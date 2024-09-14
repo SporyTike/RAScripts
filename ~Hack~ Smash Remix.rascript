@@ -51,8 +51,6 @@ Val_WarioComplain       = 0x8050E910
 //               v1.1.0 - 0x8049BCE4
 // Wario's Idle Animation [32bit]
 
-Val_World1_1Progress    = 0x8026A118
-
 // ----------------------------------------------------------------------------------------------------
 // Static Addresses
 Mem_VSRecordsOldChars   = 0x0A44E0
@@ -861,8 +859,8 @@ function Beat1PNormal() {
 }
 
 function Beat1PNormalNoContinues() {
-    return Beat1PNormal() &&
-    never(NormalModeChar1Stocks() == 0xFF)
+    return Beat1PNormal() //&&
+    //never(NormalModeChar1Stocks() == 0xFF)
 }
 
 function BeatRemix1PVeryHard() {
@@ -1352,8 +1350,8 @@ NumberOfNewChars            = length(Characters) - NumberOfOldChars
 // ----------------------------------------------------------------------------------------------------
 // Achievements
 achievement(
-    title = "Don't Get Rusty", points = 10, type="progression",
-    description = "Complete 1P Game with Metal Mario on Normal or higher without Continues.",
+    title = "Don't Get Rusty", points = 5, type="progression",
+    description = "Complete 1P Game with Metal Mario on Normal or higher.",
     id = 165928, badge = "523035", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:37",
     trigger =  never(HomerunChar() != GetCharID("Metal Mario")) &&
                Beat1PNormalNoContinues() &&
@@ -1361,8 +1359,8 @@ achievement(
 )
 
 achievement(
-    title = "King of Swing", points = 10, type="progression",
-    description = "Complete 1P Game with Giant Donkey Kong on Normal or higher without Continues.",
+    title = "King of Swing", points = 5, type="progression",
+    description = "Complete 1P Game with Giant Donkey Kong on Normal or higher.",
     id = 165929, badge = "523040", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:38",
     trigger = never(HomerunChar() != GetCharID("Giant Donkey Kong")) &&
               Beat1PNormalNoContinues() &&
@@ -1370,8 +1368,8 @@ achievement(
 )
 
 achievement(
-    title = "Force of Power", points = 10, type="progression",
-    description = "Complete 1P Game with Ganondorf on Normal or higher without Continues.",
+    title = "Force of Power", points = 5, type="progression",
+    description = "Complete 1P Game with Ganondorf on Normal or higher.",
     id = 165930, badge = "523046", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:40",
     trigger = never((HomerunChar() != GetCharID("Ganondorf")) &&
                 (HomerunChar() != GetCharID("Polygon Ganondorf"))) &&
@@ -1380,8 +1378,8 @@ achievement(
 )
 
 achievement(
-    title = "An Adventure Begins", points = 10, type="progression",
-    description = "Complete 1P Game with Young Link on Normal or higher without Continues.",
+    title = "An Adventure Begins", points = 5, type="progression",
+    description = "Complete 1P Game with Young Link on Normal or higher.",
     id = 165931, badge = "523049", published = "14.08.2021 15:04:26", modified = "08.09.2024 13:29:41",
     trigger = never((HomerunChar() != GetCharID("Young Link")) &&
                   (HomerunChar() != GetCharID("Polygon Young Link"))) &&
@@ -1390,8 +1388,8 @@ achievement(
 )
 
 achievement(
-    title = "Hawk Eyes!", points = 10, type="progression",
-    description = "Complete 1P Game with Falco on Normal or higher without Continues.",
+    title = "Hawk Eyes!", points = 5, type="progression",
+    description = "Complete 1P Game with Falco on Normal or higher.",
     id = 165932, badge = "523043", published = "14.08.2021 15:04:26", modified = "08.09.2024 13:29:39",
     trigger = never((HomerunChar() != GetCharID("Falco")) &&
                   (HomerunChar() != GetCharID("Polygon Falco"))) && 
@@ -1400,8 +1398,8 @@ achievement(
 )
 
 achievement(
-    title = "Time For Your Medicine", points = 10, type="progression",
-    description = "Complete 1P Game with Dr. Mario on Normal or higher without Continues.",
+    title = "Time For Your Medicine", points = 5, type="progression",
+    description = "Complete 1P Game with Dr. Mario on Normal or higher.",
     id = 165926, badge = "523052", published = "14.08.2021 15:04:24", modified = "08.09.2024 13:29:42",
     trigger = never((HomerunChar() != GetCharID("Dr. Mario")) &&
                   (HomerunChar() != GetCharID("Polygon Dr. Mario"))) &&
@@ -1410,8 +1408,8 @@ achievement(
 )
 
 achievement(
-    title = "Dark Memories", points = 10, type="progression",
-    description = "Complete 1P Game with Dark Samus on Normal or higher without Continues.",
+    title = "Dark Memories", points = 5, type="progression",
+    description = "Complete 1P Game with Dark Samus on Normal or higher.",
     id = 165933, badge = "523058", published = "14.08.2021 15:04:26", modified = "08.09.2024 14:00:49",
     trigger = never((HomerunChar() != GetCharID("Samus")) &&
                   (HomerunChar() != GetCharID("Polygon Samus"))) &&
@@ -1420,8 +1418,8 @@ achievement(
 )
 
 achievement(
-    title = "Stealing the Show!", points = 10, type="progression",
-    description = "Complete 1P Game with Wario on Normal or higher without Continues.",
+    title = "Stealing the Show!", points = 5, type="progression",
+    description = "Complete 1P Game with Wario on Normal or higher.",
     id = 165934, badge = "523055", published = "14.08.2021 15:04:27", modified = "08.09.2024 13:29:43", 
     trigger = never((HomerunChar() != GetCharID("Wario")) &&
                   (HomerunChar() != GetCharID("Polygon Wario"))) &&
@@ -1430,8 +1428,8 @@ achievement(
 )
 
 achievement(
-    title = "Yeah!", points = 10, type="progression",
-    description = "Complete 1P Game with Lucas on Normal or higher without Continues.",
+    title = "Yeah!", points = 5, type="progression",
+    description = "Complete 1P Game with Lucas on Normal or higher.",
     id = 165935, badge = "523061", published = "14.08.2021 15:04:27", modified = "08.09.2024 13:29:45", 
     trigger = never((HomerunChar() != GetCharID("Lucas")) &&
                   (HomerunChar() != GetCharID("Polygon Lucas"))) &&
@@ -1440,8 +1438,8 @@ achievement(
 )
 
 achievement(
-    title = "Gwahahahaha!", points = 10, type="progression",
-    description = "Complete 1P Game with Bowser on Normal or higher without Continues.",
+    title = "Gwahahahaha!", points = 5, type="progression",
+    description = "Complete 1P Game with Bowser on Normal or higher.",
     id = 165936, badge = "523088", published = "14.08.2021 15:04:27", modified = "08.09.2024 14:14:49", 
     trigger = never((HomerunChar() != GetCharID("Bowser")) &&
                   (HomerunChar() != GetCharID("Polygon Bowser"))) &&
@@ -1450,8 +1448,8 @@ achievement(
 )
 
 achievement(
-    title = "Ultimate Koopa", points = 10, type="progression",
-    description = "Complete 1P Game with Giga Bowser on Normal or higher without Continues.",
+    title = "Ultimate Koopa", points = 5, type="progression",
+    description = "Complete 1P Game with Giga Bowser on Normal or higher.",
     id = 165937, badge = "523064", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:01:09", 
     trigger = never(HomerunChar() != GetCharID("Giga Bowser")) &&
               Beat1PNormalNoContinues() &&
@@ -1459,8 +1457,8 @@ achievement(
 )
 
 achievement(
-    title = "Hunting Nightmare", points = 10, type="progression",
-    description = "Complete 1P Game with Mad Piano on Normal or higher without Continues.",
+    title = "Hunting Nightmare", points = 5, type="progression",
+    description = "Complete 1P Game with Mad Piano on Normal or higher.",
     id = 165927, badge = "523068", published = "14.08.2021 15:04:24", modified = "08.09.2024 14:14:20", 
     trigger = never(HomerunChar() != GetCharID("Mad Piano")) &&
               Beat1PNormalNoContinues() &&
@@ -1468,8 +1466,8 @@ achievement(
 )
 
 achievement(
-    title = "Unleash the Wolf", points = 10, type="progression",
-    description = "Complete 1P Game with Wolf on Normal or higher without Continues.",
+    title = "Unleash the Wolf", points = 5, type="progression",
+    description = "Complete 1P Game with Wolf on Normal or higher.",
     id = 165938, badge = "523071", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Wolf")) &&
                   (HomerunChar() != GetCharID("Polygon Wolf"))) &&
@@ -1478,8 +1476,8 @@ achievement(
 )
 
 achievement(
-    title = "I'm Confident!", points = 10, type="progression",
-    description = "Complete 1P Game with Conker on Normal or higher without Continues.",
+    title = "I'm Confident!", points = 5, type="progression",
+    description = "Complete 1P Game with Conker on Normal or higher.",
     id = 165939, badge = "523074", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Conker")) &&
                   (HomerunChar() != GetCharID("Polygon Conker"))) &&
@@ -1488,8 +1486,8 @@ achievement(
 )
 
 achievement(
-    title = "Cosmic Power", points = 10, type="progression",
-    description = "Complete 1P Game with Mewtwo on Normal or higher without Continues.",
+    title = "Cosmic Power", points = 5, type="progression",
+    description = "Complete 1P Game with Mewtwo on Normal or higher.",
     id = 173151, badge = "523076", published = "21.09.2021 12:23:09", modified = "08.09.2024 14:14:21",
     trigger = never((HomerunChar() != GetCharID("Mewtwo")) &&
                   (HomerunChar() != GetCharID("Polygon Mewtwo"))) &&
@@ -1498,8 +1496,8 @@ achievement(
 )
 
 achievement(
-    title = "A Known Swordfighter", points = 10, type="progression",
-    description = "Complete 1P Game with Marth on Normal or higher without Continues.",
+    title = "A Known Swordfighter", points = 5, type="progression",
+    description = "Complete 1P Game with Marth on Normal or higher.",
     id = 173152, badge = "523079", published = "21.09.2021 12:23:09", modified = "08.09.2024 14:14:22", 
     trigger = never((HomerunChar() != GetCharID("Marth")) &&
                   (HomerunChar() != GetCharID("Polygon Marth"))) &&
@@ -1508,8 +1506,8 @@ achievement(
 )
 
 achievement(
-    title = "In Sonic Speed", points = 10, type="progression",
-    description = "Complete 1P Game with Sonic on Normal or higher without Continues.",
+    title = "In Sonic Speed", points = 5, type="progression",
+    description = "Complete 1P Game with Sonic on Normal or higher.",
     id = 197073, badge = "523082", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sonic")) &&
                   (HomerunChar() != GetCharID("Polygon Sonic"))) &&
@@ -1518,8 +1516,8 @@ achievement(
 )
 
 achievement(
-    title = "Super Power", points = 10, type="progression",
-    description = "Complete 1P Game with Super Sonic on Normal or higher without Continues.",
+    title = "Super Power", points = 5, type="progression",
+    description = "Complete 1P Game with Super Sonic on Normal or higher.",
     id = 197074, badge = "523085", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Super Sonic")) &&
               Beat1PNormalNoContinues() &&
@@ -1527,8 +1525,8 @@ achievement(
 )
 
 achievement(
-    title = "Royal Invasion", points = 10, type="progression",
-    description = "Complete 1P Game with Sheik on Normal or higher without Continues.",
+    title = "Royal Invasion", points = 5, type="progression",
+    description = "Complete 1P Game with Sheik on Normal or higher.",
     id = 161715, badge = "523954", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sheik")) &&
                   (HomerunChar() != GetCharID("Polygon Sheik"))) &&
@@ -1537,8 +1535,8 @@ achievement(
 )
 
 achievement(
-    title = "Shake It Up", points = 10, type="progression",
-    description = "Complete 1P Game with Marina on Normal or higher without Continues.",
+    title = "Shake It Up", points = 5, type="progression",
+    description = "Complete 1P Game with Marina on Normal or higher.",
     id = 161717, badge = "523957", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Marina")) &&
                   (HomerunChar() != GetCharID("Polygon Marina"))) &&
@@ -1547,8 +1545,8 @@ achievement(
 )
 
 achievement(
-    title = "Dreaming of a Kingdom", points = 10, type="progression",
-    description = "Complete 1P Game with King Dedede on Normal or higher without Continues.",
+    title = "Dreaming of a Kingdom", points = 5, type="progression",
+    description = "Complete 1P Game with King Dedede on Normal or higher.",
     id = 161719, badge = "523958", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("King Dedede")) &&
                   (HomerunChar() != GetCharID("Polygon King Dedede"))) &&
@@ -1557,8 +1555,8 @@ achievement(
 )
 
 achievement(
-    title = "Japanese Spirits", points = 10, type="progression",
-    description = "Complete 1P Game with Goemon on Normal or higher without Continues.",
+    title = "Japanese Spirits", points = 5, type="progression",
+    description = "Complete 1P Game with Goemon on Normal or higher.",
     id = 161707, badge = "523961", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Goemon")) &&
                   (HomerunChar() != GetCharID("Polygon Goemon"))) &&
@@ -1567,8 +1565,8 @@ achievement(
 )
 
 achievement(
-    title = "Spicy Combat Skills", points = 10, type="progression",
-    description = "Complete 1P Game with Peppy on Normal or higher without Continues.",
+    title = "Spicy Combat Skills", points = 5, type="progression",
+    description = "Complete 1P Game with Peppy on Normal or higher.",
     id = 161708, badge = "523962", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Peppy")) &&
               Beat1PNormalNoContinues() &&
@@ -1576,8 +1574,8 @@ achievement(
 )
 
 achievement(
-    title = "Slip' Slidin' Away", points = 10, type="progression",
-    description = "Complete 1P Game with Slippy on Normal or higher without Continues.",
+    title = "Slip' Slidin' Away", points = 5, type="progression",
+    description = "Complete 1P Game with Slippy on Normal or higher.",
     id = 161709, badge = "523965", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Slippy")) &&
               Beat1PNormalNoContinues() &&
@@ -1585,8 +1583,8 @@ achievement(
 )
 
 achievement(
-    title = "Battle For the Jiggy", points = 10, type="progression",
-    description = "Complete 1P Game with Banjo & Kazooie on Normal or higher without Continues.",
+    title = "Battle For the Jiggy", points = 5, type="progression",
+    description = "Complete 1P Game with Banjo & Kazooie on Normal or higher.",
     id = 161710, badge = "523966", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Banjo & Kazooie")) &&
                   (HomerunChar() != GetCharID("Polygon Banjo & Kazooie"))) &&
@@ -1595,8 +1593,8 @@ achievement(
 )
 
 achievement(
-    title = "More Comedy Than Stealth", points = 10, type="progression",
-    description = "Complete 1P Game with Ebisumaru on Normal or higher without Continues.",
+    title = "More Comedy Than Stealth", points = 5, type="progression",
+    description = "Complete 1P Game with Ebisumaru on Normal or higher.",
     id = 462596, badge = "523969", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Ebisumaru")) &&
               Beat1PNormalNoContinues() &&
@@ -1604,8 +1602,8 @@ achievement(
 )
 
 achievement(
-    title = "Lead of Faith", points = 10, type="progression",
-    description = "Complete 1P Game with Metal Luigi on Normal or higher without Continues.",
+    title = "Lead of Faith", points = 5, type="progression",
+    description = "Complete 1P Game with Metal Luigi on Normal or higher.",
     id = 462597, badge = "523970", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Metal Luigi")) &&
               Beat1PNormalNoContinues() &&
@@ -1613,8 +1611,8 @@ achievement(
 )
 
 achievement(
-    title = "Ryou-Chou Majesty", points = 10, type="progression",
-    description = "Complete 1P Game with Dragon King on Normal or higher without Continues.",
+    title = "Ryou-Chou Majesty", points = 5, type="progression",
+    description = "Complete 1P Game with Dragon King on Normal or higher.",
     id = 462600, badge = "523973", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Dragon King")) &&
               Beat1PNormalNoContinues() &&
@@ -2483,7 +2481,7 @@ achievement(
 achievement(
     title = "Speeding Away", points = 3,
     description = "Complete the Normal Version of Bonus 3 'Race To The Finish' within 20 Seconds.",
-    id = 0, badge = "523106", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
+    id = 463455, badge = "525007", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Normal") && 
               Bonus3Timer() >= 1 &&    
               Bonus3Timer() <= 1200
@@ -2492,7 +2490,7 @@ achievement(
 achievement(
     title = "In One Motion", points = 4,
     description = "Complete the Remix Version of Bonus 3 'Race To The Finish' within 20 Seconds.",
-    id = 0, badge = "523106", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
+    id = 463456, badge = "525008", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Remix") && 
               Bonus3Timer() >= 1 &&    
               Bonus3Timer() <= 1200
@@ -2875,36 +2873,34 @@ achievement(
     trigger = GameState() == 0x16 && 
               FreeModeStage() == GetStageID("World 1-1") && 
               FreeModeNumFighters() == 1 &&
-              dword(Mem_World1_1Progress - 0x04) == Val_World1_1Progress &&
-              repeated(10,
-                (once(prev(dword(Mem_World1_1Progress)) == 0x80221BDC &&
-                dword(Mem_World1_1Progress) == 0x80221BA8)) ||
-                dword(Mem_World1_1Progress) == 0x80221B9C) &&
+              once((prev(dword(Mem_World1_1Progress)) == 0x80221B9C || 
+                prev(dword(Mem_World1_1Progress)) == 0x80221BDC) && 
+              dword(Mem_World1_1Progress) == 0x80221BA8) &&
               trigger_when((once(dword(Mem_World1_1Progress) == 0x80221BC0) &&
                 dword(Mem_World1_1Progress) == 0x80221BA8)) &&
-              ((((byte(PointerPlayerData() + 0x000008) == 0) || 
-                byte(PointerPlayerData() + 0x000008) == 42 ||
-                byte(PointerPlayerData() + 0x000008) == 4 || 
-                byte(PointerPlayerData() + 0x000008) == 43) &&
+              ((((byte(PointerPlayerData() + 0x000008) == GetCharID("Mario")) || 
+                byte(PointerPlayerData() + 0x000008) == GetCharID("JP Mario") ||
+                byte(PointerPlayerData() + 0x000008) == GetCharID("Luigi") || 
+                byte(PointerPlayerData() + 0x000008) == GetCharID("JP Luigi")) &&
                 byte(PointerPlayerData() + 0x000020) == 0 && 
-                byte(PointerPlayerData() + 0x000B58) == 52 &&
+                byte(PointerPlayerData() + 0x000B58) == GetCharID("Bowser") &&
                 byte(PointerPlayerData() + 0x000B60) >= 5 && 
                 byte(PointerPlayerData() + 0x000B70) == 1 &&
-                never(((byte(FreeModeChar2Stocks()) < prev(byte(FreeModeChar2Stocks())) ||
-                    dword(PointerPlayerData() + 0x000B7C) > prev(dword(PointerPlayerData() + 0x000B7C)))) &&
-                    byte(PointerPlayerData() + 0x000B58) != 52
+                never(((FreeModeChar1Stocks() < prev(FreeModeChar1Stocks()) ||
+                    dword(PointerPlayerData() + 0x00002C) > prev(dword(PointerPlayerData() + 0x00002C)))) &&
+                    byte(PointerPlayerData() + 0x000008) != GetCharID("Bowser")
                 )) ||
-               (((byte(PointerPlayerData() + 0x000B58) == 0) || 
-                byte(PointerPlayerData() + 0x000B58) == 42 ||
-                byte(PointerPlayerData() + 0x000B58) == 4 || 
-                byte(PointerPlayerData() + 0x000B58) == 43) &&
+               (((byte(PointerPlayerData() + 0x000B58) == GetCharID("Mario")) || 
+                byte(PointerPlayerData() + 0x000B58) == GetCharID("JP Mario") ||
+                byte(PointerPlayerData() + 0x000B58) == GetCharID("Luigi") || 
+                byte(PointerPlayerData() + 0x000B58) == GetCharID("JP Luigi")) &&
                 byte(PointerPlayerData() + 0x000B70) == 0 && 
-                byte(PointerPlayerData() + 0x000008) == 52 &&
+                byte(PointerPlayerData() + 0x000008) == GetCharID("Bowser") &&
                 byte(PointerPlayerData() + 0x000010) >= 5 && 
                 byte(PointerPlayerData() + 0x000020) == 1 &&
-                never(((byte(FreeModeChar1Stocks()) < prev(byte(FreeModeChar1Stocks())) ||
-                    dword(PointerPlayerData() + 0x00002C) > prev(dword(PointerPlayerData() + 0x00002C)))) &&
-                    byte(PointerPlayerData() + 0x000008) != 52
+                never(((FreeModeChar2Stocks() < prev(FreeModeChar2Stocks()) ||
+                    dword(PointerPlayerData() + 0x000B7C) > prev(dword(PointerPlayerData() + 0x000B7C)))) &&
+                    byte(PointerPlayerData() + 0x000B58) != GetCharID("Bowser")
                 )))
 )
 
@@ -8820,5 +8816,3 @@ leaderboard(
     format = "FRAMES",
     lower_is_better = true
 )
-
-
