@@ -1056,7 +1056,11 @@ function Beat4COMs(stage, char1, char2, char3, char4, slot) {
                             byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 9)) &&
            trigger_when(GameState() == 0x18) &&
            once(GameState() == 0x16 &&
-           bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0) &&
+           (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
+           bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
+           bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
            trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
@@ -1116,7 +1120,11 @@ function Beat4COMsSame(char, slot, stage1, stage2) {
                             byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 9)) &&
            trigger_when(GameState() == 0x18) &&
            once(GameState() == 0x16 &&
-           bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0) &&
+           (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
+           bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
+           bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
            trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
@@ -1411,8 +1419,8 @@ achievement(
     title = "Dark Memories", points = 5, type="progression",
     description = "Complete 1P Game with Dark Samus on Normal or higher.",
     id = 165933, badge = "523058", published = "14.08.2021 15:04:26", modified = "08.09.2024 14:00:49",
-    trigger = never((HomerunChar() != GetCharID("Samus")) &&
-                  (HomerunChar() != GetCharID("Polygon Samus"))) &&
+    trigger = never((HomerunChar() != GetCharID("Dark Samus")) &&
+                  (HomerunChar() != GetCharID("Polygon Dark Samus"))) &&
               Beat1PNormalNoContinues() &&
               RulesCommunity()
 )
