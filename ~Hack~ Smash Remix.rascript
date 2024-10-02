@@ -14,6 +14,10 @@ Mem_Bonus12RecordData   = 0x48BCF0
 Mem_RulesData           = 0x452888                        
 //               v1.1.0 - 0x452880
 
+Mem_HighscoreOn         = 0x4C9BE0
+
+Mem_BattleSetting       = 0x4462C8
+
 Mem_GameMode            = 0x4CBD04
 //               v1.1.0 - 0x4752BC
 // Game Mode
@@ -855,7 +859,8 @@ function Beat1PNormal() {
         NormalModeProgress() == 0) &&
     trigger_when(prev(NormalModeProgress()) == 0x0D 
         && NormalModeProgress() == 0x0E) &&
-    never(byte(Mem_GameMode) != 0x00)
+    never(byte(Mem_GameMode) != 0x00) &&
+    never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function Beat1PNormalNoContinues() {
@@ -872,12 +877,14 @@ function BeatRemix1PVeryHard() {
         NormalModeProgress() == 0) &&
     trigger_when(prev(NormalModeProgress()) == 0x0D 
         && NormalModeProgress() == 0x0E) &&
-    never(byte(Mem_GameMode) != 0x04)
+    never(byte(Mem_GameMode) != 0x04) &&
+    never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function BeatRemix1PVeryHard3Stocks() {
     return BeatRemix1PVeryHard() &&
-    never(NormalModeStocks() > 2)
+    never(NormalModeStocks() > 2) &&
+    never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function BeatAllstarsVeryHard3Stocks() {
@@ -890,7 +897,8 @@ function BeatAllstarsVeryHard3Stocks() {
         byte(Mem_GameMode + 20) == 0) &&
     trigger_when(prev(NormalModeProgress()) == 0x0D 
         && NormalModeProgress() == 0x0E) &&
-    never(byte(Mem_GameMode) != 0x05)
+    never(byte(Mem_GameMode) != 0x05) &&
+    never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function Beat12CharacterBattle() {
@@ -923,7 +931,9 @@ function Beat12CharacterBattle() {
         never(GameState() == 0x09) &&
         never(player12Loses == 12) &&
         trigger_when(com12LosesM == 12) &&
-        trigger_when(com12LosesD == 11)
+        trigger_when(com12LosesD == 11) &&
+        ResetCheating(0) &&
+        ResetCheating(1)
 }
 
 function Beat1COM(stage, char1, char2, slot) {
@@ -957,7 +967,9 @@ function Beat1COM(stage, char1, char2, slot) {
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
            trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00)
+           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1)
 }
 
 function Beat1COMKirbyRandom(slot) {
@@ -986,7 +998,9 @@ function Beat1COMKirbyRandom(slot) {
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
            trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00)
+           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           NoCheating(0) &&
+           NoCheating(1)
 }
 
 function Beat1COMLevel10(slot) {
@@ -1003,7 +1017,9 @@ function Beat1COMLevel10(slot) {
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) == 10) &&
            trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00)
+           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1)
 }
 
 function Beat4COMs(stage, char1, char2, char3, char4, slot) {
@@ -1066,7 +1082,11 @@ function Beat4COMs(stage, char1, char2, char3, char4, slot) {
            trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
            + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
            + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
-           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3)
+           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1) &&
+           NoCheatingNoHat(2) &&
+           NoCheatingNoHat(3)
 }
 
 function Beat4COMsSame(char, slot, stage1, stage2) {
@@ -1130,7 +1150,11 @@ function Beat4COMsSame(char, slot, stage1, stage2) {
            trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
            + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
            + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
-           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3)
+           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1) &&
+           NoCheatingNoHat(2) &&
+           NoCheatingNoHat(3)
 }
 
 function BeatAllBonus1() {
@@ -1148,6 +1172,7 @@ function BeatAllBonus1() {
                                                    (PreGameState() == 0x34 &&
                                                    NormalModeProgress() == 0x03)) &&
                                                    GameState() == 0x35 &&
+                                                   dword(Mem_HighscoreOn)  == 0x01 &&
                                                    prev(Bonus1Targets() >= 0x01) &&
                                                    Bonus1Targets() == 0x00 &&
                                                    Bonus12Stage() == stage))
@@ -1156,6 +1181,7 @@ function BeatAllBonus1() {
                                                    (PreGameState() == 0x34 &&
                                                    NormalModeProgress() == 0x03)) &&
                                                    GameState() == 0x35 &&
+                                                   dword(Mem_HighscoreOn)  == 0x01 &&
                                                    Bonus12Char() == char))
                                                    
     return measured(codeStages) && never(codeReset)
@@ -1176,6 +1202,7 @@ function BeatAllBonus2() {
                                                    (PreGameState() == 0x34 &&
                                                    NormalModeProgress() == 0x07)) &&
                                                    GameState() == 0x35 &&
+                                                   dword(Mem_HighscoreOn)  == 0x01 &&
                                                    prev(Bonus2Platforms() >= 0x01) &&
                                                    Bonus2Platforms() == 0x00 &&
                                                    Bonus12Stage() == stage))
@@ -1184,6 +1211,7 @@ function BeatAllBonus2() {
                                                    (PreGameState() == 0x34 &&
                                                    NormalModeProgress() == 0x07)) &&
                                                    GameState() == 0x35 &&
+                                                   dword(Mem_HighscoreOn)  == 0x01 &&
                                                    Bonus12Char() == char))
                                                    
     return measured(codeStages) && never(codeReset)
@@ -1191,6 +1219,35 @@ function BeatAllBonus2() {
 
 function RulesCommunity() {
     return true
+}
+
+function NoCheating(id) {
+    address = id
+    return dword(Mem_BattleSetting + 0x00 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0x25C + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0x95F4C + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0x9A0A8 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0x9C2C8 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xAD274 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xAD9A0 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xADB3C + id*4) == 0
+}
+
+function NoCheatingNoHat(id) {
+    return NoCheating(id) &&
+           dword(Mem_BattleSetting + 0xFFEB0 + id*4) == 0
+}
+
+function ResetCheating(id) {
+    return never(dword(Mem_BattleSetting + 0x00 + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0x25C + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0x95F4C + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0x9A0A8 + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0x9C2C8 + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0xAD274 + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0xAD9A0 + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0xADB3C + id*4) != 0 ||
+           dword(Mem_BattleSetting + 0xFFEB0 + id*4) != 0)
 }
 
 function KirbyCopyAbility(slot) {
@@ -1230,7 +1287,8 @@ function LB_1PGame(name) {
                NormalModeProgress() == 0x0E) ||
            (NormalModeChar1Stocks() == 0xFF &&
                dword(Mem_ContinueState) == 0x02 &&
-               prev(dword(Mem_ContinueState)) == 0x00))
+               prev(dword(Mem_ContinueState)) == 0x00)) &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_Remix1PGame(name) {
@@ -1241,7 +1299,8 @@ function LB_Remix1PGame(name) {
                NormalModeProgress() == 0x0E) ||
            (NormalModeChar1Stocks() == 0xFF &&
                dword(Mem_ContinueState) == 0x02 &&
-               prev(dword(Mem_ContinueState)) == 0x00))
+               prev(dword(Mem_ContinueState)) == 0x00)) &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_Bonus1(stage) {
@@ -1257,7 +1316,8 @@ function LB_Bonus1(stage) {
                 prev(Bonus1Targets() <= 10) &&
                 (BothGameStates() == 0x3513 ||
                 (BothGameStates() == 0x3534) &&
-                NormalModeProgress() == 0x03)
+                NormalModeProgress() == 0x03) &&
+                never(dword(Mem_HighscoreOn)  == 0x00)
         }
     }
 }
@@ -1275,8 +1335,9 @@ function LB_Bonus2(stage) {
                    prev(Bonus2Platforms() <= 10) &&
                    (BothGameStates() == 0x3514 ||
                    (BothGameStates() == 0x3534) &&
-                   NormalModeProgress() == 0x03)
-        }
+                   NormalModeProgress() == 0x03) &&
+                   never(dword(Mem_HighscoreOn)  == 0x00)
+        }   
     }
 }
 
@@ -1296,7 +1357,8 @@ function LB_Bonus3(stage) {
                Bonus3State() == 0x07 &&
                ((NormalModeProgress() == 0x0B &&
                BothGameStates() == 0x010E) ||
-               BothGameStates() == 0x770E)
+               BothGameStates() == 0x770E) &&
+               never(dword(Mem_HighscoreOn)  == 0x00)
     }
 }
 
@@ -1305,7 +1367,8 @@ function LB_MultiMan(name) {
            byte(Mem_GameMode) == 0x02 &&
            prev(NormalModeChar1Stocks()) == 0x00 &&
            NormalModeChar1Stocks() == 0xFF &&
-           GameState() == 0x77
+           GameState() == 0x77 &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_MultiManHealth(name) {
@@ -1313,7 +1376,8 @@ function LB_MultiManHealth(name) {
            byte(Mem_GameMode) == 0x02 &&
            prev(NormalModeChar1Percentage()) < 300 &&
            NormalModeChar1Percentage() >= 300 &&
-           GameState() == 0x77
+           GameState() == 0x77 &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_CruelMultiMan(name) {
@@ -1321,7 +1385,8 @@ function LB_CruelMultiMan(name) {
            byte(Mem_GameMode) == 0x03 &&
            prev(NormalModeChar1Stocks()) == 0x00 &&
            NormalModeChar1Stocks() == 0xFF &&
-           GameState() == 0x77
+           GameState() == 0x77 &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_CruelMultiManHealth(name) {
@@ -1329,7 +1394,8 @@ function LB_CruelMultiManHealth(name) {
            byte(Mem_GameMode) == 0x03 &&
            prev(NormalModeChar1Percentage()) < 300 &&
            NormalModeChar1Percentage() >= 300 &&
-           GameState() == 0x77
+           GameState() == 0x77 &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_Allstars(name) {
@@ -1340,14 +1406,16 @@ function LB_Allstars(name) {
                NormalModeProgress() == 0x0E) ||
            (NormalModeChar1Stocks() == 0xFF &&
                dword(Mem_ContinueState) == 0x02 &&
-               prev(dword(Mem_ContinueState)) == 0x00))
+               prev(dword(Mem_ContinueState)) == 0x00)) &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 function LB_Homerun(name) {
     return NormalModeChar1() == GetCharID(name) &&
            byte(Mem_GameMode) == 0x06 &&
            prev(Bonus3State()) != 0x06 &&
-           Bonus3State() == 0x06
+           Bonus3State() == 0x06 &&
+           never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
 // ----------------------------------------------------------------------------------------------------
@@ -2492,7 +2560,8 @@ achievement(
     id = 463455, badge = "525007", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Normal") && 
               Bonus3Timer() >= 1 &&    
-              Bonus3Timer() <= 1200
+              Bonus3Timer() <= 1200 &&
+              dword(Mem_HighscoreOn) == 1
 )
 
 achievement(
@@ -2501,7 +2570,8 @@ achievement(
     id = 463456, badge = "525008", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Remix") && 
               Bonus3Timer() >= 1 &&    
-              Bonus3Timer() <= 1200
+              Bonus3Timer() <= 1200 &&
+              dword(Mem_HighscoreOn) == 1
 )
 
 achievement(
@@ -2576,7 +2646,9 @@ achievement(
               prev(Bonus3State()) != 0x06 &&
               Bonus3State() == 0x06 &&
               dword(Mem_HomerunDistance) >= 37500 &&
-              dword(Mem_HomerunDistance) <= 1000000
+              dword(Mem_HomerunDistance) <= 1000000 &&
+              RulesCommunity() &&
+              never(dword(Mem_HighscoreOn)  == 0x00)
 )
 
 achievement(
@@ -2594,7 +2666,9 @@ achievement(
               FreeModeCombo(3, 4) ||
               FreeModeCombo(4, 1) ||
               FreeModeCombo(4, 2) ||
-              FreeModeCombo(4, 3)
+              FreeModeCombo(4, 3) &&
+              RulesCommunity() &&
+              never(dword(Mem_HighscoreOn)  == 0x00)
 )
 
 achievement(
@@ -2680,114 +2754,127 @@ achievement(
     title = "Fight Your Nightmares", points = 3,
     description = "Win a Free-for-All Battle as Luigi against Mad Piano on the Stage 'Big Boo's Haunt' with Level 9 CPU.",
     id = 166158, badge = "523097", published = "15.08.2021 15:58:15", modified = "09.09.2024 17:17:28",
-    trigger = Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 0) ||
-              Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 1)
+    trigger = (Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 0) ||
+              Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Intergalactic Showdown", points = 3,
     description = "Win a Free-for-All Battle as Fox against Wolf on the Stage 'Venom' with Level 9 CPU.",
     id = 166159, badge = "523098", published = "15.08.2021 15:58:18", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Venom", "Fox", "Wolf", 0) ||
-              Beat1COM("Venom", "Fox", "Wolf", 1)
+    trigger = (Beat1COM("Venom", "Fox", "Wolf", 0) ||
+              Beat1COM("Venom", "Fox", "Wolf", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Decisive Fight", points = 3,
     description = "Win a Free-for-All Battle as Link against Ganondorf on the Stage 'Ganon's Tower' with Level 9 CPU.",
     id = 166160, badge = "523099", published = "15.08.2021 15:58:20", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Ganon's Tower", "Link", "Ganondorf", 0) ||
-              Beat1COM("Ganon's Tower", "Link", "Ganondorf", 1)
+    trigger = (Beat1COM("Ganon's Tower", "Link", "Ganondorf", 0) ||
+              Beat1COM("Ganon's Tower", "Link", "Ganondorf", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Lost In Time", points = 3,
     description = "Win a Free-for-All Battle as Young Link against Link on the Stage 'Deku Tree' with Level 9 CPU.",
     id = 463029, badge = "524288", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Deku Tree", "Young Link", "Link", 0) ||
-              Beat1COM("Deku Tree", "Young Link", "Link", 1)    
+    trigger = (Beat1COM("Deku Tree", "Young Link", "Link", 0) ||
+              Beat1COM("Deku Tree", "Young Link", "Link", 1)) &&
+              RulesCommunity() 
 )
 
 achievement(
     title = "Metal of Dishonor", points = 3,
     description = "Win a Free-for-All Battle as Mario or Luigi against their Metallic Version on the Stage 'Metallic Madness' with Level 9 CPU.",
     id = 463030, badge = "524289", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Metallic Madness", "Mario", "Metal Mario", 0) ||
+    trigger = (Beat1COM("Metallic Madness", "Mario", "Metal Mario", 0) ||
               Beat1COM("Metallic Madness", "Mario", "Metal Mario", 1) ||
               Beat1COM("Metallic Madness", "Luigi", "Metal Luigi", 0) ||
-              Beat1COM("Metallic Madness", "Luigi", "Metal Luigi", 1) 
+              Beat1COM("Metallic Madness", "Luigi", "Metal Luigi", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Twin Phazon Fury", points = 3,
     description = "Win a Free-for-All Battle as Dark Samus against Samus on the Stage 'Norfair' with Level 9 CPU.",
     id = 463031, badge = "524290", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Norfair", "Dark Samus", "Samus", 0) ||
-              Beat1COM("Norfair", "Dark Samus", "Samus", 1) 
+    trigger = (Beat1COM("Norfair", "Dark Samus", "Samus", 0) ||
+              Beat1COM("Norfair", "Dark Samus", "Samus", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "A Well-Known Rematch", points = 3,
     description = "Win a Free-for-All Battle as King Dedede against Kirby on the Stage 'Mt. Dedede' with Level 9 CPU.",
     id = 462745, badge = "524082", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 0) ||
-              Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 1)    
+    trigger = (Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 0) ||
+              Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 1)) &&
+              RulesCommunity()  
 )
 
 achievement(
     title = "Magic In Vegas", points = 3,
     description = "Win a Free-for-All Battle as Kirby using the Top Hat on the Stage 'Casino Night Zone' against a Level 9 CPU.",
     id = 463452, badge = "525005", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat1COMKirbyRandom(0) ||
-              Beat1COMKirbyRandom(1)
+    trigger = (Beat1COMKirbyRandom(0) ||
+              Beat1COMKirbyRandom(1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Coming Soon...", points = 3,
     description = "Win a Free-for-All Battle between Giga Bowser and Giant Donkey Kong on the Stage 'New Pork City' with Level 9 CPU.",
     id = 166161, badge = "523100", published = "15.08.2021 15:58:23", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("New Pork City", "Giga Bowser", "Giant Donkey Kong", 0) ||
+    trigger = (Beat1COM("New Pork City", "Giga Bowser", "Giant Donkey Kong", 0) ||
               Beat1COM("New Pork City", "Giga Bowser", "Giant Donkey Kong", 1) ||
               Beat1COM("New Pork City", "Giant Donkey Kong", "Giga Bowser", 0) ||
-              Beat1COM("New Pork City", "Giant Donkey Kong", "Giga Bowser", 1)
+              Beat1COM("New Pork City", "Giant Donkey Kong", "Giga Bowser", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Oh Snap!", points = 3,
     description = "Win a Free-for-All Battle between Pikachu and Mewtwo on the Stage 'Meta Crystal' with Level 9 CPU.",
     id = 173187, badge = "523101", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = Beat1COM("Meta Crystal", "Pikachu", "Mewtwo", 0) ||
+    trigger = (Beat1COM("Meta Crystal", "Pikachu", "Mewtwo", 0) ||
               Beat1COM("Meta Crystal", "Pikachu", "Mewtwo", 1) ||
               Beat1COM("Meta Crystal", "Mewtwo", "Pikachu", 0) ||
-              Beat1COM("Meta Crystal", "Mewtwo", "Pikachu", 1)
+              Beat1COM("Meta Crystal", "Mewtwo", "Pikachu", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Diddy's Christmas Knockout", points = 3,
     description = "Win a Free-for-All Battle between Conker and Banjo & Kazooie on the Stage 'Frosty Village' with Level 9 CPU.",
     id = 462962, badge = "524235", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat1COM("Frosty Village", "Conker", "Banjo & Kazooie", 0) ||
+    trigger = (Beat1COM("Frosty Village", "Conker", "Banjo & Kazooie", 0) ||
               Beat1COM("Frosty Village", "Conker", "Banjo & Kazooie", 1) ||
               Beat1COM("Frosty Village", "Banjo & Kazooie", "Conker", 0) ||
-              Beat1COM("Frosty Village", "Banjo & Kazooie", "Conker", 1)
+              Beat1COM("Frosty Village", "Banjo & Kazooie", "Conker", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Historical Lession", points = 3,
     description = "Win a Free-for-All Battle between Goemon and Ebisumaru on the Stage 'Edo Town' with Level 9 CPU.",
     id = 463028, badge = "524287", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat1COM("Edo Town", "Goemon", "Ebisumaru", 0) ||
+    trigger = (Beat1COM("Edo Town", "Goemon", "Ebisumaru", 0) ||
               Beat1COM("Edo Town", "Goemon", "Ebisumaru", 1) ||
               Beat1COM("Edo Town", "Ebisumaru", "Goemon", 0) ||
-              Beat1COM("Edo Town", "Ebisumaru", "Goemon", 1)
+              Beat1COM("Edo Town", "Ebisumaru", "Goemon", 1)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Without Fear", points = 5,
     description = "Win a Free-for-All Battle against a Level 10 CPU.",
     id = 463449, badge = "525004", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat1COMLevel10(0) ||
-              Beat1COMLevel10(1)
+    trigger = (Beat1COMLevel10(0) ||
+              Beat1COMLevel10(1)) &&
+              RulesCommunity()
 )
 
 
@@ -2795,47 +2882,51 @@ achievement(
     title = "Not This Again...", points = 5,
     description = "Win a Free-for-All Battle between Yoshi, Mario, Luigi and Wario on the Stage 'Peach's Castle II' with Level 9 CPU.",
     id = 166162, badge = "523102", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
-    trigger = Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 0) ||
+    trigger = (Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 0) ||
               Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 1) ||
               Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 2) ||
-              Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 3)
+              Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 3)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Star Fox Assault", points = 5,
     description = "Win a Free-for-All Battle between Fox, Falco, Peppy and Slippy on the Stage 'Sector Z' with Level 9 CPU.",
     id = 463049, badge = "524322", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
-    trigger = Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 0) ||
+    trigger = (Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 0) ||
               Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 1) ||
               Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 2) ||
-              Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 3)
+              Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 3)) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Dragon King: The Fighting Game", points = 5,
     description = "Win a Free-for-All Battle between four Dragon King on the Stage 'Dragon King' with Level 9 CPU.",
     id = 463050, badge = "524359", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat4COMsSame("Dragon King", 0, "Dragon King", "Dragon King") ||
+    trigger = (Beat4COMsSame("Dragon King", 0, "Dragon King", "Dragon King") ||
               Beat4COMsSame("Dragon King", 1, "Dragon King", "Dragon King") ||
               Beat4COMsSame("Dragon King", 2, "Dragon King", "Dragon King") ||
-              Beat4COMsSame("Dragon King", 3, "Dragon King", "Dragon King")
+              Beat4COMsSame("Dragon King", 3, "Dragon King", "Dragon King")) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Still In Beta", points = 5,
     description = "Win a Free-for-All Battle between four Polygon Fighters on the Stage 'Dream Land Beta 1' or 'Dream Land Beta 2' with Level 9 CPU.",
     id = 166163, badge = "523103", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
-    trigger = Beat4COMsSame("Polygon", 0, "Dream Land Beta 1", "Dream Land Beta 2") ||
+    trigger = (Beat4COMsSame("Polygon", 0, "Dream Land Beta 1", "Dream Land Beta 2") ||
               Beat4COMsSame("Polygon", 1, "Dream Land Beta 1", "Dream Land Beta 2") ||
               Beat4COMsSame("Polygon", 2, "Dream Land Beta 1", "Dream Land Beta 2") ||
-              Beat4COMsSame("Polygon", 3, "Dream Land Beta 1", "Dream Land Beta 2")
+              Beat4COMsSame("Polygon", 3, "Dream Land Beta 1", "Dream Land Beta 2")) &&
+              RulesCommunity()
 )
 
 achievement(
     title = "Feels Nostalgic!", points = 2,
     description = "In a Free-for-All Battle as Mario against Bowser on the Stage 'Bowser's Stadium' throw Bowser directly into a Bomb using the Backthrow with Level 5 CPU.",
     id = 166164, badge = "523104", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:28",
-    trigger = GameState() == 0x16 &&
+    trigger = (GameState() == 0x16 &&
               FreeModeStage() == GetStageID("Bowser's Stadium") &&
               FreeModeNumFighters() == 1 &&
               (((byte(PointerPlayerData() + 0x08) == GetCharID("Mario") ||
@@ -2871,14 +2962,17 @@ achievement(
                         never(byte(PointerPlayerData() + 0x24) != 0xB6 &&
                             byte(PointerPlayerData() + 0x24) != 0x33 &&
                             byte(PointerPlayerData() + 0x24) != 0x34 &&
-                            byte(PointerPlayerData() + 0x08) == GetCharID("Bowser"))))
+                            byte(PointerPlayerData() + 0x08) == GetCharID("Bowser"))))) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1)
 ) 
 
 achievement(
     title = "Super Mario Clash.", points = 5,
     description = "In a Free-for-All Battle as Mario or Luigi against Bowser on the Stage 'World 1-1' do a full cycle on the Stage without taking Damage with Level 5 CPU.",
     id = 463472, badge = "525023", published = "14.09.2024 15:42:42", modified = "14.09.2024 15:42:42",
-    trigger = GameState() == 0x16 && 
+    trigger = (GameState() == 0x16 && 
               FreeModeStage() == GetStageID("World 1-1") && 
               FreeModeNumFighters() == 1 &&
               once((prev(dword(Mem_World1_1Progress)) == 0x80221B9C || 
@@ -2908,14 +3002,17 @@ achievement(
                 byte(PointerPlayerData() + 0x000020) == 1 &&
                 never(((FreeModeChar2Stocks() < prev(FreeModeChar2Stocks()) ||
                     dword(PointerPlayerData() + 0x000B7C) > prev(dword(PointerPlayerData() + 0x000B7C)))) &&
-                    byte(PointerPlayerData() + 0x000B58) != GetCharID("Bowser")
-                )))
+                    byte(PointerPlayerData() + 0x000B58) != GetCharID("Bowser"))))) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1)
 )
 
 leaderboard(
     id = 24642, title = "Mario",
     description = "1P Game",
-    start  = LB_1PGame("Mario"),
+    start  = LB_1PGame("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -2925,7 +3022,8 @@ leaderboard(
 leaderboard(
     id = 24643, title = "Mario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Mario"),
+    start  = LB_Remix1PGame("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -2935,7 +3033,8 @@ leaderboard(
 leaderboard(
     id = 24661, title = "Mario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mario"),
+    start  = LB_MultiMan("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -2945,7 +3044,8 @@ leaderboard(
 leaderboard(
     id = 24662, title = "Mario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Mario"),
+    start  = LB_CruelMultiMan("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -2955,7 +3055,8 @@ leaderboard(
 leaderboard(
     id = 25995, title = "Mario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Mario"),
+    start  = LB_Allstars("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -2965,7 +3066,8 @@ leaderboard(
 leaderboard(
     id = 30442, title = "Mario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Mario"),
+    start  = LB_Homerun("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -2975,7 +3077,8 @@ leaderboard(
 leaderboard(
     id = 24663, title = "Mario JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Mario"),
+    start  = LB_1PGame("JP Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -2985,7 +3088,8 @@ leaderboard(
 leaderboard(
     id = 24716, title = "Mario JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Mario"),
+    start  = LB_Remix1PGame("JP Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -2995,7 +3099,8 @@ leaderboard(
 leaderboard(
     id = 24940, title = "Mario JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Mario"),
+    start  = LB_MultiMan("JP Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3005,7 +3110,8 @@ leaderboard(
 leaderboard(
     id = 24993, title = "Mario JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Mario"),
+    start  = LB_CruelMultiMan("JP Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3015,7 +3121,8 @@ leaderboard(
 leaderboard(
     id = 25996, title = "Mario JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Mario"),
+    start  = LB_Allstars("JP Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3035,7 +3142,8 @@ leaderboard(
 leaderboard(
     id = 24688, title = "Polygon Mario",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Mario"),
+    start  = LB_1PGame("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3045,7 +3153,8 @@ leaderboard(
 leaderboard(
     id = 24717, title = "Polygon Mario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Mario"),
+    start  = LB_Remix1PGame("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3055,7 +3164,8 @@ leaderboard(
 leaderboard(
     id = 24941, title = "Polygon Mario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Mario"),
+    start  = LB_MultiMan("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3065,7 +3175,8 @@ leaderboard(
 leaderboard(
     id = 24994, title = "Polygon Mario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Mario"),
+    start  = LB_CruelMultiMan("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3075,7 +3186,8 @@ leaderboard(
 leaderboard(
     id = 25997, title = "Polygon Mario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Mario"),
+    start  = LB_Allstars("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3085,7 +3197,8 @@ leaderboard(
 leaderboard(
     id = 30444, title = "Polygon Mario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Mario"),
+    start  = LB_Homerun("Polygon Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3095,7 +3208,8 @@ leaderboard(
 leaderboard(
     id = 24664, title = "Fox",
     description = "1P Game",
-    start  = LB_1PGame("Fox"),
+    start  = LB_1PGame("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3105,7 +3219,8 @@ leaderboard(
 leaderboard(
     id = 24718, title = "Fox",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Fox"),
+    start  = LB_Remix1PGame("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3115,7 +3230,8 @@ leaderboard(
 leaderboard(
     id = 24942, title = "Fox",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Fox"),
+    start  = LB_MultiMan("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3125,7 +3241,8 @@ leaderboard(
 leaderboard(
     id = 24995, title = "Fox",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox"),
+    start  = LB_CruelMultiMan("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3135,7 +3252,8 @@ leaderboard(
 leaderboard(
     id = 25998, title = "Fox",
     description = "All-Star Mode",
-    start  = LB_Allstars("Fox"),
+    start  = LB_Allstars("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3145,7 +3263,8 @@ leaderboard(
 leaderboard(
     id = 30445, title = "Fox",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Fox"),
+    start  = LB_Homerun("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3155,7 +3274,8 @@ leaderboard(
 leaderboard(
     id = 24665, title = "Fox JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Fox"),
+    start  = LB_1PGame("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3165,7 +3285,8 @@ leaderboard(
 leaderboard(
     id = 24719, title = "Fox JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Fox"),
+    start  = LB_Remix1PGame("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3175,7 +3296,8 @@ leaderboard(
 leaderboard(
     id = 24943, title = "Fox JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Fox"),
+    start  = LB_MultiMan("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3185,7 +3307,8 @@ leaderboard(
 leaderboard(
     id = 24996, title = "Fox JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Fox"),
+    start  = LB_CruelMultiMan("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3195,7 +3318,8 @@ leaderboard(
 leaderboard(
     id = 25999, title = "Fox JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Fox"),
+    start  = LB_Allstars("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3205,7 +3329,8 @@ leaderboard(
 leaderboard(
     id = 30446, title = "Fox JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Fox"),
+    start  = LB_Homerun("JP Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3215,7 +3340,8 @@ leaderboard(
 leaderboard(
     id = 24666, title = "Polygon Fox",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Fox"),
+    start  = LB_1PGame("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3225,7 +3351,8 @@ leaderboard(
 leaderboard(
     id = 24720, title = "Polygon Fox",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Fox"),
+    start  = LB_Remix1PGame("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3235,7 +3362,8 @@ leaderboard(
 leaderboard(
     id = 24944, title = "Polygon Fox",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Fox"),
+    start  = LB_MultiMan("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3245,7 +3373,8 @@ leaderboard(
 leaderboard(
     id = 24997, title = "Polygon Fox",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Fox"),
+    start  = LB_CruelMultiMan("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3255,7 +3384,8 @@ leaderboard(
 leaderboard(
     id = 26000, title = "Polygon Fox",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Fox"),
+    start  = LB_Allstars("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3265,7 +3395,8 @@ leaderboard(
 leaderboard(
     id = 30447, title = "Polygon Fox",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Fox"),
+    start  = LB_Homerun("Polygon Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3275,7 +3406,8 @@ leaderboard(
 leaderboard(
     id = 24667, title = "Donkey Kong",
     description = "1P Game",
-    start  = LB_1PGame("Donkey Kong"),
+    start  = LB_1PGame("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3285,7 +3417,8 @@ leaderboard(
 leaderboard(
     id = 24721, title = "Donkey Kong",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Donkey Kong"),
+    start  = LB_Remix1PGame("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3295,7 +3428,8 @@ leaderboard(
 leaderboard(
     id = 24945, title = "Donkey Kong",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Donkey Kong"),
+    start  = LB_MultiMan("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3305,7 +3439,8 @@ leaderboard(
 leaderboard(
     id = 24998, title = "Donkey Kong",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Donkey Kong"),
+    start  = LB_CruelMultiMan("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3315,7 +3450,8 @@ leaderboard(
 leaderboard(
     id = 26001, title = "Donkey Kong",
     description = "All-Star Mode",
-    start  = LB_Allstars("Donkey Kong"),
+    start  = LB_Allstars("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3325,7 +3461,8 @@ leaderboard(
 leaderboard(
     id = 30448, title = "Donkey Kong",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Donkey Kong"),
+    start  = LB_Homerun("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3335,7 +3472,8 @@ leaderboard(
 leaderboard(
     id = 24668, title = "Donkey Kong JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Donkey Kong"),
+    start  = LB_1PGame("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3345,7 +3483,8 @@ leaderboard(
 leaderboard(
     id = 24722, title = "Donkey Kong JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Donkey Kong"),
+    start  = LB_Remix1PGame("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3355,7 +3494,8 @@ leaderboard(
 leaderboard(
     id = 24946, title = "Donkey Kong JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Donkey Kong"),
+    start  = LB_MultiMan("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3365,7 +3505,8 @@ leaderboard(
 leaderboard(
     id = 24999, title = "Donkey Kong JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Donkey Kong"),
+    start  = LB_CruelMultiMan("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3375,7 +3516,8 @@ leaderboard(
 leaderboard(
     id = 26002, title = "Donkey Kong JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Donkey Kong"),
+    start  = LB_Allstars("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3385,7 +3527,8 @@ leaderboard(
 leaderboard(
     id = 30449, title = "Donkey Kong JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Donkey Kong"),
+    start  = LB_Homerun("JP Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3395,7 +3538,8 @@ leaderboard(
 leaderboard(
     id = 24669, title = "Polygon Donkey Kong",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Donkey Kong"),
+    start  = LB_1PGame("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3405,7 +3549,8 @@ leaderboard(
 leaderboard(
     id = 24723, title = "Polygon Donkey Kong",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Donkey Kong"),
+    start  = LB_Remix1PGame("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3415,7 +3560,8 @@ leaderboard(
 leaderboard(
     id = 24947, title = "Polygon Donkey Kong",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Donkey Kong"),
+    start  = LB_MultiMan("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3425,7 +3571,8 @@ leaderboard(
 leaderboard(
     id = 25000, title = "Polygon Donkey Kong",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Donkey Kong"),
+    start  = LB_CruelMultiMan("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3435,7 +3582,8 @@ leaderboard(
 leaderboard(
     id = 26003, title = "Polygon Donkey Kong",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Donkey Kong"),
+    start  = LB_Allstars("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3445,7 +3593,8 @@ leaderboard(
 leaderboard(
     id = 30450, title = "Polygon Donkey Kong",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Donkey Kong"),
+    start  = LB_Homerun("Polygon Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3455,7 +3604,8 @@ leaderboard(
 leaderboard(
     id = 24670, title = "Samus",
     description = "1P Game",
-    start  = LB_1PGame("Samus"),
+    start  = LB_1PGame("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3465,7 +3615,8 @@ leaderboard(
 leaderboard(
     id = 24724, title = "Samus",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Samus"),
+    start  = LB_Remix1PGame("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3475,7 +3626,8 @@ leaderboard(
 leaderboard(
     id = 24948, title = "Samus",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Samus"),
+    start  = LB_MultiMan("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3485,7 +3637,8 @@ leaderboard(
 leaderboard(
     id = 25001, title = "Samus",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Samus"),
+    start  = LB_CruelMultiMan("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3495,7 +3648,8 @@ leaderboard(
 leaderboard(
     id = 26004, title = "Samus",
     description = "All-Star Mode",
-    start  = LB_Allstars("Samus"),
+    start  = LB_Allstars("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3505,7 +3659,8 @@ leaderboard(
 leaderboard(
     id = 30451, title = "Samus",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Samus"),
+    start  = LB_Homerun("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3515,7 +3670,8 @@ leaderboard(
 leaderboard(
     id = 24671, title = "Samus JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Samus"),
+    start  = LB_1PGame("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3525,7 +3681,8 @@ leaderboard(
 leaderboard(
     id = 24725, title = "Samus JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Samus"),
+    start  = LB_Remix1PGame("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3535,7 +3692,8 @@ leaderboard(
 leaderboard(
     id = 24949, title = "Samus JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Samus"),
+    start  = LB_MultiMan("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3545,7 +3703,8 @@ leaderboard(
 leaderboard(
     id = 25002, title = "Samus JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Samus"),
+    start  = LB_CruelMultiMan("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3555,7 +3714,8 @@ leaderboard(
 leaderboard(
     id = 26014, title = "Samus JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Samus"),
+    start  = LB_Allstars("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3565,7 +3725,8 @@ leaderboard(
 leaderboard(
     id = 30452, title = "Samus JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Samus"),
+    start  = LB_Homerun("JP Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3575,7 +3736,8 @@ leaderboard(
 leaderboard(
     id = 24672, title = "Samus EU",
     description = "1P Game",
-    start  = LB_1PGame("EU Samus"),
+    start  = LB_1PGame("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3585,7 +3747,8 @@ leaderboard(
 leaderboard(
     id = 24726, title = "Samus EU",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Samus"),
+    start  = LB_Remix1PGame("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3595,7 +3758,8 @@ leaderboard(
 leaderboard(
     id = 24950, title = "Samus EU",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Samus"),
+    start  = LB_MultiMan("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3605,7 +3769,8 @@ leaderboard(
 leaderboard(
     id = 25003, title = "Samus EU",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Samus"),
+    start  = LB_CruelMultiMan("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3615,7 +3780,8 @@ leaderboard(
 leaderboard(
     id = 26006, title = "Samus EU",
     description = "All-Star Mode",
-    start  = LB_Allstars("EU Samus"),
+    start  = LB_Allstars("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3625,7 +3791,8 @@ leaderboard(
 leaderboard(
     id = 30453, title = "Samus EU",
     description = "Home-Run Contest",
-    start  = LB_Homerun("EU Samus"),
+    start  = LB_Homerun("EU Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3635,7 +3802,8 @@ leaderboard(
 leaderboard(
     id = 24673, title = "Polygon Samus",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Samus"),
+    start  = LB_1PGame("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3645,7 +3813,8 @@ leaderboard(
 leaderboard(
     id = 24727, title = "Polygon Samus",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Samus"),
+    start  = LB_Remix1PGame("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3655,7 +3824,8 @@ leaderboard(
 leaderboard(
     id = 24951, title = "Polygon Samus",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Samus"),
+    start  = LB_MultiMan("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3665,7 +3835,8 @@ leaderboard(
 leaderboard(
     id = 25004, title = "Polygon Samus",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Samus"),
+    start  = LB_CruelMultiMan("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3675,7 +3846,8 @@ leaderboard(
 leaderboard(
     id = 26007, title = "Polygon Samus",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Samus"),
+    start  = LB_Allstars("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3685,7 +3857,8 @@ leaderboard(
 leaderboard(
     id = 30454, title = "Polygon Samus",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Samus"),
+    start  = LB_Homerun("Polygon Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3695,7 +3868,8 @@ leaderboard(
 leaderboard(
     id = 24674, title = "Luigi",
     description = "1P Game",
-    start  = LB_1PGame("Luigi"),
+    start  = LB_1PGame("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3705,7 +3879,8 @@ leaderboard(
 leaderboard(
     id = 24728, title = "Luigi",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Luigi"),
+    start  = LB_Remix1PGame("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3715,7 +3890,8 @@ leaderboard(
 leaderboard(
     id = 24952, title = "Luigi",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Luigi"),
+    start  = LB_MultiMan("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3725,7 +3901,8 @@ leaderboard(
 leaderboard(
     id = 25005, title = "Luigi",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Luigi"),
+    start  = LB_CruelMultiMan("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3735,7 +3912,8 @@ leaderboard(
 leaderboard(
     id = 26008, title = "Luigi",
     description = "All-Star Mode",
-    start  = LB_Allstars("Luigi"),
+    start  = LB_Allstars("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3745,7 +3923,8 @@ leaderboard(
 leaderboard(
     id = 30455, title = "Luigi",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Luigi"),
+    start  = LB_Homerun("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3755,7 +3934,8 @@ leaderboard(
 leaderboard(
     id = 24675, title = "Luigi JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Luigi"),
+    start  = LB_1PGame("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3765,7 +3945,8 @@ leaderboard(
 leaderboard(
     id = 24729, title = "Luigi JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Luigi"),
+    start  = LB_Remix1PGame("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3775,7 +3956,8 @@ leaderboard(
 leaderboard(
     id = 24953, title = "Luigi JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Luigi"),
+    start  = LB_MultiMan("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3785,7 +3967,8 @@ leaderboard(
 leaderboard(
     id = 25006, title = "Luigi JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Luigi"),
+    start  = LB_CruelMultiMan("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3795,7 +3978,8 @@ leaderboard(
 leaderboard(
     id = 26009, title = "Luigi JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Luigi"),
+    start  = LB_Allstars("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3805,7 +3989,8 @@ leaderboard(
 leaderboard(
     id = 30456, title = "Luigi JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Luigi"),
+    start  = LB_Homerun("JP Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3815,7 +4000,8 @@ leaderboard(
 leaderboard(
     id = 24676, title = "Polygon Luigi",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Luigi"),
+    start  = LB_1PGame("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3825,7 +4011,8 @@ leaderboard(
 leaderboard(
     id = 24730, title = "Polygon Luigi",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Luigi"),
+    start  = LB_Remix1PGame("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3835,7 +4022,8 @@ leaderboard(
 leaderboard(
     id = 24954, title = "Polygon Luigi",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Luigi"),
+    start  = LB_MultiMan("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3845,7 +4033,8 @@ leaderboard(
 leaderboard(
     id = 25007, title = "Polygon Luigi",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Luigi"),
+    start  = LB_CruelMultiMan("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3855,7 +4044,8 @@ leaderboard(
 leaderboard(
     id = 26010, title = "Polygon Luigi",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Luigi"),
+    start  = LB_Allstars("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3865,7 +4055,8 @@ leaderboard(
 leaderboard(
     id = 30457, title = "Polygon Luigi",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Luigi"),
+    start  = LB_Homerun("Polygon Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3875,7 +4066,8 @@ leaderboard(
 leaderboard(
     id = 24677, title = "Link",
     description = "1P Game",
-    start  = LB_1PGame("Link"),
+    start  = LB_1PGame("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3885,7 +4077,8 @@ leaderboard(
 leaderboard(
     id = 24731, title = "Link",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Link"),
+    start  = LB_Remix1PGame("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3895,7 +4088,8 @@ leaderboard(
 leaderboard(
     id = 24955, title = "Link",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Link"),
+    start  = LB_MultiMan("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3905,7 +4099,8 @@ leaderboard(
 leaderboard(
     id = 25008, title = "Link",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Link"),
+    start  = LB_CruelMultiMan("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3925,7 +4120,8 @@ leaderboard(
 leaderboard(
     id = 30458, title = "Link",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Link"),
+    start  = LB_Homerun("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3935,7 +4131,8 @@ leaderboard(
 leaderboard(
     id = 24678, title = "Link JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Link"),
+    start  = LB_1PGame("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3945,7 +4142,8 @@ leaderboard(
 leaderboard(
     id = 24732, title = "Link JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Link"),
+    start  = LB_Remix1PGame("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3955,7 +4153,8 @@ leaderboard(
 leaderboard(
     id = 24956, title = "Link JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Link"),
+    start  = LB_MultiMan("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3965,7 +4164,8 @@ leaderboard(
 leaderboard(
     id = 25009, title = "Link JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Link"),
+    start  = LB_CruelMultiMan("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -3975,7 +4175,8 @@ leaderboard(
 leaderboard(
     id = 26012, title = "Link JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Link"),
+    start  = LB_Allstars("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -3985,7 +4186,8 @@ leaderboard(
 leaderboard(
     id = 30459, title = "Link JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Link"),
+    start  = LB_Homerun("JP Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -3995,7 +4197,8 @@ leaderboard(
 leaderboard(
     id = 24679, title = "Link EU",
     description = "1P Game",
-    start  = LB_1PGame("EU Link"),
+    start  = LB_1PGame("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4005,7 +4208,8 @@ leaderboard(
 leaderboard(
     id = 24733, title = "Link EU",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Link"),
+    start  = LB_Remix1PGame("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4015,7 +4219,8 @@ leaderboard(
 leaderboard(
     id = 24957, title = "Link EU",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Link"),
+    start  = LB_MultiMan("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4025,7 +4230,8 @@ leaderboard(
 leaderboard(
     id = 25010, title = "Link EU",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Link"),
+    start  = LB_CruelMultiMan("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4035,7 +4241,8 @@ leaderboard(
 leaderboard(
     id = 26013, title = "Link EU",
     description = "All-Star Mode",
-    start  = LB_Allstars("EU Link"),
+    start  = LB_Allstars("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4045,7 +4252,8 @@ leaderboard(
 leaderboard(
     id = 30460, title = "Link EU",
     description = "Home-Run Contest",
-    start  = LB_Homerun("EU Link"),
+    start  = LB_Homerun("EU Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4055,7 +4263,8 @@ leaderboard(
 leaderboard(
     id = 24680, title = "Polygon Link",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Link"),
+    start  = LB_1PGame("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4065,7 +4274,8 @@ leaderboard(
 leaderboard(
     id = 24734, title = "Polygon Link",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Link"),
+    start  = LB_Remix1PGame("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4075,7 +4285,8 @@ leaderboard(
 leaderboard(
     id = 24958, title = "Polygon Link",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Link"),
+    start  = LB_MultiMan("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4085,7 +4296,8 @@ leaderboard(
 leaderboard(
     id = 25011, title = "Polygon Link",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Link"),
+    start  = LB_CruelMultiMan("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4095,7 +4307,8 @@ leaderboard(
 leaderboard(
     id = 26005, title = "Polygon Link",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Link"),
+    start  = LB_Allstars("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4105,7 +4318,8 @@ leaderboard(
 leaderboard(
     id = 30461, title = "Polygon Link",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Link"),
+    start  = LB_Homerun("Polygon Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4115,7 +4329,8 @@ leaderboard(
 leaderboard(
     id = 24681, title = "Yoshi",
     description = "1P Game",
-    start  = LB_1PGame("Yoshi"),
+    start  = LB_1PGame("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4125,7 +4340,8 @@ leaderboard(
 leaderboard(
     id = 24735, title = "Yoshi",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Yoshi"),
+    start  = LB_Remix1PGame("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4135,7 +4351,8 @@ leaderboard(
 leaderboard(
     id = 24959, title = "Yoshi",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Yoshi"),
+    start  = LB_MultiMan("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4145,7 +4362,8 @@ leaderboard(
 leaderboard(
     id = 25012, title = "Yoshi",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Yoshi"),
+    start  = LB_CruelMultiMan("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4155,7 +4373,8 @@ leaderboard(
 leaderboard(
     id = 26015, title = "Yoshi",
     description = "All-Star Mode",
-    start  = LB_Allstars("Yoshi"),
+    start  = LB_Allstars("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4165,7 +4384,8 @@ leaderboard(
 leaderboard(
     id = 30462, title = "Yoshi",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Yoshi"),
+    start  = LB_Homerun("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4175,7 +4395,8 @@ leaderboard(
 leaderboard(
     id = 24682, title = "Yoshi JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Yoshi"),
+    start  = LB_1PGame("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4185,7 +4406,8 @@ leaderboard(
 leaderboard(
     id = 24736, title = "Yoshi JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Yoshi"),
+    start  = LB_Remix1PGame("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4195,7 +4417,8 @@ leaderboard(
 leaderboard(
     id = 24960, title = "Yoshi JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Yoshi"),
+    start  = LB_MultiMan("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4205,7 +4428,8 @@ leaderboard(
 leaderboard(
     id = 25013, title = "Yoshi JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Yoshi"),
+    start  = LB_CruelMultiMan("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4215,7 +4439,8 @@ leaderboard(
 leaderboard(
     id = 26016, title = "Yoshi JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Yoshi"),
+    start  = LB_Allstars("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4225,7 +4450,8 @@ leaderboard(
 leaderboard(
     id = 30463, title = "Yoshi JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Yoshi"),
+    start  = LB_Homerun("JP Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4235,7 +4461,8 @@ leaderboard(
 leaderboard(
     id = 24683, title = "Polygon Yoshi",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Yoshi"),
+    start  = LB_1PGame("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4245,7 +4472,8 @@ leaderboard(
 leaderboard(
     id = 24737, title = "Polygon Yoshi",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Yoshi"),
+    start  = LB_Remix1PGame("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4255,7 +4483,8 @@ leaderboard(
 leaderboard(
     id = 24961, title = "Polygon Yoshi",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Yoshi"),
+    start  = LB_MultiMan("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4265,7 +4494,8 @@ leaderboard(
 leaderboard(
     id = 25014, title = "Polygon Yoshi",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Yoshi"),
+    start  = LB_CruelMultiMan("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4275,7 +4505,8 @@ leaderboard(
 leaderboard(
     id = 26017, title = "Polygon Yoshi",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Yoshi"),
+    start  = LB_Allstars("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4285,7 +4516,8 @@ leaderboard(
 leaderboard(
     id = 30464, title = "Polygon Yoshi",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Yoshi"),
+    start  = LB_Homerun("Polygon Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4295,7 +4527,8 @@ leaderboard(
 leaderboard(
     id = 24684, title = "Captain Falcon",
     description = "1P Game",
-    start  = LB_1PGame("Captain Falcon"),
+    start  = LB_1PGame("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4305,7 +4538,8 @@ leaderboard(
 leaderboard(
     id = 24738, title = "Captain Falcon",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Captain Falcon"),
+    start  = LB_Remix1PGame("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4315,7 +4549,8 @@ leaderboard(
 leaderboard(
     id = 24962, title = "Captain Falcon",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Captain Falcon"),
+    start  = LB_MultiMan("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4325,7 +4560,8 @@ leaderboard(
 leaderboard(
     id = 25015, title = "Captain Falcon",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Captain Falcon"),
+    start  = LB_CruelMultiMan("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4335,7 +4571,8 @@ leaderboard(
 leaderboard(
     id = 26018, title = "Captain Falcon",
     description = "All-Star Mode",
-    start  = LB_Allstars("Captain Falcon"),
+    start  = LB_Allstars("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4345,7 +4582,8 @@ leaderboard(
 leaderboard(
     id = 30465, title = "Captain Falcon",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Captain Falcon"),
+    start  = LB_Homerun("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4355,7 +4593,8 @@ leaderboard(
 leaderboard(
     id = 24685, title = "Captain Falcon JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Captain Falcon"),
+    start  = LB_1PGame("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4365,7 +4604,8 @@ leaderboard(
 leaderboard(
     id = 24739, title = "Captain Falcon JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Captain Falcon"),
+    start  = LB_Remix1PGame("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4375,7 +4615,8 @@ leaderboard(
 leaderboard(
     id = 24963, title = "Captain Falcon JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Captain Falcon"),
+    start  = LB_MultiMan("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4385,7 +4626,8 @@ leaderboard(
 leaderboard(
     id = 25016, title = "Captain Falcon JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Captain Falcon"),
+    start  = LB_CruelMultiMan("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4395,7 +4637,8 @@ leaderboard(
 leaderboard(
     id = 26019, title = "Captain Falcon JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Captain Falcon"),
+    start  = LB_Allstars("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4405,7 +4648,8 @@ leaderboard(
 leaderboard(
     id = 30466, title = "Captain Falcon JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Captain Falcon"),
+    start  = LB_Homerun("JP Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4415,7 +4659,8 @@ leaderboard(
 leaderboard(
     id = 24686, title = "Polygon Captain Falcon",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Captain Falcon"),
+    start  = LB_1PGame("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4425,7 +4670,8 @@ leaderboard(
 leaderboard(
     id = 24740, title = "Polygon Captain Falcon",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Captain Falcon"),
+    start  = LB_Remix1PGame("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4435,7 +4681,8 @@ leaderboard(
 leaderboard(
     id = 24964, title = "Polygon Captain Falcon",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Captain Falcon"),
+    start  = LB_MultiMan("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4445,7 +4692,8 @@ leaderboard(
 leaderboard(
     id = 25017, title = "Polygon Captain Falcon",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Captain Falcon"),
+    start  = LB_CruelMultiMan("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4455,7 +4703,8 @@ leaderboard(
 leaderboard(
     id = 26020, title = "Polygon Captain Falcon",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Captain Falcon"),
+    start  = LB_Allstars("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4465,7 +4714,8 @@ leaderboard(
 leaderboard(
     id = 30467, title = "Polygon Captain Falcon",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Captain Falcon"),
+    start  = LB_Homerun("Polygon Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4475,7 +4725,8 @@ leaderboard(
 leaderboard(
     id = 24687, title = "Kirby",
     description = "1P Game",
-    start  = LB_1PGame("Kirby"),
+    start  = LB_1PGame("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4485,7 +4736,8 @@ leaderboard(
 leaderboard(
     id = 24741, title = "Kirby",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Kirby"),
+    start  = LB_Remix1PGame("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4495,7 +4747,8 @@ leaderboard(
 leaderboard(
     id = 24965, title = "Kirby",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Kirby"),
+    start  = LB_MultiMan("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4505,7 +4758,8 @@ leaderboard(
 leaderboard(
     id = 25018, title = "Kirby",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Kirby"),
+    start  = LB_CruelMultiMan("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4515,7 +4769,8 @@ leaderboard(
 leaderboard(
     id = 26021, title = "Kirby",
     description = "All-Star Mode",
-    start  = LB_Allstars("Kirby"),
+    start  = LB_Allstars("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4525,7 +4780,8 @@ leaderboard(
 leaderboard(
     id = 30468, title = "Kirby",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Kirby"),
+    start  = LB_Homerun("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4535,7 +4791,8 @@ leaderboard(
 leaderboard(
     id = 24689, title = "Kirby JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Kirby"),
+    start  = LB_1PGame("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4545,7 +4802,8 @@ leaderboard(
 leaderboard(
     id = 24742, title = "Kirby JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Kirby"),
+    start  = LB_Remix1PGame("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4555,7 +4813,8 @@ leaderboard(
 leaderboard(
     id = 24966, title = "Kirby JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Kirby"),
+    start  = LB_MultiMan("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4565,7 +4824,8 @@ leaderboard(
 leaderboard(
     id = 25019, title = "Kirby JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Kirby"),
+    start  = LB_CruelMultiMan("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4575,7 +4835,8 @@ leaderboard(
 leaderboard(
     id = 26022, title = "Kirby JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Kirby"),
+    start  = LB_Allstars("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4585,7 +4846,8 @@ leaderboard(
 leaderboard(
     id = 30469, title = "Kirby JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Kirby"),
+    start  = LB_Homerun("JP Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4595,7 +4857,8 @@ leaderboard(
 leaderboard(
     id = 24715, title = "Polygon Kirby",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Kirby"),
+    start  = LB_1PGame("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4605,7 +4868,8 @@ leaderboard(
 leaderboard(
     id = 24743, title = "Polygon Kirby",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Kirby"),
+    start  = LB_Remix1PGame("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4615,7 +4879,8 @@ leaderboard(
 leaderboard(
     id = 24967, title = "Polygon Kirby",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Kirby"),
+    start  = LB_MultiMan("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4625,7 +4890,8 @@ leaderboard(
 leaderboard(
     id = 25020, title = "Polygon Kirby",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Kirby"),
+    start  = LB_CruelMultiMan("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4635,7 +4901,8 @@ leaderboard(
 leaderboard(
     id = 26023, title = "Polygon Kirby",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Kirby"),
+    start  = LB_Allstars("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4645,7 +4912,8 @@ leaderboard(
 leaderboard(
     id = 30470, title = "Polygon Kirby",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Kirby"),
+    start  = LB_Homerun("Polygon Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4655,7 +4923,8 @@ leaderboard(
 leaderboard(
     id = 24690, title = "Pikachu",
     description = "1P Game",
-    start  = LB_1PGame("Pikachu"),
+    start  = LB_1PGame("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4665,7 +4934,8 @@ leaderboard(
 leaderboard(
     id = 24744, title = "Pikachu",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Pikachu"),
+    start  = LB_Remix1PGame("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4675,7 +4945,8 @@ leaderboard(
 leaderboard(
     id = 24968, title = "Pikachu",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Pikachu"),
+    start  = LB_MultiMan("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4685,7 +4956,8 @@ leaderboard(
 leaderboard(
     id = 25021, title = "Pikachu",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Pikachu"),
+    start  = LB_CruelMultiMan("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4695,7 +4967,8 @@ leaderboard(
 leaderboard(
     id = 26024, title = "Pikachu",
     description = "All-Star Mode",
-    start  = LB_Allstars("Pikachu"),
+    start  = LB_Allstars("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4705,7 +4978,8 @@ leaderboard(
 leaderboard(
     id = 30471, title = "Pikachu",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Pikachu"),
+    start  = LB_Homerun("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4715,7 +4989,8 @@ leaderboard(
 leaderboard(
     id = 24691, title = "Pikachu JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Pikachu"),
+    start  = LB_1PGame("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4725,7 +5000,8 @@ leaderboard(
 leaderboard(
     id = 24745, title = "Pikachu JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Pikachu"),
+    start  = LB_Remix1PGame("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4735,7 +5011,8 @@ leaderboard(
 leaderboard(
     id = 24969, title = "Pikachu JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Pikachu"),
+    start  = LB_MultiMan("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4745,7 +5022,8 @@ leaderboard(
 leaderboard(
     id = 25022, title = "Pikachu JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Pikachu"),
+    start  = LB_CruelMultiMan("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4755,7 +5033,8 @@ leaderboard(
 leaderboard(
     id = 26025, title = "Pikachu JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Pikachu"),
+    start  = LB_Allstars("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4765,7 +5044,8 @@ leaderboard(
 leaderboard(
     id = 30472, title = "Pikachu JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Pikachu"),
+    start  = LB_Homerun("JP Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4775,7 +5055,8 @@ leaderboard(
 leaderboard(
     id = 24692, title = "Pikachu EU",
     description = "1P Game",
-    start  = LB_1PGame("EU Pikachu"),
+    start  = LB_1PGame("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4785,7 +5066,8 @@ leaderboard(
 leaderboard(
     id = 24756, title = "Pikachu EU",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Pikachu"),
+    start  = LB_Remix1PGame("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4795,7 +5077,8 @@ leaderboard(
 leaderboard(
     id = 24970, title = "Pikachu EU",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Pikachu"),
+    start  = LB_MultiMan("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4805,7 +5088,8 @@ leaderboard(
 leaderboard(
     id = 25023, title = "Pikachu EU",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Pikachu"),
+    start  = LB_CruelMultiMan("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4815,7 +5099,8 @@ leaderboard(
 leaderboard(
     id = 26026, title = "Pikachu EU",
     description = "All-Star Mode",
-    start  = LB_Allstars("EU Pikachu"),
+    start  = LB_Allstars("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4825,7 +5110,8 @@ leaderboard(
 leaderboard(
     id = 30473, title = "Pikachu EU",
     description = "Home-Run Contest",
-    start  = LB_Homerun("EU Pikachu"),
+    start  = LB_Homerun("EU Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4835,7 +5121,8 @@ leaderboard(
 leaderboard(
     id = 24693, title = "Polygon Pikachu",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Pikachu"),
+    start  = LB_1PGame("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4845,7 +5132,8 @@ leaderboard(
 leaderboard(
     id = 24757, title = "Polygon Pikachu",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Pikachu"),
+    start  = LB_Remix1PGame("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4855,7 +5143,8 @@ leaderboard(
 leaderboard(
     id = 24971, title = "Polygon Pikachu",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Pikachu"),
+    start  = LB_MultiMan("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4865,7 +5154,8 @@ leaderboard(
 leaderboard(
     id = 25024, title = "Polygon Pikachu",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Pikachu"),
+    start  = LB_CruelMultiMan("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4875,7 +5165,8 @@ leaderboard(
 leaderboard(
     id = 26027, title = "Polygon Pikachu",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Pikachu"),
+    start  = LB_Allstars("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4885,7 +5176,8 @@ leaderboard(
 leaderboard(
     id = 30474, title = "Polygon Pikachu",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Pikachu"),
+    start  = LB_Homerun("Polygon Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4895,7 +5187,8 @@ leaderboard(
 leaderboard(
     id = 24694, title = "Jigglypuff",
     description = "1P Game",
-    start  = LB_1PGame("Jigglypuff"),
+    start  = LB_1PGame("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4905,7 +5198,8 @@ leaderboard(
 leaderboard(
     id = 24748, title = "Jigglypuff",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Jigglypuff"),
+    start  = LB_Remix1PGame("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4915,7 +5209,8 @@ leaderboard(
 leaderboard(
     id = 24972, title = "Jigglypuff",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Jigglypuff"),
+    start  = LB_MultiMan("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4925,7 +5220,8 @@ leaderboard(
 leaderboard(
     id = 25025, title = "Jigglypuff",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Jigglypuff"),
+    start  = LB_CruelMultiMan("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4935,7 +5231,8 @@ leaderboard(
 leaderboard(
     id = 26028, title = "Jigglypuff",
     description = "All-Star Mode",
-    start  = LB_Allstars("Jigglypuff"),
+    start  = LB_Allstars("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4945,7 +5242,8 @@ leaderboard(
 leaderboard(
     id = 30475, title = "Jigglypuff",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Jigglypuff"),
+    start  = LB_Homerun("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -4955,7 +5253,8 @@ leaderboard(
 leaderboard(
     id = 24695, title = "Jigglypuff JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Jigglypuff"),
+    start  = LB_1PGame("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4965,7 +5264,8 @@ leaderboard(
 leaderboard(
     id = 24749, title = "Jigglypuff JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Jigglypuff"),
+    start  = LB_Remix1PGame("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -4975,7 +5275,8 @@ leaderboard(
 leaderboard(
     id = 24973, title = "Jigglypuff JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Jigglypuff"),
+    start  = LB_MultiMan("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4985,7 +5286,8 @@ leaderboard(
 leaderboard(
     id = 25026, title = "Jigglypuff JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Jigglypuff"),
+    start  = LB_CruelMultiMan("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -4995,7 +5297,8 @@ leaderboard(
 leaderboard(
     id = 26029, title = "Jigglypuff JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Jigglypuff"),
+    start  = LB_Allstars("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5005,7 +5308,8 @@ leaderboard(
 leaderboard(
     id = 30476, title = "Jigglypuff JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Jigglypuff"),
+    start  = LB_Homerun("JP Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5015,7 +5319,8 @@ leaderboard(
 leaderboard(
     id = 24696, title = "Jigglypuff EU",
     description = "1P Game",
-    start  = LB_1PGame("EU Jigglypuff"),
+    start  = LB_1PGame("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5025,7 +5330,8 @@ leaderboard(
 leaderboard(
     id = 24760, title = "Jigglypuff EU",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Jigglypuff"),
+    start  = LB_Remix1PGame("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5035,7 +5341,8 @@ leaderboard(
 leaderboard(
     id = 24974, title = "Jigglypuff EU",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Jigglypuff"),
+    start  = LB_MultiMan("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5045,7 +5352,8 @@ leaderboard(
 leaderboard(
     id = 25027, title = "Jigglypuff EU",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Jigglypuff"),
+    start  = LB_CruelMultiMan("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5055,7 +5363,8 @@ leaderboard(
 leaderboard(
     id = 26030, title = "Jigglypuff EU",
     description = "All-Star Mode",
-    start  = LB_Allstars("EU Jigglypuff"),
+    start  = LB_Allstars("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5065,7 +5374,8 @@ leaderboard(
 leaderboard(
     id = 30477, title = "Jigglypuff EU",
     description = "Home-Run Contest",
-    start  = LB_Homerun("EU Jigglypuff"),
+    start  = LB_Homerun("EU Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5075,7 +5385,8 @@ leaderboard(
 leaderboard(
     id = 24697, title = "Polygon Jigglypuff",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Jigglypuff"),
+    start  = LB_1PGame("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5085,7 +5396,8 @@ leaderboard(
 leaderboard(
     id = 24761, title = "Polygon Jigglypuff",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Jigglypuff"),
+    start  = LB_Remix1PGame("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5095,7 +5407,8 @@ leaderboard(
 leaderboard(
     id = 24975, title = "Polygon Jigglypuff",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Jigglypuff"),
+    start  = LB_MultiMan("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5105,7 +5418,8 @@ leaderboard(
 leaderboard(
     id = 25028, title = "Polygon Jigglypuff",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Jigglypuff"),
+    start  = LB_CruelMultiMan("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5115,7 +5429,8 @@ leaderboard(
 leaderboard(
     id = 26031, title = "Polygon Jigglypuff",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Jigglypuff"),
+    start  = LB_Allstars("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5125,7 +5440,8 @@ leaderboard(
 leaderboard(
     id = 30478, title = "Polygon Jigglypuff",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Jigglypuff"),
+    start  = LB_Homerun("Polygon Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5135,7 +5451,8 @@ leaderboard(
 leaderboard(
     id = 24698, title = "Ness",
     description = "1P Game",
-    start  = LB_1PGame("Ness"),
+    start  = LB_1PGame("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5145,7 +5462,8 @@ leaderboard(
 leaderboard(
     id = 24752, title = "Ness",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Ness"),
+    start  = LB_Remix1PGame("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5155,7 +5473,8 @@ leaderboard(
 leaderboard(
     id = 24976, title = "Ness",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ness"),
+    start  = LB_MultiMan("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5165,7 +5484,8 @@ leaderboard(
 leaderboard(
     id = 25029, title = "Ness",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ness"),
+    start  = LB_CruelMultiMan("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5175,7 +5495,8 @@ leaderboard(
 leaderboard(
     id = 26032, title = "Ness",
     description = "All-Star Mode",
-    start  = LB_Allstars("Ness"),
+    start  = LB_Allstars("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5185,7 +5506,8 @@ leaderboard(
 leaderboard(
     id = 30479, title = "Ness",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Ness"),
+    start  = LB_Homerun("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5195,7 +5517,8 @@ leaderboard(
 leaderboard(
     id = 24699, title = "Ness JP",
     description = "1P Game",
-    start  = LB_1PGame("JP Ness"),
+    start  = LB_1PGame("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5205,7 +5528,8 @@ leaderboard(
 leaderboard(
     id = 24763, title = "Ness JP",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Ness"),
+    start  = LB_Remix1PGame("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5215,7 +5539,8 @@ leaderboard(
 leaderboard(
     id = 24977, title = "Ness JP",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Ness"),
+    start  = LB_MultiMan("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5225,7 +5550,8 @@ leaderboard(
 leaderboard(
     id = 25030, title = "Ness JP",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Ness"),
+    start  = LB_CruelMultiMan("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5235,7 +5561,8 @@ leaderboard(
 leaderboard(
     id = 26033, title = "Ness JP",
     description = "All-Star Mode",
-    start  = LB_Allstars("JP Ness"),
+    start  = LB_Allstars("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5245,7 +5572,8 @@ leaderboard(
 leaderboard(
     id = 30480, title = "Ness JP",
     description = "Home-Run Contest",
-    start  = LB_Homerun("JP Ness"),
+    start  = LB_Homerun("JP Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5255,7 +5583,8 @@ leaderboard(
 leaderboard(
     id = 24700, title = "Polygon Ness",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Ness"),
+    start  = LB_1PGame("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5265,7 +5594,8 @@ leaderboard(
 leaderboard(
     id = 24764, title = "Polygon Ness",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Ness"),
+    start  = LB_Remix1PGame("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5275,7 +5605,8 @@ leaderboard(
 leaderboard(
     id = 24978, title = "Polygon Ness",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Ness"),
+    start  = LB_MultiMan("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5285,7 +5616,8 @@ leaderboard(
 leaderboard(
     id = 25031, title = "Polygon Ness",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Ness"),
+    start  = LB_CruelMultiMan("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5295,7 +5627,8 @@ leaderboard(
 leaderboard(
     id = 26034, title = "Polygon Ness",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Ness"),
+    start  = LB_Allstars("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5305,7 +5638,8 @@ leaderboard(
 leaderboard(
     id = 30481, title = "Polygon Ness",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Ness"),
+    start  = LB_Homerun("Polygon Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5315,7 +5649,8 @@ leaderboard(
 leaderboard(
     id = 24701, title = "Metal Mario",
     description = "1P Game",
-    start  = LB_1PGame("Metal Mario"),
+    start  = LB_1PGame("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5325,7 +5660,8 @@ leaderboard(
 leaderboard(
     id = 24765, title = "Metal Mario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Metal Mario"),
+    start  = LB_Remix1PGame("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5335,7 +5671,8 @@ leaderboard(
 leaderboard(
     id = 24979, title = "Metal Mario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Metal Mario"),
+    start  = LB_MultiMan("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5345,7 +5682,8 @@ leaderboard(
 leaderboard(
     id = 25032, title = "Metal Mario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Metal Mario"),
+    start  = LB_CruelMultiMan("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5355,7 +5693,8 @@ leaderboard(
 leaderboard(
     id = 26035, title = "Metal Mario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Metal Mario"),
+    start  = LB_Allstars("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5365,7 +5704,8 @@ leaderboard(
 leaderboard(
     id = 30482, title = "Metal Mario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Metal Mario"),
+    start  = LB_Homerun("Metal Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5375,7 +5715,8 @@ leaderboard(
 leaderboard(
     id = 24702, title = "Giant Donkey Kong",
     description = "1P Game",
-    start  = LB_1PGame("Giant Donkey Kong"),
+    start  = LB_1PGame("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5385,7 +5726,8 @@ leaderboard(
 leaderboard(
     id = 24771, title = "Giant Donkey Kong",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Giant Donkey Kong"),
+    start  = LB_Remix1PGame("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5395,7 +5737,8 @@ leaderboard(
 leaderboard(
     id = 24980, title = "Giant Donkey Kong",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Giant Donkey Kong"),
+    start  = LB_MultiMan("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5405,7 +5748,8 @@ leaderboard(
 leaderboard(
     id = 25033, title = "Giant Donkey Kong",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Giant Donkey Kong"),
+    start  = LB_CruelMultiMan("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5415,7 +5759,8 @@ leaderboard(
 leaderboard(
     id = 26036, title = "Giant Donkey Kong",
     description = "All-Star Mode",
-    start  = LB_Allstars("Giant Donkey Kong"),
+    start  = LB_Allstars("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5425,7 +5770,8 @@ leaderboard(
 leaderboard(
     id = 30483, title = "Giant Donkey Kong",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Giant Donkey Kong"),
+    start  = LB_Homerun("Giant Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5445,7 +5791,8 @@ leaderboard(
 leaderboard(
     id = 24772, title = "Ganondorf",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Ganondorf"),
+    start  = LB_Remix1PGame("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5455,7 +5802,8 @@ leaderboard(
 leaderboard(
     id = 24981, title = "Ganondorf",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ganondorf"),
+    start  = LB_MultiMan("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5465,7 +5813,8 @@ leaderboard(
 leaderboard(
     id = 25034, title = "Ganondorf",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ganondorf"),
+    start  = LB_CruelMultiMan("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5475,7 +5824,8 @@ leaderboard(
 leaderboard(
     id = 26037, title = "Ganondorf",
     description = "All-Star Mode",
-    start  = LB_Allstars("Ganondorf"),
+    start  = LB_Allstars("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5495,7 +5845,8 @@ leaderboard(
 leaderboard(
     id = 115286, title = "Polygon Ganondorf",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Ganondorf"),
+    start  = LB_1PGame("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5505,7 +5856,8 @@ leaderboard(
 leaderboard(
     id = 115287, title = "Polygon Ganondorf",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Ganondorf"),
+    start  = LB_Remix1PGame("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5515,7 +5867,8 @@ leaderboard(
 leaderboard(
     id = 115288, title = "Polygon Ganondorf",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Ganondorf"),
+    start  = LB_MultiMan("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5525,7 +5878,8 @@ leaderboard(
 leaderboard(
     id = 115289, title = "Polygon Ganondorf",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Ganondorf"),
+    start  = LB_CruelMultiMan("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5535,7 +5889,8 @@ leaderboard(
 leaderboard(
     id = 115290, title = "Polygon Ganondorf",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Ganondorf"),
+    start  = LB_Allstars("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5545,7 +5900,8 @@ leaderboard(
 leaderboard(
     id = 115291, title = "Polygon Ganondorf",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Ganondorf"),
+    start  = LB_Homerun("Polygon Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5555,7 +5911,8 @@ leaderboard(
 leaderboard(
     id = 24704, title = "Young Link",
     description = "1P Game",
-    start  = LB_1PGame("Young Link"),
+    start  = LB_1PGame("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5565,7 +5922,8 @@ leaderboard(
 leaderboard(
     id = 24773, title = "Young Link",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Young Link"),
+    start  = LB_Remix1PGame("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5575,7 +5933,8 @@ leaderboard(
 leaderboard(
     id = 24982, title = "Young Link",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Young Link"),
+    start  = LB_MultiMan("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5585,7 +5944,8 @@ leaderboard(
 leaderboard(
     id = 25035, title = "Young Link",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Young Link"),
+    start  = LB_CruelMultiMan("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5595,7 +5955,8 @@ leaderboard(
 leaderboard(
     id = 26038, title = "Young Link",
     description = "All-Star Mode",
-    start  = LB_Allstars("Young Link"),
+    start  = LB_Allstars("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5605,7 +5966,8 @@ leaderboard(
 leaderboard(
     id = 30485, title = "Young Link",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Young Link"),
+    start  = LB_Homerun("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5615,7 +5977,8 @@ leaderboard(
 leaderboard(
     id = 115292, title = "Polygon Young Link",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Young Link"),
+    start  = LB_1PGame("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5625,7 +5988,8 @@ leaderboard(
 leaderboard(
     id = 115293, title = "Polygon Young Link",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Young Link"),
+    start  = LB_Remix1PGame("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5635,7 +5999,8 @@ leaderboard(
 leaderboard(
     id = 115294, title = "Polygon Young Link",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Young Link"),
+    start  = LB_MultiMan("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5645,7 +6010,8 @@ leaderboard(
 leaderboard(
     id = 115295, title = "Polygon Young Link",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Young Link"),
+    start  = LB_CruelMultiMan("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5655,7 +6021,8 @@ leaderboard(
 leaderboard(
     id = 115296, title = "Polygon Young Link",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Young Link"),
+    start  = LB_Allstars("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5665,7 +6032,8 @@ leaderboard(
 leaderboard(
     id = 115297, title = "Polygon Young Link",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Young Link"),
+    start  = LB_Homerun("Polygon Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5675,7 +6043,8 @@ leaderboard(
 leaderboard(
     id = 24705, title = "Falco",
     description = "1P Game",
-    start  = LB_1PGame("Falco"),
+    start  = LB_1PGame("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5685,7 +6054,8 @@ leaderboard(
 leaderboard(
     id = 24774, title = "Falco",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Falco"),
+    start  = LB_Remix1PGame("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5695,7 +6065,8 @@ leaderboard(
 leaderboard(
     id = 24983, title = "Falco",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Falco"),
+    start  = LB_MultiMan("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5705,7 +6076,8 @@ leaderboard(
 leaderboard(
     id = 25036, title = "Falco",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Falco"),
+    start  = LB_CruelMultiMan("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5715,7 +6087,8 @@ leaderboard(
 leaderboard(
     id = 26039, title = "Falco",
     description = "All-Star Mode",
-    start  = LB_Allstars("Falco"),
+    start  = LB_Allstars("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5725,7 +6098,8 @@ leaderboard(
 leaderboard(
     id = 30486, title = "Falco",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Falco"),
+    start  = LB_Homerun("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5735,7 +6109,8 @@ leaderboard(
 leaderboard(
     id = 115280, title = "Polygon Falco",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Falco"),
+    start  = LB_1PGame("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5745,7 +6120,8 @@ leaderboard(
 leaderboard(
     id = 115281, title = "Polygon Falco",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Falco"),
+    start  = LB_Remix1PGame("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5755,7 +6131,8 @@ leaderboard(
 leaderboard(
     id = 115282, title = "Polygon Falco",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Falco"),
+    start  = LB_MultiMan("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5765,7 +6142,8 @@ leaderboard(
 leaderboard(
     id = 115283, title = "Polygon Falco",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Falco"),
+    start  = LB_CruelMultiMan("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5775,7 +6153,8 @@ leaderboard(
 leaderboard(
     id = 115284, title = "Polygon Falco",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Falco"),
+    start  = LB_Allstars("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5785,7 +6164,8 @@ leaderboard(
 leaderboard(
     id = 115285, title = "Polygon Falco",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Falco"),
+    start  = LB_Homerun("Polygon Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5795,7 +6175,8 @@ leaderboard(
 leaderboard(
     id = 24706, title = "Dr. Mario",
     description = "1P Game",
-    start  = LB_1PGame("Dr. Mario"),
+    start  = LB_1PGame("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5805,7 +6186,8 @@ leaderboard(
 leaderboard(
     id = 24775, title = "Dr. Mario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Dr. Mario"),
+    start  = LB_Remix1PGame("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5815,7 +6197,8 @@ leaderboard(
 leaderboard(
     id = 24984, title = "Dr. Mario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dr. Mario"),
+    start  = LB_MultiMan("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5825,7 +6208,8 @@ leaderboard(
 leaderboard(
     id = 25037, title = "Dr. Mario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dr. Mario"),
+    start  = LB_CruelMultiMan("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5835,7 +6219,8 @@ leaderboard(
 leaderboard(
     id = 26040, title = "Dr. Mario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Dr. Mario"),
+    start  = LB_Allstars("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5845,7 +6230,8 @@ leaderboard(
 leaderboard(
     id = 30487, title = "Dr. Mario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Dr. Mario"),
+    start  = LB_Homerun("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5855,7 +6241,8 @@ leaderboard(
 leaderboard(
     id = 115262, title = "Polygon Dr. Mario",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Dr. Mario"),
+    start  = LB_1PGame("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5865,7 +6252,8 @@ leaderboard(
 leaderboard(
     id = 115263, title = "Polygon Dr. Mario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Dr. Mario"),
+    start  = LB_Remix1PGame("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5875,7 +6263,8 @@ leaderboard(
 leaderboard(
     id = 115264, title = "Polygon Dr. Mario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Dr. Mario"),
+    start  = LB_MultiMan("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5885,7 +6274,8 @@ leaderboard(
 leaderboard(
     id = 115265, title = "Polygon Dr. Mario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Dr. Mario"),
+    start  = LB_CruelMultiMan("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5895,7 +6285,8 @@ leaderboard(
 leaderboard(
     id = 115266, title = "Polygon Dr. Mario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Dr. Mario"),
+    start  = LB_Allstars("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5905,7 +6296,8 @@ leaderboard(
 leaderboard(
     id = 115267, title = "Polygon Dr. Mario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Dr. Mario"),
+    start  = LB_Homerun("Polygon Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5915,7 +6307,8 @@ leaderboard(
 leaderboard(
     id = 24707, title = "Dark Samus",
     description = "1P Game",
-    start  = LB_1PGame("Dark Samus"),
+    start  = LB_1PGame("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5925,7 +6318,8 @@ leaderboard(
 leaderboard(
     id = 24777, title = "Dark Samus",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Dark Samus"),
+    start  = LB_Remix1PGame("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5935,7 +6329,8 @@ leaderboard(
 leaderboard(
     id = 24985, title = "Dark Samus",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dark Samus"),
+    start  = LB_MultiMan("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5945,7 +6340,8 @@ leaderboard(
 leaderboard(
     id = 25038, title = "Dark Samus",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dark Samus"),
+    start  = LB_CruelMultiMan("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -5955,7 +6351,8 @@ leaderboard(
 leaderboard(
     id = 26041, title = "Dark Samus",
     description = "All-Star Mode",
-    start  = LB_Allstars("Dark Samus"),
+    start  = LB_Allstars("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5965,7 +6362,8 @@ leaderboard(
 leaderboard(
     id = 30488, title = "Dark Samus",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Dark Samus"),
+    start  = LB_Homerun("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -5975,7 +6373,8 @@ leaderboard(
 leaderboard(
     id = 115298, title = "Polygon Dark Samus",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Dark Samus"),
+    start  = LB_1PGame("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5985,7 +6384,8 @@ leaderboard(
 leaderboard(
     id = 115299, title = "Polygon Dark Samus",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Dark Samus"),
+    start  = LB_Remix1PGame("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -5995,7 +6395,8 @@ leaderboard(
 leaderboard(
     id = 115300, title = "Polygon Dark Samus",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Dark Samus"),
+    start  = LB_MultiMan("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6005,7 +6406,8 @@ leaderboard(
 leaderboard(
     id = 115301, title = "Polygon Dark Samus",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Dark Samus"),
+    start  = LB_CruelMultiMan("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6015,7 +6417,8 @@ leaderboard(
 leaderboard(
     id = 115302, title = "Polygon Dark Samus",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Dark Samus"),
+    start  = LB_Allstars("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6025,7 +6428,8 @@ leaderboard(
 leaderboard(
     id = 115303, title = "Polygon Dark Samus",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Dark Samus"),
+    start  = LB_Homerun("Polygon Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6035,7 +6439,8 @@ leaderboard(
 leaderboard(
     id = 24708, title = "Wario",
     description = "1P Game",
-    start  = LB_1PGame("Wario"),
+    start  = LB_1PGame("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6045,7 +6450,8 @@ leaderboard(
 leaderboard(
     id = 24762, title = "Wario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Wario"),
+    start  = LB_Remix1PGame("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6055,7 +6461,8 @@ leaderboard(
 leaderboard(
     id = 24986, title = "Wario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Wario"),
+    start  = LB_MultiMan("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6065,7 +6472,8 @@ leaderboard(
 leaderboard(
     id = 25039, title = "Wario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Wario"),
+    start  = LB_CruelMultiMan("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6075,7 +6483,8 @@ leaderboard(
 leaderboard(
     id = 26042, title = "Wario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Wario"),
+    start  = LB_Allstars("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6085,7 +6494,8 @@ leaderboard(
 leaderboard(
     id = 30489, title = "Wario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Wario"),
+    start  = LB_Homerun("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6095,7 +6505,8 @@ leaderboard(
 leaderboard(
     id = 24920, title = "Polygon Wario",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Wario"),
+    start  = LB_1PGame("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6105,7 +6516,8 @@ leaderboard(
 leaderboard(
     id = 24866, title = "Polygon Wario",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Wario"),
+    start  = LB_Remix1PGame("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6115,7 +6527,8 @@ leaderboard(
 leaderboard(
     id = 24813, title = "Polygon Wario",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Wario"),
+    start  = LB_MultiMan("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6125,7 +6538,8 @@ leaderboard(
 leaderboard(
     id = 24919, title = "Polygon Wario",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Wario"),
+    start  = LB_CruelMultiMan("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6135,7 +6549,8 @@ leaderboard(
 leaderboard(
     id = 24865, title = "Polygon Wario",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Wario"),
+    start  = LB_Allstars("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6145,7 +6560,8 @@ leaderboard(
 leaderboard(
     id = 24812, title = "Polygon Wario",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Wario"),
+    start  = LB_Homerun("Polygon Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6155,7 +6571,8 @@ leaderboard(
 leaderboard(
     id = 24709, title = "Lucas",
     description = "1P Game",
-    start  = LB_1PGame("Lucas"),
+    start  = LB_1PGame("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6165,7 +6582,8 @@ leaderboard(
 leaderboard(
     id = 24766, title = "Lucas",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Lucas"),
+    start  = LB_Remix1PGame("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6175,7 +6593,8 @@ leaderboard(
 leaderboard(
     id = 24987, title = "Lucas",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Lucas"),
+    start  = LB_MultiMan("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6185,7 +6604,8 @@ leaderboard(
 leaderboard(
     id = 25040, title = "Lucas",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Lucas"),
+    start  = LB_CruelMultiMan("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6195,7 +6615,8 @@ leaderboard(
 leaderboard(
     id = 26043, title = "Lucas",
     description = "All-Star Mode",
-    start  = LB_Allstars("Lucas"),
+    start  = LB_Allstars("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6205,7 +6626,8 @@ leaderboard(
 leaderboard(
     id = 30490, title = "Lucas",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Lucas"),
+    start  = LB_Homerun("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6215,7 +6637,8 @@ leaderboard(
 leaderboard(
     id = 24918, title = "Polygon Lucas",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Lucas"),
+    start  = LB_1PGame("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6225,7 +6648,8 @@ leaderboard(
 leaderboard(
     id = 24864, title = "Polygon Lucas",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Lucas"),
+    start  = LB_Remix1PGame("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6235,7 +6659,8 @@ leaderboard(
 leaderboard(
     id = 24811, title = "Polygon Lucas",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Lucas"),
+    start  = LB_MultiMan("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6245,7 +6670,8 @@ leaderboard(
 leaderboard(
     id = 24917, title = "Polygon Lucas",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Lucas"),
+    start  = LB_CruelMultiMan("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6255,7 +6681,8 @@ leaderboard(
 leaderboard(
     id = 24863, title = "Polygon Lucas",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Lucas"),
+    start  = LB_Allstars("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6265,7 +6692,8 @@ leaderboard(
 leaderboard(
     id = 24808, title = "Polygon Lucas",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Lucas"),
+    start  = LB_Homerun("Polygon Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6275,7 +6703,8 @@ leaderboard(
 leaderboard(
     id = 24714, title = "Bowser",
     description = "1P Game",
-    start  = LB_1PGame("Bowser"),
+    start  = LB_1PGame("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6285,7 +6714,8 @@ leaderboard(
 leaderboard(
     id = 24776, title = "Bowser",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Bowser"),
+    start  = LB_Remix1PGame("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6295,7 +6725,8 @@ leaderboard(
 leaderboard(
     id = 24992, title = "Bowser",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Bowser"),
+    start  = LB_MultiMan("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6305,7 +6736,8 @@ leaderboard(
 leaderboard(
     id = 25045, title = "Bowser",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Bowser"),
+    start  = LB_CruelMultiMan("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6315,7 +6747,8 @@ leaderboard(
 leaderboard(
     id = 26044, title = "Bowser",
     description = "All-Star Mode",
-    start  = LB_Allstars("Bowser"),
+    start  = LB_Allstars("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6325,7 +6758,8 @@ leaderboard(
 leaderboard(
     id = 30491, title = "Bowser",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Bowser"),
+    start  = LB_Homerun("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6335,7 +6769,8 @@ leaderboard(
 leaderboard(
     id = 24810, title = "Polygon Bowser",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Bowser"),
+    start  = LB_1PGame("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6345,7 +6780,8 @@ leaderboard(
 leaderboard(
     id = 24916, title = "Polygon Bowser",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Bowser"),
+    start  = LB_Remix1PGame("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6355,7 +6791,8 @@ leaderboard(
 leaderboard(
     id = 24862, title = "Polygon Bowser",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Bowser"),
+    start  = LB_MultiMan("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6365,7 +6802,8 @@ leaderboard(
 leaderboard(
     id = 24809, title = "Polygon Bowser",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Bowser"),
+    start  = LB_CruelMultiMan("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6375,7 +6813,8 @@ leaderboard(
 leaderboard(
     id = 24915, title = "Polygon Bowser",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Bowser"),
+    start  = LB_Allstars("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6385,7 +6824,8 @@ leaderboard(
 leaderboard(
     id = 24861, title = "Polygon Bowser",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Bowser"),
+    start  = LB_Homerun("Polygon Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6395,7 +6835,8 @@ leaderboard(
 leaderboard(
     id = 24710, title = "Giga Bowser",
     description = "1P Game",
-    start  = LB_1PGame("Giga Bowser"),
+    start  = LB_1PGame("Giga Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6405,7 +6846,8 @@ leaderboard(
 leaderboard(
     id = 24767, title = "Giga Bowser",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Giga Bowser"),
+    start  = LB_Remix1PGame("Giga Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6415,7 +6857,8 @@ leaderboard(
 leaderboard(
     id = 24988, title = "Giga Bowser",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Giga Bowser"),
+    start  = LB_MultiMan("Giga Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6425,7 +6868,8 @@ leaderboard(
 leaderboard(
     id = 25041, title = "Giga Bowser",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox"),
+    start  = LB_CruelMultiMan("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6435,7 +6879,8 @@ leaderboard(
 leaderboard(
     id = 26045, title = "Giga Bowser",
     description = "All-Star Mode",
-    start  = LB_Allstars("Giga Bowser"),
+    start  = LB_Allstars("Giga Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6445,7 +6890,8 @@ leaderboard(
 leaderboard(
     id = 30492, title = "Giga Bowser",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Giga Bowser"),
+    start  = LB_Homerun("Giga Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6455,7 +6901,8 @@ leaderboard(
 leaderboard(
     id = 24711, title = "Mad Piano",
     description = "1P Game",
-    start  = LB_1PGame("Mad Piano"),
+    start  = LB_1PGame("Mad Piano") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6465,7 +6912,8 @@ leaderboard(
 leaderboard(
     id = 24768, title = "Mad Piano",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Mad Piano"),
+    start  = LB_Remix1PGame("Mad Piano") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6475,7 +6923,8 @@ leaderboard(
 leaderboard(
     id = 24989, title = "Mad Piano",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mad Piano"),
+    start  = LB_MultiMan("Mad Piano") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6485,7 +6934,8 @@ leaderboard(
 leaderboard(
     id = 25042, title = "Mad Piano",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox"),
+    start  = LB_CruelMultiMan("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6495,7 +6945,8 @@ leaderboard(
 leaderboard(
     id = 26046, title = "Mad Piano",
     description = "All-Star Mode",
-    start  = LB_Allstars("Mad Piano"),
+    start  = LB_Allstars("Mad Piano") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6505,7 +6956,8 @@ leaderboard(
 leaderboard(
     id = 30493, title = "Mad Piano",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Mad Piano"),
+    start  = LB_Homerun("Mad Piano") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6515,7 +6967,8 @@ leaderboard(
 leaderboard(
     id = 24712, title = "Wolf",
     description = "1P Game",
-    start  = LB_1PGame("Wolf"),
+    start  = LB_1PGame("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6525,7 +6978,8 @@ leaderboard(
 leaderboard(
     id = 24769, title = "Wolf",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Wolf"),
+    start  = LB_Remix1PGame("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6535,7 +6989,8 @@ leaderboard(
 leaderboard(
     id = 24990, title = "Wolf",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Wolf"),
+    start  = LB_MultiMan("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6545,7 +7000,8 @@ leaderboard(
 leaderboard(
     id = 25043, title = "Wolf",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Wolf"),
+    start  = LB_CruelMultiMan("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6555,7 +7011,8 @@ leaderboard(
 leaderboard(
     id = 26047, title = "Wolf",
     description = "All-Star Mode",
-    start  = LB_Allstars("Wolf"),
+    start  = LB_Allstars("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6565,7 +7022,8 @@ leaderboard(
 leaderboard(
     id = 30494, title = "Wolf",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Wolf"),
+    start  = LB_Homerun("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6575,7 +7033,8 @@ leaderboard(
 leaderboard(
     id = 24914, title = "Polygon Wolf",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Wolf"),
+    start  = LB_1PGame("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6585,7 +7044,8 @@ leaderboard(
 leaderboard(
     id = 24860, title = "Polygon Wolf",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Wolf"),
+    start  = LB_Remix1PGame("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6595,7 +7055,8 @@ leaderboard(
 leaderboard(
     id = 24807, title = "Polygon Wolf",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Wolf"),
+    start  = LB_MultiMan("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6605,7 +7066,8 @@ leaderboard(
 leaderboard(
     id = 24913, title = "Polygon Wolf",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Wolf"),
+    start  = LB_CruelMultiMan("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6615,7 +7077,8 @@ leaderboard(
 leaderboard(
     id = 24859, title = "Polygon Wolf",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Wolf"),
+    start  = LB_Allstars("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6625,7 +7088,8 @@ leaderboard(
 leaderboard(
     id = 24806, title = "Polygon Wolf",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Wolf"),
+    start  = LB_Homerun("Polygon Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6635,7 +7099,8 @@ leaderboard(
 leaderboard(
     id = 24713, title = "Conker",
     description = "1P Game",
-    start  = LB_1PGame("Conker"),
+    start  = LB_1PGame("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6645,7 +7110,8 @@ leaderboard(
 leaderboard(
     id = 24770, title = "Conker",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Conker"),
+    start  = LB_Remix1PGame("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6655,7 +7121,8 @@ leaderboard(
 leaderboard(
     id = 24991, title = "Conker",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Conker"),
+    start  = LB_MultiMan("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6665,7 +7132,8 @@ leaderboard(
 leaderboard(
     id = 25044, title = "Conker",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Conker"),
+    start  = LB_CruelMultiMan("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6675,7 +7143,8 @@ leaderboard(
 leaderboard(
     id = 26048, title = "Conker",
     description = "All-Star Mode",
-    start  = LB_Allstars("Conker"),
+    start  = LB_Allstars("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6685,7 +7154,8 @@ leaderboard(
 leaderboard(
     id = 30495, title = "Conker",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Conker"),
+    start  = LB_Homerun("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6695,7 +7165,8 @@ leaderboard(
 leaderboard(
     id = 24912, title = "Polygon Conker",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Conker"),
+    start  = LB_1PGame("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6705,7 +7176,8 @@ leaderboard(
 leaderboard(
     id = 24831, title = "Polygon Conker",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Conker"),
+    start  = LB_Remix1PGame("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6715,7 +7187,8 @@ leaderboard(
 leaderboard(
     id = 24805, title = "Polygon Conker",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Conker"),
+    start  = LB_MultiMan("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6725,7 +7198,8 @@ leaderboard(
 leaderboard(
     id = 24911, title = "Polygon Conker",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Conker"),
+    start  = LB_CruelMultiMan("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6735,7 +7209,8 @@ leaderboard(
 leaderboard(
     id = 24858, title = "Polygon Conker",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Conker"),
+    start  = LB_Allstars("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6745,7 +7220,8 @@ leaderboard(
 leaderboard(
     id = 24803, title = "Polygon Conker",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Conker"),
+    start  = LB_Homerun("Polygon Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6755,7 +7231,8 @@ leaderboard(
 leaderboard(
     id = 25981, title = "Mewtwo",
     description = "1P Game",
-    start  = LB_1PGame("Mewtwo"),
+    start  = LB_1PGame("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6765,7 +7242,8 @@ leaderboard(
 leaderboard(
     id = 25983, title = "Mewtwo",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Mewtwo"),
+    start  = LB_Remix1PGame("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6775,7 +7253,8 @@ leaderboard(
 leaderboard(
     id = 25991, title = "Mewtwo",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mewtwo"),
+    start  = LB_MultiMan("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6785,7 +7264,8 @@ leaderboard(
 leaderboard(
     id = 25993, title = "Mewtwo",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Mewtwo"),
+    start  = LB_CruelMultiMan("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6795,7 +7275,8 @@ leaderboard(
 leaderboard(
     id = 26049, title = "Mewtwo",
     description = "All-Star Mode",
-    start  = LB_Allstars("Mewtwo"),
+    start  = LB_Allstars("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6805,7 +7286,8 @@ leaderboard(
 leaderboard(
     id = 30496, title = "Mewtwo",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Mewtwo"),
+    start  = LB_Homerun("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6815,7 +7297,8 @@ leaderboard(
 leaderboard(
     id = 24910, title = "Polygon Mewtwo",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Mewtwo"),
+    start  = LB_1PGame("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6825,7 +7308,8 @@ leaderboard(
 leaderboard(
     id = 24857, title = "Polygon Mewtwo",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Mewtwo"),
+    start  = LB_Remix1PGame("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6835,7 +7319,8 @@ leaderboard(
 leaderboard(
     id = 24802, title = "Polygon Mewtwo",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Mewtwo"),
+    start  = LB_MultiMan("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6845,7 +7330,8 @@ leaderboard(
 leaderboard(
     id = 24909, title = "Polygon Mewtwo",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Mewtwo"),
+    start  = LB_CruelMultiMan("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6855,7 +7341,8 @@ leaderboard(
 leaderboard(
     id = 24856, title = "Polygon Mewtwo",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Mewtwo"),
+    start  = LB_Allstars("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6865,7 +7352,8 @@ leaderboard(
 leaderboard(
     id = 24801, title = "Polygon Mewtwo",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Mewtwo"),
+    start  = LB_Homerun("Polygon Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6875,7 +7363,8 @@ leaderboard(
 leaderboard(
     id = 25982, title = "Marth",
     description = "1P Game",
-    start  = LB_1PGame("Marth"),
+    start  = LB_1PGame("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6885,7 +7374,8 @@ leaderboard(
 leaderboard(
     id = 25984, title = "Marth",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Marth"),
+    start  = LB_Remix1PGame("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6895,7 +7385,8 @@ leaderboard(
 leaderboard(
     id = 25992, title = "Marth",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Marth"),
+    start  = LB_MultiMan("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6905,7 +7396,8 @@ leaderboard(
 leaderboard(
     id = 25994, title = "Marth",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Marth"),
+    start  = LB_CruelMultiMan("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6915,7 +7407,8 @@ leaderboard(
 leaderboard(
     id = 26050, title = "Marth",
     description = "All-Star Mode",
-    start  = LB_Allstars("Marth"),
+    start  = LB_Allstars("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6925,7 +7418,8 @@ leaderboard(
 leaderboard(
     id = 30497, title = "Marth",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Marth"),
+    start  = LB_Homerun("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6935,7 +7429,8 @@ leaderboard(
 leaderboard(
     id = 24908, title = "Polygon Marth",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Marth"),
+    start  = LB_1PGame("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6945,7 +7440,8 @@ leaderboard(
 leaderboard(
     id = 24855, title = "Polygon Marth",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Marth"),
+    start  = LB_Remix1PGame("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6955,7 +7451,8 @@ leaderboard(
 leaderboard(
     id = 24800, title = "Polygon Marth",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Marth"),
+    start  = LB_MultiMan("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6965,7 +7462,8 @@ leaderboard(
 leaderboard(
     id = 24907, title = "Polygon Marth",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Marth"),
+    start  = LB_CruelMultiMan("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -6975,7 +7473,8 @@ leaderboard(
 leaderboard(
     id = 24854, title = "Polygon Marth",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Marth"),
+    start  = LB_Allstars("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -6985,7 +7484,8 @@ leaderboard(
 leaderboard(
     id = 24799, title = "Polygon Marth",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Marth"),
+    start  = LB_Homerun("Polygon Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -6995,7 +7495,8 @@ leaderboard(
 leaderboard(
     id = 30432, title = "Sonic",
     description = "1P Game",
-    start  = LB_1PGame("Sonic"),
+    start  = LB_1PGame("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7005,7 +7506,8 @@ leaderboard(
 leaderboard(
     id = 30434, title = "Sonic",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Sonic"),
+    start  = LB_Remix1PGame("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7015,7 +7517,8 @@ leaderboard(
 leaderboard(
     id = 30436, title = "Sonic",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Sonic"),
+    start  = LB_MultiMan("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7025,7 +7528,8 @@ leaderboard(
 leaderboard(
     id = 30438, title = "Sonic",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Sonic"),
+    start  = LB_CruelMultiMan("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7035,7 +7539,8 @@ leaderboard(
 leaderboard(
     id = 30440, title = "Sonic",
     description = "All-Star Mode",
-    start  = LB_Allstars("Sonic"),
+    start  = LB_Allstars("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7045,7 +7550,8 @@ leaderboard(
 leaderboard(
     id = 30498, title = "Sonic",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Sonic"),
+    start  = LB_Homerun("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7055,7 +7561,8 @@ leaderboard(
 leaderboard(
     id = 24906, title = "Polygon Sonic",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Sonic"),
+    start  = LB_1PGame("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7065,7 +7572,8 @@ leaderboard(
 leaderboard(
     id = 24853, title = "Polygon Sonic",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Sonic"),
+    start  = LB_Remix1PGame("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7075,7 +7583,8 @@ leaderboard(
 leaderboard(
     id = 115259, title = "Polygon Sonic",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Sonic"),
+    start  = LB_MultiMan("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7085,7 +7594,8 @@ leaderboard(
 leaderboard(
     id = 115260, title = "Polygon Sonic",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Sonic"),
+    start  = LB_CruelMultiMan("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7095,7 +7605,8 @@ leaderboard(
 leaderboard(
     id = 115261, title = "Polygon Sonic",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Sonic"),
+    start  = LB_Allstars("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7105,7 +7616,8 @@ leaderboard(
 leaderboard(
     id = 115258, title = "Polygon Sonic",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Sonic"),
+    start  = LB_Homerun("Polygon Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7115,7 +7627,8 @@ leaderboard(
 leaderboard(
     id = 30433, title = "Super Sonic",
     description = "1P Game",
-    start  = LB_1PGame("Super Sonic"),
+    start  = LB_1PGame("Super Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7125,7 +7638,8 @@ leaderboard(
 leaderboard(
     id = 30435, title = "Super Sonic",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Fox"),
+    start  = LB_Remix1PGame("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7135,7 +7649,8 @@ leaderboard(
 leaderboard(
     id = 30437, title = "Super Sonic",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Super Sonic"),
+    start  = LB_MultiMan("Super Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7145,7 +7660,8 @@ leaderboard(
 leaderboard(
     id = 30439, title = "Super Sonic",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Super Sonic"),
+    start  = LB_CruelMultiMan("Super Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7155,7 +7671,8 @@ leaderboard(
 leaderboard(
     id = 30441, title = "Super Sonic",
     description = "All-Star Mode",
-    start  = LB_Allstars("Super Sonic"),
+    start  = LB_Allstars("Super Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7165,7 +7682,8 @@ leaderboard(
 leaderboard(
     id = 30499, title = "Super Sonic",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Super Sonic"),
+    start  = LB_Homerun("Super Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7175,7 +7693,8 @@ leaderboard(
 leaderboard(
     id = 24804, title = "Sheik",
     description = "1P Game",
-    start  = LB_1PGame("Sheik"),
+    start  = LB_1PGame("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7185,7 +7704,8 @@ leaderboard(
 leaderboard(
     id = 25989, title = "Sheik",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Sheik"),
+    start  = LB_Remix1PGame("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7195,7 +7715,8 @@ leaderboard(
 leaderboard(
     id = 25987, title = "Sheik",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Sheik"),
+    start  = LB_MultiMan("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7205,7 +7726,8 @@ leaderboard(
 leaderboard(
     id = 25985, title = "Sheik",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Sheik"),
+    start  = LB_CruelMultiMan("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7215,7 +7737,8 @@ leaderboard(
 leaderboard(
     id = 24937, title = "Sheik",
     description = "All-Star Mode",
-    start  = LB_Allstars("Sheik"),
+    start  = LB_Allstars("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7225,7 +7748,8 @@ leaderboard(
 leaderboard(
     id = 24884, title = "Sheik",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Sheik"),
+    start  = LB_Homerun("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7235,7 +7759,8 @@ leaderboard(
 leaderboard(
     id = 115268, title = "Polygon Sheik",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Sheik"),
+    start  = LB_1PGame("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7245,7 +7770,8 @@ leaderboard(
 leaderboard(
     id = 115269, title = "Polygon Sheik",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Sheik"),
+    start  = LB_Remix1PGame("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7255,7 +7781,8 @@ leaderboard(
 leaderboard(
     id = 115270, title = "Polygon Sheik",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Sheik"),
+    start  = LB_MultiMan("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7265,7 +7792,8 @@ leaderboard(
 leaderboard(
     id = 115271, title = "Polygon Sheik",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Sheik"),
+    start  = LB_CruelMultiMan("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7275,7 +7803,8 @@ leaderboard(
 leaderboard(
     id = 115272, title = "Polygon Sheik",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Sheik"),
+    start  = LB_Allstars("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7285,7 +7814,8 @@ leaderboard(
 leaderboard(
     id = 115273, title = "Polygon Sheik",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Sheik"),
+    start  = LB_Homerun("Polygon Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7295,7 +7825,8 @@ leaderboard(
 leaderboard(
     id = 24830, title = "Marina",
     description = "1P Game",
-    start  = LB_1PGame("Marina"),
+    start  = LB_1PGame("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7305,7 +7836,8 @@ leaderboard(
 leaderboard(
     id = 24936, title = "Marina",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Marina"),
+    start  = LB_Remix1PGame("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7315,7 +7847,8 @@ leaderboard(
 leaderboard(
     id = 24883, title = "Marina",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Marina"),
+    start  = LB_MultiMan("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7325,7 +7858,8 @@ leaderboard(
 leaderboard(
     id = 24829, title = "Marina",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Marina"),
+    start  = LB_CruelMultiMan("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7335,7 +7869,8 @@ leaderboard(
 leaderboard(
     id = 24935, title = "Marina",
     description = "All-Star Mode",
-    start  = LB_Allstars("Marina"),
+    start  = LB_Allstars("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7345,7 +7880,8 @@ leaderboard(
 leaderboard(
     id = 24882, title = "Marina",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Marina"),
+    start  = LB_Homerun("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7355,7 +7891,8 @@ leaderboard(
 leaderboard(
     id = 115274, title = "Polygon Marina",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Marina"),
+    start  = LB_1PGame("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7365,7 +7902,8 @@ leaderboard(
 leaderboard(
     id = 115275, title = "Polygon Marina",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Marina"),
+    start  = LB_Remix1PGame("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7375,7 +7913,8 @@ leaderboard(
 leaderboard(
     id = 115276, title = "Polygon Marina",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Marina"),
+    start  = LB_MultiMan("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7385,7 +7924,8 @@ leaderboard(
 leaderboard(
     id = 115277, title = "Polygon Marina",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Marina"),
+    start  = LB_CruelMultiMan("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7395,7 +7935,8 @@ leaderboard(
 leaderboard(
     id = 115278, title = "Polygon Marina",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Marina"),
+    start  = LB_Allstars("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7405,7 +7946,8 @@ leaderboard(
 leaderboard(
     id = 115279, title = "Polygon Marina",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Marina"),
+    start  = LB_Homerun("Polygon Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7415,7 +7957,8 @@ leaderboard(
 leaderboard(
     id = 24939, title = "King Dedede",
     description = "1P Game",
-    start  = LB_1PGame("King Dedede"),
+    start  = LB_1PGame("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7425,7 +7968,8 @@ leaderboard(
 leaderboard(
     id = 24881, title = "King Dedede",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("King Dedede"),
+    start  = LB_Remix1PGame("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7435,7 +7979,8 @@ leaderboard(
 leaderboard(
     id = 24828, title = "King Dedede",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("King Dedede"),
+    start  = LB_MultiMan("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7445,7 +7990,8 @@ leaderboard(
 leaderboard(
     id = 24938, title = "King Dedede",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("King Dedede"),
+    start  = LB_CruelMultiMan("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7455,7 +8001,8 @@ leaderboard(
 leaderboard(
     id = 24885, title = "King Dedede",
     description = "All-Star Mode",
-    start  = LB_Allstars("King Dedede"),
+    start  = LB_Allstars("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7465,7 +8012,8 @@ leaderboard(
 leaderboard(
     id = 24886, title = "King Dedede",
     description = "Home-Run Contest",
-    start  = LB_Homerun("King Dedede"),
+    start  = LB_Homerun("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7475,7 +8023,8 @@ leaderboard(
 leaderboard(
     id = 115304, title = "Polygon King Dedede",
     description = "1P Game",
-    start  = LB_1PGame("Polygon King Dedede"),
+    start  = LB_1PGame("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7485,7 +8034,8 @@ leaderboard(
 leaderboard(
     id = 115305, title = "Polygon King Dedede",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon King Dedede"),
+    start  = LB_Remix1PGame("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7495,7 +8045,8 @@ leaderboard(
 leaderboard(
     id = 115306, title = "Polygon King Dedede",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon King Dedede"),
+    start  = LB_MultiMan("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7505,7 +8056,8 @@ leaderboard(
 leaderboard(
     id = 115307, title = "Polygon King Dedede",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon King Dedede"),
+    start  = LB_CruelMultiMan("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7515,7 +8067,8 @@ leaderboard(
 leaderboard(
     id = 115308, title = "Polygon King Dedede",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon King Dedede"),
+    start  = LB_Allstars("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7525,7 +8078,8 @@ leaderboard(
 leaderboard(
     id = 115309, title = "Polygon King Dedede",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon King Dedede"),
+    start  = LB_Homerun("Polygon King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7535,7 +8089,8 @@ leaderboard(
 leaderboard(
     id = 24934, title = "Goemon",
     description = "1P Game",
-    start  = LB_1PGame("Goemon"),
+    start  = LB_1PGame("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7545,7 +8100,8 @@ leaderboard(
 leaderboard(
     id = 24880, title = "Goemon",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Goemon"),
+    start  = LB_Remix1PGame("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7555,7 +8111,8 @@ leaderboard(
 leaderboard(
     id = 24827, title = "Goemon",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Goemon"),
+    start  = LB_MultiMan("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7565,7 +8122,8 @@ leaderboard(
 leaderboard(
     id = 24933, title = "Goemon",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Goemon"),
+    start  = LB_CruelMultiMan("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7575,7 +8133,8 @@ leaderboard(
 leaderboard(
     id = 24879, title = "Goemon",
     description = "All-Star Mode",
-    start  = LB_Allstars("Goemon"),
+    start  = LB_Allstars("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7585,7 +8144,8 @@ leaderboard(
 leaderboard(
     id = 24826, title = "Goemon",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Goemon"),
+    start  = LB_Homerun("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7595,7 +8155,8 @@ leaderboard(
 leaderboard(
     id = 115310, title = "Polygon Goemon",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Goemon"),
+    start  = LB_1PGame("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7605,7 +8166,8 @@ leaderboard(
 leaderboard(
     id = 115311, title = "Polygon Goemon",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Goemon"),
+    start  = LB_Remix1PGame("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7615,7 +8177,8 @@ leaderboard(
 leaderboard(
     id = 115312, title = "Polygon Goemon",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Goemon"),
+    start  = LB_MultiMan("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7625,7 +8188,8 @@ leaderboard(
 leaderboard(
     id = 115313, title = "Polygon Goemon",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Goemon"),
+    start  = LB_CruelMultiMan("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7635,7 +8199,8 @@ leaderboard(
 leaderboard(
     id = 115314, title = "Polygon Goemon",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Goemon"),
+    start  = LB_Allstars("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7645,7 +8210,8 @@ leaderboard(
 leaderboard(
     id = 115315, title = "Polygon Goemon",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Goemon"),
+    start  = LB_Homerun("Polygon Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7655,7 +8221,8 @@ leaderboard(
 leaderboard(
     id = 24932, title = "Peppy",
     description = "1P Game",
-    start  = LB_1PGame("Peppy"),
+    start  = LB_1PGame("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7665,7 +8232,8 @@ leaderboard(
 leaderboard(
     id = 24878, title = "Peppy",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Peppy"),
+    start  = LB_Remix1PGame("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7675,7 +8243,8 @@ leaderboard(
 leaderboard(
     id = 24825, title = "Peppy",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Peppy"),
+    start  = LB_MultiMan("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7685,7 +8254,8 @@ leaderboard(
 leaderboard(
     id = 24931, title = "Peppy",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Peppy"),
+    start  = LB_CruelMultiMan("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7695,7 +8265,8 @@ leaderboard(
 leaderboard(
     id = 24877, title = "Peppy",
     description = "All-Star Mode",
-    start  = LB_Allstars("Peppy"),
+    start  = LB_Allstars("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7705,7 +8276,8 @@ leaderboard(
 leaderboard(
     id = 24824, title = "Peppy",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Peppy"),
+    start  = LB_Homerun("Peppy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7715,7 +8287,8 @@ leaderboard(
 leaderboard(
     id = 24930, title = "Slippy",
     description = "1P Game",
-    start  = LB_1PGame("Slippy"),
+    start  = LB_1PGame("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7725,7 +8298,8 @@ leaderboard(
 leaderboard(
     id = 24876, title = "Slippy",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Slippy"),
+    start  = LB_Remix1PGame("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7735,7 +8309,8 @@ leaderboard(
 leaderboard(
     id = 24823, title = "Slippy",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Slippy"),
+    start  = LB_MultiMan("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7745,7 +8320,8 @@ leaderboard(
 leaderboard(
     id = 24929, title = "Slippy",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Slippy"),
+    start  = LB_CruelMultiMan("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7755,7 +8331,8 @@ leaderboard(
 leaderboard(
     id = 24875, title = "Slippy",
     description = "All-Star Mode",
-    start  = LB_Allstars("Slippy"),
+    start  = LB_Allstars("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7765,7 +8342,8 @@ leaderboard(
 leaderboard(
     id = 24822, title = "Slippy",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Slippy"),
+    start  = LB_Homerun("Slippy") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7775,7 +8353,8 @@ leaderboard(
 leaderboard(
     id = 24928, title = "Banjo & Kazooie",
     description = "1P Game",
-    start  = LB_1PGame("Banjo & Kazooie"),
+    start  = LB_1PGame("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7785,7 +8364,8 @@ leaderboard(
 leaderboard(
     id = 24874, title = "Banjo & Kazooie",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Banjo & Kazooie"),
+    start  = LB_Remix1PGame("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7795,7 +8375,8 @@ leaderboard(
 leaderboard(
     id = 24821, title = "Banjo & Kazooie",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Banjo & Kazooie"),
+    start  = LB_MultiMan("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7805,7 +8386,8 @@ leaderboard(
 leaderboard(
     id = 24927, title = "Banjo & Kazooie",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Banjo & Kazooie"),
+    start  = LB_CruelMultiMan("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7815,7 +8397,8 @@ leaderboard(
 leaderboard(
     id = 24873, title = "Banjo & Kazooie",
     description = "All-Star Mode",
-    start  = LB_Allstars("Banjo & Kazooie"),
+    start  = LB_Allstars("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7825,7 +8408,8 @@ leaderboard(
 leaderboard(
     id = 24820, title = "Banjo & Kazooie",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Banjo & Kazooie"),
+    start  = LB_Homerun("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7835,7 +8419,8 @@ leaderboard(
 leaderboard(
     id = 115316, title = "Polygon Banjo & Kazooie",
     description = "1P Game",
-    start  = LB_1PGame("Polygon Banjo & Kazooie"),
+    start  = LB_1PGame("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7845,7 +8430,8 @@ leaderboard(
 leaderboard(
     id = 115317, title = "Polygon Banjo & Kazooie",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Banjo & Kazooie"),
+    start  = LB_Remix1PGame("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7855,7 +8441,8 @@ leaderboard(
 leaderboard(
     id = 115318, title = "Polygon Banjo & Kazooie",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Banjo & Kazooie"),
+    start  = LB_MultiMan("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7865,7 +8452,8 @@ leaderboard(
 leaderboard(
     id = 115319, title = "Polygon Banjo & Kazooie",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Banjo & Kazooie"),
+    start  = LB_CruelMultiMan("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7875,7 +8463,8 @@ leaderboard(
 leaderboard(
     id = 115320, title = "Polygon Banjo & Kazooie",
     description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Banjo & Kazooie"),
+    start  = LB_Allstars("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7885,7 +8474,8 @@ leaderboard(
 leaderboard(
     id = 115321, title = "Polygon Banjo & Kazooie",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Banjo & Kazooie"),
+    start  = LB_Homerun("Polygon Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7895,7 +8485,8 @@ leaderboard(
 leaderboard(
     id = 24926, title = "Ebisumaru",
     description = "1P Game",
-    start  = LB_1PGame("Ebisumaru"),
+    start  = LB_1PGame("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7905,7 +8496,8 @@ leaderboard(
 leaderboard(
     id = 24872, title = "Ebisumaru",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Ebisumaru"),
+    start  = LB_Remix1PGame("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7915,7 +8507,8 @@ leaderboard(
 leaderboard(
     id = 24819, title = "Ebisumaru",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ebisumaru"),
+    start  = LB_MultiMan("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7925,7 +8518,8 @@ leaderboard(
 leaderboard(
     id = 24925, title = "Ebisumaru",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ebisumaru"),
+    start  = LB_CruelMultiMan("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7935,7 +8529,8 @@ leaderboard(
 leaderboard(
     id = 24871, title = "Ebisumaru",
     description = "All-Star Mode",
-    start  = LB_Allstars("Ebisumaru"),
+    start  = LB_Allstars("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7945,7 +8540,8 @@ leaderboard(
 leaderboard(
     id = 24818, title = "Ebisumaru",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Ebisumaru"),
+    start  = LB_Homerun("Ebisumaru") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -7955,7 +8551,8 @@ leaderboard(
 leaderboard(
     id = 24924, title = "Metal Luigi",
     description = "1P Game",
-    start  = LB_1PGame("Metal Luigi"),
+    start  = LB_1PGame("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7965,7 +8562,8 @@ leaderboard(
 leaderboard(
     id = 24870, title = "Metal Luigi",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Metal Luigi"),
+    start  = LB_Remix1PGame("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -7975,7 +8573,8 @@ leaderboard(
 leaderboard(
     id = 24817, title = "Metal Luigi",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Metal Luigi"),
+    start  = LB_MultiMan("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7985,7 +8584,8 @@ leaderboard(
 leaderboard(
     id = 24923, title = "Metal Luigi",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Metal Luigi"),
+    start  = LB_CruelMultiMan("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -7995,7 +8595,8 @@ leaderboard(
 leaderboard(
     id = 24869, title = "Metal Luigi",
     description = "All-Star Mode",
-    start  = LB_Allstars("Metal Luigi"),
+    start  = LB_Allstars("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8005,7 +8606,8 @@ leaderboard(
 leaderboard(
     id = 24816, title = "Metal Luigi",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Metal Luigi"),
+    start  = LB_Homerun("Metal Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -8015,7 +8617,8 @@ leaderboard(
 leaderboard(
     id = 24922, title = "Dragon King",
     description = "1P Game",
-    start  = LB_1PGame("Dragon King"),
+    start  = LB_1PGame("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8025,7 +8628,8 @@ leaderboard(
 leaderboard(
     id = 24868, title = "Dragon King",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Dragon King"),
+    start  = LB_Remix1PGame("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8035,7 +8639,8 @@ leaderboard(
 leaderboard(
     id = 24815, title = "Dragon King",
     description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dragon King"),
+    start  = LB_MultiMan("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -8045,7 +8650,8 @@ leaderboard(
 leaderboard(
     id = 24921, title = "Dragon King",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dragon King"),
+    start  = LB_CruelMultiMan("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -8055,7 +8661,8 @@ leaderboard(
 leaderboard(
     id = 24867, title = "Dragon King",
     description = "All-Star Mode",
-    start  = LB_Allstars("Dragon King"),
+    start  = LB_Allstars("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8065,7 +8672,8 @@ leaderboard(
 leaderboard(
     id = 24814, title = "Dragon King",
     description = "Home-Run Contest",
-    start  = LB_Homerun("Dragon King"),
+    start  = LB_Homerun("Dragon King") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_HomerunDistance),
@@ -8075,7 +8683,8 @@ leaderboard(
 leaderboard(
     id = 115322, title = "Master Hand",
     description = "1P Game",
-    start  = LB_1PGame("Master Hand"),
+    start  = LB_1PGame("Master Hand") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8085,7 +8694,8 @@ leaderboard(
 leaderboard(
     id = 115323, title = "Master Hand",
     description = "Remix 1P",
-    start  = LB_Remix1PGame("Master Hand"),
+    start  = LB_Remix1PGame("Master Hand") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8095,7 +8705,8 @@ leaderboard(
 leaderboard(
     id = 115324, title = "Master Hand",
     description = "Multi-Man Mode",
-    start  = LB_MultiManHealth("Master Hand"),
+    start  = LB_MultiManHealth("Master Hand") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -8105,7 +8716,8 @@ leaderboard(
 leaderboard(
     id = 115325, title = "Master Hand",
     description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiManHealth("Master Hand"),
+    start  = LB_CruelMultiManHealth("Master Hand") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = dword(Mem_MultiManKills),
@@ -8115,7 +8727,8 @@ leaderboard(
 leaderboard(
     id = 115326, title = "Master Hand",
     description = "All-Star Mode",
-    start  = LB_Allstars("Master Hand"),
+    start  = LB_Allstars("Master Hand") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = NormalModeScore(),
@@ -8125,7 +8738,8 @@ leaderboard(
 leaderboard(
     id = 24658, title = "Bonus 1: Break The Targets - Stage 1",
     description = "Stage of Mario / Metal Mario",
-    start  = LB_Bonus1("Mario"),
+    start  = LB_Bonus1("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8136,7 +8750,8 @@ leaderboard(
 leaderboard(
     id = 24659, title = "Bonus 1: Break The Targets - Stage 2",
     description = "Stage of Fox / Peppy",
-    start  = LB_Bonus1("Fox"),
+    start  = LB_Bonus1("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8147,7 +8762,8 @@ leaderboard(
 leaderboard(
     id = 24660, title = "Bonus 1: Break The Targets - Stage 3",
     description = "Stage of Donkey Kong",
-    start  = LB_Bonus1("Donkey Kong"),
+    start  = LB_Bonus1("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8158,7 +8774,8 @@ leaderboard(
 leaderboard(
     id = 25990, title = "Bonus 1: Break The Targets - Stage 4",
     description = "Stage of Samus",
-    start  = LB_Bonus1("Samus"),
+    start  = LB_Bonus1("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8169,7 +8786,8 @@ leaderboard(
 leaderboard(
     id = 24779, title = "Bonus 1: Break The Targets - Stage 5",
     description = "Stage of Luigi / Metal Luigi",
-    start  = LB_Bonus1("Luigi"),
+    start  = LB_Bonus1("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8180,7 +8798,8 @@ leaderboard(
 leaderboard(
     id = 24834, title = "Bonus 1: Break The Targets - Stage 6",
     description = "Stage of Link",
-    start  = LB_Bonus1("Link"),
+    start  = LB_Bonus1("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8190,7 +8809,8 @@ leaderboard(
 leaderboard(
     id = 24887, title = "Bonus 1: Break The Targets - Stage 7",
     description = "Stage of Yoshi",
-    start  = LB_Bonus1("Yoshi"),
+    start  = LB_Bonus1("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8201,7 +8821,8 @@ leaderboard(
 leaderboard(
     id = 24780, title = "Bonus 1: Break The Targets - Stage 8",
     description = "Stage of Captain Falcon / Dragon King",
-    start  = LB_Bonus1("Captain Falcon"),
+    start  = LB_Bonus1("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8212,7 +8833,8 @@ leaderboard(
 leaderboard(
     id = 24835, title = "Bonus 1: Break The Targets - Stage 9",
     description = "Stage of Kirby",
-    start  = LB_Bonus1("Kirby"),
+    start  = LB_Bonus1("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8223,7 +8845,8 @@ leaderboard(
 leaderboard(
     id = 24888, title = "Bonus 1: Break The Targets - Stage 10",
     description = "Stage of Pikachu",
-    start  = LB_Bonus1("Pikachu"),
+    start  = LB_Bonus1("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8234,7 +8857,8 @@ leaderboard(
 leaderboard(
     id = 24781, title = "Bonus 1: Break The Targets - Stage 11",
     description = "Stage of Jigglypuff",
-    start  = LB_Bonus1("Jigglypuff"),
+    start  = LB_Bonus1("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8245,7 +8869,8 @@ leaderboard(
 leaderboard(
     id = 24836, title = "Bonus 1: Break The Targets - Stage 12",
     description = "Stage of Ness",
-    start  = LB_Bonus1("Ness"),
+    start  = LB_Bonus1("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8256,7 +8881,8 @@ leaderboard(
 leaderboard(
     id = 24889, title = "Bonus 1: Break The Targets - Stage 13",
     description = "Stage of Falco / Slippy",
-    start  = LB_Bonus1("Falco"),
+    start  = LB_Bonus1("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8267,7 +8893,8 @@ leaderboard(
 leaderboard(
     id = 24782, title = "Bonus 1: Break The Targets - Stage 14",
     description = "Stage of Ganondorf",
-    start  = LB_Bonus1("Ganondorf"),
+    start  = LB_Bonus1("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8278,7 +8905,8 @@ leaderboard(
 leaderboard(
     id = 24837, title = "Bonus 1: Break The Targets - Stage 15",
     description = "Stage of Young Link",
-    start  = LB_Bonus1("Young Link"),
+    start  = LB_Bonus1("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8289,7 +8917,8 @@ leaderboard(
 leaderboard(
     id = 24890, title = "Bonus 1: Break The Targets - Stage 16",
     description = "Stage of Dr. Mario",
-    start  = LB_Bonus1("Dr. Mario"),
+    start  = LB_Bonus1("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8300,7 +8929,8 @@ leaderboard(
 leaderboard(
     id = 24783, title = "Bonus 1: Break The Targets - Stage 17",
     description = "Stage of Wario",
-    start  = LB_Bonus1("Wario"),
+    start  = LB_Bonus1("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8311,7 +8941,8 @@ leaderboard(
 leaderboard(
     id = 24838, title = "Bonus 1: Break The Targets - Stage 18",
     description = "Stage of Dark Samus",
-    start  = LB_Bonus1("Dark Samus"),
+    start  = LB_Bonus1("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8322,7 +8953,8 @@ leaderboard(
 leaderboard(
     id = 24891, title = "Bonus 1: Break The Targets - Stage 19",
     description = "Stage of Lucas",
-    start  = LB_Bonus1("Lucas"),
+    start  = LB_Bonus1("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8332,7 +8964,8 @@ leaderboard(
 leaderboard(
     id = 24784, title = "Bonus 1: Break The Targets - Stage 20",
     description = "Stage of Bowser / Giga Bowser",
-    start  = LB_Bonus1("Bowser"),
+    start  = LB_Bonus1("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8343,7 +8976,8 @@ leaderboard(
 leaderboard(
     id = 24839, title = "Bonus 1: Break The Targets - Stage 21",
     description = "Stage of Wolf",
-    start  = LB_Bonus1("Wolf"),
+    start  = LB_Bonus1("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8354,7 +8988,8 @@ leaderboard(
 leaderboard(
     id = 24892, title = "Bonus 1: Break The Targets - Stage 22",
     description = "Stage of Conker",
-    start  = LB_Bonus1("Conker"),
+    start  = LB_Bonus1("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8365,7 +9000,8 @@ leaderboard(
 leaderboard(
     id = 24785, title = "Bonus 1: Break The Targets - Stage 23",
     description = "Stage of Mewtwo",
-    start  = LB_Bonus1("Mewtwo"),
+    start  = LB_Bonus1("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8376,7 +9012,8 @@ leaderboard(
 leaderboard(
     id = 24840, title = "Bonus 1: Break The Targets - Stage 24",
     description = "Stage of Marth",
-    start  = LB_Bonus1("Marth"),
+    start  = LB_Bonus1("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8387,7 +9024,8 @@ leaderboard(
 leaderboard(
     id = 24893, title = "Bonus 1: Break The Targets - Stage 25",
     description = "Stage of Sonic / Super Sonic",
-    start  = LB_Bonus1("Sonic"),
+    start  = LB_Bonus1("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8398,7 +9036,8 @@ leaderboard(
 leaderboard(
     id = 24786, title = "Bonus 1: Break The Targets - Stage 26",
     description = "Stage of Sheik",
-    start  = LB_Bonus1("Sheik"),
+    start  = LB_Bonus1("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8409,7 +9048,8 @@ leaderboard(
 leaderboard(
     id = 24841, title = "Bonus 1: Break The Targets - Stage 27",
     description = "Stage of Marina",
-    start  = LB_Bonus1("Marina"),
+    start  = LB_Bonus1("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8420,7 +9060,8 @@ leaderboard(
 leaderboard(
     id = 24895, title = "Bonus 1: Break The Targets - Stage 28",
     description = "Stage of King Dedede",
-    start  = LB_Bonus1("King Dedede"),
+    start  = LB_Bonus1("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8431,7 +9072,8 @@ leaderboard(
 leaderboard(
     id = 24842, title = "Bonus 1: Break The Targets - Stage 29",
     description = "Stage of Goemon / Ebisumaru",
-    start  = LB_Bonus1("Goemon"),
+    start  = LB_Bonus1("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8443,7 +9085,8 @@ leaderboard(
     id = 24787, title = "Bonus 1: Break The Targets - Stage 30",
     description = "Stage of Banjo & Kazooie",
     start  = LB_Bonus1("Banjo & Kazooie"),
-    cancel = always_false(),
+    cancel = always_false() &&
+              RulesCommunity(),
     submit = always_true(),
     value  = Bonus12Timer(),
     format = "FRAMES",
@@ -8453,7 +9096,8 @@ leaderboard(
 leaderboard(
     id = 24894, title = "Bonus 1: Break The Targets - Stage 31",
     description = "Stage of Polygon Team / Mad Piano",
-    start  = LB_Bonus1("Polygon Team"),
+    start  = LB_Bonus1("Polygon Team") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8464,7 +9108,8 @@ leaderboard(
 leaderboard(
     id = 24788, title = "Bonus 2: Break The Targets - Stage 1",
     description = "Stage of Mario / Metal Mario",
-    start  = LB_Bonus2("Mario"),
+    start  = LB_Bonus2("Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8475,7 +9120,8 @@ leaderboard(
 leaderboard(
     id = 24843, title = "Bonus 2: Break The Targets - Stage 2",
     description = "Stage of Fox / Peppy Mario",
-    start  = LB_Bonus2("Fox"),
+    start  = LB_Bonus2("Fox") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8486,7 +9132,8 @@ leaderboard(
 leaderboard(
     id = 24896, title = "Bonus 2: Break The Targets - Stage 3",
     description = "Stage of Donkey Kong",
-    start  = LB_Bonus2("Donkey Kong"),
+    start  = LB_Bonus2("Donkey Kong") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8497,7 +9144,8 @@ leaderboard(
 leaderboard(
     id = 24789, title = "Bonus 2: Break The Targets - Stage 4",
     description = "Stage of Samus",
-    start  = LB_Bonus2("Samus"),
+    start  = LB_Bonus2("Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8508,7 +9156,8 @@ leaderboard(
 leaderboard(
     id = 24844, title = "Bonus 2: Break The Targets - Stage 5",
     description = "Stage of Luigi / Metal Luigi",
-    start  = LB_Bonus2("Luigi"),
+    start  = LB_Bonus2("Luigi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8519,7 +9168,8 @@ leaderboard(
 leaderboard(
     id = 24897, title = "Bonus 2: Break The Targets - Stage 6",
     description = "Stage of Link",
-    start  = LB_Bonus2("Link"),
+    start  = LB_Bonus2("Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8530,7 +9180,8 @@ leaderboard(
 leaderboard(
     id = 24790, title = "Bonus 2: Break The Targets - Stage 7",
     description = "Stage of Yoshi",
-    start  = LB_Bonus2("Yoshi"),
+    start  = LB_Bonus2("Yoshi") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8541,7 +9192,8 @@ leaderboard(
 leaderboard(
     id = 24845, title = "Bonus 2: Break The Targets - Stage 8",
     description = "Stage of Captain Falcon / Dragon King",
-    start  = LB_Bonus2("Captain Falcon"),
+    start  = LB_Bonus2("Captain Falcon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8552,7 +9204,8 @@ leaderboard(
 leaderboard(
     id = 24898, title = "Bonus 2: Break The Targets - Stage 9",
     description = "Stage of Kirby",
-    start  = LB_Bonus2("Kirby"),
+    start  = LB_Bonus2("Kirby") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8563,7 +9216,8 @@ leaderboard(
 leaderboard(
     id = 24791, title = "Bonus 2: Break The Targets - Stage 10",
     description = "Stage of Pikachu",
-    start  = LB_Bonus2("Pikachu"),
+    start  = LB_Bonus2("Pikachu") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8574,7 +9228,8 @@ leaderboard(
 leaderboard(
     id = 24846, title = "Bonus 2: Break The Targets - Stage 11",
     description = "Stage of Jigglypuff",
-    start  = LB_Bonus2("Jigglypuff"),
+    start  = LB_Bonus2("Jigglypuff") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8585,7 +9240,8 @@ leaderboard(
 leaderboard(
     id = 24899, title = "Bonus 2: Break The Targets - Stage 12",
     description = "Stage of Ness",
-    start  = LB_Bonus2("Ness"),
+    start  = LB_Bonus2("Ness") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8596,7 +9252,8 @@ leaderboard(
 leaderboard(
     id = 24792, title = "Bonus 2: Break The Targets - Stage 13",
     description = "Stage of Falco / Slippy",
-    start  = LB_Bonus2("Falco"),
+    start  = LB_Bonus2("Falco") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8607,7 +9264,8 @@ leaderboard(
 leaderboard(
     id = 24847, title = "Bonus 2: Break The Targets - Stage 14",
     description = "Stage of Ganondorf",
-    start  = LB_Bonus2("Ganondorf"),
+    start  = LB_Bonus2("Ganondorf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8618,7 +9276,8 @@ leaderboard(
 leaderboard(
     id = 24900, title = "Bonus 2: Break The Targets - Stage 15",
     description = "Stage of Young Link",
-    start  = LB_Bonus2("Young Link"),
+    start  = LB_Bonus2("Young Link") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8629,7 +9288,8 @@ leaderboard(
 leaderboard(
     id = 24793, title = "Bonus 2: Break The Targets - Stage 16",
     description = "Stage of Dr. Mario",
-    start  = LB_Bonus2("Dr. Mario"),
+    start  = LB_Bonus2("Dr. Mario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8640,7 +9300,8 @@ leaderboard(
 leaderboard(
     id = 24848, title = "Bonus 2: Break The Targets - Stage 17",
     description = "Stage of Wario",
-    start  = LB_Bonus2("Wario"),
+    start  = LB_Bonus2("Wario") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8651,7 +9312,8 @@ leaderboard(
 leaderboard(
     id = 24901, title = "Bonus 2: Break The Targets - Stage 18",
     description = "Stage of Dark Samus",
-    start  = LB_Bonus2("Dark Samus"),
+    start  = LB_Bonus2("Dark Samus") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8662,7 +9324,8 @@ leaderboard(
 leaderboard(
     id = 24794, title = "Bonus 2: Break The Targets - Stage 19",
     description = "Stage of Lucas",
-    start  = LB_Bonus2("Lucas"),
+    start  = LB_Bonus2("Lucas") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8673,7 +9336,8 @@ leaderboard(
 leaderboard(
     id = 24849, title = "Bonus 2: Break The Targets - Stage 20",
     description = "Stage of Bowser / Giga Bowser",
-    start  = LB_Bonus2("Bowser"),
+    start  = LB_Bonus2("Bowser") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8685,7 +9349,8 @@ leaderboard(
 leaderboard(
     id = 24902, title = "Bonus 2: Break The Targets - Stage 21",
     description = "Stage of Wolf",
-    start  = LB_Bonus2("Wolf"),
+    start  = LB_Bonus2("Wolf") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8696,7 +9361,8 @@ leaderboard(
 leaderboard(
     id = 24795, title = "Bonus 2: Break The Targets - Stage 22",
     description = "Stage of Conker",
-    start  = LB_Bonus2("Conker"),
+    start  = LB_Bonus2("Conker") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8707,7 +9373,8 @@ leaderboard(
 leaderboard(
     id = 24850, title = "Bonus 2: Break The Targets - Stage 23",
     description = "Stage of Mewtwo",
-    start  = LB_Bonus2("Mewtwo"),
+    start  = LB_Bonus2("Mewtwo") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8718,7 +9385,8 @@ leaderboard(
 leaderboard(
     id = 24903, title = "Bonus 2: Break The Targets - Stage 24",
     description = "Stage of Marth",
-    start  = LB_Bonus2("Marth"),
+    start  = LB_Bonus2("Marth") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8729,7 +9397,8 @@ leaderboard(
 leaderboard(
     id = 24796, title = "Bonus 2: Break The Targets - Stage 25",
     description = "Stage of Sonic / Super Sonic",
-    start  = LB_Bonus2("Sonic"),
+    start  = LB_Bonus2("Sonic") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8740,7 +9409,8 @@ leaderboard(
 leaderboard(
     id = 24851, title = "Bonus 2: Break The Targets - Stage 26",
     description = "Stage of Sheik",
-    start  = LB_Bonus2("Sheik"),
+    start  = LB_Bonus2("Sheik") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8751,7 +9421,8 @@ leaderboard(
 leaderboard(
     id = 24904, title = "Bonus 2: Break The Targets - Stage 27",
     description = "Stage of Marina",
-    start  = LB_Bonus2("Marina"),
+    start  = LB_Bonus2("Marina") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8762,7 +9433,8 @@ leaderboard(
 leaderboard(
     id = 24797, title = "Bonus 2: Break The Targets - Stage 28",
     description = "Stage of King Dedede",
-    start  = LB_Bonus2("King Dedede"),
+    start  = LB_Bonus2("King Dedede") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8773,7 +9445,8 @@ leaderboard(
 leaderboard(
     id = 24852, title = "Bonus 2: Break The Targets - Stage 29",
     description = "Stage of Goemon / Ebisumaru",
-    start  = LB_Bonus2("Goemon"),
+    start  = LB_Bonus2("Goemon") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8784,7 +9457,8 @@ leaderboard(
 leaderboard(
     id = 24905, title = "Bonus 2: Break The Targets - Stage 30",
     description = "Stage of Banjo & Kazooie",
-    start  = LB_Bonus2("Banjo & Kazooie"),
+    start  = LB_Bonus2("Banjo & Kazooie") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8795,7 +9469,8 @@ leaderboard(
 leaderboard(
     id = 24798, title = "Bonus 2: Break The Targets - Stage 31",
     description = "Stage of Polygon Team / Mad Piano",
-    start  = LB_Bonus2("Polygon Team"),
+    start  = LB_Bonus2("Polygon Team") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus12Timer(),
@@ -8806,7 +9481,8 @@ leaderboard(
 leaderboard(
     id = 25988, title = "Bonus 3: Race To The Finish - Stage 1",
     description = "Normal Stage",
-    start  = LB_Bonus3("Normal"),
+    start  = LB_Bonus3("Normal") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus3Timer(),
@@ -8817,7 +9493,8 @@ leaderboard(
 leaderboard(
     id = 25986, title = "Bonus 3: Race To The Finish - Stage 2",
     description = "Remix Stage",
-    start  = LB_Bonus3("Remix"),
+    start  = LB_Bonus3("Remix") &&
+              RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus3Timer(),
