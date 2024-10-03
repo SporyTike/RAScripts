@@ -887,9 +887,8 @@ function BeatRemix1PVeryHard3Stocks() {
     never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
-function BeatAllstarsVeryHard3Stocks() {
+function BeatAllstarsVeryHard() {
     return never(NormalModeDifficulty() != 4) && 
-    never(NormalModeStocks() > 2) &&
     never(BothGameStates() == 0x1B1B) &&
     never(BothGameStates() == 0x1B34) &&
     never(BothGameStates() == 0x0834) &&
@@ -898,6 +897,12 @@ function BeatAllstarsVeryHard3Stocks() {
     trigger_when(prev(NormalModeProgress()) == 0x0D 
         && NormalModeProgress() == 0x0E) &&
     never(byte(Mem_GameMode) != 0x05) &&
+    never(dword(Mem_HighscoreOn)  == 0x00)
+}
+
+function BeatAllstarsVeryHard3Stocks() {
+    return BeatAllstarsVeryHard() &&
+    never(NormalModeStocks() > 2) &&
     never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
@@ -2125,7 +2130,7 @@ achievement(
     trigger = never(HomerunChar() < GetCharID("Polygon Mario")) &&
               never((HomerunChar() > GetCharID("Polygon Ness")) &&
                 (HomerunChar() < GetCharID("Polygon Wario"))) &&
-              BeatRemix1PVeryHard3Stocks() &&
+              BeatRemix1PVeryHard() &&
               RulesCommunity()
 )
 
@@ -2423,12 +2428,12 @@ achievement(
 
 achievement(
     title = "Half the Power", points = 10,
-    description = "Complete All-Star Mode with any Polygon Fighter on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with any Polygon Fighter on Very Hard.",
     id = 173186, badge = "523039", published = "21.09.2021 17:45:44", modified = "08.09.2024 13:29:37", 
     trigger = never(HomerunChar() < GetCharID("Polygon Mario")) &&
               never((HomerunChar() > GetCharID("Polygon Ness")) &&
                 (HomerunChar() < GetCharID("Polygon Wario"))) &&
-              BeatAllstarsVeryHard3Stocks() &&
+              BeatAllstarsVeryHard() &&
               RulesCommunity()
 )
 
