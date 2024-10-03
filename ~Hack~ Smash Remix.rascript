@@ -969,7 +969,9 @@ function Beat1COM(stage, char1, char2, slot) {
            trigger_when(GameState() == 0x18 &&
            byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            NoCheatingNoHat(0) &&
-           NoCheatingNoHat(1)
+           NoCheatingNoHat(1) &&
+           NoCheatingNoHat(2) &&
+           NoCheatingNoHat(3)
 }
 
 function Beat1COMKirbyRandom(slot) {
@@ -1000,7 +1002,9 @@ function Beat1COMKirbyRandom(slot) {
            trigger_when(GameState() == 0x18 &&
            byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            NoCheating(0) &&
-           NoCheating(1)
+           NoCheating(1) &&
+           NoCheating(2) &&
+           NoCheating(3)
 }
 
 function Beat1COMLevel10(slot) {
@@ -1019,7 +1023,9 @@ function Beat1COMLevel10(slot) {
            trigger_when(GameState() == 0x18 &&
            byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            NoCheatingNoHat(0) &&
-           NoCheatingNoHat(1)
+           NoCheatingNoHat(1) &&
+           NoCheatingNoHat(2) &&
+           NoCheatingNoHat(3)
 }
 
 function Beat4COMs(stage, char1, char2, char3, char4, slot) {
