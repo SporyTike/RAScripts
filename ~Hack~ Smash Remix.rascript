@@ -1187,6 +1187,7 @@ function BeatAllBonus1() {
                                                    NormalModeProgress() == 0x03)) &&
                                                    GameState() == 0x35 &&
                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+                                                   Bonus1Targets() == 0 &&
                                                    prev(Bonus12State() == 0x05) &&
                                                    Bonus12State() == 0x06 &&
                                                    Bonus12Stage() == stage))
@@ -1217,6 +1218,7 @@ function BeatAllBonus2() {
                                                    NormalModeProgress() == 0x07)) &&
                                                    GameState() == 0x35 &&
                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+                                                   Bonus2Platforms() == 0 &&
                                                    prev(Bonus12State() == 0x05) &&
                                                    Bonus12State() == 0x06 &&
                                                    Bonus12Stage() == stage))
