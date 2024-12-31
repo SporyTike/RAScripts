@@ -711,6 +711,9 @@ function Bonus12Char() => byte(0x18F1D0)
 function Bonus12Stage() => byte(0x18F1B2)
 // Bonus 1 / Bonus 2 - Stage ID [8bit]
 
+function Bonus12State() => byte(0x18F1C2)
+// Bonus 1 / Bonus 2 - State ID [8bit]
+
 function Bonus12Timer() => dword(0x18F1C8)
 // Bonus 1 / Bonus 2 - Timer [32bit]
 
@@ -1184,8 +1187,8 @@ function BeatAllBonus1() {
                                                    NormalModeProgress() == 0x03)) &&
                                                    GameState() == 0x35 &&
                                                    dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   prev(Bonus1Targets() >= 0x01) &&
-                                                   Bonus1Targets() == 0x00 &&
+                                                   prev(Bonus12State() == 0x05) &&
+                                                   Bonus12State() == 0x06 &&
                                                    Bonus12Stage() == stage))
                                                    
     codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x13 || 
@@ -1214,8 +1217,8 @@ function BeatAllBonus2() {
                                                    NormalModeProgress() == 0x07)) &&
                                                    GameState() == 0x35 &&
                                                    dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   prev(Bonus2Platforms() >= 0x01) &&
-                                                   Bonus2Platforms() == 0x00 &&
+                                                   prev(Bonus12State() == 0x05) &&
+                                                   Bonus12State() == 0x06 &&
                                                    Bonus12Stage() == stage))
                                                    
     codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x14 || 
