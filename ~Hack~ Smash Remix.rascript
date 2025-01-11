@@ -68,7 +68,7 @@ Mem_ContinueState       = 0x13433C
 Mem_TrainingSelectData  = 0x1385A0
 Mem_NormalSelectData    = 0x138F08
 Mem_MultiManKills       = 0x1936A0
-Mem_World1_1Progress    = 0x269D70
+Mem_World1_1Progress    = 0x1313E0
 
 // ----------------------------------------------------------------------------------------------------
 
@@ -2991,11 +2991,19 @@ achievement(
     trigger = (GameState() == 0x16 && 
               FreeModeStage() == GetStageID("World 1-1") && 
               FreeModeNumFighters() == 1 &&
-              once((prev(dword(Mem_World1_1Progress)) == 0x80221B9C || 
-                prev(dword(Mem_World1_1Progress)) == 0x80221BDC) && 
-              dword(Mem_World1_1Progress) == 0x80221BA8) &&
-              trigger_when((once(dword(Mem_World1_1Progress) == 0x80221BC0) &&
-                dword(Mem_World1_1Progress) == 0x80221BA8)) &&
+              tally(1,
+              once((
+                (prev(dword(tbyte(Mem_World1_1Progress) + 0xA30)) == 0x80221B9C) || 
+                    prev(dword(tbyte(Mem_World1_1Progress) + 0xA30)) == 0x80221BDC) && 
+                dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221BA8),
+              once(
+                (prev(dword(tbyte(Mem_World1_1Progress) + 0xA30)) == 0x80221B9C || 
+                    prev(dword(tbyte(Mem_World1_1Progress) + 0xA30)) == 0x80221BDC) && 
+                dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221BE8)) &&
+              trigger_when((once(dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221BC0) ||
+                    (once(dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221C00))) &&
+                (dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221BA8 || 
+                    dword(tbyte(Mem_World1_1Progress) + 0xA30) == 0x80221BE8)) &&
               ((((byte(PointerPlayerData() + 0x000008) == GetCharID("Mario")) || 
                 byte(PointerPlayerData() + 0x000008) == GetCharID("JP Mario") ||
                 byte(PointerPlayerData() + 0x000008) == GetCharID("Luigi") || 
