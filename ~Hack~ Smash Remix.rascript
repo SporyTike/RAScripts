@@ -2752,6 +2752,7 @@ achievement(
               GameState() == 0x35 ||
               GameState() == 0x36 ||
               GameState() == 0x77) &&
+              PointerPlayerData() != 0 &&
               ((byte(PointerPlayerData() + 0x08 + 0xB50*0) == GetCharID("Sandbag") && byte(PointerPlayerData() + 0x20 + 0xB50*0) == 0) ||
               (byte(PointerPlayerData() + 0x08 + 0xB50*1) == GetCharID("Sandbag") && byte(PointerPlayerData() + 0x20 + 0xB50*1) == 0) ||
               (byte(PointerPlayerData() + 0x08 + 0xB50*2) == GetCharID("Sandbag") && byte(PointerPlayerData() + 0x20 + 0xB50*2) == 0) ||
