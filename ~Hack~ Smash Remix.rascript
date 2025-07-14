@@ -3,7 +3,8 @@
 
 // ----------------------------------------------------------------------------------------------------
 // Dynamic Addresses
-Mem_Bonus12RecordData   = 0x48BCF0    
+Mem_Bonus12RecordData   = 0x4A2CA7
+//               v1.5.2 - 0x48BCF0    
 //               v1.1.0 - 0x45034C  
 // Bonus 1 / Bonus 2 - Records (new Characters - Normal) [1600 Bytes; 32 Bytes per Character ID]
 //  +16 | Bonus 1 - Record Time (32bit)
@@ -11,14 +12,18 @@ Mem_Bonus12RecordData   = 0x48BCF0
 //  +24 | Bonus 2 - Record Time (32bit)
 //  +31 | Bonus 2 - Platform Record            
                         
-Mem_RulesData           = 0x452888                        
+Mem_RulesData           = 0x4617A8
+//               v1.5.2 - 0x452888                        
 //               v1.1.0 - 0x452880
 
-Mem_HighscoreOn         = 0x4C9BE0
+Mem_HighscoreOn         = 0x4E79D0
+//               v1.5.2 - 0x4C9BE0
 
-Mem_BattleSetting       = 0x4462C8
+Mem_BattleSetting       = 0x453748
+//               v1.5.2 - 0x4462C8
 
-Mem_GameMode            = 0x4CBD04
+Mem_GameMode            = 0x4E9C94
+//               v1.5.2 - 0x4CBD04
 //               v1.1.0 - 0x4752BC
 // Game Mode
 // 00 | 1P Game
@@ -29,15 +34,18 @@ Mem_GameMode            = 0x4CBD04
 // 05 | All-Star Mode
 // 06 | Home-Run Contest
 
-Mem_12CharacterStocks   = 0x4D7618
+Mem_12CharacterStocks   = 0x4F6D10
+//               v1.5.2 - 0x4D7618
 //               v1.1.0 - 0x47E91C
 // 12-Character Battle - Set Stocks [32bit]
 
-Mem_HomerunDistance     = 0x4D1DB0
+Mem_HomerunDistance     = 0x4F00A0
+//               v1.5.2 - 0x4D1DB0
 //               v1.1.0 - 0x479694
 // Home-Run Contest - Distance (Graphic) [32bit]
 
-Mem_FreeModeComboData   = 0x4C7780
+Mem_FreeModeComboData   = 0x4E5360
+//               v1.5.2 - 0x4C7780
 //               v1.1.0 - 0x4715AC
 // Free-for-All - 1P - Combo [16 Bytes]
 //  +00 | Combo against 1P
@@ -45,18 +53,40 @@ Mem_FreeModeComboData   = 0x4C7780
 //  +08 | Combo against 3P
 //  +12 | Combo against 4P
 
-Mem_PlayerTagStart      = 0x4590DB
+Mem_PlayerTagStart      = 0x468D9F
+//               v1.5.2 - 0x4590DB
 // Array that stores Player Tags
 
-Mem_KirbyHatOption      = 0x546178
+Mem_GallerySounds       = 0x5139AC
+// Gallery - Sound Mode [32bit]
+
+Mem_SonicVariation      = 0x559F90
+// Sonic Variation currently played by Player [4 Bytes; 8bit each]
+
+Mem_KirbyHatOption      = 0x584160
+//               v1.5.2 - 0x546178
 // Option for Pre-Selected Kirby Hat [16 Bytes; 32bit each]
 
-Val_WarioComplain       = 0x8050E910
+Mem_1PGameNewScores     = 0x4A2CA0
+// 1P Game - Highscore Data - Master Hand [32 Bytes]
+
+Mem_Remix1PScores       = 0x4A3750
+// Remix 1P - Highscore Data - Mario [32 Bytes]
+
+Mem_MultiManScores      = 0x4A5170
+// Multi-Man Mode - Highscore Data - Mario [4 Bytes]
+
+Mem_HomeRunScores       = 0x4A5650
+// Home-Run Contest - Highscore Data - Mario [4 Bytes]
+
+Val_WarioComplain       = 0x8053DE80
+//               v1.5.2 - 0x8050E910
 //               v1.1.0 - 0x8049BCE4
 // Wario's Idle Animation [32bit]
 
 // ----------------------------------------------------------------------------------------------------
 // Static Addresses
+Mem_CurrentMusicTrack   = 0x096710
 Mem_VSRecordsOldChars   = 0x0A44E0
 Mem_NormalModeData      = 0x0A4938
 Mem_FreeModeData        = 0x0A4D0E
@@ -69,6 +99,10 @@ Mem_TrainingSelectData  = 0x1385A0
 Mem_NormalSelectData    = 0x138F08
 Mem_MultiManKills       = 0x1936A0
 Mem_World1_1Progress    = 0x1313E0
+Mem_CameraData          = 0x131460
+
+Mem_VSMode              = Mem_12CharacterStocks - 0x9F8
+Mem_SmashketballData    = Mem_HomerunDistance + 0x12088
 
 // ----------------------------------------------------------------------------------------------------
 
@@ -101,6 +135,8 @@ Characters = [
     [0x18, "Polygon Jigglypuff",        true,   "Polygon"],
     [0x19, "Polygon Ness",              true,   "Polygon"],
     [0x1A, "Giant Donkey Kong",         true,   "Giant Donkey Kong"],
+    [0x1B, "",                          false,  ""],
+    [0x1C, "",                          false,  ""],
     [0x1D, "Falco",                     true,   "Falco"],
     [0x1E, "Ganondorf",                 true,   "Ganondorf"],
     [0x1F, "Young Link",                true,   "Young Link"],
@@ -144,24 +180,31 @@ Characters = [
     [0x45, "Metal Luigi",               true,   "Metal Luigi"],
     [0x46, "Ebisumaru",                 true,   "Ebisumaru"],
     [0x47, "Dragon King",               true,   "Dragon King"],
-    [0x48, "Polygon Wario",             true,   "Polygon"],
-    [0x49, "Polygon Lucas",             true,   "Polygon"],
-    [0x4A, "Polygon Bowser",            true,   "Polygon"],
-    [0x4B, "Polygon Wolf",              true,   "Polygon"],
-    [0x4C, "Polygon Dr. Mario",         true,   "Polygon"],
-    [0x4D, "Polygon Sonic",             true,   "Polygon"],
-    [0x4E, "Polygon Sheik",             true,   "Polygon"],
-    [0x4F, "Polygon Marina",            true,   "Polygon"],
-    [0x50, "Polygon Falco",             true,   "Polygon"],
-    [0x51, "Polygon Ganondorf",         true,   "Polygon"],
-    [0x52, "Polygon Dark Samus",        true,   "Polygon"],
-    [0x53, "Polygon Marth",             true,   "Polygon"],
-    [0x54, "Polygon Mewtwo",            true,   "Polygon"],
-    [0x55, "Polygon King Dedede",       true,   "Polygon"],
-    [0x56, "Polygon Young Link",        true,   "Polygon"],
-    [0x57, "Polygon Goemon",            true,   "Polygon"],
-    [0x58, "Polygon Conker",            true,   "Polygon"],
-    [0x59, "Polygon Banjo & Kazooie",   true,   "Polygon"],
+    [0x48, "Crash",                     true,   "Crash"],
+    [0x49, "Peach",                     true,   "Peach"],
+    [0x4A, "Roy",                       true,   "Roy"],
+    [0x4B, "Dr. Luigi",                 true,   "Dr. Luigi"],
+    [0x4C, "Lanky Kong",                true,   "Lanky Kong"],
+    [0x4D, "Polygon Wario",             true,   "Polygon"],
+    [0x4E, "Polygon Lucas",             true,   "Polygon"],
+    [0x4F, "Polygon Bowser",            true,   "Polygon"],
+    [0x50, "Polygon Wolf",              true,   "Polygon"],
+    [0x51, "Polygon Dr. Mario",         true,   "Polygon"],
+    [0x52, "Polygon Sonic",             true,   "Polygon"],
+    [0x53, "Polygon Sheik",             true,   "Polygon"],
+    [0x54, "Polygon Marina",            true,   "Polygon"],
+    [0x55, "Polygon Falco",             true,   "Polygon"],
+    [0x56, "Polygon Ganondorf",         true,   "Polygon"],
+    [0x57, "Polygon Dark Samus",        true,   "Polygon"],
+    [0x58, "Polygon Marth",             true,   "Polygon"],
+    [0x59, "Polygon Mewtwo",            true,   "Polygon"],
+    [0x5A, "Polygon King Dedede",       true,   "Polygon"],
+    [0x5B, "Polygon Young Link",        true,   "Polygon"],
+    [0x5C, "Polygon Goemon",            true,   "Polygon"],
+    [0x5D, "Polygon Conker",            true,   "Polygon"],
+    [0x5E, "Polygon Banjo & Kazooie",   true,   "Polygon"],
+    [0x5F, "Polygon Peach",             true,   "Polygon"],
+    [0x60, "Polygon Crash",             true,   "Polygon"],
 ]
 
 function GetCharID(name) {
@@ -189,32 +232,32 @@ Stages = [
     [0x0C, "Mini Yoshi's Island"],
     [0x0D, "Meta Crystal"],
     [0x0E, "Duel Zone"],
-    [0x0F, "Race to the Finish - Normal"],
+    [0x0F, "Racing to the Normal Finish"],
     [0x10, "Final Destination"],
-    [0x11, "Bonus 1 - Mario / Metal Mario"],
-    [0x12, "Bonus 1 - Fox / Peppy"],
-    [0x13, "Bonus 1 - Fox / Peppy"],
-    [0x14, "Bonus 1 - Samus"],
-    [0x15, "Bonus 1 - Luigi / Metal Luigi"],
-    [0x16, "Bonus 1 - Link"],
-    [0x17, "Bonus 1 - Yoshi"],
-    [0x18, "Bonus 1 - Captain Falcon / Dragon King"],
-    [0x19, "Bonus 1 - Kirby"],
-    [0x1A, "Bonus 1 - Pikachu"],
-    [0x1B, "Bonus 1 - Jigglypuff"],
-    [0x1C, "Bonus 1 - Ness"],
-    [0x1D, "Bonus 2 - Mario / Metal Mario"],
-    [0x1E, "Bonus 2 - Fox / Peppy"],
-    [0x1F, "Bonus 2 - Donkey Kong"],
-    [0x20, "Bonus 2 - Samus"],
-    [0x21, "Bonus 2 - Luigi / Metal Luigi"],
-    [0x22, "Bonus 2 - Link"],
-    [0x23, "Bonus 2 - Yoshi"],
-    [0x24, "Bonus 2 - Captain Falcon / Dragon King"],
-    [0x25, "Bonus 2 - Kirby"],
-    [0x26, "Bonus 2 - Pikachu"],
-    [0x27, "Bonus 2 - Jigglypuff"],
-    [0x28, "Bonus 2 - Ness"],
+    [0x11, "Breaking the Targets of Mario and Metal Mario"],
+    [0x12, "Breaking the Targets of Fox and Peppy"],
+    [0x13, "Breaking the Targets of Donkey Kong and Lanky Kong"],
+    [0x14, "Breaking the Targets of Samus"],
+    [0x15, "Breaking the Targets of Luigi and Metal Luigi"],
+    [0x16, "Breaking the Targets of Link"],
+    [0x17, "Breaking the Targets of Yoshi"],
+    [0x18, "Breaking the Targets of Captain Falcon and Dragon King"],
+    [0x19, "Breaking the Targets of Kirby"],
+    [0x1A, "Breaking the Targets of Pikachu"],
+    [0x1B, "Breaking the Targets of Jigglypuff"],
+    [0x1C, "Breaking the Targets of Ness"],
+    [0x1D, "Boarding the Platforms of Mario and Metal Mario"],
+    [0x1E, "Boarding the Platforms of Fox and Peppy"],
+    [0x1F, "Boarding the Platforms of Donkey Kong and Lanky Kong"],
+    [0x20, "Boarding the Platforms of Samus"],
+    [0x21, "Boarding the Platforms of Luigi and Metal Luigi"],
+    [0x22, "Boarding the Platforms of Link"],
+    [0x23, "Boarding the Platforms of Yoshi"],
+    [0x24, "Boarding the Platforms of Captain Falcon and Dragon King"],
+    [0x25, "Boarding the Platforms of Kirby"],
+    [0x26, "Boarding the Platforms of Pikachu"],
+    [0x27, "Boarding the Platforms of Jigglypuff"],
+    [0x28, "Boarding the Platforms of Ness"],
     [0x29, "Deku Tree"],
     [0x2A, "First Destination"],
     [0x2B, "Ganon's Tower"],
@@ -251,70 +294,70 @@ Stages = [
     [0x4A, "Crateria"],
     [0x4B, "Frosty Village"],
     [0x4C, "Smashville"],
-    [0x4D, "Bonus 1 - Dr. Mario"],
-    [0x4E, "Bonus 1 - Ganondorf"],
-    [0x4F, "Bonus 1 - Young Link"],
+    [0x4D, "Breaking the Targets of Dr. Mario and Dr. Luigi"],
+    [0x4E, "Breaking the Targets of Ganondorf"],
+    [0x4F, "Breaking the Targets of Young Link"],
     [0x50, "Battlefield DL"],
-    [0x51, "Bonus 1 - Dark Samus"],
-    [0x52, "Bonus 1 - Polygon Team / Mad Piano"],
-    [0x53, "Bonus 1 - Falco / Slippy"],
-    [0x54, "Bonus 1 - Wario"],
+    [0x51, "Breaking the Targets of Dark Samus"],
+    [0x52, "Breaking the Targets of Polygon Team and Mad Piano"],
+    [0x53, "Breaking the Targets of Falco and Slippy"],
+    [0x54, "Breaking the Targets of Wario"],
     [0x55, "Hyrule Temple"],
-    [0x56, "Bonus 1 - Lucas"],
-    [0x57, "Bonus 2 - Ganondorf"],
+    [0x56, "Breaking the Targets of Lucas"],
+    [0x57, "Boarding the Platforms of Ganondorf"],
     [0x58, "New Pork City"],
-    [0x59, "Bonus 2 - Dark Samus"],
+    [0x59, "Boarding the Platforms of Dark Samus"],
     [0x5A, "Smashketball"],
-    [0x5B, "Bonus 2 - Dr. Mario"],
+    [0x5B, "Boarding the Platforms of Dr. Mario and Dr. Luigi"],
     [0x5C, "Norfair"],
-    [0x5D, "Corneria City"],
+    [0x5D, "Raid Blue"],
     [0x5E, "Congo Falls"],
-    [0x5F, "Osohe Castle"],
+    [0x5F, "Pigmask Fortress"],
     [0x60, "Yoshi's Story"],
     [0x61, "World 1-1"],
     [0x62, "Flat Zone II"],
     [0x63, "Gerudo Valley"],
-    [0x64, "Bonus 2 - Young Link"],
-    [0x65, "Bonus 2 - Falco / Slippy"],
-    [0x66, "Bonus 2 - Polygon Team / Mad Piano"],
+    [0x64, "Boarding the Platforms of Young Link"],
+    [0x65, "Boarding the Platforms of Falco and Slippy"],
+    [0x66, "Boarding the Platforms of Polygon Team and Mad Piano"],
     [0x67, "Hyrule Castle DL"],
     [0x68, "Hyrule Castle Ω"],
     [0x69, "Congo Jungle DL"],
     [0x6A, "Congo Jungle Ω"],
     [0x6B, "Peach's Castle DL"],
     [0x6C, "Peach's Castle Ω"],
-    [0x6D, "Bonus 2 - Wario"],
+    [0x6D, "Boarding the Platforms of Wario"],
     [0x6E, "Fray's Stage - Night"],
     [0x6F, "Goomba Road"],
-    [0x70, "Bonus 2 - Lucas"],
+    [0x70, "Boarding the Platforms of Lucas"],
     [0x71, "Sector Z DL"],
     [0x72, "Saffron City DL"],
     [0x73, "Yoshi's Island DL"],
-    [0x74, "Zebes DL"],
+    [0x74, "Planet Zebes DL"],
     [0x75, "Sector Z Ω"],
     [0x76, "Saffron City Ω"],
     [0x77, "Yoshi's Island Ω"],
     [0x78, "Dream Land Ω"],
-    [0x79, "Zebes Ω"],
-    [0x7A, "Bonus 1 - Bowser / Giga Bowser"],
-    [0x7B, "Bonus 2 - Bowser / Giga Bowser"],
+    [0x79, "Planet Zebes Ω"],
+    [0x7A, "Breaking the Targets of Bowser and Giga Bowser"],
+    [0x7B, "Boarding the Platforms of Bowser and Giga Bowser"],
     [0x7C, "Bowser's Keep"],
     [0x7D, "Rith Essa"],
     [0x7E, "Venom"],
-    [0x7F, "Bonus 1 - Wolf"],
-    [0x80, "Bonus 2 - Wolf"],
-    [0x81, "Bonus 1 - Conker"],
-    [0x82, "Bonus 2 - Conker"],
+    [0x7F, "Breaking the Targets of Wolf"],
+    [0x80, "Boarding the Platforms of Wolf"],
+    [0x81, "Breaking the Targets of Conker"],
+    [0x82, "Boarding the Platforms of Conker"],
     [0x83, "Windy"],
     [0x84, "dataDyne Central"],
     [0x85, "Planet Clancer"],
     [0x86, "Jungle Japes"],
-    [0x87, "Bonus 1 - Marth"],
+    [0x87, "Breaking the Targets of Marth and Roy"],
     [0x88, "Game Boy Land"],
-    [0x89, "Bonus 1 - Mewtwo"],
-    [0x8A, "Bonus 2 - Marth"],
+    [0x89, "Breaking the Targets of Mewtwo"],
+    [0x8A, "Boarding the Platforms of Marth and Roy"],
     [0x8B, "All-Star Lobby"],
-    [0x8C, "Bonus 2 - Mewtwo"],
+    [0x8C, "Boarding the Platforms of Mewtwo"],
     [0x8D, "Castle Siege"],
     [0x8E, "Yoshi's Island II"],
     [0x8F, "Final Destination DL"],
@@ -334,46 +377,61 @@ Stages = [
     [0x9D, "Subcon"],
     [0x9E, "Pirate Land"],
     [0x9F, "Casino Night Zone"],
-    [0xA0, "Bonus 1 - Sonic / Super Sonic"],
-    [0xA1, "Bonus 2 - Sonic / Super Sonic"],
+    [0xA0, "Breaking the Targets of Sonic and Super Sonic"],
+    [0xA1, "Boarding the Platforms of Sonic and Super Sonic"],
     [0xA2, "Metallic Madness"],
     [0xA3, "Rainbow Road"],
     [0xA4, "Pokemon Stadium 2"],
     [0xA5, "Norfair Remix"],
     [0xA6, "Toad's Turnpike"],
     [0xA7, "Tal Tal Heights Remix"],
-    [0xA8, "Bonus 2 - Sheik"],
+    [0xA8, "Boarding the Platforms of Sheik"],
     [0xA9, "Winter Dream Land"],
-    [0xAA, "Bonus 1 - Sheik"],
+    [0xAA, "Breaking the Targets of Sheik"],
     [0xAB, "Glacial River Remix"],
-    [0xAC, "Bonus 1 - Marina"],
+    [0xAC, "Breaking the Targets of Marina"],
     [0xAD, "Dragon King Remix"],
-    [0xAE, "Bonus 2 - Marina"],
-    [0xAF, "Bonus 1 - King Dedede"],
+    [0xAE, "Boarding the Platforms of Marina"],
+    [0xAF, "Breaking the Targets of King Dedede"],
     [0xB0, "Dracula's Castle"],
     [0xB1, "Reverse Castle"],
-    [0xB2, "Bonus 2 - King Dedede"],
+    [0xB2, "Boarding the Platforms of King Dedede"],
     [0xB3, "Mt. Dedede"],
     [0xB4, "Edo Town"],
     [0xB5, "Deku Tree DL"],
     [0xB6, "Crateria DL"],
-    [0xB7, "Bonus 1 - Goemon / Ebisumaru"],
+    [0xB7, "Breaking the Targets of Goemon and Ebisumaru"],
     [0xB8, "First Destination Remix"],
-    [0xB9, "Bonus 2 - Goemon / Ebisumaru"],
+    [0xB9, "Boarding the Platforms of Goemon and Ebisumaru"],
     [0xBA, "Twilight City"],
     [0xBB, "Melrode"],
     [0xBC, "Meta Crystent"],
-    [0xBD, "Race to the Finish - Remix"],
+    [0xBD, "Racing to the Remix Finish"],
     [0xBE, "Grim Reaper's Cavern"],
     [0xBF, "Scuttle Town"],
     [0xC0, "Big Boo's Haunt"],
     [0xC1, "Dinosaur Land"],
-    [0xC2, "Bonus 1 - Banjo & Kazooie"],
+    [0xC2, "Breaking the Targets of Banjo & Kazooie"],
     [0xC3, "Spawned Fear"],
     [0xC4, "Smashville Remix"],
-    [0xC5, "Bonus 2 - Banjo & Kazooie"],
+    [0xC5, "Boarding the Platforms of Banjo & Kazooie"],
     [0xC6, "Poke Floats"],
-    [0xC7, "Big Snowman"]
+    [0xC7, "Big Snowman"],
+    [0xC8, "Dream Land Beta DL"],
+    [0xC9, "LMAO Castle"],
+    [0xCA, "Discovery Falls"],
+    [0xCB, "Breaking the Targets of Crash"],
+    [0xCC, "Discovery Falls Remix"],
+    [0xCD, "N64 Remix"],
+    [0xCE, "Boarding the Platforms of Crash"],
+    [0xCF, "Breaking the Targets of Peach"],
+    [0xD0, "Breaking the Targets of Peach"],
+    [0xD1, "Smashketball 2"],
+    [0xD2, "Time Twister"],
+    [0xD3, "Time Twister"],
+    [0xD4, "N. Sanity Beach"],
+    [0xD5, "Snow Go"],
+    [0xD6, "Future Frenzy"],
 ]
 
 function GetStageID(name) {
@@ -386,77 +444,97 @@ function GetStageID(name) {
 
 // ID, Character Ability, New Ability
 KirbyAbility = [
-    [GetCharID("Mario"), "Mario", false],
-    [GetCharID("Fox"), "Fox", false],
-    [GetCharID("Donkey Kong"), "Donkey Kong", false],
-    [GetCharID("Samus"), "Samus", false],
-    [GetCharID("Luigi"), "Luigi", false],
-    [GetCharID("Link"), "Link", false],
-    [GetCharID("Yoshi"), "Yoshi", false],
-    [GetCharID("Captain Falcon"), "Captain Falcon", false],
-    [GetCharID("Pikachu"), "Pikachu", false],
-    [GetCharID("Jigglypuff"), "Jigglypuff", false],
-    [GetCharID("Ness"), "Ness", false],
-    [0x1C, "???", true],
-    [GetCharID("Falco"), "Falco", true],
-    [GetCharID("Ganondorf"), "Ganondorf", true],
-    [GetCharID("Young Link"), "Young Link", true],
-    [GetCharID("Dr. Mario"), "Dr. Mario", true],
-    [GetCharID("Wario"), "Wario", true],
-    [GetCharID("Dark Samus"), "Dark Samus", true],
-    [GetCharID("Lucas"), "Lucas", true],
-    [GetCharID("Bowser"), "Bowser", true],
-    [GetCharID("Mad Piano"), "Mad Piano", true],
-    [GetCharID("Wolf"), "Wolf", true],
-    [GetCharID("Conker"), "Conker", true],
-    [GetCharID("Mewtwo"), "Mewtwo", true],
-    [GetCharID("Marth"), "Marth", true],
-    [GetCharID("Sonic"), "Sonic", true],
-    [GetCharID("Sheik"), "Sheik", true],
-    [GetCharID("Marina"), "Marina", true],
-    [GetCharID("King Dedede"), "King Dedede", true],
-    [GetCharID("Goemon"), "Goemon", true],
-    [GetCharID("Slippy"), "Slippy", true],
-    [GetCharID("Peppy"), "Peppy", true],
-    [GetCharID("Banjo & Kazooie"), "Banjo & Kazooie", true],
-    [GetCharID("Ebisumaru"), "Ebisumaru", true],
-    [GetCharID("Dragon King"), "Dragon King", true],
+    [GetCharID("Mario"),            "Mario",            false],
+    [GetCharID("Fox"),              "Fox",              false],
+    [GetCharID("Donkey Kong"),      "Donkey Kong",      false],
+    [GetCharID("Samus"),            "Samus",            false],
+    [GetCharID("Luigi"),            "Luigi",            false],
+    [GetCharID("Link"),             "Link",             false],
+    [GetCharID("Yoshi"),            "Yoshi",            false],
+    [GetCharID("Captain Falcon"),   "Captain Falcon",   false],
+    [GetCharID("Pikachu"),          "Pikachu",          false],
+    [GetCharID("Jigglypuff"),       "Jigglypuff",       false],
+    [GetCharID("Ness"),             "Ness",             false],
+    [GetCharID("Falco"),            "Falco",            true],
+    [GetCharID("Ganondorf"),        "Ganondorf",        true],
+    [GetCharID("Young Link"),       "Young Link",       true],
+    [GetCharID("Dr. Mario"),        "Dr. Mario",        true],
+    [GetCharID("Wario"),            "Wario",            true],
+    [GetCharID("Bowser"),           "Bowser",           true],
+    [GetCharID("Wolf"),             "Wolf",             true],
+    [GetCharID("Conker"),           "Conker",           true],
+    [GetCharID("Mewtwo"),           "Mewtwo",           true],
+    [GetCharID("Marth"),            "Marth",            true],
+    [GetCharID("Sonic"),            "Sonic",            true],
+    [GetCharID("Sheik"),            "Sheik",            true],
+    [GetCharID("Marina"),           "Marina",           true],
+    [GetCharID("King Dedede"),      "King Dedede",      true],
+    [GetCharID("Goemon"),           "Goemon",           true],
+    [GetCharID("Banjo & Kazooie"),  "Banjo & Kazooie",  true],
+    [GetCharID("Crash"),            "Crash",            true],
+    [GetCharID("Peach"),            "Peach",            true],
+    [GetCharID("Dark Samus"),       "Dark Samus",       true],
+    [GetCharID("Lucas"),            "Lucas",            true],
+    [GetCharID("Peppy"),            "Peppy",            true],
+    [GetCharID("Slippy"),           "Slippy",           true],
+    [GetCharID("Roy"),              "Roy",              true],
+    [GetCharID("Dr. Luigi"),        "Dr. Luigi",        true],
+    [GetCharID("Lanky Kong"),       "Lanky Kong",       true],
+    [GetCharID("Dragon King"),      "Dragon King",      true],
+    [GetCharID("Ebisumaru"),        "Ebisumaru",        true],
+    [GetCharID("Mad Piano"),        "Mad Piano",        true],
+    [0x1C,                          "???",              true],
 ]
 
 // Stage ID, Bonus 1 Map, Bonus 2 Map, Stage Character 1, Stage Character 2
 BonusStages = [
-    [1, 0x11, 0x1D, "Mario", "Metal Mario"],
-    [2, 0x12, 0x1E, "Fox", "Peppy"],
-    [3, 0x13, 0x1F, "Donkey Kong", ""],
-    [4, 0x14, 0x20, "Samus", ""],
-    [5, 0x15, 0x21, "Luigi", "Metal Luigi"],
-    [6, 0x16, 0x22, "Link", ""],
-    [7, 0x17, 0x23, "Yoshi", ""],
-    [8, 0x18, 0x24, "Captain Falcon", "Dragon King"],
-    [9, 0x19, 0x25, "Kirby", ""],
-    [10, 0x1A, 0x26, "Pikachu", ""],
-    [11, 0x1B, 0x27, "Jigglypuff", ""],
-    [12, 0x1C, 0x28, "Ness", ""],
-    [13, 0x4D, 0x5B, "Dr. Mario", ""],
-    [14, 0x4E, 0x57, "Ganondorf", ""],
-    [15, 0x4F, 0x64, "Young Link", ""],
-    [16, 0x51, 0x59, "Dark Samus", ""],
-    [17, 0x52, 0x66, "Polygon Team", "Mad Piano"],
-    [18, 0x53, 0x65, "Falco", "Slippy"],
-    [19, 0x54, 0x6D, "Wario", ""],
-    [20, 0x56, 0x70, "Lucas", ""],
-    [21, 0x7A, 0x7B, "Bowser", "Giga Bowser"],
-    [22, 0x7F, 0x80, "Wolf", ""],
-    [23, 0x81, 0x82, "Conker", ""],
-    [24, 0x87, 0x8A, "Marth", ""],
-    [25, 0x89, 0x8C, "Mewtwo", ""],
-    [26, 0xA0, 0xA1, "Sonic", "Super Sonic"],
-    [27, 0xAA, 0xA8, "Sheik", ""],
-    [28, 0xAC, 0xAE, "Marina", ""],
-    [29, 0xAF, 0xB2, "King Dedede", ""],
-    [30, 0xB7, 0xB9, "Goemon", "Ebisumaru"],
+    [1,  0x11, 0x1D, "Mario",           "Metal Mario"],
+    [2,  0x12, 0x1E, "Fox",             "Peppy"],
+    [3,  0x13, 0x1F, "Donkey Kong",     "Lanky Kong"],
+    [4,  0x14, 0x20, "Samus",           ""],
+    [5,  0x15, 0x21, "Luigi",           "Metal Luigi"],
+    [6,  0x16, 0x22, "Link",            ""],
+    [7,  0x17, 0x23, "Yoshi",           ""],
+    [8,  0x18, 0x24, "Captain Falcon",  "Dragon King"],
+    [9,  0x19, 0x25, "Kirby",           ""],
+    [10, 0x1A, 0x26, "Pikachu",         ""],
+    [11, 0x1B, 0x27, "Jigglypuff",      ""],
+    [12, 0x1C, 0x28, "Ness",            ""],
+    [13, 0x4D, 0x5B, "Dr. Mario",       "Dr. Luigi"],
+    [14, 0x4E, 0x57, "Ganondorf",       ""],
+    [15, 0x4F, 0x64, "Young Link",      ""],
+    [16, 0x51, 0x59, "Dark Samus",      ""],
+    [17, 0x52, 0x66, "Polygon Team",    "Mad Piano"],
+    [18, 0x53, 0x65, "Falco",           "Slippy"],
+    [19, 0x54, 0x6D, "Wario",           ""],
+    [20, 0x56, 0x70, "Lucas",           ""],
+    [21, 0x7A, 0x7B, "Bowser",          "Giga Bowser"],
+    [22, 0x7F, 0x80, "Wolf",            ""],
+    [23, 0x81, 0x82, "Conker",          ""],
+    [24, 0x87, 0x8A, "Marth",           "Roy"],
+    [25, 0x89, 0x8C, "Mewtwo",          ""],
+    [26, 0xA0, 0xA1, "Sonic",           "Super Sonic"],
+    [27, 0xAA, 0xA8, "Sheik",           ""],
+    [28, 0xAC, 0xAE, "Marina",          ""],
+    [29, 0xAF, 0xB2, "King Dedede",     ""],
+    [30, 0xB7, 0xB9, "Goemon",          "Ebisumaru"],
     [31, 0xC2, 0xC5, "Banjo & Kazooie", ""],
+    [32, 0xCB, 0xCE, "Crash",           ""],
+    [33, 0xCF, 0xD0, "Peach",           ""],
 ]
+
+// Track ID, Track Name
+MusicTracks = [
+    [0x16F, "Crash Bash Loading Screen"]
+]
+
+function GetTrackID(name) {
+    for track in MusicTracks {
+        if(track[1] == name) {
+            return track[0]
+        }
+    }
+}
 
 // ----------------------------------------------------------------------------------------------------
 // 1P Game, Remix Mode, All-Star Mode
@@ -486,38 +564,11 @@ function NormalModeChar1Stocks() => byte(Mem_NormalModeData + 520)
 function NormalModeChar1Percentage() => word(Mem_NormalModeData + 588)
 // 1P Game / Remix Mode - Player 1 - Percentage [16bit]
 
-function NormalModeChar2Stocks() => byte(Mem_NormalModeData + 628)
-// 1P Game / Remix Mode - Player 2 - Stocks in Reserve [8bit]
-function NormalModeChar2Percentage() => word(Mem_NormalModeData + 704)
-// 1P Game / Remix Mode - Player 2 - Percentage [16bit]
-
-function NormalModeChar3Stocks() => byte(Mem_NormalModeData + 744)
-// 1P Game / Remix Mode - Player 3 - Stocks in Reserve [8bit]
-function NormalModeChar3Percentage() => word(Mem_NormalModeDate + 820)
-// 1P Game / Remix Mode - Player 3 - Percentage [16bit]
-
-function NormalModeChar4Stocks() => byte(Mem_NormalModeData + 860)
-// 1P Game / Remix Mode - Player 4 - Stocks in Reserve [8bit]
-function NormalModeChar4Percentage() => word(Mem_NormalModeData + 936)
-// 1P Game / Remix Mode - Player 4 - Percentage [16bit]
-
 function NormalModeScore() => dword(Mem_NormalModeData + 440)
 // 1P Game / Remix 1P / All-Star Mode - Total Score [32bit]
 
 function NormalModeStage() => byte(Mem_NormalModeData + 482)
 // 1P Game / Remix Mode / Bonus 3 - Stage ID [8bit]
-
-function NormalModeNumFighters() => byte(Mem_NormalModeData + 486)
-// 1P Game / Remix Mode - Number of Fighters in Battle [8bit]
-
-function NormalModeTimer() => dword(Mem_NormalModeData + 500)
-// 1P Game / Remix Mode - Battle Timer [32bit]
-
-function NormalSelectChar1() => byte(Mem_NormalSelectData)
-// 1P Player Game - Character Select - Player 1 - Character ID [8bit]
-
-function NormalSelectChar1Confirm() => byte(Mem_NormalSelectData + 12)
-// 1P Player Game - Character Select - Player 1 - Character confirmed [8bit]
 
 // ----------------------------------------------------------------------------------------------------
 // Free-for-all
@@ -544,16 +595,6 @@ function FreeModeChar1Control() => byte(Mem_FreeModeData + 35)
 // --- 2 | Player 3
 // --- 3 | Player 4
 // --- 4 | COM
-function FreeModeChar1DMG1() => dword(Mem_FreeModeData + 86)
-// Free-for-all - Player 1 - Damage taken from 1P [32bit]
-function FreeModeChar1DMG2() => dword(Mem_FreeModeData + 90)
-// Free-for-all - Player 1 - Damage taken from 2P [32bit]
-function FreeModeChar1DMG3() => dword(Mem_FreeModeData + 94)
-// Free-for-all - Player 1 - Damage taken from 3P [32bit]
-function FreeModeChar1DMG4() => dword(Mem_FreeModeData + 98)
-// Free-for-all - Player 1 - Damage taken from 4P [32bit]
-function FreeModeChar1Percentage() => word(Mem_FreeModeData + 102)
-// Free-for-all - Player 1 - Percentage [16bit]
 
 function FreeModeChar2() => byte(Mem_FreeModeData + 142)
 // Free-for-all - Player 2 - Character ID [8bit]
@@ -568,16 +609,6 @@ function FreeModeChar2Control() => byte(Mem_FreeModeData +151)
 // --- 2 | Player 3
 // --- 3 | Player 4
 // --- 4 | COM
-function FreeModeChar2DMG1() => dword(Mem_FreeModeData + 202)
-// Free-for-all - Player 2 - Damage taken from 1P [32bit]
-function FreeModeChar2DMG2() => dword(Mem_FreeModeData + 206)
-// Free-for-all - Player 2 - Damage taken from 2P [32bit]
-function FreeModeChar2DMG3() => dword(Mem_FreeModeData + 210)
-// Free-for-all - Player 2 - Damage taken from 3P [32bit]
-function FreeModeChar2DMG4() => dword(Mem_FreeModeData + 214)
-// Free-for-all - Player 2 - Damage taken from 4P [32bit]
-function FreeModeChar2Percentage() => word(Mem_FreeModeData + 218)
-// Free-for-all - Player 2 - Percentage [16bit]
 
 function FreeModeChar3() => byte(Mem_FreeModeData + 258)
 // Free-for-all - Player 3 - Character ID [8bit]
@@ -592,16 +623,6 @@ function FreeModeChar3Control() => byte(Mem_FreeModeData +267)
 // --- 2 | Player 3
 // --- 3 | Player 4
 // --- 4 | COM
-function FreeModeChar3DMG1() => dword(Mem_FreeModeData + 318)
-// Free-for-all - Player 3 - Damage taken from 1P [32bit]
-function FreeModeChar3DMG2() => dword(Mem_FreeModeData + 322)
-// Free-for-all - Player 3 - Damage taken from 2P [32bit]
-function FreeModeChar3DMG3() => dword(Mem_FreeModeData + 326)
-// Free-for-all - Player 3 - Damage taken from 3P [32bit]
-function FreeModeChar3DMG4() => dword(Mem_FreeModeData + 330)
-// Free-for-all - Player 3 - Damage taken from 4P [32bit]
-function FreeModeChar3Percentage() => word(Mem_FreeModeData + 334)
-// Free-for-all - Player 3 - Percentage [16bit]
 
 function FreeModeChar4() => byte(Mem_FreeModeData + 374)
 // Free-for-all - Player 4 - Character ID [8bit]
@@ -616,16 +637,6 @@ function FreeModeChar4Control() => byte(Mem_FreeModeData +383)
 // --- 2 | Player 3
 // --- 3 | Player 4
 // --- 4 | COM
-function FreeModeChar4DMG1() => dword(Mem_FreeModeData + 434)
-// Free-for-all - Player 4 - Damage taken from 1P [32bit]
-function FreeModeChar4DMG2() => dword(Mem_FreeModeData + 438)
-// Free-for-all - Player 4 - Damage taken from 2P [32bit]
-function FreeModeChar4DMG3() => dword(Mem_FreeModeData + 442)
-// Free-for-all - Player 4 - Damage taken from 3P [32bit]
-function FreeModeChar4DMG4() => dword(Mem_FreeModeData + 446)
-// Free-for-all - Player 4 - Damage taken from 4P [32bit]
-function FreeModeChar4Percentage() => word(Mem_FreeModeData + 450)
-// Free-for-all - Player 4 - Percentage [16bit]
 
 function FreeModeCombo(char, enemy) {
     address = dword(Mem_FreeModeComboData + ((char - 1)*0x38 + ((enemy - 1)*0x04)))
@@ -652,7 +663,7 @@ function Bonus1RecordsNewChars(id) => byte(Mem_Bonus12RecordData + 23 + (id - Ge
 function Bonus1Records() {
     totalSum = []
     for character in Characters {
-        if(character[0] != GetCharID("Master Hand")) {
+        if(character[0] != GetCharID("Master Hand") && character[1] != "") {
             if(character[2] == false) {
                 array_push(totalSum, Bonus1RecordsOldChars(character[0]))
             }
@@ -675,7 +686,7 @@ function Bonus2RecordsNewChars(id) => byte(Mem_Bonus12RecordData + 31 + (id - Ge
 function Bonus2Records() {
     totalSum = []
     for character in Characters {
-        if(character[0] != GetCharID("Master Hand")) {
+        if(character[0] != GetCharID("Master Hand") && character[1] != "") {
             if(character[2] == false) {
                 array_push(totalSum, Bonus2RecordsOldChars(character[0]))
             }
@@ -867,12 +878,13 @@ function Beat1PNormal() {
 }
 
 function Beat1PNormalNoContinues() {
-    return Beat1PNormal() //&&
-    //never(NormalModeChar1Stocks() == 0xFF)
+    return Beat1PNormal() &&
+    never(NormalModeChar1Stocks() == 0xFF)
 }
 
-function BeatRemix1PVeryHard() {
-    return never(NormalModeDifficulty() != 4) && 
+function BeatRemix1PNormal() {
+    return never(NormalModeDifficulty() < 2) && 
+    never(NormalModeDifficulty() > 4) && 
     never(BothGameStates() == 0x1B1B) &&
     never(BothGameStates() == 0x1B34) &&
     never(BothGameStates() == 0x0834) &&
@@ -884,23 +896,35 @@ function BeatRemix1PVeryHard() {
     never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
+function BeatRemix1PVeryHard() {
+    return never(NormalModeDifficulty() != 4) && 
+           BeatRemix1PNormal()
+}
+
 function BeatRemix1PVeryHard3Stocks() {
     return BeatRemix1PVeryHard() &&
     never(NormalModeStocks() > 2) &&
     never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
-function BeatAllstarsVeryHard() {
-    return never(NormalModeDifficulty() != 4) && 
+function BeatAllstarsNormal() {
+    return never(NormalModeDifficulty() < 2) && 
+    never(NormalModeDifficulty() > 4) && 
     never(BothGameStates() == 0x1B1B) &&
     never(BothGameStates() == 0x1B34) &&
     never(BothGameStates() == 0x0834) &&
     once(NormalModeStage() == 0x8B &&
-        byte(Mem_GameMode + 20) == 0) &&
+        byte(Mem_GameMode + 20) == 0 &&
+        BothGameStates() == 0x770E) &&
     trigger_when(prev(NormalModeProgress()) == 0x0D 
         && NormalModeProgress() == 0x0E) &&
     never(byte(Mem_GameMode) != 0x05) &&
     never(dword(Mem_HighscoreOn)  == 0x00)
+}
+
+function BeatAllstarsVeryHard() {
+    return never(NormalModeDifficulty() != 4) && 
+    BeatAllstarsNormal()
 }
 
 function BeatAllstarsVeryHard3Stocks() {
@@ -921,27 +945,47 @@ function Beat12CharacterBattle() {
     player12Loses = sum_of(player12Chars, p => p)
     com12LosesM = sum_of(com12Chars, m => m)
     com12LosesD = sum_of(com12Chars, d => prev(d)) 
+    return never(byte(Mem_VSMode) != 1) &&
+           never(prev(byte(Mem_GameState) == 0x15) && 
+           byte(Mem_GameState) == 0x16 &&
+           FreeModeChar1Control() == 4) &&
+           never(prev(byte(Mem_GameState) == 0x15) && 
+           byte(Mem_GameState) == 0x16 &&
+           FreeModeChar2Control() != 4) &&
+           never(prev(byte(Mem_GameState) == 0x15) && 
+           byte(Mem_GameState) == 0x16 &&
+           FreeModeChar2CPU() < 5) &&
+           never(BothGameStates() == 0x1B1B) &&
+           never(GameState() == 0x09) &&
+           never(player12Loses == 12) &&
+           trigger_when(com12LosesM == 12) &&
+           trigger_when(com12LosesD == 11) &&
+           ResetCheating(0) &&
+           ResetCheating(1)
+}
+
+function Beat12CharacterBattleCPU5() {
+    return once(FreeModeChar2CPU() >= 0x05 &&
+              prev(byte(Mem_12CharacterStocks + 0x07) == 0x1C) &&
+              byte(Mem_12CharacterStocks + 0x07) != 0x1C &&
+              prev(byte(Mem_12CharacterStocks + 0xDB) == 0x1C) &&
+              byte(Mem_12CharacterStocks + 0xDB) != 0x1C) &&
+           Beat12CharacterBattle() &&
+           never(prev(byte(Mem_GameState) == 0x15) && 
+              byte(Mem_GameState) == 0x16 &&
+              FreeModeChar2CPU() < 5)
+}
+
+function Beat12CharacterBattleCPU9() {
     return once(FreeModeChar2CPU() >= 0x09 &&
-        prev(byte(Mem_12CharacterStocks + 0x07) == 0x1C) &&
-        byte(Mem_12CharacterStocks + 0x07) != 0x1C &&
-        prev(byte(Mem_12CharacterStocks + 0xDB) == 0x1C) &&
-        byte(Mem_12CharacterStocks + 0xDB) != 0x1C) &&
-        never(prev(byte(Mem_GameState) == 0x15) && 
-        byte(Mem_GameState) == 0x16 &&
-        FreeModeChar1Control() == 4) &&
-        never(prev(byte(Mem_GameState) == 0x15) && 
-        byte(Mem_GameState) == 0x16 &&
-        FreeModeChar2Control() != 4) &&
-        never(prev(byte(Mem_GameState) == 0x15) && 
-        byte(Mem_GameState) == 0x16 &&
-        FreeModeChar2CPU() < 9) &&
-        never(BothGameStates() == 0x1B1B) &&
-        never(GameState() == 0x09) &&
-        never(player12Loses == 12) &&
-        trigger_when(com12LosesM == 12) &&
-        trigger_when(com12LosesD == 11) &&
-        ResetCheating(0) &&
-        ResetCheating(1)
+              prev(byte(Mem_12CharacterStocks + 0x07) == 0x1C) &&
+              byte(Mem_12CharacterStocks + 0x07) != 0x1C &&
+              prev(byte(Mem_12CharacterStocks + 0xDB) == 0x1C) &&
+              byte(Mem_12CharacterStocks + 0xDB) != 0x1C) &&
+           Beat12CharacterBattle() &&
+           never(prev(byte(Mem_GameState) == 0x15) && 
+              byte(Mem_GameState) == 0x16 &&
+              FreeModeChar2CPU() < 9)
 }
 
 function Beat1COM(stage, char1, char2, slot) {
@@ -963,7 +1007,8 @@ function Beat1COM(stage, char1, char2, slot) {
     player2Code = any_of(player2IDs, id => (byte(PointerPlayerData() + 0x08 + 0xB50*(1-control[1])) == id))
 
     return never(GameState() != 0x16 &&
-               GameState() != 0x18) &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 1) &&
            never(FreeModeStage() != GetStageID(stage)) && 
            once(player1Code &&
@@ -996,7 +1041,8 @@ function Beat1COMKirbyRandom(slot) {
     playerCode= any_of(playerIDs, id => (byte(PointerPlayerData() + 0x08 + 0xB50*(1-control[0])) == id))
 
     return never(GameState() != 0x16 &&
-                GameState() != 0x18) &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 1) &&
            never(FreeModeStage() != GetStageID("Casino Night Zone")) &&
            once(playerCode &&
@@ -1020,7 +1066,8 @@ function Beat1COMLevel10(slot) {
     control[slot] = 1
 
     return never(GameState() != 0x16 &&
-                GameState() != 0x18) &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 1) &&
            once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
            trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
@@ -1059,13 +1106,26 @@ function Beat4COMs(stage, char1, char2, char3, char4, slot) {
         }
     }
     
-    char1Code = tally_of(player1IDs, 1, id => (byte(PointerPlayerData() + 0x08 + 0xB50*0) == id))
-    char2Code = tally_of(player2IDs, 1, id => (byte(PointerPlayerData() + 0x08 + 0xB50*1) == id))
-    char3Code = tally_of(player3IDs, 1, id => (byte(PointerPlayerData() + 0x08 + 0xB50*2) == id))
-    char4Code = tally_of(player4IDs, 1, id => (byte(PointerPlayerData() + 0x08 + 0xB50*3) == id))
+    char1Code = tally(1, (byte(PointerPlayerData() + 0x08 + 0xB50*0) == GetCharID(char1)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*1) == GetCharID(char1)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*2) == GetCharID(char1)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*3) == GetCharID(char1)))
+    char2Code = tally(1, (byte(PointerPlayerData() + 0x08 + 0xB50*0) == GetCharID(char2)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*1) == GetCharID(char2)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*2) == GetCharID(char2)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*3) == GetCharID(char2)))
+    char3Code = tally(1, (byte(PointerPlayerData() + 0x08 + 0xB50*0) == GetCharID(char3)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*1) == GetCharID(char3)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*2) == GetCharID(char3)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*3) == GetCharID(char3)))
+    char4Code = tally(1, (byte(PointerPlayerData() + 0x08 + 0xB50*0) == GetCharID(char4)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*1) == GetCharID(char4)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*2) == GetCharID(char4)) ||
+                                              (byte(PointerPlayerData() + 0x08 + 0xB50*3) == GetCharID(char4)))
                                             
     return never(GameState() != 0x16 &&
-               GameState() != 0x18) &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 3) &&
            never(FreeModeStage() != GetStageID(stage)) && 
            char1Code &&
@@ -1132,7 +1192,8 @@ function Beat4COMsSame(char, slot, stage1, stage2) {
     char4Code = tally_of(player4IDs, 1, id => (byte(PointerPlayerData() + 0x08 + 0xB50*3) == id))
                                             
     return never(GameState() != 0x16 &&
-               GameState() != 0x18) &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 3) &&
            never(FreeModeStage() != GetStageID(stage1) &&
                FreeModeStage() != GetStageID(stage2)) && 
@@ -1171,6 +1232,155 @@ function Beat4COMsSame(char, slot, stage1, stage2) {
            NoCheatingNoHat(3)
 }
 
+function BeatSmashketball(mode, slot) {
+    playerIDs = []
+    control = [0, 0]
+    control[slot] = 1
+    
+    
+    playerCode= any_of(playerIDs, id => (byte(PointerPlayerData() + 0x08 + 0xB50*(1-control[0])) == id))
+
+    return never(GameState() != 0x16 &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 4) &&
+           never(FreeModeNumFighters() != 1) &&
+           never(byte(Mem_SmashketballData + 0x73) 
+               + byte(Mem_SmashketballData + 0x72)
+               + byte(Mem_SmashketballData + 0x71)
+               + byte(Mem_SmashketballData + 0x70) != 2) &&
+           once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
+           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           once(GameState() == 0x16 &&
+           byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
+           trigger_when(GameState() == 0x18 &&
+           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) && 
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1)
+}
+
+function BeatSmashketball5Points(mode, slot) {
+    playerIDs = []
+    control = [0, 0]
+    control[slot] = 1
+    
+    if (mode == "Basketball") {
+        SmashketballMode = 0
+    } else if (mode == "Soccer") {
+        SmashketballMode = 1
+    }
+
+    return BeatSmashketball(mode, slot) &&
+           never(byte(Mem_SmashketballData) != SmashketballMode) &&
+           trigger_when(once(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)
+                           - dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) >= 5 &&
+                             dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)
+                           - dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) <= 0x80000000 &&
+                             byte(Mem_FreeModeData + 0x0C) == 0x06))
+}
+
+function BeatSmashketballCOM0(mode, slot) {
+    playerIDs = []
+    control = [0, 0]
+    control[slot] = 1
+
+    return BeatSmashketball(mode, slot) &&
+           trigger_when(once(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50) == 0 &&
+                             dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) >= 1 &&
+                             byte(Mem_FreeModeData + 0x0C) == 0x06)) &&
+           once(GameState() == 0x16 &&
+                byte(Mem_FreeModeData + 0x0C) == 0x00) &&
+           never(prev(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)) == 0 &&
+                      dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50) == 1 &&
+                      byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 0)
+}
+
+function BeatTagTeam(slot) {
+    playerIDs = []
+    control = [0, 0]
+    control[slot] = 1
+    
+    playerCode= any_of(playerIDs, id => (byte(PointerPlayerData() + 0x08 + 0xB50*(1-control[0])) == id))
+
+    return never(GameState() != 0x16 &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 2) &&
+           never(FreeModeNumFighters() != 1) &&
+           once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
+           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           once(GameState() == 0x16 &&
+           byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 5) &&
+           trigger_when(GameState() == 0x18 &&
+           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           byte(Mem_12CharacterStocks + 0x4E70 + 0x60 + 0x3 - byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))) == 0x5 &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) == 0x1B &&
+           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) == 0x1B &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1)
+}
+
+function BeatKingOfTheHill(slot) {
+    player1IDs = []
+    player2IDs = []
+    player3IDs = []
+    player4IDs = []
+    control = [1, 1, 1, 1]
+    control[slot] = 0
+                                            
+    return never(GameState() != 0x16 &&
+                 GameState() != 0x18) &&
+           never(byte(Mem_VSMode) != 3) &&
+           never(FreeModeNumFighters() != 3) &&
+           tally(3, once(GameState() == 0x16 &&
+                            bit0(PointerPlayerData() + 0x20 + 0xB50*0) == 1 &&
+                            byte(PointerPlayerData() + 0x10 + 0xB50*0) >= 5),
+                    once(GameState() == 0x16 &&
+                            bit0(PointerPlayerData() + 0x20 + 0xB50*1) == 1 &&
+                            byte(PointerPlayerData() + 0x10 + 0xB50*1) >= 5),
+                    once(GameState() == 0x16 &&
+                            bit0(PointerPlayerData() + 0x20 + 0xB50*2) == 1 &&
+                            byte(PointerPlayerData() + 0x10 + 0xB50*2) >= 5),
+                    once(GameState() == 0x16 &&
+                            bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 1 &&
+                            byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 5)) &&
+           trigger_when(GameState() == 0x18) &&
+           once(GameState() == 0x16 &&
+           (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
+           bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
+           bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
+           bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
+           trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
+           trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
+           + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
+           + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
+           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           NoCheatingNoHat(0) &&
+           NoCheatingNoHat(1) &&
+           NoCheatingNoHat(2) &&
+           NoCheatingNoHat(3)
+}
+
+function PlayingBonus1(address) {
+    code = always_false()
+
+    for stage in BonusStages {
+        code = code || byte(address) == stage[1]
+    }
+    
+    return code
+}
+
 function BeatAllBonus1() {
     stageClears = []
     charIDs = []
@@ -1178,7 +1388,9 @@ function BeatAllBonus1() {
         array_push(stageClears, stages[1])
     }
     for character in Characters {
-        array_push(charIDs, character[0])
+        if(character[1] != "") {
+            array_push(charIDs, character[0])
+        }
     }
     
     i = length(stageClears)
@@ -1202,6 +1414,16 @@ function BeatAllBonus1() {
     return measured(codeStages) && never(codeReset)
 }
 
+function PlayingBonus2(address) {
+    code = always_false()
+
+    for stage in BonusStages {
+        code = code || byte(address) == stage[2]
+    }
+    
+    return code
+}
+
 function BeatAllBonus2() {
     stageClears = []
     charIDs = []
@@ -1209,7 +1431,9 @@ function BeatAllBonus2() {
         array_push(stageClears, stages[2])
     }
     for character in Characters {
-        array_push(charIDs, character[0])
+        if(character[1] != "") {
+            array_push(charIDs, character[0])
+        }
     }
     
     i = length(stageClears)
@@ -1233,6 +1457,13 @@ function BeatAllBonus2() {
     return measured(codeStages) && never(codeReset)
 }
 
+function TotalScoreAchievement(mode, score) {
+    return byte(Mem_GameMode) == mode &&
+           measured(LB_TotalScoreSum(mode) >= score) &&
+               prev(LB_TotalScoreSum(mode)) < score &&
+               prev(LB_TotalScoreSum(mode)) >= score - score/5
+}
+
 function RulesCommunity() {
     return true
 }
@@ -1240,30 +1471,30 @@ function RulesCommunity() {
 function NoCheating(id) {
     address = id
     return dword(Mem_BattleSetting + 0x00 + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0x25C + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0x95F4C + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0x9A0A8 + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0x9C2C8 + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0xAD274 + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0xAD9A0 + id*4) == 0 &&
-           dword(Mem_BattleSetting + 0xADB3C + id*4) == 0
+           dword(Mem_BattleSetting + 0x260 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xB5398 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xB8CC8 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xCE6E8 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xCE884 + id*4) == 0 &&
+           dword(Mem_BattleSetting + 0xCDFBC + id*4) == 0
 }
 
 function NoCheatingNoHat(id) {
     return NoCheating(id) &&
-           dword(Mem_BattleSetting + 0xFFEB0 + id*4) == 0
+           dword(Mem_BattleSetting + 0x130A18 + id*4) == 0
 }
 
 function ResetCheating(id) {
-    return never(dword(Mem_BattleSetting + 0x00 + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0x25C + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0x95F4C + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0x9A0A8 + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0x9C2C8 + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0xAD274 + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0xAD9A0 + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0xADB3C + id*4) != 0 ||
-           dword(Mem_BattleSetting + 0xFFEB0 + id*4) != 0)
+    return never(
+              dword(Mem_BattleSetting + 0x00 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0x260 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0xB5398 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0xB8CC8 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0xCE6E8 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0xCE884 + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0xCDFBC + id*4) != 0 ||
+              dword(Mem_BattleSetting + 0x130A18 + id*4) != 0
+            )
 }
 
 function KirbyCopyAbility(slot) {
@@ -1284,8 +1515,9 @@ function KirbyCopyAbility(slot) {
     return measured(code)
 }
 
-function SetPlayerTag(num) {
-    return byte(Mem_PlayerTagStart + 0x3C*(num-1)) != 0x00
+function SetPlayerTag(slot) {
+    return byte(Mem_PlayerTagStart + 0x3C*(slot-1)) != 0x00 &&
+           byte(Mem_PlayerTagStart + 0x3C*(slot-1)) != prev(byte(Mem_PlayerTagStart + 0x3C*(slot-1)))
 }
 
 function CharacterCostume(char, costume, slot) {
@@ -1293,8 +1525,225 @@ function CharacterCostume(char, costume, slot) {
            byte(PointerPlayerData() + 0x13 + 0xB50*slot) == costume
 }
 
+function GallerySounds(index, input) {
+    return GameState() == 0x37 &&
+           PreGameState() >= 0x37 &&
+           PreGameState() != 0x38 &&
+           PreGameState() != 0x39 &&
+           PreGameState() <= 0x3A &&
+           dword(Mem_GallerySounds) == index &&
+           (bit(4 + input, 0x9EFA6 + 8*0) > prev(bit(4 + input, 0x9EFA6 + 8*0)) ||
+            bit(4 + input, 0x9EFA6 + 8*1) > prev(bit(4 + input, 0x9EFA6 + 8*1)) ||
+            bit(4 + input, 0x9EFA6 + 8*2) > prev(bit(4 + input, 0x9EFA6 + 8*2)) ||
+            bit(4 + input, 0x9EFA6 + 8*3) > prev(bit(4 + input, 0x9EFA6 + 8*3)))
+}
+
+function LuigiKnockDown(attacker, target) {
+    return (byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Luigi") ||
+            byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Polygon Luigi") ||
+            byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("JP Luigi") ||
+            byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Metal Luigi") ||
+            byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Dr. Luigi")) &&
+           word(PointerPlayerData() + 0x24 + 0xB50*attacker) == 0xBD &&
+           dword(0xA4D64 + 0x74*target + 4*attacker) > prev(dword(0xA4D64 + 0x74*target + 4*attacker)) &&
+           prev(word(PointerPlayerData() + 0x24 + 0xB50*target) == 0x55) && 
+           word(PointerPlayerData() + 0x24 + 0xB50*target) == 0x33 &&
+           float(PointerPlayerData() + 0x58 + 0xB50*target) <= -110.0
+}
+
+function WarioGoing(slot) {
+    return byte(PointerPlayerData() + 0x08 + 0xB50*slot) == GetCharID("Wario") &&
+           prev(byte(PointerPlayerData() + 0xADC + 0xB50*slot)) == 0 &&
+           byte(PointerPlayerData() + 0xADC + 0xB50*slot) == 1
+}
+
+function MarinaShaking(slot) {
+    return byte(PointerPlayerData() + 0x08 + 0xB50*slot) == GetCharID("Marina") &&
+           prev(word(PointerPlayerData() + 0x24 + 0xB50*slot) != 0xFB) && 
+           word(PointerPlayerData() + 0x24 + 0xB50*slot) == 0xFB &&
+           ((dword(Mem_BattleSetting - 0x105F8 + slot*4) == 0 &&
+             bit5(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 1 &&
+             bit3(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 2 &&
+             bit2(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 3 &&
+             bit1(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 4 &&
+             bit0(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 5 &&
+             bit3(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 6 &&
+             bit2(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 7 &&
+             bit1(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 8 &&
+             bit0(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1))
+}
+
+function PeppyBarrelRolling(slot) {
+    return byte(PointerPlayerData() + 0x08 + 0xB50*slot) == GetCharID("Peppy") &&
+           prev(word(PointerPlayerData() + 0x24 + 0xB50*slot) != 0xE8) && 
+           word(PointerPlayerData() + 0x24 + 0xB50*slot) == 0xE8 &&
+           ((dword(Mem_BattleSetting - 0x105F8 + slot*4) == 0 &&
+             bit5(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 1 &&
+             bit3(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 2 &&
+             bit2(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 3 &&
+             bit1(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 4 &&
+             bit0(0x9EFA0 + 0x06 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 5 &&
+             bit3(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 6 &&
+             bit2(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 7 &&
+             bit1(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1) ||
+            (dword(Mem_BattleSetting - 0x105F8 + slot*4) == 8 &&
+             bit0(0x9EFA0 + 0x07 + byte(PointerPlayerData() + 0x0E + 0xB50*slot)*8) == 1))
+}
+
+function SonicIsClassic(slot) {
+    return byte(PointerPlayerData() + 0x8 + 0xB50*slot) == GetCharID("Sonic") && 
+           byte(Mem_SonicVariation + 3 - 1*slot) == 1 &&
+           byte(PointerPlayerData() + 0x20 + 0xB50*slot) == 0
+}
+
+function SoundWasPlayed(sound) {
+    code = always_false()
+    
+    for i in range(0, 11, 1) {
+        code = code ||
+               (prev(byte(0x95B15 + i*0x98)) == 0 &&
+               byte(0x95B15 + i*0x98) == 1 &&
+               dword(tbyte(0x95B2C + i*0x98)) == sound)
+    }
+    
+    return code
+}
+
 // ----------------------------------------------------------------------------------------------------
 // Leaderboard Logic
+function LB_TotalScoreUpdate1PGame(mode) {
+    objectSize = 0x20
+    
+    loop = 0
+    code = always_false()
+
+    for character in Characters {
+        // Character ID is an original Character and uses Static Memory Chunk
+        if (loop < 12) {
+            code = code || dword(Mem_NormalModeData + 0x04 + loop*objectSize) > prev(dword(Mem_NormalModeData + 0x04 + loop*objectSize))
+        }
+        // Character ID is a new Character and uses Dynamic Memory Chunk
+        if (loop >= 12) {
+            code = code || dword(Mem_1PGameNewScores + (loop-12)*objectSize) > prev(dword(Mem_1PGameNewScores + (loop-12)*objectSize))
+        }
+        loop = loop + 1
+    }
+    
+    return byte(Mem_GameMode) == 0x00 &&
+           code
+}
+
+function LB_TotalScoreSum1PGame(mode) {
+    objectSize = 0x20
+    
+    loop = 0
+    score = 0
+
+    for character in Characters {
+        // Character ID is an original Character and uses Static Memory Chunk
+        if (loop < 12) {
+            score = score + dword(Mem_NormalModeData + 0x04 + loop*objectSize)
+        }
+        // Character ID is a new Character and uses Dynamic Memory Chunk
+        if (loop >= 12) {
+            score = score + dword(Mem_1PGameNewScores + (loop-12)*objectSize)
+        }
+        loop = loop + 1
+    }
+    
+    return score
+}
+
+function LB_TotalScoreUpdate(mode) {
+    objectSize = 0x04
+    
+    // Remix 1P
+    if (mode == 4) {
+        objectSize = 0x20
+        address = Mem_Remix1PScores
+    }
+    // All-Star Mode
+    if (mode == 5) {
+        objectSize = 0x20
+        address = Mem_Remix1PScores + length(Characters)*objectSize + 0x10
+    }
+    // Multi-Man Mode
+    if (mode == 2) {
+        address = Mem_MultiManScores
+    }
+    // Cruel Multi-Man Mode
+    if (mode == 3) {
+        address = Mem_MultiManScores + length(Characters)*objectSize - 0x04 + 0x20
+    }
+    // Home-Run Contest
+    if (mode == 6) {
+        address = Mem_HomeRunScores
+    }
+    
+    loop = 0
+    code = always_false()
+
+    for character in Characters {
+        code = code || dword(address + loop*objectSize) > prev(dword(address + loop*objectSize))
+        loop = loop + 1
+    }
+    
+    return byte(Mem_GameMode) == mode &&
+           code
+}
+
+function LB_TotalScoreSum(mode) {
+    objectSize = 0x04
+    
+    // Remix 1P
+    if (mode == 4) {
+        objectSize = 0x20
+        address = Mem_Remix1PScores
+    }
+    // All-Star Mode
+    if (mode == 5) {
+        objectSize = 0x20
+        address = Mem_Remix1PScores + length(Characters)*objectSize + 0x10
+    }
+    // Multi-Man Mode
+    if (mode == 2) {
+        address = Mem_MultiManScores
+    }
+    // Cruel Multi-Man Mode
+    if (mode == 3) {
+        address = Mem_MultiManScores + length(Characters)*objectSize - 0x04 + 0x20
+    }
+        // Home-Run Contest
+    if (mode == 6) {
+        address = Mem_HomeRunScores
+    }
+    
+    loop = 0
+    score = 0
+
+    for character in Characters {
+        score = score + dword(address + loop*objectSize)
+        loop = loop + 1
+    }
+    
+    return score
+}
+
 function LB_1PGame(name) {
     return NormalModeChar1() == GetCharID(name) &&
            byte(Mem_GameMode) == 0x00 &&
@@ -1307,7 +1756,7 @@ function LB_1PGame(name) {
            never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
-function LB_Remix1PGame(name) {
+function LB_Remix1P(name) {
     return NormalModeChar1() == GetCharID(name) &&
            byte(Mem_GameMode) == 0x01 &&
            byte(Mem_GameMode) == prev(byte(Mem_GameMode)) &&
@@ -1414,7 +1863,7 @@ function LB_CruelMultiManHealth(name) {
            never(dword(Mem_HighscoreOn)  == 0x00)
 }
 
-function LB_Allstars(name) {
+function LB_AllStars(name) {
     return NormalModeChar1() == GetCharID(name) &&
            byte(Mem_GameMode) == 0x05 &&
            byte(Mem_GameMode) == prev(byte(Mem_GameMode)) &&
@@ -1442,8 +1891,16 @@ NumberOfNewChars            = length(Characters) - NumberOfOldChars
 // ----------------------------------------------------------------------------------------------------
 // Achievements
 achievement(
-    title = "Don't Get Rusty", points = 5, type="progression",
-    description = "Complete 1P Game with Metal Mario on Normal or higher.",
+    title = "Keep It Normal", points = 5, type="progression",
+    description = "Complete 1P Game on Normal.",
+    id = 528930, badge = "599784", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
+    trigger = Beat1PNormal() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Don't Get Rusty", points = 5, type="",
+    description = "Complete 1P Game with Metal Mario on Normal without using continues.",
     id = 165928, badge = "523035", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:37",
     trigger =  never(HomerunChar() != GetCharID("Metal Mario")) &&
                Beat1PNormalNoContinues() &&
@@ -1451,8 +1908,8 @@ achievement(
 )
 
 achievement(
-    title = "King of Swing", points = 5, type="progression",
-    description = "Complete 1P Game with Giant Donkey Kong on Normal or higher.",
+    title = "King of Swing", points = 5, type="",
+    description = "Complete 1P Game with Giant Donkey Kong on Normal without using continues.",
     id = 165929, badge = "523040", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:38",
     trigger = never(HomerunChar() != GetCharID("Giant Donkey Kong")) &&
               Beat1PNormalNoContinues() &&
@@ -1460,8 +1917,8 @@ achievement(
 )
 
 achievement(
-    title = "Force of Power", points = 5, type="progression",
-    description = "Complete 1P Game with Ganondorf on Normal or higher.",
+    title = "Force of Power", points = 5, type="",
+    description = "Complete 1P Game with Ganondorf on Normal without using continues.",
     id = 165930, badge = "523046", published = "14.08.2021 15:04:25", modified = "08.09.2024 13:29:40",
     trigger = never((HomerunChar() != GetCharID("Ganondorf")) &&
                 (HomerunChar() != GetCharID("Polygon Ganondorf"))) &&
@@ -1470,8 +1927,8 @@ achievement(
 )
 
 achievement(
-    title = "An Adventure Begins", points = 5, type="progression",
-    description = "Complete 1P Game with Young Link on Normal or higher.",
+    title = "An Adventure Begins", points = 5, type="",
+    description = "Complete 1P Game with Young Link on Normal without using continues.",
     id = 165931, badge = "523049", published = "14.08.2021 15:04:26", modified = "08.09.2024 13:29:41",
     trigger = never((HomerunChar() != GetCharID("Young Link")) &&
                   (HomerunChar() != GetCharID("Polygon Young Link"))) &&
@@ -1480,8 +1937,8 @@ achievement(
 )
 
 achievement(
-    title = "Hawk Eyes!", points = 5, type="progression",
-    description = "Complete 1P Game with Falco on Normal or higher.",
+    title = "Hawk Eyes!", points = 5, type="",
+    description = "Complete 1P Game with Falco on Normal without using continues.",
     id = 165932, badge = "523043", published = "14.08.2021 15:04:26", modified = "08.09.2024 13:29:39",
     trigger = never((HomerunChar() != GetCharID("Falco")) &&
                   (HomerunChar() != GetCharID("Polygon Falco"))) && 
@@ -1490,8 +1947,8 @@ achievement(
 )
 
 achievement(
-    title = "Time For Your Medicine", points = 5, type="progression",
-    description = "Complete 1P Game with Dr. Mario on Normal or higher.",
+    title = "Time For Your Medicine", points = 5, type="",
+    description = "Complete 1P Game with Dr. Mario on Normal without using continues.",
     id = 165926, badge = "523052", published = "14.08.2021 15:04:24", modified = "08.09.2024 13:29:42",
     trigger = never((HomerunChar() != GetCharID("Dr. Mario")) &&
                   (HomerunChar() != GetCharID("Polygon Dr. Mario"))) &&
@@ -1500,8 +1957,8 @@ achievement(
 )
 
 achievement(
-    title = "Dark Memories", points = 5, type="progression",
-    description = "Complete 1P Game with Dark Samus on Normal or higher.",
+    title = "Dark Memories", points = 5, type="",
+    description = "Complete 1P Game with Dark Samus on Normal without using continues.",
     id = 165933, badge = "523058", published = "14.08.2021 15:04:26", modified = "08.09.2024 14:00:49",
     trigger = never((HomerunChar() != GetCharID("Dark Samus")) &&
                   (HomerunChar() != GetCharID("Polygon Dark Samus"))) &&
@@ -1510,8 +1967,8 @@ achievement(
 )
 
 achievement(
-    title = "Stealing the Show!", points = 5, type="progression",
-    description = "Complete 1P Game with Wario on Normal or higher.",
+    title = "Stealing the Show!", points = 5, type="",
+    description = "Complete 1P Game with Wario on Normal without using continues.",
     id = 165934, badge = "523055", published = "14.08.2021 15:04:27", modified = "08.09.2024 13:29:43", 
     trigger = never((HomerunChar() != GetCharID("Wario")) &&
                   (HomerunChar() != GetCharID("Polygon Wario"))) &&
@@ -1520,8 +1977,8 @@ achievement(
 )
 
 achievement(
-    title = "Yeah!", points = 5, type="progression",
-    description = "Complete 1P Game with Lucas on Normal or higher.",
+    title = "Yeah!", points = 5, type="",
+    description = "Complete 1P Game with Lucas on Normal without using continues.",
     id = 165935, badge = "523061", published = "14.08.2021 15:04:27", modified = "08.09.2024 13:29:45", 
     trigger = never((HomerunChar() != GetCharID("Lucas")) &&
                   (HomerunChar() != GetCharID("Polygon Lucas"))) &&
@@ -1530,8 +1987,8 @@ achievement(
 )
 
 achievement(
-    title = "Gwahahahaha!", points = 5, type="progression",
-    description = "Complete 1P Game with Bowser on Normal or higher.",
+    title = "Gwahahahaha!", points = 5, type="",
+    description = "Complete 1P Game with Bowser on Normal without using continues.",
     id = 165936, badge = "523088", published = "14.08.2021 15:04:27", modified = "08.09.2024 14:14:49", 
     trigger = never((HomerunChar() != GetCharID("Bowser")) &&
                   (HomerunChar() != GetCharID("Polygon Bowser"))) &&
@@ -1540,8 +1997,8 @@ achievement(
 )
 
 achievement(
-    title = "Ultimate Koopa", points = 5, type="progression",
-    description = "Complete 1P Game with Giga Bowser on Normal or higher.",
+    title = "Ultimate Koopa", points = 5, type="",
+    description = "Complete 1P Game with Giga Bowser on Normal without using continues.",
     id = 165937, badge = "523064", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:01:09", 
     trigger = never(HomerunChar() != GetCharID("Giga Bowser")) &&
               Beat1PNormalNoContinues() &&
@@ -1549,8 +2006,8 @@ achievement(
 )
 
 achievement(
-    title = "Hunting Nightmare", points = 5, type="progression",
-    description = "Complete 1P Game with Mad Piano on Normal or higher.",
+    title = "Hunting Nightmare", points = 5, type="",
+    description = "Complete 1P Game with Mad Piano on Normal without using continues.",
     id = 165927, badge = "523068", published = "14.08.2021 15:04:24", modified = "08.09.2024 14:14:20", 
     trigger = never(HomerunChar() != GetCharID("Mad Piano")) &&
               Beat1PNormalNoContinues() &&
@@ -1558,8 +2015,8 @@ achievement(
 )
 
 achievement(
-    title = "Unleash the Wolf", points = 5, type="progression",
-    description = "Complete 1P Game with Wolf on Normal or higher.",
+    title = "Unleash the Wolf", points = 5, type="",
+    description = "Complete 1P Game with Wolf on Normal without using continues.",
     id = 165938, badge = "523071", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Wolf")) &&
                   (HomerunChar() != GetCharID("Polygon Wolf"))) &&
@@ -1568,8 +2025,8 @@ achievement(
 )
 
 achievement(
-    title = "I'm Confident!", points = 5, type="progression",
-    description = "Complete 1P Game with Conker on Normal or higher.",
+    title = "I'm Confident!", points = 5, type="",
+    description = "Complete 1P Game with Conker on Normal without using continues.",
     id = 165939, badge = "523074", published = "14.08.2021 15:04:28", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Conker")) &&
                   (HomerunChar() != GetCharID("Polygon Conker"))) &&
@@ -1578,8 +2035,8 @@ achievement(
 )
 
 achievement(
-    title = "Cosmic Power", points = 5, type="progression",
-    description = "Complete 1P Game with Mewtwo on Normal or higher.",
+    title = "Cosmic Power", points = 5, type="",
+    description = "Complete 1P Game with Mewtwo on Normal without using continues.",
     id = 173151, badge = "523076", published = "21.09.2021 12:23:09", modified = "08.09.2024 14:14:21",
     trigger = never((HomerunChar() != GetCharID("Mewtwo")) &&
                   (HomerunChar() != GetCharID("Polygon Mewtwo"))) &&
@@ -1588,8 +2045,8 @@ achievement(
 )
 
 achievement(
-    title = "A Known Swordfighter", points = 5, type="progression",
-    description = "Complete 1P Game with Marth on Normal or higher.",
+    title = "A Known Swordfighter", points = 5, type="",
+    description = "Complete 1P Game with Marth on Normal without using continues.",
     id = 173152, badge = "523079", published = "21.09.2021 12:23:09", modified = "08.09.2024 14:14:22", 
     trigger = never((HomerunChar() != GetCharID("Marth")) &&
                   (HomerunChar() != GetCharID("Polygon Marth"))) &&
@@ -1598,8 +2055,8 @@ achievement(
 )
 
 achievement(
-    title = "In Sonic Speed", points = 5, type="progression",
-    description = "Complete 1P Game with Sonic on Normal or higher.",
+    title = "In Sonic Speed", points = 5, type="",
+    description = "Complete 1P Game with Sonic on Normal without using continues.",
     id = 197073, badge = "523082", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sonic")) &&
                   (HomerunChar() != GetCharID("Polygon Sonic"))) &&
@@ -1608,8 +2065,8 @@ achievement(
 )
 
 achievement(
-    title = "Super Power", points = 5, type="progression",
-    description = "Complete 1P Game with Super Sonic on Normal or higher.",
+    title = "Super Power", points = 5, type="",
+    description = "Complete 1P Game with Super Sonic on Normal without using continues.",
     id = 197074, badge = "523085", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Super Sonic")) &&
               Beat1PNormalNoContinues() &&
@@ -1617,8 +2074,8 @@ achievement(
 )
 
 achievement(
-    title = "Royal Invasion", points = 5, type="progression",
-    description = "Complete 1P Game with Sheik on Normal or higher.",
+    title = "Royal Invasion", points = 5, type="",
+    description = "Complete 1P Game with Sheik on Normal without using continues.",
     id = 161715, badge = "523954", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sheik")) &&
                   (HomerunChar() != GetCharID("Polygon Sheik"))) &&
@@ -1627,8 +2084,8 @@ achievement(
 )
 
 achievement(
-    title = "Shake It Up", points = 5, type="progression",
-    description = "Complete 1P Game with Marina on Normal or higher.",
+    title = "Shake It Up", points = 5, type="",
+    description = "Complete 1P Game with Marina on Normal without using continues.",
     id = 161717, badge = "523957", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Marina")) &&
                   (HomerunChar() != GetCharID("Polygon Marina"))) &&
@@ -1637,8 +2094,8 @@ achievement(
 )
 
 achievement(
-    title = "Dreaming of a Kingdom", points = 5, type="progression",
-    description = "Complete 1P Game with King Dedede on Normal or higher.",
+    title = "Dreaming of a Kingdom", points = 5, type="",
+    description = "Complete 1P Game with King Dedede on Normal without using continues.",
     id = 161719, badge = "523958", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("King Dedede")) &&
                   (HomerunChar() != GetCharID("Polygon King Dedede"))) &&
@@ -1647,8 +2104,8 @@ achievement(
 )
 
 achievement(
-    title = "Japanese Spirits", points = 5, type="progression",
-    description = "Complete 1P Game with Goemon on Normal or higher.",
+    title = "Japanese Spirits", points = 5, type="",
+    description = "Complete 1P Game with Goemon on Normal without using continues.",
     id = 161707, badge = "523961", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Goemon")) &&
                   (HomerunChar() != GetCharID("Polygon Goemon"))) &&
@@ -1657,8 +2114,8 @@ achievement(
 )
 
 achievement(
-    title = "Spicy Combat Skills", points = 5, type="progression",
-    description = "Complete 1P Game with Peppy on Normal or higher.",
+    title = "Spicy Combat Skills", points = 5, type="",
+    description = "Complete 1P Game with Peppy on Normal without using continues.",
     id = 161708, badge = "523962", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Peppy")) &&
               Beat1PNormalNoContinues() &&
@@ -1666,8 +2123,8 @@ achievement(
 )
 
 achievement(
-    title = "Slip' Slidin' Away", points = 5, type="progression",
-    description = "Complete 1P Game with Slippy on Normal or higher.",
+    title = "Slip' Slidin' Away", points = 5, type="",
+    description = "Complete 1P Game with Slippy on Normal without using continues.",
     id = 161709, badge = "523965", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Slippy")) &&
               Beat1PNormalNoContinues() &&
@@ -1675,8 +2132,8 @@ achievement(
 )
 
 achievement(
-    title = "Battle For the Jiggy", points = 5, type="progression",
-    description = "Complete 1P Game with Banjo & Kazooie on Normal or higher.",
+    title = "Battle For the Jiggy", points = 5, type="",
+    description = "Complete 1P Game with Banjo & Kazooie on Normal without using continues.",
     id = 161710, badge = "523966", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Banjo & Kazooie")) &&
                   (HomerunChar() != GetCharID("Polygon Banjo & Kazooie"))) &&
@@ -1685,8 +2142,8 @@ achievement(
 )
 
 achievement(
-    title = "More Comedy Than Stealth", points = 5, type="progression",
-    description = "Complete 1P Game with Ebisumaru on Normal or higher.",
+    title = "More Comedy Than Stealth", points = 5, type="",
+    description = "Complete 1P Game with Ebisumaru on Normal without using continues.",
     id = 462596, badge = "523969", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Ebisumaru")) &&
               Beat1PNormalNoContinues() &&
@@ -1694,8 +2151,8 @@ achievement(
 )
 
 achievement(
-    title = "Lead of Faith", points = 5, type="progression",
-    description = "Complete 1P Game with Metal Luigi on Normal or higher.",
+    title = "Lead of Faith", points = 5, type="",
+    description = "Complete 1P Game with Metal Luigi on Normal without using continues.",
     id = 462597, badge = "523970", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Metal Luigi")) &&
               Beat1PNormalNoContinues() &&
@@ -1703,8 +2160,8 @@ achievement(
 )
 
 achievement(
-    title = "Ryou-Chou Majesty", points = 5, type="progression",
-    description = "Complete 1P Game with Dragon King on Normal or higher.",
+    title = "Ryou-Chou Majesty", points = 5, type="",
+    description = "Complete 1P Game with Dragon King on Normal without using continues.",
     id = 462600, badge = "523973", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
     trigger = never(HomerunChar() != GetCharID("Dragon King")) &&
               Beat1PNormalNoContinues() &&
@@ -1712,8 +2169,61 @@ achievement(
 )
 
 achievement(
-    title = "Limited Controls", points = 10, type="progression",
-    description = "Complete 1P Game with any Polygon Fighter on Normal or higher.",
+    title = "Crash Landing", points = 5, type="",
+    description = "Complete 1P Game with Crash on Normal without using continues.",
+    id = 529124, badge = "600034", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
+    trigger = never(HomerunChar() != GetCharID("Crash")) &&
+              Beat1PNormalNoContinues() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Sweet and Pink", points = 5, type="",
+    description = "Complete 1P Game with Peach on Normal without using continues.",
+    id = 529125, badge = "600035", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
+    trigger = never(HomerunChar() != GetCharID("Peach")) &&
+              Beat1PNormalNoContinues() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Blazing Blade", points = 5, type="",
+    description = "Complete 1P Game with Roy on Normal without using continues.",
+    id = 529126, badge = "600036", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
+    trigger = never(HomerunChar() != GetCharID("Roy")) &&
+              Beat1PNormalNoContinues() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "PhD in Plumbering", points = 5, type="",
+    description = "Complete 1P Game with Dr. Luigi on Normal without using continues.",
+    id = 529127, badge = "600037", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
+    trigger = never(HomerunChar() != GetCharID("Dr. Luigi")) &&
+              Beat1PNormalNoContinues() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "No Style, No Grace", points = 5, type="",
+    description = "Complete 1P Game with Lanky Kong on Normal without using continues.",
+    id = 529128, badge = "600038", published = "11.02.2022 19:39:39", modified = "08.09.2024 14:14:24", 
+    trigger = never(HomerunChar() != GetCharID("Lanky Kong")) &&
+              Beat1PNormalNoContinues() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Shuffled Around", points = 5, type="progression",
+    description = "Complete Remix 1P on Normal.",
+    id = 529101, badge = "599953", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
+    trigger = BeatRemix1PNormal() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Limited Controls", points = 10, type="",
+    description = "Complete 1P Game with any Polygon Fighter on Normal.",
     id = 173153, badge = "523037", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
     trigger = never(HomerunChar() < GetCharID("Polygon Mario")) &&
               never((HomerunChar() > GetCharID("Polygon Ness")) &&
@@ -1724,7 +2234,7 @@ achievement(
 
 achievement(
     title = "Plumbing Away", points = 25,
-    description = "Complete Remix 1P with Mario on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Mario on Very Hard and 3 stocks.",
     id = 165944, badge = "523010", published = "14.08.2021 16:37:34", modified = "08.09.2024 13:29:29", 
     trigger = never((HomerunChar() != GetCharID("Mario")) &&
                 (HomerunChar() != GetCharID("JP Mario")) &&
@@ -1735,7 +2245,7 @@ achievement(
 
 achievement(
     title = "HAYAAAAH!", points = 25,
-    description = "Complete Remix 1P with Fox on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Fox on Very Hard and 3 stocks.",
     id = 165945, badge = "523012", published = "14.08.2021 16:37:37", modified = "08.09.2024 13:29:29", 
     trigger = never((HomerunChar() != GetCharID("Fox")) &&
                 (HomerunChar() != GetCharID("JP Fox")) &&
@@ -1746,7 +2256,7 @@ achievement(
 
 achievement(
     title = "Jungle Beat", points = 25,
-    description = "Complete Remix 1P with Donkey Kong on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Donkey Kong on Very Hard and 3 stocks.",
     id = 165946, badge = "523014", published = "14.08.2021 16:41:51", modified = "08.09.2024 13:29:30", 
     trigger = never((HomerunChar() != GetCharID("Donkey Kong")) &&
                 (HomerunChar() != GetCharID("JP Donkey Kong")) &&
@@ -1757,7 +2267,7 @@ achievement(
 
 achievement(
     title = "Complete Meltdown", points = 25,
-    description = "Complete Remix 1P with Samus on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Samus on Very Hard and 3 stocks.",
     id = 165947, badge = "523016", published = "14.08.2021 16:47:33", modified = "08.09.2024 13:29:30", 
     trigger = never((HomerunChar() != GetCharID("Samus")) &&
                 (HomerunChar() != GetCharID("JP Samus")) &&
@@ -1769,7 +2279,7 @@ achievement(
 
 achievement(
     title = "New Superstar", points = 25,
-    description = "Complete Remix 1P with Luigi on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Luigi on Very Hard and 3 stocks.",
     id = 165948, badge = "523018", published = "14.08.2021 16:55:44", modified = "08.09.2024 13:29:31",
     trigger = never((HomerunChar() != GetCharID("Luigi")) &&
                 (HomerunChar() != GetCharID("JP Luigi")) &&
@@ -1780,7 +2290,7 @@ achievement(
 
 achievement(
     title = "A Real Hero", points = 25,
-    description = "Complete Remix 1P with Link on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Link on Very Hard and 3 stocks.",
     id = 165949, badge = "523020", published = "14.08.2021 17:00:23", modified = "08.09.2024 13:29:31", 
     trigger = never((HomerunChar() != GetCharID("Link")) &&
                 (HomerunChar() != GetCharID("JP Link")) &&
@@ -1792,7 +2302,7 @@ achievement(
 
 achievement(
     title = "Jurassic Destruction", points = 25,
-    description = "Complete Remix 1P with Yoshi on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Yoshi on Very Hard and 3 stocks.",
     id = 165950, badge = "523022", published = "14.08.2021 17:04:42", modified = "08.09.2024 13:29:32", 
     trigger = never((HomerunChar() != GetCharID("Yoshi")) &&
                 (HomerunChar() != GetCharID("JP Yoshi")) &&
@@ -1803,7 +2313,7 @@ achievement(
 
 achievement(
     title = "Rising Phoenix", points = 25,
-    description = "Complete Remix 1P with Captain Falcon on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Captain Falcon on Very Hard and 3 stocks.",
     id = 165951, badge = "523024", published = "14.08.2021 17:11:09", modified = "08.09.2024 13:29:33",
     trigger = never((HomerunChar() != GetCharID("Captain Falcon")) &&
                 (HomerunChar() != GetCharID("JP Captain Falcon")) &&
@@ -1814,7 +2324,7 @@ achievement(
 
 achievement(
     title = "Cute and Dangerous", points = 25,
-    description = "Complete Remix 1P with Kirby on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Kirby on Very Hard and 3 stocks.",
     id = 165952, badge = "523026", published = "14.08.2021 17:16:04", modified = "08.09.2024 13:29:33", 
     trigger = never((HomerunChar() != GetCharID("Kirby")) &&
                 (HomerunChar() != GetCharID("JP Kirby")) &&
@@ -1825,7 +2335,7 @@ achievement(
 
 achievement(
     title = "End of the Thunderstorm", points = 25,
-    description = "Complete Remix 1P with Pikachu on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Pikachu on Very Hard and 3 stocks.",
     id = 165953, badge = "523028", published = "14.08.2021 17:21:17", modified = "08.09.2024 13:29:34", 
     trigger = never((HomerunChar() != GetCharID("Pikachu")) &&
                 (HomerunChar() != GetCharID("JP Pikachu")) &&
@@ -1837,7 +2347,7 @@ achievement(
 
 achievement(
     title = "Song of Soaring", points = 25,
-    description = "Complete Remix 1P with Jigglypuff on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Jigglypuff on Very Hard and 3 stocks.",
     id = 165954, badge = "523030", published = "14.08.2021 17:26:21", modified = "08.09.2024 13:29:35", 
     trigger = never((HomerunChar() != GetCharID("Jigglypuff")) &&
                 (HomerunChar() != GetCharID("JP Jigglypuff")) &&
@@ -1849,7 +2359,7 @@ achievement(
 
 achievement(
     title = "PK Victory", points = 25,
-    description = "Complete Remix 1P with Ness on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Ness on Very Hard and 3 stocks.",
     id = 165955, badge = "523032", published = "14.08.2021 17:30:26", modified = "08.09.2024 13:29:35", 
     trigger = never((HomerunChar() != GetCharID("Ness")) &&
                 (HomerunChar() != GetCharID("JP Ness")) &&
@@ -1860,7 +2370,7 @@ achievement(
 
 achievement(
     title = "Heavy Fighter", points = 25,
-    description = "Complete Remix 1P with Metal Mario on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Metal Mario on Very Hard and 3 stocks.",
     id = 165956, badge = "523036", published = "14.08.2021 17:30:43", modified = "08.09.2024 13:29:37",
     trigger = never(HomerunChar() != GetCharID("Metal Mario")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -1869,7 +2379,7 @@ achievement(
 
 achievement(
     title = "Bigger Is Better", points = 25,
-    description = "Complete Remix 1P with Giant Donkey Kong on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Giant Donkey Kong on Very Hard and 3 stocks.",
     id = 165957, badge = "523041", published = "14.08.2021 17:38:48", modified = "08.09.2024 13:29:38",
     trigger = never(HomerunChar() != GetCharID("Giant Donkey Kong")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -1878,7 +2388,7 @@ achievement(
 
 achievement(
     title = "The Dark Lord", points = 25,
-    description = "Complete Remix 1P with Ganondorf on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Ganondorf on Very Hard and 3 stocks.",
     id = 165958, badge = "523047", published = "14.08.2021 17:42:46", modified = "08.09.2024 13:29:41",
     trigger = never((HomerunChar() != GetCharID("Ganondorf")) &&
                 (HomerunChar() != GetCharID("Polygon Ganondorf"))) &&
@@ -1888,7 +2398,7 @@ achievement(
 
 achievement(
     title = "Kid of Courage", points = 25,
-    description = "Complete Remix 1P with Young Link on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Young Link on Very Hard and 3 stocks.",
     id = 165967, badge = "523050", published = "14.08.2021 18:05:15", modified = "08.09.2024 13:29:41", 
     trigger = never((HomerunChar() != GetCharID("Young Link")) &&
                 (HomerunChar() != GetCharID("Polygon Young Link"))) &&
@@ -1898,7 +2408,7 @@ achievement(
 
 achievement(
     title = "Revali But Better", points = 25,
-    description = "Complete Remix 1P with Falco on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Falco on Very Hard and 3 stocks.",
     id = 165968, badge = "523044", published = "14.08.2021 18:08:56", modified = "08.09.2024 13:29:39",
     trigger = never((HomerunChar() != GetCharID("Falco")) &&
                 (HomerunChar() != GetCharID("Polygon Falco"))) &&
@@ -1908,7 +2418,7 @@ achievement(
 
 achievement(
     title = "You're Ready For the Hospital", points = 25,
-    description = "Complete Remix 1P with Dr. Mario on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Dr. Mario on Very Hard and 3 stocks.",
     id = 165971, badge = "523053", published = "14.08.2021 18:14:15", modified = "08.09.2024 14:00:27",
     trigger = never((HomerunChar() != GetCharID("Dr. Mario")) &&
                 (HomerunChar() != GetCharID("Polygon Dr. Mario"))) &&
@@ -1918,7 +2428,7 @@ achievement(
 
 achievement(
     title = "Perfect Clone", points = 25,
-    description = "Complete Remix 1P with Dark Samus on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Dark Samus on Very Hard and 3 stocks.",
     id = 165972, badge = "523059", published = "14.08.2021 18:18:06", modified = "08.09.2024 13:29:44",
     trigger = never((HomerunChar() != GetCharID("Dark Samus")) &&
                 (HomerunChar() != GetCharID("Polygon Dark Samus"))) &&
@@ -1928,7 +2438,7 @@ achievement(
 
 achievement(
     title = "Doing It For the Money", points = 25,
-    description = "Complete Remix 1P with Wario on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Wario on Very Hard and 3 stocks.",
     id = 165973, badge = "523056", published = "14.08.2021 18:22:07", modified = "08.09.2024 14:00:40",
     trigger = never((HomerunChar() != GetCharID("Wario")) &&
                 (HomerunChar() != GetCharID("Polygon Wario"))) &&
@@ -1938,7 +2448,7 @@ achievement(
 
 achievement(
     title = "Newcomer Out of Nowhere", points = 25,
-    description = "Complete Remix 1P with Lucas on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Lucas on Very Hard and 3 stocks.",
     id = 165974, badge = "523062", published = "14.08.2021 18:27:46", modified = "08.09.2024 13:29:45", 
     trigger = never((HomerunChar() != GetCharID("Lucas")) &&
                 (HomerunChar() != GetCharID("Polygon Lucas"))) &&
@@ -1948,7 +2458,7 @@ achievement(
 
 achievement(
     title = "Defending the Title", points = 25,
-    description = "Complete Remix 1P with Bowser on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Bowser on Very Hard and 3 stocks.",
     id = 165975, badge = "523089", published = "14.08.2021 18:36:52", modified = "08.09.2024 14:14:50",
     trigger = never((HomerunChar() != GetCharID("Bowser")) &&
                 (HomerunChar() != GetCharID("Polygon Bowser"))) &&
@@ -1958,7 +2468,7 @@ achievement(
 
 achievement(
     title = "Unbanished Beast", points = 25,
-    description = "Complete Remix 1P with Giga Bowser on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Giga Bowser on Very Hard and 3 stocks.",
     id = 165976, badge = "523065", published = "14.08.2021 18:36:53", modified = "08.09.2024 14:01:15",
     trigger = never(HomerunChar() != GetCharID("Giga Bowser")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -1967,7 +2477,7 @@ achievement(
 
 achievement(
     title = "Your Worst Nightmare", points = 25,
-    description = "Complete Remix 1P with Mad Piano on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Mad Piano on Very Hard and 3 stocks.",
     id = 165977, badge = "523069", published = "14.08.2021 18:40:00", modified = "08.09.2024 14:14:20",
     trigger = never(HomerunChar() != GetCharID("Mad Piano")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -1976,7 +2486,7 @@ achievement(
 
 achievement(
     title = "A Wild Beast", points = 25,
-    description = "Complete Remix 1P with Wolf on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Wolf on Very Hard and 3 stocks.",
     id = 165978, badge = "523072", published = "14.08.2021 18:42:23", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Wolf")) &&
                 (HomerunChar() != GetCharID("Polygon Wolf"))) &&
@@ -1986,7 +2496,7 @@ achievement(
 
 achievement(
     title = "Not So Child-Friendly", points = 25,
-    description = "Complete Remix 1P with Conker on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Conker on Very Hard and 3 stocks.",
     id = 165979, badge = "523066", published = "14.08.2021 18:45:04", modified = "08.09.2024 14:01:34", 
     trigger = never((HomerunChar() != GetCharID("Conker")) &&
                 (HomerunChar() != GetCharID("Polygon Conker"))) &&
@@ -1996,7 +2506,7 @@ achievement(
 
 achievement(
     title = "Legendary Victory", points = 25,
-    description = "Complete Remix 1P with Mewtwo on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Mewtwo on Very Hard and 3 stocks.",
     id = 173154, badge = "523077", published = "21.09.2021 12:23:15", modified = "08.09.2024 14:14:22", 
     trigger = never((HomerunChar() != GetCharID("Mewtwo")) &&
                 (HomerunChar() != GetCharID("Polygon Mewtwo"))) &&
@@ -2006,7 +2516,7 @@ achievement(
 
 achievement(
     title = "Feeling the Blade", points = 25,
-    description = "Complete Remix 1P with Marth on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Marth on Very Hard and 3 stocks.",
     id = 173155, badge = "523080", published = "21.09.2021 12:23:15", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Marth")) &&
                 (HomerunChar() != GetCharID("Polygon Marth"))) &&
@@ -2016,7 +2526,7 @@ achievement(
 
 achievement(
     title = "Where's Eggman?", points = 25,
-    description = "Complete Remix 1P with Sonic on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Sonic on Very Hard and 3 stocks.",
     id = 197075, badge = "523083", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sonic")) &&
                 (HomerunChar() != GetCharID("Polygon Sonic"))) &&
@@ -2026,7 +2536,7 @@ achievement(
 
 achievement(
     title = "Power of the Chaos Emeralds", points = 25,
-    description = "Complete Remix 1P with Super Sonic on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Super Sonic on Very Hard and 3 stocks.",
     id = 197076, badge = "523086", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Super Sonic")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -2035,7 +2545,7 @@ achievement(
 
 achievement(
     title = "Hidden Techniques", points = 25,
-    description = "Complete Remix 1P with Sheik on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Sheik on Very Hard and 3 stocks.",
     id = 161714, badge = "523955", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sheik")) &&
                 (HomerunChar() != GetCharID("Polygon Sheik"))) &&
@@ -2045,7 +2555,7 @@ achievement(
 
 achievement(
     title = "Mischief Master", points = 25,
-    description = "Complete Remix 1P with Marina on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Marina on Very Hard and 3 stocks.",
     id = 161716, badge = "523956", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Marina")) &&
                 (HomerunChar() != GetCharID("Polygon Marina"))) &&
@@ -2055,7 +2565,7 @@ achievement(
 
 achievement(
     title = "Waddle Dee Commander", points = 25,
-    description = "Complete Remix 1P with King Dedede on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with King Dedede on Very Hard and 3 stocks.",
     id = 161718, badge = "523959", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("King Dedede")) &&
                 (HomerunChar() != GetCharID("Polygon King Dedede"))) &&
@@ -2065,7 +2575,7 @@ achievement(
 
 achievement(
     title = "Ninja Quickness", points = 25,
-    description = "Complete Remix 1P with Goemon on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Goemon on Very Hard and 3 stocks.",
     id = 161720, badge = "523960", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Goemon")) &&
                 (HomerunChar() != GetCharID("Polygon Goemon"))) &&
@@ -2075,7 +2585,7 @@ achievement(
 
 achievement(
     title = "Never Give Up", points = 25,
-    description = "Complete Remix 1P with Peppy on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Peppy on Very Hard and 3 stocks.",
     id = 161722, badge = "523963", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Peppy")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -2084,7 +2594,7 @@ achievement(
 
 achievement(
     title = "Toadally Easy", points = 25,
-    description = "Complete Remix 1P with Slippy on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Slippy on Very Hard and 3 stocks.",
     id = 161724, badge = "523964", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Slippy")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -2093,7 +2603,7 @@ achievement(
 
 achievement(
     title = "Eggstraordinary", points = 25,
-    description = "Complete Remix 1P with Banjo & Kazooie on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Banjo & Kazooie on Very Hard and 3 stocks.",
     id = 161726, badge = "523967", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Banjo & Kazooie")) &&
                 (HomerunChar() != GetCharID("Polygon Banjo & Kazooie"))) &&
@@ -2103,7 +2613,7 @@ achievement(
 
 achievement(
     title = "Great Ebisumaru", points = 25,
-    description = "Complete Remix 1P with Ebisumaru on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Ebisumaru on Very Hard and 3 stocks.",
     id = 161728, badge = "523968", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Ebisumaru")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -2112,7 +2622,7 @@ achievement(
 
 achievement(
     title = "Silver Is Real", points = 25,
-    description = "Complete Remix 1P with Metal Luigi on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Metal Luigi on Very Hard and 3 stocks.",
     id = 462598, badge = "523971", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Metal Luigi")) &&
               BeatRemix1PVeryHard3Stocks() &&
@@ -2121,9 +2631,54 @@ achievement(
 
 achievement(
     title = "Remnants of Sakurai's Past", points = 25,
-    description = "Complete Remix 1P with Dragon King on Very Hard and 3 Stocks.",
+    description = "Complete Remix 1P with Dragon King on Very Hard and 3 stocks.",
     id = 462599, badge = "523972", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
     trigger = never(HomerunChar() != GetCharID("Dragon King")) &&
+              BeatRemix1PVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "N. Sane Skillz", points = 25,
+    description = "Complete Remix 1P with Crash on Very Hard and 3 stocks.",
+    id = 529129, badge = "600039", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
+    trigger = never(HomerunChar() != GetCharID("Crash")) &&
+              BeatRemix1PVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Turn 'Ip Around", points = 25,
+    description = "Complete Remix 1P with Peach on Very Hard and 3 stocks.",
+    id = 529130, badge = "600040", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
+    trigger = never(HomerunChar() != GetCharID("Peach")) &&
+              BeatRemix1PVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Heat Check", points = 25,
+    description = "Complete Remix 1P with Roy on Very Hard and 3 stocks.",
+    id = 529131, badge = "600041", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
+    trigger = never(HomerunChar() != GetCharID("Roy")) &&
+              BeatRemix1PVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Bitter Pills", points = 25,
+    description = "Complete Remix 1P with Dr. Luigi on Very Hard and 3 stocks.",
+    id = 529132, badge = "600042", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
+    trigger = never(HomerunChar() != GetCharID("Dr. Luigi")) &&
+              BeatRemix1PVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Trombone Remix", points = 25,
+    description = "Complete Remix 1P with Lanky Kong on Very Hard and 3 stocks.",
+    id = 529133, badge = "600043", published = "11.02.2022 19:39:40", modified = "08.09.2024 14:14:25", 
+    trigger = never(HomerunChar() != GetCharID("Lanky Kong")) &&
               BeatRemix1PVeryHard3Stocks() &&
               RulesCommunity()
 )
@@ -2141,7 +2696,7 @@ achievement(
 
 achievement(
     title = "All-Time Favorite", points = 10,
-    description = "Complete All-Star Mode with Mario on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Mario on Very Hard and 3 stocks.",
     id = 173158, badge = "523011", published = "21.09.2021 17:45:35", modified = "08.09.2024 13:29:29", 
     trigger = never((HomerunChar() != GetCharID("Mario")) &&
                 (HomerunChar() != GetCharID("JP Mario")) &&
@@ -2152,7 +2707,7 @@ achievement(
 
 achievement(
     title = "Space Adventure", points = 10,
-    description = "Complete All-Star Mode with Fox on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Fox on Very Hard and 3 stocks.",
     id = 173159, badge = "523013", published = "21.09.2021 17:45:35", modified = "08.09.2024 13:29:30", 
     trigger = never((HomerunChar() != GetCharID("Fox")) &&
                 (HomerunChar() != GetCharID("JP Fox")) &&
@@ -2163,7 +2718,7 @@ achievement(
 
 achievement(
     title = "Donkey Konga", points = 10,
-    description = "Complete All-Star Mode with Donkey Kong on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Donkey Kong on Very Hard and 3 stocks.",
     id = 173160, badge = "523015", published = "21.09.2021 17:45:35", modified = "08.09.2024 13:29:30", 
     trigger = never((HomerunChar() != GetCharID("Donkey Kong")) &&
                 (HomerunChar() != GetCharID("JP Donkey Kong")) &&
@@ -2174,7 +2729,7 @@ achievement(
 
 achievement(
     title = "Mother Brain", points = 10,
-    description = "Complete All-Star Mode with Samus on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Samus on Very Hard and 3 stocks.",
     id = 173161, badge = "523017", published = "21.09.2021 17:45:36", modified = "08.09.2024 13:29:30", 
     trigger = never((HomerunChar() != GetCharID("Samus")) &&
                 (HomerunChar() != GetCharID("JP Samus")) &&
@@ -2186,7 +2741,7 @@ achievement(
 
 achievement(
     title = "Not A Sidekick", points = 10,
-    description = "Complete All-Star Mode with Luigi on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Luigi on Very Hard and 3 stocks.",
     id = 173162, badge = "523019", published = "21.09.2021 17:45:36", modified = "08.09.2024 13:29:31", 
     trigger = never((HomerunChar() != GetCharID("Luigi")) &&
                 (HomerunChar() != GetCharID("JP Luigi")) &&
@@ -2197,7 +2752,7 @@ achievement(
 
 achievement(
     title = "Hero of Time", points = 10,
-    description = "Complete All-Star Mode with Link on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Link on Very Hard and 3 stocks.",
     id = 173163, badge = "523021", published = "21.09.2021 17:45:36", modified = "08.09.2024 13:29:32", 
     trigger = never((HomerunChar() != GetCharID("Link")) &&
                 (HomerunChar() != GetCharID("JP Link")) &&
@@ -2209,7 +2764,7 @@ achievement(
 
 achievement(
     title = "Topsy-Turvy", points = 10,
-    description = "Complete All-Star Mode with Yoshi on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Yoshi on Very Hard and 3 stocks.",
     id = 173164, badge = "523023", published = "21.09.2021 17:45:37", modified = "08.09.2024 13:29:32",
     trigger = never((HomerunChar() != GetCharID("Yoshi")) &&
                 (HomerunChar() != GetCharID("JP Yoshi")) &&
@@ -2220,7 +2775,7 @@ achievement(
 
 achievement(
     title = "Falco Punch!", points = 10,
-    description = "Complete All-Star Mode with Captain Falcon on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Captain Falcon on Very Hard and 3 stocks.",
     id = 173165, badge = "523025", published = "21.09.2021 17:45:37", modified = "08.09.2024 13:29:33", 
     trigger = never((HomerunChar() != GetCharID("Captain Falcon")) &&
                 (HomerunChar() != GetCharID("JP Captain Falcon")) &&
@@ -2231,7 +2786,7 @@ achievement(
 
 achievement(
     title = "Poyo!", points = 10,
-    description = "Complete All-Star Mode with Kirby on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Kirby on Very Hard and 3 stocks.",
     id = 173166, badge = "523027", published = "21.09.2021 17:45:37", modified = "08.09.2024 13:29:34", 
     trigger = never((HomerunChar() != GetCharID("Kirby")) &&
                 (HomerunChar() != GetCharID("JP Kirby")) &&
@@ -2242,7 +2797,7 @@ achievement(
 
 achievement(
     title = "Electric Shock Showdown", points = 10,
-    description = "Complete All-Star Mode with Pikachu on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Pikachu on Very Hard and 3 stocks.",
     id = 173167, badge = "523029", published = "21.09.2021 17:45:38", modified = "08.09.2024 13:29:34", 
     trigger = never((HomerunChar() != GetCharID("Pikachu")) &&
                 (HomerunChar() != GetCharID("JP Pikachu")) &&
@@ -2254,7 +2809,7 @@ achievement(
 
 achievement(
     title = "Jigglypuff's Song", points = 10,
-    description = "Complete All-Star Mode with Jigglypuff on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Jigglypuff on Very Hard and 3 stocks.",
     id = 173168, badge = "523031", published = "21.09.2021 17:45:38", modified = "08.09.2024 13:29:35",
     trigger = never((HomerunChar() != GetCharID("Jigglypuff")) &&
                 (HomerunChar() != GetCharID("JP Jigglypuff")) &&
@@ -2266,7 +2821,7 @@ achievement(
 
 achievement(
     title = "Binding of Earth", points = 10,
-    description = "Complete All-Star Mode with Ness on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Ness on Very Hard and 3 stocks.",
     id = 173169, badge = "523033", published = "21.09.2021 17:45:38", modified = "08.09.2024 13:29:35", 
     trigger = never((HomerunChar() != GetCharID("Ness")) &&
                 (HomerunChar() != GetCharID("JP Ness")) &&
@@ -2277,7 +2832,7 @@ achievement(
 
 achievement(
     title = "Full Metal Marionist", points = 10,
-    description = "Complete All-Star Mode with Metal Mario on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Metal Mario on Very Hard and 3 stocks.",
     id = 173170, badge = "523034", published = "21.09.2021 17:45:39", modified = "08.09.2024 13:29:36",
     trigger = never(HomerunChar() != GetCharID("Metal Mario")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2286,7 +2841,7 @@ achievement(
 
 achievement(
     title = "Monkey D. Kong", points = 10,
-    description = "Complete All-Star Mode with Giant Donkey Kong on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Giant Donkey Kong on Very Hard and 3 stocks.",
     id = 173171, badge = "523042", published = "21.09.2021 17:45:39", modified = "08.09.2024 13:29:38", 
     trigger = never(HomerunChar() != GetCharID("Giant Donkey Kong")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2295,7 +2850,7 @@ achievement(
 
 achievement(
     title = "From the Shadows", points = 10,
-    description = "Complete All-Star Mode with Ganondorf on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Ganondorf on Very Hard and 3 stocks.",
     id = 173172, badge = "523048", published = "21.09.2021 17:45:39", modified = "08.09.2024 13:29:41", 
     trigger = never((HomerunChar() != GetCharID("Ganondorf")) &&
                 (HomerunChar() != GetCharID("Polygon Ganondorf"))) &&
@@ -2305,7 +2860,7 @@ achievement(
 
 achievement(
     title = "Oracle of Triumph", points = 10,
-    description = "Complete All-Star Mode with Young Link on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Young Link on Very Hard and 3 stocks.",
     id = 173173, badge = "523051", published = "21.09.2021 17:45:40", modified = "08.09.2024 13:29:42", 
     trigger = never((HomerunChar() != GetCharID("Young Link")) &&
                 (HomerunChar() != GetCharID("Polygon Young Link"))) &&
@@ -2315,7 +2870,7 @@ achievement(
 
 achievement(
     title = "Early Bird", points = 10,
-    description = "Complete All-Star Mode with Falco on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Falco on Very Hard and 3 stocks.",
     id = 173174, badge = "523045", published = "21.09.2021 17:45:40", modified = "08.09.2024 13:29:39", 
     trigger = never((HomerunChar() != GetCharID("Falco")) &&
                 (HomerunChar() != GetCharID("Polygon Falco"))) &&
@@ -2325,7 +2880,7 @@ achievement(
 
 achievement(
     title = "Just In Time", points = 10,
-    description = "Complete All-Star Mode with Dr. Mario on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Dr. Mario on Very Hard and 3 stocks.",
     id = 173175, badge = "523054", published = "21.09.2021 17:45:40", modified = "08.09.2024 13:29:43", 
     trigger = never((HomerunChar() != GetCharID("Dr. Mario")) &&
                 (HomerunChar() != GetCharID("Polygon Dr. Mario"))) &&
@@ -2335,7 +2890,7 @@ achievement(
 
 achievement(
     title = "Phazontastico", points = 10,
-    description = "Complete All-Star Mode with Dark Samus on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Dark Samus on Very Hard and 3 stocks.",
     id = 173176, badge = "523060", published = "21.09.2021 17:45:41", modified = "08.09.2024 13:29:45", 
     trigger = never((HomerunChar() != GetCharID("Dark Samus")) &&
                 (HomerunChar() != GetCharID("Dark Samus"))) &&
@@ -2345,7 +2900,7 @@ achievement(
 
 achievement(
     title = "Farting Hero", points = 10,
-    description = "Complete All-Star Mode with Wario on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Wario on Very Hard and 3 stocks.",
     id = 173177, badge = "523057", published = "21.09.2021 17:45:41", modified = "08.09.2024 13:29:43", 
     trigger = never((HomerunChar() != GetCharID("Wario")) &&
                 (HomerunChar() != GetCharID("Polygon Wario"))) &&
@@ -2355,7 +2910,7 @@ achievement(
 
 achievement(
     title = "Little Snake", points = 10,
-    description = "Complete All-Star Mode with Lucas on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Lucas on Very Hard and 3 stocks.",
     id = 173178, badge = "523063", published = "21.09.2021 17:45:41", modified = "08.09.2024 13:29:45", 
     trigger = never((HomerunChar() != GetCharID("Lucas")) &&
                 (HomerunChar() != GetCharID("Polygon Lucas"))) &&
@@ -2365,7 +2920,7 @@ achievement(
 
 achievement(
     title = "King of the Koopas", points = 10,
-    description = "Complete All-Star Mode with Bowser on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Bowser on Very Hard and 3 stocks.",
     id = 173179, badge = "523090", published = "21.09.2021 17:45:42", modified = "08.09.2024 14:14:50", 
     trigger = never((HomerunChar() != GetCharID("Bowser")) &&
                 (HomerunChar() != GetCharID("Polygon Bowser"))) &&
@@ -2375,7 +2930,7 @@ achievement(
 
 achievement(
     title = "Nightmare Beast", points = 10,
-    description = "Complete All-Star Mode with Giga Bowser on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Giga Bowser on Very Hard and 3 stocks.",
     id = 173180, badge = "523067", published = "21.09.2021 17:45:42", modified = "08.09.2024 14:14:20", 
     trigger = never(HomerunChar() != GetCharID("Giga Bowser")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2384,7 +2939,7 @@ achievement(
 
 achievement(
     title = "Haunted Object", points = 10,
-    description = "Complete All-Star Mode with Mad Piano on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Mad Piano on Very Hard and 3 stocks.",
     id = 173181, badge = "523070", published = "21.09.2021 17:45:42", modified = "08.09.2024 14:14:20", 
     trigger = never(HomerunChar() != GetCharID("Mad Piano")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2393,7 +2948,7 @@ achievement(
 
 achievement(
     title = "Fangs of Terror", points = 10,
-    description = "Complete All-Star Mode with Wolf on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Wolf on Very Hard and 3 stocks.",
     id = 173182, badge = "523073", published = "21.09.2021 17:45:43", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Wolf")) &&
                 (HomerunChar() != GetCharID("Polygon Wolf"))) &&
@@ -2403,7 +2958,7 @@ achievement(
 
 achievement(
     title = "That's Nuts!", points = 10,
-    description = "Complete All-Star Mode with Conker on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Conker on Very Hard and 3 stocks.",
     id = 173183, badge = "523075", published = "21.09.2021 17:45:43", modified = "08.09.2024 14:14:21", 
     trigger = never((HomerunChar() != GetCharID("Conker")) &&
                 (HomerunChar() != GetCharID("Polygon Conker"))) &&
@@ -2413,7 +2968,7 @@ achievement(
 
 achievement(
     title = "Mewtwo Strikes Back", points = 10,
-    description = "Complete All-Star Mode with Mewtwo on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Mewtwo on Very Hard and 3 stocks.",
     id = 173184, badge = "523078", published = "21.09.2021 17:45:43", modified = "08.09.2024 14:14:22", 
     trigger = never((HomerunChar() != GetCharID("Mewtwo")) &&
                 (HomerunChar() != GetCharID("Polygon Mewtwo"))) &&
@@ -2423,7 +2978,7 @@ achievement(
 
 achievement(
     title = "For the Kingdom", points = 10,
-    description = "Complete All-Star Mode with Marth on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Marth on Very Hard and 3 stocks.",
     id = 173185, badge = "523081", published = "21.09.2021 17:45:44", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Marth")) &&
                 (HomerunChar() != GetCharID("Polygon Marth"))) &&
@@ -2443,8 +2998,8 @@ achievement(
 )
 
 achievement(
-    title = "Classic Sonic", points = 10,
-    description = "Complete All-Star Mode with Sonic on Very Hard and 3 Stocks.",
+    title = "Look At My Sneakers", points = 10,
+    description = "Complete All-Star Mode with Sonic on Very Hard and 3 stocks.",
     id = 197077, badge = "523084", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:24", 
     trigger = never((HomerunChar() != GetCharID("Sonic")) &&
                 (HomerunChar() != GetCharID("Polygon Sonic"))) &&
@@ -2454,7 +3009,7 @@ achievement(
 
 achievement(
     title = "Chaos Control!", points = 10,
-    description = "Complete All-Star Mode with Super Sonic on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Super Sonic on Very Hard and 3 stocks.",
     id = 197078, badge = "523087", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Super Sonic")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2463,7 +3018,7 @@ achievement(
 
 achievement(
     title = "Princess' Secret", points = 10,
-    description = "Complete All-Star Mode with Sheik on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Sheik on Very Hard and 3 stocks.",
     id = 161704, badge = "523872", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("Sheik")) &&
                   (HomerunChar() != GetCharID("Polygon Sheik"))) &&
@@ -2472,8 +3027,8 @@ achievement(
 )
 
 achievement(
-    title = "Shake, Shake!", points = 10,
-    description = "Complete All-Star Mode with Marina on Very Hard and 3 Stocks.",
+    title = "Shaken, Not Stirred!", points = 10,
+    description = "Complete All-Star Mode with Marina on Very Hard and 3 stocks.",
     id = 161705, badge = "523873", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("Marina")) &&
                   (HomerunChar() != GetCharID("Polygon Marina"))) &&
@@ -2483,7 +3038,7 @@ achievement(
 
 achievement(
     title = "Good Penguin", points = 10,
-    description = "Complete All-Star Mode with King Dedede on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with King Dedede on Very Hard and 3 stocks.",
     id = 161706, badge = "523874", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("King Dedede")) &&
                   (HomerunChar() != GetCharID("Polygon King Dedede"))) &&
@@ -2493,7 +3048,7 @@ achievement(
 
 achievement(
     title = "Hero of Odeo", points = 10,
-    description = "Complete All-Star Mode with Goemon on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Goemon on Very Hard and 3 stocks.",
     id = 161721, badge = "523875", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("Goemon")) &&
                   (HomerunChar() != GetCharID("Polygon Goemon"))) &&
@@ -2503,7 +3058,7 @@ achievement(
 
 achievement(
     title = "Hare's Legacy", points = 10,
-    description = "Complete All-Star Mode with Peppy on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Peppy on Very Hard and 3 stocks.",
     id = 161723, badge = "523876", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Peppy")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2512,7 +3067,7 @@ achievement(
 
 achievement(
     title = "Tactical Expert", points = 10,
-    description = "Complete All-Star Mode with Slippy on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Slippy on Very Hard and 3 stocks.",
     id = 161725, badge = "523877", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Slippy")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2521,7 +3076,7 @@ achievement(
 
 achievement(
     title = "Double Trouble", points = 10,
-    description = "Complete All-Star Mode with Banjo & Kazooie on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Banjo & Kazooie on Very Hard and 3 stocks.",
     id = 161727, badge = "523905", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("Banjo & Kazooie")) &&
                   (HomerunChar() != GetCharID("Polygon Banjo & Kazooie"))) &&
@@ -2531,7 +3086,7 @@ achievement(
 
 achievement(
     title = "Mighty? I Thought You Mean Weighty...", points = 10,
-    description = "Complete All-Star Mode with Ebisumaru on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Ebisumaru on Very Hard and 3 stocks.",
     id = 161711, badge = "523906", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Ebisumaru")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2540,7 +3095,7 @@ achievement(
 
 achievement(
     title = "Not Just Scrap Metal", points = 10,
-    description = "Complete All-Star Mode with Metal Luigi on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Metal Luigi on Very Hard and 3 stocks.",
     id = 161712, badge = "523907", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Metal Luigi")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2549,7 +3104,7 @@ achievement(
 
 achievement(
     title = "King of the Fists", points = 10,
-    description = "Complete All-Star Mode with Dragon King on Very Hard and 3 Stocks.",
+    description = "Complete All-Star Mode with Dragon King on Very Hard and 3 stocks.",
     id = 161713, badge = "523953", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never(HomerunChar() != GetCharID("Dragon King")) &&
               BeatAllstarsVeryHard3Stocks() &&
@@ -2557,22 +3112,75 @@ achievement(
 )
 
 achievement(
-    title = "Sharp Shots on Targets", points = 25,
-    description = "Complete all Bonus 1 'Break The Targets' Stages in a Row with a single Character.",
+    title = "Twisted Adventure", points = 10,
+    description = "Complete All-Star Mode with Crash on Very Hard and 3 stocks.",
+    id = 529134, badge = "600044", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = never(HomerunChar() != GetCharID("Crash")) &&
+              BeatAllstarsVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Crowned Winner", points = 10,
+    description = "Complete All-Star Mode with Peach on Very Hard and 3 stocks.",
+    id = 529135, badge = "600045", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = never(HomerunChar() != GetCharID("Peach")) &&
+              BeatAllstarsVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Prince of Pherae", points = 10,
+    description = "Complete All-Star Mode with Roy on Very Hard and 3 stocks.",
+    id = 529136, badge = "600046", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = never(HomerunChar() != GetCharID("Roy")) &&
+              BeatAllstarsVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Green Medicine, Red Results", points = 10,
+    description = "Complete All-Star Mode with Dr. Luigi on Very Hard and 3 stocks.",
+    id = 529137, badge = "600047", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = never(HomerunChar() != GetCharID("Dr. Luigi")) &&
+              BeatAllstarsVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Make A Balloon of A Buffoon", points = 10,
+    description = "Complete All-Star Mode with Lanky Kong on Very Hard and 3 stocks.",
+    id = 529138, badge = "600048", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = never(HomerunChar() != GetCharID("Lanky Kong")) &&
+              BeatAllstarsVeryHard3Stocks() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Everyone Is Here", points = 5, type = "progression",
+    description = "Complete All-Star Mode on Normal.",
+    id = 529121, badge = "599965", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = BeatAllstarsNormal() &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Sharp Shots on Targets", points = 25, type="progression",
+    description = "Complete all Bonus 1 'Break The Targets' Stages in a row with a single character.",
     id = 166068, badge = "523105", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = BeatAllBonus1()
 )
 
 achievement(
-    title = "Precise Jumps on Platforms", points = 25,
-    description = "Complete all Bonus 2 'Board The Platforms' Stages in a Row with a single Character.",
+    title = "Precise Jumps on Platforms", points = 25, type="progression",
+    description = "Complete all Bonus 2 'Board The Platforms' Stages in a row with a single character.",
     id = 166069, badge = "523106", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = BeatAllBonus2()
 )
 
 achievement(
     title = "Speeding Away", points = 3,
-    description = "Complete the Normal Version of Bonus 3 'Race To The Finish' within 20 Seconds.",
+    description = "Complete Normal Bonus 3 'Race To The Finish' within 20 seconds.",
     id = 463455, badge = "525007", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Normal") && 
               Bonus3Timer() >= 1 &&    
@@ -2582,7 +3190,7 @@ achievement(
 
 achievement(
     title = "In One Motion", points = 4,
-    description = "Complete the Remix Version of Bonus 3 'Race To The Finish' within 20 Seconds.",
+    description = "Complete Remix Bonus 3 'Race To The Finish' within 20 seconds.",
     id = 463456, badge = "525008", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = LB_Bonus3("Remix") && 
               Bonus3Timer() >= 1 &&    
@@ -2591,20 +3199,28 @@ achievement(
 )
 
 achievement(
-    title = "Smash Royal", points = 10, type="progression",
-    description = "Finish a Multi-Man Battle with 100 or more Kills.",
+    title = "Smash Royal", points = 10, type="",
+    description = "Finish a game of Multi-Man Mode with 100 or more KOs.",
     id = 166085, badge = "523091", published = "15.08.2021 12:14:16", modified = "08.09.2024 14:18:30", 
     trigger = prev(NormalModeChar1Stocks()) == 0 &&
               NormalModeChar1Stocks() == 0xFF &&
               GameState() == 0x77 &&
               dword(Mem_MultiManKills) >= 100 &&
-              byte(Mem_GameMode) == 0x02 &&
+              byte(Mem_GameMode) == 0x02 &&            
               RulesCommunity()
 )
 
 achievement(
-    title = "Expert Training", points = 10, type="progression",
-    description = "Finish a Cruel Multi-Man Battle with 5 or more Kills.",
+    title = "Thousands of Victories", points = 25, type="progression",
+    description = "Get a total of 2.500 KOs in Multi-Man Mode.",
+    id = 531882, badge = "603729", published = "15.08.2021 12:14:16", modified = "08.09.2024 14:18:30", 
+    trigger = TotalScoreAchievement(0x02, 2500) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Expert Training", points = 10, type="",
+    description = "Finish a game of Cruel Multi-Man Mode with 5 or more KOs.",
     id = 166086, badge = "523092", published = "15.08.2021 12:14:16", modified = "08.09.2024 14:18:31", 
     trigger = prev(NormalModeChar1Stocks()) == 0 &&
               NormalModeChar1Stocks() == 0xFF &&
@@ -2615,10 +3231,28 @@ achievement(
 )
 
 achievement(
-    title = "Original Battle Royale", points = 25, type="progression",
-    description = "Win a 12-Character Battle with the Default Team against a COM using the same Team on Level 9 or higher in one Session and without leaving the Mode.",
+    title = "All Men Are My Main", points = 25, type="progression",
+    description = "Get a total of 50 KOs in Cruel Multi-Man Mode.",
+    id = 531884, badge = "603731", published = "15.08.2021 12:14:16", modified = "08.09.2024 14:18:30", 
+    trigger = TotalScoreAchievement(0x03, 50) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Last One Standing", points = 10, type = "progression",
+    description = "Win a 12-Character Battle against a COM on Level 5 without leaving the mode.",
+    id = 529123, badge = "600070", published = "15.08.2021 17:18:38", modified = "08.09.2024 17:22:06",
+    trigger = Beat12CharacterBattleCPU5() &&
+              never(byte(Mem_12CharacterStocks + 0xBC) != 0) &&
+              never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Original Battle Royale", points = 25,
+    description = "Win a 12-Character Battle with the Default Team against a COM using the same on Level 9 without leaving the mode.",
     id = 166165, badge = "523217", published = "15.08.2021 17:18:38", modified = "08.09.2024 17:22:06",
-    trigger = Beat12CharacterBattle() &&
+    trigger = Beat12CharacterBattleCPU9() &&
               never(byte(Mem_12CharacterStocks + 0xBC) != 0) &&
               never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
               RulesCommunity()
@@ -2626,9 +3260,9 @@ achievement(
 
 achievement(
     title = "From A Foreign Country", points = 25,
-    description = "Win a 12-Character Battle with the Japanese Team against a COM using the same Team on Level 9 or higher in one Session and without leaving the Mode.",
+    description = "Win a 12-Character Battle with the Japanese Team against a COM using the same on Level 9 without leaving the mode.",
     id = 462249, badge = "523500", published = "09.09.2024 17:19:48", modified = "09.09.2024 17:33:50", 
-    trigger = Beat12CharacterBattle() &&
+    trigger = Beat12CharacterBattleCPU9() &&
               never(byte(Mem_12CharacterStocks + 0xBC) != 1) &&
               never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
               RulesCommunity()
@@ -2636,65 +3270,154 @@ achievement(
 
 achievement(
     title = "Count the Polygons", points = 25,
-    description = "Win a 12-Character Battle with the Polygon Team against a COM using the same Team on Level 9 or higher in one Session and without leaving the Mode.",
+    description = "Win a 12-Character Battle with the Polygon Team against a COM using the same on Level 9 without leaving the mode.",
     id = 462250, badge = "523499", published = "09.09.2024 17:24:34", modified = "09.09.2024 17:31:43", 
-    trigger = Beat12CharacterBattle() &&
+    trigger = Beat12CharacterBattleCPU9() &&
               never(byte(Mem_12CharacterStocks + 0xBC) != 2) &&
               never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
               RulesCommunity()
 )
 
 achievement(
-    title = "Mixing Everything Up", points = 25, type="progression",
-    description = "Win a 12-Character Battle with the Remix Team against a COM using the same Team on Level 9 or higher in one Session and without leaving the Mode.",
+    title = "Mixing Everything Up", points = 25,
+    description = "Win a 12-Character Battle with the Remix Team against a COM using the same on Level 9 without leaving the mode.",
     id = 462251, badge = "523501", published = "09.09.2024 17:24:34", modified = "09.09.2024 17:31:48", 
-    trigger = Beat12CharacterBattle() &&
-              never(byte(Mem_12CharacterStocks + 0xBC) != 3) &&
-              never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
+    trigger = Beat12CharacterBattleCPU9() &&
+              never(byte(Mem_12CharacterStocks + 0xBD) != 3) &&
+              never(byte(Mem_12CharacterStocks + 0xBD) != byte(Mem_12CharacterStocks + 0x190)) &&
               RulesCommunity()
 )
 
 achievement(
-    title = "How to Make Mochi!", points = 10, type="progression",
-    description = "Reach a Distance of 3750.0 Feet or more in Home-Run Contest.",
+    title = "How to Make Mochi!", points = 10, type="",
+    description = "Get a distance of 4500.0 feet or more in Home-Run Contest.",
     id = 197079, badge = "523093", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
     trigger = byte(Mem_GameMode) == 0x06 &&
               prev(Bonus3State()) != 0x06 &&
               Bonus3State() == 0x06 &&
-              dword(Mem_HomerunDistance) >= 37500 &&
+              dword(Mem_HomerunDistance) >= 45000 &&
               dword(Mem_HomerunDistance) <= 1000000 &&
               RulesCommunity() &&
               never(dword(Mem_HighscoreOn)  == 0x00)
 )
 
 achievement(
+    title = "Cloudy with a Chance of Sandbags", points = 25, type="progression",
+    description = "Get a total distance of 250000.0 in Home-Run Contest.",
+    id = 531883, badge = "603730", published = "15.08.2021 12:14:16", modified = "08.09.2024 14:18:30", 
+    trigger = TotalScoreAchievement(0x06, 2500000) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Smash Randomizer", points = 5, type="progression",
+    description = "Win a Tag Team match against a COM on Level 5 with 6 stocks and all stocks of both players set to Random.",
+    id = 529741, badge = "600855", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = BeatTagTeam(0) ||
+              BeatTagTeam(1)
+)
+
+achievement(
+    title = "Get Out Of My Zone", points = 5, type="progression",
+    description = "Win a King of the Hill match against three COMs on Level 5.",
+    id = 529737, badge = "600853", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = (BeatKingOfTheHill(0) ||
+               BeatKingOfTheHill(1) || 
+               BeatKingOfTheHill(2) ||
+               BeatKingOfTheHill(3)) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "National Smashketball Association", points = 5, type="progression",
+    description = "Win a 1-vs-1 Smashketball 1 match against a COM on Level 9 with a lead of 5 points or more.",
+    id = 529258, badge = "600224", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = (BeatSmashketball5Points("Basketball", 0) ||
+               BeatSmashketball5Points("Basketball", 1)) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Champions League", points = 5, type="progression",
+    description = "Win a 1-vs-1 Smashketball 2 match against a COM on Level 9 with a lead of 5 points or more.",
+    id = 529259, badge = "600224", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = (BeatSmashketball5Points("Soccer", 0) ||
+               BeatSmashketball5Points("Soccer", 1)) &&
+              RulesCommunity()
+)
+
+achievement(
+    title = "Golden Goal", points = 2, type="",
+    description = "In Smashketball 2 make a goal that is worth 3 points.",
+    id = 531954, badge = "603799", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = byte(Mem_VSMode) == 4 &&
+              byte(Mem_SmashketballData) == 1 &&
+              RulesCommunity() &&
+              (dword(Mem_SmashketballData + 0x50) - prev(dword(Mem_SmashketballData + 0x50)) == 3 || 
+               dword(Mem_SmashketballData + 0x54) - prev(dword(Mem_SmashketballData + 0x54)) == 3 ||
+               dword(Mem_SmashketballData + 0x58) - prev(dword(Mem_SmashketballData + 0x58)) == 3 ||
+               dword(Mem_SmashketballData + 0x5C) - prev(dword(Mem_SmashketballData + 0x5C)) == 3)
+)
+
+achievement(
+    title = "Oh Boy, He's On Fire!", points = 3,
+    description = "Win a 1-vs-1 Smashketball match against a COM on Level 9 without letting the COM score once.",
+    id = 529908, badge = "601042", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    trigger = (BeatSmashketballCOM0("Basketball", 0) ||
+               BeatSmashketballCOM0("Basketball", 1) ||
+               BeatSmashketballCOM0("Soccer", 0) ||
+               BeatSmashketballCOM0("Soccer", 1)) &&
+              RulesCommunity()
+)
+
+achievement(
     title = "Combo King", points = 5,
-    description = "Get a Combo of 15 Hits against a CPU in a Free-for-All or 12-Character Battle.",
+    description = "Get a combo of 15 hits against a COM in Free-for-All mode.",
     id = 166087, badge = "523094", published = "15.08.2021 13:40:15", modified = "08.09.2024 14:19:29", 
-    trigger = FreeModeCombo(1, 2) ||
-              FreeModeCombo(1, 3) ||
-              FreeModeCombo(1, 4) ||
-              FreeModeCombo(2, 1) ||
-              FreeModeCombo(2, 3) ||
-              FreeModeCombo(2, 4) ||
-              FreeModeCombo(3, 1) ||
-              FreeModeCombo(3, 2) ||
-              FreeModeCombo(3, 4) ||
-              FreeModeCombo(4, 1) ||
-              FreeModeCombo(4, 2) ||
-              FreeModeCombo(4, 3) &&
+    trigger = GameState() == 0x16 &&
+              byte(Mem_VSMode) == 0 &&
+              (FreeModeCombo(1, 2) ||
+               FreeModeCombo(1, 3) ||
+               FreeModeCombo(1, 4) ||
+               FreeModeCombo(2, 1) ||
+               FreeModeCombo(2, 3) ||
+               FreeModeCombo(2, 4) ||
+               FreeModeCombo(3, 1) ||
+               FreeModeCombo(3, 2) ||
+               FreeModeCombo(3, 4) ||
+               FreeModeCombo(4, 1) ||
+               FreeModeCombo(4, 2) ||
+               FreeModeCombo(4, 3)) &&
               RulesCommunity() &&
               never(dword(Mem_HighscoreOn)  == 0x00)
 )
 
 achievement(
     title = "Wanna Be A New Fighter", points = 5,
-    description = "Copy as Kirby the Ability of every other Character.",
+    description = "Copy as Kirby the ability of every other character in a single session.",
     id = 166084, badge = "523095", published = "15.08.2021 11:46:21", modified = "08.09.2024 14:19:29", 
     trigger = KirbyCopyAbility(0) ||
               KirbyCopyAbility(1) ||
               KirbyCopyAbility(2) ||
               KirbyCopyAbility(3)
+)
+
+achievement(
+    title = "Watch Your Fingers", points = 2,
+    description = "Use any Luigi variant to kick a COM who is grabbing a ledge straight down without ability to recover.",
+    id = 529430, badge = "600405", published = "15.08.2021 11:46:21", modified = "08.09.2024 14:19:29", 
+    trigger = LuigiKnockDown(0, 1) || 
+              LuigiKnockDown(0, 2) || 
+              LuigiKnockDown(0, 3) || 
+              LuigiKnockDown(1, 0) || 
+              LuigiKnockDown(1, 2) || 
+              LuigiKnockDown(1, 3) || 
+              LuigiKnockDown(2, 0) || 
+              LuigiKnockDown(2, 1) || 
+              LuigiKnockDown(2, 3) || 
+              LuigiKnockDown(3, 0) || 
+              LuigiKnockDown(3, 1) || 
+              LuigiKnockDown(3, 2) 
 )
 
 achievement(
@@ -2726,6 +3449,324 @@ achievement(
                byte(0x138658) == GetCharID("Wario") &&
                prev(dword(PointerPlayerData() + 0x00086C)) == 2152316132 &&
                 dword(PointerPlayerData() + 0x00086C) == 2152316144))
+)
+
+achievement(
+    title = "There He Goes!", points = 1,
+    description = "Let Wario say his famous quote while ramming his enemies.",
+    id = 530687, badge = "602093", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = WarioGoing(0) || 
+              WarioGoing(1) || 
+              WarioGoing(2) || 
+              WarioGoing(3)
+)
+
+achievement(
+    title = "Shake! Shake!", points = 1,
+    description = "Let Marina say her famous quote while shaking her enemy.",
+    id = 529984, badge = "601072", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = MarinaShaking(0) || 
+              MarinaShaking(1) || 
+              MarinaShaking(2) || 
+              MarinaShaking(3)
+)
+
+achievement(
+    title = "Do a Barrel Roll!", points = 1,
+    description = "Let Peppy say his famous quote while doing some rolls.",
+    id = 530656, badge = "602048", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = PeppyBarrelRolling(0) || 
+              PeppyBarrelRolling(1) || 
+              PeppyBarrelRolling(2) || 
+              PeppyBarrelRolling(3)
+)
+
+achievement(
+    title = "Welcome to Hell", points = 1,
+    description = "Listen to a sinister laughing while starting the game.",
+    id = 529986, badge = "601073", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x37 &&
+              prev(GameState()) == 0x1B &&
+              (bit5(0x9EFA0 + 0x6 + 8*0) == 1 ||
+               bit5(0x9EFA0 + 0x6 + 8*1) == 1 ||
+               bit5(0x9EFA0 + 0x6 + 8*2) == 1 ||
+               bit5(0x9EFA0 + 0x6 + 8*3) == 1)
+)
+
+achievement(
+    title = "Behind the Scenes", points = 1,
+    description = "Listen to all background noises while looking at your images.",
+    id = 531953, badge = "603798", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = measured(tally(36, once(GallerySounds(0x00, 0)),
+                        once(GallerySounds(0x00, 1)),
+                        once(GallerySounds(0x01, 0)),
+                        once(GallerySounds(0x01, 1)),
+                        once(GallerySounds(0x02, 0)),
+                        once(GallerySounds(0x02, 1)),
+                        once(GallerySounds(0x03, 0)),
+                        once(GallerySounds(0x03, 1)),
+                        once(GallerySounds(0x04, 0)),
+                        once(GallerySounds(0x04, 1)),
+                        once(GallerySounds(0x05, 0)),
+                        once(GallerySounds(0x05, 1)),
+                        once(GallerySounds(0x06, 0)),
+                        once(GallerySounds(0x06, 1)),
+                        once(GallerySounds(0x07, 0)),
+                        once(GallerySounds(0x07, 1)),
+                        once(GallerySounds(0x08, 0)),
+                        once(GallerySounds(0x08, 1)),
+                        once(GallerySounds(0x09, 0)),
+                        once(GallerySounds(0x09, 1)),
+                        once(GallerySounds(0x0A, 0)),
+                        once(GallerySounds(0x0A, 1)),
+                        once(GallerySounds(0x0B, 0)),
+                        once(GallerySounds(0x0B, 1)),
+                        once(GallerySounds(0x0C, 0)),
+                        once(GallerySounds(0x0C, 1)),
+                        once(GallerySounds(0x0D, 0)),
+                        once(GallerySounds(0x0D, 1)),
+                        once(GallerySounds(0x0E, 0)),
+                        once(GallerySounds(0x0E, 1)),
+                        once(GallerySounds(0x0F, 0)),
+                        once(GallerySounds(0x0F, 1)),
+                        once(GallerySounds(0x10, 0)),
+                        once(GallerySounds(0x10, 1)),
+                        once(GallerySounds(0x11, 0)),
+                        once(GallerySounds(0x11, 1))), when=always_true(), format="raw")
+)
+
+achievement(
+    title = "Ape-Normal Head Size", points = 3,
+    description = "Enable Donkey Kong mode.",
+    id = 529988, badge = "601078", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x10 &&
+              dword(Mem_BattleSetting + 0xC1A3C) != prev(dword(Mem_BattleSetting + 0xC1A3C)) &&
+              dword(Mem_BattleSetting + 0xC1A3C) == 1
+)
+
+achievement(
+    title = "Diddy Long Leg", points = 3,
+    description = "Enable Lanky Kong mode.",
+    id = 529989, badge = "601079", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x10 &&
+              dword(Mem_BattleSetting + 0xC1A3C) != prev(dword(Mem_BattleSetting + 0xC1A3C)) &&
+              dword(Mem_BattleSetting + 0xC1A3C) == 2
+)
+
+achievement(
+    title = "Dear Mario...", points = 3,
+    description = "Find a hidden letter from Peach.",
+    id = 530000, badge = "601090", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x1A &&
+              byte(PointerPlayerData() + 0x08) != prev(byte(PointerPlayerData() + 0x08)) &&
+              byte(PointerPlayerData() + 0x08) == GetCharID("Peach")
+)
+
+achievement(
+    title = "Giving It Some Extra Touch", points = 1,
+    description = "Set your main menu music to a remixed version of Super Mario 64.",
+    id = 530051, badge = "601149", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x39 &&
+              dword(0x96710) != prev(dword(0x96710)) &&
+              dword(0x96710) == 0x104
+)
+
+achievement(
+    title = "Game Boy Pak", points = 3,
+    description = "Set your main menu music to Game Boy games music.",
+    id = 530411, badge = "602037", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x39 &&
+              dword(0x96710) != prev(dword(0x96710)) &&
+              dword(0x96710) >= 0xA2 &&
+              dword(0x96710) <= 0xA5
+)
+
+achievement(
+    title = "AFKing for the 1,000,000 VS Mode Matches", points = 2,
+    description = "Finish three Free-for-All matches in a row without touching any controller after the characters were selected once.",
+    id = 530646, badge = "602036", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = once(GameState() == 0x10 &&
+                   (byte(0x13BAE0) > prev(byte(0x13BAE0)) ||
+                    byte(0x13BB9C) > prev(byte(0x13BB9C)) ||
+                    byte(0x13BC58) > prev(byte(0x13BC58)) ||
+                    byte(0x13BD14) > prev(byte(0x13BD14)))) &&
+              once(prev(GameState() == 0x10) &&
+                   GameState() >= 0x15) &&
+              trigger_when(tally(3, GameState() == 0x16 &&
+                                    prev(byte(0xA4D1A) != 0x06) &&
+                                    byte(0xA4D1A) == 0x06)) &&
+              never(GameState() == 0x10 &&
+                    byte(0x13BAE0) == prev(byte(0x13BAE0)) &&
+                    byte(0x13BB9C) == prev(byte(0x13BB9C)) &&
+                    byte(0x13BC58) == prev(byte(0x13BC58)) &&
+                    byte(0x13BD14) == prev(byte(0x13BD14)) &&
+                    (byte(0x9EFA3) != prev(byte(0x9EFA3)) || 
+                     dword(0x9EFA4) > prev(dword(0x9EFA4)) ||
+                     byte(0x9EFAB) != prev(byte(0x9EFAB)) || 
+                     dword(0x9EFAC) > prev(dword(0x9EFAC)) ||
+                     byte(0x9EFB3) != prev(byte(0x9EFB3)) || 
+                     dword(0x9EFB4) > prev(dword(0x9EFB4)) ||
+                     byte(0x9EFBB) != prev(byte(0x9EFBB)) || 
+                     dword(0x9EFBC) > prev(dword(0x9EFBC)))) &&
+              never(GameState() != 0x10 &&
+                    (byte(0x9EFA3) != prev(byte(0x9EFA3)) || 
+                     dword(0x9EFA4) > prev(dword(0x9EFA4)) ||
+                     byte(0x9EFAB) != prev(byte(0x9EFAB)) || 
+                     dword(0x9EFAC) > prev(dword(0x9EFAC)) ||
+                     byte(0x9EFB3) != prev(byte(0x9EFB3)) || 
+                     dword(0x9EFB4) > prev(dword(0x9EFB4)) ||
+                     byte(0x9EFBB) != prev(byte(0x9EFBB)) || 
+                     dword(0x9EFBC) > prev(dword(0x9EFBC)))) &&
+              never(byte(Mem_VSMode) != 0) &&
+              never(GameState() == 0x09)
+)
+
+achievement(
+    title = "72 Hours Remaining", points = 1,
+    description = "Play the Song of Time on the stage 'Great Bay'.",
+    id = 530652, badge = "602044", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = GameState() == 0x16 &&
+              FreeModeStage() == GetStageID("Great Bay") &&
+              SoundWasPlayed(0x3CA8788)
+)
+
+achievement(
+    title = "I Don't Know What Y'all Are Watching", points = 1,
+    description = "Take a close look of Charles Barkley.",
+    id = 529982, badge = "602724", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = (GameState() == 0x10 || GameState() == 0x16) &&
+              FreeModeStage() == GetStageID("Smashketball") &&
+              float(tbyte(Mem_CameraData) + 0x0D0) >= -500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D0) <= 500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) >= 500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) <= 1500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= -2000.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= -800.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+)
+
+achievement(
+    title = "Fetching Ball With Your Pal", points = 1,
+    description = "Take a close look of Paulie the Dog.",
+    id = 529983, badge = "601071", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = (GameState() == 0x10 || GameState() == 0x16) &&
+              FreeModeStage() == GetStageID("Smashketball 2") &&
+              float(tbyte(Mem_CameraData) + 0x0D0) >= -500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D0) <= 500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) >= 500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) <= 1500.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= -2000.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= -800.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+)
+
+achievement(
+    title = "Have a Lunch Break", points = 2,
+    description = "Take a close look of a plate filled with sushi.",
+    id = 530710, badge = "602143", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = (GameState() == 0x10 || GameState() == 0x16) &&
+              FreeModeStage() == GetStageID("Mushroom Kingdom SR") &&
+              float(tbyte(Mem_CameraData) + 0x0D0) >= -1990.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D0) <= -1790.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) >= 2530.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) <= 2680.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= 750.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= 850.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -100.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 100.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= 200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 400.0
+)
+
+achievement(
+    title = "Don't Forget To Save", points = 1,
+    description = "Take a close look of Resetti.",
+    id = 531025, badge = "602563", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = (GameState() == 0x10 || GameState() == 0x16) &&
+              FreeModeStage() == GetStageID("Smashville") &&
+              float(tbyte(Mem_CameraData) + 0x0D0) >= 235.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D0) <= 635.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) >= 150.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) <= 350.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= -3900.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= -3200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+)
+
+achievement(
+    title = "Enjoy Your Stay", points = 1,
+    description = "Take a close look of a female villager.",
+    id = 530803, badge = "602559", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
+    trigger = (GameState() == 0x10 || GameState() == 0x16) &&
+              FreeModeStage() == GetStageID("Smashville Remix") &&
+              float(tbyte(Mem_CameraData) + 0x0D0) >= 235.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D0) <= 635.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) >= 150.0 &&
+              float(tbyte(Mem_CameraData) + 0x0D4) <= 350.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= -3900.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= -3200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
+              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+)
+
+achievement(
+    title = "Crazy Maneuvers", points = 3,
+    description = "Collect the extra life and then break all targets in Crash's Bonus 1 without using Super Sonic.",
+    id = 529331, badge = "600294", published = "15.08.2021 11:46:21", modified = "08.09.2024 14:19:29", 
+    trigger = never(Bonus12Char() == GetCharID("Super Sonic")) &&
+              Bonus12Stage() == GetStageID("Breaking the Targets of Crash") &&
+              Bonus12State() >= 1 &&
+              Bonus12State() <= 7 &&
+              trigger_when(prev(Bonus1Targets() == 1) &&
+                           Bonus1Targets() == 0) &&
+              disable_when(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen") && 
+                           Bonus1Targets() < prev(Bonus1Targets()), 
+                   until = (Bonus12State() < prev(Bonus12State()) && 
+                              Bonus12State() == 0) || 
+                            GameState() != 0x35)
+)
+
+achievement(
+    title = "Crashing Right In", points = 3,
+    description = "Collect the extra life and then board all platforms in Crash's Bonus 2 without using Super Sonic.",
+    id = 529332, badge = "600295", published = "15.08.2021 11:46:21", modified = "08.09.2024 14:19:29", 
+    trigger = never(Bonus12Char() == GetCharID("Super Sonic")) &&
+              Bonus12Stage() == GetStageID("Boarding the Platforms of Crash") &&
+              Bonus12State() >= 1 &&
+              Bonus12State() <= 7 &&
+              trigger_when(prev(Bonus2Platforms() == 1) &&
+                           Bonus2Platforms() == 0) &&
+              disable_when(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen") && 
+                           Bonus2Platforms() < prev(Bonus2Platforms()), 
+                   until = (Bonus12State() < prev(Bonus12State()) && 
+                              Bonus12State() == 0) || 
+                            GameState() != 0x35)
+)
+
+achievement(
+    title = "Where It All Began", points = 1,
+    description = "Play as Classic Sonic.",
+    id = 530410, badge = "601597", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    trigger = (GameState() == 0x01 ||
+              GameState() == 0x16 ||
+              GameState() == 0x35 ||
+              GameState() == 0x36 ||
+              GameState() == 0x77) &&
+              (SonicIsClassic(0) || 
+               SonicIsClassic(1) ||
+               SonicIsClassic(2) ||
+               SonicIsClassic(3))
 )
 
 achievement(
@@ -2761,128 +3802,189 @@ achievement(
 
 achievement(
     title = "Hands Up", points = 1,
-    description = "Unlock Master Hand as a playable Character.",
+    description = "Unlock Master Hand as a playable character.",
     id = 462601, badge = "523974", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
-    trigger = BothGameStates() == 0x3907 &&
+    trigger = GameState() == 0x39 &&
               SetPlayerTag(20)
 )
 
 achievement(
-    title = "Fight Your Nightmares", points = 3,
-    description = "Win a Free-for-All Battle as Luigi against Mad Piano on the Stage 'Big Boo's Haunt' with Level 9 CPU.",
+    title = "Haunted Madness", points = 3,
+    description = "Win a Free-for-All Battle as Mad Piano against Luigi on the stage 'Big Boo's Haunt' with Level 9 CPU.",
     id = 166158, badge = "523097", published = "15.08.2021 15:58:15", modified = "09.09.2024 17:17:28",
-    trigger = (Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 0) ||
-              Beat1COM("Big Boo's Haunt", "Luigi", "Mad Piano", 1)) &&
-              RulesCommunity()
+    trigger = (Beat1COM("Big Boo's Haunt", "Mad Piano", "Luigi", 0) ||
+              Beat1COM("Big Boo's Haunt", "Mad Piano", "Luigi", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Intergalactic Showdown", points = 3,
-    description = "Win a Free-for-All Battle as Fox against Wolf on the Stage 'Venom' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Fox against Wolf on the stage 'Venom' with Level 9 CPU.",
     id = 166159, badge = "523098", published = "15.08.2021 15:58:18", modified = "09.09.2024 17:17:26", 
-    trigger = (Beat1COM("Venom", "Fox", "Wolf", 0) ||
-              Beat1COM("Venom", "Fox", "Wolf", 1)) &&
-              RulesCommunity()
+    trigger = (Beat1COM("Venom", "Wolf", "Fox", 0) ||
+              Beat1COM("Venom", "Wolf", "Fox", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Decisive Fight", points = 3,
-    description = "Win a Free-for-All Battle as Link against Ganondorf on the Stage 'Ganon's Tower' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Ganondorf against Link on the stage 'Ganon's Tower' with Level 9 CPU.",
     id = 166160, badge = "523099", published = "15.08.2021 15:58:20", modified = "09.09.2024 17:17:26", 
-    trigger = (Beat1COM("Ganon's Tower", "Link", "Ganondorf", 0) ||
-              Beat1COM("Ganon's Tower", "Link", "Ganondorf", 1)) &&
-              RulesCommunity()
+    trigger = (Beat1COM("Ganon's Tower", "Ganondorf", "Link", 0) ||
+              Beat1COM("Ganon's Tower", "Ganondorf", "Link", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Lost In Time", points = 3,
-    description = "Win a Free-for-All Battle as Young Link against Link on the Stage 'Deku Tree' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Young Link against Link on the stage 'Deku Tree' with Level 9 CPU.",
     id = 463029, badge = "524288", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("Deku Tree", "Young Link", "Link", 0) ||
               Beat1COM("Deku Tree", "Young Link", "Link", 1)) &&
-              RulesCommunity() 
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
-    title = "Metal of Dishonor", points = 3,
-    description = "Win a Free-for-All Battle as Mario or Luigi against their Metallic Version on the Stage 'Metallic Madness' with Level 9 CPU.",
+    title = "Metal of Honor", points = 3,
+    description = "Win a Free-for-All Battle as Metal Mario or Metal Luigi against their normal versions on the stage 'Metallic Madness' with Level 9 CPU.",
     id = 463030, badge = "524289", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
-    trigger = (Beat1COM("Metallic Madness", "Mario", "Metal Mario", 0) ||
-              Beat1COM("Metallic Madness", "Mario", "Metal Mario", 1) ||
-              Beat1COM("Metallic Madness", "Luigi", "Metal Luigi", 0) ||
-              Beat1COM("Metallic Madness", "Luigi", "Metal Luigi", 1)) &&
-              RulesCommunity()
+    trigger = (Beat1COM("Metallic Madness", "Metal Mario", "Mario", 0) ||
+              Beat1COM("Metallic Madness", "Metal Mario", "Mario", 1) ||
+              Beat1COM("Metallic Madness", "Metal Luigi", "Luigi", 0) ||
+              Beat1COM("Metallic Madness", "Metal Luigi", "Luigi", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Twin Phazon Fury", points = 3,
-    description = "Win a Free-for-All Battle as Dark Samus against Samus on the Stage 'Norfair' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Dark Samus against Samus on the stage 'Norfair' with Level 9 CPU.",
     id = 463031, badge = "524290", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("Norfair", "Dark Samus", "Samus", 0) ||
               Beat1COM("Norfair", "Dark Samus", "Samus", 1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "A Well-Known Rematch", points = 3,
-    description = "Win a Free-for-All Battle as King Dedede against Kirby on the Stage 'Mt. Dedede' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as King Dedede against Kirby on the stage 'Mt. Dedede' with Level 9 CPU.",
     id = 462745, badge = "524082", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 0) ||
               Beat1COM("Mt. Dedede", "King Dedede", "Kirby", 1)) &&
-              RulesCommunity()  
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Magic In Vegas", points = 3,
-    description = "Win a Free-for-All Battle as Kirby using the Top Hat on the Stage 'Casino Night Zone' against a Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Kirby using the Top Hat on the stage 'Casino Night Zone' against a Level 9 CPU.",
     id = 463452, badge = "525005", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat1COMKirbyRandom(0) ||
               Beat1COMKirbyRandom(1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
+)
+
+achievement(
+    title = "Win For Once!", points = 3,
+    description = "Win a Free-for-All Battle as Lanky Kong against Donkey Kong on the stage 'Jungle Japes' with Level 9 CPU.",
+    id = 529333, badge = "600297", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
+    trigger = (Beat1COM("Jungle Japes", "Lanky Kong", "Donkey Kong", 0) ||
+              Beat1COM("Jungle Japes", "Lanky Kong", "Donkey Kong", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Coming Soon...", points = 3,
-    description = "Win a Free-for-All Battle between Giga Bowser and Giant Donkey Kong on the Stage 'New Pork City' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Giga Bowser and Giant Donkey Kong on the stage 'New Pork City' with Level 9 CPU.",
     id = 166161, badge = "523100", published = "15.08.2021 15:58:23", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("New Pork City", "Giga Bowser", "Giant Donkey Kong", 0) ||
               Beat1COM("New Pork City", "Giga Bowser", "Giant Donkey Kong", 1) ||
               Beat1COM("New Pork City", "Giant Donkey Kong", "Giga Bowser", 0) ||
               Beat1COM("New Pork City", "Giant Donkey Kong", "Giga Bowser", 1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Oh Snap!", points = 3,
-    description = "Win a Free-for-All Battle between Pikachu and Mewtwo on the Stage 'Meta Crystal' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Pikachu and Mewtwo on the stage 'Meta Crystal' with Level 9 CPU.",
     id = 173187, badge = "523101", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("Meta Crystal", "Pikachu", "Mewtwo", 0) ||
               Beat1COM("Meta Crystal", "Pikachu", "Mewtwo", 1) ||
               Beat1COM("Meta Crystal", "Mewtwo", "Pikachu", 0) ||
               Beat1COM("Meta Crystal", "Mewtwo", "Pikachu", 1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Diddy's Christmas Knockout", points = 3,
-    description = "Win a Free-for-All Battle between Conker and Banjo & Kazooie on the Stage 'Frosty Village' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Conker and Banjo & Kazooie on the stage 'Frosty Village' with Level 9 CPU.",
     id = 462962, badge = "524235", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat1COM("Frosty Village", "Conker", "Banjo & Kazooie", 0) ||
               Beat1COM("Frosty Village", "Conker", "Banjo & Kazooie", 1) ||
               Beat1COM("Frosty Village", "Banjo & Kazooie", "Conker", 0) ||
               Beat1COM("Frosty Village", "Banjo & Kazooie", "Conker", 1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
     title = "Historical Lession", points = 3,
-    description = "Win a Free-for-All Battle between Goemon and Ebisumaru on the Stage 'Edo Town' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Goemon and Ebisumaru on the stage 'Edo Town' with Level 9 CPU.",
     id = 463028, badge = "524287", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat1COM("Edo Town", "Goemon", "Ebisumaru", 0) ||
               Beat1COM("Edo Town", "Goemon", "Ebisumaru", 1) ||
               Beat1COM("Edo Town", "Ebisumaru", "Goemon", 0) ||
               Beat1COM("Edo Town", "Ebisumaru", "Goemon", 1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1)
+)
+
+achievement(
+    title = "For My Kingdom!", points = 3,
+    description = "Win a Free-for-All Battle between Marth and Roy on the stage 'Castle Siege' with Level 9 CPU.",
+    id = 529334, badge = "600298", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
+    trigger = (Beat1COM("Castle Siege", "Roy", "Marth", 0) ||
+              Beat1COM("Castle Siege", "Roy", "Marth", 1) ||
+              Beat1COM("Castle Siege", "Marth", "Roy", 0) ||
+              Beat1COM("Castle Siege", "Marth", "Roy", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
+)
+
+achievement(
+    title = "Doctor's Order", points = 3,
+    description = "Win a Free-for-All Battle between Dr. Mario and Dr. Luigi on the stage 'Dr. Mario' with Level 9 CPU.",
+    id = 529335, badge = "600299", published = "21.09.2021 17:45:45", modified = "09.09.2024 17:17:26", 
+    trigger = (Beat1COM("Dr. Mario", "Dr. Mario", "Dr. Luigi", 0) ||
+              Beat1COM("Dr. Mario", "Dr. Mario", "Dr. Luigi", 1) ||
+              Beat1COM("Dr. Mario", "Dr. Luigi", "Dr. Mario", 0) ||
+              Beat1COM("Dr. Mario", "Dr. Luigi", "Dr. Mario", 1)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) 
 )
 
 achievement(
@@ -2891,57 +3993,105 @@ achievement(
     id = 463449, badge = "525004", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat1COMLevel10(0) ||
               Beat1COMLevel10(1)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1)
 )
 
 
 achievement(
     title = "Not This Again...", points = 5,
-    description = "Win a Free-for-All Battle between Yoshi, Mario, Luigi and Wario on the Stage 'Peach's Castle II' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Yoshi, Mario, Luigi and Wario on the stage 'Peach's Castle II' with Level 9 CPU.",
     id = 166162, badge = "523102", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
     trigger = (Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 0) ||
               Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 1) ||
               Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 2) ||
               Beat4COMs("Peach's Castle II", "Yoshi", "Mario", "Luigi", "Wario", 3)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
 )
 
 achievement(
     title = "Star Fox Assault", points = 5,
-    description = "Win a Free-for-All Battle between Fox, Falco, Peppy and Slippy on the Stage 'Sector Z' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between Fox, Falco, Peppy and Slippy on the stage 'Sector Z' with Level 9 CPU.",
     id = 463049, badge = "524322", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
     trigger = (Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 0) ||
               Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 1) ||
               Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 2) ||
               Beat4COMs("Sector Z", "Fox", "Falco", "Peppy", "Slippy", 3)) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
 )
 
 achievement(
     title = "Dragon King: The Fighting Game", points = 5,
-    description = "Win a Free-for-All Battle between four Dragon King on the Stage 'Dragon King' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between four Dragon King on the stage 'Dragon King' with Level 9 CPU.",
     id = 463050, badge = "524359", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat4COMsSame("Dragon King", 0, "Dragon King", "Dragon King") ||
               Beat4COMsSame("Dragon King", 1, "Dragon King", "Dragon King") ||
               Beat4COMsSame("Dragon King", 2, "Dragon King", "Dragon King") ||
               Beat4COMsSame("Dragon King", 3, "Dragon King", "Dragon King")) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
+)
+
+achievement(
+    title = "Superior Animal Mascot", points = 5,
+    description = "Win a Free-for-All Battle between Pikachu, Sonic, Banjo & Kazooie and Crash on the stage 'Windy' with Level 9 CPU.",
+    id = 529153, badge = "600061", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
+    trigger = (Beat4COMs("Windy", "Pikachu", "Sonic", "Banjo & Kazooie", "Crash", 0) ||
+              Beat4COMs("Windy", "Pikachu", "Sonic", "Banjo & Kazooie", "Crash", 1) ||
+              Beat4COMs("Windy", "Pikachu", "Sonic", "Banjo & Kazooie", "Crash", 2) ||
+              Beat4COMs("Windy", "Pikachu", "Sonic", "Banjo & Kazooie", "Crash", 3)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
+)
+
+achievement(
+    title = "Legends of the Seven Stars", points = 5,
+    description = "Win a Free-for-All Battle between Mario, Yoshi, Bowser and Peach on the stage 'Bowser's Keep' with Level 9 CPU.",
+    id = 529907, badge = "601041", published = "15.08.2021 16:54:20", modified = "08.09.2024 14:21:57", 
+    trigger = (Beat4COMs("Bowser's Keep", "Mario", "Yoshi", "Bowser", "Peach", 0) ||
+              Beat4COMs("Bowser's Keep", "Mario", "Yoshi", "Bowser", "Peach", 1) ||
+              Beat4COMs("Bowser's Keep", "Mario", "Yoshi", "Bowser", "Peach", 2) ||
+              Beat4COMs("Bowser's Keep", "Mario", "Yoshi", "Bowser", "Peach", 3)) &&
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
 )
 
 achievement(
     title = "Still In Beta", points = 5,
-    description = "Win a Free-for-All Battle between four Polygon Fighters on the Stage 'Dream Land Beta 1' or 'Dream Land Beta 2' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle between four Polygon Fighters on the stage 'Dream Land Beta 1' or 'Dream Land Beta 2' with Level 9 CPU.",
     id = 166163, badge = "523103", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:11", 
     trigger = (Beat4COMsSame("Polygon", 0, "Dream Land Beta 1", "Dream Land Beta 2") ||
               Beat4COMsSame("Polygon", 1, "Dream Land Beta 1", "Dream Land Beta 2") ||
               Beat4COMsSame("Polygon", 2, "Dream Land Beta 1", "Dream Land Beta 2") ||
               Beat4COMsSame("Polygon", 3, "Dream Land Beta 1", "Dream Land Beta 2")) &&
-              RulesCommunity()
+              RulesCommunity() &&
+              NoCheatingNoHat(0) &&
+              NoCheatingNoHat(1) &&
+              NoCheatingNoHat(2) &&
+              NoCheatingNoHat(3)
 )
 
 achievement(
     title = "Feels Nostalgic!", points = 2,
-    description = "In a Free-for-All Battle as Mario against Bowser on the Stage 'Bowser's Stadium' throw Bowser directly into a Bomb using the Backthrow with Level 5 CPU.",
+    description = "In a Free-for-All Battle as Mario against Bowser on the stage 'Bowser's Stadium' throw Bowser directly into a bomb using the backthrow with Level 5 CPU.",
     id = 166164, badge = "523104", published = "15.08.2021 16:54:21", modified = "08.09.2024 14:22:28",
     trigger = (GameState() == 0x16 &&
               FreeModeStage() == GetStageID("Bowser's Stadium") &&
@@ -2987,7 +4137,7 @@ achievement(
 
 achievement(
     title = "Super Mario Clash.", points = 5,
-    description = "In a Free-for-All Battle as Mario or Luigi against Bowser on the Stage 'World 1-1' do a full cycle on the Stage without taking Damage with Level 5 CPU.",
+    description = "In a Free-for-All Battle as Mario or Luigi against Bowser on the stage 'World 1-1' do a full cycle on the stage without taking damage with Level 5 CPU.",
     id = 463472, badge = "525023", published = "14.09.2024 15:42:42", modified = "14.09.2024 15:42:42",
     trigger = (GameState() == 0x16 && 
               FreeModeStage() == GetStageID("World 1-1") && 
@@ -3033,5681 +4183,1013 @@ achievement(
               NoCheatingNoHat(1)
 )
 
-leaderboard(
-    id = 24642, title = "Mario",
-    description = "1P Game",
-    start  = LB_1PGame("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24643, title = "Mario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24661, title = "Mario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24662, title = "Mario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25995, title = "Mario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30442, title = "Mario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24663, title = "Mario JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24716, title = "Mario JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24940, title = "Mario JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24993, title = "Mario JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25996, title = "Mario JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30443, title = "Mario JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Mario"),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24688, title = "Polygon Mario",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24717, title = "Polygon Mario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24941, title = "Polygon Mario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24994, title = "Polygon Mario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25997, title = "Polygon Mario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30444, title = "Polygon Mario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24664, title = "Fox",
-    description = "1P Game",
-    start  = LB_1PGame("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24718, title = "Fox",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24942, title = "Fox",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24995, title = "Fox",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25998, title = "Fox",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30445, title = "Fox",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24665, title = "Fox JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24719, title = "Fox JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24943, title = "Fox JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24996, title = "Fox JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25999, title = "Fox JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30446, title = "Fox JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24666, title = "Polygon Fox",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24720, title = "Polygon Fox",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24944, title = "Polygon Fox",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24997, title = "Polygon Fox",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26000, title = "Polygon Fox",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30447, title = "Polygon Fox",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24667, title = "Donkey Kong",
-    description = "1P Game",
-    start  = LB_1PGame("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24721, title = "Donkey Kong",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24945, title = "Donkey Kong",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24998, title = "Donkey Kong",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26001, title = "Donkey Kong",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30448, title = "Donkey Kong",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24668, title = "Donkey Kong JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24722, title = "Donkey Kong JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24946, title = "Donkey Kong JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24999, title = "Donkey Kong JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26002, title = "Donkey Kong JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30449, title = "Donkey Kong JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24669, title = "Polygon Donkey Kong",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24723, title = "Polygon Donkey Kong",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24947, title = "Polygon Donkey Kong",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25000, title = "Polygon Donkey Kong",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26003, title = "Polygon Donkey Kong",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30450, title = "Polygon Donkey Kong",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24670, title = "Samus",
-    description = "1P Game",
-    start  = LB_1PGame("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24724, title = "Samus",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24948, title = "Samus",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25001, title = "Samus",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26004, title = "Samus",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30451, title = "Samus",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24671, title = "Samus JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24725, title = "Samus JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24949, title = "Samus JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25002, title = "Samus JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26014, title = "Samus JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30452, title = "Samus JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24672, title = "Samus EU",
-    description = "1P Game",
-    start  = LB_1PGame("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24726, title = "Samus EU",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24950, title = "Samus EU",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25003, title = "Samus EU",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26006, title = "Samus EU",
-    description = "All-Star Mode",
-    start  = LB_Allstars("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30453, title = "Samus EU",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("EU Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24673, title = "Polygon Samus",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24727, title = "Polygon Samus",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24951, title = "Polygon Samus",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25004, title = "Polygon Samus",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26007, title = "Polygon Samus",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30454, title = "Polygon Samus",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24674, title = "Luigi",
-    description = "1P Game",
-    start  = LB_1PGame("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24728, title = "Luigi",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24952, title = "Luigi",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25005, title = "Luigi",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26008, title = "Luigi",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30455, title = "Luigi",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24675, title = "Luigi JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24729, title = "Luigi JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24953, title = "Luigi JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25006, title = "Luigi JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26009, title = "Luigi JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30456, title = "Luigi JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24676, title = "Polygon Luigi",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24730, title = "Polygon Luigi",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24954, title = "Polygon Luigi",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25007, title = "Polygon Luigi",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26010, title = "Polygon Luigi",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30457, title = "Polygon Luigi",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24677, title = "Link",
-    description = "1P Game",
-    start  = LB_1PGame("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24731, title = "Link",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24955, title = "Link",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25008, title = "Link",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26011, title = "Link",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Link"),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30458, title = "Link",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24678, title = "Link JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24732, title = "Link JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24956, title = "Link JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25009, title = "Link JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26012, title = "Link JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30459, title = "Link JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24679, title = "Link EU",
-    description = "1P Game",
-    start  = LB_1PGame("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24733, title = "Link EU",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24957, title = "Link EU",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25010, title = "Link EU",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26013, title = "Link EU",
-    description = "All-Star Mode",
-    start  = LB_Allstars("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30460, title = "Link EU",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("EU Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24680, title = "Polygon Link",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24734, title = "Polygon Link",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24958, title = "Polygon Link",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25011, title = "Polygon Link",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26005, title = "Polygon Link",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30461, title = "Polygon Link",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24681, title = "Yoshi",
-    description = "1P Game",
-    start  = LB_1PGame("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24735, title = "Yoshi",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24959, title = "Yoshi",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25012, title = "Yoshi",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26015, title = "Yoshi",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30462, title = "Yoshi",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24682, title = "Yoshi JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24736, title = "Yoshi JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24960, title = "Yoshi JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25013, title = "Yoshi JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26016, title = "Yoshi JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30463, title = "Yoshi JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24683, title = "Polygon Yoshi",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24737, title = "Polygon Yoshi",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24961, title = "Polygon Yoshi",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25014, title = "Polygon Yoshi",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26017, title = "Polygon Yoshi",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30464, title = "Polygon Yoshi",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24684, title = "Captain Falcon",
-    description = "1P Game",
-    start  = LB_1PGame("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24738, title = "Captain Falcon",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24962, title = "Captain Falcon",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25015, title = "Captain Falcon",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26018, title = "Captain Falcon",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30465, title = "Captain Falcon",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24685, title = "Captain Falcon JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24739, title = "Captain Falcon JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24963, title = "Captain Falcon JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25016, title = "Captain Falcon JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26019, title = "Captain Falcon JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30466, title = "Captain Falcon JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24686, title = "Polygon Captain Falcon",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24740, title = "Polygon Captain Falcon",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24964, title = "Polygon Captain Falcon",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25017, title = "Polygon Captain Falcon",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26020, title = "Polygon Captain Falcon",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30467, title = "Polygon Captain Falcon",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24687, title = "Kirby",
-    description = "1P Game",
-    start  = LB_1PGame("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24741, title = "Kirby",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24965, title = "Kirby",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25018, title = "Kirby",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26021, title = "Kirby",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30468, title = "Kirby",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24689, title = "Kirby JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24742, title = "Kirby JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24966, title = "Kirby JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25019, title = "Kirby JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26022, title = "Kirby JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30469, title = "Kirby JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24715, title = "Polygon Kirby",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24743, title = "Polygon Kirby",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24967, title = "Polygon Kirby",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25020, title = "Polygon Kirby",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26023, title = "Polygon Kirby",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30470, title = "Polygon Kirby",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24690, title = "Pikachu",
-    description = "1P Game",
-    start  = LB_1PGame("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24744, title = "Pikachu",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24968, title = "Pikachu",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25021, title = "Pikachu",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26024, title = "Pikachu",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30471, title = "Pikachu",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24691, title = "Pikachu JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24745, title = "Pikachu JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24969, title = "Pikachu JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25022, title = "Pikachu JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26025, title = "Pikachu JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30472, title = "Pikachu JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24692, title = "Pikachu EU",
-    description = "1P Game",
-    start  = LB_1PGame("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24756, title = "Pikachu EU",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24970, title = "Pikachu EU",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25023, title = "Pikachu EU",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26026, title = "Pikachu EU",
-    description = "All-Star Mode",
-    start  = LB_Allstars("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30473, title = "Pikachu EU",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("EU Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24693, title = "Polygon Pikachu",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24757, title = "Polygon Pikachu",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24971, title = "Polygon Pikachu",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25024, title = "Polygon Pikachu",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26027, title = "Polygon Pikachu",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30474, title = "Polygon Pikachu",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24694, title = "Jigglypuff",
-    description = "1P Game",
-    start  = LB_1PGame("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24748, title = "Jigglypuff",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24972, title = "Jigglypuff",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25025, title = "Jigglypuff",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26028, title = "Jigglypuff",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30475, title = "Jigglypuff",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24695, title = "Jigglypuff JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24749, title = "Jigglypuff JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24973, title = "Jigglypuff JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25026, title = "Jigglypuff JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26029, title = "Jigglypuff JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30476, title = "Jigglypuff JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24696, title = "Jigglypuff EU",
-    description = "1P Game",
-    start  = LB_1PGame("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24760, title = "Jigglypuff EU",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24974, title = "Jigglypuff EU",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25027, title = "Jigglypuff EU",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26030, title = "Jigglypuff EU",
-    description = "All-Star Mode",
-    start  = LB_Allstars("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30477, title = "Jigglypuff EU",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("EU Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24697, title = "Polygon Jigglypuff",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24761, title = "Polygon Jigglypuff",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24975, title = "Polygon Jigglypuff",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25028, title = "Polygon Jigglypuff",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26031, title = "Polygon Jigglypuff",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30478, title = "Polygon Jigglypuff",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24698, title = "Ness",
-    description = "1P Game",
-    start  = LB_1PGame("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24752, title = "Ness",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24976, title = "Ness",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25029, title = "Ness",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26032, title = "Ness",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30479, title = "Ness",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24699, title = "Ness JP",
-    description = "1P Game",
-    start  = LB_1PGame("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24763, title = "Ness JP",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24977, title = "Ness JP",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25030, title = "Ness JP",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26033, title = "Ness JP",
-    description = "All-Star Mode",
-    start  = LB_Allstars("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30480, title = "Ness JP",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("JP Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24700, title = "Polygon Ness",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24764, title = "Polygon Ness",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24978, title = "Polygon Ness",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25031, title = "Polygon Ness",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26034, title = "Polygon Ness",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30481, title = "Polygon Ness",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24701, title = "Metal Mario",
-    description = "1P Game",
-    start  = LB_1PGame("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24765, title = "Metal Mario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24979, title = "Metal Mario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25032, title = "Metal Mario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26035, title = "Metal Mario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30482, title = "Metal Mario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Metal Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24702, title = "Giant Donkey Kong",
-    description = "1P Game",
-    start  = LB_1PGame("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24771, title = "Giant Donkey Kong",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24980, title = "Giant Donkey Kong",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25033, title = "Giant Donkey Kong",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26036, title = "Giant Donkey Kong",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30483, title = "Giant Donkey Kong",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Giant Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24703, title = "Ganondorf",
-    description = "1P Game",
-    start  = LB_1PGame("Ganondorf"),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24772, title = "Ganondorf",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24981, title = "Ganondorf",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25034, title = "Ganondorf",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26037, title = "Ganondorf",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30484, title = "Ganondorf",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Ganondorf"),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115286, title = "Polygon Ganondorf",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115287, title = "Polygon Ganondorf",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115288, title = "Polygon Ganondorf",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115289, title = "Polygon Ganondorf",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115290, title = "Polygon Ganondorf",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115291, title = "Polygon Ganondorf",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24704, title = "Young Link",
-    description = "1P Game",
-    start  = LB_1PGame("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24773, title = "Young Link",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24982, title = "Young Link",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25035, title = "Young Link",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26038, title = "Young Link",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30485, title = "Young Link",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115292, title = "Polygon Young Link",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115293, title = "Polygon Young Link",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115294, title = "Polygon Young Link",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115295, title = "Polygon Young Link",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115296, title = "Polygon Young Link",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115297, title = "Polygon Young Link",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24705, title = "Falco",
-    description = "1P Game",
-    start  = LB_1PGame("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24774, title = "Falco",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24983, title = "Falco",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25036, title = "Falco",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26039, title = "Falco",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30486, title = "Falco",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115280, title = "Polygon Falco",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115281, title = "Polygon Falco",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115282, title = "Polygon Falco",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115283, title = "Polygon Falco",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115284, title = "Polygon Falco",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115285, title = "Polygon Falco",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24706, title = "Dr. Mario",
-    description = "1P Game",
-    start  = LB_1PGame("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24775, title = "Dr. Mario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24984, title = "Dr. Mario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25037, title = "Dr. Mario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26040, title = "Dr. Mario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30487, title = "Dr. Mario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115262, title = "Polygon Dr. Mario",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115263, title = "Polygon Dr. Mario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115264, title = "Polygon Dr. Mario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115265, title = "Polygon Dr. Mario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115266, title = "Polygon Dr. Mario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115267, title = "Polygon Dr. Mario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24707, title = "Dark Samus",
-    description = "1P Game",
-    start  = LB_1PGame("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24777, title = "Dark Samus",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24985, title = "Dark Samus",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25038, title = "Dark Samus",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26041, title = "Dark Samus",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30488, title = "Dark Samus",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115298, title = "Polygon Dark Samus",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115299, title = "Polygon Dark Samus",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115300, title = "Polygon Dark Samus",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115301, title = "Polygon Dark Samus",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115302, title = "Polygon Dark Samus",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115303, title = "Polygon Dark Samus",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24708, title = "Wario",
-    description = "1P Game",
-    start  = LB_1PGame("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24762, title = "Wario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24986, title = "Wario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25039, title = "Wario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26042, title = "Wario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30489, title = "Wario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24920, title = "Polygon Wario",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24866, title = "Polygon Wario",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24813, title = "Polygon Wario",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24919, title = "Polygon Wario",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24865, title = "Polygon Wario",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24812, title = "Polygon Wario",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24709, title = "Lucas",
-    description = "1P Game",
-    start  = LB_1PGame("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24766, title = "Lucas",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24987, title = "Lucas",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25040, title = "Lucas",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26043, title = "Lucas",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30490, title = "Lucas",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24918, title = "Polygon Lucas",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24864, title = "Polygon Lucas",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24811, title = "Polygon Lucas",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24917, title = "Polygon Lucas",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24863, title = "Polygon Lucas",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24808, title = "Polygon Lucas",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24714, title = "Bowser",
-    description = "1P Game",
-    start  = LB_1PGame("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24776, title = "Bowser",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24992, title = "Bowser",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25045, title = "Bowser",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26044, title = "Bowser",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30491, title = "Bowser",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24810, title = "Polygon Bowser",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24916, title = "Polygon Bowser",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24862, title = "Polygon Bowser",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24809, title = "Polygon Bowser",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24915, title = "Polygon Bowser",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24861, title = "Polygon Bowser",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24710, title = "Giga Bowser",
-    description = "1P Game",
-    start  = LB_1PGame("Giga Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24767, title = "Giga Bowser",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Giga Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24988, title = "Giga Bowser",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Giga Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25041, title = "Giga Bowser",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26045, title = "Giga Bowser",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Giga Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30492, title = "Giga Bowser",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Giga Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24711, title = "Mad Piano",
-    description = "1P Game",
-    start  = LB_1PGame("Mad Piano") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24768, title = "Mad Piano",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Mad Piano") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24989, title = "Mad Piano",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mad Piano") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25042, title = "Mad Piano",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26046, title = "Mad Piano",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Mad Piano") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30493, title = "Mad Piano",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Mad Piano") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24712, title = "Wolf",
-    description = "1P Game",
-    start  = LB_1PGame("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24769, title = "Wolf",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24990, title = "Wolf",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25043, title = "Wolf",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26047, title = "Wolf",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30494, title = "Wolf",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24914, title = "Polygon Wolf",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24860, title = "Polygon Wolf",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24807, title = "Polygon Wolf",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24913, title = "Polygon Wolf",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24859, title = "Polygon Wolf",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24806, title = "Polygon Wolf",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24713, title = "Conker",
-    description = "1P Game",
-    start  = LB_1PGame("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24770, title = "Conker",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24991, title = "Conker",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25044, title = "Conker",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26048, title = "Conker",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30495, title = "Conker",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24912, title = "Polygon Conker",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24831, title = "Polygon Conker",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24805, title = "Polygon Conker",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24911, title = "Polygon Conker",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24858, title = "Polygon Conker",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24803, title = "Polygon Conker",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 25981, title = "Mewtwo",
-    description = "1P Game",
-    start  = LB_1PGame("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25983, title = "Mewtwo",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25991, title = "Mewtwo",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25993, title = "Mewtwo",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26049, title = "Mewtwo",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30496, title = "Mewtwo",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24910, title = "Polygon Mewtwo",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24857, title = "Polygon Mewtwo",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24802, title = "Polygon Mewtwo",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24909, title = "Polygon Mewtwo",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24856, title = "Polygon Mewtwo",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24801, title = "Polygon Mewtwo",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 25982, title = "Marth",
-    description = "1P Game",
-    start  = LB_1PGame("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25984, title = "Marth",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25992, title = "Marth",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25994, title = "Marth",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 26050, title = "Marth",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30497, title = "Marth",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24908, title = "Polygon Marth",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24855, title = "Polygon Marth",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24800, title = "Polygon Marth",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24907, title = "Polygon Marth",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24854, title = "Polygon Marth",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24799, title = "Polygon Marth",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 30432, title = "Sonic",
-    description = "1P Game",
-    start  = LB_1PGame("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30434, title = "Sonic",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30436, title = "Sonic",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30438, title = "Sonic",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30440, title = "Sonic",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30498, title = "Sonic",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24906, title = "Polygon Sonic",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24853, title = "Polygon Sonic",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115259, title = "Polygon Sonic",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115260, title = "Polygon Sonic",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115261, title = "Polygon Sonic",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115258, title = "Polygon Sonic",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 30433, title = "Super Sonic",
-    description = "1P Game",
-    start  = LB_1PGame("Super Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30435, title = "Super Sonic",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30437, title = "Super Sonic",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Super Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30439, title = "Super Sonic",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Super Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30441, title = "Super Sonic",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Super Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 30499, title = "Super Sonic",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Super Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24804, title = "Sheik",
-    description = "1P Game",
-    start  = LB_1PGame("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25989, title = "Sheik",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25987, title = "Sheik",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 25985, title = "Sheik",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24937, title = "Sheik",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24884, title = "Sheik",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115268, title = "Polygon Sheik",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115269, title = "Polygon Sheik",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115270, title = "Polygon Sheik",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115271, title = "Polygon Sheik",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115272, title = "Polygon Sheik",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115273, title = "Polygon Sheik",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24830, title = "Marina",
-    description = "1P Game",
-    start  = LB_1PGame("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24936, title = "Marina",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24883, title = "Marina",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24829, title = "Marina",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24935, title = "Marina",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24882, title = "Marina",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115274, title = "Polygon Marina",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115275, title = "Polygon Marina",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115276, title = "Polygon Marina",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115277, title = "Polygon Marina",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115278, title = "Polygon Marina",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115279, title = "Polygon Marina",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24939, title = "King Dedede",
-    description = "1P Game",
-    start  = LB_1PGame("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24881, title = "King Dedede",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24828, title = "King Dedede",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24938, title = "King Dedede",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24885, title = "King Dedede",
-    description = "All-Star Mode",
-    start  = LB_Allstars("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24886, title = "King Dedede",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115304, title = "Polygon King Dedede",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115305, title = "Polygon King Dedede",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115306, title = "Polygon King Dedede",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115307, title = "Polygon King Dedede",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115308, title = "Polygon King Dedede",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115309, title = "Polygon King Dedede",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24934, title = "Goemon",
-    description = "1P Game",
-    start  = LB_1PGame("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24880, title = "Goemon",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24827, title = "Goemon",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24933, title = "Goemon",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24879, title = "Goemon",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24826, title = "Goemon",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115310, title = "Polygon Goemon",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115311, title = "Polygon Goemon",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115312, title = "Polygon Goemon",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115313, title = "Polygon Goemon",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115314, title = "Polygon Goemon",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115315, title = "Polygon Goemon",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24932, title = "Peppy",
-    description = "1P Game",
-    start  = LB_1PGame("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24878, title = "Peppy",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24825, title = "Peppy",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24931, title = "Peppy",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24877, title = "Peppy",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24824, title = "Peppy",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Peppy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24930, title = "Slippy",
-    description = "1P Game",
-    start  = LB_1PGame("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24876, title = "Slippy",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24823, title = "Slippy",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24929, title = "Slippy",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24875, title = "Slippy",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24822, title = "Slippy",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Slippy") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24928, title = "Banjo & Kazooie",
-    description = "1P Game",
-    start  = LB_1PGame("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24874, title = "Banjo & Kazooie",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24821, title = "Banjo & Kazooie",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24927, title = "Banjo & Kazooie",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24873, title = "Banjo & Kazooie",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24820, title = "Banjo & Kazooie",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115316, title = "Polygon Banjo & Kazooie",
-    description = "1P Game",
-    start  = LB_1PGame("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115317, title = "Polygon Banjo & Kazooie",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115318, title = "Polygon Banjo & Kazooie",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115319, title = "Polygon Banjo & Kazooie",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115320, title = "Polygon Banjo & Kazooie",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 115321, title = "Polygon Banjo & Kazooie",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Polygon Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24926, title = "Ebisumaru",
-    description = "1P Game",
-    start  = LB_1PGame("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24872, title = "Ebisumaru",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24819, title = "Ebisumaru",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24925, title = "Ebisumaru",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24871, title = "Ebisumaru",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24818, title = "Ebisumaru",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Ebisumaru") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24924, title = "Metal Luigi",
-    description = "1P Game",
-    start  = LB_1PGame("Metal Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24870, title = "Metal Luigi",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Metal Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24817, title = "Metal Luigi",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Metal Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24923, title = "Metal Luigi",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Metal Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
+// ----------------------------------------------------------------------------------------------------
+// Leaderboards
 
 leaderboard(
-    id = 24869, title = "Metal Luigi",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Metal Luigi") &&
-              RulesCommunity(),
+    id = 135407, title = "1P Game",
+    description = "Highest Total Score",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D &&
+             LB_TotalScoreUpdate1PGame(0),
     cancel = always_false(),
     submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
+    value  = LB_TotalScoreSum1PGame(0),
+    format = "VALUE",
+    lower_is_better = false
 )
 
 leaderboard(
-    id = 24816, title = "Metal Luigi",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Metal Luigi") &&
-              RulesCommunity(),
+    id = 135408, title = "Remix 1P",
+    description = "Highest Total Score",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D && 
+             LB_TotalScoreUpdate(4),
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 24922, title = "Dragon King",
-    description = "1P Game",
-    start  = LB_1PGame("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24868, title = "Dragon King",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24815, title = "Dragon King",
-    description = "Multi-Man Mode",
-    start  = LB_MultiMan("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24921, title = "Dragon King",
-    description = "Cruel Multi-Man Mode",
-    start  = LB_CruelMultiMan("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_MultiManKills),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24867, title = "Dragon King",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24814, title = "Dragon King",
-    description = "Home-Run Contest",
-    start  = LB_Homerun("Dragon King") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = dword(Mem_HomerunDistance),
-    format = "FIXED1"
-)
-
-leaderboard(
-    id = 115322, title = "Master Hand",
-    description = "1P Game",
+    value  = LB_TotalScoreSum(4),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 135409, title = "All-Stars Mode",
+    description = "Highest Total Score",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D &&
+             LB_TotalScoreUpdate(5),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = LB_TotalScoreSum(5),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 135410, title = "Multi-Man Mode",
+    description = "Highest Total KOs",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D &&
+             LB_TotalScoreUpdate(2),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = LB_TotalScoreSum(2),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 135411, title = "Cruel Multi-Man Mode",
+    description = "Highest Total KOs",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D &&
+             LB_TotalScoreUpdate(3),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = LB_TotalScoreSum(3),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 135412, title = "Home-Run Contest",
+    description = "Highest Total Distance",
+    start  = BothGameStates() != 0x1B1B &&
+             BothGameStates() != 0x800D &&
+             LB_TotalScoreUpdate(6),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = LB_TotalScoreSum(6),
+    format = "FIXED1",
+    lower_is_better = false
+)
+
+Leaderboard_Params = [
+    {
+        "Character":    "Mario",
+        "ID_1PGame":    24642,
+        "ID_Remix1P":   24643,
+        "ID_MultiMan":  24661,
+        "ID_CruelMan":  24662,
+        "ID_AllStar":   25995,
+        "ID_Homerun":   30442,
+    },
+    {
+        "Character":    "JP Mario",
+        "ID_1PGame":    24663,
+        "ID_Remix1P":   24716,
+        "ID_MultiMan":  24940,
+        "ID_CruelMan":  24993,
+        "ID_AllStar":   25996,
+        "ID_Homerun":   30443,
+    },
+    {
+        "Character":    "Polygon Mario",
+        "ID_1PGame":    24688,
+        "ID_Remix1P":   24717,
+        "ID_MultiMan":  24941,
+        "ID_CruelMan":  24994,
+        "ID_AllStar":   25997,
+        "ID_Homerun":   30444,
+    },
+    {
+        "Character":    "Fox",
+        "ID_1PGame":    24664,
+        "ID_Remix1P":   24718,
+        "ID_MultiMan":  24942,
+        "ID_CruelMan":  24995,
+        "ID_AllStar":   25998,
+        "ID_Homerun":   30445,
+    },
+    {
+        "Character":    "JP Fox",
+        "ID_1PGame":    24665,
+        "ID_Remix1P":   24719,
+        "ID_MultiMan":  24943,
+        "ID_CruelMan":  24996,
+        "ID_AllStar":   25999,
+        "ID_Homerun":   30446,
+    },
+    {
+        "Character":    "Polygon Fox",
+        "ID_1PGame":    24666,
+        "ID_Remix1P":   24720,
+        "ID_MultiMan":  24944,
+        "ID_CruelMan":  24997,
+        "ID_AllStar":   26000,
+        "ID_Homerun":   30447,
+    },
+    {
+        "Character":    "Donkey Kong",
+        "ID_1PGame":    24667,
+        "ID_Remix1P":   24721,
+        "ID_MultiMan":  24945,
+        "ID_CruelMan":  24998,
+        "ID_AllStar":   26001,
+        "ID_Homerun":   30448,
+    },
+    {
+        "Character":    "JP Donkey Kong",
+        "ID_1PGame":    24668,
+        "ID_Remix1P":   24722,
+        "ID_MultiMan":  24946,
+        "ID_CruelMan":  24999,
+        "ID_AllStar":   26002,
+        "ID_Homerun":   30449,
+    },
+    {
+        "Character":    "Polygon Donkey Kong",
+        "ID_1PGame":    24669,
+        "ID_Remix1P":   24723,
+        "ID_MultiMan":  24947,
+        "ID_CruelMan":  25000,
+        "ID_AllStar":   26003,
+        "ID_Homerun":   30450,
+    },
+    {
+        "Character":    "Samus",
+        "ID_1PGame":    24670,
+        "ID_Remix1P":   24724,
+        "ID_MultiMan":  24948,
+        "ID_CruelMan":  25001,
+        "ID_AllStar":   26004,
+        "ID_Homerun":   30451,
+    },
+    {
+        "Character":    "JP Samus",
+        "ID_1PGame":    24671,
+        "ID_Remix1P":   24725,
+        "ID_MultiMan":  24949,
+        "ID_CruelMan":  25002,
+        "ID_AllStar":   26014,
+        "ID_Homerun":   30452,
+    },
+    {
+        "Character":    "EU Samus",
+        "ID_1PGame":    24672,
+        "ID_Remix1P":   24726,
+        "ID_MultiMan":  24950,
+        "ID_CruelMan":  25003,
+        "ID_AllStar":   26006,
+        "ID_Homerun":   30453,
+    },
+    {
+        "Character":    "Polygon Samus",
+        "ID_1PGame":    24673,
+        "ID_Remix1P":   24727,
+        "ID_MultiMan":  24951,
+        "ID_CruelMan":  25004,
+        "ID_AllStar":   26007,
+        "ID_Homerun":   30454,
+    },
+    {
+        "Character":    "Luigi",
+        "ID_1PGame":    24674,
+        "ID_Remix1P":   24728,
+        "ID_MultiMan":  24952,
+        "ID_CruelMan":  25005,
+        "ID_AllStar":   26008,
+        "ID_Homerun":   30455,
+    },
+    {
+        "Character":    "JP Luigi",
+        "ID_1PGame":    24675,
+        "ID_Remix1P":   24729,
+        "ID_MultiMan":  24953,
+        "ID_CruelMan":  25006,
+        "ID_AllStar":   26009,
+        "ID_Homerun":   30456,
+    },
+    {
+        "Character":    "Polygon Luigi",
+        "ID_1PGame":    24676,
+        "ID_Remix1P":   24730,
+        "ID_MultiMan":  24954,
+        "ID_CruelMan":  25007,
+        "ID_AllStar":   26010,
+        "ID_Homerun":   30457,
+    },
+    {
+        "Character":    "Link",
+        "ID_1PGame":    24677,
+        "ID_Remix1P":   24731,
+        "ID_MultiMan":  24955,
+        "ID_CruelMan":  25008,
+        "ID_AllStar":   26011,
+        "ID_Homerun":   30458,
+    },
+    {
+        "Character":    "JP Link",
+        "ID_1PGame":    24678,
+        "ID_Remix1P":   24732,
+        "ID_MultiMan":  24956,
+        "ID_CruelMan":  25009,
+        "ID_AllStar":   26012,
+        "ID_Homerun":   30459,
+    },
+    {
+        "Character":    "EU Link",
+        "ID_1PGame":    24679,
+        "ID_Remix1P":   24733,
+        "ID_MultiMan":  24957,
+        "ID_CruelMan":  25010,
+        "ID_AllStar":   26013,
+        "ID_Homerun":   30460,
+    },
+    {
+        "Character":    "Polygon Link",
+        "ID_1PGame":    24680,
+        "ID_Remix1P":   24734,
+        "ID_MultiMan":  24958,
+        "ID_CruelMan":  25011,
+        "ID_AllStar":   26005,
+        "ID_Homerun":   30461,
+    },
+    {
+        "Character":    "Yoshi",
+        "ID_1PGame":    24681,
+        "ID_Remix1P":   24735,
+        "ID_MultiMan":  24959,
+        "ID_CruelMan":  25012,
+        "ID_AllStar":   26015,
+        "ID_Homerun":   30462,
+    },
+    {
+        "Character":    "JP Yoshi",
+        "ID_1PGame":    24682,
+        "ID_Remix1P":   24736,
+        "ID_MultiMan":  24960,
+        "ID_CruelMan":  25013,
+        "ID_AllStar":   26016,
+        "ID_Homerun":   30463,
+    },
+    {
+        "Character":    "Polygon Yoshi",
+        "ID_1PGame":    24683,
+        "ID_Remix1P":   24737,
+        "ID_MultiMan":  24961,
+        "ID_CruelMan":  25014,
+        "ID_AllStar":   26017,
+        "ID_Homerun":   30464,
+    },
+    {
+        "Character":    "Captain Falcon",
+        "ID_1PGame":    24684,
+        "ID_Remix1P":   24738,
+        "ID_MultiMan":  24962,
+        "ID_CruelMan":  25015,
+        "ID_AllStar":   26018,
+        "ID_Homerun":   30465,
+    },
+    {
+        "Character":    "JP Captain Falcon",
+        "ID_1PGame":    24685,
+        "ID_Remix1P":   24739,
+        "ID_MultiMan":  24963,
+        "ID_CruelMan":  25016,
+        "ID_AllStar":   26019,
+        "ID_Homerun":   30466,
+    },
+    {
+        "Character":    "Polygon Captain Falcon",
+        "ID_1PGame":    24686,
+        "ID_Remix1P":   24740,
+        "ID_MultiMan":  24964,
+        "ID_CruelMan":  25017,
+        "ID_AllStar":   26020,
+        "ID_Homerun":   30467,
+    },
+    {
+        "Character":    "Kirby",
+        "ID_1PGame":    24687,
+        "ID_Remix1P":   24741,
+        "ID_MultiMan":  24965,
+        "ID_CruelMan":  25018,
+        "ID_AllStar":   26021,
+        "ID_Homerun":   30468,
+    },
+    {
+        "Character":    "JP Kirby",
+        "ID_1PGame":    24689,
+        "ID_Remix1P":   24742,
+        "ID_MultiMan":  24966,
+        "ID_CruelMan":  25019,
+        "ID_AllStar":   26022,
+        "ID_Homerun":   30469,
+    },
+    {
+        "Character":    "Polygon Kirby",
+        "ID_1PGame":    24715,
+        "ID_Remix1P":   24743,
+        "ID_MultiMan":  24967,
+        "ID_CruelMan":  25020,
+        "ID_AllStar":   26023,
+        "ID_Homerun":   30470,
+    },
+    {
+        "Character":    "Pikachu",
+        "ID_1PGame":    24690,
+        "ID_Remix1P":   24744,
+        "ID_MultiMan":  24968,
+        "ID_CruelMan":  25021,
+        "ID_AllStar":   26024,
+        "ID_Homerun":   30471,
+    },
+    {
+        "Character":    "JP Pikachu",
+        "ID_1PGame":    24691,
+        "ID_Remix1P":   24745,
+        "ID_MultiMan":  24969,
+        "ID_CruelMan":  25022,
+        "ID_AllStar":   26025,
+        "ID_Homerun":   30472,
+    },
+    {
+        "Character":    "EU Pikachu",
+        "ID_1PGame":    24692,
+        "ID_Remix1P":   24756,
+        "ID_MultiMan":  24970,
+        "ID_CruelMan":  25023,
+        "ID_AllStar":   26026,
+        "ID_Homerun":   30473,
+    },
+    {
+        "Character":    "Polygon Pikachu",
+        "ID_1PGame":    24693,
+        "ID_Remix1P":   24757,
+        "ID_MultiMan":  24971,
+        "ID_CruelMan":  25024,
+        "ID_AllStar":   26027,
+        "ID_Homerun":   30474,
+    },
+    {
+        "Character":    "Jigglypuff",
+        "ID_1PGame":    24694,
+        "ID_Remix1P":   24748,
+        "ID_MultiMan":  24972,
+        "ID_CruelMan":  25025,
+        "ID_AllStar":   26028,
+        "ID_Homerun":   30475,
+    },
+    {
+        "Character":    "JP Jigglypuff",
+        "ID_1PGame":    24695,
+        "ID_Remix1P":   24749,
+        "ID_MultiMan":  24973,
+        "ID_CruelMan":  25026,
+        "ID_AllStar":   26029,
+        "ID_Homerun":   30476,
+    },
+    {
+        "Character":    "EU Jigglypuff",
+        "ID_1PGame":    24696,
+        "ID_Remix1P":   24760,
+        "ID_MultiMan":  24974,
+        "ID_CruelMan":  25027,
+        "ID_AllStar":   26030,
+        "ID_Homerun":   30477,
+    },
+    {
+        "Character":    "Polygon Jigglypuff",
+        "ID_1PGame":    24697,
+        "ID_Remix1P":   24761,
+        "ID_MultiMan":  24975,
+        "ID_CruelMan":  25028,
+        "ID_AllStar":   26031,
+        "ID_Homerun":   30478,
+    },
+    {
+        "Character":    "Ness",
+        "ID_1PGame":    24698,
+        "ID_Remix1P":   24752,
+        "ID_MultiMan":  24976,
+        "ID_CruelMan":  25029,
+        "ID_AllStar":   26032,
+        "ID_Homerun":   30479,
+    },
+    {
+        "Character":    "JP Ness",
+        "ID_1PGame":    24699,
+        "ID_Remix1P":   24763,
+        "ID_MultiMan":  24977,
+        "ID_CruelMan":  25030,
+        "ID_AllStar":   26033,
+        "ID_Homerun":   30480,
+    },
+    {
+        "Character":    "Polygon Ness",
+        "ID_1PGame":    24700,
+        "ID_Remix1P":   24764,
+        "ID_MultiMan":  24978,
+        "ID_CruelMan":  25031,
+        "ID_AllStar":   26034,
+        "ID_Homerun":   30481,
+    },
+    {
+        "Character":    "Metal Mario",
+        "ID_1PGame":    24701,
+        "ID_Remix1P":   24765,
+        "ID_MultiMan":  24979,
+        "ID_CruelMan":  25032,
+        "ID_AllStar":   26035,
+        "ID_Homerun":   30482,
+    },
+    {
+        "Character":    "Giant Donkey Kong",
+        "ID_1PGame":    24702,
+        "ID_Remix1P":   24771,
+        "ID_MultiMan":  24980,
+        "ID_CruelMan":  25033,
+        "ID_AllStar":   26036,
+        "ID_Homerun":   30483,
+    },
+    {
+        "Character":    "Ganondorf",
+        "ID_1PGame":    24703,
+        "ID_Remix1P":   24772,
+        "ID_MultiMan":  24981,
+        "ID_CruelMan":  25034,
+        "ID_AllStar":   26037,
+        "ID_Homerun":   30484,
+    },
+    {
+        "Character":    "Polygon Ganondorf",
+        "ID_1PGame":    115286,
+        "ID_Remix1P":   115287,
+        "ID_MultiMan":  115288,
+        "ID_CruelMan":  115289,
+        "ID_AllStar":   115290,
+        "ID_Homerun":   115291,
+    },
+    {
+        "Character":    "Young Link",
+        "ID_1PGame":    24704,
+        "ID_Remix1P":   24773,
+        "ID_MultiMan":  24982,
+        "ID_CruelMan":  25035,
+        "ID_AllStar":   26038,
+        "ID_Homerun":   30485,
+    },
+    {
+        "Character":    "Polygon Young Link",
+        "ID_1PGame":    115292,
+        "ID_Remix1P":   115293,
+        "ID_MultiMan":  115294,
+        "ID_CruelMan":  115295,
+        "ID_AllStar":   115296,
+        "ID_Homerun":   115297,
+    },
+    {
+        "Character":    "Falco",
+        "ID_1PGame":    24705,
+        "ID_Remix1P":   24774,
+        "ID_MultiMan":  24983,
+        "ID_CruelMan":  25036,
+        "ID_AllStar":   26039,
+        "ID_Homerun":   30486,
+    },
+    {
+        "Character":    "Polygon Falco",
+        "ID_1PGame":    115280,
+        "ID_Remix1P":   115281,
+        "ID_MultiMan":  115282,
+        "ID_CruelMan":  115283,
+        "ID_AllStar":   115284,
+        "ID_Homerun":   115285,
+    },
+    {
+        "Character":    "Dr. Mario",
+        "ID_1PGame":    24706,
+        "ID_Remix1P":   24775,
+        "ID_MultiMan":  24984,
+        "ID_CruelMan":  25037,
+        "ID_AllStar":   26040,
+        "ID_Homerun":   30487,
+    },
+    {
+        "Character":    "Polygon Dr. Mario",
+        "ID_1PGame":    115262,
+        "ID_Remix1P":   115263,
+        "ID_MultiMan":  115264,
+        "ID_CruelMan":  115265,
+        "ID_AllStar":   115266,
+        "ID_Homerun":   115267,
+    },
+    {
+        "Character":    "Dark Samus",
+        "ID_1PGame":    24707,
+        "ID_Remix1P":   24777,
+        "ID_MultiMan":  24985,
+        "ID_CruelMan":  25038,
+        "ID_AllStar":   26041,
+        "ID_Homerun":   30488,
+    },
+    {
+        "Character":    "Polygon Dark Samus",
+        "ID_1PGame":    115298,
+        "ID_Remix1P":   115299,
+        "ID_MultiMan":  115300,
+        "ID_CruelMan":  115301,
+        "ID_AllStar":   115302,
+        "ID_Homerun":   115303,
+    },
+    {
+        "Character":    "Wario",
+        "ID_1PGame":    24708,
+        "ID_Remix1P":   24762,
+        "ID_MultiMan":  24986,
+        "ID_CruelMan":  25039,
+        "ID_AllStar":   26042,
+        "ID_Homerun":   30489,
+    },
+    {
+        "Character":    "Polygon Wario",
+        "ID_1PGame":    24920,
+        "ID_Remix1P":   24866,
+        "ID_MultiMan":  24813,
+        "ID_CruelMan":  24919,
+        "ID_AllStar":   24865,
+        "ID_Homerun":   24812,
+    },
+    {
+        "Character":    "Lucas",
+        "ID_1PGame":    24709,
+        "ID_Remix1P":   24766,
+        "ID_MultiMan":  24987,
+        "ID_CruelMan":  25040,
+        "ID_AllStar":   26043,
+        "ID_Homerun":   30490,
+    },
+    {
+        "Character":    "Polygon Lucas",
+        "ID_1PGame":    24918,
+        "ID_Remix1P":   24864,
+        "ID_MultiMan":  24811,
+        "ID_CruelMan":  24917,
+        "ID_AllStar":   24863,
+        "ID_Homerun":   24808,
+    },
+    {
+        "Character":    "Bowser",
+        "ID_1PGame":    24714,
+        "ID_Remix1P":   24776,
+        "ID_MultiMan":  24992,
+        "ID_CruelMan":  25045,
+        "ID_AllStar":   26044,
+        "ID_Homerun":   30491,
+    },
+    {
+        "Character":    "Polygon Bowser",
+        "ID_1PGame":    24810,
+        "ID_Remix1P":   24916,
+        "ID_MultiMan":  24862,
+        "ID_CruelMan":  24809,
+        "ID_AllStar":   24915,
+        "ID_Homerun":   24861,
+    },
+    {
+        "Character":    "Giga Bowser",
+        "ID_1PGame":    24710,
+        "ID_Remix1P":   24767,
+        "ID_MultiMan":  24988,
+        "ID_CruelMan":  25041,
+        "ID_AllStar":   26045,
+        "ID_Homerun":   30492,
+    },
+    {
+        "Character":    "Mad Piano",
+        "ID_1PGame":    24711,
+        "ID_Remix1P":   24768,
+        "ID_MultiMan":  24989,
+        "ID_CruelMan":  25042,
+        "ID_AllStar":   26046,
+        "ID_Homerun":   30493,
+    },
+    {
+        "Character":    "Wolf",
+        "ID_1PGame":    24712,
+        "ID_Remix1P":   24769,
+        "ID_MultiMan":  24990,
+        "ID_CruelMan":  25043,
+        "ID_AllStar":   26047,
+        "ID_Homerun":   30494,
+    },
+    {
+        "Character":    "Polygon Wolf",
+        "ID_1PGame":    24914,
+        "ID_Remix1P":   24860,
+        "ID_MultiMan":  24807,
+        "ID_CruelMan":  24913,
+        "ID_AllStar":   24859,
+        "ID_Homerun":   24806,
+    },
+    {
+        "Character":    "Conker",
+        "ID_1PGame":    24713,
+        "ID_Remix1P":   24770,
+        "ID_MultiMan":  24991,
+        "ID_CruelMan":  25044,
+        "ID_AllStar":   26048,
+        "ID_Homerun":   30495,
+    },
+    {
+        "Character":    "Polygon Conker",
+        "ID_1PGame":    24912,
+        "ID_Remix1P":   24831,
+        "ID_MultiMan":  24805,
+        "ID_CruelMan":  24911,
+        "ID_AllStar":   24858,
+        "ID_Homerun":   24803,
+    },
+    {
+        "Character":    "Mewtwo",
+        "ID_1PGame":    25981,
+        "ID_Remix1P":   25983,
+        "ID_MultiMan":  25991,
+        "ID_CruelMan":  25993,
+        "ID_AllStar":   26049,
+        "ID_Homerun":   30496,
+    },
+    {
+        "Character":    "Polygon Mewtwo",
+        "ID_1PGame":    24910,
+        "ID_Remix1P":   24857,
+        "ID_MultiMan":  24802,
+        "ID_CruelMan":  24909,
+        "ID_AllStar":   24856,
+        "ID_Homerun":   24801,
+    },
+    {
+        "Character":    "Marth",
+        "ID_1PGame":    25982,
+        "ID_Remix1P":   25984,
+        "ID_MultiMan":  25992,
+        "ID_CruelMan":  25994,
+        "ID_AllStar":   26050,
+        "ID_Homerun":   30497,
+    },
+    {
+        "Character":    "Polygon Marth",
+        "ID_1PGame":    24908,
+        "ID_Remix1P":   24855,
+        "ID_MultiMan":  24800,
+        "ID_CruelMan":  24907,
+        "ID_AllStar":   24854,
+        "ID_Homerun":   24799,
+    },
+    {
+        "Character":    "Sonic",
+        "ID_1PGame":    30432,
+        "ID_Remix1P":   30434,
+        "ID_MultiMan":  30436,
+        "ID_CruelMan":  30438,
+        "ID_AllStar":   30440,
+        "ID_Homerun":   30498,
+    },
+    {
+        "Character":    "Polygon Sonic",
+        "ID_1PGame":    24906,
+        "ID_Remix1P":   24853,
+        "ID_MultiMan":  115259,
+        "ID_CruelMan":  115260,
+        "ID_AllStar":   115261,
+        "ID_Homerun":   115258,
+    },
+    {
+        "Character":    "Super Sonic",
+        "ID_1PGame":    30433,
+        "ID_Remix1P":   30435,
+        "ID_MultiMan":  30437,
+        "ID_CruelMan":  30439,
+        "ID_AllStar":   30441,
+        "ID_Homerun":   30499,
+    },
+    {
+        "Character":    "Sheik",
+        "ID_1PGame":    24804,
+        "ID_Remix1P":   25989,
+        "ID_MultiMan":  25987,
+        "ID_CruelMan":  25985,
+        "ID_AllStar":   24937,
+        "ID_Homerun":   24884,
+    },
+    {
+        "Character":    "Polygon Sheik",
+        "ID_1PGame":    115268,
+        "ID_Remix1P":   115269,
+        "ID_MultiMan":  115270,
+        "ID_CruelMan":  115271,
+        "ID_AllStar":   115272,
+        "ID_Homerun":   115273,
+    },
+    {
+        "Character":    "Marina",
+        "ID_1PGame":    24830,
+        "ID_Remix1P":   24936,
+        "ID_MultiMan":  24883,
+        "ID_CruelMan":  24829,
+        "ID_AllStar":   24935,
+        "ID_Homerun":   24882,
+    },
+    {
+        "Character":    "Polygon Marina",
+        "ID_1PGame":    115274,
+        "ID_Remix1P":   115275,
+        "ID_MultiMan":  115276,
+        "ID_CruelMan":  115277,
+        "ID_AllStar":   115278,
+        "ID_Homerun":   115279,
+    },
+    {
+        "Character":    "King Dedede",
+        "ID_1PGame":    24939,
+        "ID_Remix1P":   24881,
+        "ID_MultiMan":  24828,
+        "ID_CruelMan":  24938,
+        "ID_AllStar":   24885,
+        "ID_Homerun":   24886,
+    },
+    {
+        "Character":    "Polygon King Dedede",
+        "ID_1PGame":    115304,
+        "ID_Remix1P":   115305,
+        "ID_MultiMan":  115306,
+        "ID_CruelMan":  115307,
+        "ID_AllStar":   115308,
+        "ID_Homerun":   115309,
+    },
+    {
+        "Character":    "Goemon",
+        "ID_1PGame":    24934,
+        "ID_Remix1P":   24880,
+        "ID_MultiMan":  24827,
+        "ID_CruelMan":  24933,
+        "ID_AllStar":   24879,
+        "ID_Homerun":   24826,
+    },
+    {
+        "Character":    "Polygon Goemon",
+        "ID_1PGame":    115310,
+        "ID_Remix1P":   115311,
+        "ID_MultiMan":  115312,
+        "ID_CruelMan":  115313,
+        "ID_AllStar":   115314,
+        "ID_Homerun":   115315,
+    },
+    {
+        "Character":    "Peppy",
+        "ID_1PGame":    24932,
+        "ID_Remix1P":   24878,
+        "ID_MultiMan":  24825,
+        "ID_CruelMan":  24931,
+        "ID_AllStar":   24877,
+        "ID_Homerun":   24824,
+    },
+    {
+        "Character":    "Slippy",
+        "ID_1PGame":    24930,
+        "ID_Remix1P":   24876,
+        "ID_MultiMan":  24823,
+        "ID_CruelMan":  24929,
+        "ID_AllStar":   24875,
+        "ID_Homerun":   24822,
+    },
+    {
+        "Character":    "Banjo & Kazooie",
+        "ID_1PGame":    24928,
+        "ID_Remix1P":   24874,
+        "ID_MultiMan":  24821,
+        "ID_CruelMan":  24927,
+        "ID_AllStar":   24873,
+        "ID_Homerun":   24820,
+    },
+    {
+        "Character":    "Polygon Banjo & Kazooie",
+        "ID_1PGame":    115316,
+        "ID_Remix1P":   115317,
+        "ID_MultiMan":  115318,
+        "ID_CruelMan":  115319,
+        "ID_AllStar":   115320,
+        "ID_Homerun":   115321,
+    },
+    {
+        "Character":    "Ebisumaru",
+        "ID_1PGame":    24926,
+        "ID_Remix1P":   24872,
+        "ID_MultiMan":  24819,
+        "ID_CruelMan":  24925,
+        "ID_AllStar":   24871,
+        "ID_Homerun":   24818,
+    },
+    {
+        "Character":    "Metal Luigi",
+        "ID_1PGame":    24924,
+        "ID_Remix1P":   24870,
+        "ID_MultiMan":  24817,
+        "ID_CruelMan":  24923,
+        "ID_AllStar":   24869,
+        "ID_Homerun":   24816,
+    },
+    {
+        "Character":    "Dragon King",
+        "ID_1PGame":    24922,
+        "ID_Remix1P":   24868,
+        "ID_MultiMan":  24815,
+        "ID_CruelMan":  24921,
+        "ID_AllStar":   24867,
+        "ID_Homerun":   24814,
+    },
+    {
+        "Character":    "Crash",
+        "ID_1PGame":    134721,
+        "ID_Remix1P":   134722,
+        "ID_MultiMan":  134750,
+        "ID_CruelMan":  134749,
+        "ID_AllStar":   134748,
+        "ID_Homerun":   134747,
+    },
+    {
+        "Character":    "Polygon Crash",
+        "ID_1PGame":    135324,
+        "ID_Remix1P":   135325,
+        "ID_MultiMan":  135326,
+        "ID_CruelMan":  135327,
+        "ID_AllStar":   135328,
+        "ID_Homerun":   135329,
+    },
+    {
+        "Character":    "Peach",
+        "ID_1PGame":    134746,
+        "ID_Remix1P":   134745,
+        "ID_MultiMan":  134744,
+        "ID_CruelMan":  134743,
+        "ID_AllStar":   134742,
+        "ID_Homerun":   134741,
+    },
+    {
+        "Character":    "Polygon Peach",
+        "ID_1PGame":    135318,
+        "ID_Remix1P":   135319,
+        "ID_MultiMan":  135320,
+        "ID_CruelMan":  135321,
+        "ID_AllStar":   135322,
+        "ID_Homerun":   135323,
+    },
+    {
+        "Character":    "Roy",
+        "ID_1PGame":    134740,
+        "ID_Remix1P":   134739,
+        "ID_MultiMan":  134738,
+        "ID_CruelMan":  134737,
+        "ID_AllStar":   134735,
+        "ID_Homerun":   134736,
+    },
+    {
+        "Character":    "Dr. Luigi",
+        "ID_1PGame":    134734,
+        "ID_Remix1P":   134733,
+        "ID_MultiMan":  134732,
+        "ID_CruelMan":  134731,
+        "ID_AllStar":   134730,
+        "ID_Homerun":   134729,
+    },
+    {
+        "Character":    "Lanky Kong",
+        "ID_1PGame":    134723,
+        "ID_Remix1P":   134724,
+        "ID_MultiMan":  134725,
+        "ID_CruelMan":  134726,
+        "ID_AllStar":   134727,
+        "ID_Homerun":   134728,
+    },
+]
+
+// Character-specific Leaderboards
+for params in Leaderboard_Params {
+    // 1P Game
+    leaderboard(
+        id = params["ID_1PGame"],
+        title = "1P Game",
+        description = format("Highest Score with {0}", params["Character"]),
+        start  = LB_1PGame(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = NormalModeScore(),
+        format = "VALUE"
+    )
+    
+    // Remix 1P
+    leaderboard(
+        id = params["ID_Remix1P"],
+        title = "Remix 1P",
+        description = format("Highest Score with {0}", params["Character"]),
+        start  = LB_Remix1P(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = NormalModeScore(),
+        format = "VALUE"
+    )
+    
+    // All-Star Mode
+    leaderboard(
+        id = params["ID_AllStar"],
+        title = "All-Star Mode",
+        description = format("Highest Score with {0}", params["Character"]),
+        start  = LB_AllStars(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = NormalModeScore(),
+        format = "VALUE"
+    )
+    
+    // Multi-Man Mode
+    leaderboard(
+        id = params["ID_MultiMan"],
+        title = "Multi-Man Mode",
+        description = format("Most KOs with {0}", params["Character"]),
+        start  = LB_MultiMan(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = dword(Mem_MultiManKills),
+        format = "VALUE"
+    )
+    
+    // Cruel Multi-Man Mode
+    leaderboard(
+        id = params["ID_CruelMan"],
+        title = "Cruel Multi-Man Mode",
+        description = format("Most KOs with {0}", params["Character"]),
+        start  = LB_CruelMultiMan(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = dword(Mem_MultiManKills),
+        format = "VALUE"
+    )
+    
+    // Home-Run Contest" {
+    leaderboard(
+        id = params["ID_Homerun"],
+        title = "Home-Run Contest",
+        description = format("Longest Distance with {0}", params["Character"]),
+        start  = LB_Homerun(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = dword(Mem_HomerunDistance),
+        format = "FIXED1"
+    )
+}
+
+// Master Hand Leaderboards
+leaderboard(
+    id = 115322, 
+    title = "1P Game",
+    description = "Highest Score with Master Hand",
     start  = LB_1PGame("Master Hand") &&
               RulesCommunity(),
     cancel = always_false(),
@@ -8717,9 +5199,10 @@ leaderboard(
 )
 
 leaderboard(
-    id = 115323, title = "Master Hand",
-    description = "Remix 1P",
-    start  = LB_Remix1PGame("Master Hand") &&
+    id = 115323, 
+    title = "Remix 1P",
+    description = "Highest Score with Master Hand",
+    start  = LB_Remix1P("Master Hand") &&
               RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
@@ -8728,8 +5211,21 @@ leaderboard(
 )
 
 leaderboard(
-    id = 115324, title = "Master Hand",
-    description = "Multi-Man Mode",
+    id = 115326,
+    title = "All-Star Mode",
+    description = "Highest Score with Master Hand",
+    start  = LB_AllStars("Master Hand") &&
+              RulesCommunity(),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = NormalModeScore(),
+    format = "VALUE"
+)
+
+leaderboard(
+    id = 115324, 
+    title = "Multi-Man Mode",
+    description = "Most KOs with Master Hand",
     start  = LB_MultiManHealth("Master Hand") &&
               RulesCommunity(),
     cancel = always_false(),
@@ -8739,8 +5235,9 @@ leaderboard(
 )
 
 leaderboard(
-    id = 115325, title = "Master Hand",
-    description = "Cruel Multi-Man Mode",
+    id = 115325, 
+    title = "Cruel Multi-Man Mode",
+    description = "Most KOs with Master Hand",
     start  = LB_CruelMultiManHealth("Master Hand") &&
               RulesCommunity(),
     cancel = always_false(),
@@ -8749,765 +5246,246 @@ leaderboard(
     format = "VALUE"
 )
 
-leaderboard(
-    id = 115326, title = "Master Hand",
-    description = "All-Star Mode",
-    start  = LB_Allstars("Master Hand") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = NormalModeScore(),
-    format = "VALUE"
-)
-
-leaderboard(
-    id = 24658, title = "Bonus 1: Break The Targets - Stage 1",
-    description = "Stage of Mario / Metal Mario",
-    start  = LB_Bonus1("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24659, title = "Bonus 1: Break The Targets - Stage 2",
-    description = "Stage of Fox / Peppy",
-    start  = LB_Bonus1("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24660, title = "Bonus 1: Break The Targets - Stage 3",
-    description = "Stage of Donkey Kong",
-    start  = LB_Bonus1("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 25990, title = "Bonus 1: Break The Targets - Stage 4",
-    description = "Stage of Samus",
-    start  = LB_Bonus1("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24779, title = "Bonus 1: Break The Targets - Stage 5",
-    description = "Stage of Luigi / Metal Luigi",
-    start  = LB_Bonus1("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24834, title = "Bonus 1: Break The Targets - Stage 6",
-    description = "Stage of Link",
-    start  = LB_Bonus1("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES"
-)
-
-leaderboard(
-    id = 24887, title = "Bonus 1: Break The Targets - Stage 7",
-    description = "Stage of Yoshi",
-    start  = LB_Bonus1("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24780, title = "Bonus 1: Break The Targets - Stage 8",
-    description = "Stage of Captain Falcon / Dragon King",
-    start  = LB_Bonus1("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24835, title = "Bonus 1: Break The Targets - Stage 9",
-    description = "Stage of Kirby",
-    start  = LB_Bonus1("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24888, title = "Bonus 1: Break The Targets - Stage 10",
-    description = "Stage of Pikachu",
-    start  = LB_Bonus1("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24781, title = "Bonus 1: Break The Targets - Stage 11",
-    description = "Stage of Jigglypuff",
-    start  = LB_Bonus1("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24836, title = "Bonus 1: Break The Targets - Stage 12",
-    description = "Stage of Ness",
-    start  = LB_Bonus1("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24889, title = "Bonus 1: Break The Targets - Stage 13",
-    description = "Stage of Falco / Slippy",
-    start  = LB_Bonus1("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24782, title = "Bonus 1: Break The Targets - Stage 14",
-    description = "Stage of Ganondorf",
-    start  = LB_Bonus1("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24837, title = "Bonus 1: Break The Targets - Stage 15",
-    description = "Stage of Young Link",
-    start  = LB_Bonus1("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24890, title = "Bonus 1: Break The Targets - Stage 16",
-    description = "Stage of Dr. Mario",
-    start  = LB_Bonus1("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24783, title = "Bonus 1: Break The Targets - Stage 17",
-    description = "Stage of Wario",
-    start  = LB_Bonus1("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24838, title = "Bonus 1: Break The Targets - Stage 18",
-    description = "Stage of Dark Samus",
-    start  = LB_Bonus1("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24891, title = "Bonus 1: Break The Targets - Stage 19",
-    description = "Stage of Lucas",
-    start  = LB_Bonus1("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES"
-)
-
-leaderboard(
-    id = 24784, title = "Bonus 1: Break The Targets - Stage 20",
-    description = "Stage of Bowser / Giga Bowser",
-    start  = LB_Bonus1("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24839, title = "Bonus 1: Break The Targets - Stage 21",
-    description = "Stage of Wolf",
-    start  = LB_Bonus1("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24892, title = "Bonus 1: Break The Targets - Stage 22",
-    description = "Stage of Conker",
-    start  = LB_Bonus1("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24785, title = "Bonus 1: Break The Targets - Stage 23",
-    description = "Stage of Mewtwo",
-    start  = LB_Bonus1("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24840, title = "Bonus 1: Break The Targets - Stage 24",
-    description = "Stage of Marth",
-    start  = LB_Bonus1("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24893, title = "Bonus 1: Break The Targets - Stage 25",
-    description = "Stage of Sonic / Super Sonic",
-    start  = LB_Bonus1("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24786, title = "Bonus 1: Break The Targets - Stage 26",
-    description = "Stage of Sheik",
-    start  = LB_Bonus1("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24841, title = "Bonus 1: Break The Targets - Stage 27",
-    description = "Stage of Marina",
-    start  = LB_Bonus1("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24895, title = "Bonus 1: Break The Targets - Stage 28",
-    description = "Stage of King Dedede",
-    start  = LB_Bonus1("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24842, title = "Bonus 1: Break The Targets - Stage 29",
-    description = "Stage of Goemon / Ebisumaru",
-    start  = LB_Bonus1("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24787, title = "Bonus 1: Break The Targets - Stage 30",
-    description = "Stage of Banjo & Kazooie",
-    start  = LB_Bonus1("Banjo & Kazooie"),
-    cancel = always_false() &&
-              RulesCommunity(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24894, title = "Bonus 1: Break The Targets - Stage 31",
-    description = "Stage of Polygon Team / Mad Piano",
-    start  = LB_Bonus1("Polygon Team") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24788, title = "Bonus 2: Break The Targets - Stage 1",
-    description = "Stage of Mario / Metal Mario",
-    start  = LB_Bonus2("Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24843, title = "Bonus 2: Break The Targets - Stage 2",
-    description = "Stage of Fox / Peppy Mario",
-    start  = LB_Bonus2("Fox") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24896, title = "Bonus 2: Break The Targets - Stage 3",
-    description = "Stage of Donkey Kong",
-    start  = LB_Bonus2("Donkey Kong") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24789, title = "Bonus 2: Break The Targets - Stage 4",
-    description = "Stage of Samus",
-    start  = LB_Bonus2("Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24844, title = "Bonus 2: Break The Targets - Stage 5",
-    description = "Stage of Luigi / Metal Luigi",
-    start  = LB_Bonus2("Luigi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24897, title = "Bonus 2: Break The Targets - Stage 6",
-    description = "Stage of Link",
-    start  = LB_Bonus2("Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24790, title = "Bonus 2: Break The Targets - Stage 7",
-    description = "Stage of Yoshi",
-    start  = LB_Bonus2("Yoshi") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24845, title = "Bonus 2: Break The Targets - Stage 8",
-    description = "Stage of Captain Falcon / Dragon King",
-    start  = LB_Bonus2("Captain Falcon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24898, title = "Bonus 2: Break The Targets - Stage 9",
-    description = "Stage of Kirby",
-    start  = LB_Bonus2("Kirby") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24791, title = "Bonus 2: Break The Targets - Stage 10",
-    description = "Stage of Pikachu",
-    start  = LB_Bonus2("Pikachu") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24846, title = "Bonus 2: Break The Targets - Stage 11",
-    description = "Stage of Jigglypuff",
-    start  = LB_Bonus2("Jigglypuff") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24899, title = "Bonus 2: Break The Targets - Stage 12",
-    description = "Stage of Ness",
-    start  = LB_Bonus2("Ness") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24792, title = "Bonus 2: Break The Targets - Stage 13",
-    description = "Stage of Falco / Slippy",
-    start  = LB_Bonus2("Falco") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24847, title = "Bonus 2: Break The Targets - Stage 14",
-    description = "Stage of Ganondorf",
-    start  = LB_Bonus2("Ganondorf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24900, title = "Bonus 2: Break The Targets - Stage 15",
-    description = "Stage of Young Link",
-    start  = LB_Bonus2("Young Link") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24793, title = "Bonus 2: Break The Targets - Stage 16",
-    description = "Stage of Dr. Mario",
-    start  = LB_Bonus2("Dr. Mario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24848, title = "Bonus 2: Break The Targets - Stage 17",
-    description = "Stage of Wario",
-    start  = LB_Bonus2("Wario") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24901, title = "Bonus 2: Break The Targets - Stage 18",
-    description = "Stage of Dark Samus",
-    start  = LB_Bonus2("Dark Samus") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24794, title = "Bonus 2: Break The Targets - Stage 19",
-    description = "Stage of Lucas",
-    start  = LB_Bonus2("Lucas") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24849, title = "Bonus 2: Break The Targets - Stage 20",
-    description = "Stage of Bowser / Giga Bowser",
-    start  = LB_Bonus2("Bowser") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-
-leaderboard(
-    id = 24902, title = "Bonus 2: Break The Targets - Stage 21",
-    description = "Stage of Wolf",
-    start  = LB_Bonus2("Wolf") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24795, title = "Bonus 2: Break The Targets - Stage 22",
-    description = "Stage of Conker",
-    start  = LB_Bonus2("Conker") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24850, title = "Bonus 2: Break The Targets - Stage 23",
-    description = "Stage of Mewtwo",
-    start  = LB_Bonus2("Mewtwo") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24903, title = "Bonus 2: Break The Targets - Stage 24",
-    description = "Stage of Marth",
-    start  = LB_Bonus2("Marth") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24796, title = "Bonus 2: Break The Targets - Stage 25",
-    description = "Stage of Sonic / Super Sonic",
-    start  = LB_Bonus2("Sonic") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24851, title = "Bonus 2: Break The Targets - Stage 26",
-    description = "Stage of Sheik",
-    start  = LB_Bonus2("Sheik") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24904, title = "Bonus 2: Break The Targets - Stage 27",
-    description = "Stage of Marina",
-    start  = LB_Bonus2("Marina") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24797, title = "Bonus 2: Break The Targets - Stage 28",
-    description = "Stage of King Dedede",
-    start  = LB_Bonus2("King Dedede") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24852, title = "Bonus 2: Break The Targets - Stage 29",
-    description = "Stage of Goemon / Ebisumaru",
-    start  = LB_Bonus2("Goemon") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24905, title = "Bonus 2: Break The Targets - Stage 30",
-    description = "Stage of Banjo & Kazooie",
-    start  = LB_Bonus2("Banjo & Kazooie") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 24798, title = "Bonus 2: Break The Targets - Stage 31",
-    description = "Stage of Polygon Team / Mad Piano",
-    start  = LB_Bonus2("Polygon Team") &&
-              RulesCommunity(),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = Bonus12Timer(),
-    format = "FRAMES",
-    lower_is_better = true
-)
-
-leaderboard(
-    id = 25988, title = "Bonus 3: Race To The Finish - Stage 1",
-    description = "Normal Stage",
+Bonus_Leaderboards = [
+    {
+        "Character":    "Mario",
+        "Stage_Char":   "Mario / Metal Mario",
+        "ID_Bonus1":    24658,
+        "ID_Bonus2":    24788,
+    },
+    {
+        "Character":    "Fox",
+        "Stage_Char":   "Fox / Peppy",
+        "ID_Bonus1":    24659,
+        "ID_Bonus2":    24843,
+    },
+    {
+        "Character":    "Donkey Kong",
+        "Stage_Char":   "Donkey Kong / Lanky Kong",
+        "ID_Bonus1":    24660,
+        "ID_Bonus2":    24896,
+    },
+    {
+        "Character":    "Samus",
+        "Stage_Char":   "Samus",
+        "ID_Bonus1":    25990,
+        "ID_Bonus2":    24789,
+    },
+    {
+        "Character":    "Luigi",
+        "Stage_Char":   "Luigi / Metal Luigi",
+        "ID_Bonus1":    24779,
+        "ID_Bonus2":    24844,
+    },
+    {
+        "Character":    "Link",
+        "Stage_Char":   "Link",
+        "ID_Bonus1":    24834,
+        "ID_Bonus2":    24897,
+    },
+    {
+        "Character":    "Yoshi",
+        "Stage_Char":   "Yoshi",
+        "ID_Bonus1":    24887,
+        "ID_Bonus2":    24790,
+    },
+    {
+        "Character":    "Captain Falcon",
+        "Stage_Char":   "Captain Falcon / Dragon King",
+        "ID_Bonus1":    24780,
+        "ID_Bonus2":    24845,
+    },
+    {
+        "Character":    "Kirby",
+        "Stage_Char":   "Kirby",
+        "ID_Bonus1":    24835,
+        "ID_Bonus2":    24898,
+    },
+    {
+        "Character":    "Pikachu",
+        "Stage_Char":   "Pikachu",
+        "ID_Bonus1":    24888,
+        "ID_Bonus2":    24791,
+    },
+    {
+        "Character":    "Jigglypuff",
+        "Stage_Char":   "Jigglypuff",
+        "ID_Bonus1":    24781,
+        "ID_Bonus2":    24846,
+    },
+    {
+        "Character":    "Ness",
+        "Stage_Char":   "Ness",
+        "ID_Bonus1":    24836,
+        "ID_Bonus2":    24899,
+    },
+    {
+        "Character":    "Falco",
+        "Stage_Char":   "Falco / Slippy",
+        "ID_Bonus1":    24889,
+        "ID_Bonus2":    24792,
+    },
+    {
+        "Character":    "Ganondorf",
+        "Stage_Char":   "Ganondorf",
+        "ID_Bonus1":    24782,
+        "ID_Bonus2":    24847,
+    },
+    {
+        "Character":    "Young Link",
+        "Stage_Char":   "Young Link",
+        "ID_Bonus1":    24837,
+        "ID_Bonus2":    24900,
+    },
+    {
+        "Character":    "Dr. Mario",
+        "Stage_Char":   "Dr. Mario / Dr. Luigi",
+        "ID_Bonus1":    24890,
+        "ID_Bonus2":    24793,
+    },
+    {
+        "Character":    "Wario",
+        "Stage_Char":   "Wario",
+        "ID_Bonus1":    24783,
+        "ID_Bonus2":    24848,
+    },
+    {
+        "Character":    "Dark Samus",
+        "Stage_Char":   "Dark Samus",
+        "ID_Bonus1":    24838,
+        "ID_Bonus2":    24901,
+    },
+    {
+        "Character":    "Lucas",
+        "Stage_Char":   "Lucas",
+        "ID_Bonus1":    24891,
+        "ID_Bonus2":    24794,
+    },
+    {
+        "Character":    "Bowser",
+        "Stage_Char":   "Bowser / Giga Bowser",
+        "ID_Bonus1":    24784,
+        "ID_Bonus2":    24849,
+    },
+    {
+        "Character":    "Wolf",
+        "Stage_Char":   "Wolf",
+        "ID_Bonus1":    24839,
+        "ID_Bonus2":    24902,
+    },
+    {
+        "Character":    "Conker",
+        "Stage_Char":   "Conker",
+        "ID_Bonus1":    24892,
+        "ID_Bonus2":    24795,
+    },
+    {
+        "Character":    "Mewtwo",
+        "Stage_Char":   "Mewtwo",
+        "ID_Bonus1":    24785,
+        "ID_Bonus2":    24850,
+    },
+    {
+        "Character":    "Marth",
+        "Stage_Char":   "Marth / Roy",
+        "ID_Bonus1":    24840,
+        "ID_Bonus2":    24903,
+    },
+    {
+        "Character":    "Sonic",
+        "Stage_Char":   "Sonic / Super Sonic",
+        "ID_Bonus1":    24893,
+        "ID_Bonus2":    24796,
+    },
+    {
+        "Character":    "Sheik",
+        "Stage_Char":   "Sheik",
+        "ID_Bonus1":    24786,
+        "ID_Bonus2":    24851,
+    },
+    {
+        "Character":    "Marina",
+        "Stage_Char":   "Marina",
+        "ID_Bonus1":    24841,
+        "ID_Bonus2":    24904,
+    },
+    {
+        "Character":    "King Dedede",
+        "Stage_Char":   "King Dedede",
+        "ID_Bonus1":    24895,
+        "ID_Bonus2":    24797,
+    },
+    {
+        "Character":    "Goemon",
+        "Stage_Char":   "Goemon / Ebisumaru",
+        "ID_Bonus1":    24842,
+        "ID_Bonus2":    24852,
+    },
+    {
+        "Character":    "Banjo & Kazooie",
+        "Stage_Char":   "Banjo & Kazooie",
+        "ID_Bonus1":    24787,
+        "ID_Bonus2":    24905,
+    },
+    {
+        "Character":    "Crash",
+        "Stage_Char":   "Crash",
+        "ID_Bonus1":    134796,
+        "ID_Bonus2":    134797,
+    },
+    {
+        "Character":    "Peach",
+        "Stage_Char":   "Peach",
+        "ID_Bonus1":    134798,
+        "ID_Bonus2":    134799,
+    },
+    {
+        "Character":    "Polygon Team",
+        "Stage_Char":   "Polygon Team / Mad Piano",
+        "ID_Bonus1":    24894,
+        "ID_Bonus2":    24798,
+    },
+]
+
+bonusStage = 0
+
+for params in Bonus_Leaderboards {
+    bonusStage = bonusStage + 1
+    
+    // Bonus 1
+    leaderboard(
+        id = params["ID_Bonus1"],
+        title = format("Bonus 1: Break The Targets", bonusStage),
+        description = format("Fastest Time to clear the stage of {0}", params["Stage_Char"]),
+        start  = LB_Bonus1(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = Bonus12Timer(),
+        format = "FRAMES",
+        lower_is_better = true
+    )
+    
+    // Bonus 2
+    leaderboard(
+        id = params["ID_Bonus2"],
+        title = format("Bonus 2: Board The Platforms", bonusStage),
+        description = format("Fastest Time to clear the stage of {0}", params["Stage_Char"]),
+        start  = LB_Bonus2(params["Character"]) &&
+                 RulesCommunity(),
+        cancel = always_false(),
+        submit = always_true(),
+        value  = Bonus12Timer(),
+        format = "FRAMES",
+        lower_is_better = true
+    )
+}
+
+leaderboard(
+    id = 25988, title = "Bonus 3: Race To The Finish",
+    description = "Fastest Time to clear the Normal Stage",
     start  = LB_Bonus3("Normal") &&
-              RulesCommunity(),
+             RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus3Timer(),
@@ -9516,13 +5494,490 @@ leaderboard(
 )
 
 leaderboard(
-    id = 25986, title = "Bonus 3: Race To The Finish - Stage 2",
-    description = "Remix Stage",
+    id = 25986, title = "Bonus 3: Race To The Finish",
+    description = "Fastest Time to clear the Remix Stage",
     start  = LB_Bonus3("Remix") &&
-              RulesCommunity(),
+             RulesCommunity(),
     cancel = always_false(),
     submit = always_true(),
     value  = Bonus3Timer(),
     format = "FRAMES",
     lower_is_better = true
+)
+
+// ----------------------------------------------------------------------------------------------------
+// Rich Presence
+
+Lookup_Character = {
+}
+
+for character in Characters {
+    Lookup_Character[character[0]] = character[1]
+}
+
+Lookup_Stage = {
+}
+
+for stage in Stages {
+    Lookup_Stage[stage[0]] = stage[1]
+}
+
+Lookup_1PMode = {
+    0x00: "1P Game",
+    0x01: "Race to the Finish",
+    0x02: "Multi-Man Mode",
+    0x03: "Cruel Multi-Man Mode",
+    0x04: "Remix 1P",
+    0x05: "All-Star Mode",
+    0x06: "Home-Run Contest"
+}
+
+Lookup_VSMode = {
+    0x00: "Free-for-All",
+    0x01: "12-Character",
+    0x02: "Tag Team",
+    0x03: "King of the Hill",
+    0x04: "Smashketball"
+}
+
+Lookup_Bonus = {
+    0x00: "Bonus 1",
+    0x01: "Bonus 2",
+    0x02: "Bonus 3"
+}
+
+Lookup_Smashketball = {
+    0x00: "Smashketball 1",
+    0x01: "Smashketball 2"
+}
+
+Lookup_Challenges = {
+    0x00: "/14",
+    0x04: "/14",
+    0x05: "/30"
+}
+
+rich_presence_conditional_display(
+    (GameState() == 0x01 || GameState() == 0x08) && (byte(Mem_GameMode) == 0x00 || byte(Mem_GameMode) == 0x04 || byte(Mem_GameMode) == 0x05) && PreGameState() == 0x0E && byte(0xA4B40) == 0xFF,
+    "{0} got a Game Over [{1}]",
+    rich_presence_lookup("Character", byte(0xA4B38), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game")
+)
+rich_presence_conditional_display(
+    (GameState() == 0x01 || GameState() == 0x1B || BothGameStates() == 0x371B || BothGameStates() == 0x800D) && PreGameState() != 0x0E,
+    "In the Titlescreen"
+)
+rich_presence_conditional_display(
+    GameState() == 0x01 && PreGameState() == 0x0E && (byte(0xA4B1A) == GetStageID("Racing to the Normal Finish") || byte(0xA4B1A) == GetStageID("Racing to the Remix Finish")),
+    "{0} with {1} [⏱️{2}] [{3}] [🏆{4}{5}]",
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_value("Secs", measured(dword(0xA4B2C)/60, when=dword(0xA4B2C) <= 0xE10), "SECS"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x01 && PreGameState() == 0x0E && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In a Battle between {1} and {2} on the Stage '{3}' [{0}] [🏆{4}{5}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x01 && PreGameState() == 0x0E && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In a Battle between {1}, {2} and {3} on the Stage '{4}' [{0}] [🏆{5}{6}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x01 && PreGameState() == 0x0E,
+    "In a Battle between {1}, {2}, {3} and {4} on the Stage '{5}' [{0}] [🏆{6}{7}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x03,
+    "In the Debug Menu"
+)
+rich_presence_conditional_display(
+    GameState() == 0x07,
+    "In the Main Menu"
+)
+rich_presence_conditional_display(
+    GameState() == 0x08,
+    "In the 1P Mode Menu"
+)
+rich_presence_conditional_display(
+    GameState() == 0x09,
+    "In the VS Mode Menu"
+)
+rich_presence_conditional_display(
+    GameState() == 0x0E,
+    "{0} is waiting for the next Challenge [{1}] [🏆{2}{3}]",
+    rich_presence_lookup("Character", byte(0xA4B38), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x0F || GameState() == 0x2F || GameState() == 0x39,
+    "In the Options"
+)
+rich_presence_conditional_display(
+    GameState() == 0x11,
+    "Preparing {0}",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game")
+)
+rich_presence_conditional_display(
+    (GameState() == 0x10 || BothGameStates() == 0x1510) && byte(Mem_VSMode) != 4,
+    "Preparing a {0} Battle",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All")
+)
+rich_presence_conditional_display(
+    (GameState() == 0x10 || BothGameStates() == 0x1510) && byte(Mem_VSMode) == 4,
+    "Preparing a {0} Battle",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1")
+)
+rich_presence_conditional_display(
+    GameState() == 0x12 ||
+        BothGameStates() == 0x1512,
+    "Preparing a Training Session"
+)
+
+rich_presence_conditional_display(
+    (GameState() == 0x13 || GameState() == 0x14) && (byte(Mem_GameMode) != 2 && byte(Mem_GameMode) != 3 && byte(Mem_GameMode) != 6),
+    "Preparing a {0} Practice",
+    rich_presence_lookup("Bonus", byte(0x137714), Lookup_Bonus, fallback="Bonus 1")
+)
+
+rich_presence_conditional_display(
+    (GameState() == 0x13 || GameState() == 0x14) && (byte(Mem_GameMode) == 2 || byte(Mem_GameMode) == 3 || byte(Mem_GameMode) == 6),
+    "Preparing a {0}",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game")
+)
+
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) != 4 && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In a Battle between {1} and {2} on the Stage '{3}' [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4D0A), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) != 4 && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In a Battle between {1}, {2} and {3} on the Stage '{4}' [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4D0A), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) != 4,
+    "In a Battle between {1}, {2}, {3} and {4} on the Stage '{5}' [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4D0A), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) == 4 && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In a Battle between {1} and {2} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) == 4 && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In a Battle between {1}, {2} and {3} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x16 && byte(Mem_VSMode) == 4,
+    "In a Battle between {1}, {2}, {3} and {4} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) != 4 && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In the Results of a Battle between {1} and {2} [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) != 4 && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In the Results of a Battle between {1}, {2} and {3} [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) != 4,
+    "In the Results of a Battle between {1}, {2}, {3} and {4} [{0}]",
+    rich_presence_lookup("VSMode", byte(Mem_VSMode), Lookup_VSMode, fallback="Free-for-All"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) == 4 && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In the Results of a Battle between {1} and {2} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) == 4 && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In the Results of a Battle between {1}, {2} and {3} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x18 && byte(Mem_VSMode) == 4,
+    "In the Results of a Battle between {1}, {2}, {3} and {4} [{0}]",
+    rich_presence_lookup("Smashketball", byte(Mem_SmashketballData), Lookup_Smashketball, fallback="Smashketball 1"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x19,
+    "Checking the VS Record"
+)
+rich_presence_conditional_display(
+    GameState() == 0x1A,
+    "Checking Character Data of {0}",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() >= 0x1C && GameState() <= 0x2E,
+    "Watching the Intro Sequence"
+)
+rich_presence_conditional_display(
+    GameState() == 0x30,
+    "{0} completed the Mode [{1}] [🏆{2}{2}]",
+    rich_presence_lookup("Character", byte(0xA4B38), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() >= 0x33 && GameState() <= 0x34 && byte(Mem_GameMode) != 0x05,
+    "{0} completed the current Challenge [{1}] [🏆{2}{3}]",
+    rich_presence_lookup("Character", byte(0xA4B38), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(0xA4AE4) + 1),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() >= 0x33 && GameState() <= 0x34 && byte(Mem_GameMode) == 0x05,
+    "{0} completed the current Challenge [{1}] [🏆{2}{3}]",
+    rich_presence_lookup("Character", byte(0xA4B38), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x35 && byte(Mem_GameMode) != 2 && byte(Mem_GameMode) != 3 && PlayingBonus1(0x18F1B2) && BothGameStates() == 0x3534, //Break the Targets in Game Mode
+    "{0} with {1} [🎯{2}/10] [⏱️{3}] [{4}] [🏆{5}{6}]",
+    rich_presence_lookup("Stage", byte(0x18F1B2), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_macro("Number", 10 - byte(0x1313FF)),
+    rich_presence_value("Secs", word(0x18F1C4)/60, "SECS"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(0xA4AE4)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x35 && byte(Mem_GameMode) != 2 && byte(Mem_GameMode) != 3 && PlayingBonus1(0x18F1B2) && BothGameStates() != 0x3534, //Break the Targets in Practice
+    "{0} with {1} [🎯{2}/10] [⏱️{3}] [Practice]",
+    rich_presence_lookup("Stage", byte(0x18F1B2), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_macro("Number", 10 - byte(0x1313FF)),
+    rich_presence_value("Frames", dword(0x18F1C8), "FRAMES")
+)
+rich_presence_conditional_display(
+    GameState() == 0x35 && byte(Mem_GameMode) != 2 && byte(Mem_GameMode) != 3 && PlayingBonus2(0x18F1B2) && BothGameStates() == 0x3534, //Board the Platforms in Game Mode
+    "{0} with {1} [🕳{2}/10] [⏱️{3}] [{4}] [🏆{5}{6}]",
+    rich_presence_lookup("Stage", byte(0x18F1B2), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_macro("Number", 10 - byte(0x131403)),
+    rich_presence_value("Secs", word(0x18F1C4)/60, "SECS"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x35 && byte(Mem_GameMode) != 2 && byte(Mem_GameMode) != 3 && PlayingBonus2(0x18F1B2) && BothGameStates() != 0x3534, //Board the Platforms in Practice
+    "{0} with {1} [🕳{2}/10] [⏱️{3}] [Practice]",
+    rich_presence_lookup("Stage", byte(0x18F1B2), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_macro("Number", 10 - byte(0x131403)),
+    rich_presence_value("Frames", dword(0x18F1C8), "FRAMES")
+)
+rich_presence_conditional_display(
+    GameState() == 0x36 && byte(PointerPlayerData() + 0x0C + 0xB50*1) == 0,
+    "In a Training Session with {0} on the Stage '{1}' [Training]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4ADC), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x36 && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In a Training Session with {0} and {1} on the Stage '{2}' [Training]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4ADC), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x36 && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In a Training Session with {0}, {1} and {2} on the Stage '{3}' [Training]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4ADC), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x36,
+    "In a Training Session with {0}, {1}, {2} and {3} on the Stage '{4}' [Training]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4ADC), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x37,
+    "In the Gallery"
+)
+rich_presence_conditional_display(
+    GameState() == 0x38,
+    "Watching the Credits"
+)
+rich_presence_conditional_display(
+    GameState() == 0x3A,
+    "In the Data Menu"
+)
+rich_presence_conditional_display(
+    GameState() == 0x3B,
+    "In the Sound Test"
+)
+rich_presence_conditional_display(
+    GameState() == 0x3C,
+    "Watching the Tutorial Battle"
+)
+rich_presence_conditional_display(
+    GameState() == 0x3D && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "Watching a Battle between {0} and {1} on the Stage '{2}' [Demo]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0x18E2F2), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x3D && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "Watching a Battle between {0}, {1} and {2} on the Stage '{3}' [Demo]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0x18E2F2), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x3D,
+    "Watching a Battle between {0}, {1}, {2} and {3} on the Stage '{4}' [Demo]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0x18E2F2), Lookup_Stage, fallback="Peach's Castle")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && (byte(0xA4B1A) == GetStageID("Racing to the Normal Finish") || byte(0xA4B1A) == GetStageID("Racing to the Remix Finish")),
+    "{0} with {1} [⏱️{2}]",
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_value("Frames", dword(0xA4B30), "FRAMES")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && (byte(0xA4B1A) == GetStageID("Home-Run Contest")),
+    "{0} is punching the Sandbag for a great Distance [Home-Run Contest]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && (byte(Mem_GameMode) == 0x02 || byte(Mem_GameMode) == 0x03),
+    "{0} is smashing against endlessly on the Stage '{1}' [⚪{3}] [{2}]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_value("Number", dword(Mem_MultiManKills), "VALUE")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && byte(Mem_GameMode) == 0x05 && (byte(0xA4B1A) == GetStageID("All-Star Lobby")),
+    "{0} is in the Lobby [All-Star Mode] [🏆{1}{2}]",
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && byte(Mem_GameMode) == 0x05 && PreGameState() == 0x0E && byte(PointerPlayerData() + 0x0C + 0xB50*2) == 0,
+    "In a Battle between {1} and {2} on the Stage '{3}' [{0}] [🏆{4}{5}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && byte(Mem_GameMode) == 0x05 && PreGameState() == 0x0E && byte(PointerPlayerData() + 0x0C + 0xB50*3) == 0,
+    "In a Battle between {1}, {2} and {3} on the Stage '{4}' [{0}] [🏆{5}{6}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_conditional_display(
+    GameState() == 0x77 && byte(Mem_GameMode) == 0x05 && PreGameState() == 0x0E,
+    "In a Battle between {1}, {2}, {3} and {4} on the Stage '{5}' [{0}] [🏆{6}{7}]",
+    rich_presence_lookup("1PMode", byte(Mem_GameMode), Lookup_1PMode, fallback="1P Game"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*0), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*1), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*2), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Character", byte(PointerPlayerData() + 0x08 + 0xB50*3), Lookup_Character, fallback="Mario"),
+    rich_presence_lookup("Stage", byte(0xA4B1A), Lookup_Stage, fallback="Peach's Castle"),
+    rich_presence_macro("Number", byte(Mem_GameMode + 0x14)),
+    rich_presence_lookup("Challenges", byte(Mem_GameMode), Lookup_Challenges, fallback="")
+)
+rich_presence_display(
+        "In the Main Menu"
 )
