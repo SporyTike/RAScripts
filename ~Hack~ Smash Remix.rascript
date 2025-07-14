@@ -3572,7 +3572,7 @@ achievement(
 )
 
 achievement(
-    title = "Dear Mario...", points = 3,
+    title = "Dear Mario...", points = 1,
     description = "Find a hidden letter from Peach.",
     id = 530000, badge = "601090", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
     trigger = GameState() == 0x1A &&
