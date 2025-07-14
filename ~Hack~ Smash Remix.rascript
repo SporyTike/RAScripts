@@ -916,8 +916,9 @@ function BeatAllstarsNormal() {
     once(NormalModeStage() == 0x8B &&
         byte(Mem_GameMode + 20) == 0 &&
         BothGameStates() == 0x770E) &&
-    trigger_when(prev(NormalModeProgress()) == 0x0D 
-        && NormalModeProgress() == 0x0E) &&
+    trigger_when(prev(GameState()) >= 0x33 &&
+        prev(GameState()) <= 0x34 &&
+        GameState() == 0x30) &&
     never(byte(Mem_GameMode) != 0x05) &&
     never(dword(Mem_HighscoreOn)  == 0x00)
 }
@@ -3340,7 +3341,7 @@ achievement(
 achievement(
     title = "Champions League", points = 5, type="progression",
     description = "Win a 1-vs-1 Smashketball 2 match against a COM on Level 9 with a lead of 5 points or more.",
-    id = 529259, badge = "600224", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
+    id = 529259, badge = "600225", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
     trigger = (BeatSmashketball5Points("Soccer", 0) ||
                BeatSmashketball5Points("Soccer", 1)) &&
               RulesCommunity()
