@@ -1249,8 +1249,10 @@ function BeatSmashketball(mode, slot) {
                + byte(Mem_SmashketballData + 0x72)
                + byte(Mem_SmashketballData + 0x71)
                + byte(Mem_SmashketballData + 0x70) != 2) &&
-           once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
+           once(GameState() == 0x16 &&
+                byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
            trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
            trigger_when(GameState() == 0x18 &&
@@ -1285,8 +1287,8 @@ function BeatSmashketballCOM0(mode, slot) {
     control[slot] = 1
 
     return BeatSmashketball(mode, slot) &&
-           trigger_when(once(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50) == 0 &&
-                             dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) >= 1 &&
+           trigger_when(once(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50) >= 1 &&
+                             dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) == 0 &&
                              byte(Mem_FreeModeData + 0x0C) == 0x06)) &&
            once(GameState() == 0x16 &&
                 byte(Mem_FreeModeData + 0x0C) == 0x00) &&
@@ -1306,25 +1308,39 @@ function BeatTagTeam(slot) {
                  GameState() != 0x18) &&
            never(byte(Mem_VSMode) != 2) &&
            never(FreeModeNumFighters() != 1) &&
-           once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
+           once(GameState() == 0x16 && 
+                byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
            trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
            once(GameState() == 0x16 &&
-           byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 5) &&
-           trigger_when(GameState() == 0x18 &&
+                byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 5) &&
+                trigger_when(GameState() == 0x18 &&
            byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
            byte(Mem_12CharacterStocks + 0x4E70 + 0x60 + 0x3 - byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))) == 0x5 &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) == 0x1B &&
-           byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) == 0x1B &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*1) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*2) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*3) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*4) != 0x1B) &&
+           never(GameState() == 0x16 &&
+                byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[1]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*5) != 0x1B) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1)
 }
@@ -1548,7 +1564,8 @@ function LuigiKnockDown(attacker, target) {
            word(PointerPlayerData() + 0x24 + 0xB50*attacker) == 0xBD &&
            dword(0xA4D64 + 0x74*target + 4*attacker) > prev(dword(0xA4D64 + 0x74*target + 4*attacker)) &&
            prev(word(PointerPlayerData() + 0x24 + 0xB50*target) == 0x55) && 
-           word(PointerPlayerData() + 0x24 + 0xB50*target) == 0x33 &&
+           word(PointerPlayerData() + 0x24 + 0xB50*target) >= 0x33 &&
+           word(PointerPlayerData() + 0x24 + 0xB50*target) <= 0x37 &&
            float(PointerPlayerData() + 0x58 + 0xB50*target) <= -110.0
 }
 
@@ -1894,7 +1911,7 @@ NumberOfNewChars            = length(Characters) - NumberOfOldChars
 achievement(
     title = "Keep It Normal", points = 5, type="progression",
     description = "Complete 1P Game on Normal.",
-    id = 528930, badge = "599784", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
+    id = 532081, badge = "599784", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
     trigger = Beat1PNormal() &&
               RulesCommunity()
 )
@@ -2217,7 +2234,7 @@ achievement(
 achievement(
     title = "Shuffled Around", points = 5, type="progression",
     description = "Complete Remix 1P on Normal.",
-    id = 529101, badge = "599953", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
+    id = 532082, badge = "599953", published = "21.09.2021 12:23:11", modified = "08.09.2024 13:29:37", 
     trigger = BeatRemix1PNormal() &&
               RulesCommunity()
 )
@@ -3160,7 +3177,7 @@ achievement(
 achievement(
     title = "Everyone Is Here", points = 5, type = "progression",
     description = "Complete All-Star Mode on Normal.",
-    id = 529121, badge = "599965", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
+    id = 532083, badge = "599965", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = BeatAllstarsNormal() &&
               RulesCommunity()
 )
@@ -3242,7 +3259,7 @@ achievement(
 achievement(
     title = "Last One Standing", points = 10, type = "progression",
     description = "Win a 12-Character Battle against a COM on Level 5 without leaving the mode.",
-    id = 529123, badge = "600070", published = "15.08.2021 17:18:38", modified = "08.09.2024 17:22:06",
+    id = 532084, badge = "600070", published = "15.08.2021 17:18:38", modified = "08.09.2024 17:22:06",
     trigger = Beat12CharacterBattleCPU5() &&
               never(byte(Mem_12CharacterStocks + 0xBC) != 0) &&
               never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
@@ -3331,7 +3348,7 @@ achievement(
 
 achievement(
     title = "National Smashketball Association", points = 5, type="progression",
-    description = "Win a 1-vs-1 Smashketball 1 match against a COM on Level 9 with a lead of 5 points or more.",
+    description = "Win a Smashketball 1 match against a COM on Level 9 with a lead of 5 points or more.",
     id = 529258, badge = "600224", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
     trigger = (BeatSmashketball5Points("Basketball", 0) ||
                BeatSmashketball5Points("Basketball", 1)) &&
@@ -3340,7 +3357,7 @@ achievement(
 
 achievement(
     title = "Champions League", points = 5, type="progression",
-    description = "Win a 1-vs-1 Smashketball 2 match against a COM on Level 9 with a lead of 5 points or more.",
+    description = "Win a Smashketball 2 match against a COM on Level 9 with a lead of 5 points or more.",
     id = 529259, badge = "600225", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
     trigger = (BeatSmashketball5Points("Soccer", 0) ||
                BeatSmashketball5Points("Soccer", 1)) &&
@@ -3362,7 +3379,7 @@ achievement(
 
 achievement(
     title = "Oh Boy, He's On Fire!", points = 3,
-    description = "Win a 1-vs-1 Smashketball match against a COM on Level 9 without letting the COM score once.",
+    description = "Win a Smashketball match against a COM on Level 9 without letting the COM score once.",
     id = 529908, badge = "601042", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:18:55", 
     trigger = (BeatSmashketballCOM0("Basketball", 0) ||
                BeatSmashketballCOM0("Basketball", 1) ||
