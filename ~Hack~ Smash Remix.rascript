@@ -3461,12 +3461,12 @@ achievement(
                 dword(PointerPlayerData() + 0x002A5C) == Val_WarioComplain + 0x0C) ||
                (GameState() == 18 &&
                byte(0x1385A0) == GetCharID("Wario") &&
-               prev(dword(PointerPlayerData() + 0x0013BC)) == 2152316132 &&
-                dword(PointerPlayerData() + 0x0013BC) == 2152316144) ||
+               prev(dword(PointerPlayerData() + 0x0013BC)) == Val_WarioComplain &&
+                dword(PointerPlayerData() + 0x0013BC) == Val_WarioComplain + 0x0C) ||
                (GameState() == 18 &&
                byte(0x138658) == GetCharID("Wario") &&
-               prev(dword(PointerPlayerData() + 0x00086C)) == 2152316132 &&
-                dword(PointerPlayerData() + 0x00086C) == 2152316144))
+               prev(dword(PointerPlayerData() + 0x00086C)) == Val_WarioComplain &&
+                dword(PointerPlayerData() + 0x00086C) == Val_WarioComplain + 0x0C))
 )
 
 achievement(
