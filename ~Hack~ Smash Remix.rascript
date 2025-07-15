@@ -1251,8 +1251,10 @@ function BeatSmashketball(mode, slot) {
                + byte(Mem_SmashketballData + 0x70) != 2) &&
            once(GameState() == 0x16 &&
                 byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
+           trigger_when(byte(Mem_FreeModePlacement + 4*0)
+                      + byte(Mem_FreeModePlacement + 4*1)
+                      + byte(Mem_FreeModePlacement + 4*2) 
+                      + byte(Mem_FreeModePlacement + 4*3) == 1) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
            trigger_when(GameState() == 0x18 &&
@@ -1561,9 +1563,12 @@ function LuigiKnockDown(attacker, target) {
             byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("JP Luigi") ||
             byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Metal Luigi") ||
             byte(PointerPlayerData() + 0x08 + 0xB50*attacker) == GetCharID("Dr. Luigi")) &&
+            bit0(PointerPlayerData() + 0x20 + 0xB50*attacker) == 0 &&
+            bit0(PointerPlayerData() + 0x20 + 0xB50*target) == 1 &&
            word(PointerPlayerData() + 0x24 + 0xB50*attacker) == 0xBD &&
            dword(0xA4D64 + 0x74*target + 4*attacker) > prev(dword(0xA4D64 + 0x74*target + 4*attacker)) &&
-           prev(word(PointerPlayerData() + 0x24 + 0xB50*target) == 0x55) && 
+           prev(word(PointerPlayerData() + 0x24 + 0xB50*target) >= 0x54) && 
+           prev(word(PointerPlayerData() + 0x24 + 0xB50*target) <= 0x56) &&
            word(PointerPlayerData() + 0x24 + 0xB50*target) >= 0x33 &&
            word(PointerPlayerData() + 0x24 + 0xB50*target) <= 0x37 &&
            float(PointerPlayerData() + 0x58 + 0xB50*target) <= -110.0
@@ -1776,7 +1781,7 @@ function LB_1PGame(name) {
 
 function LB_Remix1P(name) {
     return NormalModeChar1() == GetCharID(name) &&
-           byte(Mem_GameMode) == 0x01 &&
+           byte(Mem_GameMode) == 0x04 &&
            byte(Mem_GameMode) == prev(byte(Mem_GameMode)) &&
            ((prev(NormalModeProgress()) == 0x0D &&
                NormalModeProgress() == 0x0E) ||
@@ -3839,7 +3844,7 @@ achievement(
 
 achievement(
     title = "Intergalactic Showdown", points = 3,
-    description = "Win a Free-for-All Battle as Fox against Wolf on the stage 'Venom' with Level 9 CPU.",
+    description = "Win a Free-for-All Battle as Wolf against Fox on the stage 'Venom' with Level 9 CPU.",
     id = 166159, badge = "523098", published = "15.08.2021 15:58:18", modified = "09.09.2024 17:17:26", 
     trigger = (Beat1COM("Venom", "Wolf", "Fox", 0) ||
               Beat1COM("Venom", "Wolf", "Fox", 1)) &&
