@@ -89,6 +89,7 @@ Val_WarioComplain       = 0x8053DE80
 Mem_CurrentMusicTrack   = 0x096710
 Mem_VSRecordsOldChars   = 0x0A44E0
 Mem_NormalModeData      = 0x0A4938
+Mem_1PGameOldScores     = Mem_NormalModeData + 0x4
 Mem_FreeModeData        = 0x0A4D0E
 Mem_FreeModePlacement   = 0x139BB0
 Mem_GameState           = 0x0A4AD3
@@ -1400,37 +1401,64 @@ function PlayingBonus1(address) {
     return code
 }
 
-function BeatAllBonus1() {
-    stageClears = []
-    charIDs = []
-    for stages in BonusStages {
-        array_push(stageClears, stages[1])
-    }
-    for character in Characters {
-        if(character[1] != "") {
-            array_push(charIDs, character[0])
+function BeatAllBonus(bonusIndex) {
+    code = 0
+    totalStages = length(Characters) - 4 // Do not count 0x0C (Master Hand), 0x1B, 0x1C and 0x3C (Sandbag)
+    
+    loop = 0
+    for char in Characters {
+        if (char[0] != 0x0C && char[0] != 0x1B && char[0] != 0x1C && char[0] != 0x3C) {
+            if(loop <= GetCharID("Ness")) {
+                code = code + byte(Mem_1PGameOldScores + 23 + bonusIndex*8 + (loop - 0x00)*32) / 10
+            } else {
+                code = code + byte(Mem_1PGameNewScores + 23 + bonusIndex*8 + (loop - 0x0C)*32) / 10
+            }
         }
+        loop = loop + 1
     }
     
-    i = length(stageClears)
-    codeStages = tally_of(stageClears, i, stage => tally(1, (PreGameState() == 0x13 || 
-                                                   (PreGameState() == 0x34 &&
-                                                   NormalModeProgress() == 0x03)) &&
-                                                   GameState() == 0x35 &&
-                                                   dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   Bonus1Targets() == 0 &&
-                                                   prev(Bonus12State() == 0x05) &&
-                                                   Bonus12State() == 0x06 &&
-                                                   Bonus12Stage() == stage))
-                                                   
-    codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x13 || 
-                                                   (PreGameState() == 0x34 &&
-                                                   NormalModeProgress() == 0x03)) &&
-                                                   GameState() == 0x35 &&
-                                                   dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   Bonus12Char() == char))
-                                                   
-    return measured(codeStages) && never(codeReset)
+    return BothGameStates() != 0x1B1B &&
+           BothGameStates() != 0x800D &&
+           measured(code == totalStages) &&
+               prev(code) == totalStages - 1
+}
+
+// ----- Old Logic for beating all with one Character -----
+// function BeatAllBonus1WithSingleChar() {
+//     stageClears = []
+//     charIDs = []
+//     for stages in BonusStages {
+//         array_push(stageClears, stages[1])
+//     }
+//     for character in Characters {
+//         if(character[1] != "") {
+//             array_push(charIDs, character[0])
+//         }
+//     }
+//     
+//     i = length(stageClears)
+//     codeStages = tally_of(stageClears, i, stage => tally(1, (PreGameState() == 0x13 || 
+//                                                    (PreGameState() == 0x34 &&
+//                                                    NormalModeProgress() == 0x03)) &&
+//                                                    GameState() == 0x35 &&
+//                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+//                                                    Bonus1Targets() == 0 &&
+//                                                    prev(Bonus12State() == 0x05) &&
+//                                                    Bonus12State() == 0x06 &&
+//                                                    Bonus12Stage() == stage))
+//                                                    
+//     codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x13 || 
+//                                                    (PreGameState() == 0x34 &&
+//                                                    NormalModeProgress() == 0x03)) &&
+//                                                    GameState() == 0x35 &&
+//                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+//                                                    Bonus12Char() == char))
+//                                                    
+//     return measured(codeStages) && never(codeReset)
+// }
+
+function BeatAllBonus1() {
+    return BeatAllBonus(0)
 }
 
 function PlayingBonus2(address) {
@@ -1443,37 +1471,41 @@ function PlayingBonus2(address) {
     return code
 }
 
+// ----- Old Logic for beating all with one Character -----
+// function BeatAllBonus2WithSingleChar() {
+//     stageClears = []
+//     charIDs = []
+//     for stages in BonusStages {
+//         array_push(stageClears, stages[2])
+//     for character in Characters {
+//         if(character[1] != "") {
+//             array_push(charIDs, character[0])
+//         }
+//     }
+//     
+//     i = length(stageClears)
+//     codeStages = tally_of(stageClears, i, stage => tally(1, (PreGameState() == 0x14 || 
+//                                                    (PreGameState() == 0x34 &&
+//                                                    NormalModeProgress() == 0x07)) &&
+//                                                    GameState() == 0x35 &&
+//                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+//                                                    Bonus2Platforms() == 0 &&
+//                                                    prev(Bonus12State() == 0x05) &&
+//                                                    Bonus12State() == 0x06 &&
+//                                                    Bonus12Stage() == stage))
+//                                                    
+//     codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x14 || 
+//                                                    (PreGameState() == 0x34 &&
+//                                                    NormalModeProgress() == 0x07)) &&
+//                                                    GameState() == 0x35 &&
+//                                                    dword(Mem_HighscoreOn)  == 0x01 &&
+//                                                    Bonus12Char() == char))
+//                                                    
+//     return measured(codeStages) && never(codeReset)
+// }
+
 function BeatAllBonus2() {
-    stageClears = []
-    charIDs = []
-    for stages in BonusStages {
-        array_push(stageClears, stages[2])
-    }
-    for character in Characters {
-        if(character[1] != "") {
-            array_push(charIDs, character[0])
-        }
-    }
-    
-    i = length(stageClears)
-    codeStages = tally_of(stageClears, i, stage => tally(1, (PreGameState() == 0x14 || 
-                                                   (PreGameState() == 0x34 &&
-                                                   NormalModeProgress() == 0x07)) &&
-                                                   GameState() == 0x35 &&
-                                                   dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   Bonus2Platforms() == 0 &&
-                                                   prev(Bonus12State() == 0x05) &&
-                                                   Bonus12State() == 0x06 &&
-                                                   Bonus12Stage() == stage))
-                                                   
-    codeReset = tally_of(charIDs, 2, char => tally(1, (PreGameState() == 0x14 || 
-                                                   (PreGameState() == 0x34 &&
-                                                   NormalModeProgress() == 0x07)) &&
-                                                   GameState() == 0x35 &&
-                                                   dword(Mem_HighscoreOn)  == 0x01 &&
-                                                   Bonus12Char() == char))
-                                                   
-    return measured(codeStages) && never(codeReset)
+    return BeatAllBonus(1)
 }
 
 function TotalScoreAchievement(mode, score) {
@@ -1566,7 +1598,7 @@ function LuigiKnockDown(attacker, target) {
             bit0(PointerPlayerData() + 0x20 + 0xB50*attacker) == 0 &&
             bit0(PointerPlayerData() + 0x20 + 0xB50*target) == 1 &&
            word(PointerPlayerData() + 0x24 + 0xB50*attacker) == 0xBD &&
-           dword(0xA4D64 + 0x74*target + 4*attacker) > prev(dword(0xA4D64 + 0x74*target + 4*attacker)) &&
+           dword(byte(PointerPlayerData() + 0x0E + 0xB50*target)*0x74 + 0xA4D64 + byte(PointerPlayerData() + 0x0E + 0xB50*attacker)*4) > prev(dword(byte(PointerPlayerData() + 0x0E + 0xB50*target)*0x74 + 0xA4D64 + byte(PointerPlayerData() + 0x0E + 0xB50*attacker)*4)) &&
            prev(word(PointerPlayerData() + 0x24 + 0xB50*target) >= 0x54) && 
            prev(word(PointerPlayerData() + 0x24 + 0xB50*target) <= 0x56) &&
            word(PointerPlayerData() + 0x24 + 0xB50*target) >= 0x33 &&
@@ -3189,14 +3221,14 @@ achievement(
 
 achievement(
     title = "Sharp Shots on Targets", points = 25, type="progression",
-    description = "Complete all Bonus 1 'Break The Targets' Stages in a row with a single character.",
+    description = "Complete Normal Bonus 1 'Break The Targets' for every character.",
     id = 166068, badge = "523105", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = BeatAllBonus1()
 )
 
 achievement(
     title = "Precise Jumps on Platforms", points = 25, type="progression",
-    description = "Complete all Bonus 2 'Board The Platforms' Stages in a row with a single character.",
+    description = "Complete Normal Bonus 2 'Board The Platforms' for every character.",
     id = 166069, badge = "523106", published = "15.08.2021 02:02:32", modified = "08.09.2024 14:31:05", 
     trigger = BeatAllBonus2()
 )
@@ -6004,3 +6036,4 @@ rich_presence_conditional_display(
 rich_presence_display(
         "In the Main Menu"
 )
+
