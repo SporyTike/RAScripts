@@ -3731,8 +3731,8 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D0) <= -1790.0 &&
               float(tbyte(Mem_CameraData) + 0x0D4) >= 2530.0 &&
               float(tbyte(Mem_CameraData) + 0x0D4) <= 2680.0 &&
-              float(tbyte(Mem_CameraData) + 0x0CC) >= 750.0 &&
-              float(tbyte(Mem_CameraData) + 0x0CC) <= 850.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) >= 600.0 &&
+              float(tbyte(Mem_CameraData) + 0x0CC) <= 750.0 &&
               float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -100.0 &&
               float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 100.0 &&
               float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= 200.0 &&
