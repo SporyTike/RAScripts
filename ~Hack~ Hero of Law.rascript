@@ -67,9 +67,9 @@ function reachIngoRupees(rupee) {
 }
 
 function winIngoHand(id) {
-    return byte(Mem_IngoPlayerHand + 0x1E) > prev(byte(Mem_IngoPlayerHand + 0x1E)) &&
-           byte(Mem_IngoPlayerHand + 0x1E) == 1 &&
-           byte(Mem_IngoPlayerHand + 0x19) == id
+    return byte(Mem_IngoPlayerHand + 0x18) > prev(byte(Mem_IngoPlayerHand + 0x18)) &&
+           byte(Mem_IngoPlayerHand + 0x18) == 1 &&
+           byte(Mem_IngoPlayerHand + 0x13) == id
 }
 
 // ------------------------------------------------------------
@@ -480,7 +480,7 @@ achievement(
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
-                  dialogueRead(0x3E),
+                  dialogueRead(0x40),
     type        = "missable"
 )
 
