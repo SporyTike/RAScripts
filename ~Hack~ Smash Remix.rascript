@@ -3338,8 +3338,8 @@ achievement(
     description = "Win a 12-Character Battle with the Remix Team against a COM using the same on Level 9 without leaving the mode.",
     id = 462251, badge = "523501", published = "09.09.2024 17:24:34", modified = "09.09.2024 17:31:48", 
     trigger = Beat12CharacterBattleCPU9() &&
-              never(byte(Mem_12CharacterStocks + 0xBD) != 3) &&
-              never(byte(Mem_12CharacterStocks + 0xBD) != byte(Mem_12CharacterStocks + 0x190)) &&
+              never(byte(Mem_12CharacterStocks + 0xBC) != 3) &&
+              never(byte(Mem_12CharacterStocks + 0xBC) != byte(Mem_12CharacterStocks + 0x190)) &&
               RulesCommunity()
 )
 
