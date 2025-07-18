@@ -600,11 +600,14 @@ rich_presence_conditional_display(
 )
 rich_presence_conditional_display(
     word(Mem_Map) == 0x29,
-    "Link is playing Poker with Ingo"
+    "Link is playing Poker with Ingo [💰{0}] [Extra 2]",
+    rich_presence_value(
+        "Number", dword(Mem_IngoRupees), "VALUE"
+    )
 )
 rich_presence_conditional_display(
     word(Mem_Map) == 0x62 || word(Mem_Map) == 0x78,
-    "Super Talon is jumping around [⏱️{0}]",
+    "Super Talon is jumping around [⏱️{0}] [Extra 1]",
     rich_presence_value(
         "Number", dword(Mem_SuperTalonTime)/100, "VALUE"
     )
@@ -616,7 +619,7 @@ rich_presence_conditional_display(
         "Scenario",
         dword(Mem_Scenario),
         Scenario,
-        fallback = "Link is in the Grand Court of Hyrule"
+        fallback = "Link is in the Grand Court of Hyrule [Main]"
     ),
     rich_presence_value(
         "Number", word(Mem_Health), "VALUE"
@@ -626,10 +629,10 @@ rich_presence_conditional_display(
     word(Mem_Map) >= 1 && word(Mem_Map) <= 100 && dword(Mem_Scenario) >= 0x27,
     "{0} [❤️{1}] [Extra 3]",
     rich_presence_lookup(
-        "Scenario",
+        "ScenarioExtra",
         dword(Mem_Scenario),
         Scenario,
-        fallback = "Link is in the Grand Court of Hyrule"
+        fallback = "Link is in the Grand Court of Hyrule [Extra 3]"
     ),
     rich_presence_value(
         "Number", word(Mem_Health), "VALUE"
