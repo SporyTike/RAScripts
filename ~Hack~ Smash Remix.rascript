@@ -3949,8 +3949,8 @@ achievement(
     trigger = (Beat1COMKirbyRandom(0) ||
               Beat1COMKirbyRandom(1)) &&
               RulesCommunity() &&
-              NoCheatingNoHat(0) &&
-              NoCheatingNoHat(1) 
+              NoCheating(0) &&
+              NoCheating(1) 
 )
 
 achievement(
