@@ -1679,6 +1679,100 @@ function SoundWasPlayed(sound) {
     return code
 }
 
+SlopeArray = [
+    [0,  -680.00000,   0.00000],
+    [1,  -672.44444,   0.01746],
+    [2,  -664.88889,   0.03492],
+    [3,  -657.33333,   0.05241],
+    [4,  -649.77778,   0.06993],
+    [5,  -642.22222,   0.08749],
+    [6,  -634.66667,   0.10510],
+    [7,  -627.11111,   0.12278],
+    [8,  -619.55556,   0.14054],
+    [9,  -612.00000,   0.15838],
+    [10, -604.44444,   0.17633],
+    [11, -596.88889,   0.19438],
+    [12, -589.33333,   0.21256],
+    [13, -581.77778,   0.23087],
+    [14, -574.22222,   0.24933],
+    [15, -566.66667,   0.26795],
+    [16, -559.11111,   0.28675],
+    [17, -551.55556,   0.30573],
+    [18, -544.00000,   0.32492],
+    [19, -536.44444,   0.34433],
+    [20, -528.88889,   0.36397],
+    [21, -521.33333,   0.38386],
+    [22, -513.77778,   0.40403],
+    [23, -506.22222,   0.42447],
+    [24, -498.66667,   0.44523],
+    [25, -491.11111,   0.46631],
+    [26, -483.55556,   0.48773],
+    [27, -476.00000,   0.50953],
+    [28, -468.44444,   0.53171],
+    [29, -460.88889,   0.55431],
+    [30, -453.33333,   0.57735],
+    [31, -445.77778,   0.60086],
+    [32, -438.22222,   0.62487],
+    [33, -430.66667,   0.64941],
+    [34, -423.11111,   0.67451],
+    [35, -415.55556,   0.70021],
+    [36, -408.00000,   0.72654],
+    [37, -400.44444,   0.75355],
+    [38, -392.88889,   0.78129],
+    [39, -385.33333,   0.80978],
+    [40, -377.77778,   0.83910],
+    [41, -370.22222,   0.86929],
+    [42, -362.66667,   0.90040],
+    [43, -355.11111,   0.93252],
+    [44, -347.55556,   0.96569],
+    [45, -340.00000,   1.00000],
+    [46, -332.44444,   1.03553],
+    [47, -324.88889,   1.07237],
+    [48, -317.33333,   1.11061],
+    [49, -309.77778,   1.15037],
+    [50, -302.22222,   1.19175],
+    [51, -294.66667,   1.23490],
+    [52, -287.11111,   1.27994],
+    [53, -279.55556,   1.32704],
+    [54, -272.00000,   1.37638],
+    [55, -264.44444,   1.42815],
+    [56, -256.88889,   1.48256],
+    [57, -249.33333,   1.53986],
+    [58, -241.77778,   1.60033],
+    [59, -234.22222,   1.66428],
+    [60, -226.66667,   1.73205],
+    [61, -219.11111,   1.80405],
+    [62, -211.55556,   1.88073],
+    [63, -204.00000,   1.96261],
+    [64, -196.44444,   2.05030],
+    [65, -188.88889,   2.14451],
+    [66, -181.33333,   2.24604],
+    [67, -173.77778,   2.35585],
+    [68, -166.22222,   2.47509],
+    [69, -158.66667,   2.60509],
+    [70, -151.11111,   2.74748],
+    [71, -143.55556,   2.90421],
+    [72, -136.00000,   3.07768],
+    [73, -128.44444,   3.27085],
+    [74, -120.88889,   3.48741],
+    [75, -113.33333,   3.73205],
+    [76, -105.77778,   4.01078],
+    [77, -98.22222,    4.33148],
+    [78, -90.66667,    4.70463],
+    [79, -83.11111,    5.14455],
+    [80, -75.55556,    5.67128],
+    [81, -68.00000,    6.31375],
+    [82, -60.44444,    7.11537],
+    [83, -52.88889,    8.14435],
+    [84, -45.33333,    9.51436],
+    [85, -37.77778,   11.43005],
+    [86, -30.22222,   14.30067],
+    [87, -22.66667,   19.08114],
+    [88, -15.11111,   28.63625],
+    [89,  -7.55556,   57.28996],
+    [90,   0.00000, 1000.00000]
+]
+
 // ----------------------------------------------------------------------------------------------------
 // Leaderboard Logic
 function LB_TotalScoreUpdate1PGame(mode) {
@@ -1945,6 +2039,7 @@ NumberOfNewChars            = length(Characters) - NumberOfOldChars
 
 // ----------------------------------------------------------------------------------------------------
 // Achievements
+
 achievement(
     title = "Keep It Normal", points = 5, type="progression",
     description = "Complete 1P Game on Normal.",
@@ -3697,10 +3792,10 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D4) <= 1500.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) >= -2000.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) <= -800.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0)
 )
 
 achievement(
@@ -3715,10 +3810,10 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D4) <= 1500.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) >= -2000.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) <= -800.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0)
 )
 
 achievement(
@@ -3733,10 +3828,10 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D4) <= 2680.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) >= 600.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) <= 750.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -100.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 100.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= 200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 400.0
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= -100.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 100.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= 200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 400.0)
 )
 
 achievement(
@@ -3751,10 +3846,10 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D4) <= 350.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) >= -3900.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) <= -3200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0)
 )
 
 achievement(
@@ -3769,10 +3864,10 @@ achievement(
               float(tbyte(Mem_CameraData) + 0x0D4) <= 350.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) >= -3900.0 &&
               float(tbyte(Mem_CameraData) + 0x0CC) <= -3200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0 &&
-              float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) >= 1450.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C4) - float(tbyte(Mem_CameraData) + 0x0D0) <= 1930.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) >= -200.0) &&
+              trigger_when(float(tbyte(Mem_CameraData) + 0x0C8) - float(tbyte(Mem_CameraData) + 0x0D4) <= 200.0)
 )
 
 achievement(
