@@ -1669,11 +1669,13 @@ function SonicIsClassic(slot) {
 function SoundWasPlayed(sound) {
     code = always_false()
     
-    for i in range(0, 11, 1) {
+    soundStart = 0x095AC9
+    
+    for i in range(0, 23, 1) {
         code = code ||
-               (prev(byte(0x95B15 + i*0x98)) == 0 &&
-               byte(0x95B15 + i*0x98) == 1 &&
-               dword(tbyte(0x95B2C + i*0x98)) == sound)
+               (prev(byte(soundStart + i*0x4C)) == 0 &&
+               byte(soundStart + i*0x4C) == 1 &&
+               dword(tbyte(soundStart + 0x17 + i*0x4C)) == sound)
     }
     
     return code
@@ -3636,11 +3638,7 @@ achievement(
     description = "Listen to a sinister laughing while starting the game.",
     id = 529986, badge = "601073", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
     trigger = GameState() == 0x37 &&
-              prev(GameState()) == 0x1B &&
-              (bit5(0x9EFA0 + 0x6 + 8*0) == 1 ||
-               bit5(0x9EFA0 + 0x6 + 8*1) == 1 ||
-               bit5(0x9EFA0 + 0x6 + 8*2) == 1 ||
-               bit5(0x9EFA0 + 0x6 + 8*3) == 1)
+              SoundWasPlayed(0x35A1DFA)
 )
 
 achievement(
