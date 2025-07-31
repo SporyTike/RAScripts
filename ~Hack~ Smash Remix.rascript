@@ -3715,8 +3715,8 @@ achievement(
     description = "Set your main menu music to a remixed version of Super Mario 64.",
     id = 530051, badge = "601149", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
     trigger = GameState() == 0x39 &&
-              dword(0x96710) != prev(dword(0x96710)) &&
-              dword(0x96710) == 0x104
+              dword(Mem_CurrentMusicTrack) != prev(dword(Mem_CurrentMusicTrack)) &&
+              dword(Mem_CurrentMusicTrack) == 0x104
 )
 
 achievement(
@@ -3724,9 +3724,9 @@ achievement(
     description = "Set your main menu music to Game Boy games music.",
     id = 530411, badge = "602037", published = "15.08.2021 14:57:24", modified = "08.09.2024 14:19:55", 
     trigger = GameState() == 0x39 &&
-              dword(0x96710) != prev(dword(0x96710)) &&
-              dword(0x96710) >= 0xA2 &&
-              dword(0x96710) <= 0xA5
+              dword(Mem_CurrentMusicTrack) != prev(dword(Mem_CurrentMusicTrack)) &&
+              dword(Mem_CurrentMusicTrack) >= 0xA2 &&
+              dword(Mem_CurrentMusicTrack) <= 0xA5
 )
 
 achievement(
@@ -3878,7 +3878,8 @@ achievement(
               Bonus12State() <= 7 &&
               trigger_when(prev(Bonus1Targets() == 1) &&
                            Bonus1Targets() == 0) &&
-              disable_when(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen") && 
+              disable_when(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen") &&
+                           prior(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen")) &&
                            Bonus1Targets() < prev(Bonus1Targets()), 
                    until = (Bonus12State() < prev(Bonus12State()) && 
                               Bonus12State() == 0) || 
@@ -3896,6 +3897,7 @@ achievement(
               trigger_when(prev(Bonus2Platforms() == 1) &&
                            Bonus2Platforms() == 0) &&
               disable_when(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen") && 
+                           prior(dword(Mem_CurrentMusicTrack) != GetTrackID("Crash Bash Loading Screen")) &&
                            Bonus2Platforms() < prev(Bonus2Platforms()), 
                    until = (Bonus12State() < prev(Bonus12State()) && 
                               Bonus12State() == 0) || 
