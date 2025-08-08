@@ -1015,14 +1015,15 @@ function Beat1COM(stage, char1, char2, slot) {
            never(FreeModeStage() != GetStageID(stage)) && 
            once(player1Code &&
            byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[0]))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            once(player2Code &&
            byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[1])) == 1) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[1]))*0x74 + Mem_FreeModeData + 0x28) == 1) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
-           trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
@@ -1050,13 +1051,14 @@ function Beat1COMKirbyRandom(slot) {
            once(playerCode &&
            byte(PointerPlayerData() + 0xADC + 0xB50*(1-control[0])) == 0x1C &&
            byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[0]))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[1])) == 1) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[1]))*0x74 + Mem_FreeModeData + 0x28) == 1) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
-           trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            NoCheating(0) &&
            NoCheating(1) &&
            NoCheating(2) &&
@@ -1072,13 +1074,14 @@ function Beat1COMLevel10(slot) {
            never(byte(Mem_VSMode) != 0) &&
            never(FreeModeNumFighters() != 1) &&
            once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[0]))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            once(byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[1])) == 1) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-control[1]))*0x74 + Mem_FreeModeData + 0x28) == 1) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) == 10) &&
-           trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
@@ -1146,19 +1149,21 @@ function Beat4COMs(stage, char1, char2, char3, char4, slot) {
                     once(GameState() == 0x16 &&
                             bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 1 &&
                             byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 9)) &&
-           trigger_when(GameState() == 0x18) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            once(GameState() == 0x16 &&
            (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
            bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
            bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
-           trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(slot))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
-           trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
-           + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
-           + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
-           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           trigger_when((byte(Mem_FreeModeData + 0x28 + 0*0x74) / byte(Mem_FreeModeData + 0x28 + 0*0x74) 
+                       + byte(Mem_FreeModeData + 0x28 + 1*0x74) / byte(Mem_FreeModeData + 0x28 + 1*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 2*0x74) / byte(Mem_FreeModeData + 0x28 + 2*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 3*0x74) / byte(Mem_FreeModeData + 0x28 + 3*0x74)) == 3) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
@@ -1215,19 +1220,21 @@ function Beat4COMsSame(char, slot, stage1, stage2) {
                     once(GameState() == 0x16 &&
                             bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 1 &&
                             byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 9)) &&
-           trigger_when(GameState() == 0x18) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            once(GameState() == 0x16 &&
            (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
            bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
            bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
-           trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(slot))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
-           trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
-           + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
-           + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
-           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           trigger_when((byte(Mem_FreeModeData + 0x28 + 0*0x74) / byte(Mem_FreeModeData + 0x28 + 0*0x74) 
+                       + byte(Mem_FreeModeData + 0x28 + 1*0x74) / byte(Mem_FreeModeData + 0x28 + 1*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 2*0x74) / byte(Mem_FreeModeData + 0x28 + 2*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 3*0x74) / byte(Mem_FreeModeData + 0x28 + 3*0x74)) == 3) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
@@ -1252,14 +1259,15 @@ function BeatSmashketball(mode, slot) {
                + byte(Mem_SmashketballData + 0x70) != 2) &&
            once(GameState() == 0x16 &&
                 byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4*0)
-                      + byte(Mem_FreeModePlacement + 4*1)
-                      + byte(Mem_FreeModePlacement + 4*2) 
-                      + byte(Mem_FreeModePlacement + 4*3) == 1) &&
+           trigger_when(byte(Mem_FreeModeData + 0x28 + 0x74*0)
+                      + byte(Mem_FreeModeData + 0x28 + 0x74*1)
+                      + byte(Mem_FreeModeData + 0x28 + 0x74*2) 
+                      + byte(Mem_FreeModeData + 0x28 + 0x74*3) == 1) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
-           trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) && 
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1)
 }
@@ -1313,12 +1321,13 @@ function BeatTagTeam(slot) {
            never(FreeModeNumFighters() != 1) &&
            once(GameState() == 0x16 && 
                 byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModePlacement) == 1-control[0]) &&
-           trigger_when(byte(Mem_FreeModePlacement + 4) == 1-control[1]) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(slot))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(1-slot))*0x74 + Mem_FreeModeData + 0x28) == 1) &&
            once(GameState() == 0x16 &&
                 byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 5) &&
-                trigger_when(GameState() == 0x18 &&
-           byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            byte(Mem_12CharacterStocks + 0x4E70 + 0x60 + 0x3 - byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))) == 0x5 &&
            never(GameState() == 0x16 &&
                 byte(byte(PointerPlayerData() + 0xE + 0xB50*(1-control[0]))*24 + Mem_12CharacterStocks + 0x4E70 + 0x3 +0x4*0) != 0x1B) &&
@@ -1372,19 +1381,21 @@ function BeatKingOfTheHill(slot) {
                     once(GameState() == 0x16 &&
                             bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 1 &&
                             byte(PointerPlayerData() + 0x10 + 0xB50*3) >= 5)) &&
-           trigger_when(GameState() == 0x18) &&
+           trigger_when(GameState() == 0x16 &&
+                prev(byte(0x0A4D1A)) == 6 &&
+                byte(0x0A4D1A) == 7) &&
            once(GameState() == 0x16 &&
            (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
            bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
            bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
            bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
-           trigger_when(byte(Mem_FreeModePlacement + slot*4) == 0) &&
+           trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(slot))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
-           trigger_when((byte(Mem_FreeModePlacement + 0) / byte(Mem_FreeModePlacement + 0) 
-           + byte(Mem_FreeModePlacement + 4) / byte(Mem_FreeModePlacement + 4)
-           + byte(Mem_FreeModePlacement + 8) / byte(Mem_FreeModePlacement + 8)
-           + byte(Mem_FreeModePlacement + 12) / byte(Mem_FreeModePlacement + 12)) == 3) &&
+           trigger_when((byte(Mem_FreeModeData + 0x28 + 0*0x74) / byte(Mem_FreeModeData + 0x28 + 0*0x74) 
+                       + byte(Mem_FreeModeData + 0x28 + 1*0x74) / byte(Mem_FreeModeData + 0x28 + 1*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 2*0x74) / byte(Mem_FreeModeData + 0x28 + 2*0x74)
+                       + byte(Mem_FreeModeData + 0x28 + 3*0x74) / byte(Mem_FreeModeData + 0x28 + 3*0x74)) == 3) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
