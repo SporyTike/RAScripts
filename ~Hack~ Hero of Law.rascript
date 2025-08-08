@@ -1,6 +1,6 @@
 // ~Hack~ Hero of Law
 // #ID = 34006
-// Hack Version: 1.03
+// Hack Version: 1.04
 
 // ------------------------------------------------------------
 // Addresses
@@ -379,7 +379,14 @@ achievement(
     description = "[Extra 2] Get your evidence judged unworthy by the moon.",
     points      = 2,
     trigger     = inGame() &&
-                  currentChapter(0x20)&&
+                  (currentChapter(0x06) ||
+                   currentChapter(0x0A) ||
+                   currentChapter(0x0D) ||
+                   currentChapter(0x11) ||
+                   currentChapter(0x16) ||
+                   currentChapter(0x19) ||
+                   currentChapter(0x1F) ||
+                   currentChapter(0x20)) &&
                   dword(Mem_SecretDialogue) == 0 &&
                   prev(dword(Mem_SecretDialogue)) != 0,
     type        = ""
@@ -419,12 +426,38 @@ achievement(
     type        = ""
 )
 
+// Defendant is non-readable characters
+achievement(
+    id          = 535986, 
+    badge       = "608161",
+    title       = "Still Can't Say It",
+    description = "[Extra 3] Let Link have issues to read the defendant's name...",
+    points      = 2,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x2D),
+    type        = "missable"
+)
+
+// Defendant is named 1 character
+achievement(
+    id          = 535987, 
+    badge       = "608155",
+    title       = "Quick, Easy and Clean",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x32),
+    type        = "missable"
+)
+
 // Defendant is named Link
 achievement(
     id          = 532978, 
     badge       = "604738",
     title       = "Linked Together",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -437,11 +470,24 @@ achievement(
     id          = 532980, 
     badge       = "604735",
     title       = "Great Taste of Music",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
                   dialogueRead(0x37),
+    type        = "missable"
+)
+
+// Defendant is named Ravio
+achievement(
+    id          = 535988, 
+    badge       = "608156",
+    title       = "Fits From Another Perspective",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x39),
     type        = "missable"
 )
 
@@ -450,7 +496,7 @@ achievement(
     id          = 532979, 
     badge       = "604737",
     title       = "Unfunny Coincidence",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -463,7 +509,7 @@ achievement(
     id          = 532982, 
     badge       = "604740",
     title       = "Opening Fresh Wounds",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -476,7 +522,7 @@ achievement(
     id          = 532981, 
     badge       = "604734",
     title       = "Legacy of Loyalty",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -489,7 +535,7 @@ achievement(
     id          = 532983, 
     badge       = "604741",
     title       = "Singer From Heart",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -502,7 +548,7 @@ achievement(
     id          = 532977, 
     badge       = "604730",
     title       = "Why Doing This Then?!",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -515,11 +561,63 @@ achievement(
     id          = 532984, 
     badge       = "604742",
     title       = "Guilty via Identity Theft",
-    description = "[Extra 3] Let Link realize the defendants name...",
+    description = "[Extra 3] Let Link realize the defendant's name...",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
                   dialogueRead(0x4E),
+    type        = "missable"
+)
+
+// Defendant is named RRWMC or WMC
+achievement(
+    id          = 535989, 
+    badge       = "608157",
+    title       = "You Listened To It All The Time",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x51),
+    type        = "missable"
+)
+
+// Defendant is named AAAAA
+achievement(
+    id          = 535990, 
+    badge       = "608158",
+    title       = "Come From Deep Down",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x57),
+    type        = "missable"
+)
+
+// Defendant is named MOYSE
+achievement(
+    id          = 535991, 
+    badge       = "608159",
+    title       = "Stop the War!",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x59),
+    type        = "missable"
+)
+
+// Defendant is named LOLO
+achievement(
+    id          = 535992, 
+    badge       = "608160",
+    title       = "Grow Up Buddy",
+    description = "[Extra 3] Let Link realize the defendant's name...",
+    points      = 1,
+    trigger     = inGame() &&
+                  currentChapter(0x32) &&
+                  dialogueRead(0x5B),
     type        = "missable"
 )
 
