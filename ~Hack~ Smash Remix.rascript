@@ -79,6 +79,9 @@ Mem_MultiManScores      = 0x4A5170
 Mem_HomeRunScores       = 0x4A5650
 // Home-Run Contest - Highscore Data - Mario [4 Bytes]
 
+Mem_KingOfTheHillZone   = 0x500C64
+// King of the Hill - Frames in Zone [16 Bytes; 32bit each]
+
 Val_WarioComplain       = 0x8053DE80
 //               v1.5.2 - 0x8050E910
 //               v1.1.0 - 0x8049BCE4
@@ -91,7 +94,6 @@ Mem_VSRecordsOldChars   = 0x0A44E0
 Mem_NormalModeData      = 0x0A4938
 Mem_1PGameOldScores     = Mem_NormalModeData + 0x4
 Mem_FreeModeData        = 0x0A4D0E
-Mem_FreeModePlacement   = 0x139BB0
 Mem_GameState           = 0x0A4AD3
 Mem_PointerPlayerData   = 0x130D84
 Mem_Bonus12Data         = 0x1313FF
@@ -1386,16 +1388,16 @@ function BeatKingOfTheHill(slot) {
                 byte(0x0A4D1A) == 7) &&
            once(GameState() == 0x16 &&
            (bit0(PointerPlayerData() + 0x20 + 0xB50*0) +
-           bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
-           bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
-           bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
+            bit0(PointerPlayerData() + 0x20 + 0xB50*1) +
+            bit0(PointerPlayerData() + 0x20 + 0xB50*2) + 
+            bit0(PointerPlayerData() + 0x20 + 0xB50*3) == 3 &&
            bit0(PointerPlayerData() + 0x20 + 0xB50*slot) == 0)) &&
            trigger_when(byte(byte(PointerPlayerData() + 0x0E + 0xB50*(slot))*0x74 + Mem_FreeModeData + 0x28) == 0) &&
            trigger_when(byte(PointerPlayerData() + 0x24 + 0xB50*slot) != 0x00) &&
-           trigger_when((byte(Mem_FreeModeData + 0x28 + 0*0x74) / byte(Mem_FreeModeData + 0x28 + 0*0x74) 
-                       + byte(Mem_FreeModeData + 0x28 + 1*0x74) / byte(Mem_FreeModeData + 0x28 + 1*0x74)
-                       + byte(Mem_FreeModeData + 0x28 + 2*0x74) / byte(Mem_FreeModeData + 0x28 + 2*0x74)
-                       + byte(Mem_FreeModeData + 0x28 + 3*0x74) / byte(Mem_FreeModeData + 0x28 + 3*0x74)) == 3) &&
+           trigger_when(dword(Mem_KingOfTheHillZone + ((slot + 0) % 4)*4) > 0 &&
+                        dword(Mem_KingOfTheHillZone + ((slot + 0) % 4)*4) >= dword(Mem_KingOfTheHillZone + ((slot + 1) % 4)*4) &&
+                        dword(Mem_KingOfTheHillZone + ((slot + 0) % 4)*4) >= dword(Mem_KingOfTheHillZone + ((slot + 2) % 4)*4) &&
+                        dword(Mem_KingOfTheHillZone + ((slot + 0) % 4)*4) >= dword(Mem_KingOfTheHillZone + ((slot + 3) % 4)*4)) &&
            NoCheatingNoHat(0) &&
            NoCheatingNoHat(1) &&
            NoCheatingNoHat(2) &&
