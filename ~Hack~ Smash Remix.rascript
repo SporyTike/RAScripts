@@ -1261,10 +1261,10 @@ function BeatSmashketball(mode, slot) {
                + byte(Mem_SmashketballData + 0x70) != 2) &&
            once(GameState() == 0x16 &&
                 byte(PointerPlayerData() + 0x20 + 0xB50*(1-control[0])) != 1) &&
-           trigger_when(byte(Mem_FreeModeData + 0x28 + 0x74*0)
-                      + byte(Mem_FreeModeData + 0x28 + 0x74*1)
-                      + byte(Mem_FreeModeData + 0x28 + 0x74*2) 
-                      + byte(Mem_FreeModeData + 0x28 + 0x74*3) == 1) &&
+           trigger_when(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)
+                      - dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) >= 1 &&
+                        dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)
+                      - dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) <= 0x80000000) &&
            once(GameState() == 0x16 &&
            byte(PointerPlayerData() + 0x10 + 0xB50*(1-slot)) >= 9) &&
            trigger_when(GameState() == 0x16 &&
@@ -1286,6 +1286,7 @@ function BeatSmashketball5Points(mode, slot) {
     }
 
     return BeatSmashketball(mode, slot) &&
+           GameState() != 0x18 &&
            never(byte(Mem_SmashketballData) != SmashketballMode) &&
            trigger_when(once(dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[0]))*4 + Mem_SmashketballData + 0x50)
                            - dword(byte(PointerPlayerData() + 0xF + 0xB50*(1-control[1]))*4 + Mem_SmashketballData + 0x50) >= 5 &&
@@ -6144,5 +6145,4 @@ rich_presence_conditional_display(
 rich_presence_display(
         "In the Main Menu"
 )
-
 
