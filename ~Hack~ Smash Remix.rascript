@@ -2939,7 +2939,7 @@ achievement(
 )
 
 achievement(
-    title = "Falco Punch!", points = 10,
+    title = "Falcon Punch!", points = 10,
     description = "Complete All-Star Mode with Captain Falcon on Very Hard and 3 stocks.",
     id = 173165, badge = "523025", published = "21.09.2021 17:45:37", modified = "08.09.2024 13:29:33", 
     trigger = never((HomerunChar() != GetCharID("Captain Falcon")) &&
@@ -6144,4 +6144,5 @@ rich_presence_conditional_display(
 rich_presence_display(
         "In the Main Menu"
 )
+
 
