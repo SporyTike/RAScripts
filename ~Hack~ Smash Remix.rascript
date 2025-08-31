@@ -3213,7 +3213,7 @@ achievement(
 )
 
 achievement(
-    title = "Hero of Odeo", points = 10,
+    title = "Hero of Oedo", points = 10,
     description = "Complete All-Star Mode with Goemon on Very Hard and 3 stocks.",
     id = 161721, badge = "523875", published = "11.02.2022 19:39:41", modified = "08.09.2024 14:14:26", 
     trigger = never((HomerunChar() != GetCharID("Goemon")) &&
