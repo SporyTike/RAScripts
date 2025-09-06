@@ -323,6 +323,11 @@ function getBabyOfSnailBowling() {
     return byte(BabyOffset + 0x0E83D0)
 }
 
+function getPlayersSnailBowling(amount) {
+    return byte(MinigamePointer + 0x181) >= amount + 1 &&
+           byte(MinigamePointer + 0x181) <= 4
+}
+
 function endMinigameFireflyCatch() {
     return saveProtection() &&
            __ornext(GameState == 0x1F || GameState == 0x24) &&
@@ -342,6 +347,11 @@ function getScoreOfFireflyCatchSpecificBaby(index) {
 function getBabyOfFireflyCatch() {
     BabyOffset = byte(MinigamePointer + 0x30)
     return byte(BabyOffset + 0x0E83D0)
+}
+
+function getPlayersFireflyCatch(amount) {
+    return byte(MinigamePointer + 0x45) >= amount + 1 &&
+           byte(MinigamePointer + 0x45) <= 4
 }
 
 function endMinigameTargetPractice() {
@@ -365,6 +375,11 @@ function getBabyOfTargetPractice() {
     return byte(BabyOffset + 0x0E83D0)
 }
 
+function getPlayersTargetPractice(amount) {
+    return byte(MinigamePointer + 0x41) >= amount + 1 &&
+           byte(MinigamePointer + 0x41) <= 4
+}
+
 function endMinigamePigBuilders() {
     return saveProtection() &&
            __ornext(GameState == 0x20 || GameState == 0x25) &&
@@ -382,6 +397,10 @@ function getScoreOfPigBuildersSpecificBaby(index) {
 
 function getBabyOfPigBuilders() {
     return getBabyOfFireflyCatch()
+}
+
+function getPlayersPigBuilders(amount) {
+    return getPlayersFireflyCatch(amount)
 }
 
 function endMinigameCandyGobble() {
@@ -403,6 +422,21 @@ function getScoreOfCandyGobbleSpecificBaby(index) {
 function getBabyOfCandyGobble() {
     BabyOffset = byte(MinigamePointer + 0x17C)
     return byte(BabyOffset + 0x0E83D0)
+}
+
+function getPlayersCandyGobble(amount, mode) {
+    multiplayer = byte(MinigamePointer + 0x44)
+    address     = byte(MinigamePointer + 0x1A8)
+    
+    if (mode == 0) {
+        return multiplayer == 0 &&
+               address >= amount * 0 + 1 &&
+               address <= 4
+    } else if (mode == 1) {
+        return multiplayer == 1 &&
+               address >= amount + 1 &&
+               address <= 4
+    }
 }
 
 //--------------------------------------------------
@@ -1417,10 +1451,10 @@ achievement(
     id = 178740, badge = "616460", published = "17.10.2021 12:09:09", modified = "01.01.2022 14:35:54",
     trigger = saveProtection() &&
               endMinigameSnailBowling() &&
-              (getScoreOfSnailBowlingSpecificBaby(0) > 50 ||
-               getScoreOfSnailBowlingSpecificBaby(1) > 50 ||
-               getScoreOfSnailBowlingSpecificBaby(2) > 50 ||
-               getScoreOfSnailBowlingSpecificBaby(3) > 50)
+              ((getScoreOfSnailBowlingSpecificBaby(0) > 50 && getPlayersSnailBowling(0)) ||
+               (getScoreOfSnailBowlingSpecificBaby(1) > 50 && getPlayersSnailBowling(1)) ||
+               (getScoreOfSnailBowlingSpecificBaby(2) > 50 && getPlayersSnailBowling(2)) ||
+               (getScoreOfSnailBowlingSpecificBaby(3) > 50 && getPlayersSnailBowling(3)))
 )
 
 achievement(
@@ -1429,10 +1463,10 @@ achievement(
     id = 178743, badge = "616461", published = "17.10.2021 12:42:32", modified = "01.01.2022 14:35:54",
     trigger = saveProtection() &&
               endMinigameFireflyCatch() &&
-              (getScoreOfFireflyCatchSpecificBaby(0) > 20 ||
-               getScoreOfFireflyCatchSpecificBaby(1) > 20 ||
-               getScoreOfFireflyCatchSpecificBaby(2) > 20 ||
-               getScoreOfFireflyCatchSpecificBaby(3) > 20)
+              ((getScoreOfFireflyCatchSpecificBaby(0) > 20 && getPlayersFireflyCatch(0)) ||
+               (getScoreOfFireflyCatchSpecificBaby(1) > 20 && getPlayersFireflyCatch(1)) ||
+               (getScoreOfFireflyCatchSpecificBaby(2) > 20 && getPlayersFireflyCatch(2)) ||
+               (getScoreOfFireflyCatchSpecificBaby(3) > 20 && getPlayersFireflyCatch(3)))
 )
 
 achievement(
@@ -1441,10 +1475,10 @@ achievement(
     id = 180464, badge = "616457", published = "27.10.2021 15:11:48", modified = "01.01.2022 14:35:55",
     trigger = saveProtection() &&
               endMinigameTargetPractice() &&
-              (getScoreOfTargetPracticeSpecificBaby(0) > 20 ||
-               getScoreOfTargetPracticeSpecificBaby(1) > 20 ||
-               getScoreOfTargetPracticeSpecificBaby(2) > 20 ||
-               getScoreOfTargetPracticeSpecificBaby(3) > 20)
+              ((getScoreOfTargetPracticeSpecificBaby(0) > 20 && getPlayersTargetPractice(0)) ||
+               (getScoreOfTargetPracticeSpecificBaby(1) > 20 && getPlayersTargetPractice(1)) ||
+               (getScoreOfTargetPracticeSpecificBaby(2) > 20 && getPlayersTargetPractice(2)) ||
+               (getScoreOfTargetPracticeSpecificBaby(3) > 20 && getPlayersTargetPractice(3)))
 )
 
 achievement(
@@ -1453,10 +1487,10 @@ achievement(
     id = 180465, badge = "616464", published = "27.10.2021 15:11:48", modified = "01.01.2022 14:35:55",
     trigger = saveProtection() &&
               endMinigamePigBuilders() &&
-              (getScoreOfPigBuildersSpecificBaby(0) > 20 ||
-               getScoreOfPigBuildersSpecificBaby(1) > 20 ||
-               getScoreOfPigBuildersSpecificBaby(2) > 20 ||
-               getScoreOfPigBuildersSpecificBaby(3) > 20)
+              ((getScoreOfPigBuildersSpecificBaby(0) > 20 && getPlayersPigBuilders(0)) ||
+               (getScoreOfPigBuildersSpecificBaby(1) > 20 && getPlayersPigBuilders(1)) ||
+               (getScoreOfPigBuildersSpecificBaby(2) > 20 && getPlayersPigBuilders(2)) ||
+               (getScoreOfPigBuildersSpecificBaby(3) > 20 && getPlayersPigBuilders(3)))
 )
 
 achievement(
@@ -1465,10 +1499,11 @@ achievement(
     id = 180466, badge = "616463", published = "27.10.2021 15:11:49", modified = "01.01.2022 14:35:55",
     trigger = saveProtection() &&
               endMinigameCandyGobble() &&
-              (getScoreOfCandyGobbleSpecificBaby(0) > 20 ||
-               getScoreOfCandyGobbleSpecificBaby(1) > 20 ||
-               getScoreOfCandyGobbleSpecificBaby(2) > 20 ||
-               getScoreOfCandyGobbleSpecificBaby(3) > 20)
+              ((getScoreOfCandyGobbleSpecificBaby(0) > 20 && getPlayersCandyGobble(0, 0)) ||
+               (getScoreOfCandyGobbleSpecificBaby(0) > 20 && getPlayersCandyGobble(0, 1)) ||
+               (getScoreOfCandyGobbleSpecificBaby(1) > 20 && getPlayersCandyGobble(1, 1)) ||
+               (getScoreOfCandyGobbleSpecificBaby(2) > 20 && getPlayersCandyGobble(2, 1)) ||
+               (getScoreOfCandyGobbleSpecificBaby(3) > 20 && getPlayersCandyGobble(3, 1)))
 )
 
 //--------------------------------------------------
@@ -1482,10 +1517,11 @@ leaderboard(
             endMinigameSnailBowling(), 
     cancel = always_false(), 
     submit = always_true(), 
-    value = max_of(getScoreOfSnailBowlingSpecificBaby(0),
-                   getScoreOfSnailBowlingSpecificBaby(1),
-                   getScoreOfSnailBowlingSpecificBaby(2),
-                   getScoreOfSnailBowlingSpecificBaby(3)), 
+    value = max_of(measured(getScoreOfSnailBowlingSpecificBaby(0), when = getPlayersSnailBowling(0)),
+                   measured(getScoreOfSnailBowlingSpecificBaby(0), when = getPlayersSnailBowling(0)),
+                   measured(getScoreOfSnailBowlingSpecificBaby(1), when = getPlayersSnailBowling(1)),
+                   measured(getScoreOfSnailBowlingSpecificBaby(2), when = getPlayersSnailBowling(2)),
+                   measured(getScoreOfSnailBowlingSpecificBaby(3), when = getPlayersSnailBowling(3))), 
     format = "Value", 
     lower_is_better = false
 )
@@ -1498,10 +1534,10 @@ leaderboard(
             endMinigameFireflyCatch(), 
     cancel = always_false(), 
     submit = always_true(), 
-    value = max_of(getScoreOfFireflyCatchSpecificBaby(0),
-                   getScoreOfFireflyCatchSpecificBaby(1),
-                   getScoreOfFireflyCatchSpecificBaby(2),
-                   getScoreOfFireflyCatchSpecificBaby(3)), 
+    value = max_of(measured(getScoreOfFireflyCatchSpecificBaby(0), when = getPlayersFireflyCatch(0)),
+                   measured(getScoreOfFireflyCatchSpecificBaby(1), when = getPlayersFireflyCatch(1)),
+                   measured(getScoreOfFireflyCatchSpecificBaby(2), when = getPlayersFireflyCatch(2)),
+                   measured(getScoreOfFireflyCatchSpecificBaby(3), when = getPlayersFireflyCatch(3))), 
     format = "Value", 
     lower_is_better = false
 )
@@ -1514,10 +1550,10 @@ leaderboard(
             endMinigamePigBuilders(), 
     cancel = always_false(), 
     submit = always_true(), 
-    value = max_of(getScoreOfPigBuildersSpecificBaby(0),
-                   getScoreOfPigBuildersSpecificBaby(1),
-                   getScoreOfPigBuildersSpecificBaby(2),
-                   getScoreOfPigBuildersSpecificBaby(3)), 
+    value = max_of(measured(getScoreOfPigBuildersSpecificBaby(0), when = getPlayersPigBuilders(0)),
+                   measured(getScoreOfPigBuildersSpecificBaby(1), when = getPlayersPigBuilders(1)),
+                   measured(getScoreOfPigBuildersSpecificBaby(2), when = getPlayersPigBuilders(2)),
+                   measured(getScoreOfPigBuildersSpecificBaby(3), when = getPlayersPigBuilders(3))), 
     format = "Value", 
     lower_is_better = false
 )
@@ -1530,10 +1566,10 @@ leaderboard(
             endMinigameTargetPractice(), 
     cancel = always_false(), 
     submit = always_true(), 
-    value = max_of(getScoreOfTargetPracticeSpecificBaby(0),
-                   getScoreOfTargetPracticeSpecificBaby(1),
-                   getScoreOfTargetPracticeSpecificBaby(2),
-                   getScoreOfTargetPracticeSpecificBaby(3)), 
+    value = max_of(measured(getScoreOfTargetPracticeSpecificBaby(0), when = getPlayersTargetPractice(0)),
+                   measured(getScoreOfTargetPracticeSpecificBaby(1), when = getPlayersTargetPractice(1)),
+                   measured(getScoreOfTargetPracticeSpecificBaby(2), when = getPlayersTargetPractice(2)),
+                   measured(getScoreOfTargetPracticeSpecificBaby(3), when = getPlayersTargetPractice(3))), 
     format = "Value", 
     lower_is_better = false
 )
@@ -1546,10 +1582,11 @@ leaderboard(
             endMinigameCandyGobble(), 
     cancel = always_false(), 
     submit = always_true(), 
-    value = max_of(getScoreOfCandyGobbleSpecificBaby(0),
-                   getScoreOfCandyGobbleSpecificBaby(1),
-                   getScoreOfCandyGobbleSpecificBaby(2),
-                   getScoreOfCandyGobbleSpecificBaby(3)), 
+    value = max_of(measured(getScoreOfCandyGobbleSpecificBaby(0), when = getPlayersCandyGobble(0, 0)),
+                   measured(getScoreOfCandyGobbleSpecificBaby(0), when = getPlayersCandyGobble(0, 1)),
+                   measured(getScoreOfCandyGobbleSpecificBaby(1), when = getPlayersCandyGobble(1, 1)),
+                   measured(getScoreOfCandyGobbleSpecificBaby(2), when = getPlayersCandyGobble(2, 1)),
+                   measured(getScoreOfCandyGobbleSpecificBaby(3), when = getPlayersCandyGobble(3, 1))), 
     format = "Value", 
     lower_is_better = false
 )
