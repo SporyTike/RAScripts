@@ -4,6 +4,7 @@
 //--------------------------------------------------
 // Adresses
 GameState        = dword(0x0F4280)
+LoadingState     = dword(0x0F427C)
 RoomNotLoaded    = byte(0x0F428C)
 DataPointer      = tbyte(0x0F42C4)
 MinigamePointer  = tbyte(0x12263C)
@@ -1403,7 +1404,8 @@ achievement(
     title = "Hot Tub Bubble Pop", points = 1,
     description = "Let your baby take a bath and wash it.",
     id = 178741, badge = "616019", published = "17.10.2021 11:59:59", modified = "01.01.2022 14:35:53",
-    trigger = saveProtection() &&
+    trigger = DebugFlag == 0 &&
+              DataPointer == prev(DataPointer) &&
               prev(GameState >= 0x16) &&
               prev(GameState <= 0x17) &&
               isInside()
@@ -1687,7 +1689,7 @@ rich_presence_conditional_display(gameState() == 0x2D,
 
 rich_presence_conditional_display(gameState() >= 0x1E && gameState() <= 0x29, 
     "The Babysitter is preparing a game of '{0}'",
-    rich_presence_lookup("Minigame", dword(0x0F427C), minigameLookup, fallback = "Snail Bowling")
+    rich_presence_lookup("Minigame", LoadingState, minigameLookup, fallback = "Snail Bowling")
 )
 
 rich_presence_display("In the Titlescreen")
