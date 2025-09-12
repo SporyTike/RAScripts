@@ -187,7 +187,7 @@ achievement(
     title = "On Top of the Snowhills in Moonview Glacier", points = 10,
     description = "Reach the Top of all Flagpoles in World 5 'Moonview Glacier'.",
     id = 142037, badge = "158249", published = "19.02.2021 01:03:02", modified = "27.09.2022 12:25:57",
-    trigger = measured(tally(11,
+    trigger = measured(tally(10,
                              getTopOfFlag(4, 0, 0),
                              getTopOfFlag(4, 1, 0),
                              getTopOfFlag(4, 1, 1),
@@ -197,9 +197,10 @@ achievement(
                              getTopOfFlag(4, 5, 0),
                              getTopOfFlag(4, 5, 1),
                              getTopOfFlag(4, 6, 0),
-                             getTopOfFlag(4, 7, 0),
-                             getTopOfFlag(4, 7, 1)
+                             getTopOfFlag(4, 7, 0)
               ))
+    // This does not cover W5-Ghost House Secret Exit since it is a King Boo boss
+
     // trigger = measured(tally(10,
     //              once(dword(0x085A94) == 88 && byte(tbyte(0x0CAAC8) + 0x0000C8) >= 8 &&
     //              byte(tbyte(0x0CAAC8) + 0x0000C8) <= 9 && prev(byte(tbyte(0x0CAAC8) + 0x0000C8)) == 0),
@@ -356,3 +357,4 @@ achievement(
     //              byte(tbyte(0x0CAAC8) + 0x0000C8) <= 9 && prev(byte(tbyte(0x0CAAC8) + 0x0000C8)) == 0))
     //          )
 )
+
