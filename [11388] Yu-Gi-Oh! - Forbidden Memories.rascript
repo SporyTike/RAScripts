@@ -504,7 +504,7 @@ achievement(
 
 achievement(
     title = "Friendly Competition", points = 2, type="missable",
-    description = "Defeat Jono at the Duel Ground. ",
+    description = "Defeat Jono at the Duel Ground.",
     id = 81274, badge = "90977", published = "22.08.2019 19:28:42", modified = "18.09.2019 19:28:35",
     trigger = inCampaign() &&
               locationID == 0x02 &&
@@ -1048,7 +1048,7 @@ achievement(
 )
 
 achievement(
-    title = "Budding Collector", points = 25,
+    title = "Budding Collector", points = 10,
     description = "Fill your Library with 200 different cards.",
     id = 82797, badge = "91530", published = "03.09.2019 19:57:20", modified = "31.05.2020 21:07:55",
     trigger = gameState() >= 0x01 &&
@@ -1115,7 +1115,7 @@ achievement(
 )
 
 achievement(
-    title = "Impregnable Defense", points = 5,
+    title = "Impregnable Defense", points = 10,
     description = "Achieve a Tech-based S-Rank.",
     id = 82785, badge = "91523", published = "03.09.2019 18:05:39", modified = "01.10.2019 15:50:02",
     trigger = getDuelRank() &&
@@ -2099,49 +2099,49 @@ achievement(
 )
 
 achievement(
-    title = "War-Lion Ritual", points = 10,
+    title = "War-Lion Ritual", points = 5,
     description = "Summon 'Super War-Lion' by sacrificing 'Frenzied Panda', 'Leogun' and 'Garvas'.",
     id = 82947, badge = "90136", published = "05.09.2019 21:52:49", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(673, 356)
 )
 
 achievement(
-    title = "Yamadron Ritual", points = 10,
+    title = "Yamadron Ritual", points = 5,
     description = "Summon 'Yamadron' by sacrificing 'Mountain Warrior', 'Koumori Dragon' and 'Wings of Wicked Flame'.",
     id = 82942, badge = "90129", published = "05.09.2019 21:52:43", modified = "19.07.2025 09:51:01",
     trigger = summonMonster(666, 357)
 )
 
 achievement(
-    title = "Zera Ritual", points = 10,
+    title = "Zera Ritual", points = 5,
     description = "Summon 'Zera the Mant' by sacrificing 'King of Yamimakai', 'Wicked Dragon with the Ersatz Head' and 'Ryu-Kishin Powered'.",
     id = 82946, badge = "90144", published = "05.09.2019 21:52:48", modified = "19.07.2025 09:51:05",
     trigger = summonMonster(671, 360)
 )
 
 achievement(
-    title = "Curse of Millennium Shield", points = 10,
+    title = "Curse of Millennium Shield", points = 5,
     description = "Summon 'Millennium Shield' by sacrificing 'Prevent Rat', 'One-Eyed Shield Dragon' and 'Armored Rat'.",
     id = 82940, badge = "90128", published = "05.09.2019 21:52:41", modified = "19.07.2025 09:51:01",
     trigger = summonMonster(665, 362)
 )
 
 achievement(
-    title = "Black Luster Ritual", points = 10,
+    title = "Black Luster Ritual", points = 5,
     description = "Summon 'Black Luster Soldier' by sacrificing 'Beaver Warrior', 'Kuriboh' and 'Gaia the Fierce Knight'.",
     id = 82944, badge = "90150", published = "05.09.2019 21:52:46", modified = "19.07.2025 09:51:07",
     trigger = summonMonster(670, 364)
 )
 
 achievement(
-    title = "Beastly Mirror Ritual", points = 10,
+    title = "Beastly Mirror Ritual", points = 5,
     description = "Summon 'Fiend's Mirror' by sacrificing 'Fiend Refrection #2', 'Wicked Mirror' and 'Fiend Refrection #1'.",
     id = 82948, badge = "90134", published = "05.09.2019 21:52:51", modified = "19.07.2025 09:51:02",
     trigger = summonMonster(674, 365)
 )
 
 achievement(
-    title = "Gate Guardian Ritual", points = 25,
+    title = "Gate Guardian Ritual", points = 10,
     description = "Summon 'Gate Guardian' by sacrificing 'Sanga of the Thunder', 'Kazejin' and 'Suijin'.",
     id = 82943, badge = "90151", published = "05.09.2019 21:52:45", modified = "19.07.2025 09:51:07",
     trigger = summonMonster(667, 374)
@@ -2155,91 +2155,91 @@ achievement(
 )
 
 achievement(
-    title = "Commencement Dance", points = 10,
+    title = "Commencement Dance", points = 5,
     description = "Summon 'Performance of Sword' by sacrificing 'Water Omotics', 'Dancing Elf' and 'Bean Soldier'.",
     id = 82950, badge = "90131", published = "05.09.2019 21:52:54", modified = "19.07.2025 09:51:01",
     trigger = summonMonster(676, 701)
 )
 
 achievement(
-    title = "Hamburger Recipe", points = 10,
+    title = "Hamburger Recipe", points = 5,
     description = "Summon 'Hungry Burger' by sacrificing 'Battle Steer', 'Bioplant' and 'Griggle'.",
     id = 82951, badge = "90133", published = "05.09.2019 21:52:56", modified = "19.07.2025 09:51:02",
     trigger = summonMonster(677, 702)
 )
 
 achievement(
-    title = "Here Comes Sennen Genjin", points = 10,
+    title = "Here Comes Sennen Genjin", points = 5,
     description = "Summon 'Sengenjin' by sacrificing 'Hitotsu-me Giant', 'Tiger Axe' and 'Millennium Golem'.",
     id = 82953, badge = "90147", published = "05.09.2019 21:52:57", modified = "19.07.2025 09:51:05",
     trigger = summonMonster(678, 703)
 )
 
 achievement(
-    title = "Prayer for Fairness", points = 10,
+    title = "Prayer for Fairness", points = 5,
     description = "Summon 'Skull Guardian' by sacrificing 'M-Warrior #1', 'M-Warrior #2' and 'Kamakiriman'.",
     id = 82954, badge = "90139", published = "05.09.2019 21:52:59", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(679, 704)
 )
 
 achievement(
-    title = "Curse of Tri-Horned Dragon", points = 10,
+    title = "Curse of Tri-Horned Dragon", points = 5,
     description = "Summon 'Tri-Horned Dragon' by sacrificing 'Feral Imp', 'Torike' and 'Black Dragon Jungle King'.",
     id = 82955, badge = "90146", published = "05.09.2019 21:53:01", modified = "19.07.2025 09:51:05",
     trigger = summonMonster(680, 705)
 )
 
 achievement(
-    title = "Wicked Soul Transfer", points = 10,
+    title = "Wicked Soul Transfer", points = 5,
     description = "Summon 'Serpent Night Dragon' by sacrificing 'Darkfire Dragon', 'Dragoness the Wicked Knight' and 'Obese Marmot of Nefarious'",
     id = 82957, badge = "90141", published = "05.09.2019 21:53:03", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(691, 706)
 )
 
 achievement(
-    title = "Cosmo Queen's Prayer", points = 10,
+    title = "Cosmo Queen's Prayer", points = 5,
     description = "Summon 'Cosmo Queen' by sacrificing 'Princess of Tsurugi', 'Queen's Double' and 'Queen of Autumn Leaves'.",
     id = 82965, badge = "90148", published = "05.09.2019 21:53:16", modified = "19.07.2025 09:51:06",
     trigger = summonMonster(698, 708)
 )
 
 achievement(
-    title = "Turtle Evolution", points = 10,
+    title = "Turtle Evolution", points = 5,
     description = "Summon 'Crab Turtle' by sacrificing 'Catapult Turtle', 'Kanikabuto' and '30,000-Year White Turtle'.",
     id = 82958, badge = "90143", published = "05.09.2019 21:53:05", modified = "19.07.2025 09:51:05",
     trigger = summonMonster(692, 710)
 )
 
 achievement(
-    title = "Puppet Manipulation", points = 10,
+    title = "Puppet Manipulation", points = 5,
     description = "Summon 'Psycho-Puppet' by sacrificing 'Mysterious Puppeteer', 'Saber Slasher' and 'Blocker'.",
     id = 82962, badge = "90135", published = "05.09.2019 21:53:10", modified = "19.07.2025 09:51:02",
     trigger = summonMonster(695, 715)
 )
 
 achievement(
-    title = "Rokutoryuu Fighter", points = 10,
+    title = "Rokutoryuu Fighter", points = 5,
     description = "Summon 'Garma Sword' by sacrificing 'Vishwar Randi', 'Swordstalker' and 'Succubus Knight'.",
     id = 82964, badge = "90140", published = "05.09.2019 21:53:14", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(697, 716)
 )
 
 achievement(
-    title = "Fortress Whale's Oath", points = 10,
+    title = "Fortress Whale's Oath", points = 5,
     description = "Summon 'Fortress Whale' by sacrificing 'White Dolphin', 'Mech Bass' and 'Misairuzame'.",
     id = 82968, badge = "90138", published = "05.09.2019 21:53:19", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(700, 718)
 )
 
 achievement(
-    title = "Revival of the Skeleton Rider", points = 10,
+    title = "Revival of the Skeleton Rider", points = 5,
     description = "Summon 'Dokurorider' by sacrificing 'Temple of Skulls', 'Cockroach Knight' and 'Korogashi'.",
     id = 82967, badge = "90130", published = "05.09.2019 21:53:18", modified = "19.07.2025 09:51:01",
     trigger = summonMonster(699, 719)
 )
 
 achievement(
-    title = "Construct of Mask", points = 10,
+    title = "Construct of Mask", points = 5,
     description = "Summon 'Mask of Shine & Dark' by sacrificing 'Mask of Darkness', 'Masked Clown' and 'Masked Sorcerer'.",
     id = 82959, badge = "90132", published = "05.09.2019 21:53:07", modified = "19.07.2025 09:51:02",
     trigger = summonMonster(693, 720)
@@ -2253,14 +2253,14 @@ achievement(
 )
 
 achievement(
-    title = "Right Arm of the Forbidden One", points = 25,
+    title = "Right Arm of the Forbidden One", points = 10,
     description = "Earn a 'Right Arm of the Forbidden One' in a duel.",
     id = 82789, badge = "89920", published = "03.09.2019 19:57:04", modified = "18.09.2019 20:45:55",
     trigger = getDuelReward(019)
 )
 
 achievement(
-    title = "Left Arm of the Forbidden One", points = 25,
+    title = "Left Arm of the Forbidden One", points = 10,
     description = "Earn a 'Left Arm of the Forbidden One' in a duel.",
     id = 82790, badge = "89921", published = "03.09.2019 19:57:06", modified = "18.09.2019 20:45:59",
     trigger = getDuelReward(020)
@@ -2295,7 +2295,7 @@ achievement(
 )
 
 achievement(
-    title = "Destructive Thunderstorm", points = 10,
+    title = "Slifer's Wrath", points = 10,
     description = "Earn a 'Raigeki' card in a duel.",
     id = 179409, badge = "617864", published = "08.09.2019 11:59:20", modified = "22.10.2019 21:03:01",
     trigger = getDuelReward(337)
@@ -2320,6 +2320,13 @@ achievement(
     description = "Earn a 'Suijin' card in a duel.",
     id = 179020, badge = "617854", published = "08.09.2019 11:59:20", modified = "22.10.2019 21:03:01",
     trigger = getDuelReward(373)
+)
+
+achievement(
+    title = "Completely Without Fusion", points = 10,
+    description = "Earn a 'Twin-Headed Thunder Dragon' card in a duel.",
+    id = 180476, badge = "618225", published = "08.09.2019 11:59:20", modified = "22.10.2019 21:03:01",
+    trigger = getDuelReward(613)
 )
 
 achievement(
@@ -2620,5 +2627,6 @@ rich_presence_display(
         fallback = "wandering around in Egypt"
     )
 )
+
 
 
