@@ -444,7 +444,7 @@ function addCardToTrunk(id) {
 
 achievement(
     title = "Holding My Name With Pride", points = 1, type = "Missable",
-    description = "Begin your adventure as the real pharao.",
+    description = "Begin your adventure as the real pharaoh.",
     id = 83233, badge = "89906", published = "08.09.2019 11:59:12", modified = "08.09.2019 12:56:58",
     trigger = __ornext(getEvent(0x500) || 
                        getEvent(0x546)) &&
@@ -471,7 +471,7 @@ achievement(
 
 achievement(
     title = "The Student Has Surpassed the Teacher", points = 1, type="missable",
-    description = "Defeat Simon Muran at the Pharao's Palace.",
+    description = "Defeat Simon Muran at the Pharaoh's Palace.",
     id = 81271, badge = "90974", published = "22.08.2019 19:28:33", modified = "18.09.2019 19:28:10",
     trigger = inCampaign() &&
               locationID == 0x01 &&
