@@ -637,7 +637,7 @@ achievement(
     description = "Defeat the Mage Soldier at the palace.",
     id = 81286, badge = "90989", published = "22.08.2019 19:31:27", modified = "18.09.2019 19:29:36",
     trigger = inCampaign() &&
-              locationID == 0x09 &&
+              locationID == 0x14 &&
               eventTriggered(0x1D061E, 6)
 )
 
@@ -1154,6 +1154,9 @@ achievement(
     id = 84287, badge = "91674", published = "28.09.2019 18:56:18", modified = "22.10.2019 21:03:01",
     trigger = __ornext(gameState() == 0x01 ||
                        gameState() == 0x03) &&
+              duelState == 0x05 &&
+              word(0x1A7B70 + 28 * 0) != 0x00 &&
+              bit7(0x1A7B7B + 28 * 0) != 0x00 &&
               word(0x1A7B70 + 28 * 0) + (bit7(0x1A7B7B + 28 * 0) * 0x10000) == word(0x1A7B70 + 28 * 1) + (bit7(0x1A7B7B + 28 * 1) * 0x10000) &&
               word(0x1A7B70 + 28 * 0) + (bit7(0x1A7B7B + 28 * 0) * 0x10000) == word(0x1A7B70 + 28 * 2) + (bit7(0x1A7B7B + 28 * 2) * 0x10000) &&
               word(0x1A7B70 + 28 * 0) + (bit7(0x1A7B7B + 28 * 0) * 0x10000) == word(0x1A7B70 + 28 * 3) + (bit7(0x1A7B7B + 28 * 3) * 0x10000) &&
