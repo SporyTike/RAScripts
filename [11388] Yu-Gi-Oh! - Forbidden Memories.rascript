@@ -333,7 +333,8 @@ function createEndFusion(id) {
 function summonMonster(ritualID, summonID) {
     return gameState() == 3 &&
            byte(0x09B1D5) == 0x00 &&
-           prev(word(0x09B338)) == ritualID &&
+           word(0x0EA118) == ritualID &&
+           word(0x09B338) != prev(word(0x09B338)) &&
            word(0x09B338) == summonID &&
            duelState == 0x06
 }
@@ -2449,9 +2450,10 @@ rich_presence_conditional_display(
         playerLP / 10,
         fillerLookup
     ),
-    rich_presence_macro(
-        "Number",
-        playerLP
+    rich_presence_value(
+        "Unformatted",
+        playerLP,
+        "Value"
     ),
     rich_presence_lookup(
         "Filler2",
@@ -2468,9 +2470,10 @@ rich_presence_conditional_display(
         opponentLP / 10,
         fillerLookup
     ),
-    rich_presence_macro(
-        "Number",
-        opponentLP
+    rich_presence_value(
+        "Unformatted",
+        opponentLP,
+        "Value"
     ),
     rich_presence_lookup(
         "Protagonist", 
@@ -2504,9 +2507,10 @@ rich_presence_conditional_display(
         playerLP / 10,
         fillerLookup
     ),
-    rich_presence_macro(
-        "Number",
-        playerLP
+    rich_presence_value(
+        "Unformatted",
+        playerLP,
+        "Value"
     ),
     rich_presence_lookup(
         "Filler2",
@@ -2523,9 +2527,10 @@ rich_presence_conditional_display(
         opponentLP / 10,
         fillerLookup
     ),
-    rich_presence_macro(
-        "Number",
-        opponentLP
+    rich_presence_value(
+        "Unformatted",
+        opponentLP,
+        "Value"
     ),
     rich_presence_lookup(
         "Protagonist", 
