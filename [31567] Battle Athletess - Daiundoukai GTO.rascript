@@ -8,8 +8,10 @@ player1Char    = word(tbyte(0x1CB01C) + 0x12)
 player1Char2   = byte(tbyte(0x1CB014) + 0x9A)
 player1RunnerH = word(tbyte(0x1CB014) + 0xEA)
 player1Action  = word(tbyte(0x1CB014) + 0xA2)
+player1RaceEnd = bit7(tbyte(0x1CB014) + 0x97)
 player1Dance   = word(tbyte(0x1CB014) + 0xF0)
 player2Char    = word(tbyte(0x1CB01C) + 0x14)
+player2RaceEnd = bit7(tbyte(0x1CB018) + 0x97)
 gameState      = word(tbyte(0x1CB01C) + 0x1C)
 mode           = word(0x1CAFF4)
 storyProgress  = word(0x1CAFF8)
@@ -62,13 +64,15 @@ function winRaceWithoutFailing(stageID) {
                 prev(camera) != 2) &&
            trigger_when(camera == 3 &&
                         byte(0x18D56A) == 0x00 &&
-                        byte(0x1CAFF1) == 0x00)
+                        byte(0x1CAFF1) == 0x00) &&
+           never(player1RaceEnd == 0 &&
+                 player2RaceEnd > prev(player2RaceEnd))
 }
 
 function finishTimeAttack(stageID) {
     return mode == 2 &&
            stage == stageID &&
-           bit7(tbyte(0x1CB014) + 0x97) > prev(bit7(tbyte(0x1CB014) + 0x97)) &&
+           player1RaceEnd > prev(player1RaceEnd) &&
            byte(0x1CAFF1) == 0x00 &&
            time > 0
            
