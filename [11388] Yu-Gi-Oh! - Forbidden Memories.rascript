@@ -2195,7 +2195,7 @@ achievement(
 
 achievement(
     title = "Wicked Soul Transfer", points = 5,
-    description = "Summon 'Serpent Night Dragon' by sacrificing 'Darkfire Dragon', 'Dragoness the Wicked Knight' and 'Obese Marmot of Nefarious'",
+    description = "Summon 'Serpent Night Dragon' by sacrificing 'Darkfire Dragon', 'Dragoness the Wicked Knight' and 'Obese Marmot of Nefarious'.",
     id = 82957, badge = "90141", published = "05.09.2019 21:53:03", modified = "19.07.2025 09:51:04",
     trigger = summonMonster(691, 706)
 )
@@ -2635,6 +2635,7 @@ rich_presence_display(
         fallback = "wandering around in Egypt"
     )
 )
+
 
 
 
