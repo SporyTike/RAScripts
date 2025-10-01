@@ -1,10 +1,11 @@
 // ~Hack~ Hero of Law
 // #ID = 34006
-// Hack Version: 1.04
+// Hack Version: 1.10
 
 // ------------------------------------------------------------
 // Addresses
 
+Mem_LoadingZone     = 0x11A5D0
 Mem_Scenario        = 0x11A5E8
 Mem_GameState       = 0x11B92C
 Mem_Map             = 0x1C8546
@@ -13,13 +14,20 @@ Mem_SubState        = Mem_GameState + 0x04
 Mem_ExtraUnlocks    = 0x11B511
 Mem_IngoRupees      = 0x11B51C
 
-Mem_SecretDialogue  = 0x1E9EBC
-Mem_CurrentDialogue = tbyte(tbyte(0x1E9EC8) + 0x1B0) + 0x36C
-Mem_DialogueHistory = tbyte(0x1E9DA8) + 0x10
-Mem_SuperTalonTime  = tbyte(0x1E9DA8) + 0x48
-Mem_DragmireSecret  = tbyte(0x1E9EB4) + 0x27C
-Mem_UnlockCheat     = tbyte(0x1EE524) + 0xB0
-Mem_IngoPlayerHand  = 0x1FEFEF
+Mem_TransferPakData = 0x1E031D
+Mem_TalonCoords     = 0x1E9DA4
+Mem_MoonMessage     = 0x1EA0EC
+Mem_InfoMusicID     = 0x1F2C90
+Mem_IngoPlayerHand  = 0x20A3FF
+Pointer_SuperTalon  = 0x1E9FD8
+Pointer_Dragmire    = 0x1EA0E4
+Pointer_Dialogue    = 0x1EA0F8
+
+Mem_SecretDialogue  = Mem_MoonMessage
+Mem_CurrentDialogue = tbyte(tbyte(Pointer_Dialogue) + 0x1C0) + 0x36C
+Mem_DialogueHistory = tbyte(Pointer_SuperTalon) + 0x10
+Mem_SuperTalonTime  = tbyte(Pointer_SuperTalon) + 0x48
+Mem_DragmireSecret  = tbyte(Pointer_Dragmire) + 0x27C
 
 // ------------------------------------------------------------
 // Pre-Defined Values
@@ -208,6 +216,21 @@ achievement(
 )
 
 achievement(
+    id          = 547639, 
+    badge       = "622656",
+    title       = "Peak Climbing",
+    description = "[Extra 1] Find a hidden sign.",
+    points      = 1,
+    trigger     = currentMap(0x78) &&
+                  float(Mem_TalonCoords + 0) >= 3350.0 &&
+                  float(Mem_TalonCoords + 0) <= 3550.0 &&
+                  float(Mem_TalonCoords + 4) >=  950.0 &&
+                  float(Mem_TalonCoords + 4) <= 1050.0 &&
+                  bit0(Mem_TalonCoords + 0x66) == 1,
+    type        = ""
+)
+
+achievement(
     id          = 532971, 
     badge       = "604710",
     title       = "This Feels Familiar",
@@ -235,9 +258,12 @@ achievement(
     description = "[Extra 1] Unlock 'Ingo's Casino' without cheating.",
     points      = 1,
     trigger     = dword(Mem_GameState) == 1 &&
-                  bit1(Mem_ExtraUnlocks) > prev(bit1(Mem_ExtraUnlocks)) &&
-                  bit7(Mem_ExtraUnlocks) == prev(bit7(Mem_ExtraUnlocks)),
-    type        = "missable"
+                  currentMap(0x36) &&
+                  byte(Mem_TransferPakData) >= 8 &&
+                  byte(Mem_TransferPakData) <= 9 &&
+                  byte(Mem_TransferPakData + 2) == 3 &&
+                  byte(Mem_TransferPakData + 2) > prev(byte(Mem_TransferPakData + 2)),
+    type        = ""
 )
 
 achievement(
@@ -247,9 +273,44 @@ achievement(
     description = "[Extra 1] Unlock 'Turnabout Thief' without cheating.",
     points      = 1,
     trigger     = dword(Mem_GameState) == 1 &&
-                  bit2(Mem_ExtraUnlocks) > prev(bit2(Mem_ExtraUnlocks)) &&
-                  bit7(Mem_ExtraUnlocks) == prev(bit7(Mem_ExtraUnlocks)),
-    type        = "missable"
+                  currentMap(0x36) &&
+                  byte(Mem_TransferPakData) == 7 &&
+                  byte(Mem_TransferPakData + 2) == 3 &&
+                  byte(Mem_TransferPakData + 2) > prev(byte(Mem_TransferPakData + 2)),
+    type        = ""
+)
+
+achievement(
+    id          = 547640, 
+    badge       = "622657",
+    title       = "History of Music",
+    description = "[Extra 2] Read background info about every song in a single visit.",
+    points      = 2,
+    trigger     = never(!currentMap(0x29)) &&
+                  measured(
+                    tally(22, once(word(Mem_InfoMusicID) == 0x00 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x01 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x02 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x03 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x04 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x05 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x06 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x07 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x08 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x09 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0A && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0B && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0C && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0D && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0E && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x0F && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x10 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x11 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x12 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x13 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x14 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
+                              once(word(Mem_InfoMusicID) == 0x15 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))))),
+    type        = ""
 )
 
 achievement(
@@ -259,7 +320,7 @@ achievement(
     description = "[Extra 2] Learn about Dragmire's secret from Ingo.",
     points      = 4,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   reachIngoRupees(50),
     type        = ""
 )
@@ -269,9 +330,9 @@ achievement(
     badge       = "604770",
     title       = "Stuck Here Forever",
     description = "[Extra 2] Collect enough rupees to pay bail.",
-    points      = 25,
+    points      = 10,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   reachIngoRupees(9999),
     type        = ""
 )
@@ -283,7 +344,7 @@ achievement(
     description = "[Extra 2] Win with Nothing.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(0),
     type        = ""
 )
@@ -295,7 +356,7 @@ achievement(
     description = "[Extra 2] Win with One Pair.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(1),
     type        = ""
 )
@@ -307,7 +368,7 @@ achievement(
     description = "[Extra 2] Win with Two Pairs.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(2),
     type        = ""
 )
@@ -319,7 +380,7 @@ achievement(
     description = "[Extra 2] Win with Three of a Kind.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(3),
     type        = ""
 )
@@ -331,7 +392,7 @@ achievement(
     description = "[Extra 2] Win with a Full House.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(4),
     type        = ""
 )
@@ -343,7 +404,7 @@ achievement(
     description = "[Extra 2] Win with Four of a Kind.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(5),
     type        = ""
 )
@@ -355,7 +416,7 @@ achievement(
     description = "[Extra 2] Win with Five of a Kind.",
     points      = 3,
     trigger     = inGame() &&
-                  byte(Mem_SubState) == 4 &&
+                  dword(Mem_SubState) == 4 &&
                   winIngoHand(6),
     type        = ""
 )
@@ -379,14 +440,16 @@ achievement(
     description = "[Extra 2] Get your evidence judged unworthy by the moon.",
     points      = 2,
     trigger     = inGame() &&
-                  (currentChapter(0x06) ||
-                   currentChapter(0x0A) ||
-                   currentChapter(0x0D) ||
-                   currentChapter(0x11) ||
-                   currentChapter(0x16) ||
-                   currentChapter(0x19) ||
-                   currentChapter(0x1F) ||
-                   currentChapter(0x20)) &&
+                  __ornext(currentChapter(0x06) ||
+                           currentChapter(0x0A) ||
+                           currentChapter(0x0D) ||
+                           currentChapter(0x11) ||
+                           currentChapter(0x16) ||
+                           currentChapter(0x19) ||
+                           currentChapter(0x1F) ||
+                           currentChapter(0x20) ||
+                           currentChapter(0x2C) ||
+                           currentChapter(0x2F)) &&
                   dword(Mem_SecretDialogue) == 0 &&
                   prev(dword(Mem_SecretDialogue)) != 0,
     type        = ""
@@ -633,6 +696,34 @@ achievement(
     type        = ""
 )
 
+achievement(
+    id          = 547641, 
+    badge       = "622658",
+    title       = "Be Not Afraid!",
+    description = "[Menu] Get haunted by yourself.",
+    points      = 3,
+    trigger     = dword(Mem_GameState) == 1 &&
+                  currentMap(0x36) &&
+                  byte(Mem_TransferPakData) >= 10 &&
+                  byte(Mem_TransferPakData) <= 11 &&
+                  byte(Mem_TransferPakData + 2) == 3 &&
+                  byte(Mem_TransferPakData + 0x0A) == 1,
+    type        = ""
+)
+
+achievement(
+    id          = 547642, 
+    badge       = "622659",
+    title       = "Play Like You Want",
+    description = "[Menu] Get Link judged for his actions.",
+    points      = 3,
+    trigger     = inGame() &&
+                  currentMap(0x38) &&
+                  dword(Mem_LoadingZone) == 0xCD &&
+                  prev(dword(Mem_LoadingZone)) == 0x50,
+    type        = ""
+)
+
 // ------------------------------------------------------------
 // Rich Presence Logic
 
@@ -711,6 +802,10 @@ rich_presence_conditional_display(
     )
 )
 rich_presence_conditional_display(
+    dword(Mem_LoadingZone) == 0x50 || dword(Mem_LoadingZone) == 0xCD,
+    "Link is judged for his Actions [Secret]"
+)
+rich_presence_conditional_display(
     word(Mem_Map) >= 1 && word(Mem_Map) <= 100 && dword(Mem_Scenario) <= 0x24,
     "{0} [❤️{1}] [Main]",
     rich_presence_lookup(
@@ -754,3 +849,5 @@ leaderboard(
     format="MILLISECS", 
     lower_is_better=false
 )
+
+
