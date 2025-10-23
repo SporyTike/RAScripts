@@ -17,7 +17,7 @@ Mem_IngoRupees      = 0x11B51C
 Mem_TransferPakData = 0x1E031D
 Mem_TalonCoords     = 0x1E9DA4
 Mem_MoonMessage     = 0x1EA0EC
-Mem_InfoMusicID     = 0x1F2C90
+Mem_InfoMusicID     = tbyte(0x1EA418)
 Mem_IngoPlayerHand  = 0x20A3FF
 Pointer_SuperTalon  = 0x1E9FD8
 Pointer_Dragmire    = 0x1EA0E4
@@ -288,28 +288,28 @@ achievement(
     points      = 2,
     trigger     = never(!currentMap(0x29)) &&
                   measured(
-                    tally(22, once(word(Mem_InfoMusicID) == 0x00 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x01 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x02 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x03 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x04 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x05 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x06 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x07 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x08 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x09 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0A && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0B && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0C && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0D && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0E && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x0F && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x10 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x11 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x12 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x13 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x14 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))),
-                              once(word(Mem_InfoMusicID) == 0x15 && dword(Mem_InfoMusicID - 0x10) == 1 && byte(Mem_InfoMusicID + 0x04) < prev(byte(Mem_InfoMusicID + 0x04))))),
+                    tally(22, once(word(Mem_InfoMusicID + 0x10) == 0x00 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x01 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x02 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x03 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x04 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x05 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x06 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x07 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x08 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x09 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0A && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0B && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0C && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0D && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0E && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x0F && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x10 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x11 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x12 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x13 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x14 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))),
+                              once(word(Mem_InfoMusicID + 0x10) == 0x15 && dword(Mem_InfoMusicID) == 1 && byte(Mem_InfoMusicID + 0x14) < prev(byte(Mem_InfoMusicID + 0x14))))),
     type        = ""
 )
 
@@ -485,7 +485,8 @@ achievement(
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
-                  dialogueRead(0x23),
+                  dword(Mem_CurrentDialogue) == 0x24 &&
+                  prev(dword(Mem_CurrentDialogue)) == 0x22,
     type        = ""
 )
 
@@ -849,5 +850,6 @@ leaderboard(
     format="MILLISECS", 
     lower_is_better=false
 )
+
 
 
