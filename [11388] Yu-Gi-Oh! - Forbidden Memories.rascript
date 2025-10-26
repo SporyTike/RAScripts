@@ -363,7 +363,9 @@ function totalLibraryEntries() {
         code = code + bitcount(libraryFlags + i + 1)
     }
     
-    code = code + (bitcount(libraryFlags + 0x5A) & 0xE0)
+    code = code + bit5(libraryFlags + 90)
+                + bit6(libraryFlags + 90)
+                + bit7(libraryFlags + 90)
     
     return code
 }
