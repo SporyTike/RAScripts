@@ -1981,9 +1981,10 @@ function sleepyNevilleGotFrozen() {
                             // Check for spell "freeze" and spell disappears
                             dword_be((dword_be(addressForSlotStart) & 0x7FFFFFFF) + 0) == 0x66726565 &&
                              word_be((dword_be(addressForSlotStart) & 0x7FFFFFFF) + 4) == 0x7A65 &&
-                            bit7(addressForSlotStart + 0x118) < prev(bit7(addressForSlotStart + 0x118)) &&
+                            bit7(addressForSlotStart + 0x118) < prev(bit7(addressForSlotStart + 0x118)) // &&
                             // Check for Hermione shot Spell
-                            any_of(hermioneIDs, hermioneID => __ornext(word_be((dword_be(addressForSlotStart + 0x04) & 0x7FFFFFFF) + 0x1362) == hermioneID)))
+                            // any_of(hermioneIDs, hermioneID => __ornext(word_be((dword_be(addressForSlotStart + 0x04) & 0x7FFFFFFF) + 0x1362) == hermioneID))
+                            )
         }
     }
     
@@ -2056,8 +2057,8 @@ function hitWhompingWillowNotWithNeville() {
 //--------------------------------------------------
 // Achievements
 achievement(
-    title = "Wizard With A Name", type = "progression",
-    description = "Complete Level 1 'The Magic Begins' in the Story.",
+    title = "Wizard with a Name", type = "progression",
+    description = "Complete 'The Magic Begins' in Story mode.",
     id = 546986, badge = "622228", points = 5,
     trigger = checkLevelID(0x01) && 
               levelMode("Story") &&
@@ -2067,7 +2068,7 @@ achievement(
 
 achievement(
     title = "Down the Drain", type = "progression",
-    description = "Complete Level 2 'Out of the Dungeon' in the Story.",
+    description = "Complete 'Out of the Dungeon' in Story mode.",
     id = 546987, badge = "622128", points = 5,
     trigger = checkLevelID(0x06) && 
               levelMode("Story") &&
@@ -2077,7 +2078,7 @@ achievement(
 
 achievement(
     title = "Celebrating Fireworks", type = "progression",
-    description = "Complete Level 3 'A Jinxed Broom' in the Story.",
+    description = "Complete 'A Jinxed Broom' in Story mode.",
     id = 546988, badge = "622129", points = 5,
     trigger = checkLevelID(0x07) && 
               levelMode("Story") &&
@@ -2086,8 +2087,8 @@ achievement(
 )
 
 achievement(
-    title = "Mood Relive On Peek", type = "progression",
-    description = "Complete Level 4 'The Restricted Section' in the Story.",
+    title = "Mood Relive on Peek", type = "progression",
+    description = "Complete 'The Restricted Section' in Story mode.",
     id = 547189, badge = "622691", points = 5,
     trigger = checkLevelID(0x0A) && 
               levelMode("Story") &&
@@ -2097,7 +2098,7 @@ achievement(
 
 achievement(
     title = "Sight Between Woods", type = "progression",
-    description = "Complete Level 5 'The Forbidden Forest' in the Story.",
+    description = "Complete 'The Forbidden Forest' in Story mode.",
     id = 547411, badge = "622420", points = 5,
     trigger = checkLevelID(0x08) && 
               levelMode("Story") &&
@@ -2107,7 +2108,7 @@ achievement(
 
 achievement(
     title = "Desire to Protect", type = "progression",
-    description = "Complete Level 6 'Face of the Enemy' in the Story.",
+    description = "Complete 'Face of the Enemy' in Story mode.",
     id = 547676, badge = "622685", points = 10,
     trigger = checkLevelID(0x0B) && 
               levelMode("Story") &&
@@ -2116,8 +2117,8 @@ achievement(
 )
 
 achievement(
-    title = "Burrow With Detours", type = "progression",
-    description = "Complete Level 7 'Floo Powder!' in the Story.",
+    title = "Burrow with Detours", type = "progression",
+    description = "Complete 'Floo Powder!' in Story mode.",
     id = 547680, badge = "622689", points = 5,
     trigger = checkLevelID(0x0C) && 
               levelMode("Story") &&
@@ -2126,8 +2127,8 @@ achievement(
 )
 
 achievement(
-    title = "Harry In Mortal Danger", type = "progression",
-    description = "Complete Level 8 'Dobby's Plan' in the Story.",
+    title = "Harry in Mortal Danger", type = "progression",
+    description = "Complete 'Dobby's Plan' in Story mode.",
     id = 548212, badge = "623313", points = 5,
     trigger = checkLevelID(0x10) && 
               levelMode("Story") &&
@@ -2137,7 +2138,7 @@ achievement(
 
 achievement(
     title = "Slitherin' In", type = "progression",
-    description = "Complete Level 9 'Crabbe and Goyle' in the Story.",
+    description = "Complete 'Crabbe and Goyle' in Story mode.",
     id = 548213, badge = "623315", points = 5,
     trigger = checkLevelID(0x11) && 
               levelMode("Story") &&
@@ -2147,7 +2148,7 @@ achievement(
 
 achievement(
     title = "Blast Through the Past", type = "progression",
-    description = "Complete Level 10 'Tom Riddle's Diary' in the Story.",
+    description = "Complete 'Tom Riddle's Diary' in Story mode.",
     id = 548388, badge = "623506", points = 5,
     trigger = checkLevelID(0x13) && 
               levelMode("Story") &&
@@ -2157,7 +2158,7 @@ achievement(
 
 achievement(
     title = "Humans Are Food, Not Friends!", type = "progression",
-    description = "Complete Level 11 'Follow the Spiders' in the Story.",
+    description = "Complete 'Follow the Spiders' in Story mode.",
     id = 548639, badge = "623760", points = 5,
     trigger = checkLevelID(0x14) && 
               levelMode("Story") &&
@@ -2167,7 +2168,7 @@ achievement(
 
 achievement(
     title = "Salazar Slytherin's Secret Serpent", type = "progression",
-    description = "Complete Level 12 'The Basilisk' in the Story.",
+    description = "Complete 'The Basilisk' in Story mode.",
     id = 549153, badge = "623864", points = 10,
     trigger = checkLevelID(0x15) && 
               levelMode("Story") &&
@@ -2177,7 +2178,7 @@ achievement(
 
 achievement(
     title = "Soul Freezing Moonlight", type = "progression",
-    description = "Complete Level 13 'News From Azkaban' in the Story.",
+    description = "Complete 'News From Azkaban' in Story mode.",
     id = 549551, badge = "624156", points = 5,
     trigger = checkLevelID(0x16) && 
               levelMode("Story") &&
@@ -2187,7 +2188,7 @@ achievement(
 
 achievement(
     title = "Passage to the Village", type = "progression",
-    description = "Complete Level 14 'Hogsmeade' in the Story.",
+    description = "Complete 'Hogsmeade' in Story mode.",
     id = 549946, badge = "624381", points = 5,
     trigger = checkLevelID(0x18) && 
               levelMode("Story") &&
@@ -2197,7 +2198,7 @@ achievement(
 
 achievement(
     title = "Midnight Tag Hunting", type = "progression",
-    description = "Complete Level 15 'Mischief Managed' in the Story.",
+    description = "Complete 'Mischief Managed' in Story mode.",
     id = 549960, badge = "624389", points = 5,
     trigger = checkLevelID(0x19) && 
               levelMode("Story") &&
@@ -2207,7 +2208,7 @@ achievement(
 
 achievement(
     title = "Beast Inside You", type = "progression",
-    description = "Complete Level 16 'The Shrieking Shack' in the Story.",
+    description = "Complete 'The Shrieking Shack' in Story mode.",
     id = 550167, badge = "624806", points = 5,
     trigger = checkLevelID(0x1A) && 
               levelMode("Story") &&
@@ -2217,7 +2218,7 @@ achievement(
 
 achievement(
     title = "Portable Déjà Two", type = "progression",
-    description = "Complete Level 17 'Dementor's Kiss' in the Story.",
+    description = "Complete 'Dementor's Kiss' in Story mode.",
     id = 550210, badge = "624805", points = 5,
     trigger = checkLevelID(0x1B) && 
               levelMode("Story") &&
@@ -2227,7 +2228,7 @@ achievement(
 
 achievement(
     title = "Escape of the Outlaws", type = "progression",
-    description = "Complete Level 18 'The Dark Tower' in the Story.",
+    description = "Complete 'The Dark Tower' in Story mode.",
     id = 550365, badge = "624952", points = 10,
     trigger = checkLevelID(0x1C) && 
               levelMode("Story") &&
@@ -2237,7 +2238,7 @@ achievement(
 
 achievement(
     title = "An Unforgettable Event", type = "progression",
-    description = "Complete Level 19 'The Quidditch World Cup' in the Story.",
+    description = "Complete 'The Quidditch World Cup' in Story mode.",
     id = 550393, badge = "625029", points = 5,
     trigger = checkLevelID(0x1D) && 
               levelMode("Story") &&
@@ -2246,8 +2247,8 @@ achievement(
 )
 
 achievement(
-    title = "Forbidden Knowledge In the Woods", type = "progression",
-    description = "Complete Level 20 'Dragons' in the Story.",
+    title = "Forbidden Knowledge in the Woods", type = "progression",
+    description = "Complete 'Dragons' in Story mode.",
     id = 550409, badge = "625042", points = 5,
     trigger = checkLevelID(0x1F) && 
               levelMode("Story") &&
@@ -2256,8 +2257,8 @@ achievement(
 )
 
 achievement(
-    title = "Like Snatching An Egg From A Chicken", type = "progression",
-    description = "Complete Level 21 'The First Task' in the Story.",
+    title = "Like Snatching an Egg from A Chicken", type = "progression",
+    description = "Complete 'The First Task' in Story mode.",
     id = 550571, badge = "625502", points = 5,
     trigger = checkLevelID(0x20) && 
               levelMode("Story") &&
@@ -2266,8 +2267,8 @@ achievement(
 )
 
 achievement(
-    title = "A Message From Beyond", type = "progression",
-    description = "Complete Level 22 'Secret of the Egg' in the Story.",
+    title = "A Message from Beyond", type = "progression",
+    description = "Complete 'Secret of the Egg' in Story mode.",
     id = 550577, badge = "625509", points = 5,
     trigger = checkLevelID(0x22) && 
               levelMode("Story") &&
@@ -2277,7 +2278,7 @@ achievement(
 
 achievement(
     title = "One You Need, Three You Freed", type = "progression",
-    description = "Complete Level 23 'The Black Lake' in the Story.",
+    description = "Complete 'The Black Lake' in Story mode.",
     id = 550581, badge = "625511", points = 5,
     trigger = checkLevelID(0x23) && 
               levelMode("Story") &&
@@ -2287,7 +2288,7 @@ achievement(
 
 achievement(
     title = "An Unpleasant Triumph", type = "progression",
-    description = "Complete Level 24 'The Dark Lord Returns' in the Story.",
+    description = "Complete 'The Dark Lord Returns' in Story mode.",
     id = 550583, badge = "625513", points = 10,
     trigger = checkLevelID(0x24) && 
               levelMode("Story") &&
@@ -2297,7 +2298,7 @@ achievement(
 
 achievement(
     title = "Secret Gardens of Gringotts", type = "",
-    description = "Complete all 10 Bonus Levels in Gringotts Vault.",
+    description = "Complete all 10 bonus levels in the Gringotts Vault.",
     id = 552124, badge = "627112", points = 10,
     trigger = checkLevelID(0x25) && 
               __ornext(checkMapID(0x152) || 
@@ -2316,7 +2317,7 @@ achievement(
 
 achievement(
     title = "Everything Is Awesome!", type = "",
-    description = "Become a Builder by completing all Builder Levels.",
+    description = "Become a Master Builder by completing all Builder Levels.",
     id = 552125, badge = "627118", points = 5,
     trigger = checkLevelID(0x26) &&
               checkMapID(0x44) &&
@@ -2326,7 +2327,7 @@ achievement(
 
 achievement(
     title = "Destiny of a Young Wizard", type = "",
-    description = "Complete the Bonus Level of Lord Voldemort.",
+    description = "Complete 'Harry's Destiny' in Borgin & Burkes.",
     id = 552294, badge = "627307", points = 5,
     trigger = checkLevelID(0x27) && 
               levelMode("Story") &&
@@ -2349,7 +2350,7 @@ achievement(
 )
 
 achievement(
-    title = "Burned To Pieces", type = "",
+    title = "Burned to Pieces", type = "",
     description = "Win the fight against Professor Quirrell without taking damage.",
     id = 553060, badge = "628032", points = 5,
     trigger = checkLevelID(0x0B) &&
@@ -2383,7 +2384,7 @@ achievement(
 
 achievement(
     title = "Calm Down the Clumsy", type = "",
-    description = "During the fight against Moaning Myrtle, deplenish the health of your partner completely while they are panicking using only thrown objects and without taking damage yourself.",
+    description = "During the fight against Moaning Myrtle, deplete the health of your partner completely while they are panicking using only thrown objects and without taking damage yourself.",
     id = 548266, badge = "623358", points = 5,
     trigger = checkLevelID(0x13) &&
               never(isInvincible()) &&
@@ -2402,28 +2403,6 @@ achievement(
                      never(getCharacterIsPlayer(2) == 1)) &&
                      trigger_when(prev(getCharacterHealth(2)) == 1 &&
                                   getCharacterHealth(2) == 0)))
-)
-
-achievement(
-    title = "Monsters Under My Bed", type = "",
-    description = "Win the fight against the Monster Book of Monsters without touching the floor of the room for more than 1 second with controlled characters.",
-    id = 553106, badge = "628036", points = 5,
-    trigger = checkLevelID(0x16) &&
-              never(getMapID() == prev(getMapID()) &&
-                    dword_be(0x00868f40) == prev(dword_be(0x00868f40)) &&
-                    !checkMapID(0xC8)) && 
-              startBossFight(0x1F8) &&
-              winBossFightHealth() &&
-              never(tally(61, checkCharacterExistence(0) &&
-                                  getCharacterIsPlayer(0) == 1 &&
-                                  getCharacterYCoordinate(0) <= 1.398 &&
-                                  getCharacterYCoordinate(0) >= 1.370 &&
-                                  getCharacterAnimation(0) != 0x69,
-                              checkCharacterExistence(1) &&
-                                  getCharacterIsPlayer(1) == 1 &&
-                                  getCharacterYCoordinate(1) <= 1.398 &&
-                                  getCharacterYCoordinate(1) >= 1.370 &&
-                                  getCharacterAnimation(1) != 0x69))
 )
 
 achievement(
@@ -2453,7 +2432,7 @@ achievement(
 )
 
 achievement(
-    title = "It's Just A Tiny Bit Bigger Snake", type = "",
+    title = "It's Just a Tiny Bit Bigger Snake", type = "",
     description = "Win the fight against the Basilisk without taking damage or getting paralyzed.",
     id = 549152, badge = "623863", points = 5,
     trigger = checkLevelID(0x15) &&
@@ -2479,6 +2458,28 @@ achievement(
 )
 
 achievement(
+    title = "Monsters Under My Bed", type = "",
+    description = "Win the fight against the Monster Book of Monsters without touching the floor of the room for more than 1 second with controlled characters.",
+    id = 553106, badge = "628036", points = 5,
+    trigger = checkLevelID(0x16) &&
+              never(getMapID() == prev(getMapID()) &&
+                    dword_be(0x00868f40) == prev(dword_be(0x00868f40)) &&
+                    !checkMapID(0xC8)) && 
+              startBossFight(0x1F8) &&
+              winBossFightHealth() &&
+              never(tally(61, checkCharacterExistence(0) &&
+                                  getCharacterIsPlayer(0) == 1 &&
+                                  getCharacterYCoordinate(0) <= 1.398 &&
+                                  getCharacterYCoordinate(0) >= 1.370 &&
+                                  getCharacterAnimation(0) != 0x69,
+                              checkCharacterExistence(1) &&
+                                  getCharacterIsPlayer(1) == 1 &&
+                                  getCharacterYCoordinate(1) <= 1.398 &&
+                                  getCharacterYCoordinate(1) >= 1.370 &&
+                                  getCharacterAnimation(1) != 0x69))
+)
+
+achievement(
     title = "Snow White and the Thugs", type = "",
     description = "Win the fight against Draco Malfoy in Hogsmeade without taking damage.",
     id = 549824, badge = "624330", points = 3,
@@ -2498,8 +2499,8 @@ achievement(
 )
 
 achievement(
-    title = "Neville and His Revenge On Living Plants", type = "",
-    description = "Win the fight against the Whomping Willow dealing only damage with Neville Longbottom and without taking damage.",
+    title = "Neville and His Revenge on Living Plants", type = "",
+    description = "Win the fight against the Whomping Willow without taking damage and only using Neville Longbottom to deal damage.",
     id = 553418, badge = "628402", points = 2,
     trigger = checkLevelID(0x1A) &&
               never(isInvincible()) &&
@@ -2542,7 +2543,7 @@ achievement(
 )
 
 achievement(
-    title = "Breathtaking Fight In the Cold", type = "",
+    title = "Breathtaking Fight in the Cold", type = "",
     description = "Win the fight against the Master Dementor without taking damage or jumping.",
     id = 550209, badge = "624804", points = 5,
     trigger = checkLevelID(0x1C) &&
@@ -2588,6 +2589,15 @@ achievement(
 )
 
 achievement(
+    title = "Become Everything You Want", type = "",
+    description = "Learn all the secrets about transfiguration.",
+    id = 551199, badge = "626183", points = 2,
+    trigger = __ornext(checkLevelID(0x02) || checkLevelID(0x03) || checkLevelID(0x04) || checkLevelID(0x05)) &&
+              checkMapID(0x65) &&
+              skillEventFlag(0x05, 2) > prev(skillEventFlag(0x05, 2))
+)
+
+achievement(
     title = "When Cursing Goes Wrong", type = "",
     description = "Collect the Gold Brick for curing Ron's Slugulus Eructo curse.",
     id = 548176, badge = "623254", points = 3,
@@ -2610,15 +2620,6 @@ achievement(
 )
 
 achievement(
-    title = "Become Everything You Want", type = "",
-    description = "Learn all the secrets about transfiguration.",
-    id = 551199, badge = "626183", points = 2,
-    trigger = __ornext(checkLevelID(0x02) || checkLevelID(0x03) || checkLevelID(0x04) || checkLevelID(0x05)) &&
-              checkMapID(0x65) &&
-              skillEventFlag(0x05, 2) > prev(skillEventFlag(0x05, 2))
-)
-
-achievement(
     title = "Wizardry and Witch Craft", type = "",
     description = "Enter Madam Malkin's hidden customisation room.",
     id = 553024, badge = "627998", points = 1,
@@ -2628,7 +2629,7 @@ achievement(
 )
 
 achievement(
-    title = "Ready For the LeakyCon", type = "",
+    title = "Ready for the LeakyCon", type = "",
     description = "Let everyone in the group wear funny earmuffs.",
     id = 548208, badge = "623312", points = 1,
     trigger = dword_be(mapID) == prev(dword_be(mapID)) &&
@@ -2648,7 +2649,7 @@ achievement(
 
 achievement(
     title = "Never Seen Again", type = "",
-    description = "Make a Student of Hogwarts disappear forever.",
+    description = "Make a student of Hogwarts disappear forever in a magical crate.",
     id = 553010, badge = "627982", points = 2,
     trigger = __ornext(checkMapID(0x60) || checkMapID(0x9F) || checkMapID(0xDE) || checkMapID(0x13A)) &&
               hitTentacleCrate()
@@ -2656,7 +2657,7 @@ achievement(
 
 achievement(
     title = "Happy Birthday, Harry!", type = "",
-    description = "Celebrate finding a special locker in Hogwarts.",
+    description = "Celebrate finding a special locker in Hogwarts with some balloons inside.",
     id = 553021, badge = "627996", points = 2,
     trigger = __ornext(checkMapID(0xAF) || checkMapID(0xF9) || checkMapID(0x144)) &&
               hitCelebrationLocker()
@@ -2664,15 +2665,15 @@ achievement(
 
 achievement(
     title = "Neville, I'm Really Really Sorry About This", type = "",
-    description = "As Hermione stop Neville in a brilliant but scary way.",
-    // Real ID not provided to prevent overwrite; id = 552837
+    description = "As Hermione, stop Neville in a brilliant but scary way that would let everyone shiver.",
+    // Real ID not provided to prevent overwrite since generated code is unoptimized; id = 552837
     id = 0, badge = "627827", points = 1,
     trigger = sleepyNevilleGotFrozen()
 )
 
 achievement(
-    title = "On the Run from the Law", type = "",
-    description = "Have all three unregistered Animagus in the group while they are transformed.",
+    title = "Bugged By Mice and Barks", type = "",
+    description = "Have all three unregistered Animagi in the group while they are transformed.",
     id = 553022, badge = "627997", points = 2,
     trigger = inGame() &&
               tally(1, once(checkCharacterExistence(0) && getCharacterID(0) == 0x198),
@@ -2744,7 +2745,7 @@ achievement(
 )
 
 achievement(
-    title = "Elixiers of Mischief", type = "",
+    title = "Elixirs of Mischief", type = "",
     description = "Learn all kinds of potions.",
     id = 553003, badge = "627975", points = 3,
     trigger = inGame() &&
@@ -2755,7 +2756,7 @@ achievement(
 )
 
 achievement(
-    title = "Licensed To Wear", type = "",
+    title = "Licensed to Wear", type = "",
     description = "Find all 167 Characters Tokens.",
     id = 552296, badge = "627308", points = 25,
     trigger = inGame() && 
@@ -2805,7 +2806,7 @@ achievement(
 
 achievement(
     title = "Merlin's Little Helper", type = "",
-    description = "Become a True Wizard in every level.",
+    description = "Achieve True Wizard in every level.",
     id = 552342, badge = "627342", points = 10,
     trigger = inGame() &&
               measured(calculateTrueWizards() == 24) &&
@@ -2823,8 +2824,8 @@ achievement(
 )
 
 achievement(
-    title = "Extra Points For Gryffindor", type = "",
-    description = "Collect a complete Hogwarts Crest in every level.",
+    title = "Extra Points for Gryffindor", type = "",
+    description = "Complete all of the Hogwarts Crests.",
     id = 552352, badge = "627360", points = 10,
     trigger = inGame() &&
               measured(calculateCrests() == 24) &&
