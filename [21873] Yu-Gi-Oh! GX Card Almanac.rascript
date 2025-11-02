@@ -91,6 +91,10 @@ function AYXP_TurnChange() {
     return byte(AYXP_currentPlayerTurn) != prev(byte(AYXP_currentPlayerTurn))
 }
 
+function AYXP_PhaseChange() {
+    return byte(AYXP_currentPlayerTurn + 0x0C) != prev(byte(AYXP_currentPlayerTurn + 0x0C))
+}
+
 function AYXP_CheckCardPosition(address) {
     address = address + 0x06
     return bit0(address)
@@ -300,44 +304,44 @@ achievement(
     description = "Force your 'Big Shield Gardna' into Defense-position by having 'Level Limit - Area B' active in your Spell & Trap Zone.",
     id = 484377, badge = "549292", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                            // Card is 'Big Shield Gardna'
-                    + AYXP_MonsterZone_BattlePosition("Player", 1)       * 0x00010000               // Card is in Defense Position
-                    + prev(AYXP_MonsterZone_BattlePosition("Player", 1)) * 0x01000000 == 0x0001129C // Card was in Attack Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)
-                    + AYXP_MonsterZone_BattlePosition("Player", 2)       * 0x00010000
-                    + prev(AYXP_MonsterZone_BattlePosition("Player", 2)) * 0x01000000 == 0x0001129C
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)
-                    + AYXP_MonsterZone_BattlePosition("Player", 3)       * 0x00010000
-                    + prev(AYXP_MonsterZone_BattlePosition("Player", 3)) * 0x01000000 == 0x0001129C
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)
-                    + AYXP_MonsterZone_BattlePosition("Player", 4)       * 0x00010000
-                    + prev(AYXP_MonsterZone_BattlePosition("Player", 4)) * 0x01000000 == 0x0001129C
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)
-                    + AYXP_MonsterZone_BattlePosition("Player", 5)       * 0x00010000
-                    + prev(AYXP_MonsterZone_BattlePosition("Player", 5)) * 0x01000000 == 0x0001129C
-                 )) &&
-                  __ornext((
-                    AYXP_SpellTrapZone_CardID("Player", 1)                                    // Card is 'Level Limit - Area B'
-                    + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x00010000 == 0x000117A6 // Card is Face-Up Position
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 2)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 3)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 4)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 5)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x00010000 == 0x000117A6
-                 ))
+                    AYXP_InBattle() &&
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                            // Card is 'Big Shield Gardna'
+                            + AYXP_MonsterZone_BattlePosition("Player", 1)       * 0x00010000               // Card is in Defense Position
+                            + prev(AYXP_MonsterZone_BattlePosition("Player", 1)) * 0x01000000 == 0x0001129C // Card was in Attack Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_BattlePosition("Player", 2)       * 0x00010000
+                            + prev(AYXP_MonsterZone_BattlePosition("Player", 2)) * 0x01000000 == 0x0001129C
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_BattlePosition("Player", 3)       * 0x00010000
+                            + prev(AYXP_MonsterZone_BattlePosition("Player", 3)) * 0x01000000 == 0x0001129C
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_BattlePosition("Player", 4)       * 0x00010000
+                            + prev(AYXP_MonsterZone_BattlePosition("Player", 4)) * 0x01000000 == 0x0001129C
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_BattlePosition("Player", 5)       * 0x00010000
+                            + prev(AYXP_MonsterZone_BattlePosition("Player", 5)) * 0x01000000 == 0x0001129C
+                        )) &&
+                    __ornext((
+                            AYXP_SpellTrapZone_CardID("Player", 1)                                    // Card is 'Level Limit - Area B'
+                            + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x00010000 == 0x000117A6 // Card is Face-Up Position
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 2)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 3)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 4)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 5)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x00010000 == 0x000117A6
+                        ))
               )
 )
 
@@ -347,12 +351,14 @@ achievement(
     description = "Destroy 'Babycerasaurus' using the effect of 'Generation Shift' to get a second 'Babycerasaurus' on your Hand and special summon a Dinosaur-type monster in your Monster Zone.",
     id = 554340, badge = "629434", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x19DD &&        // Card is 'Generation Shift'
-                      AYXP_Chain_TargetCardID(2) == 0x1A8F && // Card Target is 'Babycerasaurus'
-                      never(AYXP_TurnChange())) &&
-                 AYXP_Chain_CardID() == 0x1A8F                // Card is 'Babycerasaurus'
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x19DD &&        // Card Effect is 'Generation Shift'
+                        AYXP_Chain_TargetCardID(2) == 0x1A8F && // Card Target is 'Babycerasaurus'
+                        never(AYXP_TurnChange())
+                     ) &&
+                     AYXP_Chain_CardID() == 0x1A8F // Card Effect is 'Babycerasaurus'
                 )
               )
 )
@@ -363,152 +369,148 @@ achievement(
     description = "While having 'Amazoness Paladin' in your Monster Zone and 'Toll' active in your Spell & Trap Zone, use 'Ojama Trio' to fill the opponent's Monster Zone with tokens and activate 'Amazoness Archers' and force the tokens to attack.",
     id = 554652, badge = "629864", points = 5,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                ((once(AYXP_Chain_PlayerResponsible("Player") &&
-                       AYXP_Chain_CardID() == 0x14A6 &&   // Card is 'Amazoness Archers'
-                  once(AYXP_Chain_PlayerResponsible("Player") &&
-                       AYXP_Chain_CardID() == 0x166A)) && // Card is 'Ojama Trio'
-                  always_true()) &&
-                __ornext((
-                   AYXP_SpellTrapZone_CardID("Player", 1)                                 // Card is 'Toll'
-                   + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x10000 == 0x00011320 // Card is Face-Up Position
-                ) || (
-                   AYXP_SpellTrapZone_CardID("Player", 2)
-                   + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x10000 == 0x00011320
-                ) || (
-                   AYXP_SpellTrapZone_CardID("Player", 3)
-                   + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x10000 == 0x00011320
-                ) || (
-                   AYXP_SpellTrapZone_CardID("Player", 4)
-                   + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x10000 == 0x00011320
-                ) || (
-                   AYXP_SpellTrapZone_CardID("Player", 5)
-                   + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x10000 == 0x00011320
-                )) &&
-                ((
-                   AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Amazoness Paladin'                                                                              
-                   + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x0001160D // Card is Face-Up Position
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 2)
-                   + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x0001160D 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 3)
-                   + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x0001160D 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 4)
-                   + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x0001160D 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 5)
-                   + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x0001160D 
-                )) &&
-                ((                                                       // Logic if 'Ojama Token' attacks and gets destroyed
-                   prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Green)'
-                   + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001670 // Card is not existing
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Yellow)'
-                   + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001671 // Card is not existing
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Black)'
-                   + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001672 // Card is not existing
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 2))
-                   + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001670 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 2))
-                   + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001671
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 2))
-                   + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001672 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 3))
-                   + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001670 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 3))
-                   + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001671 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 3))
-                   + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001672 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 4))
-                   + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001670 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 4))
-                   + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001671 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 4))
-                   + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001672 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 5))
-                   + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001670 
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 5))
-                   + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001671
-                ) || (
-                   prev(AYXP_MonsterZone_CardID("Opponent", 5))
-                   + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001672 
-                ) || (                                                                  // Logic if 'Ojama Token' attacks and stays alive                                                                                      
-                   AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Green)'
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011670 // Card was able attack
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Yellow)'
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011671 // Card was able attack
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Black)'
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011672 // Card was able attack
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 2)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011670
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 2)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011671
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 2)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011672 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 3)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011670 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 3)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011671 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 3)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011672
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 4)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011670 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 4)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011671
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 4)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011672 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 5)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011670
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 5)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011671 
-                ) || (
-                   AYXP_MonsterZone_CardID("Opponent", 5)
-                   + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
-                   + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011672
-                ))
-            )
-        )
+                    AYXP_InBattle() &&
+                    ((once(AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x14A6 &&   // Card Effect is 'Amazoness Archers'
+                        once(AYXP_Chain_PlayerResponsible("Player") &&
+                            AYXP_Chain_CardID() == 0x166A))) && // Card Effect is 'Ojama Trio'
+                    __ornext((
+                            AYXP_SpellTrapZone_CardID("Player", 1)                                 // Card is 'Toll'
+                            + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x10000 == 0x00011320 // Card is Face-Up Position
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 2)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x10000 == 0x00011320
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 3)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x10000 == 0x00011320
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 4)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x10000 == 0x00011320
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 5)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x10000 == 0x00011320
+                        )) && ((
+                            AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Amazoness Paladin'                                                                              
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x0001160D // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x0001160D 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x0001160D 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x0001160D 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x0001160D 
+                    )) && ((                                                                 // Logic if 'Ojama Token' attacks and gets destroyed
+                            prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Green)'
+                            + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001670 // Card is not existing
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Yellow)'
+                            + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001671 // Card is not existing
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 1))                        // Card was 'Ojama Token (Black)'
+                            + AYXP_MonsterZone_CardID("Opponent", 1) * 0x00010000 == 0x00001672 // Card is not existing
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 2))
+                            + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001670 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 2))
+                            + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001671
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 2))
+                            + AYXP_MonsterZone_CardID("Opponent", 2) * 0x00010000 == 0x00001672 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 3))
+                            + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001670 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 3))
+                            + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001671 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 3))
+                            + AYXP_MonsterZone_CardID("Opponent", 3) * 0x00010000 == 0x00001672 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 4))
+                            + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001670 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 4))
+                            + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001671 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 4))
+                            + AYXP_MonsterZone_CardID("Opponent", 4) * 0x00010000 == 0x00001672 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 5))
+                            + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001670 
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 5))
+                            + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001671
+                        ) || (
+                            prev(AYXP_MonsterZone_CardID("Opponent", 5))
+                            + AYXP_MonsterZone_CardID("Opponent", 5) * 0x00010000 == 0x00001672 
+                        ) || (                                                                              // Logic if 'Ojama Token' attacks and stays alive                                                                                      
+                            AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Green)'
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011670 // Card was able attack
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Yellow)'
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011671 // Card was able attack
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 1)                                             // Card is 'Ojama Token (Black)'
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 1)       * 0x00010000               // Card is not able attack
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 1)) * 0x01000000 == 0x00011672 // Card was able attack
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 2)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011670
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 2)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011671
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 2)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 2)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 2)) * 0x01000000 == 0x00011672 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 3)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011670 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 3)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011671 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 3)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 3)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 3)) * 0x01000000 == 0x00011672
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 4)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011670 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 4)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011671
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 4)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 4)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 4)) * 0x01000000 == 0x00011672 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 5)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011670
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 5)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011671 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Opponent", 5)
+                            + AYXP_MonsterZone_MonsterAttacked("Opponent", 5)       * 0x00010000
+                            + prev(AYXP_MonsterZone_MonsterAttacked("Opponent", 5)) * 0x01000000 == 0x00011672
+                        ))
+                    ))
 )
 
 // 007) Ameba Encroachme
@@ -517,15 +519,16 @@ achievement(
     description = "Move your 'Ameba' to the opponent's Monster Zone using 'Mystical Box' to deal effect damage.",
     id = 554659, badge = "629872", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x1430 && // Card is 'Mystic Box'
-                      AYXP_Chain_TargetCardIDBySlot_MonsterZone(2, "Player") == 0x118A && // Card Target is 'Ameba'
-                      never(AYXP_TurnChange()))
-                ) &&
-                AYXP_Chain_PlayerResponsible("Opponent") &&
-                AYXP_Chain_CardID() == 0x118A // Card is 'Ameba'
-              )
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x1430 &&                                    // Card Effect is 'Mystic Box'
+                        AYXP_Chain_TargetCardIDBySlot_MonsterZone(2, "Player") == 0x118A && // Card Target is 'Ameba'
+                        never(AYXP_TurnChange()))
+                        ) &&
+                        AYXP_Chain_PlayerResponsible("Opponent") &&
+                        AYXP_Chain_CardID() == 0x118A // Card Effect is 'Ameba'
+                    )
 )
 
 // 012) Area: Mataza
@@ -534,99 +537,99 @@ achievement(
     description = "Equip your 'Mataza the Zapper' with 'Mage Power' while having 'Level Limit - Area B' active in your Spell & Trap Zone.",
     id = 555594, badge = "631018", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-               __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                                               // Card is 'Mataza the Zapper'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          // Card is Face-Up Position
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 1) * 0x00010000                         // Card equipped is 'Mage Power'
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 1) * 0x80000000 == 0x145D970A // Card of Card Effect is Player's Ownership
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 1)
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 2) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 2) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 1)
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 3) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 3) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 1) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 1) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 2) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 2) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 3) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 3) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 1) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 1) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 2) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 2) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 3) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 3) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 1) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 1) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 2) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 2) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 3) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 3) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 1) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 1) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                          
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 2) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 2) * 0x80000000 == 0x145D970A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                           
-                    + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 3) * 0x00010000                         
-                    + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 3) * 0x80000000 == 0x145D970A
-                 )) &&
-               __ornext((
-                    AYXP_SpellTrapZone_CardID("Player", 1)                                    // Card is 'Level Limit - Area B'
-                    + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x00010000 == 0x000117A6 // Card is Face-Up Position
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 2)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 3)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 4)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x00010000 == 0x000117A6
-                 ) || (
-                    AYXP_SpellTrapZone_CardID("Player", 5)
-                    + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x00010000 == 0x000117A6
-                 ))
+                    AYXP_InBattle() &&
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                                               // Card is 'Mataza the Zapper'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          // Card is Face-Up Position
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 1) * 0x00010000                         // Card equipped is 'Mage Power'
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 1) * 0x80000000 == 0x145D970A // Card of Card Effect is Player's Ownership
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 1)
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 2) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 2) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 1)
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 1, 3) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 1, 3) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 1) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 1) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 2) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 2) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 2, 3) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 2, 3) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 1) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 1) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 2) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 2) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 3, 3) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 3, 3) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 1) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 1) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 2) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 2) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 4, 3) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 4, 3) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 1) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 1) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                          
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 2) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 2) * 0x80000000 == 0x145D970A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00008000                                           
+                            + AYXP_MonsterZone_EffectApplied_TargetCardID("Player", 5, 3) * 0x00010000                         
+                            + AYXP_MonsterZone_EffectApplied_PlayerOwningCardEffect("Player", 5, 3) * 0x80000000 == 0x145D970A
+                        )) &&
+                    __ornext((
+                            AYXP_SpellTrapZone_CardID("Player", 1)                                    // Card is 'Level Limit - Area B'
+                            + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x00010000 == 0x000117A6 // Card is Face-Up Position
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 2)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 3)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 4)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x00010000 == 0x000117A6
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 5)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x00010000 == 0x000117A6
+                        ))
             )
 )
 
@@ -636,31 +639,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Gaia Power' from your Deck, then play it together with 'Milus Radiant' to give your Earth monsters 1000 ATK more.",
     id = 556784, badge = "632276", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1344 &&   // Card Selected is 'Gaia Power'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1344) && // Card is 'Gaia Power'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Milus Radiant'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111B5 // Card is Face-Up Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111B5
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111B5
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111B5
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111B5
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1344 &&   // Card Selected is 'Gaia Power'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1344) && // Card is 'Gaia Power'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Milus Radiant'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111B5 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111B5
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111B5
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111B5
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111B5
+                        ))
               )
 )
 
@@ -670,31 +674,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Umiiruka' from your Deck, then play it together with 'Star Boy' to give your Water monsters 1000 ATK more.",
     id = 556785, badge = "632277", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1345 &&   // Card Selected is 'Umiiruka'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1345) && // Card is 'Umiiruka'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Star Boy'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111B2 // Card is Face-Up Position 
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111B2
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111B2
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111B2
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111B2
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1345 &&   // Card Selected is 'Umiiruka'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1345) && // Card is 'Umiiruka'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Star Boy'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111B2 // Card is Face-Up Position 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111B2
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111B2
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111B2
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111B2
+                        ))
               )
 )
 
@@ -704,31 +709,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Molten Destruction' from your Deck, then play it together with 'Little Chimera' to give your Water monsters 1000 ATK more.",
     id = 556786, badge = "632278", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1346 &&   // Card Selected is 'Molten Destruction'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1346) && // Card is 'Molten Destruction'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Little Chimera'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111FC // Card is Face-Up Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111FC
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111FC
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111FC
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111FC
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1346 &&   // Card Selected is 'Molten Destruction'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1346) && // Card is 'Molten Destruction'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Little Chimera'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x000111FC // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x000111FC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x000111FC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x000111FC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x000111FC
+                        ))
               )
 )
 
@@ -738,31 +744,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Rising Air Current' from your Deck, then play it together with 'Bladefly' to give your Water monsters 1000 ATK more.",
     id = 556787, badge = "632279", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1347 &&   // Card Selected is 'Rising Air Current'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1347) && // Card is 'Rising Air Current'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Bladefly'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x00011207 // Card is Face-Up Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x00011207
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x00011207
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x00011207
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x00011207
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1347 &&   // Card Selected is 'Rising Air Current'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1347) && // Card is 'Rising Air Current'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Bladefly'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x00011207 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x00011207
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x00011207
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x00011207
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x00011207
+                        ))
               )
 )
 
@@ -772,31 +779,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Luminous Spark' from your Deck, then play it together with 'Hoshiningen' to give your Water monsters 1000 ATK more.",
     id = 556788, badge = "632280", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1348 &&   // Card Selected is 'Luminous Spark'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1348) && // Card is 'Luminous Spark'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Hoshiningen'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x00011192 // Card is Face-Up Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x00011192
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x00011192
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x00011192
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x00011192
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1348 &&   // Card Selected is 'Luminous Spark'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1348) && // Card is 'Luminous Spark'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Hoshiningen'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x00011192 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x00011192
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x00011192
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x00011192
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x00011192
+                        ))
               )
 )
 
@@ -806,31 +814,32 @@ achievement(
     description = "Use 'Terraforming' to get 'Mystic Plasma Zone' from your Deck, then play it together with 'Witch's Apprentice' to give your Water monsters 1000 ATK more.",
     id = 556789, badge = "632281", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
-                      AYXP_CardIDFromDeck() == 0x1349 &&   // Card Selected is 'Mystic Plasma Zone'
-                      dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))) &&
-                 (
-                    AYXP_FieldZone_CardID("Player") == 0x1349) && // Card is 'Mystic Plasma Zone'
-                    AYXP_FieldZone_FacePosition("Player") == 1
-                 ) && 
-                __ornext((
-                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Witch's Apprentice'
-                    + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x0001121A // Card is Face-Up Position
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 2)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x0001121A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 3)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x0001121A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 4)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x0001121A
-                 ) || (
-                    AYXP_MonsterZone_CardID("Player", 5)                                      
-                    + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x0001121A
-                 ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x15A1 &&     // Card is 'Terraforming'
+                        AYXP_CardIDFromDeck() == 0x1349 &&   // Card Selected is 'Mystic Plasma Zone'
+                        dword(AYXP_CardAmountInHand) > prev(dword(AYXP_CardAmountInHand))
+                    ) && (
+                        AYXP_FieldZone_CardID("Player") == 0x1349) && // Card is 'Mystic Plasma Zone'
+                        AYXP_FieldZone_FacePosition("Player") == 1
+                    ) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Witch's Apprentice'
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x00010000 == 0x0001121A // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x00010000 == 0x0001121A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x00010000 == 0x0001121A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x00010000 == 0x0001121A
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x00010000 == 0x0001121A
+                        ))
               )
 )
 
@@ -840,79 +849,167 @@ achievement(
     description = "Use 'Scapegoat' to special summon four tokens, then while having them on the field use 'Feather Shot' on your 'Elemental Hero Avian' to allow it to attack multiple times this turn.",
     id = 556790, badge = "632282", points = 2,
     trigger = (getGame("AYXP") &&
-               AYXP_InBattle() &&
-                (once(AYXP_Chain_PlayerResponsible("Player") &&
-                      AYXP_Chain_CardID() == 0x195B &&                                    // Card is 'Feather Shot'
-                      AYXP_Chain_TargetCardIDBySlot_MonsterZone(0, "Player") == 0x18A6 && // Card Target is 'Elemental Hero Avian'
-                      never(AYXP_TurnChange()))
-                ) &&
-                ((
-                   AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Blue)'                                                                              
-                   + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x000114F9 // Card is Face-Up Position
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 2)
-                   + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x000114F9 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 3)
-                   + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x000114F9 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 4)
-                   + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x000114F9 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 5)
-                   + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x000114F9 
-                )) &&
-                ((
-                   AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Red)'                                                                              
-                   + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x0001154F // Card is Face-Up Position
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 2)
-                   + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x0001154F 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 3)
-                   + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x0001154F 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 4)
-                   + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x0001154F 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 5)
-                   + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x0001154F 
-                )) &&
-                ((
-                   AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Orange)'                                                                              
-                   + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x00011550 // Card is Face-Up Position
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 2)
-                   + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x00011550 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 3)
-                   + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x00011550 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 4)
-                   + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x00011550 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 5)
-                   + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x00011550 
-                )) &&
-                ((
-                   AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Yellow)'                                                                              
-                   + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x00011551 // Card is Face-Up Position
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 2)
-                   + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x00011551 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 3)
-                   + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x00011551 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 4)
-                   + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x00011551 
-                ) || (
-                   AYXP_MonsterZone_CardID("Player", 5)
-                   + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x00011551 
-                ))
+                    AYXP_InBattle() &&
+                    (once(
+                        AYXP_Chain_PlayerResponsible("Player") &&
+                        AYXP_Chain_CardID() == 0x195B &&                                    // Card is 'Feather Shot'
+                        AYXP_Chain_TargetCardIDBySlot_MonsterZone(0, "Player") == 0x18A6 && // Card Target is 'Elemental Hero Avian'
+                        never(AYXP_TurnChange())
+                    )) && ((
+                            AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Blue)'                                                                              
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x000114F9 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x000114F9 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x000114F9 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x000114F9 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x000114F9 
+                    )) && ((
+                            AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Red)'                                                                              
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x0001154F // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x0001154F 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x0001154F 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x0001154F 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x0001154F 
+                    )) && ((
+                            AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Orange)'                                                                              
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x00011550 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x00011550 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x00011550 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x00011550 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x00011550 
+                    )) && ((
+                            AYXP_MonsterZone_CardID("Player", 1)                                 // Card is 'Sheep Token (Yellow)'                                                                              
+                            + AYXP_MonsterZone_FacePosition("Player", 1) * 0x10000 == 0x00011551 // Card is Face-Up Position
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)
+                            + AYXP_MonsterZone_FacePosition("Player", 2) * 0x10000 == 0x00011551 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)
+                            + AYXP_MonsterZone_FacePosition("Player", 3) * 0x10000 == 0x00011551 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)
+                            + AYXP_MonsterZone_FacePosition("Player", 4) * 0x10000 == 0x00011551 
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)
+                            + AYXP_MonsterZone_FacePosition("Player", 5) * 0x10000 == 0x00011551 
+                        ))
               )
 )
 
+// 022) Awakening of Dragons
+achievement(
+    title = "Awakening of Dragons", type = "progression",
+    description = "Use 'DNA Surgery' to change your monsters to Dragon-type and summon 'Victory Dragon'.",
+    id = 556946, badge = "632329", points = 3,
+    trigger = (getGame("AYXP") &&
+                    AYXP_InBattle() &&
+                    __ornext(( 
+                            AYXP_SpellTrapZone_CardID("Player", 1)                               // Card is 'DNA Surgery'
+                            + AYXP_SpellTrapZone_FacePosition("Player", 1) * 0x00008000          // Card is Face-Up Position 
+                            + AYXP_SpellTrapZone_DNAType("Player", 1) * 0x00010000 == 0x00019357 // DNA-Type is 'Dragon'
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 2)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 2) * 0x00008000          
+                            + AYXP_SpellTrapZone_DNAType("Player", 2) * 0x00010000 == 0x00019357 
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 3)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 3) * 0x00008000          
+                            + AYXP_SpellTrapZone_DNAType("Player", 3) * 0x00010000 == 0x00019357 
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 4)
+                            + AYXP_SpellTrapZone_FacePosition("Player", 4) * 0x00008000          
+                            + AYXP_SpellTrapZone_DNAType("Player", 4) * 0x00010000 == 0x00019357 
+                        ) || (
+                            AYXP_SpellTrapZone_CardID("Player", 5) 
+                            + AYXP_SpellTrapZone_FacePosition("Player", 5) * 0x00008000          
+                            + AYXP_SpellTrapZone_DNAType("Player", 5) * 0x00010000 == 0x00019357 
+                        )) && 
+                    __ornext((
+                            AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Victory Dragon'
+                            + prev(AYXP_MonsterZone_CardID("Player", 1)) * 0x00010000 == 0x000016EC // Card Slot was not used
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 2)                                      
+                            + prev(AYXP_MonsterZone_CardID("Player", 2)) * 0x00010000 == 0x000016EC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 3)                                      
+                            + prev(AYXP_MonsterZone_CardID("Player", 3)) * 0x00010000 == 0x000016EC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 4)                                      
+                            + prev(AYXP_MonsterZone_CardID("Player", 4)) * 0x00010000 == 0x000016EC
+                        ) || (
+                            AYXP_MonsterZone_CardID("Player", 5)                                      
+                            + prev(AYXP_MonsterZone_CardID("Player", 5)) * 0x00010000 == 0x000016EC
+                        ))
+                )
+)
 
-
-
+// 023) Back to the Graveyard
+achievement(
+    title = "Back to the Graveyard", type = "progression",
+    description = "Use 'The Shallow Grave' to special summon a monster from your Graveyard and use it to tribute summon 'Zaborg the Thunder Monarch'. Then use its effect to destroy the monster of your opponent.",
+    id = 556945, badge = "632328", points = 2,
+    trigger = (getGame("AYXP") &&
+                    AYXP_InBattle() &&
+                            once(
+                                AYXP_Chain_PlayerResponsible("Player") &&
+                                AYXP_Chain_CardID() == 0x1365 // Card Effect is 'The Shallow Grave'
+                            ) &&
+                            once((
+                                    AYXP_MonsterZone_CardID("Player", 1)                                    // Card is 'Zaborg the Thunder Monarch'
+                                    + prev(AYXP_MonsterZone_CardID("Player", 1)) * 0x00010000 == 0x0000174D // Card Slot was not used
+                                ) || (
+                                    AYXP_MonsterZone_CardID("Player", 2)                             
+                                    + prev(AYXP_MonsterZone_CardID("Player", 2)) * 0x00010000 == 0x0000174D
+                                ) || (
+                                    AYXP_MonsterZone_CardID("Player", 3)                                  
+                                    + prev(AYXP_MonsterZone_CardID("Player", 3)) * 0x00010000 == 0x0000174D
+                                ) || (
+                                    AYXP_MonsterZone_CardID("Player", 4)                                 
+                                    + prev(AYXP_MonsterZone_CardID("Player", 4)) * 0x00010000 == 0x0000174D
+                                ) || (
+                                    AYXP_MonsterZone_CardID("Player", 5)                                  
+                                    + prev(AYXP_MonsterZone_CardID("Player", 5)) * 0x00010000 == 0x0000174D
+                                )) &&
+                           once(
+                                AYXP_Chain_PlayerResponsible("Player") &&
+                                AYXP_Chain_CardID() == 0x174D // Card Effect is 'Zaborg the Thunder Monarch'
+                           ) &&
+                           tally(1,
+                                AYXP_MonsterZone_CardID("Opponent", 1) == 0x0000 &&         // Card Slot is not used
+                                    prev(AYXP_MonsterZone_CardID("Opponent", 1)) != 0x0000, // Card Slot was used
+                                AYXP_MonsterZone_CardID("Opponent", 2) == 0x0000 &&
+                                    prev(AYXP_MonsterZone_CardID("Opponent", 2)) != 0x0000,
+                                AYXP_MonsterZone_CardID("Opponent", 3) == 0x0000 &&
+                                    prev(AYXP_MonsterZone_CardID("Opponent", 3)) != 0x0000,
+                                AYXP_MonsterZone_CardID("Opponent", 4) == 0x0000 &&
+                                    prev(AYXP_MonsterZone_CardID("Opponent", 4)) != 0x0000,
+                                AYXP_MonsterZone_CardID("Opponent", 5) == 0x0000 &&
+                                    prev(AYXP_MonsterZone_CardID("Opponent", 5)) != 0x0000)
+                           ) &&
+                           never(AYXP_TurnChange()) &&
+                           never(AYXP_PhaseChange())
+                )
+)
