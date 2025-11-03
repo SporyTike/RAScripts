@@ -2058,7 +2058,7 @@ function hitWhompingWillowNotWithNeville() {
 // Achievements
 achievement(
     title = "Wizard with a Name", type = "progression",
-    description = "Complete 'The Magic Begins' in Story mode.",
+    description = "Complete \"The Magic Begins\" in Story mode.",
     id = 546986, badge = "622228", points = 5,
     trigger = checkLevelID(0x01) && 
               levelMode("Story") &&
@@ -2068,7 +2068,7 @@ achievement(
 
 achievement(
     title = "Down the Drain", type = "progression",
-    description = "Complete 'Out of the Dungeon' in Story mode.",
+    description = "Complete \"Out of the Dungeon\" in Story mode.",
     id = 546987, badge = "622128", points = 5,
     trigger = checkLevelID(0x06) && 
               levelMode("Story") &&
@@ -2078,7 +2078,7 @@ achievement(
 
 achievement(
     title = "Celebrating Fireworks", type = "progression",
-    description = "Complete 'A Jinxed Broom' in Story mode.",
+    description = "Complete \"A Jinxed Broom\" in Story mode.",
     id = 546988, badge = "622129", points = 5,
     trigger = checkLevelID(0x07) && 
               levelMode("Story") &&
@@ -2088,7 +2088,7 @@ achievement(
 
 achievement(
     title = "Mood Relive on Peek", type = "progression",
-    description = "Complete 'The Restricted Section' in Story mode.",
+    description = "Complete \"The Restricted Section\" in Story mode.",
     id = 547189, badge = "622691", points = 5,
     trigger = checkLevelID(0x0A) && 
               levelMode("Story") &&
@@ -2098,7 +2098,7 @@ achievement(
 
 achievement(
     title = "Sight Between Woods", type = "progression",
-    description = "Complete 'The Forbidden Forest' in Story mode.",
+    description = "Complete \"The Forbidden Forest\" in Story mode.",
     id = 547411, badge = "622420", points = 5,
     trigger = checkLevelID(0x08) && 
               levelMode("Story") &&
@@ -2108,7 +2108,7 @@ achievement(
 
 achievement(
     title = "Desire to Protect", type = "progression",
-    description = "Complete 'Face of the Enemy' in Story mode.",
+    description = "Complete \"Face of the Enemy\" in Story mode.",
     id = 547676, badge = "622685", points = 10,
     trigger = checkLevelID(0x0B) && 
               levelMode("Story") &&
@@ -2118,7 +2118,7 @@ achievement(
 
 achievement(
     title = "Burrow with Detours", type = "progression",
-    description = "Complete 'Floo Powder!' in Story mode.",
+    description = "Complete \"Floo Powder!\" in Story mode.",
     id = 547680, badge = "622689", points = 5,
     trigger = checkLevelID(0x0C) && 
               levelMode("Story") &&
@@ -2128,7 +2128,7 @@ achievement(
 
 achievement(
     title = "Harry in Mortal Danger", type = "progression",
-    description = "Complete 'Dobby's Plan' in Story mode.",
+    description = "Complete \"Dobby's Plan\" in Story mode.",
     id = 548212, badge = "623313", points = 5,
     trigger = checkLevelID(0x10) && 
               levelMode("Story") &&
@@ -2138,7 +2138,7 @@ achievement(
 
 achievement(
     title = "Slitherin' In", type = "progression",
-    description = "Complete 'Crabbe and Goyle' in Story mode.",
+    description = "Complete \"Crabbe and Goyle\" in Story mode.",
     id = 548213, badge = "623315", points = 5,
     trigger = checkLevelID(0x11) && 
               levelMode("Story") &&
@@ -2148,7 +2148,7 @@ achievement(
 
 achievement(
     title = "Blast Through the Past", type = "progression",
-    description = "Complete 'Tom Riddle's Diary' in Story mode.",
+    description = "Complete \"Tom Riddle's Diary\" in Story mode.",
     id = 548388, badge = "623506", points = 5,
     trigger = checkLevelID(0x13) && 
               levelMode("Story") &&
@@ -2158,7 +2158,7 @@ achievement(
 
 achievement(
     title = "Humans Are Food, Not Friends!", type = "progression",
-    description = "Complete 'Follow the Spiders' in Story mode.",
+    description = "Complete \"Follow the Spiders\" in Story mode.",
     id = 548639, badge = "623760", points = 5,
     trigger = checkLevelID(0x14) && 
               levelMode("Story") &&
@@ -2168,7 +2168,7 @@ achievement(
 
 achievement(
     title = "Salazar Slytherin's Secret Serpent", type = "progression",
-    description = "Complete 'The Basilisk' in Story mode.",
+    description = "Complete \"The Basilisk\" in Story mode.",
     id = 549153, badge = "623864", points = 10,
     trigger = checkLevelID(0x15) && 
               levelMode("Story") &&
@@ -2178,7 +2178,7 @@ achievement(
 
 achievement(
     title = "Soul Freezing Moonlight", type = "progression",
-    description = "Complete 'News From Azkaban' in Story mode.",
+    description = "Complete \"News From Azkaban\" in Story mode.",
     id = 549551, badge = "624156", points = 5,
     trigger = checkLevelID(0x16) && 
               levelMode("Story") &&
@@ -2188,7 +2188,7 @@ achievement(
 
 achievement(
     title = "Passage to the Village", type = "progression",
-    description = "Complete 'Hogsmeade' in Story mode.",
+    description = "Complete \"Hogsmeade\" in Story mode.",
     id = 549946, badge = "624381", points = 5,
     trigger = checkLevelID(0x18) && 
               levelMode("Story") &&
@@ -2198,7 +2198,7 @@ achievement(
 
 achievement(
     title = "Midnight Tag Hunting", type = "progression",
-    description = "Complete 'Mischief Managed' in Story mode.",
+    description = "Complete \"Mischief Managed\" in Story mode.",
     id = 549960, badge = "624389", points = 5,
     trigger = checkLevelID(0x19) && 
               levelMode("Story") &&
@@ -2208,7 +2208,7 @@ achievement(
 
 achievement(
     title = "Beast Inside You", type = "progression",
-    description = "Complete 'The Shrieking Shack' in Story mode.",
+    description = "Complete \"The Shrieking Shack\" in Story mode.",
     id = 550167, badge = "624806", points = 5,
     trigger = checkLevelID(0x1A) && 
               levelMode("Story") &&
@@ -2218,7 +2218,7 @@ achievement(
 
 achievement(
     title = "Portable Déjà Two", type = "progression",
-    description = "Complete 'Dementor's Kiss' in Story mode.",
+    description = "Complete \"Dementor's Kiss\" in Story mode.",
     id = 550210, badge = "624805", points = 5,
     trigger = checkLevelID(0x1B) && 
               levelMode("Story") &&
@@ -2228,7 +2228,7 @@ achievement(
 
 achievement(
     title = "Escape of the Outlaws", type = "progression",
-    description = "Complete 'The Dark Tower' in Story mode.",
+    description = "Complete \"The Dark Tower\" in Story mode.",
     id = 550365, badge = "624952", points = 10,
     trigger = checkLevelID(0x1C) && 
               levelMode("Story") &&
@@ -2238,7 +2238,7 @@ achievement(
 
 achievement(
     title = "An Unforgettable Event", type = "progression",
-    description = "Complete 'The Quidditch World Cup' in Story mode.",
+    description = "Complete \"The Quidditch World Cup\" in Story mode.",
     id = 550393, badge = "625029", points = 5,
     trigger = checkLevelID(0x1D) && 
               levelMode("Story") &&
@@ -2248,7 +2248,7 @@ achievement(
 
 achievement(
     title = "Forbidden Knowledge in the Woods", type = "progression",
-    description = "Complete 'Dragons' in Story mode.",
+    description = "Complete \"Dragons\" in Story mode.",
     id = 550409, badge = "625042", points = 5,
     trigger = checkLevelID(0x1F) && 
               levelMode("Story") &&
@@ -2258,7 +2258,7 @@ achievement(
 
 achievement(
     title = "Like Snatching an Egg from A Chicken", type = "progression",
-    description = "Complete 'The First Task' in Story mode.",
+    description = "Complete \"The First Task\" in Story mode.",
     id = 550571, badge = "625502", points = 5,
     trigger = checkLevelID(0x20) && 
               levelMode("Story") &&
@@ -2268,7 +2268,7 @@ achievement(
 
 achievement(
     title = "A Message from Beyond", type = "progression",
-    description = "Complete 'Secret of the Egg' in Story mode.",
+    description = "Complete \"Secret of the Egg\" in Story mode.",
     id = 550577, badge = "625509", points = 5,
     trigger = checkLevelID(0x22) && 
               levelMode("Story") &&
@@ -2278,7 +2278,7 @@ achievement(
 
 achievement(
     title = "One You Need, Three You Freed", type = "progression",
-    description = "Complete 'The Black Lake' in Story mode.",
+    description = "Complete \"The Black Lake\" in Story mode.",
     id = 550581, badge = "625511", points = 5,
     trigger = checkLevelID(0x23) && 
               levelMode("Story") &&
@@ -2288,7 +2288,7 @@ achievement(
 
 achievement(
     title = "An Unpleasant Triumph", type = "progression",
-    description = "Complete 'The Dark Lord Returns' in Story mode.",
+    description = "Complete \"The Dark Lord Returns\" in Story mode.",
     id = 550583, badge = "625513", points = 10,
     trigger = checkLevelID(0x24) && 
               levelMode("Story") &&
@@ -2327,7 +2327,7 @@ achievement(
 
 achievement(
     title = "Destiny of a Young Wizard", type = "",
-    description = "Complete 'Harry's Destiny' in Borgin & Burkes.",
+    description = "Complete \"Harry's Destiny\" in Borgin & Burkes.",
     id = 552294, badge = "627307", points = 5,
     trigger = checkLevelID(0x27) && 
               levelMode("Story") &&
