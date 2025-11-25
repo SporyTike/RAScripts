@@ -2287,7 +2287,7 @@ achievement(
 )
 
 achievement(
-    title = "An Unpleasant Triumph", type = "progression",
+    title = "An Unpleasant Triumph", type = "win_condition",
     description = "Complete \"The Dark Lord Returns\" in Story mode.",
     id = 550583, badge = "625513", points = 10,
     trigger = checkLevelID(0x24) && 
@@ -3203,6 +3203,7 @@ rich_presence_display(
         calculateCrests()
     )
 )
+
 
 
 
