@@ -768,7 +768,7 @@ achievement(
 )
 
 achievement(
-    title = "The Greatest of Pharaohs", points = 25, type="progression",
+    title = "The Greatest of Pharaohs", points = 25, type="win_condition",
     description = "Defeat Nitemare and bring prosperity to all.",
     id = 81298, badge = "91002", published = "22.08.2019 19:32:34", modified = "19.10.2019 20:11:01",
     trigger = gameState() == 0x0F &&
@@ -2637,6 +2637,7 @@ rich_presence_display(
         fallback = "wandering around in Egypt"
     )
 )
+
 
 
 
