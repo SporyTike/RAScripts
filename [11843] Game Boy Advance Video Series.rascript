@@ -35,6 +35,22 @@ episodes = [
         0x0878A2E0, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF9, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Jellyfishing",
+        "SpongeBob SquarePants - Volume 1",
+        0x08F9FF40, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EFF, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Plankton!",
+        "SpongeBob SquarePants - Volume 1",
+        0x09791CA0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EF9, // Total Playtime
     ]
 ]
 
@@ -70,6 +86,102 @@ questions = [
             "Giraffe",
             "Elephant",
             "Caterpillar"
+    ],
+    [
+        0201,
+        "What kind of sand pizza did SpongeBob deliver?",
+            "Olive",
+            "Broccoli",
+            "Pineapple",
+            "Pepperoni"
+    ],
+    [
+        0202,
+        "What did SpongeBob use as weights?",
+            "Shells",
+            "Stones",
+            "Mashmallows",
+            "Milkshake Cups"
+    ],
+    [
+        0203,
+        "What joke was second on SpongeBob's list?",
+            "Snack Bar",
+            "Volleyball",
+            "Frisbee",
+            "Surfing"
+    ],
+    [
+        0204,
+        "Which instrument did the male fish play?",
+            "Guitar",
+            "Bass Guitar",
+            "Tambourine",
+            "Drums"
+    ],
+    [
+        0301,
+        "How many jellyfish nets were in the locker?",
+            "Two",
+            "Three",
+            "Four",
+            "Five"
+    ],
+    [
+        0302,
+        "Who was seen with SpongeBob in the picture on the table?",
+            "Patrick",
+            "Gary",
+            "Squidward",
+            "Mr. Krabs"
+    ],
+    [
+        0303,
+        "What was the best day ever meal?",
+            "Soup",
+            "Cake",
+            "Krabby Patty",
+            "Pizza"
+    ],
+    [
+        0304,
+        "What present did Squidward get?",
+            "Cake",
+            "Jellyfish Net",
+            "Jellyfish",
+            "Picture"
+    ],
+    [
+        0401,
+        "What sauce did SpongeBob shoot into his eye?",
+            "Ketchup",
+            "Mayonnaise",
+            "Mustard",
+            "Horseradish"
+    ],
+    [
+        0402,
+        "What did Plankton dress up as?",
+            "Gary",
+            "Bean",
+            "Krabby Patty",
+            "Flower"
+    ],
+    [
+        0403,
+        "What kind of dog did Plankton own?",
+            "Beagle",
+            "Rottweiler",
+            "Labrador",
+            "Spaniel"
+    ],
+    [
+        0404,
+        "What is between cheese and lettuce on a Krabby Patty?",
+            "Pickles",
+            "Onions",
+            "Tomatoes",
+            "Sauce"
     ]
 ]
 
@@ -251,6 +363,171 @@ achievement(
                  start  = romType1VideoStarted("SpongeBob SquarePants", "Bubblestand") &&
                           romType1LeaderboardQuestionSelect(4, 3),
                  cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Bubblestand"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Ripped Pants"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Ripped Pants"),
+    id = 93982, badge = "103412", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
+              (romType1CorrectAnswer(4, 0, 4) ||
+               romType1CorrectAnswer(4, 1, 7) ||
+               romType1CorrectAnswer(4, 2, 7) ||
+               romType1CorrectAnswer(4, 3, 5))
+)
+            leaderboard(
+                 id = 7101,
+                 title       = getQuestionTitle(0201), 
+                 description = getQuestionDescription(0201),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Ripped Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7098,
+                 title       = getQuestionTitle(0202), 
+                 description = getQuestionDescription(0202),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Ripped Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7099,
+                 title       = getQuestionTitle(0203), 
+                 description = getQuestionDescription(0203),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Ripped Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7100,
+                 title       = getQuestionTitle(0204), 
+                 description = getQuestionDescription(0204),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Ripped Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Jellyfishing"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Jellyfishing"),
+    id = 93987, badge = "103414", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
+              (romType1CorrectAnswer(4, 0, 5) ||
+               romType1CorrectAnswer(4, 1, 7) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7103,
+                 title       = getQuestionTitle(0301), 
+                 description = getQuestionDescription(0301),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfishing"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7104,
+                 title       = getQuestionTitle(0302), 
+                 description = getQuestionDescription(0302),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfishing"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7105,
+                 title       = getQuestionTitle(0303), 
+                 description = getQuestionDescription(0303),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfishing"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7102,
+                 title       = getQuestionTitle(0304), 
+                 description = getQuestionDescription(0304),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfishing"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Plankton!"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Plankton!"),
+    id = 93988, badge = "103460", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
+              (romType1CorrectAnswer(4, 0, 7) ||
+               romType1CorrectAnswer(4, 1, 4) ||
+               romType1CorrectAnswer(4, 2, 7) ||
+               romType1CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 7110,
+                 title       = getQuestionTitle(0401), 
+                 description = getQuestionDescription(0401),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Plankton!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7107,
+                 title       = getQuestionTitle(0402), 
+                 description = getQuestionDescription(0402),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Plankton!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7108,
+                 title       = getQuestionTitle(0403), 
+                 description = getQuestionDescription(0403),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Plankton!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7109,
+                 title       = getQuestionTitle(0404), 
+                 description = getQuestionDescription(0404),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Plankton!"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
