@@ -6,11 +6,31 @@
 
 mem_romType1EpisodePointer  = 0x006868
 mem_romType1VideoState      = mem_romType1EpisodePointer - 0x10
-mem_romType1PlaytimeCounter = mem_romType1EpisodePointer + 0x0C
+mem_romType1SceneCountdown  = mem_romType1EpisodePointer + 0x0C
 mem_romType1VideoPlaytime   = mem_romType1EpisodePointer + 0x14
 mem_romType1CurrentChapter  = mem_romType1EpisodePointer + 0x20
 mem_romType1Input           = 0x007EC4
-mem_romType1Runtime         = mem_romType1Input + 0x2C
+mem_romType1RNG             = mem_romType1Input + 0x2C
+
+mem_romType2EpisodePointer  = 0x006828
+mem_romType2VideoState      = mem_romType2EpisodePointer - 0x10
+mem_romType2SceneCountdown  = mem_romType2EpisodePointer + 0x0C
+mem_romType2VideoPlaytime   = mem_romType2EpisodePointer + 0x14
+mem_romType2CurrentChapter  = mem_romType2EpisodePointer + 0x20
+mem_romType2Input           = 0x007EBC
+mem_romType2StateLoaded     = mem_romType2Input - 0x3C
+mem_romType2MenuState       = mem_romType2Input - 0x18
+mem_romType2RNG             = 0x0068D0
+
+mem_romType3EpisodePointer  = 0x006820
+mem_romType3VideoState      = mem_romType3EpisodePointer - 0x10
+mem_romType3SceneCountdown  = mem_romType3EpisodePointer + 0x0C
+mem_romType3VideoPlaytime   = mem_romType3EpisodePointer + 0x14
+mem_romType3CurrentChapter  = mem_romType3EpisodePointer + 0x20
+mem_romType3Input           = 0x007EC8
+mem_romType3StateLoaded     = 0x0075A0
+mem_romType3MenuState       = mem_romType3Input - 0x14
+mem_romType3RNG             = 0x00659C
 
 //--------------------------------------------------
 // Arrays and Dictionaries
@@ -51,13 +71,85 @@ episodes = [
         0x09791CA0, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF9, // Total Playtime
-    ]
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Mermaidman and Barnacleboy",
+        "SpongeBob SquarePants - Volume 2",
+        0x08022640, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EF9, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Pickles",
+        "SpongeBob SquarePants - Volume 2",
+        0x08818EB0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EFB, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Hall Monitor",
+        "SpongeBob SquarePants - Volume 2",
+        0x08FBB398, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EFF, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Jellyfish Jam",
+        "SpongeBob SquarePants - Volume 2",
+        0x096FF978, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F02, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Texas",
+        "SpongeBob SquarePants - Volume 3",
+        0x0925B500, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F08, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Walking Small",
+        "SpongeBob SquarePants - Volume 3",
+        0x099E1A94, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F47, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Hooky",
+        "SpongeBob SquarePants - Volume 3",
+        0x0826EFEC, // Episode Pointer
+        0x00000005, // Chapters
+        0x000020F0, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Mermaidman and Barnacleboy II",
+        "SpongeBob SquarePants - Volume 3",
+        0x08AC67B0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F7A, // Total Playtime
+    ],
+    [
+        "The Adventures of Jimmy Neutron: Boy Genius",
+        "Brobot",
+        "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
+        0x08022E50, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F65, // Total Playtime
+    ],
 ]
 
 questions = [
     [
         0101,
-        "Do not forget to land on ___?",
+        "Do not forget to land on what?",
             "Left Arm",
             "Left Foot",
             "Right Arm",
@@ -161,7 +253,7 @@ questions = [
     ],
     [
         0402,
-        "What did Plankton dress up as?",
+        "What did Plankton dress up as to hide from SpongeBob?",
             "Gary",
             "Bean",
             "Krabby Patty",
@@ -182,7 +274,295 @@ questions = [
             "Onions",
             "Tomatoes",
             "Sauce"
-    ]
+    ],
+    [
+        0501,
+        "What did Mermaidman think SpongeBob and Patrick were doing?",
+            "Call for Lunch",
+            "Bring Medicine",
+            "Fix TV",
+            "Visit Them"
+    ],
+    [
+        0502,
+        "What was the name of the nursering home?",
+            "Gloomy Galleon",
+            "Shady Shoals",
+            "Dark Depths",
+            "Ancient Abyss"
+    ],
+    [
+        0503,
+        "What battle of wits did Mermaidman and Barnacleboy do?",
+            "Checkers",
+            "Chess",
+            "Backgammon",
+            "Yahtzee"
+    ],
+    [
+        0504,
+        "What color was the invisible boatmobile painted in?",
+            "White",
+            "Purple",
+            "Black",
+            "Silver"
+    ],
+    [
+        0601,
+        "How many bucks did Bubble Bass get back?",
+            "Two",
+            "Three",
+            "Four",
+            "Five"
+    ],
+    [
+        0602,
+        "Who made the Krabby Patties while SpongeBob was gone?",
+            "Patrick",
+            "Squidward",
+            "Mr. Krabs",
+            "Plankton"
+    ],
+    [
+        0603,
+        "What was hanging on SpongeBob's front door?",
+            "Fried Eggs",
+            "Underwear",
+            "Shoe",
+            "Toaster"
+    ],
+    [
+        0604,
+        "What was under Bubble Bass' tongue beside pickles?",
+            "Jewelry",
+            "Cufflinks",
+            "Money",
+            "Car Keys"
+    ],
+    [
+        0701,
+        "What ice cream flavour did Patrick drop on SpongeBob?",
+            "Strawberry",
+            "Vanilla",
+            "Chocolate",
+            "Mint"
+    ],
+    [
+        0702,
+        "Who was the maniac of Bikini Bottom?",
+            "Patrick",
+            "Mr. Krabs",
+            "Plankton",
+            "SpongeBob"
+    ],
+    [
+        0703,
+        "At what intersection did Patrick see the maniac?",
+            "Conch / Coral",
+            "Seeweed / Shell",
+            "Bubble / Beluga",
+            "Pearl / Prawn"
+    ],
+    [
+        0704,
+        "How many months months will Mrs Puff be in jail?",
+            "Three",
+            "Six",
+            "Nine",
+            "Twelve"
+    ],
+    [
+        0801,
+        "What did SpongeBob disguise as to hide from the jellyfish?",
+            "Sea Sponge",
+            "Rock",
+            "Corals",
+            "Sand"
+    ],
+    [
+        0802,
+        "How man fingers did SpongeBob hold up for the jellyfish to count?",
+            "One",
+            "Two",
+            "Three",
+            "Four"
+    ],
+    [
+        0803,
+        "Who soothes the jellyfish after they started raging?",
+            "SpongeBob",
+            "Patrick",
+            "Gary",
+            "Squidward"
+    ],
+    [
+        0804,
+        "What did the jellyfish swarm not transform into?",
+            "Hand",
+            "Guitar",
+            "Face",
+            "Music Note"
+    ],
+    [
+        0901,
+        "What did SpongeBob not try to stop Sandy from leaving Goo Lagoon?",
+            "Surfing",
+            "Volleyball",
+            "Karate",
+            "Jellyfishing"
+    ],
+    [
+        0902,
+        "What song did Patrick wonder whether Sandy could sing it?",
+            "Happy Birthday",
+            "Alphabet Song",
+            "Muffin Man",
+            "Five Little Ducks"
+    ],
+    [
+        0903,
+        "When being chased by Sandy, behind what was SpongeBob hiding?",
+            "Palm",
+            "Anchor",
+            "Rock",
+            "Corals"
+    ],
+    [
+        0904,
+        "What was not part of the Texas party at the Krusty Krab?",
+            "Bull Riding",
+            "Pecanpie",
+            "Barbeque",
+            "Square Dancing"
+    ],
+    [
+        1001,
+        "What did Plankton put into his suitcase when he was giving up?",
+            "Doll",
+            "Family Picture",
+            "Teddy Bear",
+            "Hat"
+    ],
+    [
+        1002,
+        "What ice cream flavour did Plankton share with SpongeBob?",
+            "Mint",
+            "Vanilla",
+            "Chocolate",
+            "Strawberry"
+    ],
+    [
+        1003,
+        "What did SpongeBob steal from the Snack Bar?",
+            "French Fries",
+            "Milkshakes",
+            "Burgers",
+            "Hotdogs"
+    ],
+    [
+        1004,
+        "What did SpongeBob not transform into?",
+            "Elephant",
+            "Surfboard",
+            "Kite",
+            "Volleyball"
+    ],
+    [
+        1101,
+        "What clothes were left at the Fish Hooks Park?",
+            "Shoes",
+            "Baseball Cap",
+            "Underwear",
+            "Shirt"
+    ],
+    [
+        1102,
+        "What was often used as a fishing bait?",
+            "Cheese",
+            "Worms",
+            "Bread",
+            "Prawns"
+    ],
+    [
+        1103,
+        "How many friends of Pearl were in the Krusty Krab?",
+            "Three",
+            "Four",
+            "Five",
+            "Six"
+    ],
+    [
+        1104,
+        "Where did Patrick finally end up?",
+            "Seafood Dish",
+            "Gift Shop",
+            "Aquarium",
+            "Tuna Can"
+    ],
+    [
+        1201,
+        "What vision did Barnacleboy use aginst the conch signal?",
+            "Sulfur",
+            "Heat",
+            "Laser",
+            "Acid"
+    ],
+    [
+        1202,
+        "What was the name of the hero's hideout?",
+            "Mermalair",
+            "Barnacave",
+            "Hero Hollow",
+            "Dark Cove"
+    ],
+    [
+        1203,
+        "What villain burned Barnacleboy's head?",
+            "Man Ray",
+            "Atomic Flounder",
+            "Jumbo Shrimp",
+            "Sinister Slug"
+    ],
+    [
+        1204,
+        "What did SpongeBob use to defeat Dirty Bubble?",
+            "Nail",
+            "Stick",
+            "Pen",
+            "Needle"
+    ],
+    [
+        1301,
+        "What shape of an animal did the clock in Jimmy's lab have?",
+            "Pig",
+            "Chicken",
+            "Cow",
+            "Horse"
+    ],
+    [
+        1302,
+        "Over what object did Brobot jump using the pogo stick?",
+            "Tree",
+            "Skyscraper",
+            "Plane",
+            "Moon"
+    ],
+    [
+        1303,
+        "What did Cindy smell like based on Brobot?",
+            "Apples",
+            "Flowers",
+            "Candies",
+            "Vanilla"
+    ],
+    [
+        1304,
+        "What did Brobot and his family do on the moon?",
+            "Basketball",
+            "Baseball",
+            "Frisbee",
+            "Football"
+    ],
 ]
 
 //--------------------------------------------------
@@ -258,24 +638,24 @@ function romType1VideoStarted(series, episode) {
                 prev(dword(mem_romType1VideoPlaytime)) == 0x00 &&
                      dword(mem_romType1VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType1CurrentChapter) == getTotalChapters(series, episode)) &&
-           trigger_when(dword(mem_romType1PlaytimeCounter) == 0xFFFFFFFF) &&
+           trigger_when(dword(mem_romType1SceneCountdown) == 0xFFFFFFFF) &&
            never(dword(mem_romType1EpisodePointer) == getEpisodePointer(series, episode) &&
                  dword(mem_romType1VideoPlaytime) == 0x00) &&
            never(dword(mem_romType1VideoPlaytime) < getTotalPlaytime(series, episode) &&
                  prev(dword(mem_romType1VideoState)) != 0x04 &&
                  prev(dword(mem_romType1VideoState)) != 0x08 &&
                       dword(mem_romType1VideoState)  == 0x08) &&
-           never(repeated(600, dword(mem_romType1PlaytimeCounter) == 0xFFFFFFFF))
+           never(repeated(600, dword(mem_romType1SceneCountdown) == 0xFFFFFFFF))
 }
 
 function romType1CorrectAnswer(totalQuestion, currentQuestion, index) {
-    return trigger_when(once(prev(dword(mem_romType1PlaytimeCounter)) == 0x00000000 &&
-                                  dword(mem_romType1PlaytimeCounter)  == 0xFFFFFFFF &&
-                                  dword(mem_romType1Runtime) % totalQuestion == currentQuestion)) &&
+    return trigger_when(once(prev(dword(mem_romType1SceneCountdown)) == 0x00000000 &&
+                                  dword(mem_romType1SceneCountdown)  == 0xFFFFFFFF &&
+                                  dword(mem_romType1RNG) % totalQuestion == currentQuestion)) &&
            trigger_when(bit0(mem_romType1Input + 0x01)
                       + bit1(mem_romType1Input + 0x01) >= 1 &&
                         bit(index % 4 + 4, mem_romType1Input) > prev(bit(index % 4 + 4, mem_romType1Input))) &&
-           never(once(dword(mem_romType1PlaytimeCounter) == 0xFFFFFFFF &&
+           never(once(dword(mem_romType1SceneCountdown) == 0xFFFFFFFF &&
                 bit0(mem_romType1Input + 0x01)
               + bit1(mem_romType1Input + 0x01) >= 1 &&
                 bit((index + 1) % 4 + 4, mem_romType1Input)
@@ -288,14 +668,14 @@ function romType1CorrectAnswer(totalQuestion, currentQuestion, index) {
 }
 
 function romType1LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
-    return prev(dword(mem_romType1PlaytimeCounter)) == 0x00000000 &&
-                dword(mem_romType1PlaytimeCounter)  == 0xFFFFFFFF &&
-                dword(mem_romType1Runtime) % totalQuestion == currentQuestion
+    return prev(dword(mem_romType1SceneCountdown)) == 0x00000000 &&
+                dword(mem_romType1SceneCountdown)  == 0xFFFFFFFF &&
+                dword(mem_romType1RNG) % totalQuestion == currentQuestion
 }
 
 function romType1LeaderboardCancel(series, episode) {
-    return (dword(mem_romType1PlaytimeCounter) != 0xFFFFFFFF) ||
-           (repeated(600, dword(mem_romType1PlaytimeCounter) == 0xFFFFFFFF &&
+    return (dword(mem_romType1SceneCountdown) != 0xFFFFFFFF) ||
+           (repeated(600, dword(mem_romType1SceneCountdown) == 0xFFFFFFFF &&
                           never(dword(mem_romType1EpisodePointer) == getEpisodePointer(series, episode) &&
                                 dword(mem_romType1VideoPlaytime) == 0x00 &&
                                 dword(mem_romType1VideoPlaytime) == prev(dword(mem_romType1VideoPlaytime))))) ||
@@ -308,6 +688,140 @@ function romType1LeaderboardCancel(series, episode) {
           + bit(5, mem_romType1Input)
           + bit(6, mem_romType1Input)
           + bit(7, mem_romType1Input) == 1)
+}
+
+
+
+function romType2VideoStarted(series, episode) {
+    return once(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType2VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType2VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType2CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType2SceneCountdown) == 0xFFFFFFFF) &&
+           never(prev(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType2EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType2VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType2VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 prev(dword(mem_romType2VideoState)) != 0x04 &&
+                 prev(dword(mem_romType2VideoState)) != 0x08 &&
+                      dword(mem_romType2VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType2SceneCountdown) == 0xFFFFFFFF))
+}
+
+function romType2CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(prev(dword(mem_romType2MenuState)) == 0x15 &&
+                     dword(mem_romType2MenuState)  == 0x13 &&
+                high4(mem_romType2RNG) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType2StateLoaded) == 0x02 &&
+                      dword(mem_romType2EpisodePointer) == 0x00000000))) &&
+           trigger_when(once(prev(dword(mem_romType2SceneCountdown)) == 0x00000000 &&
+                                  dword(mem_romType2SceneCountdown)  == 0xFFFFFFFF)) &&
+           trigger_when(bit0(mem_romType2Input + 0x01)
+                      + bit1(mem_romType2Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType2Input) > prev(bit(index % 4 + 4, mem_romType2Input))) &&
+           never(once(dword(mem_romType2SceneCountdown) == 0xFFFFFFFF &&
+                bit0(mem_romType2Input + 0x01)
+              + bit1(mem_romType2Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType2Input)
+              + bit((index + 2) % 4 + 4, mem_romType2Input)
+              + bit((index + 3) % 4 + 4, mem_romType2Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType2Input)
+                      + bit((index + 2) % 4 + 4, mem_romType2Input)
+                      + bit((index + 3) % 4 + 4, mem_romType2Input) == 0)
+}
+
+function romType2LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return prev(dword(mem_romType2SceneCountdown)) == 0x00000000 &&
+                dword(mem_romType2SceneCountdown)  == 0xFFFFFFFF &&
+           once(prev(dword(mem_romType2MenuState)) == 0x15 &&
+                     dword(mem_romType2MenuState)  == 0x13 &&
+                high4(mem_romType2RNG) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType2StateLoaded) == 0x02 &&
+                      dword(mem_romType2EpisodePointer) == 0x00000000))
+}
+
+function romType2LeaderboardCancel(series, episode) {
+    return (dword(mem_romType2SceneCountdown) != 0xFFFFFFFF) ||
+           (repeated(600, dword(mem_romType2SceneCountdown) == 0xFFFFFFFF &&
+                          never(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode) &&
+                                dword(mem_romType2VideoPlaytime) == 0x00 &&
+                                dword(mem_romType2VideoPlaytime) == prev(dword(mem_romType2VideoPlaytime))))) ||
+           (prev(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType2EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType2Input + 0x01)
+          + bit1(mem_romType2Input + 0x01) >= 1 &&
+            bit(4, mem_romType2Input)
+          + bit(5, mem_romType2Input)
+          + bit(6, mem_romType2Input)
+          + bit(7, mem_romType2Input) == 1)
+}
+
+
+
+function romType3VideoStarted(series, episode) {
+    return once(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType3VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType3VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType3CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType3SceneCountdown) == 0xFFFFFFFF) &&
+           never(prev(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType3EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType3VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType3VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 prev(dword(mem_romType3VideoState)) != 0x04 &&
+                 prev(dword(mem_romType3VideoState)) != 0x08 &&
+                      dword(mem_romType3VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType3SceneCountdown) == 0xFFFFFFFF))
+}
+
+function romType3CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(prev(dword(mem_romType3MenuState)) == 0x14 &&
+                     dword(mem_romType3MenuState)  == 0x12 &&
+                high4(mem_romType3RNG) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType3StateLoaded) == 0x02 &&
+                      dword(mem_romType3EpisodePointer) == 0x00000000))) &&
+           trigger_when(once(prev(dword(mem_romType3SceneCountdown)) == 0x00000000 &&
+                                  dword(mem_romType3SceneCountdown)  == 0xFFFFFFFF)) &&
+           trigger_when(bit0(mem_romType3Input + 0x01)
+                      + bit1(mem_romType3Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType3Input) > prev(bit(index % 4 + 4, mem_romType3Input))) &&
+           never(once(dword(mem_romType3SceneCountdown) == 0xFFFFFFFF &&
+                bit0(mem_romType3Input + 0x01)
+              + bit1(mem_romType3Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType3Input)
+              + bit((index + 2) % 4 + 4, mem_romType3Input)
+              + bit((index + 3) % 4 + 4, mem_romType3Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType3Input)
+                      + bit((index + 2) % 4 + 4, mem_romType3Input)
+                      + bit((index + 3) % 4 + 4, mem_romType3Input) == 0)
+}
+
+function romType3LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return prev(dword(mem_romType3SceneCountdown)) == 0x00000000 &&
+                dword(mem_romType3SceneCountdown)  == 0xFFFFFFFF &&
+           once(prev(dword(mem_romType3MenuState)) == 0x14 &&
+                     dword(mem_romType3MenuState)  == 0x12 &&
+                high4(mem_romType3RNG) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType3StateLoaded) == 0x02 &&
+                      dword(mem_romType3EpisodePointer) == 0x00000000))
+}
+
+function romType3LeaderboardCancel(series, episode) {
+    return (dword(mem_romType3SceneCountdown) != 0xFFFFFFFF) ||
+           (repeated(600, dword(mem_romType3SceneCountdown) == 0xFFFFFFFF &&
+                          never(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode) &&
+                                dword(mem_romType3VideoPlaytime) == 0x00 &&
+                                dword(mem_romType3VideoPlaytime) == prev(dword(mem_romType3VideoPlaytime))))) ||
+           (prev(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType3EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType3Input + 0x01)
+          + bit1(mem_romType3Input + 0x01) >= 1 &&
+            bit(4, mem_romType3Input)
+          + bit(5, mem_romType3Input)
+          + bit(6, mem_romType3Input)
+          + bit(7, mem_romType3Input) == 1)
 }
 
 //--------------------------------------------------
@@ -533,4 +1047,499 @@ achievement(
                  format = "Frames"
             )
 
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Mermaidman and Barnacleboy"),
+    id = 94325, badge = "103808", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
+              (romType1CorrectAnswer(4, 0, 7) ||
+               romType1CorrectAnswer(4, 1, 5) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7118,
+                 title       = getQuestionTitle(0501), 
+                 description = getQuestionDescription(0501),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7115,
+                 title       = getQuestionTitle(0502), 
+                 description = getQuestionDescription(0502),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7116,
+                 title       = getQuestionTitle(0503), 
+                 description = getQuestionDescription(0503),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7117,
+                 title       = getQuestionTitle(0504), 
+                 description = getQuestionDescription(0504),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
 
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Pickles"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Pickles"),
+    id = 94333, badge = "103837", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
+              (romType1CorrectAnswer(4, 0, 6) ||
+               romType1CorrectAnswer(4, 1, 5) ||
+               romType1CorrectAnswer(4, 2, 4) ||
+               romType1CorrectAnswer(4, 3, 4))
+)
+            leaderboard(
+                 id = 7119,
+                 title       = getQuestionTitle(0601), 
+                 description = getQuestionDescription(0601),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pickles"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7120,
+                 title       = getQuestionTitle(0602), 
+                 description = getQuestionDescription(0602),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pickles"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7121,
+                 title       = getQuestionTitle(0603), 
+                 description = getQuestionDescription(0603),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pickles"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7122,
+                 title       = getQuestionTitle(0604), 
+                 description = getQuestionDescription(0604),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pickles"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Hall Monitor"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Hall Monitor"),
+    id = 94396, badge = "104021", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
+              (romType1CorrectAnswer(4, 0, 6) ||
+               romType1CorrectAnswer(4, 1, 4) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 5))
+)
+            leaderboard(
+                 id = 7128,
+                 title       = getQuestionTitle(0701), 
+                 description = getQuestionDescription(0701),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Hall Monitor"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7129,
+                 title       = getQuestionTitle(0702), 
+                 description = getQuestionDescription(0702),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Hall Monitor"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7130,
+                 title       = getQuestionTitle(0703), 
+                 description = getQuestionDescription(0703),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Hall Monitor"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7131,
+                 title       = getQuestionTitle(0704), 
+                 description = getQuestionDescription(0704),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Hall Monitor"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Jellyfish Jam"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Jellyfish Jam"),
+    id = 94407, badge = "104022", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
+              (romType1CorrectAnswer(4, 0, 5) ||
+               romType1CorrectAnswer(4, 1, 7) ||
+               romType1CorrectAnswer(4, 2, 7) ||
+               romType1CorrectAnswer(4, 3, 4))
+)
+            leaderboard(
+                 id = 7132,
+                 title       = getQuestionTitle(0801), 
+                 description = getQuestionDescription(0801),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfish Jam"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7133,
+                 title       = getQuestionTitle(0802), 
+                 description = getQuestionDescription(0802),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfish Jam"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7134,
+                 title       = getQuestionTitle(0803), 
+                 description = getQuestionDescription(0803),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfish Jam"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7135,
+                 title       = getQuestionTitle(0804), 
+                 description = getQuestionDescription(0804),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Jellyfish Jam"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Texas"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Texas"),
+    id = 94538, badge = "639171", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
+              (romType2CorrectAnswer(4, 0, 5) ||
+               romType2CorrectAnswer(4, 1, 7) ||
+               romType2CorrectAnswer(4, 2, 6) ||
+               romType2CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 7137,
+                 title       = getQuestionTitle(0901), 
+                 description = getQuestionDescription(0901),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Texas"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7138,
+                 title       = getQuestionTitle(0902), 
+                 description = getQuestionDescription(0902),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Texas"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7139,
+                 title       = getQuestionTitle(0903), 
+                 description = getQuestionDescription(0903),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Texas"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7140,
+                 title       = getQuestionTitle(0904), 
+                 description = getQuestionDescription(0904),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Texas"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Walking Small"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Walking Small"),
+    id = 94540, badge = "104154", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
+              (romType2CorrectAnswer(4, 0, 6) ||
+               romType2CorrectAnswer(4, 1, 4) ||
+               romType2CorrectAnswer(4, 2, 4) ||
+               romType2CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7142,
+                 title       = getQuestionTitle(1001), 
+                 description = getQuestionDescription(1001),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Walking Small"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7143,
+                 title       = getQuestionTitle(1002), 
+                 description = getQuestionDescription(1002),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Walking Small"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7144,
+                 title       = getQuestionTitle(1003), 
+                 description = getQuestionDescription(1003),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Walking Small"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7145,
+                 title       = getQuestionTitle(1004), 
+                 description = getQuestionDescription(1004),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Walking Small"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Hooky"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Hooky"),
+    id = 97409, badge = "107025", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
+              (romType2CorrectAnswer(4, 0, 6) ||
+               romType2CorrectAnswer(4, 1, 6) ||
+               romType2CorrectAnswer(4, 2, 5) ||
+               romType2CorrectAnswer(4, 3, 4))
+)
+            leaderboard(
+                 id = 7277,
+                 title       = getQuestionTitle(1101), 
+                 description = getQuestionDescription(1101),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Hooky"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7278,
+                 title       = getQuestionTitle(1102), 
+                 description = getQuestionDescription(1102),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Hooky"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7279,
+                 title       = getQuestionTitle(1103), 
+                 description = getQuestionDescription(1103),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Hooky"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7280,
+                 title       = getQuestionTitle(1104), 
+                 description = getQuestionDescription(1104),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Hooky"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"),
+    id = 97410, badge = "107026", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
+              (romType2CorrectAnswer(4, 0, 6) ||
+               romType2CorrectAnswer(4, 1, 6) ||
+               romType2CorrectAnswer(4, 2, 5) ||
+               romType2CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7281,
+                 title       = getQuestionTitle(1201), 
+                 description = getQuestionDescription(1201),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7282,
+                 title       = getQuestionTitle(1202), 
+                 description = getQuestionDescription(1202),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7283,
+                 title       = getQuestionTitle(1203), 
+                 description = getQuestionDescription(1203),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7284,
+                 title       = getQuestionTitle(1204), 
+                 description = getQuestionDescription(1204),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+            
+achievement(
+    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), type = "progression",
+    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"),
+    id = 97411, badge = "107027", points = 2,
+    trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
+              (romType3CorrectAnswer(4, 0, 5) ||
+               romType3CorrectAnswer(4, 1, 4) ||
+               romType3CorrectAnswer(4, 2, 6) ||
+               romType3CorrectAnswer(4, 3, 5))
+)
+            leaderboard(
+                 id = 7285,
+                 title       = getQuestionTitle(1301), 
+                 description = getQuestionDescription(1301),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
+                          romType3LeaderboardQuestionSelect(4, 0),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7286,
+                 title       = getQuestionTitle(1302), 
+                 description = getQuestionDescription(1302),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
+                          romType3LeaderboardQuestionSelect(4, 1),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7287,
+                 title       = getQuestionTitle(1303), 
+                 description = getQuestionDescription(1303),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
+                          romType3LeaderboardQuestionSelect(4, 2),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7288,
+                 title       = getQuestionTitle(1304), 
+                 description = getQuestionDescription(1304),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
+                          romType3LeaderboardQuestionSelect(4, 3),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
