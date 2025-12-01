@@ -144,6 +144,30 @@ episodes = [
         0x00000005, // Chapters
         0x00001F65, // Total Playtime
     ],
+    [
+        "The Adventures of Jimmy Neutron: Boy Genius",
+        "The Big Pinch",
+        "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
+        0x087B7DA0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001E7B, // Total Playtime
+    ],
+    [
+        "The Adventures of Jimmy Neutron: Boy Genius",
+        "Granny Baby",
+        "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
+        0x08F190EC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EAA, // Total Playtime
+    ],
+    [
+        "The Adventures of Jimmy Neutron: Boy Genius",
+        "Time is Money",
+        "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
+        0x09724BC0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F2D, // Total Playtime
+    ],
 ]
 
 questions = [
@@ -563,6 +587,102 @@ questions = [
             "Frisbee",
             "Football"
     ],
+    [
+        1401,
+        "What park name did Jimmy type into the time booth?",
+            "Menlo",
+            "Holmdel",
+            "Colonial",
+            "Thompson"
+    ],
+    [
+        1402,
+        "What was the first electronical device that broke?",
+            "Rollercoaster",
+            "Jukebox",
+            "Telephone",
+            "Goddard"
+    ],
+    [
+        1403,
+        "What instrument did Edison play while singing for Miss Fowl?",
+            "Guitar",
+            "Keyboard",
+            "Ukulele",
+            "Violin"
+    ],
+    [
+        1404,
+        "What knocked Jimmy out of the tree in the park?",
+            "Baseball",
+            "Bird",
+            "Squirrel",
+            "Frisbee"
+    ],
+    [
+        1501,
+        "What color does the Neutron family's car have?",
+            "Green",
+            "Blue",
+            "Red",
+            "Brown"
+    ],
+    [
+        1502,
+        "With what was the hair in Grandma Neutron's ear connected with?",
+            "Arm",
+            "Nose",
+            "Eye",
+            "Foot"
+    ],
+    [
+        1503,
+        "What did Jimmy do to his grandma in a previous experiment?",
+            "Weightless",
+            "Shrink",
+            "Magnetic",
+            "Invisible"
+    ],
+    [
+        1504,
+        "What kind of bird was having a fight with Jimmy's father?",
+            "Eagle",
+            "Crow",
+            "Magpie",
+            "Pidgeon"
+    ],
+    [
+        1601,
+        "How much start-up money was Jimmy's father asked to pay?",
+            "$30",
+            "$50",
+            "$75",
+            "$100"
+    ],
+    [
+        1602,
+        "How many years did Jimmy and his friends go back in time?",
+            "10 Years",
+            "12 Years",
+            "15 Years",
+            "20 Years"
+    ],
+    [
+        1603,
+        "What start-up could Jimmy's father invest in?",
+            "McSpanky's",
+            "McDonald's",
+            "McCheesey's",
+            "McBurger's"
+    ],
+    [
+        1604,
+        "What did Jimmy's father use the start-up money for instead?",
+            "Ducks",
+            "Bills",
+            "Wedding Ring",
+            "Encyclopedia"
+    ],
 ]
 
 //--------------------------------------------------
@@ -772,12 +892,14 @@ function romType3VideoStarted(series, episode) {
                  prev(dword(mem_romType3VideoState)) != 0x04 &&
                  prev(dword(mem_romType3VideoState)) != 0x08 &&
                       dword(mem_romType3VideoState)  == 0x08) &&
-           never(repeated(600, dword(mem_romType3SceneCountdown) == 0xFFFFFFFF))
+           never(repeated(600, dword(mem_romType3SceneCountdown) == 0xFFFFFFFF)) &&
+           never(dword(mem_romType3MenuState) == 0x14 &&
+                 dword(mem_romType3EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 function romType3CorrectAnswer(totalQuestion, currentQuestion, index) {
     return trigger_when(once(prev(dword(mem_romType3MenuState)) == 0x14 &&
-                     dword(mem_romType3MenuState)  == 0x12 &&
+                                  dword(mem_romType3MenuState)  == 0x12 &&
                 high4(mem_romType3RNG) % totalQuestion == currentQuestion &&
                 never(byte(mem_romType3StateLoaded) == 0x02 &&
                       dword(mem_romType3EpisodePointer) == 0x00000000))) &&
@@ -821,7 +943,9 @@ function romType3LeaderboardCancel(series, episode) {
             bit(4, mem_romType3Input)
           + bit(5, mem_romType3Input)
           + bit(6, mem_romType3Input)
-          + bit(7, mem_romType3Input) == 1)
+          + bit(7, mem_romType3Input) == 1) ||
+          (dword(mem_romType3MenuState) == 0x14 &&
+           dword(mem_romType3EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 //--------------------------------------------------
@@ -1538,6 +1662,171 @@ achievement(
                  start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
                           romType3LeaderboardQuestionSelect(4, 3),
                  cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), type = "progression",
+    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"),
+    id = 97413, badge = "107032", points = 2,
+    trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
+              (romType3CorrectAnswer(4, 0, 6) ||
+               romType3CorrectAnswer(4, 1, 5) ||
+               romType3CorrectAnswer(4, 2, 7) ||
+               romType3CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7289,
+                 title       = getQuestionTitle(1401), 
+                 description = getQuestionDescription(1401),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
+                          romType3LeaderboardQuestionSelect(4, 0),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7290,
+                 title       = getQuestionTitle(1402), 
+                 description = getQuestionDescription(1402),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
+                          romType3LeaderboardQuestionSelect(4, 1),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7291,
+                 title       = getQuestionTitle(1403), 
+                 description = getQuestionDescription(1403),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
+                          romType3LeaderboardQuestionSelect(4, 2),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7292,
+                 title       = getQuestionTitle(1404), 
+                 description = getQuestionDescription(1404),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
+                          romType3LeaderboardQuestionSelect(4, 3),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), type = "progression",
+    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"),
+    id = 97414, badge = "107039", points = 2,
+    trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
+              (romType3CorrectAnswer(4, 0, 5) ||
+               romType3CorrectAnswer(4, 1, 4) ||
+               romType3CorrectAnswer(4, 2, 7) ||
+               romType3CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 7293,
+                 title       = getQuestionTitle(1501), 
+                 description = getQuestionDescription(1501),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
+                          romType3LeaderboardQuestionSelect(4, 0),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7294,
+                 title       = getQuestionTitle(1502), 
+                 description = getQuestionDescription(1502),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
+                          romType3LeaderboardQuestionSelect(4, 1),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7295,
+                 title       = getQuestionTitle(1503), 
+                 description = getQuestionDescription(1503),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
+                          romType3LeaderboardQuestionSelect(4, 2),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7296,
+                 title       = getQuestionTitle(1504), 
+                 description = getQuestionDescription(1504),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
+                          romType3LeaderboardQuestionSelect(4, 3),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), type = "progression",
+    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"),
+    id = 97515, badge = "640637", points = 2,
+    trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
+              (romType3CorrectAnswer(4, 0, 5) ||
+               romType3CorrectAnswer(4, 1, 7) ||
+               romType3CorrectAnswer(4, 2, 6) ||
+               romType3CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 7297,
+                 title       = getQuestionTitle(1601), 
+                 description = getQuestionDescription(1601),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
+                          romType3LeaderboardQuestionSelect(4, 0),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7298,
+                 title       = getQuestionTitle(1602), 
+                 description = getQuestionDescription(1602),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
+                          romType3LeaderboardQuestionSelect(4, 1),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7299,
+                 title       = getQuestionTitle(1603), 
+                 description = getQuestionDescription(1603),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
+                          romType3LeaderboardQuestionSelect(4, 2),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7300,
+                 title       = getQuestionTitle(1604), 
+                 description = getQuestionDescription(1604),
+                 start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
+                          romType3LeaderboardQuestionSelect(4, 3),
+                 cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
