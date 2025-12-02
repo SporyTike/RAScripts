@@ -168,6 +168,22 @@ episodes = [
         0x00000005, // Chapters
         0x00001F2D, // Total Playtime
     ],
+    [
+        "All Grown Up!",
+        "Susie Sings The Blues",
+        "All Grown Up! - Volume 1",
+        0x08021CDC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003DEB, // Total Playtime
+    ],
+    [
+        "All Grown Up!",
+        "Coup DeVille",
+        "All Grown Up! - Volume 1",
+        0x08F661FC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003DF9, // Total Playtime
+    ],
 ]
 
 questions = [
@@ -682,6 +698,102 @@ questions = [
             "Bills",
             "Wedding Ring",
             "Encyclopedia"
+    ],
+    [
+        1701,
+        "Who wanted to make less boring decisions in life?",
+            "Tommy",
+            "Chuckie",
+            "Susie",
+            "Angelica"
+    ],
+    [
+        1702,
+        "What was hanging at the ceiling of the men's toilet in school?",
+            "Shoes",
+            "Pizza",
+            "Wet Paper",
+            "Pudding"
+    ],
+    [
+        1703,
+        "What was the name of the teenage pop artist?",
+            "Zusan",
+            "Emica",
+            "Amber",
+            "Lilya"
+    ],
+    [
+        1704,
+        "How much money did the con artist demand from Susie?",
+            "$100",
+            "$250",
+            "$500",
+            "$1000"
+    ],
+    [
+        1705,
+        "Who offered Susie to loan her $100?",
+            "Lil",
+            "Angelica",
+            "Kimi",
+            "Tommy"
+    ],
+    [
+        1706,
+        "Where did Susie have a singing performance?",
+            "Java Lava",
+            "Wow Mao",
+            "Groovy Smoothie",
+            "Jam Bam"
+    ],
+    [
+        1801,
+        "Who tested his smelling ability in the school cafeteria?",
+            "Chuckie",
+            "Dylan",
+            "Tommy",
+            "Phil"
+    ],
+    [
+        1802,
+        "What did Phil's armpit smell like based on Dylan?",
+            "Onions",
+            "Fish",
+            "Cheese",
+            "Ketchup"
+    ],
+    [
+        1803,
+        "Who is called socially inept and was not invited to the party?",
+            "Phil",
+            "Lil",
+            "Dylan",
+            "Chuckie"
+    ],
+    [
+        1804,
+        "What word was not written on the chalk board in class?",
+            "Quaducti",
+            "Pythagorus",
+            "Vesuvus",
+            "Archemides"
+    ],
+    [
+        1805,
+        "Who skipped sports class by pretending to be sick?",
+            "Tommy",
+            "Chuckie",
+            "Dylan",
+            "Phil"
+    ],
+    [
+        1806,
+        "What did Phil and Lil do together in the Twins Canyon Resort?",
+            "Swimming",
+            "Rollercoaster",
+            "Mud Bath",
+            "Cinema"
     ],
 ]
 
@@ -1827,6 +1939,164 @@ achievement(
                  start  = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
                           romType3LeaderboardQuestionSelect(4, 3),
                  cancel = romType3LeaderboardCancel("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("All Grown Up!", "Susie Sings The Blues"), type = "progression",
+    description = getAchievementDescription("All Grown Up!", "Susie Sings The Blues"),
+    id = 97655, badge = "107192", points = 3,
+    trigger = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+              (romType1CorrectAnswer(6, 0, 5) ||
+               romType1CorrectAnswer(6, 1, 6) ||
+               romType1CorrectAnswer(6, 2, 5) ||
+               romType1CorrectAnswer(6, 3, 4) ||
+               romType1CorrectAnswer(6, 4, 7) ||
+               romType1CorrectAnswer(6, 5, 6))
+)
+            leaderboard(
+                 id = 7304,
+                 title       = getQuestionTitle(1701), 
+                 description = getQuestionDescription(1701),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7305,
+                 title       = getQuestionTitle(1702), 
+                 description = getQuestionDescription(1702),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7306,
+                 title       = getQuestionTitle(1703), 
+                 description = getQuestionDescription(1703),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7307,
+                 title       = getQuestionTitle(1704), 
+                 description = getQuestionDescription(1704),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7308,
+                 title       = getQuestionTitle(1705), 
+                 description = getQuestionDescription(1705),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7309,
+                 title       = getQuestionTitle(1706), 
+                 description = getQuestionDescription(1706),
+                 start  = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Susie Sings The Blues"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("All Grown Up!", "Coup DeVille"), type = "progression",
+    description = getAchievementDescription("All Grown Up!", "Coup DeVille"),
+    id = 97664, badge = "107200", points = 3,
+    trigger = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+              (romType1CorrectAnswer(6, 0, 5) ||
+               romType1CorrectAnswer(6, 1, 5) ||
+               romType1CorrectAnswer(6, 2, 6) ||
+               romType1CorrectAnswer(6, 3, 4) ||
+               romType1CorrectAnswer(6, 4, 5) ||
+               romType1CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 7312,
+                 title       = getQuestionTitle(1801), 
+                 description = getQuestionDescription(1801),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7313,
+                 title       = getQuestionTitle(1802), 
+                 description = getQuestionDescription(1802),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7314,
+                 title       = getQuestionTitle(1803), 
+                 description = getQuestionDescription(1803),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7315,
+                 title       = getQuestionTitle(1804), 
+                 description = getQuestionDescription(1804),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7316,
+                 title       = getQuestionTitle(1805), 
+                 description = getQuestionDescription(1805),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7317,
+                 title       = getQuestionTitle(1806), 
+                 description = getQuestionDescription(1806),
+                 start  = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Coup DeVille"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
