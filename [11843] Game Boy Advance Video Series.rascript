@@ -184,6 +184,22 @@ episodes = [
         0x00000005, // Chapters
         0x00003DF9, // Total Playtime
     ],
+    [
+        "Dora the Explorer",
+        "Three Little Piggies",
+        "Dora the Explorer - Volume 1",
+        0x08020CAC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003E5F, // Total Playtime
+    ],
+    [
+        "Dora the Explorer",
+        "The Big River",
+        "Dora the Explorer - Volume 1",
+        0x08F43914, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003EC0, // Total Playtime
+    ],
 ]
 
 questions = [
@@ -621,7 +637,7 @@ questions = [
     ],
     [
         1403,
-        "What instrument did Edison play while singing for Miss Fowl?",
+        "What instrument did Edison play while singing for Ms. Fowl?",
             "Guitar",
             "Keyboard",
             "Ukulele",
@@ -794,6 +810,102 @@ questions = [
             "Rollercoaster",
             "Mud Bath",
             "Cinema"
+    ],
+    [
+        1901,
+        "What color did the ribbons for the pigs have?",
+            "Red",
+            "Blue",
+            "Yellow",
+            "Green"
+    ],
+    [
+        1902,
+        "Who left the gate open allowing the pigs to escape?",
+            "Boots",
+            "Dora",
+            "Tico",
+            "Swiper"
+    ],
+    [
+        1903,
+        "What was not a location on the map?",
+            "Apple Tree",
+            "Hayfield",
+            "Corn Field",
+            "Barn"
+    ],
+    [
+        1904,
+        "Who opened the gate to prevent the wagon from crashing?",
+            "Tico",
+            "Dora",
+            "Boots",
+            "Oinky"
+    ],
+    [
+        1905,
+        "Behind what was the second pig hiding in the barn?",
+            "Barrels",
+            "Water Trough",
+            "Haystacks",
+            "Tractor"
+    ],
+    [
+        1906,
+        "What item did Dora take out of the backpack at the apple tree?",
+            "Soccer Ball",
+            "Doll",
+            "Net",
+            "Sunglasses"
+    ],
+    [
+        2001,
+        "What did Dora fish out of the river?",
+            "Fish",
+            "Boots",
+            "Branch",
+            "Purse"
+    ],
+    [
+        2002,
+        "What was not a location on the map?",
+            "Waterfall",
+            "Fishy Lake",
+            "Bridge",
+            "Froggy Rocks"
+    ],
+    [
+        2003,
+        "How many pieces were missing in the boat?",
+            "5 ",
+            "7 ",
+            "9 ",
+            "11"
+    ],
+    [
+        2004,
+        "Who was fishing at the bridge?",
+            "Dora",
+            "Swiper",
+            "Boots",
+            "Tico"
+    ],
+    [
+        2005,
+        "What is the Spanish word for \"open\"?",
+            "Trabaja",
+            "Toma",
+            "Abre",
+            "Vuelve"
+    ],
+    [
+        2006,
+        "What item did Boots take out of the backpack at the waterfall?",
+            "Flower",
+            "Maracas",
+            "Fishing Pole",
+            "Binoculars"
     ],
 ]
 
@@ -1729,10 +1841,10 @@ achievement(
     description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"),
     id = 97411, badge = "107027", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
-              (romType3CorrectAnswer(4, 0, 5) ||
-               romType3CorrectAnswer(4, 1, 4) ||
-               romType3CorrectAnswer(4, 2, 6) ||
-               romType3CorrectAnswer(4, 3, 5))
+              (romType3CorrectAnswer(4, 0, 6) ||
+               romType3CorrectAnswer(4, 1, 5) ||
+               romType3CorrectAnswer(4, 2, 7) ||
+               romType3CorrectAnswer(4, 3, 7))
 )
             leaderboard(
                  id = 7285,
@@ -1784,10 +1896,10 @@ achievement(
     description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"),
     id = 97413, badge = "107032", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
-              (romType3CorrectAnswer(4, 0, 6) ||
-               romType3CorrectAnswer(4, 1, 5) ||
+              (romType3CorrectAnswer(4, 0, 5) ||
+               romType3CorrectAnswer(4, 1, 4) ||
                romType3CorrectAnswer(4, 2, 7) ||
-               romType3CorrectAnswer(4, 3, 7))
+               romType3CorrectAnswer(4, 3, 6))
 )
             leaderboard(
                  id = 7289,
@@ -2101,4 +2213,163 @@ achievement(
                  value  = always_true(),
                  format = "Frames"
             )
+            
+achievement(
+    title = getAchievementTitle("Dora the Explorer", "Three Little Piggies"), type = "progression",
+    description = getAchievementDescription("Dora the Explorer", "Three Little Piggies"),
+    id = 114580, badge = "641195", points = 3,
+    trigger = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+              (romType1CorrectAnswer(6, 0, 5) ||
+               romType1CorrectAnswer(6, 1, 4) ||
+               romType1CorrectAnswer(6, 2, 7) ||
+               romType1CorrectAnswer(6, 3, 6) ||
+               romType1CorrectAnswer(6, 4, 6) ||
+               romType1CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 8383,
+                 title       = getQuestionTitle(1901), 
+                 description = getQuestionDescription(1901),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8384,
+                 title       = getQuestionTitle(1902), 
+                 description = getQuestionDescription(1902),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8385,
+                 title       = getQuestionTitle(1903), 
+                 description = getQuestionDescription(1903),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8386,
+                 title       = getQuestionTitle(1904), 
+                 description = getQuestionDescription(1904),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7318,
+                 title       = getQuestionTitle(1905), 
+                 description = getQuestionDescription(1905),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7319,
+                 title       = getQuestionTitle(1906), 
+                 description = getQuestionDescription(1906),
+                 start  = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "Three Little Piggies"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Dora the Explorer", "The Big River"), type = "progression",
+    description = getAchievementDescription("Dora the Explorer", "The Big River"),
+    id = 114581, badge = "125228", points = 3,
+    trigger = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+              (romType1CorrectAnswer(6, 0, 5) ||
+               romType1CorrectAnswer(6, 1, 5) ||
+               romType1CorrectAnswer(6, 2, 5) ||
+               romType1CorrectAnswer(6, 3, 4) ||
+               romType1CorrectAnswer(6, 4, 7) ||
+               romType1CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 8387,
+                 title       = getQuestionTitle(2001), 
+                 description = getQuestionDescription(2001),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8388,
+                 title       = getQuestionTitle(2002), 
+                 description = getQuestionDescription(2002),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8389,
+                 title       = getQuestionTitle(2003), 
+                 description = getQuestionDescription(2003),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8390,
+                 title       = getQuestionTitle(2004), 
+                 description = getQuestionDescription(2004),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7310,
+                 title       = getQuestionTitle(2005), 
+                 description = getQuestionDescription(2005),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 7311,
+                 title       = getQuestionTitle(2006), 
+                 description = getQuestionDescription(2006),
+                 start  = romType1VideoStarted("Dora the Explorer", "The Big River") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Dora the Explorer", "The Big River"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
             
