@@ -39,6 +39,10 @@ inputArrow = [
     "🠉", "🠈", "🠋", "🠊"
 ]
 
+previousArrow = [
+    ["⇧", "⇦", "⇩", "⇨"] // Used before current
+]
+
 episodes = [
     [
         "SpongeBob SquarePants",
@@ -199,6 +203,30 @@ episodes = [
         0x08F43914, // Episode Pointer
         0x00000005, // Chapters
         0x00003EC0, // Total Playtime
+    ],
+    [
+        "All Grown Up!",
+        "Chuckie's in Love",
+        "Nicktoons Collection - Volume 1",
+        0x08022420, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003FF5, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "The Big Problem!",
+        "Nicktoons Collection - Volume 1",
+        0x08F01CDC, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000211E, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Pizza Delivery",
+        "Nicktoons Collection - Volume 1",
+        0x0963B8E0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000020CC, // Total Playtime
     ],
 ]
 
@@ -605,7 +633,7 @@ questions = [
     ],
     [
         1303,
-        "What did Cindy smell like based on Brobot?",
+        "What did Cindy smell like according to Brobot?",
             "Apples",
             "Flowers",
             "Candies",
@@ -773,7 +801,7 @@ questions = [
     ],
     [
         1802,
-        "What did Phil's armpit smell like based on Dylan?",
+        "What did Phil's armpit smell like according to Dylan?",
             "Onions",
             "Fish",
             "Cheese",
@@ -906,6 +934,126 @@ questions = [
             "Maracas",
             "Fishing Pole",
             "Binoculars"
+    ],
+    [
+        2101,
+        "Who helped Kimi to change Chuckie's look?",
+            "Betty",
+            "Lil",
+            "Nicole",
+            "Angelica"
+    ],
+    [
+        2102,
+        "Where is Chongo coming from according to Kimi?",
+            "Latvia",
+            "Munama",
+            "Batara",
+            "Kubia"
+    ],
+    [
+        2103,
+        "Who played soccer in the sports class?",
+            "Tommy",
+            "Chuckie",
+            "Dil",
+            "Kimi"
+    ],
+    [
+        2104,
+        "What did Nicole order in the Java Lava?",
+            "Burger",
+            "Smoothie",
+            "Softdrink",
+            "Ice Cream"
+    ],
+    [
+        2105,
+        "What fruits makes Chaz cry instead of onions?",
+            "Lemons",
+            "Bananas",
+            "Pineapples",
+            "Limes"
+    ],
+    [
+        2106,
+        "Who helped Chuckie to change looks in the backroom of Java Lava?",
+            "Chas",
+            "Tommy",
+            "Betty",
+            "Phil"
+    ],
+    [
+        2201,
+        "Where did Timmy's parents go when they hired Vicky as babysitter?",
+            "Minigolf",
+            "Movies",
+            "Dinner",
+            "Musical"
+    ],
+    [
+        2202,
+        "What was Timmy's first action as adult?",
+            "Movies",
+            "Help Elder",
+            "Driving",
+            "Stop Bully"
+    ],
+    [
+        2203,
+        "What did two more hours with fairly godparents cost as adult?",
+            "$2 ",
+            "$5 ",
+            "$10",
+            "$20"
+    ],
+    [
+        2204,
+        "What was not a transformation of Cosmo or Wanda?",
+            "Cat",
+            "Pillow",
+            "Toilet",
+            "Tree"
+    ],
+    [
+        2301,
+        "What did SpongeBob not firmly check doing the boat inspection?",
+            "Bumper",
+            "Tire",
+            "Antenna",
+            "Lights"
+    ],
+    [
+        2302,
+        "What did SpongeBob use to land safetly after the tornado?",
+            "Squidward",
+            "His Pants",
+            "Jellyfish",
+            "Pizza"
+    ],
+    [
+        2303,
+        "What did the pioneers ride for miles according to SpongeBob?",
+            "Horses",
+            "Trucks",
+            "Rocks",
+            "Trains"
+    ],
+    [
+        2304,
+        "What was missing in the delivery according to the customer?",
+            "Drink",
+            "Napkins",
+            "Fries",
+            "Sauce"
+    ],
+    [
+        0000,
+        "?",
+            "",
+            "",
+            "",
+            ""
     ],
 ]
 
@@ -2371,5 +2519,195 @@ achievement(
                  value  = always_true(),
                  format = "Frames"
             )
+            
+achievement(
+    title = getAchievementTitle("All Grown Up!", "Chuckie's in Love"), type = "progression",
+    description = getAchievementDescription("All Grown Up!", "Chuckie's in Love"),
+    id = 114590, badge = "125258", points = 3,
+    trigger = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+              (romType1CorrectAnswer(6, 0, 5) ||
+               romType1CorrectAnswer(6, 1, 6) ||
+               romType1CorrectAnswer(6, 2, 6) ||
+               romType1CorrectAnswer(6, 3, 5) ||
+               romType1CorrectAnswer(6, 4, 7) ||
+               romType1CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 8391,
+                 title       = getQuestionTitle(2101), 
+                 description = getQuestionDescription(2101),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8392,
+                 title       = getQuestionTitle(2102), 
+                 description = getQuestionDescription(2102),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8393,
+                 title       = getQuestionTitle(2103), 
+                 description = getQuestionDescription(2103),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8394,
+                 title       = getQuestionTitle(2104), 
+                 description = getQuestionDescription(2104),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8395,
+                 title       = getQuestionTitle(2105), 
+                 description = getQuestionDescription(2105),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8396,
+                 title       = getQuestionTitle(2106), 
+                 description = getQuestionDescription(2106),
+                 start  = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("All Grown Up!", "Chuckie's in Love"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "The Big Problem!"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "The Big Problem!"),
+    id = 114638, badge = "125375", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
+              (romType1CorrectAnswer(4, 0, 5) ||
+               romType1CorrectAnswer(4, 1, 7) ||
+               romType1CorrectAnswer(4, 2, 5) ||
+               romType1CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 8400,
+                 title       = getQuestionTitle(2201), 
+                 description = getQuestionDescription(2201),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Big Problem!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8401,
+                 title       = getQuestionTitle(2202), 
+                 description = getQuestionDescription(2202),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Big Problem!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8402,
+                 title       = getQuestionTitle(2203), 
+                 description = getQuestionDescription(2203),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Big Problem!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8403,
+                 title       = getQuestionTitle(2204), 
+                 description = getQuestionDescription(2204),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Big Problem!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Pizza Delivery"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Pizza Delivery"),
+    id = 114643, badge = "641734", points = 2,
+    trigger = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
+              (romType1CorrectAnswer(4, 0, 4) ||
+               romType1CorrectAnswer(4, 1, 4) ||
+               romType1CorrectAnswer(4, 2, 7) ||
+               romType1CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 8405,
+                 title       = getQuestionTitle(2301), 
+                 description = getQuestionDescription(2301),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pizza Delivery"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8406,
+                 title       = getQuestionTitle(2302), 
+                 description = getQuestionDescription(2302),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pizza Delivery"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8407,
+                 title       = getQuestionTitle(2303), 
+                 description = getQuestionDescription(2303),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pizza Delivery"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8408,
+                 title       = getQuestionTitle(2304), 
+                 description = getQuestionDescription(2304),
+                 start  = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pizza Delivery"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
             
             
