@@ -45,6 +45,54 @@ previousArrow = [
 
 episodes = [
     [
+        "All Grown Up!",
+        "Susie Sings The Blues",
+        "All Grown Up! - Volume 1",
+        0x08021CDC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003DEB, // Total Playtime
+    ],
+    [
+        "All Grown Up!",
+        "Coup DeVille",
+        "All Grown Up! - Volume 1",
+        0x08F661FC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003DF9, // Total Playtime
+    ],
+    [
+        "All Grown Up!",
+        "Chuckie's in Love",
+        "Nicktoons Collection - Volume 1",
+        0x08022420, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003FF5, // Total Playtime
+    ],
+    [
+        "Dora the Explorer",
+        "Three Little Piggies",
+        "Dora the Explorer - Volume 1",
+        0x08020CAC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003E5F, // Total Playtime
+    ],
+    [
+        "Dora the Explorer",
+        "The Big River",
+        "Dora the Explorer - Volume 1",
+        0x08F43914, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003EC0, // Total Playtime
+    ],
+    [
+        "Rocket Power",
+        "Big Air Dare",
+        "Nicktoons Collection - Volume 2",
+        0x08289480, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002153, // Total Playtime
+    ],
+    [
         "SpongeBob SquarePants",
         "Bubblestand",
         "SpongeBob SquarePants - Volume 1",
@@ -141,6 +189,30 @@ episodes = [
         0x00001F7A, // Total Playtime
     ],
     [
+        "SpongeBob SquarePants",
+        "Pizza Delivery",
+        "Nicktoons Collection - Volume 1",
+        0x0963B8E0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000020CC, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Nature Pants",
+        "Nicktoons Collection - Volume 2",
+        0x08BB19E0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000020F7, // Total Playtime
+    ],
+    [
+        "SpongeBob SquarePants",
+        "Opposite Day",
+        "Nicktoons Collection - Volume 2",
+        0x09AF6910, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EF6, // Total Playtime
+    ],
+    [
         "The Adventures of Jimmy Neutron: Boy Genius",
         "Brobot",
         "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
@@ -173,46 +245,6 @@ episodes = [
         0x00001F2D, // Total Playtime
     ],
     [
-        "All Grown Up!",
-        "Susie Sings The Blues",
-        "All Grown Up! - Volume 1",
-        0x08021CDC, // Episode Pointer
-        0x00000005, // Chapters
-        0x00003DEB, // Total Playtime
-    ],
-    [
-        "All Grown Up!",
-        "Coup DeVille",
-        "All Grown Up! - Volume 1",
-        0x08F661FC, // Episode Pointer
-        0x00000005, // Chapters
-        0x00003DF9, // Total Playtime
-    ],
-    [
-        "Dora the Explorer",
-        "Three Little Piggies",
-        "Dora the Explorer - Volume 1",
-        0x08020CAC, // Episode Pointer
-        0x00000005, // Chapters
-        0x00003E5F, // Total Playtime
-    ],
-    [
-        "Dora the Explorer",
-        "The Big River",
-        "Dora the Explorer - Volume 1",
-        0x08F43914, // Episode Pointer
-        0x00000005, // Chapters
-        0x00003EC0, // Total Playtime
-    ],
-    [
-        "All Grown Up!",
-        "Chuckie's in Love",
-        "Nicktoons Collection - Volume 1",
-        0x08022420, // Episode Pointer
-        0x00000005, // Chapters
-        0x00003FF5, // Total Playtime
-    ],
-    [
         "The Fairly OddParents!",
         "The Big Problem!",
         "Nicktoons Collection - Volume 1",
@@ -221,12 +253,12 @@ episodes = [
         0x0000211E, // Total Playtime
     ],
     [
-        "SpongeBob SquarePants",
-        "Pizza Delivery",
-        "Nicktoons Collection - Volume 1",
-        0x0963B8E0, // Episode Pointer
+        "The Fairly OddParents!",
+        "Odd Ball",
+        "Nicktoons Collection - Volume 2",
+        0x0945BED0, // Episode Pointer
         0x00000005, // Chapters
-        0x000020CC, // Total Playtime
+        0x000023F8, // Total Playtime
     ],
 ]
 
@@ -1048,6 +1080,134 @@ questions = [
             "Sauce"
     ],
     [
+        2401,
+        "What was the name of the video game console?",
+            "V-Cube",
+            "X-Game",
+            "Y-Play",
+            "Z-Box"
+    ],
+    [
+        2402,
+        "What was the name of Dimmsdale's basketball team?",
+            "Ball Hogs",
+            "Dunk Bears",
+            "Slam Dogs",
+            "Basket Bulls"
+    ],
+    [
+        2403,
+        "Where would the team have gone if they had lost the championship?",
+            "Canada",
+            "Siberia",
+            "Alaska",
+            "Iceland"
+    ],
+    [
+        2404,
+        "What did Timmy get in return for giving his dad the game console?",
+            "Computer",
+            "Newspaper",
+            "Couch",
+            "Blubber Nuggets"
+    ],
+    [
+        2501,
+        "Who persuaded the other kids to enter the off-limited slope?",
+            "Reggie",
+            "Sammy",
+            "Twister",
+            "Otto"
+    ],
+    [
+        2502,
+        "What did Tito play in the mountain cabin?",
+            "Chess",
+            "Cards",
+            "Ukulele",
+            "Video Games"
+    ],
+    [
+        2503,
+        "What did Raymundo built out of snow at the mountain cabine?",
+            "Igloo",
+            "Snow Ramp",
+            "Icebear",
+            "Himself"
+    ],
+    [
+        2504,
+        "What did Otto break after falling down the Big Air?",
+            "Arm",
+            "Hand",
+            "Foot",
+            "Leg"
+    ],
+    [
+        2601,
+        "Who put out the fire in the kitchen of the Krusty Krab?",
+            "Mr. Krabs",
+            "Squidward",
+            "SpongeBob",
+            "A Firefighter"
+    ],
+    [
+        2602,
+        "Who got SpongeBob's can opener as farewell gift?",
+            "Squidward",
+            "Patrick",
+            "Sandy",
+            "Mr. Krabs"
+    ],
+    [
+        2603,
+        "Behind what was SpongeBob hiding from Patrick at first?",
+            "Corals",
+            "Seagrass",
+            "Snail",
+            "Rock"
+    ],
+    [
+        2604,
+        "What did SpongeBob see when checking the Krusty Krab at night?",
+            "Grill",
+            "Krabby Patties",
+            "Spatula",
+            "Mr. Krabs"
+    ],
+    [
+        2701,
+        "On what day was Opposite Day?",
+            "Monday",
+            "Wednesday",
+            "Friday",
+            "Sunday"
+    ],
+    [
+        2702,
+        "Who did SpongeBob call his worst enemy during Opposite Day?",
+            "Gary",
+            "Squidward",
+            "Plankton",
+            "Patrick"
+    ],
+    [
+        2703,
+        "What was leaking in Squidward's house according to SpongeBob?",
+            "Roof",
+            "Walls",
+            "Pipes",
+            "Tub"
+    ],
+    [
+        2704,
+        "How many characters claimed to be Squidward?",
+            "Three",
+            "Four",
+            "Five",
+            "Six"
+    ],
+    [
         0000,
         "?",
             "",
@@ -1197,7 +1357,8 @@ function romType2VideoStarted(series, episode) {
                  prev(dword(mem_romType2VideoState)) != 0x04 &&
                  prev(dword(mem_romType2VideoState)) != 0x08 &&
                       dword(mem_romType2VideoState)  == 0x08) &&
-           never(repeated(600, dword(mem_romType2SceneCountdown) == 0xFFFFFFFF))
+           never(repeated(600, dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode) &&
+                               dword(mem_romType2SceneCountdown) == 0xFFFFFFFF))
 }
 
 function romType2CorrectAnswer(totalQuestion, currentQuestion, index) {
@@ -1235,7 +1396,8 @@ function romType2LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
 
 function romType2LeaderboardCancel(series, episode) {
     return (dword(mem_romType2SceneCountdown) != 0xFFFFFFFF) ||
-           (repeated(600, dword(mem_romType2SceneCountdown) == 0xFFFFFFFF &&
+           (repeated(600, dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode) &&
+                          dword(mem_romType2SceneCountdown) == 0xFFFFFFFF &&
                           never(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode) &&
                                 dword(mem_romType2VideoPlaytime) == 0x00 &&
                                 dword(mem_romType2VideoPlaytime) == prev(dword(mem_romType2VideoPlaytime))))) ||
@@ -2704,6 +2866,226 @@ achievement(
                  start  = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
                           romType1LeaderboardQuestionSelect(4, 3),
                  cancel = romType1LeaderboardCancel("SpongeBob SquarePants", "Pizza Delivery"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+           
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Odd Ball"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Odd Ball"),
+    id = 114646, badge = "125400", points = 2,
+    trigger = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
+              (romType2CorrectAnswer(4, 0, 6) ||
+               romType2CorrectAnswer(4, 1, 6) ||
+               romType2CorrectAnswer(4, 2, 7) ||
+               romType2CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 8409,
+                 title       = getQuestionTitle(2401), 
+                 description = getQuestionDescription(2401),
+                 start  = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("The Fairly OddParents!", "Odd Ball"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8410,
+                 title       = getQuestionTitle(2402), 
+                 description = getQuestionDescription(2402),
+                 start  = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("The Fairly OddParents!", "Odd Ball"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8411,
+                 title       = getQuestionTitle(2403), 
+                 description = getQuestionDescription(2403),
+                 start  = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("The Fairly OddParents!", "Odd Ball"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8412,
+                 title       = getQuestionTitle(2404), 
+                 description = getQuestionDescription(2404),
+                 start  = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("The Fairly OddParents!", "Odd Ball"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Rocket Power", "Big Air Dare"), type = "progression",
+    description = getAchievementDescription("Rocket Power", "Big Air Dare"),
+    id = 114721, badge = "125492", points = 2,
+    trigger = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
+              (romType2CorrectAnswer(4, 0, 4) ||
+               romType2CorrectAnswer(4, 1, 7) ||
+               romType2CorrectAnswer(4, 2, 7) ||
+               romType2CorrectAnswer(4, 3, 4))
+)
+            leaderboard(
+                 id = 8414,
+                 title       = getQuestionTitle(2501), 
+                 description = getQuestionDescription(2501),
+                 start  = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("Rocket Power", "Big Air Dare"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8415,
+                 title       = getQuestionTitle(2502), 
+                 description = getQuestionDescription(2502),
+                 start  = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("Rocket Power", "Big Air Dare"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8416,
+                 title       = getQuestionTitle(2503), 
+                 description = getQuestionDescription(2503),
+                 start  = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("Rocket Power", "Big Air Dare"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8417,
+                 title       = getQuestionTitle(2504), 
+                 description = getQuestionDescription(2504),
+                 start  = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("Rocket Power", "Big Air Dare"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Nature Pants"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Nature Pants"),
+    id = 114722, badge = "641864", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
+              (romType2CorrectAnswer(4, 0, 7) ||
+               romType2CorrectAnswer(4, 1, 6) ||
+               romType2CorrectAnswer(4, 2, 7) ||
+               romType2CorrectAnswer(4, 3, 5))
+)
+            leaderboard(
+                 id = 8419,
+                 title       = getQuestionTitle(2601), 
+                 description = getQuestionDescription(2601),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Nature Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8420,
+                 title       = getQuestionTitle(2602), 
+                 description = getQuestionDescription(2602),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Nature Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8421,
+                 title       = getQuestionTitle(2603), 
+                 description = getQuestionDescription(2603),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Nature Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8422,
+                 title       = getQuestionTitle(2604), 
+                 description = getQuestionDescription(2604),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Nature Pants"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Opposite Day"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Opposite Day"),
+    id = 114728, badge = "641865", points = 2,
+    trigger = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
+              (romType2CorrectAnswer(4, 0, 5) ||
+               romType2CorrectAnswer(4, 1, 4) ||
+               romType2CorrectAnswer(4, 2, 6) ||
+               romType2CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 8423,
+                 title       = getQuestionTitle(2701), 
+                 description = getQuestionDescription(2701),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
+                          romType2LeaderboardQuestionSelect(4, 0),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Opposite Day"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8424,
+                 title       = getQuestionTitle(2702), 
+                 description = getQuestionDescription(2702),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
+                          romType2LeaderboardQuestionSelect(4, 1),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Opposite Day"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8425,
+                 title       = getQuestionTitle(2703), 
+                 description = getQuestionDescription(2703),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
+                          romType2LeaderboardQuestionSelect(4, 2),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Opposite Day"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8426,
+                 title       = getQuestionTitle(2704), 
+                 description = getQuestionDescription(2704),
+                 start  = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
+                          romType2LeaderboardQuestionSelect(4, 3),
+                 cancel = romType2LeaderboardCancel("SpongeBob SquarePants", "Opposite Day"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
