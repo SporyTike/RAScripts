@@ -5,32 +5,41 @@
 // Addresses
 
 mem_romType1EpisodePointer  = 0x006868
-mem_romType1VideoState      = mem_romType1EpisodePointer - 0x10
-mem_romType1SceneCountdown  = mem_romType1EpisodePointer + 0x0C
-mem_romType1VideoPlaytime   = mem_romType1EpisodePointer + 0x14
-mem_romType1CurrentChapter  = mem_romType1EpisodePointer + 0x20
+mem_romType1VideoState      = 0x006858
+mem_romType1SceneCountdown  = 0x006874
+mem_romType1VideoPlaytime   = 0x00687C
+mem_romType1CurrentChapter  = 0x006888
 mem_romType1Input           = 0x007EC4
-mem_romType1RNG             = mem_romType1Input + 0x2C
+mem_romType1RNG             = 0x007EF0
 
 mem_romType2EpisodePointer  = 0x006828
-mem_romType2VideoState      = mem_romType2EpisodePointer - 0x10
-mem_romType2SceneCountdown  = mem_romType2EpisodePointer + 0x0C
-mem_romType2VideoPlaytime   = mem_romType2EpisodePointer + 0x14
-mem_romType2CurrentChapter  = mem_romType2EpisodePointer + 0x20
+mem_romType2VideoState      = 0x006818
+mem_romType2SceneCountdown  = 0x006834
+mem_romType2VideoPlaytime   = 0x00683C
+mem_romType2CurrentChapter  = 0x006848
 mem_romType2Input           = 0x007EBC
-mem_romType2StateLoaded     = mem_romType2Input - 0x3C
-mem_romType2MenuState       = mem_romType2Input - 0x18
+mem_romType2StateLoaded     = 0x007E80
+mem_romType2MenuState       = 0x007EA4
 mem_romType2RNG             = 0x0068D0
 
 mem_romType3EpisodePointer  = 0x006820
-mem_romType3VideoState      = mem_romType3EpisodePointer - 0x10
-mem_romType3SceneCountdown  = mem_romType3EpisodePointer + 0x0C
-mem_romType3VideoPlaytime   = mem_romType3EpisodePointer + 0x14
-mem_romType3CurrentChapter  = mem_romType3EpisodePointer + 0x20
+mem_romType3VideoState      = 0x006810
+mem_romType3SceneCountdown  = 0x00682C
+mem_romType3VideoPlaytime   = 0x006834
+mem_romType3CurrentChapter  = 0x006840
 mem_romType3Input           = 0x007EC8
 mem_romType3StateLoaded     = 0x0075A0
-mem_romType3MenuState       = mem_romType3Input - 0x14
+mem_romType3MenuState       = 0x007EB4
 mem_romType3RNG             = 0x00659C
+
+mem_romType4EpisodePointer  = 0x006690
+mem_romType4VideoState      = 0x046A5C
+mem_romType4SceneCountdown  = 0x0066F4
+mem_romType4VideoPlaytime   = 0x0066FC
+mem_romType4CurrentChapter  = 0x006704
+mem_romType4Input           = 0x007EA8
+mem_romType4MenuState       = 0x007E8C
+mem_romType4RNG             = 0x007F98
 
 //--------------------------------------------------
 // Arrays and Dictionaries
@@ -67,6 +76,14 @@ episodes = [
         0x08022420, // Episode Pointer
         0x00000005, // Chapters
         0x00003FF5, // Total Playtime
+    ],
+    [
+        "Danny Phantom",
+        "Attack of the Killer Garage Sale",
+        "Nicktoons Collection - Volume 3",
+        0x08000EF8, // Episode Pointer
+        0x00000005, // Chapters
+        0x00004105, // Total Playtime
     ],
     [
         "Dora the Explorer",
@@ -213,6 +230,14 @@ episodes = [
         0x00001EF6, // Total Playtime
     ],
     [
+        "SpongeBob SquarePants",
+        "Squeaky Boots",
+        "Nicktoons Collection - Volume 3",
+        0x08EFC690, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002113, // Total Playtime
+    ],
+    [
         "The Adventures of Jimmy Neutron: Boy Genius",
         "Brobot",
         "The Adventures of Jimmy Neutron: Boy Genius - Volume 1",
@@ -259,6 +284,14 @@ episodes = [
         0x0945BED0, // Episode Pointer
         0x00000005, // Chapters
         0x000023F8, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "Timvisible",
+        "Nicktoons Collection - Volume 3",
+        0x09839398, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002443, // Total Playtime
     ],
 ]
 
@@ -1208,6 +1241,118 @@ questions = [
             "Six"
     ],
     [
+        2801,
+        "What animal inspired the name of Jack Fenton's new ghost device?",
+            "Squirrel",
+            "Beaver",
+            "Rat",
+            "Weasel"
+    ],
+    [
+        2802,
+        "What was the name of the technology ghost who attacked the town?",
+            "Plasmius",
+            "Electrus",
+            "Technus",
+            "Divius"
+    ],
+    [
+        2803,
+        "Who convinced Dash to invite Danny to his party?",
+            "Paulina",
+            "Jazz",
+            "Sam",
+            "Tucker"
+    ],
+    [
+        2804,
+        "What did the shaver shave into Mr. Lancer's hair on the back?",
+            "Skull",
+            "Cross",
+            "Hash",
+            "Smiley"
+    ],
+    [
+        2805,
+        "What was seen in the movie that Sam and Tucker watched?",
+            "Ghosts",
+            "Karate",
+            "Pirates",
+            "Racing"
+    ],
+    [
+        2806,
+        "What famous character did Danny transform into for a second?",
+            "Spock",
+            "Superman",
+            "SpongeBob",
+            "Shrek"
+    ],
+    [
+        2901,
+        "What object was not haunted by Timmy?",
+            "Lights",
+            "Towel",
+            "Frog",
+            "Chalk Board"
+    ],
+    [
+        2902,
+        "What class were Cosmo and Wanda in?",
+            "History",
+            "Mathematics",
+            "Science",
+            "Spanish"
+    ],
+    [
+        2903,
+        "What did Cosmo have in his pants?",
+            "Pennies",
+            "Cheese",
+            "Hog",
+            "Trumpet"
+    ],
+    [
+        2904,
+        "What did Wanda transform into to find Timmy?",
+            "Ladybug",
+            "Bat",
+            "Mouse",
+            "Dog"
+    ],
+    [
+        3001,
+        "How many friends of Pearl were on her birthday party?",
+            "Three",
+            "Four",
+            "Five",
+            "Six"
+    ],
+    [
+        3002,
+        "How much money did Mr. Krabs count in total while dreaming?",
+            "$32",
+            "$39",
+            "$45",
+            "$51"
+    ],
+    [
+        3003,
+        "Inside what did Mr. Krabs hide the squeaky boots?",
+            "Flooring",
+            "Deep Fryer",
+            "Barrel",
+            "Office Desk"
+    ],
+    [
+        3004,
+        "What was shown on the warning when Mr. Krabs fried the boots?",
+            "Ear",
+            "Mouth",
+            "Nose",
+            "Eye"
+    ],
+    [
         0000,
         "?",
             "",
@@ -1480,6 +1625,80 @@ function romType3LeaderboardCancel(series, episode) {
           + bit(7, mem_romType3Input) == 1) ||
           (dword(mem_romType3MenuState) == 0x14 &&
            dword(mem_romType3EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+
+
+function romType4VideoStarted(series, episode) {
+    return once(dword(mem_romType4EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType4VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType4VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType4CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType4SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType4VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType4MenuState) == 0x1A) &&
+           never(prev(dword(mem_romType4EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType4EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType4VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType4VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType4MenuState) == 0x15 &&
+                 prev(dword(mem_romType4VideoState)) != 0x04 &&
+                 prev(dword(mem_romType4VideoState)) != 0x08 &&
+                      dword(mem_romType4VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType4MenuState) == 0x1A)) &&
+           never(dword(mem_romType4MenuState) == 0x00 &&
+                 dword(mem_romType4EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType4CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType4EpisodePointer) == 0x00 &&
+                             prev(dword(mem_romType4MenuState)) == 0x00 &&
+                                  dword(mem_romType4MenuState)  == 0x15 &&
+                prior(low4(mem_romType4RNG)) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType4MenuState) == 0x00 &&
+                      dword(mem_romType4EpisodePointer) == 0x00000000))) &&
+           trigger_when(dword(mem_romType4MenuState) == 0x1A) &&
+           trigger_when(bit0(mem_romType4Input + 0x01)
+                      + bit1(mem_romType4Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType4Input) > prev(bit(index % 4 + 4, mem_romType4Input))) &&
+           never(once(dword(mem_romType4MenuState) == 0x1A &&
+                bit0(mem_romType4Input + 0x01)
+              + bit1(mem_romType4Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType4Input)
+              + bit((index + 2) % 4 + 4, mem_romType4Input)
+              + bit((index + 3) % 4 + 4, mem_romType4Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType4Input)
+                      + bit((index + 2) % 4 + 4, mem_romType4Input)
+                      + bit((index + 3) % 4 + 4, mem_romType4Input) == 0)
+}
+
+function romType4LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType4MenuState)  == 0x1A &&
+           once(dword(mem_romType4EpisodePointer) == 0x00 &&
+                prev(dword(mem_romType4MenuState)) == 0x00 &&
+                     dword(mem_romType4MenuState)  == 0x15 &&
+                prior(low4(mem_romType4RNG)) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType4MenuState) == 0x00 &&
+                      dword(mem_romType4EpisodePointer) == 0x00000000))
+}
+
+function romType4LeaderboardCancel(series, episode) {
+    return (dword(mem_romType4SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType4MenuState) == 0x1A &&
+                          never(dword(mem_romType4MenuState) == 0x00 &&
+                           prev(dword(mem_romType4EpisodePointer)) != 0x00000000 &&
+                                dword(mem_romType4EpisodePointer)  == 0x00000000))) ||
+           (prev(dword(mem_romType4EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType4EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType4Input + 0x01)
+          + bit1(mem_romType4Input + 0x01) >= 1 &&
+            bit(4, mem_romType4Input)
+          + bit(5, mem_romType4Input)
+          + bit(6, mem_romType4Input)
+          + bit(7, mem_romType4Input) == 1) ||
+          (dword(mem_romType4MenuState) == 0x00 &&
+           dword(mem_romType4EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 //--------------------------------------------------
@@ -3091,5 +3310,193 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Danny Phantom", "Attack of the Killer Garage Sale"), type = "progression",
+    description = getAchievementDescription("Danny Phantom", "Attack of the Killer Garage Sale"),
+    id = 114754, badge = "643472", points = 3,
+    trigger = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+              (romType4CorrectAnswer(6, 0, 4) ||
+               romType4CorrectAnswer(6, 1, 7) ||
+               romType4CorrectAnswer(6, 2, 5) ||
+               romType4CorrectAnswer(6, 3, 7) ||
+               romType4CorrectAnswer(6, 4, 5) ||
+               romType4CorrectAnswer(6, 5, 6))
+)
+            leaderboard(
+                 id = 8427,
+                 title       = getQuestionTitle(2801), 
+                 description = getQuestionDescription(2801),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 0),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8428,
+                 title       = getQuestionTitle(2802), 
+                 description = getQuestionDescription(2802),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 1),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8429,
+                 title       = getQuestionTitle(2803), 
+                 description = getQuestionDescription(2803),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 2),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8430,
+                 title       = getQuestionTitle(2804), 
+                 description = getQuestionDescription(2804),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 3),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8432,
+                 title       = getQuestionTitle(2805), 
+                 description = getQuestionDescription(2805),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 4),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8433,
+                 title       = getQuestionTitle(2806), 
+                 description = getQuestionDescription(2806),
+                 start  = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
+                          romType4LeaderboardQuestionSelect(6, 5),
+                 cancel = romType4LeaderboardCancel("Danny Phantom", "Attack of the Killer Garage Sale"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Timvisible"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Timvisible"),
+    id = 114755, badge = "125652", points = 2,
+    trigger = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
+              (romType4CorrectAnswer(4, 0, 6) ||
+               romType4CorrectAnswer(4, 1, 4) ||
+               romType4CorrectAnswer(4, 2, 7) ||
+               romType4CorrectAnswer(4, 3, 5))
+)
+            leaderboard(
+                 id = 8431,
+                 title       = getQuestionTitle(2901), 
+                 description = getQuestionDescription(2901),
+                 start  = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
+                          romType4LeaderboardQuestionSelect(4, 0),
+                 cancel = romType4LeaderboardCancel("The Fairly OddParents!", "Timvisible"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8435,
+                 title       = getQuestionTitle(2902), 
+                 description = getQuestionDescription(2902),
+                 start  = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
+                          romType4LeaderboardQuestionSelect(4, 1),
+                 cancel = romType4LeaderboardCancel("The Fairly OddParents!", "Timvisible"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8436,
+                 title       = getQuestionTitle(2903), 
+                 description = getQuestionDescription(2903),
+                 start  = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
+                          romType4LeaderboardQuestionSelect(4, 2),
+                 cancel = romType4LeaderboardCancel("The Fairly OddParents!", "Timvisible"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8434,
+                 title       = getQuestionTitle(2904), 
+                 description = getQuestionDescription(2904),
+                 start  = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
+                          romType4LeaderboardQuestionSelect(4, 3),
+                 cancel = romType4LeaderboardCancel("The Fairly OddParents!", "Timvisible"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("SpongeBob SquarePants", "Squeaky Boots"), type = "progression",
+    description = getAchievementDescription("SpongeBob SquarePants", "Squeaky Boots"),
+    id = 114756, badge = "125655", points = 2,
+    trigger = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
+              (romType4CorrectAnswer(4, 0, 5) ||
+               romType4CorrectAnswer(4, 1, 7) ||
+               romType4CorrectAnswer(4, 2, 6) ||
+               romType4CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 8437,
+                 title       = getQuestionTitle(3001), 
+                 description = getQuestionDescription(3001),
+                 start  = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
+                          romType4LeaderboardQuestionSelect(4, 0),
+                 cancel = romType4LeaderboardCancel("SpongeBob SquarePants", "Squeaky Boots"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8440,
+                 title       = getQuestionTitle(3002), 
+                 description = getQuestionDescription(3002),
+                 start  = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
+                          romType4LeaderboardQuestionSelect(4, 1),
+                 cancel = romType4LeaderboardCancel("SpongeBob SquarePants", "Squeaky Boots"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8441,
+                 title       = getQuestionTitle(3003), 
+                 description = getQuestionDescription(3003),
+                 start  = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
+                          romType4LeaderboardQuestionSelect(4, 2),
+                 cancel = romType4LeaderboardCancel("SpongeBob SquarePants", "Squeaky Boots"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8442,
+                 title       = getQuestionTitle(3004), 
+                 description = getQuestionDescription(3004),
+                 start  = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
+                          romType4LeaderboardQuestionSelect(4, 3),
+                 cancel = romType4LeaderboardCancel("SpongeBob SquarePants", "Squeaky Boots"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
             
             
