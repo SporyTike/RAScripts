@@ -41,6 +41,13 @@ mem_romType4Input           = 0x007EA8
 mem_romType4MenuState       = 0x007E8C
 mem_romType4RNG             = 0x007F98
 
+mem_romType5EpisodePointer  = 0x007D54
+mem_romType5VideoState      = 0x006EA4
+mem_romType5VideoPlaytime   = 0x007D74
+mem_romType5Input           = 0x007DD8
+mem_romType5MenuState       = 0x007D80
+mem_romType5RNG             = 0x006E80
+
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -100,6 +107,22 @@ episodes = [
         0x08F43914, // Episode Pointer
         0x00000005, // Chapters
         0x00003EC0, // Total Playtime
+    ],
+    [
+        "Pokémon: Johto League Champions",
+        "A Hot Water Battle",
+        "Pokémon - Volume 1",
+        0x0801FC1C, // Episode Pointer
+        0x00000001, // Chapters
+        0x000026CF, // Total Playtime
+    ],
+    [
+        "Pokémon: Master Quest",
+        "For Ho-Oh The Bells Toll!",
+        "Pokémon - Volume 1",
+        0x08F4ADF4, // Episode Pointer
+        0x00000001, // Chapters
+        0x000026EA, // Total Playtime
     ],
     [
         "Rocket Power",
@@ -299,9 +322,9 @@ questions = [
     [
         0101,
         "Do not forget to land on what?",
-            "Left Arm",
+            "Left Hand",
             "Left Foot",
-            "Right Arm",
+            "Right Hand",
             "Right Foot"
     ],
     [
@@ -1353,6 +1376,102 @@ questions = [
             "Eye"
     ],
     [
+        3101,
+        "What Pokémon from the banana tree did Ash scan with his Pokédex?",
+            "Aipom",
+            "Snorlax",
+            "Mankey",
+            "Wobuffet"
+    ],
+    [
+        3102,
+        "What Poké Ball design did the beach ball have?",
+            "Master Ball",
+            "Great Ball",
+            "Lure Ball",
+            "Ultra Ball"
+    ],
+    [
+        3103,
+        "Which Pokémon got strongly hit by the beach ball?",
+            "Totodile",
+            "Cyndaquil",
+            "Chikorita",
+            "Pikachu"
+    ],
+    [
+        3104,
+        "Who was almost eaten by Snorlax?",
+            "Meowth",
+            "Jessie",
+            "Wobuffet",
+            "James"
+    ],
+    [
+        3105,
+        "What had Snorlax blocked while it was sleeping?",
+            "Cave",
+            "River",
+            "Path",
+            "Bridge"
+    ],
+    [
+        3106,
+        "Which Pokémon sensed the way out of the cave?",
+            "Cyndaquil",
+            "Meowth",
+            "Chikorita",
+            "Totodile"
+    ],
+    [
+        3201,
+        "How many gym badges were shown at the beginning of the episode?",
+            "Two",
+            "Four",
+            "Six",
+            "Eight"
+    ],
+    [
+        3202,
+        "What material were the bells on Tin Tower’s 9th floor made of?",
+            "Silver",
+            "Gold",
+            "Crystal",
+            "Platinum"
+    ],
+    [
+        3203,
+        "Who of Team Rocket broke one of the Tin Tower bells?",
+            "Jessie",
+            "Meowth",
+            "James",
+            "Wobbuffet"
+    ],
+    [
+        3204,
+        "What wild Pokémon was not seen protecting the forest?",
+            "Weedle",
+            "Tangela",
+            "Ariados",
+            "Paras"
+    ],
+    [
+        3205,
+        "Which Pokémon did Eusine use to hunt legendary Pokémon?",
+            "Gengar",
+            "Pikachu",
+            "Suicune",
+            "Alakazam"
+    ],
+    [
+        3206,
+        "Which legendary Pokémon calmed down the wild Pokémon?",
+            "Suicune",
+            "Raikou",
+            "Entei",
+            "Ho-Oh"
+    ],
+    [
         0000,
         "?",
             "",
@@ -1699,6 +1818,71 @@ function romType4LeaderboardCancel(series, episode) {
           + bit(7, mem_romType4Input) == 1) ||
           (dword(mem_romType4MenuState) == 0x00 &&
            dword(mem_romType4EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+
+
+function romType5VideoStarted(series, episode) {
+    return once(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType5VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType5VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType5VideoPlaytime) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(byte(mem_romType5MenuState)) == 0x01) &&
+                 trigger_when(byte(mem_romType5MenuState)  == 0x00) &&
+           never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
+                 dword(mem_romType5VideoPlaytime) == 0x00) &&
+           never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
+                 dword(mem_romType5VideoPlaytime) > 0x00 &&
+                 dword(mem_romType5VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 prev(byte(mem_romType5VideoState)) == 0x01 && 
+                      byte(mem_romType5VideoState)  == 0x00) &&
+           never(repeated(600, byte(mem_romType5MenuState) == 0x00)) &&
+           never(dword(mem_romType5EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType5CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(prev(byte(mem_romType5MenuState)) == 0x01 &&
+                                  byte(mem_romType5MenuState)  == 0x00 &&
+                             high4(mem_romType5RNG) % totalQuestion == currentQuestion)) &&
+           trigger_when(byte(mem_romType5Input) > 0x0F &&
+                        bit0(mem_romType5Input + 0x01)
+                      + bit1(mem_romType5Input + 0x01) <= 1 &&
+                        bit(index % 4 + 4, mem_romType5Input) < prev(bit(index % 4 + 4, mem_romType5Input))) &&
+           never(once(byte(mem_romType5Input) > 0x0F &&
+                bit0(mem_romType5Input + 0x01)
+              + bit1(mem_romType5Input + 0x01) <= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType5Input)
+              + bit((index + 2) % 4 + 4, mem_romType5Input)
+              + bit((index + 3) % 4 + 4, mem_romType5Input) == 2) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType5Input)
+                      + bit((index + 2) % 4 + 4, mem_romType5Input)
+                      + bit((index + 3) % 4 + 4, mem_romType5Input) == 3)
+}
+
+function romType5LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return prev(byte(mem_romType5MenuState)) == 0x01 &&
+                byte(mem_romType5MenuState)  == 0x00 &&
+           high4(mem_romType5RNG) % totalQuestion == currentQuestion     
+}
+
+function romType5LeaderboardCancel(series, episode) {
+    return (dword(mem_romType5VideoPlaytime) < getTotalPlaytime(series, episode)) ||
+           (repeated(600, byte(mem_romType5MenuState) == 0x00 &&
+                          never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
+                                dword(mem_romType5VideoPlaytime) == 0x00 &&
+                                dword(mem_romType5VideoPlaytime) == prev(dword(mem_romType5VideoPlaytime))))) ||
+           (dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
+            dword(mem_romType5VideoPlaytime) == 0x00 &&
+            dword(mem_romType5VideoPlaytime) < prev(dword(mem_romType5VideoPlaytime))) ||
+           (byte(mem_romType5MenuState) == 0x00 &&
+            byte(mem_romType5Input) > 0x0F &&
+            bit0(mem_romType5Input + 0x01)
+          + bit1(mem_romType5Input + 0x01) <= 1 &&
+            bit(4, mem_romType5Input)
+          + bit(5, mem_romType5Input)
+          + bit(6, mem_romType5Input)
+          + bit(7, mem_romType5Input) == 3)
 }
 
 //--------------------------------------------------
@@ -2588,7 +2772,7 @@ achievement(
 achievement(
     title = getAchievementTitle("All Grown Up!", "Susie Sings The Blues"), type = "progression",
     description = getAchievementDescription("All Grown Up!", "Susie Sings The Blues"),
-    id = 97655, badge = "107192", points = 3,
+    id = 97655, badge = "107192", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
               (romType1CorrectAnswer(6, 0, 5) ||
                romType1CorrectAnswer(6, 1, 6) ||
@@ -2667,7 +2851,7 @@ achievement(
 achievement(
     title = getAchievementTitle("All Grown Up!", "Coup DeVille"), type = "progression",
     description = getAchievementDescription("All Grown Up!", "Coup DeVille"),
-    id = 97664, badge = "107200", points = 3,
+    id = 97664, badge = "107200", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
               (romType1CorrectAnswer(6, 0, 5) ||
                romType1CorrectAnswer(6, 1, 5) ||
@@ -2746,7 +2930,7 @@ achievement(
 achievement(
     title = getAchievementTitle("Dora the Explorer", "Three Little Piggies"), type = "progression",
     description = getAchievementDescription("Dora the Explorer", "Three Little Piggies"),
-    id = 114580, badge = "641195", points = 3,
+    id = 114580, badge = "641195", points = 4,
     trigger = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
               (romType1CorrectAnswer(6, 0, 5) ||
                romType1CorrectAnswer(6, 1, 4) ||
@@ -2825,7 +3009,7 @@ achievement(
 achievement(
     title = getAchievementTitle("Dora the Explorer", "The Big River"), type = "progression",
     description = getAchievementDescription("Dora the Explorer", "The Big River"),
-    id = 114581, badge = "125228", points = 3,
+    id = 114581, badge = "125228", points = 4,
     trigger = romType1VideoStarted("Dora the Explorer", "The Big River") &&
               (romType1CorrectAnswer(6, 0, 5) ||
                romType1CorrectAnswer(6, 1, 5) ||
@@ -2904,7 +3088,7 @@ achievement(
 achievement(
     title = getAchievementTitle("All Grown Up!", "Chuckie's in Love"), type = "progression",
     description = getAchievementDescription("All Grown Up!", "Chuckie's in Love"),
-    id = 114590, badge = "125258", points = 3,
+    id = 114590, badge = "125258", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
               (romType1CorrectAnswer(6, 0, 5) ||
                romType1CorrectAnswer(6, 1, 6) ||
@@ -3313,7 +3497,7 @@ achievement(
 achievement(
     title = getAchievementTitle("Danny Phantom", "Attack of the Killer Garage Sale"), type = "progression",
     description = getAchievementDescription("Danny Phantom", "Attack of the Killer Garage Sale"),
-    id = 114754, badge = "643472", points = 3,
+    id = 114754, badge = "643472", points = 4,
     trigger = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
               (romType4CorrectAnswer(6, 0, 4) ||
                romType4CorrectAnswer(6, 1, 7) ||
@@ -3499,4 +3683,161 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Pokémon: Johto League Champions", "A Hot Water Battle"), type = "progression",
+    description = getAchievementDescription("Pokémon: Johto League Champions", "A Hot Water Battle"),
+    id = 115131, badge = "125908", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+              (romType5CorrectAnswer(6, 0, 6) ||
+               romType5CorrectAnswer(6, 1, 6) ||
+               romType5CorrectAnswer(6, 2, 5) ||
+               romType5CorrectAnswer(6, 3, 4) ||
+               romType5CorrectAnswer(6, 4, 6) ||
+               romType5CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 8451,
+                 title       = getQuestionTitle(3101), 
+                 description = getQuestionDescription(3101),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8452,
+                 title       = getQuestionTitle(3102), 
+                 description = getQuestionDescription(3102),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8453,
+                 title       = getQuestionTitle(3103), 
+                 description = getQuestionDescription(3103),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8454,
+                 title       = getQuestionTitle(3104), 
+                 description = getQuestionDescription(3104),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8455,
+                 title       = getQuestionTitle(3105), 
+                 description = getQuestionDescription(3105),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8456,
+                 title       = getQuestionTitle(3106), 
+                 description = getQuestionDescription(3106),
+                 start  = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Johto League Champions", "A Hot Water Battle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+           
+achievement(
+    title = getAchievementTitle("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), type = "progression",
+    description = getAchievementDescription("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"),
+    id = 115215, badge = "176297", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+              (romType5CorrectAnswer(6, 0, 7) ||
+               romType5CorrectAnswer(6, 1, 7) ||
+               romType5CorrectAnswer(6, 2, 6) ||
+               romType5CorrectAnswer(6, 3, 4) ||
+               romType5CorrectAnswer(6, 4, 4) ||
+               romType5CorrectAnswer(6, 5, 6))
+)
+            leaderboard(
+                 id = 8451,
+                 title       = getQuestionTitle(3201), 
+                 description = getQuestionDescription(3201),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8452,
+                 title       = getQuestionTitle(3202), 
+                 description = getQuestionDescription(3202),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8453,
+                 title       = getQuestionTitle(3203), 
+                 description = getQuestionDescription(3203),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8454,
+                 title       = getQuestionTitle(3204), 
+                 description = getQuestionDescription(3204),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8455,
+                 title       = getQuestionTitle(3205), 
+                 description = getQuestionDescription(3205),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8456,
+                 title       = getQuestionTitle(3206), 
+                 description = getQuestionDescription(3206),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
             
