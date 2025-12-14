@@ -3775,7 +3775,7 @@ achievement(
                romType5CorrectAnswer(6, 5, 6))
 )
             leaderboard(
-                 id = 8451,
+                 id = 8459,
                  title       = getQuestionTitle(3201), 
                  description = getQuestionDescription(3201),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
@@ -3786,7 +3786,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8452,
+                 id = 8460,
                  title       = getQuestionTitle(3202), 
                  description = getQuestionDescription(3202),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
@@ -3797,7 +3797,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8453,
+                 id = 8461,
                  title       = getQuestionTitle(3203), 
                  description = getQuestionDescription(3203),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
@@ -3808,7 +3808,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8454,
+                 id = 8462,
                  title       = getQuestionTitle(3204), 
                  description = getQuestionDescription(3204),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
@@ -3819,7 +3819,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8455,
+                 id = 8463,
                  title       = getQuestionTitle(3205), 
                  description = getQuestionDescription(3205),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
@@ -3830,7 +3830,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8456,
+                 id = 8464,
                  title       = getQuestionTitle(3206), 
                  description = getQuestionDescription(3206),
                  start  = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
