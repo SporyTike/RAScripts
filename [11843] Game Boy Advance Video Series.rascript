@@ -114,7 +114,7 @@ episodes = [
         "Pokémon - Volume 1",
         0x0801FC1C, // Episode Pointer
         0x00000001, // Chapters
-        0x000026CF, // Total Playtime
+        0x000025DE, // Total Playtime
     ],
     [
         "Pokémon: Master Quest",
@@ -122,7 +122,55 @@ episodes = [
         "Pokémon - Volume 1",
         0x08F4ADF4, // Episode Pointer
         0x00000001, // Chapters
-        0x000026EA, // Total Playtime
+        0x000025F9, // Total Playtime
+    ],
+    [
+        "Pokémon: Master Quest",
+        "Playing with Fire!",
+        "Pokémon - Volume 2",
+        0x0801FAC0, // Episode Pointer
+        0x00000001, // Chapters
+        0x0000260A, // Total Playtime
+    ],
+    [
+        "Pokémon: Master Quest",
+        "Johto Photo Finish",
+        "Pokémon - Volume 2",
+        0x08FA8DF8, // Episode Pointer
+        0x00000001, // Chapters
+        0x000025DF, // Total Playtime
+    ],
+    [
+        "Pokémon: Indigo League",
+        "Pokémon - I Choose You!",
+        "Pokémon - Volume 3",
+        0x0801F748, // Episode Pointer
+        0x00000001, // Chapters
+        0x000025F7, // Total Playtime
+    ],
+    [
+        "Pokémon: Indigo League",
+        "Here Comes The Squirtle Squad",
+        "Pokémon - Volume 3",
+        0x08F845A0, // Episode Pointer
+        0x00000001, // Chapters
+        0x000025F9, // Total Playtime
+    ],
+    [
+        "Pokémon: Indigo League",
+        "Beach Blank-Out Blastoise",
+        "Pokémon - Volume 4",
+        0x0801FE98, // Episode Pointer
+        0x00000001, // Chapters
+        0x00002869, // Total Playtime
+    ],
+    [
+        "Pokémon: Indigo League",
+        "Go West Young Meowth",
+        "Pokémon - Volume 4",
+        0x091E737C, // Episode Pointer
+        0x00000001, // Chapters
+        0x00002898, // Total Playtime
     ],
     [
         "Rocket Power",
@@ -1472,6 +1520,294 @@ questions = [
             "Ho-Oh"
     ],
     [
+        3301,
+        "Which of Ash's Pokémon defeated Gary's Blastoise?",
+            "Pikachu",
+            "Charizard",
+            "Bayleef",
+            "Snorlax"
+    ],
+    [
+        3302,
+        "What part of its body could Kecleon not make invisible?",
+            "Eyes",
+            "Nose",
+            "Stomach",
+            "Tail"
+    ],
+    [
+        3303,
+        "What Pokémon did Harrison use after Kecleon fainted?",
+            "Hypno",
+            "Houndoom",
+            "Blaziken",
+            "Sneasel"
+    ],
+    [
+        3304,
+        "What Pokémon was not seen at the construction site?",
+            "Machamp",
+            "Meowth",
+            "Steelix",
+            "Machoke"
+    ],
+    [
+        3305,
+        "What weather move was used in the conference battle?",
+            "Mist",
+            "Rain Dance",
+            "Hail",
+            "Sandstorm"
+    ],
+    [
+        3306,
+        "Which Pokémon has a high level according to Harrison?",
+            "Charizard",
+            "Pikachu",
+            "Blaziken",
+            "Snorlax"
+    ],
+    [
+        3401,
+        "What Pokémon did Officer Jenny take with her on the motocycle?",
+            "Growlithe",
+            "Squirtle",
+            "Pikachu",
+            "Misdreavus"
+    ],
+    [
+        3402,
+        "Who was taking care of Prof. Oak's lab during the Johto League?",
+            "Mr. Mime",
+            "Prof. Oak",
+            "Tracey",
+            "Ash's Mom"
+    ],
+    [
+        3403,
+        "Which Pokémon was Harrison unable to use after battling Ash?",
+            "Hypno",
+            "Kecleon",
+            "Blaziken",
+            "Houndoom"
+    ],
+    [
+        3404,
+        "Who did not help rescuing the Misdreavus in the forest?",
+            "Gary",
+            "Brock",
+            "Prof. Oak",
+            "Harrison"
+    ],
+    [
+        3405,
+        "Which special evolution did Gary not tell Ash about?",
+            "Remoraid",
+            "Slowpoke",
+            "Tyrogue",
+            "Magikarp"
+    ],
+    [
+        3406,
+        "What Pokémon did Gary use to attack Team Rocket?",
+            "Blaziken",
+            "Blastoise",
+            "Misdreavus",
+            "Rhydon"
+    ],
+    [
+        3501,
+        "What Pokémon battled against Gengar in the TV show?",
+            "Nidorina",
+            "Nidoqueen",
+            "Nidorino",
+            "Nidoking"
+    ],
+    [
+        3502,
+        "What Pokémon did Ash want to choose initially in the lab?",
+            "Bulbasaur",
+            "Squirtle",
+            "Charmander",
+            "Pikachu"
+    ],
+    [
+        3503,
+        "Who was not electrified by Pikachu at all?",
+            "Ash",
+            "Gary",
+            "Prof. Oak",
+            "Ash's Mom"
+    ],
+    [
+        3504,
+        "What was the first wild Pokémon that Ash encountered?",
+            "Pikachu",
+            "Rattata",
+            "Pidgey",
+            "Spearow"
+    ],
+    [
+        3505,
+        "What did the red-haired girl do when Ash met her?",
+            "Fishing",
+            "Swimming",
+            "Bicycling",
+            "Training"
+    ],
+    [
+        3506,
+        "What animal type was the unknown Pokémon Ash saw?",
+            "Bird",
+            "Tiger",
+            "Bear",
+            "Dragon"
+    ],
+    [
+        3601,
+        "How many members did the Squirtle Squad have?",
+            "Four",
+            "Five",
+            "Six",
+            "Seven"
+    ],
+    [
+        3602,
+        "What Pokémon injured Pikachu very badly?",
+            "Goldeen",
+            "Squirtle",
+            "Meowth",
+            "Charmander"
+    ],
+    [
+        3603,
+        "What item did Ash grab from the town shop?",
+            "Revive",
+            "Antidote",
+            "Super Potion",
+            "Full Heal"
+    ],
+    [
+        3604,
+        "What hair color for Misty did the Squirtle threaten Ash with?",
+            "Green",
+            "Yellow",
+            "Blue",
+            "Purple"
+    ],
+    [
+        3605,
+        "Who or what did Ash use to light up the cave?",
+            "Pikachu",
+            "Flashlight",
+            "Pokédex",
+            "Charmander"
+    ],
+    [
+        3606,
+        "What did the Squirtle Squad become after helping the town?",
+            "Policemen",
+            "Dancers",
+            "Bodyguards",
+            "Firefighters"
+    ],
+    [
+        3701,
+        "What move did Ash's Charizard use to defeat Blaine's Magmar?",
+            "Flamethrower",
+            "Seismic Toss",
+            "Skull Bash",
+            "Dragon Rage"
+    ],
+    [
+        3702,
+        "Who woke up Ash after he fell asleep for the first time?",
+            "Pikachu",
+            "Brock",
+            "Squirtle",
+            "Misty"
+    ],
+    [
+        3703,
+        "Who explained the story of the turtle island using pictures?",
+            "Squirtle",
+            "Brock",
+            "Pikachu",
+            "Misty"
+    ],
+    [
+        3704,
+        "What Pokémon was stuck in one of Blastoise's hydro cannons?",
+            "Togepi",
+            "Meowth",
+            "Jigglypuff",
+            "Pikachu"
+    ],
+    [
+        3705,
+        "Who did Team Rocket send to the turtle island for investigation?",
+            "Meowth",
+            "James",
+            "Pikachu",
+            "Jessie"
+    ],
+    [
+        3706,
+        "What was Brock’s theory on why Ash’s Squirtle became the leader?",
+            "Experience",
+            "Courage",
+            "Sunglasses",
+            "A Trainer"
+    ],
+    [
+        3801,
+        "Who did not do a morning workout in the garden?",
+            "Ash",
+            "Pikachu",
+            "Brock",
+            "Misty"
+    ],
+    [
+        3802,
+        "What did Meowth steal from the restaurant in the past?",
+            "Ice Cream",
+            "Hot Dog",
+            "Hamburger",
+            "Fried Chicken"
+    ],
+    [
+        3803,
+        "What was the name of the Meowth the rich lady owned?",
+            "Kitty",
+            "Pawsie",
+            "Meowzie",
+            "Fluffy"
+    ],
+    [
+        3804,
+        "What gems were on the Poké Ball the rich lady bought?",
+            "Diamonds",
+            "Emeralds",
+            "Rubies",
+            "Sapphires"
+    ],
+    [
+        3805,
+        "What Pokémon defeated the street cats' leader?",
+            "Arbok",
+            "Pikachu",
+            "Meowth",
+            "Weezing"
+    ],
+    [
+        3806,
+        "Who said they saw Pikachu and Togepi in the movie?",
+            "Ash",
+            "Brock",
+            "Misty",
+            "Ash's Mom"
+    ],
+    [
         0000,
         "?",
             "",
@@ -1826,7 +2162,7 @@ function romType5VideoStarted(series, episode) {
     return once(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
                 prev(dword(mem_romType5VideoPlaytime)) == 0x00 &&
                      dword(mem_romType5VideoPlaytime)  == 0x01) &&
-           trigger_when(dword(mem_romType5VideoPlaytime) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType5VideoPlaytime) >= getTotalPlaytime(series, episode)) &&
            trigger_when(prior(byte(mem_romType5MenuState)) == 0x01) &&
                  trigger_when(byte(mem_romType5MenuState)  == 0x00) &&
            never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
@@ -3840,4 +4176,479 @@ achievement(
                  value  = always_true(),
                  format = "Frames"
             )
+            
+achievement(
+    title = getAchievementTitle("Pokémon: Master Quest", "Playing with Fire!"), type = "progression",
+    description = getAchievementDescription("Pokémon: Master Quest", "Playing with Fire!"),
+    id = 115217, badge = "125978", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+              (romType5CorrectAnswer(6, 0, 7) ||
+               romType5CorrectAnswer(6, 1, 7) ||
+               romType5CorrectAnswer(6, 2, 6) ||
+               romType5CorrectAnswer(6, 3, 4) ||
+               romType5CorrectAnswer(6, 4, 4) ||
+               romType5CorrectAnswer(6, 5, 6))
+)
+            leaderboard(
+                 id = 8467,
+                 title       = getQuestionTitle(3301), 
+                 description = getQuestionDescription(3301),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8468,
+                 title       = getQuestionTitle(3302), 
+                 description = getQuestionDescription(3302),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8469,
+                 title       = getQuestionTitle(3303), 
+                 description = getQuestionDescription(3303),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8470,
+                 title       = getQuestionTitle(3304), 
+                 description = getQuestionDescription(3304),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8471,
+                 title       = getQuestionTitle(3305), 
+                 description = getQuestionDescription(3305),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8472,
+                 title       = getQuestionTitle(3306), 
+                 description = getQuestionDescription(3306),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Playing with Fire!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Pokémon: Master Quest", "Johto Photo Finish"), type = "progression",
+    description = getAchievementDescription("Pokémon: Master Quest", "Johto Photo Finish"),
+    id = 115219, badge = "125989", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+              (romType5CorrectAnswer(6, 0, 5) ||
+               romType5CorrectAnswer(6, 1, 7) ||
+               romType5CorrectAnswer(6, 2, 7) ||
+               romType5CorrectAnswer(6, 3, 7) ||
+               romType5CorrectAnswer(6, 4, 5) ||
+               romType5CorrectAnswer(6, 5, 4))
+)
+            leaderboard(
+                 id = 8475,
+                 title       = getQuestionTitle(3401), 
+                 description = getQuestionDescription(3401),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8476,
+                 title       = getQuestionTitle(3402), 
+                 description = getQuestionDescription(3402),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8477,
+                 title       = getQuestionTitle(3403), 
+                 description = getQuestionDescription(3403),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8478,
+                 title       = getQuestionTitle(3404), 
+                 description = getQuestionDescription(3404),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8479,
+                 title       = getQuestionTitle(3405), 
+                 description = getQuestionDescription(3405),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8480,
+                 title       = getQuestionTitle(3406), 
+                 description = getQuestionDescription(3406),
+                 start  = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Master Quest", "Johto Photo Finish"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+           
+achievement(
+    title = getAchievementTitle("Pokémon: Indigo League", "Pokémon - I Choose You!"), type = "progression",
+    description = getAchievementDescription("Pokémon: Indigo League", "Pokémon - I Choose You!"),
+    id = 115221, badge = "125991", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+              (romType5CorrectAnswer(6, 0, 7) ||
+               romType5CorrectAnswer(6, 1, 5) ||
+               romType5CorrectAnswer(6, 2, 5) ||
+               romType5CorrectAnswer(6, 3, 7) ||
+               romType5CorrectAnswer(6, 4, 6) ||
+               romType5CorrectAnswer(6, 5, 6))
+)
+            leaderboard(
+                 id = 8485,
+                 title       = getQuestionTitle(3501), 
+                 description = getQuestionDescription(3501),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8486,
+                 title       = getQuestionTitle(3502), 
+                 description = getQuestionDescription(3502),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8487,
+                 title       = getQuestionTitle(3503), 
+                 description = getQuestionDescription(3503),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8488,
+                 title       = getQuestionTitle(3504), 
+                 description = getQuestionDescription(3504),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8489,
+                 title       = getQuestionTitle(3505), 
+                 description = getQuestionDescription(3505),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8490,
+                 title       = getQuestionTitle(3506), 
+                 description = getQuestionDescription(3506),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Pokémon - I Choose You!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+           
+achievement(
+    title = getAchievementTitle("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), type = "progression",
+    description = getAchievementDescription("Pokémon: Indigo League", "Here Comes The Squirtle Squad"),
+    id = 115267, badge = "126026", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+              (romType5CorrectAnswer(6, 0, 5) ||
+               romType5CorrectAnswer(6, 1, 6) ||
+               romType5CorrectAnswer(6, 2, 7) ||
+               romType5CorrectAnswer(6, 3, 4) ||
+               romType5CorrectAnswer(6, 4, 4) ||
+               romType5CorrectAnswer(6, 5, 4))
+)
+            leaderboard(
+                 id = 8494,
+                 title       = getQuestionTitle(3601), 
+                 description = getQuestionDescription(3601),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8495,
+                 title       = getQuestionTitle(3602), 
+                 description = getQuestionDescription(3602),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8496,
+                 title       = getQuestionTitle(3603), 
+                 description = getQuestionDescription(3603),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8497,
+                 title       = getQuestionTitle(3604), 
+                 description = getQuestionDescription(3604),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8498,
+                 title       = getQuestionTitle(3605), 
+                 description = getQuestionDescription(3605),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8499,
+                 title       = getQuestionTitle(3606), 
+                 description = getQuestionDescription(3606),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), type = "progression",
+    description = getAchievementDescription("Pokémon: Indigo League", "Beach Blank-Out Blastoise"),
+    id = 115525, badge = "126353", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+              (romType5CorrectAnswer(6, 0, 5) ||
+               romType5CorrectAnswer(6, 1, 6) ||
+               romType5CorrectAnswer(6, 2, 5) ||
+               romType5CorrectAnswer(6, 3, 7) ||
+               romType5CorrectAnswer(6, 4, 6) ||
+               romType5CorrectAnswer(6, 5, 7))
+)
+            leaderboard(
+                 id = 8503,
+                 title       = getQuestionTitle(3701), 
+                 description = getQuestionDescription(3701),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8504,
+                 title       = getQuestionTitle(3702), 
+                 description = getQuestionDescription(3702),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8505,
+                 title       = getQuestionTitle(3703), 
+                 description = getQuestionDescription(3703),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8506,
+                 title       = getQuestionTitle(3704), 
+                 description = getQuestionDescription(3704),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8507,
+                 title       = getQuestionTitle(3705), 
+                 description = getQuestionDescription(3705),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8508,
+                 title       = getQuestionTitle(3706), 
+                 description = getQuestionDescription(3706),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Pokémon: Indigo League", "Go West Young Meowth"), type = "progression",
+    description = getAchievementDescription("Pokémon: Indigo League", "Go West Young Meowth"),
+    id = 115531, badge = "126354", points = 4,
+    trigger = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+              (romType5CorrectAnswer(6, 0, 4) ||
+               romType5CorrectAnswer(6, 1, 4) ||
+               romType5CorrectAnswer(6, 2, 7) ||
+               romType5CorrectAnswer(6, 3, 6) ||
+               romType5CorrectAnswer(6, 4, 7) ||
+               romType5CorrectAnswer(6, 5, 4))
+)
+            leaderboard(
+                 id = 8511,
+                 title       = getQuestionTitle(3801), 
+                 description = getQuestionDescription(3801),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 0),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8512,
+                 title       = getQuestionTitle(3802), 
+                 description = getQuestionDescription(3802),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 1),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8513,
+                 title       = getQuestionTitle(3803), 
+                 description = getQuestionDescription(3803),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 2),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8514,
+                 title       = getQuestionTitle(3804), 
+                 description = getQuestionDescription(3804),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 3),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8515,
+                 title       = getQuestionTitle(3805), 
+                 description = getQuestionDescription(3805),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 4),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8516,
+                 title       = getQuestionTitle(3806), 
+                 description = getQuestionDescription(3806),
+                 start  = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
+                          romType5LeaderboardQuestionSelect(6, 5),
+                 cancel = romType5LeaderboardCancel("Pokémon: Indigo League", "Go West Young Meowth"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
             
