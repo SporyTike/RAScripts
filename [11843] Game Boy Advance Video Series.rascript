@@ -364,9 +364,41 @@ episodes = [
         0x00000005, // Chapters
         0x00002443, // Total Playtime
     ],
+    [
+        "The Fairly OddParents!",
+        "Foul Balled",
+        "The Fairly OddParents! - Volume 1",
+        0x08021C44, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FAD, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "The Boy Who Would Be Queen",
+        "The Fairly OddParents! - Volume 1",
+        0x0873283C, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FA9, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "Information Stupor Highway",
+        "The Fairly OddParents! - Volume 1",
+        0x08E484A0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003F26, // Total Playtime
+    ],
 ]
 
 questions = [
+    [
+        0000,
+        "Question",
+            "Answer",
+            "Answer",
+            "Answer",
+            "Answer"
+    ],
     [
         0101,
         "Do not forget to land on what?",
@@ -1808,7 +1840,119 @@ questions = [
             "Ash's Mom"
     ],
     [
-        0000,
+        3901,
+        "What did the haters of the McBadbat destroy once again?",
+            "Window",
+            "BBQ Grill",
+            "Mailbox",
+            "Outhouse"
+    ],
+    [
+        3902,
+        "What did Chester hit with his homerun against the baby team?",
+            "Satellite",
+            "Meteor",
+            "Plane",
+            "Moon"
+    ],
+    [
+        3903,
+        "What did Chester get from his dad after winning the final game?",
+            "Baseball Bat",
+            "Hug",
+            "Paper Bag",
+            "Flowers"
+    ],
+    [
+        3904,
+        "What did Timmy's dad find in the pockets of his pants?",
+            "Coupon",
+            "Autograph",
+            "Money",
+            "Photograph"
+    ],
+    [
+        4001,
+        "What did Timmy not think about when trying to think like a girl?",
+            "Ballerina",
+            "Bunny",
+            "Clothes",
+            "Unicorn"
+    ],
+    [
+        4002,
+        "What did Trixie want to buy while being disguised as a boy?",
+            "Movie",
+            "Comic",
+            "Video Game",
+            "Action Figure"
+    ],
+    [
+        4003,
+        "Who did not get offered a frog by AJ?",
+            "Chester",
+            "Trixie",
+            "Timmy",
+            "Veronica"
+    ],
+    [
+        4004,
+        "What presents did Chester and AJ gave Trixie at her party?",
+            "Frogs",
+            "Comics",
+            "Wood",
+            "Bugs"
+    ],
+    [
+        4101,
+        "Who pressed the button to send the threatmantic e-mail to Trixie?",
+            "Cosmo",
+            "Wanda",
+            "Timmy's Dad",
+            "Timmy's Mom"
+    ],
+    [
+        4102,
+        "What country did Timmy visit by traveling through the internet?",
+            "Australia",
+            "Germany",
+            "China",
+            "Brazil"
+    ],
+    [
+        4103,
+        "What type of restaurant was it where Timmy’s dad ordered food?",
+            "Mexican",
+            "Italian",
+            "Indian",
+            "Chinese"
+    ],
+    [
+        4104,
+        "Who's parent did not break into the privacy of their child?",
+            "Veronica",
+            "Mr. Crocker",
+            "Trixie",
+            "AJ"
+    ],
+    [
+        4105,
+        "Who broke the computer in Timmy's room?",
+            "Timmy",
+            "Cosmo",
+            "Timmy's Dad",
+            "Wanda"
+    ],
+    [
+        4106,
+        "Where was the video of Mr. Crocker in the red dress streamed?",
+            "Cinema",
+            "Town Square",
+            "Zeppelin",
+            "Stadium"
+    ],
+    [
+        0001,
         "?",
             "",
             "",
@@ -2220,6 +2364,20 @@ function romType5LeaderboardCancel(series, episode) {
           + bit(6, mem_romType5Input)
           + bit(7, mem_romType5Input) == 3)
 }
+
+//--------------------------------------------------
+// Example Question
+
+leaderboard(
+                 id = 23504,
+                 title       = getQuestionTitle(0000), 
+                 description = getQuestionDescription(0000),
+                 start  = always_false(),
+                 cancel = always_true(), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
 
 //--------------------------------------------------
 // Achievements
@@ -4651,4 +4809,192 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Foul Balled"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Foul Balled"),
+    id = 125929, badge = "126385", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
+              (romType1CorrectAnswer(4, 0, 7) ||
+               romType1CorrectAnswer(4, 1, 6) ||
+               romType1CorrectAnswer(4, 2, 7) ||
+               romType1CorrectAnswer(4, 3, 6))
+)
+            leaderboard(
+                 id = 19168,
+                 title       = getQuestionTitle(3901), 
+                 description = getQuestionDescription(3901),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Foul Balled"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19169,
+                 title       = getQuestionTitle(3902), 
+                 description = getQuestionDescription(3902),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Foul Balled"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19170,
+                 title       = getQuestionTitle(3903), 
+                 description = getQuestionDescription(3903),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Foul Balled"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19171,
+                 title       = getQuestionTitle(3904), 
+                 description = getQuestionDescription(3904),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Foul Balled"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "The Boy Who Would Be Queen"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "The Boy Who Would Be Queen"),
+    id = 125931, badge = "138494", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
+              (romType1CorrectAnswer(4, 0, 7) ||
+               romType1CorrectAnswer(4, 1, 5) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 7))
+)
+            leaderboard(
+                 id = 19172,
+                 title       = getQuestionTitle(4001), 
+                 description = getQuestionDescription(4001),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Boy Who Would Be Queen"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19173,
+                 title       = getQuestionTitle(4002), 
+                 description = getQuestionDescription(4002),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Boy Who Would Be Queen"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19174,
+                 title       = getQuestionTitle(4003), 
+                 description = getQuestionDescription(4003),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Boy Who Would Be Queen"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19175,
+                 title       = getQuestionTitle(4004), 
+                 description = getQuestionDescription(4004),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "The Boy Who Would Be Queen"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Information Stupor Highway"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Information Stupor Highway"),
+    id = 125932, badge = "138504", points = 4,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+              (romType1CorrectAnswer(6, 0, 7) ||
+               romType1CorrectAnswer(6, 1, 6) ||
+               romType1CorrectAnswer(6, 2, 4) ||
+               romType1CorrectAnswer(6, 3, 6) ||
+               romType1CorrectAnswer(6, 4, 5) ||
+               romType1CorrectAnswer(6, 5, 5))
+)
+            leaderboard(
+                 id = 19176,
+                 title       = getQuestionTitle(4101), 
+                 description = getQuestionDescription(4101),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19177,
+                 title       = getQuestionTitle(4102), 
+                 description = getQuestionDescription(4102),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19178,
+                 title       = getQuestionTitle(4103), 
+                 description = getQuestionDescription(4103),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19179,
+                 title       = getQuestionTitle(4104), 
+                 description = getQuestionDescription(4104),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8518,
+                 title       = getQuestionTitle(4105), 
+                 description = getQuestionDescription(4105),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 8517,
+                 title       = getQuestionTitle(4106), 
+                 description = getQuestionDescription(4106),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
             
