@@ -388,6 +388,38 @@ episodes = [
         0x00000005, // Chapters
         0x00003F26, // Total Playtime
     ],
+    [
+        "The Fairly OddParents!",
+        "Father Time!",
+        "The Fairly OddParents! - Volume 2",
+        0x08022174, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F01, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "Apartnership!",
+        "The Fairly OddParents! - Volume 2",
+        0x0882797C, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F03, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "Ruled Out",
+        "The Fairly OddParents! - Volume 2",
+        0x090805AC, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FC7, // Total Playtime
+    ],
+    [
+        "The Fairly OddParents!",
+        "That's Life!",
+        "The Fairly OddParents! - Volume 2",
+        0x097AC404, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F4F, // Total Playtime
+    ],
 ]
 
 questions = [
@@ -1005,7 +1037,7 @@ questions = [
             "Swimming",
             "Rollercoaster",
             "Mud Bath",
-            "Cinema"
+            "Movies"
     ],
     [
         1901,
@@ -1946,10 +1978,138 @@ questions = [
     [
         4106,
         "Where was the video of Mr. Crocker in the red dress streamed?",
-            "Cinema",
+            "Movies",
             "Town Square",
             "Zeppelin",
             "Stadium"
+    ],
+    [
+        4201,
+        "What did Cosmo and Wanda do with their past selves?",
+            "Picnicking",
+            "Dancing",
+            "Swimming",
+            "Bicycling"
+    ],
+    [
+        4202,
+        "What did Timmy give his dad to eat to make him lose the race?",
+            "Hamburgers",
+            "Pizza",
+            "Hot Dogs",
+            "Fried Chicken"
+    ],
+    [
+        4203,
+        "What did Timmy use to escape the guards of his dad?",
+            "Lava Lamp",
+            "Heat Vision",
+            "Bubblegum",
+            "Bicycle"
+    ],
+    [
+        4204,
+        "What did Timmy's mom call him after he came back from the past?",
+            "Dad",
+            "Television",
+            "Trophy",
+            "Internet"
+    ],
+    [
+        4301,
+        "What did Wanda have as anniversary gift for Cosmo?",
+            "Puppy",
+            "Flowers",
+            "Picture",
+            "Chocolate"
+    ],
+    [
+        4302,
+        "What did Mama Cosma give Cupid to bribe him?",
+            "Love Potions",
+            "Cookies",
+            "Kisses",
+            "Money"
+    ],
+    [
+        4303,
+        "What special person did Cosmo want to be in the game show?",
+            "Easter Bunny",
+            "Sandman",
+            "Cupid",
+            "Santa"
+    ],
+    [
+        4304,
+        "What were Star and Twinkle that set them apart from others?",
+            "Twins",
+            "Aliens",
+            "Robots",
+            "Goddesses"
+    ],
+    [
+        4401,
+        "What transformation did Cosmo and Wanda have on the schoolyard?",
+            "Cats",
+            "Squirrels",
+            "Dogs",
+            "Pigeons"
+    ],
+    [
+        4402,
+        "What animal was hiding in the high grass of the Turner's house?",
+            "Giraffe",
+            "Elephant",
+            "Alligator",
+            "Lion"
+    ],
+    [
+        4403,
+        "What did Cosmo and Wanda play in the sewers while ignoring Timmy?",
+            "Chess",
+            "Badminton",
+            "Cards",
+            "Yahtzee"
+    ],
+    [
+        4404,
+        "Who was beating up the sewer alligator to protect Timmy?",
+            "Timmy's Mom",
+            "Timmy's Dad",
+            "Wanda",
+            "Cosmo"
+    ],
+    [
+        4501,
+        "What did Timmy's mom give Cosmo and Wanda to feed them?",
+            "Yams",
+            "Fish Food",
+            "Bread",
+            "Pizza"
+    ],
+    [
+        4502,
+        "Who forgot to feed the gerbil while Timmy was at the summer camp?",
+            "Dinkelberg",
+            "Timmy's Mom",
+            "Timmy's Dad",
+            "Cosmo"
+    ],
+    [
+        4503,
+        "Where did Cosmo and Wanda go when Timmy went with Chester and AJ?",
+            "Fish Tank",
+            "Movies",
+            "Minigolf",
+            "Pool"
+    ],
+    [
+        4504,
+        "What flower was the 1st prize for winning the Dimmsdale VegOut?",
+            "Rose",
+            "Tulip",
+            "Daisy",
+            "Hibiscus"
     ],
     [
         0001,
@@ -2391,7 +2551,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 5) ||
                romType1CorrectAnswer(4, 2, 6) ||
                romType1CorrectAnswer(4, 3, 5))
-)
+            )
             leaderboard(
                  id = 7085,
                  title       = getQuestionTitle(0101), 
@@ -2446,7 +2606,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 7) ||
                romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 5))
-)
+            )
             leaderboard(
                  id = 7101,
                  title       = getQuestionTitle(0201), 
@@ -2501,7 +2661,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 7) ||
                romType1CorrectAnswer(4, 2, 6) ||
                romType1CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7103,
                  title       = getQuestionTitle(0301), 
@@ -2556,7 +2716,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 4) ||
                romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 7110,
                  title       = getQuestionTitle(0401), 
@@ -2611,7 +2771,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 5) ||
                romType1CorrectAnswer(4, 2, 6) ||
                romType1CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7118,
                  title       = getQuestionTitle(0501), 
@@ -2666,7 +2826,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 5) ||
                romType1CorrectAnswer(4, 2, 4) ||
                romType1CorrectAnswer(4, 3, 4))
-)
+            )
             leaderboard(
                  id = 7119,
                  title       = getQuestionTitle(0601), 
@@ -2721,7 +2881,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 4) ||
                romType1CorrectAnswer(4, 2, 6) ||
                romType1CorrectAnswer(4, 3, 5))
-)
+            )
             leaderboard(
                  id = 7128,
                  title       = getQuestionTitle(0701), 
@@ -2776,7 +2936,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 7) ||
                romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 4))
-)
+            )
             leaderboard(
                  id = 7132,
                  title       = getQuestionTitle(0801), 
@@ -2831,7 +2991,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 7) ||
                romType2CorrectAnswer(4, 2, 6) ||
                romType2CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 7137,
                  title       = getQuestionTitle(0901), 
@@ -2886,7 +3046,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 4) ||
                romType2CorrectAnswer(4, 2, 4) ||
                romType2CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7142,
                  title       = getQuestionTitle(1001), 
@@ -2941,7 +3101,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 6) ||
                romType2CorrectAnswer(4, 2, 5) ||
                romType2CorrectAnswer(4, 3, 4))
-)
+            )
             leaderboard(
                  id = 7277,
                  title       = getQuestionTitle(1101), 
@@ -2996,7 +3156,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 6) ||
                romType2CorrectAnswer(4, 2, 5) ||
                romType2CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7281,
                  title       = getQuestionTitle(1201), 
@@ -3052,7 +3212,7 @@ achievement(
                romType3CorrectAnswer(4, 1, 5) ||
                romType3CorrectAnswer(4, 2, 7) ||
                romType3CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7285,
                  title       = getQuestionTitle(1301), 
@@ -3107,7 +3267,7 @@ achievement(
                romType3CorrectAnswer(4, 1, 4) ||
                romType3CorrectAnswer(4, 2, 7) ||
                romType3CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 7289,
                  title       = getQuestionTitle(1401), 
@@ -3162,7 +3322,7 @@ achievement(
                romType3CorrectAnswer(4, 1, 4) ||
                romType3CorrectAnswer(4, 2, 7) ||
                romType3CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 7293,
                  title       = getQuestionTitle(1501), 
@@ -3217,7 +3377,7 @@ achievement(
                romType3CorrectAnswer(4, 1, 7) ||
                romType3CorrectAnswer(4, 2, 6) ||
                romType3CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 7297,
                  title       = getQuestionTitle(1601), 
@@ -3274,7 +3434,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 4) ||
                romType1CorrectAnswer(6, 4, 7) ||
                romType1CorrectAnswer(6, 5, 6))
-)
+            )
             leaderboard(
                  id = 7304,
                  title       = getQuestionTitle(1701), 
@@ -3353,7 +3513,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 4) ||
                romType1CorrectAnswer(6, 4, 5) ||
                romType1CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 7312,
                  title       = getQuestionTitle(1801), 
@@ -3432,7 +3592,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 6) ||
                romType1CorrectAnswer(6, 4, 6) ||
                romType1CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 8383,
                  title       = getQuestionTitle(1901), 
@@ -3511,7 +3671,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 4) ||
                romType1CorrectAnswer(6, 4, 7) ||
                romType1CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 8387,
                  title       = getQuestionTitle(2001), 
@@ -3590,7 +3750,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 5) ||
                romType1CorrectAnswer(6, 4, 7) ||
                romType1CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 8391,
                  title       = getQuestionTitle(2101), 
@@ -3667,7 +3827,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 7) ||
                romType1CorrectAnswer(4, 2, 5) ||
                romType1CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 8400,
                  title       = getQuestionTitle(2201), 
@@ -3722,7 +3882,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 4) ||
                romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 8405,
                  title       = getQuestionTitle(2301), 
@@ -3777,7 +3937,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 6) ||
                romType2CorrectAnswer(4, 2, 7) ||
                romType2CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 8409,
                  title       = getQuestionTitle(2401), 
@@ -3832,7 +3992,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 7) ||
                romType2CorrectAnswer(4, 2, 7) ||
                romType2CorrectAnswer(4, 3, 4))
-)
+            )
             leaderboard(
                  id = 8414,
                  title       = getQuestionTitle(2501), 
@@ -3887,7 +4047,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 6) ||
                romType2CorrectAnswer(4, 2, 7) ||
                romType2CorrectAnswer(4, 3, 5))
-)
+            )
             leaderboard(
                  id = 8419,
                  title       = getQuestionTitle(2601), 
@@ -3942,7 +4102,7 @@ achievement(
                romType2CorrectAnswer(4, 1, 4) ||
                romType2CorrectAnswer(4, 2, 6) ||
                romType2CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 8423,
                  title       = getQuestionTitle(2701), 
@@ -3999,7 +4159,7 @@ achievement(
                romType4CorrectAnswer(6, 3, 7) ||
                romType4CorrectAnswer(6, 4, 5) ||
                romType4CorrectAnswer(6, 5, 6))
-)
+            )
             leaderboard(
                  id = 8427,
                  title       = getQuestionTitle(2801), 
@@ -4076,7 +4236,7 @@ achievement(
                romType4CorrectAnswer(4, 1, 4) ||
                romType4CorrectAnswer(4, 2, 7) ||
                romType4CorrectAnswer(4, 3, 5))
-)
+            )
             leaderboard(
                  id = 8431,
                  title       = getQuestionTitle(2901), 
@@ -4131,7 +4291,7 @@ achievement(
                romType4CorrectAnswer(4, 1, 7) ||
                romType4CorrectAnswer(4, 2, 6) ||
                romType4CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 8437,
                  title       = getQuestionTitle(3001), 
@@ -4188,7 +4348,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 4) ||
                romType5CorrectAnswer(6, 4, 6) ||
                romType5CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 8451,
                  title       = getQuestionTitle(3101), 
@@ -4267,7 +4427,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 4) ||
                romType5CorrectAnswer(6, 4, 4) ||
                romType5CorrectAnswer(6, 5, 6))
-)
+            )
             leaderboard(
                  id = 8459,
                  title       = getQuestionTitle(3201), 
@@ -4346,7 +4506,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 4) ||
                romType5CorrectAnswer(6, 4, 4) ||
                romType5CorrectAnswer(6, 5, 6))
-)
+            )
             leaderboard(
                  id = 8467,
                  title       = getQuestionTitle(3301), 
@@ -4425,7 +4585,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 7) ||
                romType5CorrectAnswer(6, 4, 5) ||
                romType5CorrectAnswer(6, 5, 4))
-)
+            )
             leaderboard(
                  id = 8475,
                  title       = getQuestionTitle(3401), 
@@ -4504,7 +4664,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 7) ||
                romType5CorrectAnswer(6, 4, 6) ||
                romType5CorrectAnswer(6, 5, 6))
-)
+            )
             leaderboard(
                  id = 8485,
                  title       = getQuestionTitle(3501), 
@@ -4583,9 +4743,9 @@ achievement(
                romType5CorrectAnswer(6, 3, 4) ||
                romType5CorrectAnswer(6, 4, 4) ||
                romType5CorrectAnswer(6, 5, 4))
-)
+            )
             leaderboard(
-                 id = 8494,
+                 id = 8493,
                  title       = getQuestionTitle(3601), 
                  description = getQuestionDescription(3601),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4596,7 +4756,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8495,
+                 id = 8494,
                  title       = getQuestionTitle(3602), 
                  description = getQuestionDescription(3602),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4607,7 +4767,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8496,
+                 id = 8495,
                  title       = getQuestionTitle(3603), 
                  description = getQuestionDescription(3603),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4618,7 +4778,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8497,
+                 id = 8496,
                  title       = getQuestionTitle(3604), 
                  description = getQuestionDescription(3604),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4629,7 +4789,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8498,
+                 id = 8497,
                  title       = getQuestionTitle(3605), 
                  description = getQuestionDescription(3605),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4640,7 +4800,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 8499,
+                 id = 8498,
                  title       = getQuestionTitle(3606), 
                  description = getQuestionDescription(3606),
                  start  = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
@@ -4662,7 +4822,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 7) ||
                romType5CorrectAnswer(6, 4, 6) ||
                romType5CorrectAnswer(6, 5, 7))
-)
+            )
             leaderboard(
                  id = 8503,
                  title       = getQuestionTitle(3701), 
@@ -4741,7 +4901,7 @@ achievement(
                romType5CorrectAnswer(6, 3, 6) ||
                romType5CorrectAnswer(6, 4, 7) ||
                romType5CorrectAnswer(6, 5, 4))
-)
+            )
             leaderboard(
                  id = 8511,
                  title       = getQuestionTitle(3801), 
@@ -4818,7 +4978,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 6) ||
                romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 6))
-)
+            )
             leaderboard(
                  id = 19168,
                  title       = getQuestionTitle(3901), 
@@ -4873,7 +5033,7 @@ achievement(
                romType1CorrectAnswer(4, 1, 5) ||
                romType1CorrectAnswer(4, 2, 6) ||
                romType1CorrectAnswer(4, 3, 7))
-)
+            )
             leaderboard(
                  id = 19172,
                  title       = getQuestionTitle(4001), 
@@ -4930,7 +5090,7 @@ achievement(
                romType1CorrectAnswer(6, 3, 6) ||
                romType1CorrectAnswer(6, 4, 5) ||
                romType1CorrectAnswer(6, 5, 5))
-)
+            )
             leaderboard(
                  id = 19176,
                  title       = getQuestionTitle(4101), 
@@ -4993,6 +5153,226 @@ achievement(
                  start  = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
                           romType1LeaderboardQuestionSelect(6, 5),
                  cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Information Stupor Highway"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Father Time!"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Father Time!"),
+    id = 126192, badge = "138562", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
+              (romType1CorrectAnswer(4, 0, 5) ||
+               romType1CorrectAnswer(4, 1, 5) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 19180,
+                 title       = getQuestionTitle(4201), 
+                 description = getQuestionDescription(4201),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Father Time!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19181,
+                 title       = getQuestionTitle(4202), 
+                 description = getQuestionDescription(4202),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Father Time!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19182,
+                 title       = getQuestionTitle(4203), 
+                 description = getQuestionDescription(4203),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Father Time!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19183,
+                 title       = getQuestionTitle(4204), 
+                 description = getQuestionDescription(4204),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Father Time!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Apartnership!"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Apartnership!"),
+    id = 126193, badge = "138565", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
+              (romType1CorrectAnswer(4, 0, 6) ||
+               romType1CorrectAnswer(4, 1, 4) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 7))
+            )
+            leaderboard(
+                 id = 19184,
+                 title       = getQuestionTitle(4301), 
+                 description = getQuestionDescription(4301),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Apartnership!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19185,
+                 title       = getQuestionTitle(4302), 
+                 description = getQuestionDescription(4302),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Apartnership!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19186,
+                 title       = getQuestionTitle(4303), 
+                 description = getQuestionDescription(4303),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Apartnership!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 19187,
+                 title       = getQuestionTitle(4304), 
+                 description = getQuestionDescription(4304),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Apartnership!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "Ruled Out"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "Ruled Out"),
+    id = 161333, badge = "181413", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
+              (romType1CorrectAnswer(4, 0, 5) ||
+               romType1CorrectAnswer(4, 1, 6) ||
+               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 3, 5))
+            )
+            leaderboard(
+                 id = 19188,
+                 title       = getQuestionTitle(4401), 
+                 description = getQuestionDescription(4401),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Ruled Out"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23497,
+                 title       = getQuestionTitle(4402), 
+                 description = getQuestionDescription(4402),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Ruled Out"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23498,
+                 title       = getQuestionTitle(4403), 
+                 description = getQuestionDescription(4403),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Ruled Out"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23499,
+                 title       = getQuestionTitle(4304), 
+                 description = getQuestionDescription(4304),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "Ruled Out"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Fairly OddParents!", "That's Life!"), type = "progression",
+    description = getAchievementDescription("The Fairly OddParents!", "That's Life!"),
+    id = 161334, badge = "181414", points = 2,
+    trigger = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
+              (romType1CorrectAnswer(4, 0, 4) ||
+               romType1CorrectAnswer(4, 1, 7) ||
+               romType1CorrectAnswer(4, 2, 4) ||
+               romType1CorrectAnswer(4, 3, 5))
+            )
+            leaderboard(
+                 id = 23500,
+                 title       = getQuestionTitle(4501), 
+                 description = getQuestionDescription(4501),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
+                          romType1LeaderboardQuestionSelect(4, 0),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "That's Life!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23501,
+                 title       = getQuestionTitle(4502), 
+                 description = getQuestionDescription(4502),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
+                          romType1LeaderboardQuestionSelect(4, 1),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "That's Life!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23502,
+                 title       = getQuestionTitle(4503), 
+                 description = getQuestionDescription(4503),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
+                          romType1LeaderboardQuestionSelect(4, 2),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "That's Life!"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 23503,
+                 title       = getQuestionTitle(4504), 
+                 description = getQuestionDescription(4504),
+                 start  = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
+                          romType1LeaderboardQuestionSelect(4, 3),
+                 cancel = romType1LeaderboardCancel("The Fairly OddParents!", "That's Life!"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
