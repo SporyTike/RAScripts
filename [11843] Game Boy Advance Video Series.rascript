@@ -54,7 +54,17 @@ mem_romType6SceneCountdown  = 0x00687C
 mem_romType6VideoPlaytime   = 0x006884
 mem_romType6CurrentChapter  = 0x006890
 mem_romType6Input           = 0x007EC8
+mem_romType6MenuState       = 0x007EB4
 mem_romType6RNG             = 0x007EF0
+
+mem_romType7EpisodePointer  = 0x00667C
+mem_romType7VideoState      = 0x016804
+mem_romType7SceneCountdown  = 0x0066EC
+mem_romType7VideoPlaytime   = 0x0066F4
+mem_romType7CurrentChapter  = 0x0066FC
+mem_romType7Input           = 0x007EA4
+mem_romType7MenuState       = 0x007E8C
+mem_romType7RNG             = 0x007F98
 
 //--------------------------------------------------
 // Arrays and Dictionaries
@@ -431,7 +441,7 @@ episodes = [
     [
         "Yu-Gi-Oh!",
         "Friends 'Til the End - Part 3",
-        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1",
+        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // English
         0x08021084, // Episode Pointer
         0x00000005, // Chapters
         0x00003546, // Total Playtime
@@ -439,10 +449,26 @@ episodes = [
     [
         "Yu-Gi-Oh!",
         "Friends 'Til the End - Part 4",
-        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1",
+        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // English
         0x08F1A7FC, // Episode Pointer
         0x00000005, // Chapters
         0x000034EF, // Total Playtime
+    ],
+    [
+        "Yu-Gi-Oh!",
+        "Amis Jusqu'au Bout - 3ème Partie",
+        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
+        0x08EE45C8, // Episode Pointer
+        0x00000005, // Chapters
+        0x000035E9, // Total Playtime
+    ],
+    [
+        "Yu-Gi-Oh!",
+        "Amis Jusqu'au Bout - 4ème Partie",
+        "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
+        0x08000E80, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000358C, // Total Playtime
     ],
 ]
 
@@ -2144,10 +2170,26 @@ questions = [
             "Tristan"
     ],
     [
+        4651,
+        "Qui a jeté une pièce du Puzzle du Millénium au fleuve?",
+            "Yugi",
+            "Marik",
+            "Joey",
+            "Tristan"
+    ],
+    [
         4602,
         "What monster species did the Rocket Warrior ultimately attack?",
             "Panther",
             "Magnet",
+            "Dragon",
+            "Zombie"
+    ],
+    [
+        4652,
+        "Quelle espèce de monstre Guerrier Fusée a-t-il attaquée?",
+            "Panthère",
+            "Aimant",
             "Dragon",
             "Zombie"
     ],
@@ -2160,8 +2202,24 @@ questions = [
             "Eight"
     ],
     [
+        4653,
+        "Combien de cartes localisatrices fallait-il pour la finale?",
+            "Cinq",
+            "Six",
+            "Sept",
+            "Huit"
+    ],
+    [
         4604,
         "Who found out where Yugi and Joey were currently dueling?",
+            "Mai",
+            "Duke",
+            "Serenity",
+            "Tristan"
+    ],
+    [
+        4654,
+        "Qui a découvert où Yugi et Joey se battaient?",
             "Mai",
             "Duke",
             "Serenity",
@@ -2176,12 +2234,28 @@ questions = [
             "Serenity"
     ],
     [
+        4655,
+        "Qui était la sœur de Joey dont il a payé l’opération?",
+            "Mai",
+            "Ishizu",
+            "Téa",
+            "Serenity"
+    ],
+    [
         4606,
         "What number did Joey roll using the effect of Skull Dice?",
             "One",
             "Two",
             "Three",
             "Four"
+    ],
+    [
+        4656,
+        "Quel nombre Joey a-t-il obtenu avec l’effet du Dé-crâne?",
+            "Un",
+            "Deux",
+            "Trois",
+            "Quatre"
     ],
     [
         4701,
@@ -2192,12 +2266,28 @@ questions = [
             "Hotel"
     ],
     [
+        4751,
+        "Où Marik se cachait-il lorsqu’il contrôlait Joey?",
+            "Hélicoptère",
+            "Pont",
+            "Bateau",
+            "Hôtel"
+    ],
+    [
         4702,
         "What Millennium Item does Marik own and control?",
             "Puzzle",
             "Eye",
             "Ring",
             "Rod"
+    ],
+    [
+        4752,
+        "Quel Objet du Millénium Marik possède-t-il et contrôle-t-il?",
+            "Puzzle",
+            "Œil",
+            "Anneau",
+            "Baguette"
     ],
     [
         4703,
@@ -2208,8 +2298,24 @@ questions = [
             "Harpies"
     ],
     [
+        4753,
+        "Quel type de monstres Mai avait-elle dans son deck?",
+            "Insectes",
+            "Poissons",
+            "Dinosaures",
+            "Harpies"
+    ],
+    [
         4704,
         "Who saved Téa from the bomb on the crane?",
+            "Joey",
+            "Yugi",
+            "Seto",
+            "Tristan"
+    ],
+    [
+        4754,
+        "Qui a sauvé Téa de la bombe sur la grue?",
             "Joey",
             "Yugi",
             "Seto",
@@ -2224,8 +2330,24 @@ questions = [
             "Warrior"
     ],
     [
+        4755,
+        "Quelle espèce de monstre a absorbé le Météore Destructeur?",
+            "Fée",
+            "Dragon",
+            "Magicien",
+            "Guerrier"
+    ],
+    [
         4706,
         "Who jumped into the ocean to save Joey?",
+            "Tristan",
+            "Seto",
+            "Yugi",
+            "Serenity"
+    ],
+    [
+        4756,
+        "Qui a sauté dans l’océan pour sauver Joey?",
             "Tristan",
             "Seto",
             "Yugi",
@@ -2243,6 +2365,13 @@ questions = [
 
 //--------------------------------------------------
 // Functions
+
+function isCartridge(value1, value2, value3, value4) {
+    return dword(0x000000) == value1 &&
+           dword(0x000004) == value2 &&
+           dword(0x000008) == value3 &&
+           dword(0x00000C) == value4
+}
 
 function getAchievementTitle(series, episode) {
     for episodeData in episodes {
@@ -2648,6 +2777,12 @@ function romType5LeaderboardCancel(series, episode) {
 
 
 
+function romType6InVideo() {
+    return __ornext(dword(mem_romType6MenuState) == 0x13 ||
+                    dword(mem_romType6MenuState) == 0x18) &&
+                    dword(mem_romType6VideoPlaytime) > 0
+}
+
 function romType6VideoStarted(series, episode) {
     return once(dword(mem_romType6EpisodePointer) == getEpisodePointer(series, episode) &&
                 prev(dword(mem_romType6VideoPlaytime)) == 0x00 &&
@@ -2703,6 +2838,80 @@ function romType6LeaderboardCancel(series, episode) {
           + bit(5, mem_romType6Input)
           + bit(6, mem_romType6Input)
           + bit(7, mem_romType6Input) == 1)
+}
+
+
+
+function romType7VideoStarted(series, episode) {
+    return once(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType7VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType7VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType7CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType7SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType7VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType7MenuState) == 0x1A) &&
+           never(prev(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType7EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType7VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType7VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType7MenuState) == 0x15 &&
+                 prev(dword(mem_romType7VideoState)) != 0x04 &&
+                 prev(dword(mem_romType7VideoState)) != 0x08 &&
+                      dword(mem_romType7VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType7MenuState) == 0x1A)) &&
+           never(dword(mem_romType7MenuState) == 0x00 &&
+                 dword(mem_romType7EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType7CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType7EpisodePointer) == 0x00 &&
+                             prev(dword(mem_romType7MenuState)) == 0x00 &&
+                                  dword(mem_romType7MenuState)  == 0x15 &&
+                prior(low4(mem_romType7RNG)) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType7MenuState) == 0x00 &&
+                      dword(mem_romType7EpisodePointer) == 0x00000000))) &&
+           trigger_when(dword(mem_romType7MenuState) == 0x1A) &&
+           trigger_when(bit0(mem_romType7Input + 0x01)
+                      + bit1(mem_romType7Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType7Input) > prev(bit(index % 4 + 4, mem_romType7Input))) &&
+           never(once(dword(mem_romType7MenuState) == 0x1A &&
+                bit0(mem_romType7Input + 0x01)
+              + bit1(mem_romType7Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType7Input)
+              + bit((index + 2) % 4 + 4, mem_romType7Input)
+              + bit((index + 3) % 4 + 4, mem_romType7Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType7Input)
+                      + bit((index + 2) % 4 + 4, mem_romType7Input)
+                      + bit((index + 3) % 4 + 4, mem_romType7Input) == 0)
+}
+
+function romType7LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType7MenuState)  == 0x1A &&
+           once(dword(mem_romType7EpisodePointer) == 0x00 &&
+                prev(dword(mem_romType7MenuState)) == 0x00 &&
+                     dword(mem_romType7MenuState)  == 0x15 &&
+                prior(low4(mem_romType7RNG)) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType7MenuState) == 0x00 &&
+                      dword(mem_romType7EpisodePointer) == 0x00000000))
+}
+
+function romType7LeaderboardCancel(series, episode) {
+    return (dword(mem_romType7SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType7MenuState) == 0x1A &&
+                          never(dword(mem_romType7MenuState) == 0x00 &&
+                           prev(dword(mem_romType7EpisodePointer)) != 0x00000000 &&
+                                dword(mem_romType7EpisodePointer)  == 0x00000000))) ||
+           (prev(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType7EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType7Input + 0x01)
+          + bit1(mem_romType7Input + 0x01) >= 1 &&
+            bit(4, mem_romType7Input)
+          + bit(5, mem_romType7Input)
+          + bit(6, mem_romType7Input)
+          + bit(7, mem_romType7Input) == 1) ||
+          (dword(mem_romType7MenuState) == 0x00 &&
+           dword(mem_romType7EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 //--------------------------------------------------
@@ -5561,20 +5770,30 @@ achievement(
 achievement(
     title = getAchievementTitle("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), type = "progression",
     description = getAchievementDescription("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"),
-    id = 0, badge = "80", points = 4,
-    trigger = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
-              (romType6CorrectAnswer(6, 0, 7) ||
-               romType6CorrectAnswer(6, 1, 6) ||
-               romType6CorrectAnswer(6, 2, 5) ||
-               romType6CorrectAnswer(6, 3, 4) ||
-               romType6CorrectAnswer(6, 4, 4) ||
-               romType6CorrectAnswer(6, 5, 5))
+    id = 568208, badge = "645989", points = 4,
+    trigger = (unless(!isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050)) &&
+                romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                (romType6CorrectAnswer(6, 0, 7) ||
+                 romType6CorrectAnswer(6, 1, 6) ||
+                 romType6CorrectAnswer(6, 2, 5) ||
+                 romType6CorrectAnswer(6, 3, 4) ||
+                 romType6CorrectAnswer(6, 4, 4) ||
+                 romType6CorrectAnswer(6, 5, 5))) ||
+              (unless(!isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C)) &&
+                romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                (romType7CorrectAnswer(6, 0, 7) ||
+                 romType7CorrectAnswer(6, 1, 6) ||
+                 romType7CorrectAnswer(6, 2, 5) ||
+                 romType7CorrectAnswer(6, 3, 4) ||
+                 romType7CorrectAnswer(6, 4, 4) ||
+                 romType7CorrectAnswer(6, 5, 5)))
             )
             leaderboard(
                  id = 8397,
                  title       = getQuestionTitle(4601), 
                  description = getQuestionDescription(4601),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 0),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
                  submit = always_false(), 
@@ -5585,7 +5804,8 @@ achievement(
                  id = 8398,
                  title       = getQuestionTitle(4602), 
                  description = getQuestionDescription(4602),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 1),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
                  submit = always_false(), 
@@ -5596,7 +5816,8 @@ achievement(
                  id = 8457,
                  title       = getQuestionTitle(4603), 
                  description = getQuestionDescription(4603),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 2),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
                  submit = always_false(), 
@@ -5607,7 +5828,8 @@ achievement(
                  id = 8458,
                  title       = getQuestionTitle(4604), 
                  description = getQuestionDescription(4604),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 3),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
                  submit = always_false(), 
@@ -5618,7 +5840,8 @@ achievement(
                  id = 8465,
                  title       = getQuestionTitle(4605), 
                  description = getQuestionDescription(4605),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 4),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
                  submit = always_false(), 
@@ -5629,9 +5852,82 @@ achievement(
                  id = 8466,
                  title       = getQuestionTitle(4606), 
                  description = getQuestionDescription(4606),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                           romType6LeaderboardQuestionSelect(6, 5),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149828,
+                 title       = getQuestionTitle(4651), 
+                 description = getQuestionDescription(4651),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 0),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149829,
+                 title       = getQuestionTitle(4652), 
+                 description = getQuestionDescription(4652),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 1),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149830,
+                 title       = getQuestionTitle(4653), 
+                 description = getQuestionDescription(4653),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 2),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149831,
+                 title       = getQuestionTitle(4654), 
+                 description = getQuestionDescription(4654),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 3),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149832,
+                 title       = getQuestionTitle(4655), 
+                 description = getQuestionDescription(4655),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 4),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149833,
+                 title       = getQuestionTitle(4656), 
+                 description = getQuestionDescription(4656),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 5),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -5640,20 +5936,30 @@ achievement(
 achievement(
     title = getAchievementTitle("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), type = "progression",
     description = getAchievementDescription("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"),
-    id = 0, badge = "80", points = 4,
-    trigger = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
-              (romType6CorrectAnswer(6, 0, 7) ||
-               romType6CorrectAnswer(6, 1, 4) ||
-               romType6CorrectAnswer(6, 2, 4) ||
-               romType6CorrectAnswer(6, 3, 7) ||
-               romType6CorrectAnswer(6, 4, 6) ||
-               romType6CorrectAnswer(6, 5, 4))
+    id = 568209, badge = "645990", points = 4,
+    trigger = (unless(!isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050)) &&
+                romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                (romType6CorrectAnswer(6, 0, 7) ||
+                 romType6CorrectAnswer(6, 1, 4) ||
+                 romType6CorrectAnswer(6, 2, 4) ||
+                 romType6CorrectAnswer(6, 3, 7) ||
+                 romType6CorrectAnswer(6, 4, 6) ||
+                 romType6CorrectAnswer(6, 5, 4))) ||
+              (unless(!isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C)) &&
+                romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                (romType7CorrectAnswer(6, 0, 7) ||
+                 romType7CorrectAnswer(6, 1, 4) ||
+                 romType7CorrectAnswer(6, 2, 4) ||
+                 romType7CorrectAnswer(6, 3, 7) ||
+                 romType7CorrectAnswer(6, 4, 6) ||
+                 romType7CorrectAnswer(6, 5, 4)))
             )
             leaderboard(
                  id = 8473,
                  title       = getQuestionTitle(4701), 
                  description = getQuestionDescription(4701),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 0),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
                  submit = always_false(), 
@@ -5664,7 +5970,8 @@ achievement(
                  id = 8474,
                  title       = getQuestionTitle(4702), 
                  description = getQuestionDescription(4702),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 1),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
                  submit = always_false(), 
@@ -5675,7 +5982,8 @@ achievement(
                  id = 8481,
                  title       = getQuestionTitle(4703), 
                  description = getQuestionDescription(4703),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 2),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
                  submit = always_false(), 
@@ -5686,7 +5994,8 @@ achievement(
                  id = 8482,
                  title       = getQuestionTitle(4704), 
                  description = getQuestionDescription(4704),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 3),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
                  submit = always_false(), 
@@ -5697,7 +6006,8 @@ achievement(
                  id = 8491,
                  title       = getQuestionTitle(4705), 
                  description = getQuestionDescription(4705),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 4),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
                  submit = always_false(), 
@@ -5708,9 +6018,82 @@ achievement(
                  id = 8492,
                  title       = getQuestionTitle(4706), 
                  description = getQuestionDescription(4706),
-                 start  = romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
+                 start  = isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050) &&
+                          romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                           romType6LeaderboardQuestionSelect(6, 5),
                  cancel = romType6LeaderboardCancel("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149834,
+                 title       = getQuestionTitle(4751), 
+                 description = getQuestionDescription(4751),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 0),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149835,
+                 title       = getQuestionTitle(4752), 
+                 description = getQuestionDescription(4752),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 1),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149836,
+                 title       = getQuestionTitle(4753), 
+                 description = getQuestionDescription(4753),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 2),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149837,
+                 title       = getQuestionTitle(4754), 
+                 description = getQuestionDescription(4754),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 3),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149838,
+                 title       = getQuestionTitle(4755), 
+                 description = getQuestionDescription(4755),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 4),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149839,
+                 title       = getQuestionTitle(4756), 
+                 description = getQuestionDescription(4756),
+                 start  = isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) &&
+                          romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                          romType7LeaderboardQuestionSelect(6, 5),
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
