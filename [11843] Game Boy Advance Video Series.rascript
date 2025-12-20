@@ -11,6 +11,13 @@ mem_romType1VideoPlaytime   = 0x00687C
 mem_romType1CurrentChapter  = 0x006888
 mem_romType1Input           = 0x007EC4
 mem_romType1RNG             = 0x007EF0
+    // All Grown Up! - Volume 1
+    // Dora the Explorer - Volume 1
+    // Nicktoons Collection - Volume 1
+    // SpongeBob SquarePants - Volume 1
+    // SpongeBob SquarePants - Volume 2
+    // The Fairly OddParents! - Volume 1
+    // The Fairly OddParents! - Volume 2
 
 mem_romType2EpisodePointer  = 0x006828
 mem_romType2VideoState      = 0x006818
@@ -21,6 +28,8 @@ mem_romType2Input           = 0x007EBC
 mem_romType2StateLoaded     = 0x007E80
 mem_romType2MenuState       = 0x007EA4
 mem_romType2RNG             = 0x0068D0
+    // Nicktoons Collection - Volume 2
+    // SpongeBob SquarePants - Volume 3
 
 mem_romType3EpisodePointer  = 0x006820
 mem_romType3VideoState      = 0x006810
@@ -31,6 +40,7 @@ mem_romType3Input           = 0x007EC8
 mem_romType3StateLoaded     = 0x0075A0
 mem_romType3MenuState       = 0x007EB4
 mem_romType3RNG             = 0x00659C
+    // The Adventures of Jimmy Neutron: Boy Genius - Volume 1
 
 mem_romType4EpisodePointer  = 0x006690
 mem_romType4VideoState      = 0x046A5C
@@ -40,6 +50,7 @@ mem_romType4CurrentChapter  = 0x006704
 mem_romType4Input           = 0x007EA8
 mem_romType4MenuState       = 0x007E8C
 mem_romType4RNG             = 0x007F98
+    // Nicktoons Collection - Volume 3
 
 mem_romType5EpisodePointer  = 0x007D54
 mem_romType5VideoState      = 0x006EA4
@@ -47,6 +58,10 @@ mem_romType5VideoPlaytime   = 0x007D74
 mem_romType5Input           = 0x007DD8
 mem_romType5MenuState       = 0x007D80
 mem_romType5RNG             = 0x006E80
+    // Pokémon - Volume 1
+    // Pokémon - Volume 2
+    // Pokémon - Volume 3
+    // Pokémon - Volume 4
 
 mem_romType6EpisodePointer  = 0x006870
 mem_romType6VideoState      = 0x006860
@@ -56,6 +71,7 @@ mem_romType6CurrentChapter  = 0x006890
 mem_romType6Input           = 0x007EC8
 mem_romType6MenuState       = 0x007EB4
 mem_romType6RNG             = 0x007EF0
+    // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (EN)
 
 mem_romType7EpisodePointer  = 0x00667C
 mem_romType7VideoState      = 0x016804
@@ -65,7 +81,17 @@ mem_romType7CurrentChapter  = 0x0066FC
 mem_romType7Input           = 0x007EA4
 mem_romType7MenuState       = 0x007E8C
 mem_romType7RNG             = 0x007F98
+    // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (FR)
 
+mem_romType8EpisodePointer  = 0x0066E4
+mem_romType8VideoState      = 0x0066D4
+mem_romType8SceneCountdown  = 0x00673C
+mem_romType8VideoPlaytime   = 0x006744
+mem_romType8CurrentChapter  = 0x006754
+mem_romType8Input           = 0x007EC0
+mem_romType8MenuState       = 0x007EAC
+mem_romType8RNG             = 0x005C95
+    // Dragon Ball GT - Volume 1
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -125,6 +151,22 @@ episodes = [
         0x08F43914, // Episode Pointer
         0x00000005, // Chapters
         0x00003EC0, // Total Playtime
+    ],
+    [
+        "Dragon Ball GT",
+        "A Grand Problem",
+        "Dragon Ball GT - Volume 1",
+        0x0848B5A8, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003D75, // Total Playtime
+    ],
+    [
+        "Dragon Ball GT",
+        "Pan's Gambit",
+        "Dragon Ball GT - Volume 1",
+        0x093D56C0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000035CA, // Total Playtime
     ],
     [
         "Pokémon: Johto League Champions",
@@ -2354,6 +2396,102 @@ questions = [
             "Serenity"
     ],
     [
+        4801,
+        "Who was training with Goku at the Lookout?",
+            "Trunks",
+            "Uub",
+            "Pan",
+            "Gohan"
+    ],
+    [
+        4802,
+        "What color were the stars of the Dragon Balls?",
+            "Gold",
+            "White",
+            "Red",
+            "Black"
+    ],
+    [
+        4803,
+        "Who summoned Ultimate Shenron by using the Dragon Balls?",
+            "Goku",
+            "Dende",
+            "Pilaf",
+            "Trunks"
+    ],
+    [
+        4804,
+        "What planet cost was paid when Ultimate Shenron granted the wish?",
+            "Drought",
+            "Explosion",
+            "Earthquakes",
+            "Shrinking"
+    ],
+    [
+        4805,
+        "Who was not planned to be in the space ship when it launched?",
+            "Goku",
+            "Pan",
+            "Trunks",
+            "Goten"
+    ],
+    [
+        4806,
+        "What was the model number of Giru?",
+            "D1518",
+            "B1020",
+            "G1103",
+            "T2006"
+    ],
+    [
+        4901,
+        "As what did Pan disguise herself to enter the enemy base?",
+            "Flowers",
+            "Robot",
+            "Engineer",
+            "Mailman"
+    ],
+    [
+        4902,
+        "What color was the robot Pan disguised herself as?",
+            "Yellow",
+            "Blue",
+            "Pink",
+            "Green"
+    ],
+    [
+        4903,
+        "Who had an impossible power level according to the computer?",
+            "Goku",
+            "Giru",
+            "Trunks",
+            "Pan"
+    ],
+    [
+        4904,
+        "What was the name of the scientist who created all the robots?",
+            "Dr. Gero",
+            "Dr. Brief",
+            "Dr. Myuu",
+            "Dr. Hedo"
+    ],
+    [
+        4905,
+        "Who escaped the laboratory capsule with pure power of their own?",
+            "Pan",
+            "Trunks",
+            "Giru",
+            "Goku"
+    ],
+    [
+        4906,
+        "What did the Sigma Force do in the preview of the next episode?",
+            "Defeat Goku",
+            "Explode",
+            "Fly Away",
+            "Combine"
+    ],
+    [
         0001,
         "?",
             "",
@@ -2912,6 +3050,74 @@ function romType7LeaderboardCancel(series, episode) {
           + bit(7, mem_romType7Input) == 1) ||
           (dword(mem_romType7MenuState) == 0x00 &&
            dword(mem_romType7EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+
+
+function romType8VideoStarted(series, episode) {
+    return once(dword(mem_romType8EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType8VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType8VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType8CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType8SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType8VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType8MenuState) == 0x18) &&
+           never(dword(mem_romType8MenuState) == 0x15) &&
+           never(dword(mem_romType8VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType8VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType8MenuState) == 0x13 &&
+                 prev(dword(mem_romType8VideoState)) != 0x04 &&
+                 prev(dword(mem_romType8VideoState)) != 0x08 &&
+                      dword(mem_romType8VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType8MenuState) == 0x18)) &&
+           never(dword(mem_romType8MenuState) == 0x00 &&
+                 dword(mem_romType8EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType8CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType8VideoState) == 0x08 &&
+                             prev(dword(mem_romType8MenuState)) == 0x15 &&
+                                  dword(mem_romType8MenuState)  == 0x13 &&
+                             low4(mem_romType8RNG) % totalQuestion == currentQuestion &&
+                             never(dword(mem_romType8MenuState) == 0x15 &&
+                                   dword(mem_romType8VideoPlaytime) == 0x00))) &&
+           trigger_when(dword(mem_romType8MenuState) == 0x18) &&
+           trigger_when(bit0(mem_romType8Input + 0x01)
+                      + bit1(mem_romType8Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType8Input) > prev(bit(index % 4 + 4, mem_romType8Input))) &&
+           never(once(dword(mem_romType8MenuState) == 0x18 &&
+                bit0(mem_romType8Input + 0x01)
+              + bit1(mem_romType8Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType8Input)
+              + bit((index + 2) % 4 + 4, mem_romType8Input)
+              + bit((index + 3) % 4 + 4, mem_romType8Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType8Input)
+                      + bit((index + 2) % 4 + 4, mem_romType8Input)
+                      + bit((index + 3) % 4 + 4, mem_romType8Input) == 0)
+}
+
+function romType8LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType8MenuState) == 0x18 &&
+           once(dword(mem_romType8VideoState) == 0x08 &&
+                prev(dword(mem_romType8MenuState)) == 0x15 &&
+                     dword(mem_romType8MenuState)  == 0x13 &&
+                low4(mem_romType8RNG) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType8MenuState) == 0x15))
+}
+
+function romType8LeaderboardCancel(series, episode) {
+    return (dword(mem_romType8SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType8MenuState) == 0x18 &&
+                          never(dword(mem_romType8MenuState) != prev(dword(mem_romType8MenuState)) &&
+                                dword(mem_romType8MenuState) == 0x15))) ||
+           (dword(mem_romType8MenuState) == 0x15) ||
+           (bit0(mem_romType8Input + 0x01)
+          + bit1(mem_romType8Input + 0x01) >= 1 &&
+            bit(4, mem_romType8Input)
+          + bit(5, mem_romType8Input)
+          + bit(6, mem_romType8Input)
+          + bit(7, mem_romType8Input) == 1)
 }
 
 //--------------------------------------------------
@@ -6094,6 +6300,164 @@ achievement(
                           romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 5),
                  cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Dragon Ball GT", "A Grand Problem"), type = "progression",
+    description = getAchievementDescription("Dragon Ball GT", "A Grand Problem"),
+    id = 568604, badge = "646535", points = 4,
+    trigger = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+              (romType8CorrectAnswer(6, 0, 5) ||
+               romType8CorrectAnswer(6, 1, 4) ||
+               romType8CorrectAnswer(6, 2, 7) ||
+               romType8CorrectAnswer(6, 3, 5) ||
+               romType8CorrectAnswer(6, 4, 5) ||
+               romType8CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 149895,
+                 title       = getQuestionTitle(4801), 
+                 description = getQuestionDescription(4801),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 0),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149896,
+                 title       = getQuestionTitle(4802), 
+                 description = getQuestionDescription(4802),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 1),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149897,
+                 title       = getQuestionTitle(4803), 
+                 description = getQuestionDescription(4803),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 2),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149898,
+                 title       = getQuestionTitle(4804), 
+                 description = getQuestionDescription(4804),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 3),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149899,
+                 title       = getQuestionTitle(4805), 
+                 description = getQuestionDescription(4805),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 4),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149900,
+                 title       = getQuestionTitle(4806), 
+                 description = getQuestionDescription(4806),
+                 start  = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
+                          romType8LeaderboardQuestionSelect(6, 5),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "A Grand Problem"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Dragon Ball GT", "Pan's Gambit"), type = "progression",
+    description = getAchievementDescription("Dragon Ball GT", "Pan's Gambit"),
+    id = 568605, badge = "646536", points = 4,
+    trigger = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+              (romType8CorrectAnswer(6, 0, 6) ||
+               romType8CorrectAnswer(6, 1, 7) ||
+               romType8CorrectAnswer(6, 2, 6) ||
+               romType8CorrectAnswer(6, 3, 7) ||
+               romType8CorrectAnswer(6, 4, 4) ||
+               romType8CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 149901,
+                 title       = getQuestionTitle(4901), 
+                 description = getQuestionDescription(4901),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 0),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149902,
+                 title       = getQuestionTitle(4902), 
+                 description = getQuestionDescription(4902),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 1),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149903,
+                 title       = getQuestionTitle(4903), 
+                 description = getQuestionDescription(4903),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 2),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149904,
+                 title       = getQuestionTitle(4904), 
+                 description = getQuestionDescription(4904),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 3),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149905,
+                 title       = getQuestionTitle(4905), 
+                 description = getQuestionDescription(4905),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 4),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 149906,
+                 title       = getQuestionTitle(4906), 
+                 description = getQuestionDescription(4906),
+                 start  = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
+                          romType8LeaderboardQuestionSelect(6, 5),
+                 cancel = romType8LeaderboardCancel("Dragon Ball GT", "Pan's Gambit"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
