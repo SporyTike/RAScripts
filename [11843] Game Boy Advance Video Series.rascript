@@ -92,6 +92,16 @@ mem_romType8Input           = 0x007EC0
 mem_romType8MenuState       = 0x007EAC
 mem_romType8RNG             = 0x005C95
     // Dragon Ball GT - Volume 1
+    
+mem_romType9EpisodePointer  = 0x006690
+mem_romType9VideoState      = 0x046C68
+mem_romType9SceneCountdown  = 0x0066F8
+mem_romType9VideoPlaytime   = 0x006700
+mem_romType9CurrentChapter  = 0x006708
+mem_romType9Input           = 0x007EA4
+mem_romType9MenuState       = 0x007E8C
+    // Super Robot Monkey Team Hyper Force Go! - Volume 1
+    
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -230,7 +240,7 @@ episodes = [
         "Pokémon - Volume 4",
         0x091E737C, // Episode Pointer
         0x00000001, // Chapters
-        0x00002898, // Total Playtime
+        0x00002698, // Total Playtime
     ],
     [
         "Rocket Power",
@@ -367,6 +377,22 @@ episodes = [
         0x08EFC690, // Episode Pointer
         0x00000005, // Chapters
         0x00002113, // Total Playtime
+    ],
+    [
+        "Super Robot Monkey Team Hyper Force Go!",
+        "Depths of Fear",
+        "Super Robot Monkey Team Hyper Force Go! - Volume 1",
+        0x08000EF8, // Episode Pointer
+        0x00000005, // Chapters
+        0x000037F6, // Total Playtime
+    ],
+    [
+        "Super Robot Monkey Team Hyper Force Go!",
+        "Planetoid Q",
+        "Super Robot Monkey Team Hyper Force Go! - Volume 1",
+        0x08FAC748, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003805, // Total Playtime
     ],
     [
         "The Adventures of Jimmy Neutron: Boy Genius",
