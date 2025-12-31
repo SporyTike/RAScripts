@@ -103,6 +103,16 @@ mem_romType9MenuState       = 0x007E8C
 mem_romType9RNG             = 0x007F98
     // Super Robot Monkey Team Hyper Force Go! - Volume 1
     
+mem_romType10EpisodePointer  = 0x0066A4
+mem_romType10VideoState      = 0x046218
+mem_romType10SceneCountdown  = 0x0066FC
+mem_romType10VideoPlaytime   = 0x006704
+mem_romType10CurrentChapter  = 0x00670C
+mem_romType10Input           = 0x007EB0
+mem_romType10MenuState       = 0x007E94
+mem_romType10RNG             = 0x007F98
+    // Disney Channel Collection - Volume 1
+    
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -178,6 +188,22 @@ episodes = [
         0x093D56C0, // Episode Pointer
         0x00000005, // Chapters
         0x000035CA, // Total Playtime
+    ],
+    [
+        "Kim Possible",
+        "Ron the Man",
+        "Disney Channel Collection - Volume 1",
+        0x09677028, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003E64, // Total Playtime
+    ],
+    [
+        "Lilo & Stitch: The Series",
+        "Slushy",
+        "Disney Channel Collection - Volume 1",
+        0x08486EB0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003E11, // Total Playtime
     ],
     [
         "Pokémon: Johto League Champions",
@@ -2615,6 +2641,102 @@ questions = [
             "Mintento"
     ],
     [
+        5201,
+        "Which unsigned certificate did Ron show for his history project?",
+            "Birth",
+            "Bar Mitzvah",
+            "Adoption",
+            "Immigration"
+    ],
+    [
+        5202,
+        "What was the name of the company Jack Hench was owning?",
+            "Henterprise",
+            "HenchCo",
+            "HeCorp",
+            "HenTech"
+    ],
+    [
+        5203,
+        "Who stole a whole batch of molecular muscle enhancers?",
+            "Shego",
+            "Prof. Dementor",
+            "Jack Hench",
+            "Dr. Drakken"
+    ],
+    [
+        5204,
+        "Where did Wade track Dr. Drakken and his minions?",
+            "Atlantic City",
+            "New Orleans",
+            "Chicago",
+            "Las Vegas"
+    ],
+    [
+        5205,
+        "Who did Ron and Kim unexpectedly meet in the hotel resort?",
+            "Rabbi Katz",
+            "Mr. Barkin",
+            "Wade",
+            "Jack Hench"
+    ],
+    [
+        5206,
+        "Who shut off the Pan-Dimensional Vortex Inducer after activation?",
+            "Kim",
+            "Shego",
+            "Dr. Drakken",
+            "Ron"
+    ],
+    [
+        5301,
+        "What did Lilo ask Stitch to get outside the airport?",
+            "Milkshake",
+            "Ice Cream",
+            "Coconut Juice",
+            "Soda"
+    ],
+    [
+        5302,
+        "What did Wendy think snow was before Lilo explained it to him?",
+            "Aliens",
+            "Cotton Candy",
+            "Clouds",
+            "Ash"
+    ],
+    [
+        5303,
+        "What did Lilo use at first to keep Stitch warm in the snow?",
+            "Scarf",
+            "Coat",
+            "Cocoa",
+            "Toast"
+    ],
+    [
+        5304,
+        "Which character was not recreated as a snow sculpture?",
+            "Lilo",
+            "Jumba",
+            "Gantu",
+            "Mertle"
+    ],
+    [
+        5305,
+        "What was the name of the experiment which fought against Slushy?",
+            "Splodyhead",
+            "Cauldron",
+            "Kernel",
+            "Dryheat"
+    ],
+    [
+        5306,
+        "What became Slushy's new job after Gantu's plan was stopped?",
+            "Snow Machine",
+            "Ice Dispenser",
+            "Icerink Creator",
+            "Air Conditioner"
+    ],
+    [
         0001,
         "?",
             "",
@@ -3361,6 +3483,85 @@ function romType9LeaderboardCancel(series, episode) {
           + bit(7, mem_romType9Input) == 1) ||
           (dword(mem_romType9MenuState) == 0x00 &&
            dword(mem_romType9EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+
+
+function romType10Cartridge() {
+    return isCartridge(0xE5801000, 0xE5801004, 0xE12FFF1E, 0xE5801000) && dword(0x0384) == 0xEB0009C3
+}
+
+function romType10VideoStarted(series, episode) {
+    return unless(!romType10Cartridge()) &&
+           once(dword(mem_romType10EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType10VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType10VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType10CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType10SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType10VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType10MenuState) == 0x1A) &&
+           never(prev(dword(mem_romType10EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType10EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType10VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType10VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType10MenuState) == 0x15 &&
+                 prev(dword(mem_romType10VideoState)) != 0x04 &&
+                 prev(dword(mem_romType10VideoState)) != 0x08 &&
+                      dword(mem_romType10VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType10MenuState) == 0x1A)) &&
+           never(dword(mem_romType10MenuState) == 0x00 &&
+                 dword(mem_romType10EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType10CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType10EpisodePointer) == 0x00 &&
+                             prev(dword(mem_romType10MenuState)) == 0x00 &&
+                                  dword(mem_romType10MenuState)  == 0x15 &&
+                prior(low4(mem_romType10RNG)) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType10MenuState) == 0x00 &&
+                      dword(mem_romType10EpisodePointer) == 0x00000000))) &&
+           trigger_when(dword(mem_romType10MenuState) == 0x1A) &&
+           trigger_when(bit0(mem_romType10Input + 0x01)
+                      + bit1(mem_romType10Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType10Input) > prev(bit(index % 4 + 4, mem_romType10Input))) &&
+           never(once(dword(mem_romType10MenuState) == 0x1A &&
+                bit0(mem_romType10Input + 0x01)
+              + bit1(mem_romType10Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType10Input)
+              + bit((index + 2) % 4 + 4, mem_romType10Input)
+              + bit((index + 3) % 4 + 4, mem_romType10Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType10Input)
+                      + bit((index + 2) % 4 + 4, mem_romType10Input)
+                      + bit((index + 3) % 4 + 4, mem_romType10Input) == 0)
+}
+
+function romType10LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType10MenuState)  == 0x1A &&
+           once(dword(mem_romType10EpisodePointer) == 0x00 &&
+                prev(dword(mem_romType10MenuState)) == 0x00 &&
+                     dword(mem_romType10MenuState)  == 0x15 &&
+                prior(low4(mem_romType10RNG)) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType10MenuState) == 0x00 &&
+                      dword(mem_romType10EpisodePointer) == 0x00000000))
+}
+
+function romType10LeaderboardCancel(series, episode) {
+    return (dword(mem_romType10SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType10MenuState) == 0x1A &&
+                          never(dword(mem_romType10MenuState) == 0x00 &&
+                           prev(dword(mem_romType10EpisodePointer)) != 0x00000000 &&
+                                dword(mem_romType10EpisodePointer)  == 0x00000000))) ||
+           (prev(dword(mem_romType10EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType10EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType10Input + 0x01)
+          + bit1(mem_romType10Input + 0x01) >= 1 &&
+            bit(4, mem_romType10Input)
+          + bit(5, mem_romType10Input)
+          + bit(6, mem_romType10Input)
+          + bit(7, mem_romType10Input) == 1) ||
+          (dword(mem_romType10MenuState) == 0x00 &&
+           dword(mem_romType10EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 //--------------------------------------------------
@@ -6760,7 +6961,7 @@ achievement(
 achievement(
     title = getAchievementTitle("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"), type = "progression",
     description = getAchievementDescription("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"),
-    id = 0, badge = "648153", points = 4,
+    id = 570679, badge = "648230", points = 4,
     trigger = romType9VideoStarted("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q") &&
               (romType9CorrectAnswer(6, 0, 7) ||
                romType9CorrectAnswer(6, 1, 5) ||
@@ -6814,7 +7015,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 0,
+                 id = 150531,
                  title       = getQuestionTitle(5105), 
                  description = getQuestionDescription(5105),
                  start  = romType9VideoStarted("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q") &&
@@ -6825,7 +7026,7 @@ achievement(
                  format = "Frames"
             )
             leaderboard(
-                 id = 0,
+                 id = 150532,
                  title       = getQuestionTitle(5106), 
                  description = getQuestionDescription(5106),
                  start  = romType9VideoStarted("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q") &&
@@ -6836,3 +7037,160 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Kim Possible", "Ron the Man"), type = "progression",
+    description = getAchievementDescription("Kim Possible", "Ron the Man"),
+    id = 570767, badge = "648366", points = 4,
+    trigger = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+              (romType10CorrectAnswer(6, 0, 5) ||
+               romType10CorrectAnswer(6, 1, 5) ||
+               romType10CorrectAnswer(6, 2, 6) ||
+               romType10CorrectAnswer(6, 3, 4) ||
+               romType10CorrectAnswer(6, 4, 6) ||
+               romType10CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 150536,
+                 title       = getQuestionTitle(5201), 
+                 description = getQuestionDescription(5201),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 0),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150537,
+                 title       = getQuestionTitle(5202), 
+                 description = getQuestionDescription(5202),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 1),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150538,
+                 title       = getQuestionTitle(5203), 
+                 description = getQuestionDescription(5203),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 2),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150539,
+                 title       = getQuestionTitle(5204), 
+                 description = getQuestionDescription(5204),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 3),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150540,
+                 title       = getQuestionTitle(5205), 
+                 description = getQuestionDescription(5205),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 4),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150541,
+                 title       = getQuestionTitle(5206), 
+                 description = getQuestionDescription(5206),
+                 start  = romType10VideoStarted("Kim Possible", "Ron the Man") &&
+                          romType10LeaderboardQuestionSelect(6, 5),
+                 cancel = romType10LeaderboardCancel("Kim Possible", "Ron the Man"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Lilo & Stitch: The Series", "Slushy"), type = "progression",
+    description = getAchievementDescription("Lilo & Stitch: The Series", "Slushy"),
+    id = 570770, badge = "648370", points = 4,
+    trigger = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+              (romType10CorrectAnswer(6, 0, 6) ||
+               romType10CorrectAnswer(6, 1, 6) ||
+               romType10CorrectAnswer(6, 2, 4) ||
+               romType10CorrectAnswer(6, 3, 5) ||
+               romType10CorrectAnswer(6, 4, 6) ||
+               romType10CorrectAnswer(6, 5, 5))
+            )
+            leaderboard(
+                 id = 150552,
+                 title       = getQuestionTitle(5301), 
+                 description = getQuestionDescription(5301),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 0),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150553,
+                 title       = getQuestionTitle(5302), 
+                 description = getQuestionDescription(5302),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 1),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150554,
+                 title       = getQuestionTitle(5303), 
+                 description = getQuestionDescription(5303),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 2),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150555,
+                 title       = getQuestionTitle(5304), 
+                 description = getQuestionDescription(5304),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 3),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150556,
+                 title       = getQuestionTitle(5305), 
+                 description = getQuestionDescription(5305),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 4),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150557,
+                 title       = getQuestionTitle(5306), 
+                 description = getQuestionDescription(5306),
+                 start  = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
+                          romType10LeaderboardQuestionSelect(6, 5),
+                 cancel = romType10LeaderboardCancel("Lilo & Stitch: The Series", "Slushy"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
