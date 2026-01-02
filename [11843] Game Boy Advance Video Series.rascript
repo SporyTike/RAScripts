@@ -10,12 +10,14 @@ mem_romType1SceneCountdown  = 0x006874
 mem_romType1VideoPlaytime   = 0x00687C
 mem_romType1CurrentChapter  = 0x006888
 mem_romType1Input           = 0x007EC4
+mem_romType1MenuState       = 0x007EAC
 mem_romType1RNG             = 0x007EF0
     // All Grown Up! - Volume 1
     // Dora the Explorer - Volume 1
     // Nicktoons Collection - Volume 1
     // SpongeBob SquarePants - Volume 1
     // SpongeBob SquarePants - Volume 2
+    // Strawberry Shortcake - Volume 1
     // The Fairly OddParents! - Volume 1
     // The Fairly OddParents! - Volume 2
 
@@ -72,8 +74,9 @@ mem_romType6Input           = 0x007EC8
 mem_romType6MenuState       = 0x007EB4
 mem_romType6RNG             = 0x007EF0
     // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (EN)
+    // Teenage Mutant Ninja Turtles: Things Change - Volume 1 (EN)
 
-mem_romType7EpisodePointer  = 0x00667C
+mem_romType7EpisodePointer  = 0x006694
 mem_romType7VideoState      = 0x016804
 mem_romType7SceneCountdown  = 0x0066EC
 mem_romType7VideoPlaytime   = 0x0066F4
@@ -82,6 +85,7 @@ mem_romType7Input           = 0x007EA4
 mem_romType7MenuState       = 0x007E8C
 mem_romType7RNG             = 0x007F98
     // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (FR)
+    // Tortues Ninja - Volume 1 (FR)
 
 mem_romType8EpisodePointer  = 0x0066E4
 mem_romType8VideoState      = 0x0066D4
@@ -132,6 +136,7 @@ episodes = [
         0x08021CDC, // Episode Pointer
         0x00000005, // Chapters
         0x00003DEB, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "All Grown Up!",
@@ -140,6 +145,7 @@ episodes = [
         0x08F661FC, // Episode Pointer
         0x00000005, // Chapters
         0x00003DF9, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "All Grown Up!",
@@ -148,6 +154,7 @@ episodes = [
         0x08022420, // Episode Pointer
         0x00000005, // Chapters
         0x00003FF5, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "Danny Phantom",
@@ -156,6 +163,7 @@ episodes = [
         0x08000EF8, // Episode Pointer
         0x00000005, // Chapters
         0x00004105, // Total Playtime
+        04,         // Rom-Type 4
     ],
     [
         "Dora the Explorer",
@@ -164,6 +172,7 @@ episodes = [
         0x08020CAC, // Episode Pointer
         0x00000005, // Chapters
         0x00003E5F, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "Dora the Explorer",
@@ -172,6 +181,7 @@ episodes = [
         0x08F43914, // Episode Pointer
         0x00000005, // Chapters
         0x00003EC0, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "Dragon Ball GT",
@@ -180,6 +190,7 @@ episodes = [
         0x0848B5A8, // Episode Pointer
         0x00000005, // Chapters
         0x00003D75, // Total Playtime
+        08,         // Rom-Type 8
     ],
     [
         "Dragon Ball GT",
@@ -188,6 +199,7 @@ episodes = [
         0x093D56C0, // Episode Pointer
         0x00000005, // Chapters
         0x000035CA, // Total Playtime
+        08,         // Rom-Type 8
     ],
     [
         "Kim Possible",
@@ -196,6 +208,7 @@ episodes = [
         0x09677028, // Episode Pointer
         0x00000005, // Chapters
         0x00003E64, // Total Playtime
+        10,         // Rom-Type 10
     ],
     [
         "Lilo & Stitch: The Series",
@@ -204,6 +217,7 @@ episodes = [
         0x08486EB0, // Episode Pointer
         0x00000005, // Chapters
         0x00003E11, // Total Playtime
+        10,         // Rom-Type 10
     ],
     [
         "Pokémon: Johto League Champions",
@@ -212,6 +226,7 @@ episodes = [
         0x0801FC1C, // Episode Pointer
         0x00000001, // Chapters
         0x000025DE, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Master Quest",
@@ -220,6 +235,7 @@ episodes = [
         0x08F4ADF4, // Episode Pointer
         0x00000001, // Chapters
         0x000025F9, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Master Quest",
@@ -228,6 +244,7 @@ episodes = [
         0x0801FAC0, // Episode Pointer
         0x00000001, // Chapters
         0x0000260A, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Master Quest",
@@ -236,6 +253,7 @@ episodes = [
         0x08FA8DF8, // Episode Pointer
         0x00000001, // Chapters
         0x000025DF, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Indigo League",
@@ -244,6 +262,7 @@ episodes = [
         0x0801F748, // Episode Pointer
         0x00000001, // Chapters
         0x000025F7, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Indigo League",
@@ -252,6 +271,7 @@ episodes = [
         0x08F845A0, // Episode Pointer
         0x00000001, // Chapters
         0x000025F9, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Indigo League",
@@ -260,6 +280,7 @@ episodes = [
         0x0801FE98, // Episode Pointer
         0x00000001, // Chapters
         0x00002869, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Pokémon: Indigo League",
@@ -268,6 +289,7 @@ episodes = [
         0x091E737C, // Episode Pointer
         0x00000001, // Chapters
         0x00002698, // Total Playtime
+        05,         // Rom-Type 5
     ],
     [
         "Rocket Power",
@@ -276,6 +298,7 @@ episodes = [
         0x08289480, // Episode Pointer
         0x00000005, // Chapters
         0x00002153, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -284,6 +307,7 @@ episodes = [
         0x080225B0, // Episode Pointer
         0x00000005, // Chapters
         0x00001F00, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -292,6 +316,7 @@ episodes = [
         0x0878A2E0, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF9, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -300,6 +325,7 @@ episodes = [
         0x08F9FF40, // Episode Pointer
         0x00000005, // Chapters
         0x00001EFF, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -308,6 +334,7 @@ episodes = [
         0x09791CA0, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF9, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -316,6 +343,7 @@ episodes = [
         0x08022640, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF9, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -324,6 +352,7 @@ episodes = [
         0x08818EB0, // Episode Pointer
         0x00000005, // Chapters
         0x00001EFB, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -332,6 +361,7 @@ episodes = [
         0x08FBB398, // Episode Pointer
         0x00000005, // Chapters
         0x00001EFF, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -340,6 +370,7 @@ episodes = [
         0x096FF978, // Episode Pointer
         0x00000005, // Chapters
         0x00001F02, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -348,6 +379,7 @@ episodes = [
         0x0925B500, // Episode Pointer
         0x00000005, // Chapters
         0x00001F08, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -356,6 +388,7 @@ episodes = [
         0x099E1A94, // Episode Pointer
         0x00000005, // Chapters
         0x00001F47, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -364,6 +397,7 @@ episodes = [
         0x0826EFEC, // Episode Pointer
         0x00000005, // Chapters
         0x000020F0, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -372,6 +406,7 @@ episodes = [
         0x08AC67B0, // Episode Pointer
         0x00000005, // Chapters
         0x00001F7A, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -380,6 +415,7 @@ episodes = [
         0x0963B8E0, // Episode Pointer
         0x00000005, // Chapters
         0x000020CC, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -388,6 +424,7 @@ episodes = [
         0x08BB19E0, // Episode Pointer
         0x00000005, // Chapters
         0x000020F7, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -396,6 +433,7 @@ episodes = [
         0x09AF6910, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF6, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "SpongeBob SquarePants",
@@ -404,6 +442,25 @@ episodes = [
         0x08EFC690, // Episode Pointer
         0x00000005, // Chapters
         0x00002113, // Total Playtime
+        04,         // Rom-Type 4
+    ],
+    [
+        "Strawberry Shortcake",
+        "Meet Strawberry Shortcake",
+        "Strawberry Shortcake - Volume 1",
+        0x08021588, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000374E, // Total Playtime
+        01,         // Rom-Type 1
+    ],
+    [
+        "Strawberry Shortcake",
+        "Spring for Strawberry",
+        "Strawberry Shortcake - Volume 1",
+        0x08F6AD70, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003733, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "Super Robot Monkey Team Hyper Force Go!",
@@ -412,6 +469,7 @@ episodes = [
         0x08000EF8, // Episode Pointer
         0x00000005, // Chapters
         0x000037F6, // Total Playtime
+        09,         // Rom-Type 9
     ],
     [
         "Super Robot Monkey Team Hyper Force Go!",
@@ -420,6 +478,7 @@ episodes = [
         0x08FAC748, // Episode Pointer
         0x00000005, // Chapters
         0x00003805, // Total Playtime
+        09,         // Rom-Type 9
     ],
     [
         "The Adventures of Jimmy Neutron: Boy Genius",
@@ -428,6 +487,7 @@ episodes = [
         0x08022E50, // Episode Pointer
         0x00000005, // Chapters
         0x00001F65, // Total Playtime
+        03,         // Rom-Type 3
     ],
     [
         "The Adventures of Jimmy Neutron: Boy Genius",
@@ -436,6 +496,7 @@ episodes = [
         0x087B7DA0, // Episode Pointer
         0x00000005, // Chapters
         0x00001E7B, // Total Playtime
+        03,         // Rom-Type 3
     ],
     [
         "The Adventures of Jimmy Neutron: Boy Genius",
@@ -444,6 +505,7 @@ episodes = [
         0x08F190EC, // Episode Pointer
         0x00000005, // Chapters
         0x00001EAA, // Total Playtime
+        03,         // Rom-Type 3
     ],
     [
         "The Adventures of Jimmy Neutron: Boy Genius",
@@ -452,6 +514,7 @@ episodes = [
         0x09724BC0, // Episode Pointer
         0x00000005, // Chapters
         0x00001F2D, // Total Playtime
+        03,         // Rom-Type 3
     ],
     [
         "The Fairly OddParents!",
@@ -460,6 +523,7 @@ episodes = [
         0x08F01CDC, // Episode Pointer
         0x00000005, // Chapters
         0x0000211E, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -468,6 +532,7 @@ episodes = [
         0x0945BED0, // Episode Pointer
         0x00000005, // Chapters
         0x000023F8, // Total Playtime
+        02,         // Rom-Type 2
     ],
     [
         "The Fairly OddParents!",
@@ -476,6 +541,7 @@ episodes = [
         0x09839398, // Episode Pointer
         0x00000005, // Chapters
         0x00002443, // Total Playtime
+        04,         // Rom-Type 4
     ],
     [
         "The Fairly OddParents!",
@@ -484,6 +550,7 @@ episodes = [
         0x08021C44, // Episode Pointer
         0x00000005, // Chapters
         0x00001FAD, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -492,6 +559,7 @@ episodes = [
         0x0873283C, // Episode Pointer
         0x00000005, // Chapters
         0x00001FA9, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -500,6 +568,7 @@ episodes = [
         0x08E484A0, // Episode Pointer
         0x00000005, // Chapters
         0x00003F26, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -508,6 +577,7 @@ episodes = [
         0x08022174, // Episode Pointer
         0x00000005, // Chapters
         0x00001EF8, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -516,6 +586,7 @@ episodes = [
         0x0882797C, // Episode Pointer
         0x00000005, // Chapters
         0x00001F03, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -524,6 +595,7 @@ episodes = [
         0x090805AC, // Episode Pointer
         0x00000005, // Chapters
         0x00001FC7, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "The Fairly OddParents!",
@@ -532,6 +604,52 @@ episodes = [
         0x097AC404, // Episode Pointer
         0x00000005, // Chapters
         0x00001F4F, // Total Playtime
+        01,         // Rom-Type 1
+    ],
+    [
+        "Teenage Mutant Ninja Turtles",
+        "Things Change",
+        "Teenage Mutant Ninja Turtles - Volume 1", // English
+        0x080207BC, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000377E, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Teenage Mutant Ninja Turtles",
+        "A Better Mousetrap",
+        "Teenage Mutant Ninja Turtles - Volume 1", // No French-version available
+        0x08F65B68, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000377F, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Teenage Mutant Ninja Turtles",
+        "Attack of the Mousers",
+        "Teenage Mutant Ninja Turtles - Volume 1", // No English-version available
+        0x00000000, // Episode Pointer
+        0x00000000, // Chapters
+        0x00000000, // Total Playtime
+        00,         // Not existing
+    ],
+    [
+        "Tortues Ninja",
+        "Le déménagement",
+        "Tortues Ninja - Volume 1", // French
+        0x083F78F8, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000357B, // Total Playtime
+        07,         // Rom-Type 7
+    ],
+    [
+        "Tortues Ninja",
+        "L'attaque des dératiseurs",
+        "Tortues Ninja - Volume 1", // French
+        0x091DA764, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003574, // Total Playtime
+        07,         // Rom-Type 7
     ],
     [
         "Yu-Gi-Oh!",
@@ -540,6 +658,7 @@ episodes = [
         0x08021084, // Episode Pointer
         0x00000005, // Chapters
         0x00003546, // Total Playtime
+        06,         // Rom-Type 6
     ],
     [
         "Yu-Gi-Oh!",
@@ -548,22 +667,25 @@ episodes = [
         0x08F1A7FC, // Episode Pointer
         0x00000005, // Chapters
         0x000034EF, // Total Playtime
+        06,         // Rom-Type 6
     ],
     [
         "Yu-Gi-Oh!",
         "Amis Jusqu'au Bout - 3ème Partie",
         "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
-        0x08EE45C8, // Episode Pointer
+        0x092FA04C, // Episode Pointer
         0x00000005, // Chapters
         0x000035E9, // Total Playtime
+        07,         // Rom-Type 7
     ],
     [
         "Yu-Gi-Oh!",
         "Amis Jusqu'au Bout - 4ème Partie",
         "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
-        0x08000E80, // Episode Pointer
+        0x08412E50, // Episode Pointer
         0x00000005, // Chapters
         0x0000358C, // Total Playtime
+        07,         // Rom-Type 7
     ],
 ]
 
@@ -1690,7 +1812,7 @@ questions = [
     ],
     [
         3202,
-        "What material were the bells on Tin Tower’s 9th floor made of?",
+        "What material were the bells on Tin Tower's 9th floor made of?",
             "Silver",
             "Gold",
             "Crystal",
@@ -1962,7 +2084,7 @@ questions = [
     ],
     [
         3706,
-        "What was Brock’s theory on why Ash’s Squirtle became the leader?",
+        "What was Brock's theory on why Ash's Squirtle became the leader?",
             "Experience",
             "Courage",
             "Sunglasses",
@@ -2098,7 +2220,7 @@ questions = [
     ],
     [
         4103,
-        "What type of restaurant was it where Timmy’s dad ordered food?",
+        "What type of restaurant was it where Timmy's dad ordered food?",
             "Mexican",
             "Italian",
             "Indian",
@@ -2322,7 +2444,7 @@ questions = [
     ],
     [
         4605,
-        "Who was Joey’s sister whose operation he paid for?",
+        "Who was Joey's sister whose operation he paid for?",
             "Mai",
             "Ishizu",
             "Téa",
@@ -2330,7 +2452,7 @@ questions = [
     ],
     [
         4655,
-        "Qui était la sœur de Joey dont il a payé l’opération?",
+        "Qui était la sœur de Joey dont il a payé l'opération?",
             "Mai",
             "Ishizu",
             "Téa",
@@ -2346,7 +2468,7 @@ questions = [
     ],
     [
         4656,
-        "Quel nombre Joey a-t-il obtenu avec l’effet du Dé-crâne?",
+        "Quel nombre Joey a-t-il obtenu avec l'effet du Dé-crâne?",
             "Un",
             "Deux",
             "Trois",
@@ -2362,7 +2484,7 @@ questions = [
     ],
     [
         4751,
-        "Où Marik se cachait-il lorsqu’il contrôlait Joey?",
+        "Où Marik se cachait-il lorsqu'il contrôlait Joey?",
             "Hélicoptère",
             "Pont",
             "Bateau",
@@ -2442,7 +2564,7 @@ questions = [
     ],
     [
         4756,
-        "Qui a sauté dans l’océan pour sauver Joey?",
+        "Qui a sauté dans l'océan pour sauver Joey?",
             "Tristan",
             "Seto",
             "Yugi",
@@ -2610,7 +2732,7 @@ questions = [
     ],
     [
         5103,
-        "What covered Chiro’s body that the monkey team had to remove?",
+        "What covered Chiro's body that the monkey team had to remove?",
             "Spiders",
             "Eyes",
             "Leeches",
@@ -2737,6 +2859,294 @@ questions = [
             "Air Conditioner"
     ],
     [
+        5401,
+        "What kind of berries did Custard wish existed?",
+            "Salmon",
+            "Cod",
+            "Tuna",
+            "Trout"
+    ],
+    [
+        5402,
+        "What did Apple Dumplin' use to visit Strawberry Shortcake?",
+            "Horse",
+            "Flower",
+            "Wooden Cart",
+            "Hot Air Balloon"
+    ],
+    [
+        5403,
+        "Whose birthday did Strawberry Shortcake prepare?",
+            "Angel",
+            "Huckleberry",
+            "Apple",
+            "Ginger"
+    ],
+    [
+        5404,
+        "What kind of cake did Angel Cake make for the birthday party?",
+            "Strawberry",
+            "Huckleberry",
+            "Apple",
+            "Honey"
+    ],
+    [
+        5405,
+        "What did Strawberry Shortcake not gather for the birthday party?",
+            "Juice",
+            "Party Hats",
+            "Balloons",
+            "Cookies"
+    ],
+    [
+        5406,
+        "Who did not help to build the raft?",
+            "Huckleberry",
+            "Strawberry",
+            "Honey Pie",
+            "Ginger"
+    ],
+    [
+        5501,
+        "What first Spring sign did Strawberry Shortcake see outside?",
+            "Butterfly",
+            "Tulip",
+            "Bird",
+            "Bee"
+    ],
+    [
+        5502,
+        "Who was the first character who visited Strawberry Shortcake?",
+            "Huckleberry",
+            "Ginger",
+            "Angel",
+            "Honey Pie"
+    ],
+    [
+        5503,
+        "Who was not in Strawberry Shortcake's team to find Spring?",
+            "Orange",
+            "Angel",
+            "Cupcake",
+            "Ginger"
+    ],
+    [
+        5504,
+        "In what was Cupcake stuck when Strawberry needed to help him?",
+            "Cookie Machine",
+            "Tree Log",
+            "Snow Pile",
+            "Rabbit Hole"
+    ],
+    [
+        5505,
+        "What did Spring do during Winter?",
+            "Snowball Fight",
+            "Snowboarding",
+            "Snowman",
+            "Sledging"
+    ],
+    [
+        5506,
+        "What kind of party did the group plan to do together with Spring?",
+            "Birthday",
+            "Picnic",
+            "Dance",
+            "Planting"
+    ],
+    [
+        5601,
+        "Who extinguished the flame Splinter was holding?",
+            "Raphael",
+            "Donatello",
+            "Leonardo",
+            "Michelangelo"
+    ],
+    [
+        5651,
+        "Qui a éteint la flamme que Splinter tenait?",
+            "Raphael",
+            "Donatello",
+            "Leonardo",
+            "Michelangelo"
+    ],
+    [
+        5602,
+        "Who was separated from the Turtle family in the sewers?",
+            "Raphael",
+            "Leonardo",
+            "Donatello",
+            "Splinter"
+    ],
+    [
+        5652,
+        "Qui a été séparé de la famille des Tortues dans les égouts?",
+            "Raphael",
+            "Leonardo",
+            "Donatello",
+            "Splinter"
+    ],
+    [
+        5603,
+        "Where did Raphael hide when the Purple Dragons' robbery ended?",
+            "Dumpster",
+            "Street Lamp",
+            "Manhole",
+            "Truck"
+    ],
+    [
+        5653,
+        "Où Raphael s'est-il caché après le braquage des Purple Dragons?",
+            "Benne À Ordures",
+            "Lampadaire",
+            "Bouche D'égout",
+            "Camion"
+    ],
+    [
+        5604,
+        "Who did Raphael attack first when he escaped the truck?",
+            "Michelangelo",
+            "Leonardo",
+            "Regular Ninjas",
+            "Purple Dragons"
+    ],
+    [
+        5654,
+        "Qui Raphael a-t-il attaqué en premier en s'échappant du camion?",
+            "Michelangelo",
+            "Leonardo",
+            "Ninjas Ordinaires",
+            "Purple Dragons"
+    ],
+    [
+        5605,
+        "What did the Ninja Turtles find in the truck they stole?",
+            "Hostages",
+            "Pizza",
+            "Weapons",
+            "Money"
+    ],
+    [
+        5655,
+        "Qu'ont trouvé les Tortues Ninja dans le camion qu'elles ont volé?",
+            "Otages",
+            "Pizza",
+            "Armes",
+            "Argent"
+    ],
+    [
+        5606,
+        "Where was the pagoda of the Purple Dragon's boss located?",
+            "Lake",
+            "Tree",
+            "Skyscraper",
+            "Zeppelin"
+    ],
+    [
+        5656,
+        "Où se trouvait la pagode du chef des Purple Dragons?",
+            "Lac",
+            "Arbre",
+            "Gratte-Ciel",
+            "Dirigeable"
+    ],
+    [
+        5701,
+        "Who went with Leonardo to the old Turtle lair to get their stuff?",
+            "Donatello",
+            "Splinter",
+            "Michelangelo",
+            "Raphael"
+    ],
+    [
+        5702,
+        "What were the robots called which were created to fight rats?",
+            "Doggos",
+            "Roddets",
+            "Mousers",
+            "Catties"
+    ],
+    [
+        5703,
+        "Who stopped Raphael when he tried to leave the lair in secret?",
+            "Splinter",
+            "Donatello",
+            "Michelangelo",
+            "Leonardo"
+    ],
+    [
+        5704,
+        "What did the robot destroy causing the TMNT to lose sight of it?",
+            "Walls",
+            "Water Pipes",
+            "Rails",
+            "Tires"
+    ],
+    [
+        5705,
+        "What did April use to protect herself against the robots?",
+            "Pipe",
+            "Wooden Plank",
+            "Fire Extinguisher",
+            "Katana"
+    ],
+    [
+        5706,
+        "Who caused April to become unconscious when he talked to her?",
+            "Leonardo",
+            "Michelangelo",
+            "Raphael",
+            "Donatello"
+    ],
+    [
+        5851,
+        "Qui a rendu April inconsciente à nouveau après son réveil?", // Who caused April to become unconscious once again after she woke up?
+            "Michelangelo",
+            "Raphael",
+            "Splinter",
+            "Donatello"
+    ],
+    [
+        5852,
+        "Dans quelle installation les Mousers ont-ils volé des objets?", // From what facility did the mousers steal objects?
+            "Bijouterie", // Jeweler
+            "Banque",   // Bank
+            "Musée", // Museum
+            "Antiquaire" // Antique Shop
+    ],
+    [
+        5853,
+        "Quel était le plat préféré des Tortues?", // What was the favorite food of the turtles?
+            "Pizza",
+            "Hamburgers",
+            "Poulet Frit",
+            "Frites"
+    ],
+    [
+        5854,
+        "Qu'a April désactivé pour aider les Tortues?",
+            "Caméras",
+            "Électricité",
+            "Système d'Alarme",
+            "Lasers"
+    ],
+    [
+        5855,
+        "Qui a brisé la fenêtre de la salle de contrôle du Dr Stockman?",
+            "April",
+            "Leonardo",
+            "Michelangelo",
+            "Splinter"
+    ],
+    [
+        5856,
+        "Qui a sauvé April de l'explosion des Mousers?",
+            "Michelangelo",
+            "Raphael",
+            "Leonardo",
+            "Donatello"
+    ],
+    [
         0001,
         "?",
             "",
@@ -2825,6 +3235,11 @@ function romType1Cartridge() {
     return isCartridge(0xE92D4008, 0xE3500000, 0x1A000004, 0xE3A00050)
 }
 
+function romType1RunningVideo() {
+    return dword(mem_romType1VideoState) <= 0x08 &&
+           dword(mem_romType1VideoPlaytime) > 0
+}
+
 function romType1VideoStarted(series, episode) {
     return unless(!romType1Cartridge()) &&
            once(dword(mem_romType1EpisodePointer) == getEpisodePointer(series, episode) &&
@@ -2887,6 +3302,12 @@ function romType1LeaderboardCancel(series, episode) {
 
 function romType2Cartridge() {
     return isCartridge(0xE92D4030, 0xE5901000, 0xE24DD00C, 0xE5912010) && dword(0x0384) == 0xE3540FFA
+}
+
+function romType2RunningVideo() {
+    return (dword(mem_romType2MenuState) == 0x13 &&
+            dword(mem_romType2VideoPlaytime) > 0) ||
+           dword(mem_romType2MenuState) == 0x18
 }
 
 function romType2VideoStarted(series, episode) {
@@ -2963,6 +3384,12 @@ function romType3Cartridge() {
     return isCartridge(0xE92D4030, 0xE1A04001, 0xE5901000, 0xE24DD00C)
 }
 
+function romType3RunningVideo() {
+    return (dword(mem_romType3MenuState) == 0x12 &&
+            dword(mem_romType3VideoPlaytime) > 0) ||
+           dword(mem_romType3MenuState) == 0x17
+}
+
 function romType3VideoStarted(series, episode) {
     return unless(!romType3Cartridge()) &&
            once(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode) &&
@@ -3037,6 +3464,12 @@ function romType3LeaderboardCancel(series, episode) {
 
 function romType4Cartridge() {
     return isCartridge(0xE5801000, 0xE5801004, 0xE12FFF1E, 0xE5801000) && dword(0x0384) == 0xEB000CEB
+}
+
+function romType4RunningVideo() {
+    return (dword(mem_romType4MenuState) == 0x15 &&
+            dword(mem_romType4VideoPlaytime) > 0) ||
+           dword(mem_romType4MenuState) == 0x1A
 }
 
 function romType4VideoStarted(series, episode) {
@@ -3118,6 +3551,10 @@ function romType5Cartridge() {
     return isCartridge(0x030068E8, 0x03006960, 0x03006960, 0x03006960)
 }
 
+function romType5RunningVideo() {
+    return dword(mem_romType5MenuState) == 0x01
+}
+
 function romType5VideoStarted(series, episode) {
     return unless(!romType5Cartridge()) &&
            once(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
@@ -3190,10 +3627,12 @@ function romType6Cartridge() {
                 
 }
 
-function romType6InVideo() {
-    return __ornext(dword(mem_romType6MenuState) == 0x13 ||
-                    dword(mem_romType6MenuState) == 0x18) &&
-                    dword(mem_romType6VideoPlaytime) > 0
+function romType6RunningVideo() {
+    return dword(mem_romType6VideoState) <= 0x08 &&
+           ((dword(mem_romType6MenuState) == 0x13 &&
+             dword(mem_romType6VideoPlaytime) > 0) ||
+            dword(mem_romType6MenuState) == 0x18)
+                    
 }
 
 function romType6VideoStarted(series, episode) {
@@ -3260,6 +3699,13 @@ function romType7Cartridge() {
     return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C)
 }
 
+function romType7RunningVideo() {
+    return (dword(mem_romType7MenuState) == 0x15 &&
+            dword(mem_romType7VideoPlaytime) > 0) ||
+           dword(mem_romType7MenuState) == 0x1A
+                    
+}
+
 function romType7VideoStarted(series, episode) {
     return unless(!romType7Cartridge()) &&
            once(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode) &&
@@ -3267,12 +3713,13 @@ function romType7VideoStarted(series, episode) {
                      dword(mem_romType7VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType7CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType7SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType7VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType7VideoPlaytime)) >= getTotalPlaytime(series, episode) - 3) &&
+           trigger_when(prior(dword(mem_romType7VideoPlaytime)) <= getTotalPlaytime(series, episode) + 3) &&
            trigger_when(dword(mem_romType7MenuState) == 0x1A) &&
            never(prev(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType7EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType7VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType7VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType7VideoPlaytime) < getTotalPlaytime(series, episode) - 3 &&
                  dword(mem_romType7MenuState) == 0x15 &&
                  prev(dword(mem_romType7VideoState)) != 0x04 &&
                  prev(dword(mem_romType7VideoState)) != 0x08 &&
@@ -3337,6 +3784,12 @@ function romType7LeaderboardCancel(series, episode) {
 
 function romType8Cartridge() {
     return isCartridge(0xE92D4030, 0xE5901000, 0xE24DD00C, 0xE5912010) && dword(0x0384) == 0xE2844F40
+}
+
+function romType8RunningVideo() {
+    return (dword(mem_romType8MenuState) == 0x13 &&
+            dword(mem_romType8VideoPlaytime) > 0) ||
+           dword(mem_romType8MenuState) == 0x18
 }
 
 function romType8VideoStarted(series, episode) {
@@ -3410,6 +3863,12 @@ function romType8LeaderboardCancel(series, episode) {
 
 function romType9Cartridge() {
     return isCartridge(0xE5801000, 0xE5801004, 0xE12FFF1E, 0xE5801000) && dword(0x0384) == 0xEB0009C2
+}
+
+function romType9RunningVideo() {
+    return (dword(mem_romType9MenuState) == 0x15 &&
+            dword(mem_romType9VideoPlaytime) > 0) ||
+           dword(mem_romType9MenuState) == 0x1A
 }
 
 function romType9VideoStarted(series, episode) {
@@ -3489,6 +3948,12 @@ function romType9LeaderboardCancel(series, episode) {
 
 function romType10Cartridge() {
     return isCartridge(0xE5801000, 0xE5801004, 0xE12FFF1E, 0xE5801000) && dword(0x0384) == 0xEB0009C3
+}
+
+function romType10RunningVideo() {
+    return (dword(mem_romType10MenuState) == 0x15 &&
+            dword(mem_romType10VideoPlaytime) > 0) ||
+           dword(mem_romType10MenuState) == 0x1A
 }
 
 function romType10VideoStarted(series, episode) {
@@ -7194,3 +7659,646 @@ achievement(
                  value  = always_true(),
                  format = "Frames"
             )
+            
+achievement(
+    title = getAchievementTitle("Strawberry Shortcake", "Meet Strawberry Shortcake"), type = "progression",
+    description = getAchievementDescription("Strawberry Shortcake", "Meet Strawberry Shortcake"),
+    id = 571082, badge = "648725", points = 4,
+    trigger = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+              (romType1CorrectAnswer(6, 0, 6) ||
+               romType1CorrectAnswer(6, 1, 6) ||
+               romType1CorrectAnswer(6, 2, 4) ||
+               romType1CorrectAnswer(6, 3, 5) ||
+               romType1CorrectAnswer(6, 4, 6) ||
+               romType1CorrectAnswer(6, 5, 5))
+            )
+            leaderboard(
+                 id = 150645,
+                 title       = getQuestionTitle(5401), 
+                 description = getQuestionDescription(5401),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150646,
+                 title       = getQuestionTitle(5402), 
+                 description = getQuestionDescription(5402),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150647,
+                 title       = getQuestionTitle(5403), 
+                 description = getQuestionDescription(5403),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150648,
+                 title       = getQuestionTitle(5404), 
+                 description = getQuestionDescription(5404),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150649,
+                 title       = getQuestionTitle(5405), 
+                 description = getQuestionDescription(5405),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150650,
+                 title       = getQuestionTitle(5406), 
+                 description = getQuestionDescription(5406),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Meet Strawberry Shortcake"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Strawberry Shortcake", "Spring for Strawberry"), type = "progression",
+    description = getAchievementDescription("Strawberry Shortcake", "Spring for Strawberry"),
+    id = 571083, badge = "648726", points = 4,
+    trigger = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+              (romType1CorrectAnswer(6, 0, 6) ||
+               romType1CorrectAnswer(6, 1, 7) ||
+               romType1CorrectAnswer(6, 2, 5) ||
+               romType1CorrectAnswer(6, 3, 5) ||
+               romType1CorrectAnswer(6, 4, 7) ||
+               romType1CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 150652,
+                 title       = getQuestionTitle(5501), 
+                 description = getQuestionDescription(5501),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150653,
+                 title       = getQuestionTitle(5502), 
+                 description = getQuestionDescription(5502),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150654,
+                 title       = getQuestionTitle(5503), 
+                 description = getQuestionDescription(5503),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150655,
+                 title       = getQuestionTitle(5504), 
+                 description = getQuestionDescription(5504),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150656,
+                 title       = getQuestionTitle(5505), 
+                 description = getQuestionDescription(5505),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150657,
+                 title       = getQuestionTitle(5506), 
+                 description = getQuestionDescription(5506),
+                 start  = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Strawberry Shortcake", "Spring for Strawberry"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "Things Change"), type = "progression",
+    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "Things Change"),
+    id = 571089, badge = "648732", points = 4,
+    trigger = (romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                (romType6CorrectAnswer(6, 0, 7) ||
+                 romType6CorrectAnswer(6, 1, 4) ||
+                 romType6CorrectAnswer(6, 2, 4) ||
+                 romType6CorrectAnswer(6, 3, 6) ||
+                 romType6CorrectAnswer(6, 4, 4) ||
+                 romType6CorrectAnswer(6, 5, 7))) ||
+              (romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                (romType7CorrectAnswer(6, 0, 7) ||
+                 romType7CorrectAnswer(6, 1, 4) ||
+                 romType7CorrectAnswer(6, 2, 4) ||
+                 romType7CorrectAnswer(6, 3, 6) ||
+                 romType7CorrectAnswer(6, 4, 4) ||
+                 romType7CorrectAnswer(6, 5, 7)))
+            )
+            leaderboard(
+                 id = 150658,
+                 title       = getQuestionTitle(5601), 
+                 description = getQuestionDescription(5601),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 0),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150659,
+                 title       = getQuestionTitle(5602), 
+                 description = getQuestionDescription(5602),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 1),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150660,
+                 title       = getQuestionTitle(5603), 
+                 description = getQuestionDescription(5603),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 2),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150661,
+                 title       = getQuestionTitle(5604), 
+                 description = getQuestionDescription(5604),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 3),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150662,
+                 title       = getQuestionTitle(5605), 
+                 description = getQuestionDescription(5605),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 4),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150663,
+                 title       = getQuestionTitle(5606), 
+                 description = getQuestionDescription(5606),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
+                          romType6LeaderboardQuestionSelect(6, 5),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "Things Change"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150664,
+                 title       = getQuestionTitle(5651), 
+                 description = getQuestionDescription(5651),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 0),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150665,
+                 title       = getQuestionTitle(5652), 
+                 description = getQuestionDescription(5652),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 1),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150666,
+                 title       = getQuestionTitle(5653), 
+                 description = getQuestionDescription(5653),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 2),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150667,
+                 title       = getQuestionTitle(5654), 
+                 description = getQuestionDescription(5654),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 3),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150668,
+                 title       = getQuestionTitle(5655), 
+                 description = getQuestionDescription(5655),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 4),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150669,
+                 title       = getQuestionTitle(5656), 
+                 description = getQuestionDescription(5656),
+                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                          romType7LeaderboardQuestionSelect(6, 5),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), type = "progression",
+    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "A Better Mousetrap"),
+    id = 571098, badge = "648756", points = 4,
+    trigger = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+               (romType6CorrectAnswer(6, 0, 4) ||
+                romType6CorrectAnswer(6, 1, 7) ||
+                romType6CorrectAnswer(6, 2, 4) ||
+                romType6CorrectAnswer(6, 3, 5) ||
+                romType6CorrectAnswer(6, 4, 7) ||
+                romType6CorrectAnswer(6, 5, 5))
+            )
+            leaderboard(
+                 id = 150670,
+                 title       = getQuestionTitle(5701), 
+                 description = getQuestionDescription(5701),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 0),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150671,
+                 title       = getQuestionTitle(5702), 
+                 description = getQuestionDescription(5702),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 1),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150672,
+                 title       = getQuestionTitle(5703), 
+                 description = getQuestionDescription(5703),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 2),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150673,
+                 title       = getQuestionTitle(5704), 
+                 description = getQuestionDescription(5704),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 3),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150674,
+                 title       = getQuestionTitle(5705), 
+                 description = getQuestionDescription(5705),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 4),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150675,
+                 title       = getQuestionTitle(5706), 
+                 description = getQuestionDescription(5706),
+                 start  = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
+                          romType6LeaderboardQuestionSelect(6, 5),
+                 cancel = romType6LeaderboardCancel("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "Attack of the Mousers"), type = "progression",
+    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "Attack of the Mousers"),
+    id = 571103, badge = "648803", points = 4,
+    trigger = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+               (romType7CorrectAnswer(6, 0, 7) ||
+                romType7CorrectAnswer(6, 1, 5) ||
+                romType7CorrectAnswer(6, 2, 6) ||
+                romType7CorrectAnswer(6, 3, 6) ||
+                romType7CorrectAnswer(6, 4, 7) ||
+                romType7CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 150676,
+                 title       = getQuestionTitle(5851), 
+                 description = getQuestionDescription(5851),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 0),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150677,
+                 title       = getQuestionTitle(5852), 
+                 description = getQuestionDescription(5852),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 1),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150678,
+                 title       = getQuestionTitle(5853), 
+                 description = getQuestionDescription(5853),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 2),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150679,
+                 title       = getQuestionTitle(5854), 
+                 description = getQuestionDescription(5854),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 3),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150680,
+                 title       = getQuestionTitle(5855), 
+                 description = getQuestionDescription(5855),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 4),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150681,
+                 title       = getQuestionTitle(5856), 
+                 description = getQuestionDescription(5856),
+                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                          romType7LeaderboardQuestionSelect(6, 5),
+                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+//--------------------------------------------------
+// Rich Presence
+romType1Videos = {
+    0x08021CDC: "Watching the episode 'Susie Sings The Blues' from the series 'All Grown Up!'",
+    0x08F661FC: "Watching the episode 'Coup DeVille' from the series 'All Grown Up!'",
+    0x08022420: "Watching the episode 'Chuckie's in Love' from the series 'All Grown Up!'",
+    0x08020CAC: "Watching the episode 'Three Little Piggies' from the series 'Dora the Explorer'",
+    0x08F43914: "Watching the episode 'The Big River' from the series 'Dora the Explorer'",
+    0x080225B0: "Watching the episode 'Bubblestand' from the series 'SpongeBob SquarePants'",
+    0x0878A2E0: "Watching the episode 'Ripped Pants' from the series 'SpongeBob SquarePants'",
+    0x08F9FF40: "Watching the episode 'Jellyfishing' from the series 'SpongeBob SquarePants'",
+    0x09791CA0: "Watching the episode 'Plankton!' from the series 'SpongeBob SquarePants'",
+    0x08022640: "Watching the episode 'Mermaidman and Barnacleboy' from the series 'SpongeBob SquarePants'",
+    0x08818EB0: "Watching the episode 'Pickles' from the series 'SpongeBob SquarePants'",
+    0x08FBB398: "Watching the episode 'Hall Monitor' from the series 'SpongeBob SquarePants'",
+    0x096FF978: "Watching the episode 'Jellyfish Jam' from the series 'SpongeBob SquarePants'",
+    0x0963B8E0: "Watching the episode 'Pizza Delivery' from the series 'SpongeBob SquarePants'",
+    0x08021588: "Watching the episode 'Meet Strawberry Shortcake' from the series 'Strawberry Shortcake'",
+    0x08F6AD70: "Watching the episode 'Spring for Strawberry' from the series 'Strawberry Shortcake'",
+    0x08F01CDC: "Watching the episode 'The Big Problem!' from the series 'The Fairly OddParents!'",
+    0x08021C44: "Watching the episode 'Foul Balled' from the series 'The Fairly OddParents!'",
+    0x0873283C: "Watching the episode 'The Boy Who Would Be Queen' from the series 'The Fairly OddParents!'",
+    0x08E484A0: "Watching the episode 'Information Stupor Highway' from the series 'The Fairly OddParents!'",
+    0x08022174: "Watching the episode 'Father Time!' from the series 'The Fairly OddParents!'",
+    0x0882797C: "Watching the episode 'Apartnership!' from the series 'The Fairly OddParents!'",
+    0x090805AC: "Watching the episode 'Ruled Out' from the series 'The Fairly OddParents!'",
+    0x097AC404: "Watching the episode 'That's Life!' from the series 'The Fairly OddParents!'",
+}
+
+romType2Videos = {
+    0x08289480: "Watching the episode 'Big Air Dare' from the series 'Rocket Power'",
+    0x0925B500: "Watching the episode 'Texas' from the series 'SpongeBob SquarePants'",
+    0x099E1A94: "Watching the episode 'Walking Small' from the series 'SpongeBob SquarePants'",
+    0x0826EFEC: "Watching the episode 'Hooky' from the series 'SpongeBob SquarePants'",
+    0x08AC67B0: "Watching the episode 'Mermaidman and Barnacleboy II' from the series 'SpongeBob SquarePants'",
+    0x08BB19E0: "Watching the episode 'Nature Pants' from the series 'SpongeBob SquarePants'",
+    0x09AF6910: "Watching the episode 'Opposite Day' from the series 'SpongeBob SquarePants'",
+    0x0945BED0: "Watching the episode 'Odd Ball' from the series 'The Fairly OddParents!'",
+}
+
+romType3Videos = {
+    0x08022E50: "Watching the episode 'Brobot' from the series 'The Adventures of Jimmy Neutron: Boy Genius'",
+    0x087B7DA0: "Watching the episode 'The Big Pinch' from the series 'The Adventures of Jimmy Neutron: Boy Genius'",
+    0x08F190EC: "Watching the episode 'Granny Baby' from the series 'The Adventures of Jimmy Neutron: Boy Genius'",
+    0x09724BC0: "Watching the episode 'Time is Money' from the series 'The Adventures of Jimmy Neutron: Boy Genius'",
+}
+
+romType4Videos = {
+    0x08000EF8: "Watching the episode 'Attack of the Killer Garage Sale' from the series 'Danny Phantom'",
+    0x08EFC690: "Watching the episode 'Squeaky Boots' from the series 'SpongeBob SquarePants'",
+    0x09839398: "Watching the episode 'Timvisible' from the series 'The Fairly OddParents!'",
+}
+
+romType5Videos = {
+    0x0801FC1C: "Watching the episode 'A Hot Water Battle' from the series 'Pokémon: Johto League Champions'",
+    0x08F4ADF4: "Watching the episode 'For Ho-Oh The Bells Toll!' from the series 'Pokémon: Master Quest'",
+    0x0801FAC0: "Watching the episode 'Playing with Fire!' from the series 'Pokémon: Master Quest'",
+    0x08FA8DF8: "Watching the episode 'Johto Photo Finish' from the series 'Pokémon: Master Quest'",
+    0x0801F748: "Watching the episode 'Pokémon - I Choose You!' from the series 'Pokémon: Indigo League'",
+    0x08F845A0: "Watching the episode 'Here Comes The Squirtle Squad' from the series 'Pokémon: Indigo League'",
+    0x0801FE98: "Watching the episode 'Beach Blank-Out Blastoise' from the series 'Pokémon: Indigo League'",
+    0x091E737C: "Watching the episode 'Go West Young Meowth' from the series 'Pokémon: Indigo League'",
+}
+
+romType6Videos = {
+    0x08021084: "Watching the episode 'Friends 'Til the End - Part 3' from the series 'Yu-Gi-Oh!'", // English
+    0x08F1A7FC: "Watching the episode 'Friends 'Til the End - Part 4' from the series 'Yu-Gi-Oh!'", // English
+    0x080207BC: "Watching the episode 'Things Change' from the series 'Teenage Mutant Ninja Turtles", // English
+    0x08F65B68: "Watching the episode 'A Better Mousetrap' from the series 'Teenage Mutant Ninja Turtles", // English
+}
+
+romType7Videos = {
+    0x092FA04C: "Watching the episode 'Friends 'Til the End - Part 3' from the series 'Yu-Gi-Oh!'", // French
+    0x08412E50: "Watching the episode 'Friends 'Til the End - Part 4' from the series 'Yu-Gi-Oh!'", // French
+    0x083F78F8: "Watching the episode 'A Better Mousetrap' from the series 'Teenage Mutant Ninja Turtles", // French
+    0x091DA764: "Watching the episode 'Attack of the Mousers' from the series 'Teenage Mutant Ninja Turtles" // French
+}
+
+romType8Videos = {
+    0x0848B5A8: "Watching the episode 'A Grand Problem' from the series 'Dragon Ball GT'",
+    0x093D56C0: "Watching the episode 'Pan's Gambit' from the series 'Dragon Ball GT'",
+}
+
+romType9Videos = {
+    0x08000EF8: "Watching the episode 'Depths of Fear' from the series 'Super Robot Monkey Team Hyper Force Go!'",
+    0x08FAC748: "Watching the episode 'Planetoid Q' from the series 'Super Robot Monkey Team Hyper Force Go!'",
+}
+
+romType10Videos = {
+    0x09677028: "Watching the episode 'Ron the Man' from the series 'Kim Possible'",
+    0x08486EB0: "Watching the episode 'Slushy' from the series 'Lilo & Stitch: The Series'",
+}
+
+rich_presence_conditional_display(romType1Cartridge() && romType1RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType1Videos",
+                          dword(mem_romType1EpisodePointer),
+                          romType1Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType2Cartridge() && romType2RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType2Videos",
+                          dword(mem_romType2EpisodePointer),
+                          romType2Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType3Cartridge() && romType3RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType3Videos",
+                          dword(mem_romType3EpisodePointer),
+                          romType3Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType4Cartridge() && romType4RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType4Videos",
+                          dword(mem_romType4EpisodePointer),
+                          romType4Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType5Cartridge() && romType5RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType5Videos",
+                          dword(mem_romType5EpisodePointer),
+                          romType5Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType6Cartridge() && romType6RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType6Videos",
+                          dword(mem_romType6EpisodePointer),
+                          romType6Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType7Cartridge() && romType7RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType7Videos",
+                          dword(mem_romType7EpisodePointer),
+                          romType7Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType8Cartridge() && romType8RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType8Videos",
+                          dword(mem_romType8EpisodePointer),
+                          romType8Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType9Cartridge() && romType9RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType9Videos",
+                          dword(mem_romType9EpisodePointer),
+                          romType9Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType10Cartridge() && romType10RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType10Videos",
+                          dword(mem_romType10EpisodePointer),
+                          romType10Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_display("Selecting a video from their GBA video collection")
