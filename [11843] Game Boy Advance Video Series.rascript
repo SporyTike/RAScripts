@@ -15,6 +15,7 @@ mem_romType1RNG             = 0x007EF0
     // All Grown Up! - Volume 1
     // Dora the Explorer - Volume 1
     // Nicktoons Collection - Volume 1
+    // Sonic X - Volume 1
     // SpongeBob SquarePants - Volume 1
     // SpongeBob SquarePants - Volume 2
     // Strawberry Shortcake - Volume 1
@@ -299,6 +300,24 @@ episodes = [
         0x00000005, // Chapters
         0x00002153, // Total Playtime
         02,         // Rom-Type 2
+    ],
+    [
+        "Sonic X",
+        "Chaos Control Freaks",
+        "Sonic X - Volume 1",
+        0x08020C10, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003789, // Total Playtime
+        01,         // Rom-Type 1
+    ],
+    [
+        "Sonic X",
+        "Sonic to the Rescue",
+        "Sonic X - Volume 1",
+        0x08FD6A0C, // Episode Pointer
+        0x00000005, // Chapters
+        0x000037A8, // Total Playtime
+        01,         // Rom-Type 1
     ],
     [
         "SpongeBob SquarePants",
@@ -3145,6 +3164,102 @@ questions = [
             "Raphael",
             "Leonardo",
             "Donatello"
+    ],
+    [
+        5901,
+        "Who of Sonic's friends was captured by Dr. Eggman?",
+            "Cream",
+            "Tails",
+            "Amy",
+            "Knuckles"
+    ],
+    [
+        5902,
+        "Where did the Chaos Emerald teleport Sonic to?",
+            "Mountains",
+            "Forest",
+            "Beach",
+            "City"
+    ],
+    [
+        5903,
+        "What did the police men use to try to capture Sonic?",
+            "Net",
+            "Police Dog",
+            "Mousetrap",
+            "Food"
+    ],
+    [
+        5904,
+        "What did the Speed Team use to chase Sonic?",
+            "Motorcycles",
+            "Speedboats",
+            "Formula One Cars",
+            "Jet Airplanes"
+    ],
+    [
+        5905,
+        "Where did Sonic land after racing with the Speed Team?",
+            "Fruit Stand",
+            "Swimming Pool",
+            "Tree",
+            "Intersection"
+    ],
+    [
+        5906,
+        "Who saved Sonic from drowning in the swimming pool?",
+            "Leon",
+            "Christopher",
+            "Danny",
+            "Frances"
+    ],
+    [
+        6001,
+        "What did Christopher call Sonic when phoning his mother?",
+            "Cat",
+            "Mouse",
+            "Skunk",
+            "Porcupine"
+    ],
+    [
+        6002,
+        "What food did Christopher want to give Sonic at first?",
+            "Crickets",
+            "Curry",
+            "Cat Food",
+            "Crackers"
+    ],
+    [
+        6003,
+        "Who of his friends did Sonic see in the TV news?",
+            "Amy",
+            "Knuckles",
+            "Cream",
+            "Tails"
+    ],
+    [
+        6004,
+        "Who of Christopher's family members was helping to save Cream?",
+            "Mother",
+            "Father",
+            "Grandpa",
+            "Uncle"
+    ],
+    [
+        6005,
+        "What was used to interrupt the electricity of the facility?",
+            "Coins",
+            "Paper Planes",
+            "Computer Virus",
+            "Bombs"
+    ],
+    [
+        6006,
+        "Who was interrupting the electricity of the facility?",
+            "Tails",
+            "Cheese",
+            "Sonic",
+            "Cream"
     ],
     [
         0001,
@@ -8128,6 +8243,164 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Sonic X", "Chaos Control Freaks"), type = "progression",
+    description = getAchievementDescription("Sonic X", "Chaos Control Freaks"),
+    id = 571493, badge = "649116", points = 4,
+    trigger = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+              (romType1CorrectAnswer(6, 0, 6) ||
+               romType1CorrectAnswer(6, 1, 4) ||
+               romType1CorrectAnswer(6, 2, 6) ||
+               romType1CorrectAnswer(6, 3, 7) ||
+               romType1CorrectAnswer(6, 4, 5) ||
+               romType1CorrectAnswer(6, 5, 5))
+            )
+            leaderboard(
+                 id = 150724,
+                 title       = getQuestionTitle(5901), 
+                 description = getQuestionDescription(5901),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150725,
+                 title       = getQuestionTitle(5902), 
+                 description = getQuestionDescription(5902),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150726,
+                 title       = getQuestionTitle(5903), 
+                 description = getQuestionDescription(5903),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150727,
+                 title       = getQuestionTitle(5904), 
+                 description = getQuestionDescription(5904),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150728,
+                 title       = getQuestionTitle(5905), 
+                 description = getQuestionDescription(5905),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150729,
+                 title       = getQuestionTitle(5906), 
+                 description = getQuestionDescription(5906),
+                 start  = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Chaos Control Freaks"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Sonic X", "Sonic to the Rescue"), type = "progression",
+    description = getAchievementDescription("Sonic X", "Sonic to the Rescue"),
+    id = 571539, badge = "649117", points = 4,
+    trigger = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+              (romType1CorrectAnswer(6, 0, 6) ||
+               romType1CorrectAnswer(6, 1, 7) ||
+               romType1CorrectAnswer(6, 2, 7) ||
+               romType1CorrectAnswer(6, 3, 7) ||
+               romType1CorrectAnswer(6, 4, 5) ||
+               romType1CorrectAnswer(6, 5, 6))
+            )
+            leaderboard(
+                 id = 150730,
+                 title       = getQuestionTitle(6001), 
+                 description = getQuestionDescription(6001),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 0),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150731,
+                 title       = getQuestionTitle(6002), 
+                 description = getQuestionDescription(6002),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 1),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150732,
+                 title       = getQuestionTitle(6003), 
+                 description = getQuestionDescription(6003),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 2),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150733,
+                 title       = getQuestionTitle(6004), 
+                 description = getQuestionDescription(6004),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 3),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150734,
+                 title       = getQuestionTitle(6005), 
+                 description = getQuestionDescription(6005),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 4),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150735,
+                 title       = getQuestionTitle(6006), 
+                 description = getQuestionDescription(6006),
+                 start  = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
+                          romType1LeaderboardQuestionSelect(6, 5),
+                 cancel = romType1LeaderboardCancel("Sonic X", "Sonic to the Rescue"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -8136,6 +8409,8 @@ romType1Videos = {
     0x08022420: "Watching the episode 'Chuckie's in Love' from the series 'All Grown Up!'",
     0x08020CAC: "Watching the episode 'Three Little Piggies' from the series 'Dora the Explorer'",
     0x08F43914: "Watching the episode 'The Big River' from the series 'Dora the Explorer'",
+    0x08020C10: "Watching the episode 'Chaos Control Freaks' from the series 'Sonic X'",
+    0x08FD6A0C: "Watching the episode 'Sonic to the Rescue' from the series 'Sonic X'",
     0x080225B0: "Watching the episode 'Bubblestand' from the series 'SpongeBob SquarePants'",
     0x0878A2E0: "Watching the episode 'Ripped Pants' from the series 'SpongeBob SquarePants'",
     0x08F9FF40: "Watching the episode 'Jellyfishing' from the series 'SpongeBob SquarePants'",
