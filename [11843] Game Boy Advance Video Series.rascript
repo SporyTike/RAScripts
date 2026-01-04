@@ -3119,7 +3119,7 @@ questions = [
     ],
     [
         5851,
-        "Qui a rendu April inconsciente à nouveau après son réveil?", // Who caused April to become unconscious once again after she woke up?
+        "Qui a rendu April inconsciente à nouveau après son réveil?",
             "Michelangelo",
             "Raphael",
             "Splinter",
@@ -3127,15 +3127,15 @@ questions = [
     ],
     [
         5852,
-        "Dans quelle installation les Mousers ont-ils volé des objets?", // From what facility did the mousers steal objects?
-            "Bijouterie", // Jeweler
-            "Banque",   // Bank
-            "Musée", // Museum
-            "Antiquaire" // Antique Shop
+        "Dans quelle installation les Mousers ont-ils volé des objets?",
+            "Bijouterie",
+            "Banque",
+            "Musée",
+            "Antiquaire"
     ],
     [
         5853,
-        "Quel était le plat préféré des Tortues?", // What was the favorite food of the turtles?
+        "Quel était le plat préféré des Tortues?",
             "Pizza",
             "Hamburgers",
             "Poulet Frit",
