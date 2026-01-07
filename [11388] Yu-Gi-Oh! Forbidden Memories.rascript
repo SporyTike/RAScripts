@@ -428,8 +428,9 @@ function usedAllGuardianStars() {
     
     return tally_of(guardianStars, 10, guardianStar => never(gameState() != 1 &&
                                                              gameState() != 3) &&
-                                                        once(duelState == 0x05 &&
-                                                             byte(0x09B1D5) == 0x00 &&
+                                                        once(byte(0x09B1D5) == 0x00 &&
+                                                             prior(duelState) == 0x08 &&
+                                                                   duelState  == 0x05 &&
                                                              word(0x09B35A) != 0xFFFF &&
                                                              word(0x09B35A) != prev(word(0x09B35A)) &&
                                                              byte(0x09B344) == guardianStars[guardianStar - 0x18]))                                                
@@ -2637,6 +2638,7 @@ rich_presence_display(
         fallback = "wandering around in Egypt"
     )
 )
+
 
 
 
