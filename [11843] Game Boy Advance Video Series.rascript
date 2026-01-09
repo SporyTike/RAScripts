@@ -74,6 +74,7 @@ mem_romType6CurrentChapter  = 0x006890
 mem_romType6Input           = 0x007EC8
 mem_romType6MenuState       = 0x007EB4
 mem_romType6RNG             = 0x007EF0
+    // Cartoon Network Collection - Volume 1
     // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (EN)
     // Teenage Mutant Ninja Turtles: Things Change - Volume 1 (EN)
 
@@ -98,7 +99,7 @@ mem_romType8MenuState       = 0x007EAC
 mem_romType8RNG             = 0x005C95
     // Dragon Ball GT - Volume 1
     
-mem_romType9EpisodePointer  = 0x006690
+mem_romType9EpisodePointer  = 0x0066A0
 mem_romType9VideoState      = 0x046C68
 mem_romType9SceneCountdown  = 0x0066F8
 mem_romType9VideoPlaytime   = 0x006700
@@ -107,6 +108,7 @@ mem_romType9Input           = 0x007EA4
 mem_romType9MenuState       = 0x007E8C
 mem_romType9RNG             = 0x007F98
     // Super Robot Monkey Team Hyper Force Go! - Volume 1
+    // The Proud Family - Volume 1
     
 mem_romType10EpisodePointer  = 0x0066A4
 mem_romType10VideoState      = 0x046218
@@ -158,6 +160,15 @@ episodes = [
         01,         // Rom-Type 1
     ],
     [
+        "Courage the Cowardly Dog",
+        "The Magic Tree of Nowhere",
+        "Cartoon Network Collection - Volume 1",
+        0x09896CD8, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FD8, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
         "Danny Phantom",
         "Attack of the Killer Garage Sale",
         "Nicktoons Collection - Volume 3",
@@ -201,6 +212,24 @@ episodes = [
         0x00000005, // Chapters
         0x000035CA, // Total Playtime
         08,         // Rom-Type 8
+    ],
+    [
+        "Ed, Edd n Eddy",
+        "Stop, Look and Ed",
+        "Cartoon Network Collection - Volume 1",
+        0x08CD6D58, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FEF, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Johnny Bravo",
+        "The Perfect Gift",
+        "Cartoon Network Collection - Volume 1",
+        0x085EB210, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001496, // Total Playtime
+        06,         // Rom-Type 6
     ],
     [
         "Kim Possible",
@@ -485,7 +514,7 @@ episodes = [
         "Super Robot Monkey Team Hyper Force Go!",
         "Depths of Fear",
         "Super Robot Monkey Team Hyper Force Go! - Volume 1",
-        0x08000EF8, // Episode Pointer
+        0x084451D4, // Episode Pointer
         0x00000005, // Chapters
         0x000037F6, // Total Playtime
         09,         // Rom-Type 9
@@ -494,7 +523,7 @@ episodes = [
         "Super Robot Monkey Team Hyper Force Go!",
         "Planetoid Q",
         "Super Robot Monkey Team Hyper Force Go! - Volume 1",
-        0x08FAC748, // Episode Pointer
+        0x093ECDB4, // Episode Pointer
         0x00000005, // Chapters
         0x00003805, // Total Playtime
         09,         // Rom-Type 9
@@ -534,6 +563,15 @@ episodes = [
         0x00000005, // Chapters
         0x00001F2D, // Total Playtime
         03,         // Rom-Type 3
+    ],
+    [
+        "The Grim Adventures of Billy & Mandy",
+        "The Crawling Niceness",
+        "Cartoon Network Collection - Volume 1",
+        0x08022CA4, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001683, // Total Playtime
+        06,         // Rom-Type 6
     ],
     [
         "The Fairly OddParents!",
@@ -624,6 +662,24 @@ episodes = [
         0x00000005, // Chapters
         0x00001F4F, // Total Playtime
         01,         // Rom-Type 1
+    ],
+    [
+        "The Proud Family",
+        "Tween Town",
+        "The Proud Family - Volume 1",
+        0x08461014, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003B9E, // Total Playtime
+        09,         // Rom-Type 9
+    ],
+    [
+        "The Proud Family",
+        "Twins to Tweens",
+        "The Proud Family - Volume 1",
+        0x08EDF308, // Episode Pointer
+        0x00000005, // Chapters
+        0x00003AFD, // Total Playtime
+        09,         // Rom-Type 9
     ],
     [
         "Teenage Mutant Ninja Turtles",
@@ -3260,6 +3316,230 @@ questions = [
             "Cheese",
             "Sonic",
             "Cream"
+    ],
+    [
+        6101,
+        "Who told the other girls about the new opened Teen Night Club?",
+            "Dijonay",
+            "LaCienega",
+            "Zoey",
+            "Penny"
+    ],
+    [
+        6102,
+         "What location did the girls say they were going when they lied?",
+            "Juice Bar",
+            "Mall",
+            "Teen Night Club",
+            "Movies"
+    ],
+    [
+        6103,
+        "What character did Al Roker use to make a pun on Penny’s name?",
+            "Peter Pan",
+            "Paddington Bear",
+            "Pinocchio",
+            "Pippi Longstocking"
+    ],
+    [
+        6104,
+        "What kind of taxes did President Scooter propose?",
+            "Candy Tax",
+            "Party Tax",
+            "Phone Tax",
+            "Video Game Tax"
+    ],
+    [
+        6105,
+        "Which relative did Al Roker forget to make disappear?",
+            "LaCienega",
+            "Penny",
+            "Zoey",
+            "Dijonay"
+    ],
+    [
+        6106,
+        "What happened to Suga Mama when Papi signed Al Roker's contract?",
+            "Melting",
+            "Beautifying",
+            "Rejuvenating",
+            "Disappearing"
+    ],
+    [
+        6201,
+        "Where did Penny's parents and Suga Mama go?",
+            "Restaurant",
+            "Movies",
+            "Bowling",
+            "Musical"
+    ],
+    [
+        6202,
+        "Where couldn't Penny go because she had to babysit?",
+            "Go-Karts",
+            "Mall",
+            "Bowling",
+            "Pool Party"
+    ],
+    [
+        6203,
+        "Who did Danté want to call later that day?",
+            "BeBe",
+            "Penny",
+            "LaCienega",
+            "CeCe"
+    ],
+    [
+        6204,
+        "Where were BeBe and CeCe's birthmarks?",
+            "Shoulder",
+            "Butt",
+            "Ankle",
+            "Back"
+    ],
+    [
+        6205,
+        "What did Suga Mama bake in the kitchen?",
+            "Bread",
+            "Pie",
+            "Cookies",
+            "Browneys"
+    ],
+    [
+        6206,
+        "Where did BeBe and CeCe turn into babies again?",
+            "Roller Coaster",
+            "Bumper Cars",
+            "Go-Karts",
+            "Drop Tower"
+    ],
+    [
+        6301,
+        "What animal documentary did Mandy and the Grim Reaper watch?",
+            "Mantises",
+            "Ants",
+            "Spiders",
+            "Fleas"
+    ],
+    [
+        6302,
+        "What did Billy find in the Grim Reaper's trunk?",
+            "Bone",
+            "Egg",
+            "Soda",
+            "Frisbee"
+    ],
+    [
+        6303,
+        "What did Jeff the Spider make for Mandy?",
+            "Scarf",
+            "Socks",
+            "Mittens",
+            "Sweater"
+    ],
+    [
+        6304,
+        "What equipment did the exterminator grab from his truck?",
+            "Net",
+            "Mouse Trap",
+            "Insecticide",
+            "Boot"
+    ],
+    [
+        6401,
+        "How much did a glass of lemonade cost at Suzy's stand?",
+            "10 Cents",
+            "25 Cents",
+            "50 Cents",
+            "75 Cents"
+    ],
+    [
+        6402,
+        "For what event did Suzy want to buy a gift for her mother?",
+            "Christmas",
+            "Mother's Day",
+            "Valentine's Day",
+            "Birthday"
+    ],
+    [
+        6403,
+        "What did Johnny want to buy for his mother as a gift?",
+            "Perfume",
+            "Necklace",
+            "Underwear",
+            "Slippers"
+    ],
+    [
+        6404,
+        "What job did Johnny not try to earn some money?",
+            "Lumberjack",
+            "Battery Tester",
+            "Fast-Food Worker",
+            "Hotline Operator"
+    ],
+    [
+        6501,
+        "Who was the first person who stepped on the grass?",
+            "Ed",
+            "Rolf",
+            "Eddy",
+            "Kevin"
+    ],
+    [
+        6502,
+        "In what environment did Ed and Eddy play while ignoring the signs?",
+            "Swamp",
+            "Mud",
+            "Cement",
+            "Lake"
+    ],
+    [
+        6503,
+        "Which object from Edd did Ed accidentally destroy in his room?",
+            "Ant Farm",
+            "Birdcage",
+            "Terrarium",
+            "Aquarium"
+    ],
+    [
+        6504,
+        "What giant pile did Jimmy and Sarah create so they could eat it?",
+            "Ice Cream",
+            "Cake",
+            "Candies",
+            "Whipped Cream"
+    ],
+    [
+        6601,
+        "What was in the package Muriel got from the delivery truck?",
+            "Blanket",
+            "Towels",
+            "Curtains",
+            "Clothes"
+    ],
+    [
+        6602,
+        "What was the first wish that Muriel made that the tree fulfilled?",
+            "Bulldozer",
+            "Washing Machine",
+            "Oven",
+            "Excavator"
+    ],
+    [
+        6603,
+        "What did Courage not use to protect the tree against Eustace?",
+            "Baseball Bat",
+            "Moat",
+            "Wall",
+            "Barbed Wire"
+    ],
+    [
+        6604,
+        "What part of the tree needed to be mixed with honey for the remedy?",
+            "Leaves",
+            "Acorns",
+            "Roots",
+            "Flowers"
     ],
     [
         0001,
@@ -8401,6 +8681,384 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("The Proud Family", "Tween Town"), type = "progression",
+    description = getAchievementDescription("The Proud Family", "Tween Town"),
+    id = 572016, badge = "650091", points = 4,
+    trigger = romType9VideoStarted("The Proud Family", "Tween Town") &&
+              (romType9CorrectAnswer(6, 0, 5) ||
+               romType9CorrectAnswer(6, 1, 6) ||
+               romType9CorrectAnswer(6, 2, 7) ||
+               romType9CorrectAnswer(6, 3, 5) ||
+               romType9CorrectAnswer(6, 4, 5) ||
+               romType9CorrectAnswer(6, 5, 4))
+            )
+            leaderboard(
+                 id = 150950,
+                 title       = getQuestionTitle(6101), 
+                 description = getQuestionDescription(6101),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 0),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150951,
+                 title       = getQuestionTitle(6102), 
+                 description = getQuestionDescription(6102),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 1),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150952,
+                 title       = getQuestionTitle(6103), 
+                 description = getQuestionDescription(6103),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 2),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150953,
+                 title       = getQuestionTitle(6104), 
+                 description = getQuestionDescription(6104),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 3),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150954,
+                 title       = getQuestionTitle(6105), 
+                 description = getQuestionDescription(6105),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 4),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150955,
+                 title       = getQuestionTitle(6106), 
+                 description = getQuestionDescription(6106),
+                 start  = romType9VideoStarted("The Proud Family", "Tween Town") &&
+                          romType9LeaderboardQuestionSelect(6, 5),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Tween Town"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Proud Family", "Twins to Tweens"), type = "progression",
+    description = getAchievementDescription("The Proud Family", "Twins to Tweens"),
+    id = 572324, badge = "650092", points = 4,
+    trigger = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+              (romType9CorrectAnswer(6, 0, 7) ||
+               romType9CorrectAnswer(6, 1, 4) ||
+               romType9CorrectAnswer(6, 2, 4) ||
+               romType9CorrectAnswer(6, 3, 5) ||
+               romType9CorrectAnswer(6, 4, 5) ||
+               romType9CorrectAnswer(6, 5, 7))
+            )
+            leaderboard(
+                 id = 150997,
+                 title       = getQuestionTitle(6201), 
+                 description = getQuestionDescription(6201),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 0),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150998,
+                 title       = getQuestionTitle(6202), 
+                 description = getQuestionDescription(6202),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 1),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 150999,
+                 title       = getQuestionTitle(6203), 
+                 description = getQuestionDescription(6203),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 2),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151000,
+                 title       = getQuestionTitle(6204), 
+                 description = getQuestionDescription(6204),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 3),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151001,
+                 title       = getQuestionTitle(6205), 
+                 description = getQuestionDescription(6205),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 4),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151002,
+                 title       = getQuestionTitle(6206), 
+                 description = getQuestionDescription(6206),
+                 start  = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
+                          romType9LeaderboardQuestionSelect(6, 5),
+                 cancel = romType9LeaderboardCancel("The Proud Family", "Twins to Tweens"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), type = "progression",
+    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"),
+    id = 572327, badge = "650095", points = 2,
+    trigger = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
+               (romType6CorrectAnswer(4, 0, 6) ||
+                romType6CorrectAnswer(4, 1, 5) ||
+                romType6CorrectAnswer(4, 2, 4) ||
+                romType6CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 151003,
+                 title       = getQuestionTitle(6301), 
+                 description = getQuestionDescription(6301),
+                 start  = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151004,
+                 title       = getQuestionTitle(6302), 
+                 description = getQuestionDescription(6302),
+                 start  = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151005,
+                 title       = getQuestionTitle(6303), 
+                 description = getQuestionDescription(6303),
+                 start  = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151006,
+                 title       = getQuestionTitle(6304), 
+                 description = getQuestionDescription(6304),
+                 start  = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Johnny Bravo", "The Perfect Gift"), type = "progression",
+    description = getAchievementDescription("Johnny Bravo", "The Perfect Gift"),
+    id = 572406, badge = "650128", points = 2,
+    trigger = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
+               (romType6CorrectAnswer(4, 0, 5) ||
+                romType6CorrectAnswer(4, 1, 5) ||
+                romType6CorrectAnswer(4, 2, 4) ||
+                romType6CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 151007,
+                 title       = getQuestionTitle(6401), 
+                 description = getQuestionDescription(6401),
+                 start  = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Johnny Bravo", "The Perfect Gift"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151008,
+                 title       = getQuestionTitle(6402), 
+                 description = getQuestionDescription(6402),
+                 start  = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Johnny Bravo", "The Perfect Gift"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151009,
+                 title       = getQuestionTitle(6403), 
+                 description = getQuestionDescription(6403),
+                 start  = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Johnny Bravo", "The Perfect Gift"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151010,
+                 title       = getQuestionTitle(6404), 
+                 description = getQuestionDescription(6404),
+                 start  = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Johnny Bravo", "The Perfect Gift"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Ed, Edd n Eddy", "Stop, Look and Ed"), type = "progression",
+    description = getAchievementDescription("Ed, Edd n Eddy", "Stop, Look and Ed"),
+    id = 572407, badge = "650129", points = 2,
+    trigger = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
+               (romType6CorrectAnswer(4, 0, 7) ||
+                romType6CorrectAnswer(4, 1, 7) ||
+                romType6CorrectAnswer(4, 2, 6) ||
+                romType6CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 151011,
+                 title       = getQuestionTitle(6501), 
+                 description = getQuestionDescription(6501),
+                 start  = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Ed, Edd n Eddy", "Stop, Look and Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151012,
+                 title       = getQuestionTitle(6502), 
+                 description = getQuestionDescription(6502),
+                 start  = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Ed, Edd n Eddy", "Stop, Look and Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151013,
+                 title       = getQuestionTitle(6503), 
+                 description = getQuestionDescription(6503),
+                 start  = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Ed, Edd n Eddy", "Stop, Look and Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151014,
+                 title       = getQuestionTitle(6504), 
+                 description = getQuestionDescription(6504),
+                 start  = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Ed, Edd n Eddy", "Stop, Look and Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), type = "progression",
+    description = getAchievementDescription("Courage the Cowardly Dog", "The Magic Tree of Nowhere"),
+    id = 572408, badge = "650130", points = 2,
+    trigger = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
+               (romType6CorrectAnswer(4, 0, 7) ||
+                romType6CorrectAnswer(4, 1, 7) ||
+                romType6CorrectAnswer(4, 2, 7) ||
+                romType6CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 151015,
+                 title       = getQuestionTitle(6601), 
+                 description = getQuestionDescription(6601),
+                 start  = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151016,
+                 title       = getQuestionTitle(6602), 
+                 description = getQuestionDescription(6602),
+                 start  = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151017,
+                 title       = getQuestionTitle(6603), 
+                 description = getQuestionDescription(6603),
+                 start  = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151018,
+                 title       = getQuestionTitle(6604), 
+                 description = getQuestionDescription(6604),
+                 start  = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -8468,17 +9126,21 @@ romType5Videos = {
 }
 
 romType6Videos = {
+    0x09896CD8: "Watching the episode 'The Magic Tree of Nowhere' from the series 'Courage the Cowardly Dog'",
+    0x08CD6D58: "Watching the episode 'Stop, Look and Ed' from the series 'Ed, Edd n Eddy'",
+    0x085EB210: "Watching the episode 'The Perfect Gift' from the series 'Johnny Bravo'",
+    0x080207BC: "Watching the episode 'Things Change' from the series 'Teenage Mutant Ninja Turtles", // English
+    0x08F65B68: "Watching the episode 'A Better Mousetrap' from the series 'Teenage Mutant Ninja Turtles",
+    0x08022CA4: "Watching the episode 'The Crawling Niceness' from the series 'The Grim Adventures of Billy & Mandy'",
     0x08021084: "Watching the episode 'Friends 'Til the End - Part 3' from the series 'Yu-Gi-Oh!'", // English
     0x08F1A7FC: "Watching the episode 'Friends 'Til the End - Part 4' from the series 'Yu-Gi-Oh!'", // English
-    0x080207BC: "Watching the episode 'Things Change' from the series 'Teenage Mutant Ninja Turtles", // English
-    0x08F65B68: "Watching the episode 'A Better Mousetrap' from the series 'Teenage Mutant Ninja Turtles", // English
 }
 
 romType7Videos = {
+    0x083F78F8: "Watching the episode 'Things Change' from the series 'Teenage Mutant Ninja Turtles", // French
+    0x091DA764: "Watching the episode 'Attack of the Mousers' from the series 'Teenage Mutant Ninja Turtles",
     0x092FA04C: "Watching the episode 'Friends 'Til the End - Part 3' from the series 'Yu-Gi-Oh!'", // French
     0x08412E50: "Watching the episode 'Friends 'Til the End - Part 4' from the series 'Yu-Gi-Oh!'", // French
-    0x083F78F8: "Watching the episode 'A Better Mousetrap' from the series 'Teenage Mutant Ninja Turtles", // French
-    0x091DA764: "Watching the episode 'Attack of the Mousers' from the series 'Teenage Mutant Ninja Turtles" // French
 }
 
 romType8Videos = {
@@ -8487,8 +9149,10 @@ romType8Videos = {
 }
 
 romType9Videos = {
-    0x08000EF8: "Watching the episode 'Depths of Fear' from the series 'Super Robot Monkey Team Hyper Force Go!'",
-    0x08FAC748: "Watching the episode 'Planetoid Q' from the series 'Super Robot Monkey Team Hyper Force Go!'",
+    0x084451D4: "Watching the episode 'Depths of Fear' from the series 'Super Robot Monkey Team Hyper Force Go!'",
+    0x093ECDB4: "Watching the episode 'Planetoid Q' from the series 'Super Robot Monkey Team Hyper Force Go!'",
+    0x08461014: "Watching the episode 'Tween Town' from the series 'The Proud Family'",
+    0x08EDF308: "Watching the episode 'Twins to Tweens' from the series 'The Proud Family'",
 }
 
 romType10Videos = {
