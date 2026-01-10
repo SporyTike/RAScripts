@@ -433,6 +433,8 @@ function usedAllGuardianStars() {
                                                                    duelState  == 0x05 &&
                                                              word(0x09B35A) != 0xFFFF &&
                                                              word(0x09B35A) != prev(word(0x09B35A)) &&
+                                                             byte(0x0E9F58) == 0x02 &&
+                                                             dword(0x0E9F64) == 0x00 &&
                                                              byte(0x09B344) == guardianStars[guardianStar - 0x18]))                                                
 }
 
