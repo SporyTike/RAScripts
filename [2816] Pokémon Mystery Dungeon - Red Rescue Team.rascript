@@ -469,7 +469,7 @@ friendAreas = [
     ["Poison Swamp",    0x03C9F0,  06],
     ["Power Plant",     0x03E0F8,  06],
     ["Rainbow Peak",    0x038BB8,  01],
-    ["Ravaged Field",   0x03FD28,  05],
+    ["Ravaged Field",   0x03FCD0,  05],
     ["Rub-a-Dub River", 0x03BBD8,  07],
     ["Sacred Field",    0x03A1B8,  03],
     ["Safari",          0x039920,  15],
@@ -540,8 +540,9 @@ function checkfriendAreaGotNewPokemon(friendAreaName) {
         code = code || word(memoryStart + (i * 0x58) + 0x08) != prev(word(memoryStart + (i * 0x58) + 0x08)) ||
                        bit0(memoryStart + (i * 0x58)) > prev(bit0(memoryStart + (i * 0x58)))
     }
-    return byte(0x00C139) > 0 &&
-           word(0x040390) != 0x00 &&
+    return __ornext(byte(0x041DE0) == 0x08 ||
+                    byte(0x00C139) > 0) &&
+           word(0x027590) != 0x00 &&
            __ornext(code)
 }
 
