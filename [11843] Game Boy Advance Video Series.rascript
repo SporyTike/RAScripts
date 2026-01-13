@@ -120,6 +120,16 @@ mem_romType10MenuState       = 0x007E94
 mem_romType10RNG             = 0x007F98
     // Disney Channel Collection - Volume 1
     
+mem_romType11EpisodePointer  = 0x0066BC
+mem_romType11VideoState      = 0x047790
+mem_romType11SceneCountdown  = 0x006714
+mem_romType11VideoPlaytime   = 0x00671C
+mem_romType11CurrentChapter  = 0x006724
+mem_romType11Input           = 0x007EAC
+mem_romType11MenuState       = 0x007E94
+mem_romType11RNG             = 0x007F98
+    // Cartoon Network Collection - Volume 2
+    
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -160,6 +170,15 @@ episodes = [
         01,         // Rom-Type 1
     ],
     [
+        "Codename: Kids Next Door",
+        "Operation: T.U.R.N.I.P.",
+        "Cartoon Network Collection - Volume 2",
+        0x08263AC4, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F46, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
         "Courage the Cowardly Dog",
         "The Magic Tree of Nowhere",
         "Cartoon Network Collection - Volume 1",
@@ -167,6 +186,15 @@ episodes = [
         0x00000005, // Chapters
         0x00001FD8, // Total Playtime
         06,         // Rom-Type 6
+    ],
+    [
+        "Courage the Cowardly Dog",
+        "Courage the Fly",
+        "Cartoon Network Collection - Volume 2",
+        0x08A10078, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F88, // Total Playtime
+        11,         // Rom-Type 11
     ],
     [
         "Danny Phantom",
@@ -230,6 +258,15 @@ episodes = [
         0x00000005, // Chapters
         0x00001496, // Total Playtime
         06,         // Rom-Type 6
+    ],
+    [
+        "Johnny Bravo",
+        "Balloon Platoon",
+        "Cartoon Network Collection - Volume 2",
+        0x0955AF24, // Episode Pointer
+        0x00000005, // Chapters
+        0x000015C9, // Total Playtime
+        11,         // Rom-Type 11
     ],
     [
         "Kim Possible",
@@ -572,6 +609,15 @@ episodes = [
         0x00000005, // Chapters
         0x00001683, // Total Playtime
         06,         // Rom-Type 6
+    ],
+    [
+        "The Grim Adventures of Billy & Mandy",
+        "Mandy the Merciless",
+        "Cartoon Network Collection - Volume 2",
+        0x08F7EC0C, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000155E, // Total Playtime
+        11,         // Rom-Type 11
     ],
     [
         "The Fairly OddParents!",
@@ -3542,6 +3588,70 @@ questions = [
             "Flowers"
     ],
     [
+        6701,
+        "What did General Horton compliment about his subordinate?",
+            "Badges",
+            "Haircut",
+            "Uniform",
+            "Socks"
+    ],
+    [
+        6702,
+        "Which object did Eustace not hit Muriel in the face with?",
+            "Insecticide",
+            "Swatter",
+            "Bug Zapper",
+            "Flypaper"
+    ],
+    [
+        6703,
+        "What did Muriel offer the fly to calm it down?",
+            "Sugar",
+            "Apple",
+            "Meat",
+            "Soda"
+    ],
+    [
+        6704,
+        "What did the strange guy turn the agents into using his potion?",
+            "Buffalos",
+            "Antilopes",
+            "Zebras",
+            "Lions"
+    ],
+    [
+        6801,
+        "What did Johnny bring to his observation of Raymond he made with Suzi?",
+            "Binoculars",
+            "Microphone",
+            "Camera",
+            "Night Goggles"
+    ],
+    [
+        6802,
+        "What was Johnny's job during his team's water bomb preparation?",
+            "Filling",
+            "Knoting",
+            "Stamping",
+            "Stacking"
+    ],
+    [
+        6803,
+        "Who was supposedly captured by the enemy during the water bomb war?",
+            "Suzy",
+            "Carl",
+            "Johnny",
+            "Raymond"
+    ],
+    [
+        6804,
+        "What size must Johnny's brain be based on the tourist guide?",
+            "Cashew",
+            "Pistachio",
+            "Peanut",
+            "Walnut"
+    ],
+    [
         0001,
         "?",
             "",
@@ -4424,6 +4534,85 @@ function romType10LeaderboardCancel(series, episode) {
            dword(mem_romType10EpisodePointer) != getEpisodePointer(series, episode))
 }
 
+
+
+function romType11Cartridge() {
+    return isCartridge(0xE5801000, 0xE5801004, 0xE12FFF1E, 0xE5801000) && dword(0x0384) == 0xEB0009D6
+}
+
+function romType11RunningVideo() {
+    return (dword(mem_romType11MenuState) == 0x13 &&
+            dword(mem_romType11VideoPlaytime) > 0) ||
+           dword(mem_romType11MenuState) == 0x18
+}
+
+function romType11VideoStarted(series, episode) {
+    return unless(!romType11Cartridge()) &&
+           once(dword(mem_romType11EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType11VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType11VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType11CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType11SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType11VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType11MenuState) == 0x18) &&
+           never(dword(mem_romType11VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType11VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType11MenuState) == 0x13 &&
+                 prev(dword(mem_romType11VideoState)) != 0x04 &&
+                 prev(dword(mem_romType11VideoState)) != 0x08 &&
+                      dword(mem_romType11VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType11MenuState) == 0x18)) &&
+           never(dword(mem_romType11MenuState) == 0x15)
+}
+
+function romType11CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType11EpisodePointer) != 0x00 &&
+                             prev(dword(mem_romType11MenuState)) == 0x15 &&
+                                  dword(mem_romType11MenuState)  == 0x13 &&
+                prior(low4(mem_romType11RNG)) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType11MenuState) == 0x15 &&
+                      dword(mem_romType11EpisodePointer) == 0x00000000))) &&
+           trigger_when(dword(mem_romType11MenuState) == 0x18) &&
+           trigger_when(bit0(mem_romType11Input + 0x01)
+                      + bit1(mem_romType11Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType11Input) > prev(bit(index % 4 + 4, mem_romType11Input))) &&
+           never(once(dword(mem_romType11MenuState) == 0x18 &&
+                bit0(mem_romType11Input + 0x01)
+              + bit1(mem_romType11Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType11Input)
+              + bit((index + 2) % 4 + 4, mem_romType11Input)
+              + bit((index + 3) % 4 + 4, mem_romType11Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType11Input)
+                      + bit((index + 2) % 4 + 4, mem_romType11Input)
+                      + bit((index + 3) % 4 + 4, mem_romType11Input) == 0)
+}
+
+function romType11LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType11MenuState) == 0x18 &&
+           once(dword(mem_romType11EpisodePointer) != 0x00 &&
+                prev(dword(mem_romType11MenuState)) == 0x15 &&
+                     dword(mem_romType11MenuState)  == 0x13 &&
+                prior(low4(mem_romType11RNG)) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType11MenuState) == 0x15))
+}
+
+function romType11LeaderboardCancel(series, episode) {
+    return (dword(mem_romType11SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType11MenuState) == 0x18 &&
+                          never(dword(mem_romType11MenuState) == 0x15 &&
+                           prev(dword(mem_romType11MenuState)) != 0x15))) ||
+           (prev(dword(mem_romType11EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType11EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType11Input + 0x01)
+          + bit1(mem_romType11Input + 0x01) >= 1 &&
+            bit(4, mem_romType11Input)
+          + bit(5, mem_romType11Input)
+          + bit(6, mem_romType11Input)
+          + bit(7, mem_romType11Input) == 1) ||
+          dword(mem_romType11MenuState) == 0x15
+}
+
 //--------------------------------------------------
 // Example Question
 
@@ -5107,10 +5296,10 @@ achievement(
     description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"),
     id = 97411, badge = "107027", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
-              (romType3CorrectAnswer(4, 0, 6) ||
-               romType3CorrectAnswer(4, 1, 5) ||
-               romType3CorrectAnswer(4, 2, 7) ||
-               romType3CorrectAnswer(4, 3, 7))
+              (romType3CorrectAnswer(4, 0, 5) ||
+               romType3CorrectAnswer(4, 1, 4) ||
+               romType3CorrectAnswer(4, 2, 6) ||
+               romType3CorrectAnswer(4, 3, 5))
             )
             leaderboard(
                  id = 7285,
@@ -5162,10 +5351,10 @@ achievement(
     description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"),
     id = 97413, badge = "107032", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
-              (romType3CorrectAnswer(4, 0, 5) ||
-               romType3CorrectAnswer(4, 1, 4) ||
+              (romType3CorrectAnswer(4, 0, 6) ||
+               romType3CorrectAnswer(4, 1, 5) ||
                romType3CorrectAnswer(4, 2, 7) ||
-               romType3CorrectAnswer(4, 3, 6))
+               romType3CorrectAnswer(4, 3, 7))
             )
             leaderboard(
                  id = 7289,
@@ -9059,6 +9248,116 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Courage the Cowardly Dog", "Courage the Fly"), type = "progression",
+    description = getAchievementDescription("Courage the Cowardly Dog", "Courage the Fly"),
+    id = 572423, badge = "650131", points = 2,
+    trigger = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
+               (romType11CorrectAnswer(4, 0, 4) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 150651,
+                 title       = getQuestionTitle(6701), 
+                 description = getQuestionDescription(6701),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Courage the Fly"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151020,
+                 title       = getQuestionTitle(6702), 
+                 description = getQuestionDescription(6702),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Courage the Fly"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151021,
+                 title       = getQuestionTitle(6703), 
+                 description = getQuestionDescription(6703),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Courage the Fly"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151022,
+                 title       = getQuestionTitle(6704), 
+                 description = getQuestionDescription(6704),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Courage the Fly"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Johnny Bravo", "Balloon Platoon"), type = "progression",
+    description = getAchievementDescription("Johnny Bravo", "Balloon Platoon"),
+    id = 572424, badge = "650140", points = 2,
+    trigger = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
+               (romType11CorrectAnswer(4, 0, 4) ||
+                romType11CorrectAnswer(4, 1, 4) ||
+                romType11CorrectAnswer(4, 2, 5) ||
+                romType11CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 151023,
+                 title       = getQuestionTitle(6801), 
+                 description = getQuestionDescription(6801),
+                 start  = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Balloon Platoon"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151024,
+                 title       = getQuestionTitle(6802), 
+                 description = getQuestionDescription(6802),
+                 start  = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Balloon Platoon"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151025,
+                 title       = getQuestionTitle(6803), 
+                 description = getQuestionDescription(6803),
+                 start  = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Balloon Platoon"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151026,
+                 title       = getQuestionTitle(6804), 
+                 description = getQuestionDescription(6804),
+                 start  = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Balloon Platoon"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -9160,6 +9459,13 @@ romType10Videos = {
     0x08486EB0: "Watching the episode 'Slushy' from the series 'Lilo & Stitch: The Series'",
 }
 
+romType11Videos = {
+    0x08263AC4: "Watching the episode 'Operation: T.U.R.N.I.P.' from the series 'Codename: Kids Next Door'",
+    0x08A10078: "Watching the episode 'Courage the Fly' from the series 'Courage the Cowardly Dog'",
+    0x0955AF24: "Watching the episode 'Balloon Platoon' from the series 'Johnny Bravo'",
+    0x08F7EC0C: "Watching the episode 'Mandy the Merciless' from the series 'The Grim Adventures of Billy & Mandy'",
+}
+
 rich_presence_conditional_display(romType1Cartridge() && romType1RunningVideo(), 
     "{0}",
      rich_presence_lookup("romType1Videos",
@@ -9237,6 +9543,14 @@ rich_presence_conditional_display(romType10Cartridge() && romType10RunningVideo(
      rich_presence_lookup("romType10Videos",
                           dword(mem_romType10EpisodePointer),
                           romType10Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType11Cartridge() && romType11RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType11Videos",
+                          dword(mem_romType11EpisodePointer),
+                          romType11Videos,
                           fallback = "Selecting a video from their GBA video collection")
 )
 
