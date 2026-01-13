@@ -541,8 +541,8 @@ function checkfriendAreaGotNewPokemon(friendAreaName) {
                        bit0(memoryStart + (i * 0x58)) > prev(bit0(memoryStart + (i * 0x58)))
     }
     return __ornext(byte(0x041DE0) == 0x08 ||
-                    byte(0x00C139) > 0) &&
-           word(0x027590) != 0x00 &&
+            byte(0x00C139) > 0) &&
+           byte(0x04303c) != 0x00 &&
            __ornext(code)
 }
 
