@@ -2,7 +2,9 @@
 // #ID = 2816
 
 //----------------------------------------
-// Arrays and Dictionaries
+// Variables, Arrays and Dictionaries
+
+pokeSquareMapID = byte(0x041DE0)
 
 pokemonIDs = [
     [0x0001, "Bulbasaur"],
@@ -540,10 +542,31 @@ function checkfriendAreaGotNewPokemon(friendAreaName) {
         code = code || word(memoryStart + (i * 0x58) + 0x08) != prev(word(memoryStart + (i * 0x58) + 0x08)) ||
                        bit0(memoryStart + (i * 0x58)) > prev(bit0(memoryStart + (i * 0x58)))
     }
-    return __ornext(byte(0x041DE0) == 0x08 ||
-            byte(0x00C139) > 0) &&
+    return __ornext(pokeSquareMapID == 0x08 || // evolved new Friend in Luminous Cave
+                    isInFrontOfRescueBase() || // got new Friend via Wish Stone
+                    byte(0x00C139) > 0) &&     // was inside Dungeon before
            byte(0x04303c) != 0x00 &&
            __ornext(code)
+}
+
+function isInFrontOfRescueBase() {
+    return __ornext(pokeSquareMapID == 0x09 || pokeSquareMapID == 0x0A || pokeSquareMapID == 0x0B || // Pikachu Base
+                    pokeSquareMapID == 0x0F || pokeSquareMapID == 0x10 || pokeSquareMapID == 0x11 || // Meowth Base
+                    pokeSquareMapID == 0x15 || pokeSquareMapID == 0x16 || pokeSquareMapID == 0x17 || // Eevee Base
+                    pokeSquareMapID == 0x1B || pokeSquareMapID == 0x1C || pokeSquareMapID == 0x1D || // Skitty Base
+                    pokeSquareMapID == 0x21 || pokeSquareMapID == 0x22 || pokeSquareMapID == 0x23 || // Squirtle Base
+                    pokeSquareMapID == 0x27 || pokeSquareMapID == 0x28 || pokeSquareMapID == 0x29 || // Totodile Base
+                    pokeSquareMapID == 0x2D || pokeSquareMapID == 0x2E || pokeSquareMapID == 0x2F || // Mudkip Base
+                    pokeSquareMapID == 0x33 || pokeSquareMapID == 0x34 || pokeSquareMapID == 0x35 || // Psyduck Base
+                    pokeSquareMapID == 0x39 || pokeSquareMapID == 0x3A || pokeSquareMapID == 0x3B || // Charmander Base
+                    pokeSquareMapID == 0x3F || pokeSquareMapID == 0x40 || pokeSquareMapID == 0x41 || // Torchic Base
+                    pokeSquareMapID == 0x45 || pokeSquareMapID == 0x46 || pokeSquareMapID == 0x47 || // Cyndaquil Base
+                    pokeSquareMapID == 0x4B || pokeSquareMapID == 0x4C || pokeSquareMapID == 0x4D || // Cubone Base
+                    pokeSquareMapID == 0x51 || pokeSquareMapID == 0x52 || pokeSquareMapID == 0x53 || // Machop Base
+                    pokeSquareMapID == 0x57 || pokeSquareMapID == 0x58 || pokeSquareMapID == 0x59 || // Bulbasaur Base
+                    pokeSquareMapID == 0x5D || pokeSquareMapID == 0x5E || pokeSquareMapID == 0x5F || // Chikorita Base
+                    pokeSquareMapID == 0x63 || pokeSquareMapID == 0x64 || pokeSquareMapID == 0x65    // Treecko Base
+                   )
 }
 
 //----------------------------------------
