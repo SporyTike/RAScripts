@@ -128,7 +128,9 @@ mem_romType11CurrentChapter  = 0x006724
 mem_romType11Input           = 0x007EAC
 mem_romType11MenuState       = 0x007E94
 mem_romType11RNG             = 0x007F98
+    // Cartoon Network Collection - Limited Edition
     // Cartoon Network Collection - Volume 2
+
     
 //--------------------------------------------------
 // Arrays and Dictionaries
@@ -179,6 +181,15 @@ episodes = [
         11,         // Rom-Type 11
     ],
     [
+        "Codename: Kids Next Door",
+        "Operation: M.I.N.I.-G.O.L.F.",
+        "Cartoon Network Collection - Limited Edition",
+        0x094CCFDC, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000200B, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
         "Courage the Cowardly Dog",
         "The Magic Tree of Nowhere",
         "Cartoon Network Collection - Volume 1",
@@ -197,6 +208,15 @@ episodes = [
         11,         // Rom-Type 11
     ],
     [
+        "Courage the Cowardly Dog",
+        "Queen of the Black Puddle",
+        "Cartoon Network Collection - Limited Edition",
+        0x09B7BDF0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001EEF, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
         "Danny Phantom",
         "Attack of the Killer Garage Sale",
         "Nicktoons Collection - Volume 3",
@@ -204,6 +224,15 @@ episodes = [
         0x00000005, // Chapters
         0x00004105, // Total Playtime
         04,         // Rom-Type 4
+    ],
+    [
+        "Dexter's Laboratory",
+        "The Big Sister",
+        "Cartoon Network Collection - Limited Edition",
+        0x08CDC354, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014C5, // Total Playtime
+        11,         // Rom-Type 11
     ],
     [
         "Dora the Explorer",
@@ -249,6 +278,15 @@ episodes = [
         0x00000005, // Chapters
         0x00001FEF, // Total Playtime
         06,         // Rom-Type 6
+    ],
+    [
+        "Ed, Edd n Eddy",
+        "Key to My Ed",
+        "Cartoon Network Collection - Limited Edition",
+        0x0825C7D0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002019, // Total Playtime
+        11,         // Rom-Type 11
     ],
     [
         "Johnny Bravo",
@@ -3652,8 +3690,200 @@ questions = [
             "Walnut"
     ],
     [
+        6901,
+        "What animal did Mandy fuse with to become immortal?",
+            "Leech",
+            "Worm",
+            "Snake",
+            "Snail"
+    ],
+    [
+        6902,
+        "What happened to the 2187th Billy clone causing his death?",
+            "Eaten",
+            "Exploded",
+            "Smashed",
+            "Burned"
+    ],
+    [
+        6903,
+        "What powerful seasoning did the miners extract from the mines?",
+            "Turmeric",
+            "Salt",
+            "Sugar",
+            "Cinnamon"
+    ],
+    [
+        6904,
+        "What did Mandy tell Billy was her only weakness?",
+            "Frogs",
+            "Alligators",
+            "Lizards",
+            "Snakes"
+    ],
+    [
+        7001,
+        "In which device inside their base did the kids not find turnips?",
+            "Soda Machine",
+            "Microwave",
+            "Water Cooler",
+            "Fridge"
+    ],
+    [
+        7002,
+        "What was the name of the drill vehicle the kids used?",
+            "P.I.P.E.P.O.D.",
+            "B.L.E.N.D.A.A.R.",
+            "C.O.O.L.B.U.S.",
+            "R.O.A.D.S.T.A.R."
+    ],
+    [
+        7003,
+        "Who called H.I.P.P.I.E.-H.O.P. to the giant turnip?",
+            "Numbuh 1",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4"
+    ],
+    [
+        7004,
+        "Who did the final attack on the giant turnip?",
+            "Numbuh 1",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4"
+    ],
+    [
+        7101,
+        "Where did Eustace see the Black Puddle Queen for the first time?",
+            "Puddle",
+            "Bucket",
+            "Tea Cup",
+            "Bathtub"
+    ],
+    [
+        7102,
+        "What did Courage not try to do to cheer up Muriel?",
+            "Balloons",
+            "Ice Cream",
+            "Flowers",
+            "Puppets"
+    ],
+    [
+        7103,
+        "What did Courage get from the sunken ship inside the puddle?",
+            "Cannon",
+            "Fishing Rod",
+            "Harpoon",
+            "Chains"
+    ],
+    [
+        7104,
+        "What water source did Courage use to escape the underwater place?",
+            "Bucket",
+            "Puddle",
+            "Bathtub",
+            "Tears"
+    ],
+    [
+        7201,
+        "What mixture did Edd mix together that Ed drank?",
+            "Milkshake",
+            "Ice Tea",
+            "Soda",
+            "Smoothie"
+    ],
+    [
+        7202,
+        "What animal did Ed try to use the key on?",
+            "Sheep",
+            "Cow",
+            "Pig",
+            "Horse"
+    ],
+    [
+        7203,
+        "Which kid did Eddy trip over at 3:00 p.m.?",
+            "Jonny",
+            "Rolf",
+            "Kevin",
+            "Jimmy"
+    ],
+    [
+        7204,
+        "What was the object that could be opened with the lost key?",
+            "Door",
+            "Chest",
+            "Locker",
+            "Car"
+    ],
+    [
+        7301,
+        "What animal did Dee Dee dress up as to get a chocolate cookie?",
+            "Parrot",
+            "Hamster",
+            "Rat",
+            "Pidgeon"
+    ],
+    [
+        7302,
+        "What media did Dexter use to check the mess that Dee Dee caused?",
+            "Television",
+            "Internet",
+            "Radio",
+            "Newspaper"
+    ],
+    [
+        7303,
+        "What did Dee Dee want to do with Dexter after beating his robot?",
+            "Dress Up",
+            "Play Tag",
+            "Kiss",
+            "Dance"
+    ],
+    [
+        7304,
+        "What did the modified chocolate cookies turn Dexter’s mom into?",
+            "Rat",
+            "Elephant",
+            "Dragon",
+            "Alien"
+    ],
+    [
+        7401,
+        "Who did Rupert Puttkin accidentally hit with a golf ball?",
+            "Numbuh 1",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4"
+    ],
+    [
+        7402,
+        "What was the gimmick of the 18th hole where Rupert Puttkin lost?",
+            "Water Mill",
+            "Lighthouse",
+            "Clown",
+            "Alligator"
+    ],
+    [
+        7403,
+        "What monument was not part of Great Puttinski's mini-golf course?",
+            "Sphinx",
+            "Eiffel Tower",
+            "Taj Mahal",
+            "Stonehenge"
+    ],
+    [
+        7404,
+        "What did the kids play after the Great Puttinski was defeated?",
+            "Golf",
+            "Tennis",
+            "Billiard",
+            "Ping-Pong"
+    ],
+    [
         0001,
-        "?",
+        "",
             "",
             "",
             "",
@@ -9358,6 +9588,336 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), type = "progression",
+    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"),
+    id = 573717, badge = "651510", points = 2,
+    trigger = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 6) ||
+                romType11CorrectAnswer(4, 2, 4) ||
+                romType11CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 151534,
+                 title       = getQuestionTitle(6901), 
+                 description = getQuestionDescription(6901),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151535,
+                 title       = getQuestionTitle(6902), 
+                 description = getQuestionDescription(6902),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151536,
+                 title       = getQuestionTitle(6903), 
+                 description = getQuestionDescription(6903),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151537,
+                 title       = getQuestionTitle(6904), 
+                 description = getQuestionDescription(6904),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), type = "progression",
+    description = getAchievementDescription("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."),
+    id = 573725, badge = "651511", points = 2,
+    trigger = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 6) ||
+                romType11CorrectAnswer(4, 2, 7) ||
+                romType11CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 151538,
+                 title       = getQuestionTitle(7001), 
+                 description = getQuestionDescription(7001),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151539,
+                 title       = getQuestionTitle(7002), 
+                 description = getQuestionDescription(7002),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151540,
+                 title       = getQuestionTitle(7003), 
+                 description = getQuestionDescription(7003),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 151541,
+                 title       = getQuestionTitle(7004), 
+                 description = getQuestionDescription(7004),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Courage the Cowardly Dog", "Queen of the Black Puddle"), type = "progression",
+    description = getAchievementDescription("Courage the Cowardly Dog", "Queen of the Black Puddle"),
+    id = 575149, badge = "653039", points = 2,
+    trigger = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
+               (romType11CorrectAnswer(4, 0, 7) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 5) ||
+                romType11CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 152545,
+                 title       = getQuestionTitle(7101), 
+                 description = getQuestionDescription(7101),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Queen of the Black Puddle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152546,
+                 title       = getQuestionTitle(7102), 
+                 description = getQuestionDescription(7102),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Queen of the Black Puddle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152547,
+                 title       = getQuestionTitle(7103), 
+                 description = getQuestionDescription(7103),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Queen of the Black Puddle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152548,
+                 title       = getQuestionTitle(7104), 
+                 description = getQuestionDescription(7104),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Queen of the Black Puddle"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Ed, Edd n Eddy", "Key to My Ed"), type = "progression",
+    description = getAchievementDescription("Ed, Edd n Eddy", "Key to My Ed"),
+    id = 575721, badge = "653554", points = 2,
+    trigger = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
+               (romType11CorrectAnswer(4, 0, 7) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 152686,
+                 title       = getQuestionTitle(7201), 
+                 description = getQuestionDescription(7201),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Key to My Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152687,
+                 title       = getQuestionTitle(7202), 
+                 description = getQuestionDescription(7202),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Key to My Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152688,
+                 title       = getQuestionTitle(7203), 
+                 description = getQuestionDescription(7203),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Key to My Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152689,
+                 title       = getQuestionTitle(7204), 
+                 description = getQuestionDescription(7204),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Key to My Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Dexter's Laboratory", "The Big Sister"), type = "progression",
+    description = getAchievementDescription("Dexter's Laboratory", "The Big Sister"),
+    id = 575726, badge = "653562", points = 2,
+    trigger = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
+               (romType11CorrectAnswer(4, 0, 7) ||
+                romType11CorrectAnswer(4, 1, 6) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 152694,
+                 title       = getQuestionTitle(7301), 
+                 description = getQuestionDescription(7301),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "The Big Sister"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152695,
+                 title       = getQuestionTitle(7302), 
+                 description = getQuestionDescription(7302),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "The Big Sister"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152696,
+                 title       = getQuestionTitle(7303), 
+                 description = getQuestionDescription(7303),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "The Big Sister"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152697,
+                 title       = getQuestionTitle(7304), 
+                 description = getQuestionDescription(7304),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "The Big Sister"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), type = "progression",
+    description = getAchievementDescription("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."),
+    id = 576033, badge = "653807", points = 2,
+    trigger = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 4) ||
+                romType11CorrectAnswer(4, 3, 4))
+            )
+            leaderboard(
+                 id = 152730,
+                 title       = getQuestionTitle(7401), 
+                 description = getQuestionDescription(7401),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152731,
+                 title       = getQuestionTitle(7402), 
+                 description = getQuestionDescription(7402),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152732,
+                 title       = getQuestionTitle(7403), 
+                 description = getQuestionDescription(7403),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 152733,
+                 title       = getQuestionTitle(7404), 
+                 description = getQuestionDescription(7404),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -9461,7 +10021,11 @@ romType10Videos = {
 
 romType11Videos = {
     0x08263AC4: "Watching the episode 'Operation: T.U.R.N.I.P.' from the series 'Codename: Kids Next Door'",
+    0x094CCFDC: "Watching the episode 'Operation: M.I.N.I.-G.O.L.F.' from the series 'Codename: Kids Next Door'",
     0x08A10078: "Watching the episode 'Courage the Fly' from the series 'Courage the Cowardly Dog'",
+    0x09B7BDF0: "Watching the episode 'Queen of the Black Puddle' from the series 'Courage the Cowardly Dog'",
+    0x08CDC354: "Watching the episode 'The Big Sister' from the series 'Dexter's Laboratory'",
+    0x0825C7D0: "Watching the episode 'Key to My Ed' from the series 'Ed, Edd n Eddy'",
     0x0955AF24: "Watching the episode 'Balloon Platoon' from the series 'Johnny Bravo'",
     0x08F7EC0C: "Watching the episode 'Mandy the Merciless' from the series 'The Grim Adventures of Billy & Mandy'",
 }
