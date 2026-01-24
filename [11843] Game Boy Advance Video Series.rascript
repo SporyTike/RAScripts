@@ -129,7 +129,18 @@ mem_romType11Input           = 0x007EAC
 mem_romType11MenuState       = 0x007E94
 mem_romType11RNG             = 0x007F98
     // Cartoon Network Collection - Limited Edition
+    // Cartoon Network Collection - Platinum Edition (EN)
     // Cartoon Network Collection - Volume 2
+    
+mem_romType12EpisodePointer  = 0x006694
+mem_romType12VideoState      = 0x01681C
+mem_romType12SceneCountdown  = 0x0066EC
+mem_romType12VideoPlaytime   = 0x0066F4
+mem_romType12CurrentChapter  = 0x0066FC
+mem_romType12Input           = 0x007EA4
+mem_romType12MenuState       = 0x007E8C
+mem_romType12RNG             = 0x007F98
+    // Cartoon Network Collection - Édition Platinum (EN)
 
     
 //--------------------------------------------------
@@ -190,6 +201,24 @@ episodes = [
         11,         // Rom-Type 11
     ],
     [
+        "Codename: Kids Next Door",
+        "Operation: T.O.M.M.Y.",
+        "Cartoon Network Collection - Platinum Edition",
+        0x0949F318, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FA8, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Codename: Kids Next Door (FR)",
+        "Operation: T.O.M.M.Y.",
+        "Cartoon Network Collection - Édition Platinum", // French
+        0x09451920, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FA3, // Total Playtime
+        12,         // Rom-Type 12
+    ],
+    [
         "Courage the Cowardly Dog",
         "The Magic Tree of Nowhere",
         "Cartoon Network Collection - Volume 1",
@@ -215,6 +244,24 @@ episodes = [
         0x00000005, // Chapters
         0x00001EEF, // Total Playtime
         11,         // Rom-Type 11
+    ],
+    [
+        "Courage the Cowardly Dog",
+        "Cowboy Courage",
+        "Cartoon Network Collection - Platinum Edition", // English
+        0x08D14E60, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FCE, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Courage the Cowardly Dog (FR)",
+        "Cowboy Courage",
+        "Cartoon Network Collection - Édition Platinum", // French
+        0x08D20300, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FCC, // Total Playtime
+        12,         // Rom-Type 12
     ],
     [
         "Danny Phantom",
@@ -287,6 +334,24 @@ episodes = [
         0x00000005, // Chapters
         0x00002019, // Total Playtime
         11,         // Rom-Type 11
+    ],
+    [
+        "Ed, Edd n Eddy",
+        "The Luck of the Ed",
+        "Cartoon Network Collection - Platinum Edition",
+        0x0826BF04, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002041, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Ed, Edd n Eddy (FR)",
+        "The Luck of the Ed",
+        "Cartoon Network Collection - Édition Platinum", // French
+        0x0826E7D4, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000203F, // Total Playtime
+        12,         // Rom-Type 12
     ],
     [
         "Johnny Bravo",
@@ -658,6 +723,24 @@ episodes = [
         11,         // Rom-Type 11
     ],
     [
+        "The Grim Adventures of Billy & Mandy",
+        "A Grim Surprise",
+        "Cartoon Network Collection - Platinum Edition",
+        0x09AACD18, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001565, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Billy & Mandy: Adventuriers de l'Au-delà (FR)",
+        "La Surprise du Faucheur",
+        "Cartoon Network Collection - Édition Platinum", // French
+        0x09A261D4, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000153B, // Total Playtime
+        12,         // Rom-Type 12
+    ],
+    [
         "The Fairly OddParents!",
         "The Big Problem!",
         "Nicktoons Collection - Volume 1",
@@ -775,13 +858,31 @@ episodes = [
         06,         // Rom-Type 6
     ],
     [
+        "Tortues Ninja (FR)",
+        "Le déménagement",
+        "Tortues Ninja - Volume 1", // French
+        0x083F78F8, // Episode Pointer
+        0x00000005, // Chapters
+        0x0000357B, // Total Playtime
+        07,         // Rom-Type 7
+    ],
+    [
         "Teenage Mutant Ninja Turtles",
         "A Better Mousetrap",
-        "Teenage Mutant Ninja Turtles - Volume 1", // No French-version available
+        "Teenage Mutant Ninja Turtles - Volume 1",
         0x08F65B68, // Episode Pointer
         0x00000005, // Chapters
         0x0000377F, // Total Playtime
         06,         // Rom-Type 6
+    ],
+    [
+        "Tortues Ninja",
+        "Un nouveau piège à rat",
+        "Tortues Ninja - Volume 1", // No French-version available
+        0x00000000, // Episode Pointer
+        0x00000000, // Chapters
+        0x00000000, // Total Playtime
+        00,         // Not existing
     ],
     [
         "Teenage Mutant Ninja Turtles",
@@ -793,16 +894,7 @@ episodes = [
         00,         // Not existing
     ],
     [
-        "Tortues Ninja",
-        "Le déménagement",
-        "Tortues Ninja - Volume 1", // French
-        0x083F78F8, // Episode Pointer
-        0x00000005, // Chapters
-        0x0000357B, // Total Playtime
-        07,         // Rom-Type 7
-    ],
-    [
-        "Tortues Ninja",
+        "Tortues Ninja (FR)",
         "L'attaque des dératiseurs",
         "Tortues Ninja - Volume 1", // French
         0x091DA764, // Episode Pointer
@@ -829,7 +921,7 @@ episodes = [
         06,         // Rom-Type 6
     ],
     [
-        "Yu-Gi-Oh!",
+        "Yu-Gi-Oh! (FR)",
         "Amis Jusqu'au Bout - 3ème Partie",
         "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
         0x092FA04C, // Episode Pointer
@@ -838,7 +930,7 @@ episodes = [
         07,         // Rom-Type 7
     ],
     [
-        "Yu-Gi-Oh!",
+        "Yu-Gi-Oh! (FR)",
         "Amis Jusqu'au Bout - 4ème Partie",
         "Yu-Gi-Oh! Yugi vs. Joey - Volume 1", // French
         0x08412E50, // Episode Pointer
@@ -3419,7 +3511,7 @@ questions = [
     ],
     [
         6103,
-        "What character did Al Roker use to make a pun on Penny’s name?",
+        "What character did Al Roker use to make a pun on Penny's name?",
             "Peter Pan",
             "Paddington Bear",
             "Pinocchio",
@@ -3843,7 +3935,7 @@ questions = [
     ],
     [
         7304,
-        "What did the modified chocolate cookies turn Dexter’s mom into?",
+        "What did the modified chocolate cookies turn Dexter's mom into?",
             "Rat",
             "Elephant",
             "Dragon",
@@ -3880,6 +3972,262 @@ questions = [
             "Tennis",
             "Billiard",
             "Ping-Pong"
+    ],
+    [
+        7501,
+        "What did Eustance throw into the fire of the fireplace?",
+            "Bills",
+            "Postcards",
+            "Contract",
+            "Drawings"
+    ],
+    [
+        7551,
+        "Qu'a jeté Eustance dans le feu de la cheminée?",
+            "Factures",
+            "Cartes Postales",
+            "Contrat",
+            "Dessins"
+    ],
+    [
+        7502,
+        "What did Courage chew on when he became the sheriff of the town?",
+            "Chewing Tobacco",
+            "Toothpick",
+            "Bubble Gum",
+            "Wheat Straw"
+    ],
+    [
+        7552,
+        "Qu'a mâché Courage en devenant shérif de la ville?",
+            "Tabac à Chiquer",
+            "Cure-Dent",
+            "Chewing-Gum",
+            "Paille de Blé"
+    ],
+    [
+        7503,
+        "What instrument did Cowboy Courage play in Minnie's bar?",
+            "Piano",
+            "Banjo",
+            "Washboard",
+            "Harmonica"
+    ],
+    [
+        7553,
+        "Quel instrument Cowboy Courage a-t-il joué au bar de Minnie?",
+            "Piano",
+            "Banjo",
+            "Planche à Laver",
+            "Harmonica"
+    ],
+    [
+        7504,
+        "Where was the safe in the Mayor's office hidden?",
+            "Bookshelf",
+            "Rug",
+            "Bed",
+            "Picture"
+    ],
+    [
+        7554,
+        "Où le coffre-fort du maire était-il caché?",
+            "Bibliothèque",
+            "Tapis",
+            "Lit",
+            "Tableau"
+    ],
+    [
+        7601,
+        "What hat did Eddy wear when he brought his stuff outside?",
+            "Sombrero",
+            "Pirate Hat",
+            "Paper Hat",
+            "Military Helmet"
+    ],
+    [
+        7651,
+        "Quel chapeau Eddy portait-il en sortant ses affaires?",
+            "Sombrero",
+            "Chapeau de Pirate",
+            "Chapeau en Papier",
+            "Casque Militaire"
+    ],
+    [
+        7602,
+        "Over what object did Ed trip while hiding the magazines?",
+            "Branch",
+            "Rubber Chicken",
+            "Water Hose",
+            "Bucket",
+    ],
+    [
+        7652,
+        "Sur quoi Ed a-t-il trébuché en cachant les magazines?",
+            "Branche",
+            "Poulet en Caoutchouc",
+            "Tuyau d'Arrosage",
+            "Seau"
+    ],
+    [
+        7603,
+        "What food did Edd use to take a better look of Ed's head?",
+            "Cupcake",
+            "Pizza",
+            "Sandwich",
+            "Ice Cream"
+    ],
+    [
+        7653,
+        "Quel aliment Edd a-t-il utilisé pour mieux voir la tête d'Ed?",
+            "Cupcake",
+            "Pizza",
+            "Sandwich",
+            "Glace"
+    ],
+    [
+        7604,
+        "What did Ed dig up in the sandbox?",
+            "Sock",
+            "Magazine",
+            "Toy Car",
+            "Toothbrush"
+    ],
+    [
+        7654,
+        "Qu'est-ce qu'Ed a déterré dans le bac à sable?",
+            "Chaussette",
+            "Magazine",
+            "Voiture Jouet",
+            "Brosse à Dents"
+    ],
+    [
+        7701,
+        "Where did Billy tell Grim his plan for Mandy's birthday party?",
+            "Bathroom",
+            "Storage Room",
+            "Cellar",
+            "Attic"
+    ],
+    [
+        7751,
+        "Où Billy a-t-il dit à Grim son plan pour l'anniversaire de Mandy?",
+            "Salle de Bain",
+            "Débarras",
+            "Cave",
+            "Grenier"
+    ],
+    [
+        7702,
+        "What did Billy use to mix the cake batter?",
+            "Spatula",
+            "Bone",
+            "Ladle",
+            "Scythe"
+    ],
+    [
+        7752,
+        "Avec quoi Billy a-t-il mélangé la pâte à gâteau ?",
+            "Spatule",
+            "Os",
+            "Louche",
+            "Faux"
+    ],
+    [
+        7703,
+        "How did Billy and Grim hide from Mandy in the corridor?",
+            "Inside Clock",
+            "Behind Door",
+            "Under Rug",
+            "As Statues"
+    ],
+    [
+        7753,
+        "Comment Billy et Grim se sont-ils cachés dans le couloir?",
+            "Dans l'Horloge",
+            "Derrière la Porte",
+            "Sous le Tapis",
+            "En Statues"
+    ],
+    [
+        7704,
+        "According to Mandy when will her next birthday be?",
+            "3 Months",
+            "5 Months",
+            "7 Months",
+            "9 Months"
+    ],
+    [
+        7754,
+        "Selon Mandy, quand sera son prochain anniversaire?",
+            "3 Mois",
+            "5 Mois",
+            "7 Mois",
+            "9 Mois"
+    ],
+    [
+        7801,
+        "Where did Numbuh 3 play on the playground?",
+            "Sandbox",
+            "Swings",
+            "Slide",
+            "Seesaw"
+    ],
+    [
+        7851,
+        "Où Numéro 3 jouait-elle dans la cour de récréation?",
+            "Bac à Sable",
+            "Balançoires",
+            "Toboggan",
+            "Bascule"
+    ],
+    [
+        7802,
+        "What was used as ammo for the weapon Numbuh 2 used?",
+            "Juice",
+            "Mails",
+            "Candies",
+            "Rocks"
+    ],
+    [
+        7852,
+        "Qu'a-t-on utilisé comme munitions pour l'arme de Numéro 2?",
+            "Jus",
+            "Courriers",
+            "Bonbons",
+            "Cailloux"
+    ],
+    [
+        7803,
+        "Where did Numéro 3 hide from the vacuum tentacles?",
+            "Plushies",
+            "Bed",
+            "Closet",
+            "Bathroom"
+    ],
+    [
+        7853,
+        "Où Numéro 3 s'est-elle cachée des tentacules de l'aspirateur?",
+            "Peluches",
+            "Lit",
+            "Placard",
+            "Salle de Bain"
+    ],
+    [
+        7804,
+        "What did Numbuh 2's mother give the kids to fight the cold?",
+            "Tea",
+            "Hot Chocolate",
+            "Oatmeal",
+            "Soup"
+    ],
+    [
+        7854,
+        "Que la mère de Numéro 2 a-t-elle donné contre le froid?",
+            "Thé",
+            "Chocolat Chaud",
+            "Flocons d'Avoine",
+            "Soupe"
     ],
     [
         0001,
@@ -4431,7 +4779,7 @@ function romType6LeaderboardCancel(series, episode) {
 
 
 function romType7Cartridge() {
-    return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C)
+    return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) && dword(0x7EC0) == 0x08000E80
 }
 
 function romType7RunningVideo() {
@@ -4841,6 +5189,93 @@ function romType11LeaderboardCancel(series, episode) {
           + bit(6, mem_romType11Input)
           + bit(7, mem_romType11Input) == 1) ||
           dword(mem_romType11MenuState) == 0x15
+}
+
+
+
+function romType12Cartridge() {
+    return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) && dword(0x7EC0) == 0x08000E98
+}
+
+function romType12RunningVideo() {
+    return (dword(mem_romType12MenuState) == 0x15 &&
+            dword(mem_romType12VideoPlaytime) > 0) ||
+           dword(mem_romType12MenuState) == 0x1A
+                    
+}
+
+function romType12VideoStarted(series, episode) {
+    return unless(!romType12Cartridge()) &&
+           once(dword(mem_romType12EpisodePointer) == getEpisodePointer(series, episode) &&
+                prev(dword(mem_romType12VideoPlaytime)) == 0x00 &&
+                     dword(mem_romType12VideoPlaytime)  == 0x01) &&
+           trigger_when(dword(mem_romType12CurrentChapter) == getTotalChapters(series, episode)) &&
+           trigger_when(dword(mem_romType12SceneCountdown) == 0x00000000) &&
+           trigger_when(prior(dword(mem_romType12VideoPlaytime)) >= getTotalPlaytime(series, episode) - 3) &&
+           trigger_when(prior(dword(mem_romType12VideoPlaytime)) <= getTotalPlaytime(series, episode) + 3) &&
+           trigger_when(dword(mem_romType12MenuState) == 0x1A) &&
+           never(prev(dword(mem_romType12EpisodePointer) == getEpisodePointer(series, episode)) &&
+                      dword(mem_romType12EpisodePointer) == 0x00000000) &&
+           never(dword(mem_romType12VideoPlaytime) > 0x00000000 &&
+                 dword(mem_romType12VideoPlaytime) < getTotalPlaytime(series, episode) - 3 &&
+                 dword(mem_romType12MenuState) == 0x15 &&
+                 prev(dword(mem_romType12VideoState)) != 0x04 &&
+                 prev(dword(mem_romType12VideoState)) != 0x08 &&
+                      dword(mem_romType12VideoState)  == 0x08) &&
+           never(repeated(600, dword(mem_romType12MenuState) == 0x1A)) &&
+           never(dword(mem_romType12MenuState) == 0x00 &&
+                 dword(mem_romType12EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType12CorrectAnswer(totalQuestion, currentQuestion, index) {
+    return trigger_when(once(dword(mem_romType12EpisodePointer) == 0x00 &&
+                             prev(dword(mem_romType12MenuState)) == 0x00 &&
+                                  dword(mem_romType12MenuState)  == 0x15 &&
+                prior(low4(mem_romType12RNG)) % totalQuestion == currentQuestion &&
+                never(dword(mem_romType12MenuState) == 0x00 &&
+                      dword(mem_romType12EpisodePointer) == 0x00000000))) &&
+           trigger_when(dword(mem_romType12MenuState) == 0x1A) &&
+           trigger_when(bit0(mem_romType12Input + 0x01)
+                      + bit1(mem_romType12Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romType12Input) > prev(bit(index % 4 + 4, mem_romType12Input))) &&
+           never(once(dword(mem_romType12MenuState) == 0x1A &&
+                bit0(mem_romType12Input + 0x01)
+              + bit1(mem_romType12Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romType12Input)
+              + bit((index + 2) % 4 + 4, mem_romType12Input)
+              + bit((index + 3) % 4 + 4, mem_romType12Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romType12Input)
+                      + bit((index + 2) % 4 + 4, mem_romType12Input)
+                      + bit((index + 3) % 4 + 4, mem_romType12Input) == 0)
+}
+
+function romType12LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    return dword(mem_romType12MenuState)  == 0x1A &&
+           once(dword(mem_romType12EpisodePointer) == 0x00 &&
+                prev(dword(mem_romType12MenuState)) == 0x00 &&
+                     dword(mem_romType12MenuState)  == 0x15 &&
+                prior(low4(mem_romType12RNG)) % totalQuestion == currentQuestion &&
+                never(byte(mem_romType12MenuState) == 0x00 &&
+                      dword(mem_romType12EpisodePointer) == 0x00000000))
+}
+
+function romType12LeaderboardCancel(series, episode) {
+    return (dword(mem_romType12SceneCountdown) != 0x00000000) ||
+           (repeated(600, dword(mem_romType12MenuState) == 0x1A &&
+                          never(dword(mem_romType12MenuState) == 0x00 &&
+                           prev(dword(mem_romType12EpisodePointer)) != 0x00000000 &&
+                                dword(mem_romType12EpisodePointer)  == 0x00000000))) ||
+           (prev(dword(mem_romType12EpisodePointer) == getEpisodePointer(series, episode)) &&
+                 dword(mem_romType12EpisodePointer) == 0x00000000) ||
+           (bit0(mem_romType12Input + 0x01)
+          + bit1(mem_romType12Input + 0x01) >= 1 &&
+            bit(4, mem_romType12Input)
+          + bit(5, mem_romType12Input)
+          + bit(6, mem_romType12Input)
+          + bit(7, mem_romType12Input) == 1) ||
+          (dword(mem_romType12MenuState) == 0x00 &&
+           dword(mem_romType12EpisodePointer) != getEpisodePointer(series, episode))
 }
 
 //--------------------------------------------------
@@ -7707,7 +8142,7 @@ achievement(
                  romType6CorrectAnswer(6, 3, 4) ||
                  romType6CorrectAnswer(6, 4, 4) ||
                  romType6CorrectAnswer(6, 5, 5))) ||
-              (romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+              (romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                 (romType7CorrectAnswer(6, 0, 7) ||
                  romType7CorrectAnswer(6, 1, 6) ||
                  romType7CorrectAnswer(6, 2, 5) ||
@@ -7785,9 +8220,9 @@ achievement(
                  id = 149828,
                  title       = getQuestionTitle(4651), 
                  description = getQuestionDescription(4651),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 0),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7796,9 +8231,9 @@ achievement(
                  id = 149829,
                  title       = getQuestionTitle(4652), 
                  description = getQuestionDescription(4652),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 1),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7807,9 +8242,9 @@ achievement(
                  id = 149830,
                  title       = getQuestionTitle(4653), 
                  description = getQuestionDescription(4653),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 2),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7818,9 +8253,9 @@ achievement(
                  id = 149831,
                  title       = getQuestionTitle(4654), 
                  description = getQuestionDescription(4654),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 3),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7829,9 +8264,9 @@ achievement(
                  id = 149832,
                  title       = getQuestionTitle(4655), 
                  description = getQuestionDescription(4655),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 4),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7840,9 +8275,9 @@ achievement(
                  id = 149833,
                  title       = getQuestionTitle(4656), 
                  description = getQuestionDescription(4656),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 5),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 3ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 3ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7859,7 +8294,7 @@ achievement(
                  romType6CorrectAnswer(6, 3, 7) ||
                  romType6CorrectAnswer(6, 4, 6) ||
                  romType6CorrectAnswer(6, 5, 4))) ||
-              (romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+              (romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                 (romType7CorrectAnswer(6, 0, 7) ||
                  romType7CorrectAnswer(6, 1, 4) ||
                  romType7CorrectAnswer(6, 2, 4) ||
@@ -7937,9 +8372,9 @@ achievement(
                  id = 149834,
                  title       = getQuestionTitle(4751), 
                  description = getQuestionDescription(4751),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 0),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7948,9 +8383,9 @@ achievement(
                  id = 149835,
                  title       = getQuestionTitle(4752), 
                  description = getQuestionDescription(4752),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 1),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7959,9 +8394,9 @@ achievement(
                  id = 149836,
                  title       = getQuestionTitle(4753), 
                  description = getQuestionDescription(4753),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 2),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7970,9 +8405,9 @@ achievement(
                  id = 149837,
                  title       = getQuestionTitle(4754), 
                  description = getQuestionDescription(4754),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 3),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7981,9 +8416,9 @@ achievement(
                  id = 149838,
                  title       = getQuestionTitle(4755), 
                  description = getQuestionDescription(4755),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 4),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -7992,9 +8427,9 @@ achievement(
                  id = 149839,
                  title       = getQuestionTitle(4756), 
                  description = getQuestionDescription(4756),
-                 start  = romType7VideoStarted("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie") &&
+                 start  = romType7VideoStarted("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie") &&
                           romType7LeaderboardQuestionSelect(6, 5),
-                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh!", "Amis Jusqu'au Bout - 4ème Partie"), 
+                 cancel = romType7LeaderboardCancel("Yu-Gi-Oh! (FR)", "Amis Jusqu'au Bout - 4ème Partie"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8643,7 +9078,7 @@ achievement(
                  romType6CorrectAnswer(6, 3, 6) ||
                  romType6CorrectAnswer(6, 4, 4) ||
                  romType6CorrectAnswer(6, 5, 7))) ||
-              (romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+              (romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                 (romType7CorrectAnswer(6, 0, 7) ||
                  romType7CorrectAnswer(6, 1, 4) ||
                  romType7CorrectAnswer(6, 2, 4) ||
@@ -8721,9 +9156,9 @@ achievement(
                  id = 150664,
                  title       = getQuestionTitle(5651), 
                  description = getQuestionDescription(5651),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 0),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8732,9 +9167,9 @@ achievement(
                  id = 150665,
                  title       = getQuestionTitle(5652), 
                  description = getQuestionDescription(5652),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 1),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8743,9 +9178,9 @@ achievement(
                  id = 150666,
                  title       = getQuestionTitle(5653), 
                  description = getQuestionDescription(5653),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 2),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8754,9 +9189,9 @@ achievement(
                  id = 150667,
                  title       = getQuestionTitle(5654), 
                  description = getQuestionDescription(5654),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 3),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8765,9 +9200,9 @@ achievement(
                  id = 150668,
                  title       = getQuestionTitle(5655), 
                  description = getQuestionDescription(5655),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 4),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8776,9 +9211,9 @@ achievement(
                  id = 150669,
                  title       = getQuestionTitle(5656), 
                  description = getQuestionDescription(5656),
-                 start  = romType7VideoStarted("Tortues Ninja", "Le déménagement") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "Le déménagement") &&
                           romType7LeaderboardQuestionSelect(6, 5),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "Le déménagement"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "Le déménagement"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8867,7 +9302,7 @@ achievement(
     title = getAchievementTitle("Teenage Mutant Ninja Turtles", "Attack of the Mousers"), type = "progression",
     description = getAchievementDescription("Teenage Mutant Ninja Turtles", "Attack of the Mousers"),
     id = 571103, badge = "648803", points = 4,
-    trigger = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+    trigger = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                (romType7CorrectAnswer(6, 0, 7) ||
                 romType7CorrectAnswer(6, 1, 5) ||
                 romType7CorrectAnswer(6, 2, 6) ||
@@ -8879,9 +9314,9 @@ achievement(
                  id = 150676,
                  title       = getQuestionTitle(5851), 
                  description = getQuestionDescription(5851),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 0),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8890,9 +9325,9 @@ achievement(
                  id = 150677,
                  title       = getQuestionTitle(5852), 
                  description = getQuestionDescription(5852),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 1),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8901,9 +9336,9 @@ achievement(
                  id = 150678,
                  title       = getQuestionTitle(5853), 
                  description = getQuestionDescription(5853),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 2),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8912,9 +9347,9 @@ achievement(
                  id = 150679,
                  title       = getQuestionTitle(5854), 
                  description = getQuestionDescription(5854),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 3),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8923,9 +9358,9 @@ achievement(
                  id = 150680,
                  title       = getQuestionTitle(5855), 
                  description = getQuestionDescription(5855),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 4),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -8934,9 +9369,9 @@ achievement(
                  id = 150681,
                  title       = getQuestionTitle(5856), 
                  description = getQuestionDescription(5856),
-                 start  = romType7VideoStarted("Tortues Ninja", "L'attaque des dératiseurs") &&
+                 start  = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                           romType7LeaderboardQuestionSelect(6, 5),
-                 cancel = romType7LeaderboardCancel("Tortues Ninja", "L'attaque des dératiseurs"), 
+                 cancel = romType7LeaderboardCancel("Tortues Ninja (FR)", "L'attaque des dératiseurs"), 
                  submit = always_false(), 
                  value  = always_true(),
                  format = "Frames"
@@ -9918,6 +10353,422 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Courage the Cowardly Dog", "Cowboy Courage"), type = "progression",
+    description = getAchievementDescription("Courage the Cowardly Dog", "Cowboy Courage"),
+    id = 576870, badge = "654248", points = 2,
+    trigger = (romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
+               (romType11CorrectAnswer(4, 0, 6) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 7) ||
+                romType11CorrectAnswer(4, 3, 4))) ||
+              (romType12VideoStarted("Courage the Cowardly Dog (FR)", "Cowboy Courage") &&
+               (romType12CorrectAnswer(4, 0, 6) ||
+                romType12CorrectAnswer(4, 1, 7) ||
+                romType12CorrectAnswer(4, 2, 7) ||
+                romType12CorrectAnswer(4, 3, 4)))
+            )
+            leaderboard(
+                 id = 153543,
+                 title       = getQuestionTitle(7501), 
+                 description = getQuestionDescription(7501),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153544,
+                 title       = getQuestionTitle(7502), 
+                 description = getQuestionDescription(7502),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153545,
+                 title       = getQuestionTitle(7503), 
+                 description = getQuestionDescription(7503),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153546,
+                 title       = getQuestionTitle(7504), 
+                 description = getQuestionDescription(7504),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153559,
+                 title       = getQuestionTitle(7551), 
+                 description = getQuestionDescription(7551),
+                 start  = romType12VideoStarted("Courage the Cowardly Dog (FR)", "Cowboy Courage") &&
+                          romType12LeaderboardQuestionSelect(4, 0),
+                 cancel = romType12LeaderboardCancel("Courage the Cowardly Dog (FR)", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153560,
+                 title       = getQuestionTitle(7552), 
+                 description = getQuestionDescription(7552),
+                 start  = romType12VideoStarted("Courage the Cowardly Dog (FR)", "Cowboy Courage") &&
+                          romType12LeaderboardQuestionSelect(4, 1),
+                 cancel = romType12LeaderboardCancel("Courage the Cowardly Dog (FR)", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153561,
+                 title       = getQuestionTitle(7553), 
+                 description = getQuestionDescription(7553),
+                 start  = romType12VideoStarted("Courage the Cowardly Dog (FR)", "Cowboy Courage") &&
+                          romType12LeaderboardQuestionSelect(4, 2),
+                 cancel = romType12LeaderboardCancel("Courage the Cowardly Dog (FR)", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153562,
+                 title       = getQuestionTitle(7554), 
+                 description = getQuestionDescription(7554),
+                 start  = romType12VideoStarted("Courage the Cowardly Dog (FR)", "Cowboy Courage") &&
+                          romType12LeaderboardQuestionSelect(4, 3),
+                 cancel = romType12LeaderboardCancel("Courage the Cowardly Dog (FR)", "Cowboy Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Ed, Edd n Eddy", "The Luck of the Ed"), type = "progression",
+    description = getAchievementDescription("Ed, Edd n Eddy", "The Luck of the Ed"),
+    id = 576982, badge = "654347", points = 2,
+    trigger = (romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
+               (romType11CorrectAnswer(4, 0, 6) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 4))) ||
+              (romType12VideoStarted("Ed, Edd n Eddy (FR)", "The Luck of the Ed") &&
+               (romType12CorrectAnswer(4, 0, 6) ||
+                romType12CorrectAnswer(4, 1, 5) ||
+                romType12CorrectAnswer(4, 2, 6) ||
+                romType12CorrectAnswer(4, 3, 4)))
+            )
+            leaderboard(
+                 id = 153564,
+                 title       = getQuestionTitle(7601), 
+                 description = getQuestionDescription(7601),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153565,
+                 title       = getQuestionTitle(7602), 
+                 description = getQuestionDescription(7602),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153566,
+                 title       = getQuestionTitle(7603), 
+                 description = getQuestionDescription(7603),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153567,
+                 title       = getQuestionTitle(7604), 
+                 description = getQuestionDescription(7604),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153568,
+                 title       = getQuestionTitle(7651), 
+                 description = getQuestionDescription(7651),
+                 start  = romType12VideoStarted("Ed, Edd n Eddy (FR)", "The Luck of the Ed") &&
+                          romType12LeaderboardQuestionSelect(4, 0),
+                 cancel = romType12LeaderboardCancel("Ed, Edd n Eddy (FR)", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153569,
+                 title       = getQuestionTitle(7652), 
+                 description = getQuestionDescription(7652),
+                 start  = romType12VideoStarted("Ed, Edd n Eddy (FR)", "The Luck of the Ed") &&
+                          romType12LeaderboardQuestionSelect(4, 1),
+                 cancel = romType12LeaderboardCancel("Ed, Edd n Eddy (FR)", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153570,
+                 title       = getQuestionTitle(7653), 
+                 description = getQuestionDescription(7653),
+                 start  = romType12VideoStarted("Ed, Edd n Eddy (FR)", "The Luck of the Ed") &&
+                          romType12LeaderboardQuestionSelect(4, 2),
+                 cancel = romType12LeaderboardCancel("Ed, Edd n Eddy (FR)", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153571,
+                 title       = getQuestionTitle(7654), 
+                 description = getQuestionDescription(7654),
+                 start  = romType12VideoStarted("Ed, Edd n Eddy (FR)", "The Luck of the Ed") &&
+                          romType12LeaderboardQuestionSelect(4, 3),
+                 cancel = romType12LeaderboardCancel("Ed, Edd n Eddy (FR)", "The Luck of the Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), type = "progression",
+    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "A Grim Surprise"),
+    id = 576983, badge = "654357", points = 2,
+    trigger = (romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 7) ||
+                romType11CorrectAnswer(4, 3, 5))) ||
+              (romType12VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur") &&
+               (romType12CorrectAnswer(4, 0, 5) ||
+                romType12CorrectAnswer(4, 1, 5) ||
+                romType12CorrectAnswer(4, 2, 7) ||
+                romType12CorrectAnswer(4, 3, 5)))
+            )
+            leaderboard(
+                 id = 153579,
+                 title       = getQuestionTitle(7701), 
+                 description = getQuestionDescription(7701),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153580,
+                 title       = getQuestionTitle(7702), 
+                 description = getQuestionDescription(7702),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153581,
+                 title       = getQuestionTitle(7703), 
+                 description = getQuestionDescription(7703),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153582,
+                 title       = getQuestionTitle(7704), 
+                 description = getQuestionDescription(7704),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153583,
+                 title       = getQuestionTitle(7751), 
+                 description = getQuestionDescription(7751),
+                 start  = romType12VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur") &&
+                          romType12LeaderboardQuestionSelect(4, 0),
+                 cancel = romType12LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153584,
+                 title       = getQuestionTitle(7752), 
+                 description = getQuestionDescription(7752),
+                 start  = romType12VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur") &&
+                          romType12LeaderboardQuestionSelect(4, 1),
+                 cancel = romType12LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153585,
+                 title       = getQuestionTitle(7753), 
+                 description = getQuestionDescription(7753),
+                 start  = romType12VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur") &&
+                          romType12LeaderboardQuestionSelect(4, 2),
+                 cancel = romType12LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153586,
+                 title       = getQuestionTitle(7754), 
+                 description = getQuestionDescription(7754),
+                 start  = romType12VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur") &&
+                          romType12LeaderboardQuestionSelect(4, 3),
+                 cancel = romType12LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "La Surprise du Faucheur"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), type = "progression",
+    description = getAchievementDescription("Codename: Kids Next Door", "Operation: T.O.M.M.Y."),
+    id = 576986, badge = "654380", points = 2,
+    trigger = (romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
+               (romType11CorrectAnswer(4, 0, 6) ||
+                romType11CorrectAnswer(4, 1, 6) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 4))) ||
+              (romType12VideoStarted("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y.") &&
+               (romType12CorrectAnswer(4, 0, 6) ||
+                romType12CorrectAnswer(4, 1, 6) ||
+                romType12CorrectAnswer(4, 2, 6) ||
+                romType12CorrectAnswer(4, 3, 4)))
+            )
+            leaderboard(
+                 id = 153587,
+                 title       = getQuestionTitle(7801), 
+                 description = getQuestionDescription(7801),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153588,
+                 title       = getQuestionTitle(7802), 
+                 description = getQuestionDescription(7802),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153589,
+                 title       = getQuestionTitle(7803), 
+                 description = getQuestionDescription(7803),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153590,
+                 title       = getQuestionTitle(7804), 
+                 description = getQuestionDescription(7804),
+                 start  = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153591,
+                 title       = getQuestionTitle(7851), 
+                 description = getQuestionDescription(7851),
+                 start  = romType12VideoStarted("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y.") &&
+                          romType12LeaderboardQuestionSelect(4, 0),
+                 cancel = romType12LeaderboardCancel("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153592,
+                 title       = getQuestionTitle(7852), 
+                 description = getQuestionDescription(7852),
+                 start  = romType12VideoStarted("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y.") &&
+                          romType12LeaderboardQuestionSelect(4, 1),
+                 cancel = romType12LeaderboardCancel("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153593,
+                 title       = getQuestionTitle(7853), 
+                 description = getQuestionDescription(7853),
+                 start  = romType12VideoStarted("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y.") &&
+                          romType12LeaderboardQuestionSelect(4, 2),
+                 cancel = romType12LeaderboardCancel("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153594,
+                 title       = getQuestionTitle(7854), 
+                 description = getQuestionDescription(7854),
+                 start  = romType12VideoStarted("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y.") &&
+                          romType12LeaderboardQuestionSelect(4, 3),
+                 cancel = romType12LeaderboardCancel("Codename: Kids Next Door (FR)", "Operation: T.O.M.M.Y."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -10022,12 +10873,23 @@ romType10Videos = {
 romType11Videos = {
     0x08263AC4: "Watching the episode 'Operation: T.U.R.N.I.P.' from the series 'Codename: Kids Next Door'",
     0x094CCFDC: "Watching the episode 'Operation: M.I.N.I.-G.O.L.F.' from the series 'Codename: Kids Next Door'",
+    0x0949F318: "Watching the episode 'Operation: T.O.M.M.Y.' from the series 'Codename: Kids Next Door'", // English
     0x08A10078: "Watching the episode 'Courage the Fly' from the series 'Courage the Cowardly Dog'",
     0x09B7BDF0: "Watching the episode 'Queen of the Black Puddle' from the series 'Courage the Cowardly Dog'",
+    0x08D14E60: "Watching the episode 'Cowboy Courage' from the series 'Courage the Cowardly Dog'", // English
     0x08CDC354: "Watching the episode 'The Big Sister' from the series 'Dexter's Laboratory'",
     0x0825C7D0: "Watching the episode 'Key to My Ed' from the series 'Ed, Edd n Eddy'",
+    0x0826BF04: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // English
     0x0955AF24: "Watching the episode 'Balloon Platoon' from the series 'Johnny Bravo'",
     0x08F7EC0C: "Watching the episode 'Mandy the Merciless' from the series 'The Grim Adventures of Billy & Mandy'",
+    0x09AACD18: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // English
+}
+
+romType12Videos = {
+    0x09451920: "Watching the episode 'Operation: T.O.M.M.Y.' from the series 'Codename: Kids Next Door'", // French
+    0x08D20300: "Watching the episode 'Cowboy Courage' from the series 'Courage the Cowardly Dog'", // French
+    0x0826E7D4: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // French
+    0x09A261D4: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // French
 }
 
 rich_presence_conditional_display(romType1Cartridge() && romType1RunningVideo(), 
@@ -10115,6 +10977,14 @@ rich_presence_conditional_display(romType11Cartridge() && romType11RunningVideo(
      rich_presence_lookup("romType11Videos",
                           dword(mem_romType11EpisodePointer),
                           romType11Videos,
+                          fallback = "Selecting a video from their GBA video collection")
+)
+
+rich_presence_conditional_display(romType12Cartridge() && romType12RunningVideo(), 
+    "{0}",
+     rich_presence_lookup("romType12Videos",
+                          dword(mem_romType12EpisodePointer),
+                          romType12Videos,
                           fallback = "Selecting a video from their GBA video collection")
 )
 
