@@ -130,6 +130,7 @@ mem_romType11MenuState       = 0x007E94
 mem_romType11RNG             = 0x007F98
     // Cartoon Network Collection - Limited Edition
     // Cartoon Network Collection - Platinum Edition (EN)
+    // Cartoon Network Collection - Premium Edition (EN)
     // Cartoon Network Collection - Volume 2
     
 mem_romType12EpisodePointer  = 0x006694
@@ -140,7 +141,17 @@ mem_romType12CurrentChapter  = 0x0066FC
 mem_romType12Input           = 0x007EA4
 mem_romType12MenuState       = 0x007E8C
 mem_romType12RNG             = 0x007F98
-    // Cartoon Network Collection - Édition Platinum (EN)
+    // Cartoon Network Collection - Édition Platinum (FR)
+    
+mem_romType13EpisodePointer  = 0x006694
+mem_romType13VideoState      = 0x016794
+mem_romType13SceneCountdown  = 0x0066EC
+mem_romType13VideoPlaytime   = 0x0066F4
+mem_romType13CurrentChapter  = 0x0066FC
+mem_romType13Input           = 0x007EA4
+mem_romType13MenuState       = 0x007E8C
+mem_romType13RNG             = 0x007F98
+    // Cartoon Network Collection - Édition Premium (FR)
 
     
 //--------------------------------------------------
@@ -264,6 +275,24 @@ episodes = [
         12,         // Rom-Type 12
     ],
     [
+        "Courage the Cowardly Dog",
+        "The Shadow of Courage",
+        "Cartoon Network Collection - Premium Edition", // English
+        0x098EF9D0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FE2, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Courage the Cowardly Dog (FR)",
+        "The Shadow of Courage",
+        "Cartoon Network Collection - Édition Premium", // French
+        0x093A6D78, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002005, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
         "Danny Phantom",
         "Attack of the Killer Garage Sale",
         "Nicktoons Collection - Volume 3",
@@ -280,6 +309,24 @@ episodes = [
         0x00000005, // Chapters
         0x000014C5, // Total Playtime
         11,         // Rom-Type 11
+    ],
+    [
+        "Dexter's Laboratory",
+        "Double Trouble",
+        "Cartoon Network Collection - Premium Edition", // English
+        0x08C7D7A8, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001489, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Dexter's Laboratory (FR)",
+        "Les Clones",
+        "Cartoon Network Collection - Édition Premium", // French
+        0x08CC7A9C, // Episode Pointer
+        0x00000005, // Chapters
+        0x000013BB, // Total Playtime
+        13,         // Rom-Type 13
     ],
     [
         "Dora the Explorer",
@@ -354,6 +401,24 @@ episodes = [
         12,         // Rom-Type 12
     ],
     [
+        "Ed, Edd n Eddy",
+        "A Glass of Warm Ed",
+        "Cartoon Network Collection - Premium Edition", // English
+        0x0824C030, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FE9, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Ed, Edd n Eddy (FR)",
+        "A Glass of Warm Ed",
+        "Cartoon Network Collection - Édition Premium", // French
+        0x0825E0C4, // Episode Pointer
+        0x00000005, // Chapters
+        0x00002022, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
         "Johnny Bravo",
         "The Perfect Gift",
         "Cartoon Network Collection - Volume 1",
@@ -370,6 +435,24 @@ episodes = [
         0x00000005, // Chapters
         0x000015C9, // Total Playtime
         11,         // Rom-Type 11
+    ],
+    [
+        "Johnny Bravo",
+        "Cookie Crisis",
+        "Cartoon Network Collection - Premium Edition", // English
+        0x092BAAE4, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001494, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Johnny Bravo (FR)",
+        "Cookie Crisis",
+        "Cartoon Network Collection - Édition Premium", // French
+        0x0980FD10, // Episode Pointer
+        0x00000005, // Chapters
+        0x000013BE, // Total Playtime
+        13,         // Rom-Type 13
     ],
     [
         "Kim Possible",
@@ -4230,6 +4313,262 @@ questions = [
             "Soupe"
     ],
     [
+        7901,
+        "What weapon did Eustace want to use against the burglar?",
+            "Tennis Racket",
+            "Golf Club",
+            "Hockey Stick",
+            "Baseball Bat"
+    ],
+    [
+        7951,
+        "Quelle arme Eustace voulait-il utiliser contre le cambrioleur?",
+            "Tennis Raquette",
+            "Golf Club",
+            "Hockey Crosse",
+            "Baseball Batte"
+    ],
+    [
+        7902,
+        "Where did Courage have to sleep for lying about a burglar?",
+            "Corridor",
+            "Attic",
+            "Basement",
+            "Kitchen"
+    ],
+    [
+        7952,
+        "Où Courage a-t-il dû dormir pour avoir menti?",
+            "Couloir",
+            "Grenier",
+            "Sous-Sol",
+            "Cuisine"
+    ],
+    [
+        7903,
+        "Where did Eustace hide after he saw the shadow in the kitchen?",
+            "Cabinet",
+            "Couch",
+            "Table",
+            "Fridge"
+    ],
+    [
+        7953,
+        "Où Eustace s'est-il caché après avoir vu l'ombre dans la cuisine?",
+            "Placard",
+            "Canapé",
+            "Table",
+            "Réfrigérateur"
+    ],
+    [
+        7904,
+        "Where did the shadow go to get a peaceful and happy life?",
+            "Basement",
+            "Night Sky",
+            "Well",
+            "City"
+    ],
+    [
+        7954,
+        "Où l'ombre est-elle allée pour une vie paisible?",
+            "Sous-Sol",
+            "Ciel Nocturne",
+            "Puits",
+            "Ville"
+    ],
+    [
+        8001,
+        "What non-food object did Ed eat in Edd's house?",
+            "Mason Jar",
+            "Cactus",
+            "Teddy Bear",
+            "Egg Timer"
+    ],
+    [
+        8051,
+        "Quel objet non alimentaire Ed a-t-il mangé chez Edd?",
+            "Bocal en Verre",
+            "Cactus",
+            "Ours en Peluche",
+            "Minuteur à Œufs"
+    ],
+    [
+        8002,
+        "What food did Ed eat from Jimmy's fridge?",
+            "Lasagna",
+            "Pie",
+            "Pizza",
+            "Bacon"
+    ],
+    [
+        8052,
+        "Quelle nourriture Ed a-t-il mangée dans le frigo de Jimmy?",
+            "Lasagnes",
+            "Tarte",
+            "Pizza",
+            "Bacon"
+    ],
+    [
+        8003,
+        "What did Ed still have in his mouth when Eddy woke him up?",
+            "Sausages",
+            "Pickles",
+            "Chicken",
+            "Lollipop"
+    ],
+    [
+        8053,
+        "Qu'avait encore Ed dans la bouche quand Eddy l'a réveillé?",
+            "Saucisses",
+            "Cornichons",
+            "Poulet",
+            "Sucette"
+    ],
+    [
+        8004,
+        "Who bought Chunky Puffs for 50 cents at Ed's Mart?",
+            "Jimmy",
+            "Kevin",
+            "Rolf",
+            "Jonny"
+    ],
+    [
+        8054,
+        "Qui a acheté des Chunky Puffs à 50 cents chez Ed?",
+            "Jimmy",
+            "Kevin",
+            "Rolf",
+            "Jonny"
+    ],
+    [
+        8101,
+        "What did Lee Lee suggest as first order of business?",
+            "Reading",
+            "Dancing",
+            "Drawing",
+            "Gossiping"
+    ],
+    [
+        8151,
+        "Que Lee Lee a-t-elle proposé comme première priorité?",
+            "Lire",
+            "Danser",
+            "Dessiner",
+            "Ragoter"
+    ],
+    [
+        8102,
+        "What did Mee Mee draw on Dexter's chalkboard?",
+            "Unicorn",
+            "Rabbit",
+            "Cat",
+            "Mermaid"
+    ],
+    [
+        8152,
+        "Qu'a dessiné Mee Mee sur le tableau de Dexter?",
+            "Licorne",
+            "Lapin",
+            "Chat",
+            "Sirène"
+    ],
+    [
+        8103,
+        "What did Dexter accidentally clone alongside himself?",
+            "Rat",
+            "Dee Dee",
+            "Rabbit",
+            "Lee Lee"
+    ],
+    [
+        8153,
+        "Qu'a cloné Dexter par accident en plus de lui-même?",
+            "Rat",
+            "Dee Dee",
+            "Lapin",
+            "Lee Lee"
+    ],
+    [
+        8104,
+        "What words did Dee Dee whisper into Dexter's ear?",
+            "Lunch Break",
+            "Slumber Party",
+            "Dance Lesson",
+            "Dinner Time"
+    ],
+    [
+        8154,
+        "Quels mots Dee Dee a-t-elle chuchotés à l'oreille de Dexter?",
+            "Pause Déjeuner",
+            "Surprise Partie",
+            "Cours de Danse",
+            "L'heure du Dîner"
+    ],
+    [
+        8201,
+        "Which animal did Suzy show Johnny to eat cookies with?",
+            "Dog",
+            "Hamster",
+            "Fox",
+            "Parrot"
+    ],
+    [
+        8251,
+        "Avec quel animal Suzy a proposé à Johnny de manger des biscuits?",
+            "Chien",
+            "Hamster",
+            "Renard",
+            "Perroquet"
+    ],
+    [
+        8202,
+        "What object did Johnny order and got in his mail?",
+            "Hair Gel",
+            "Protein Bars",
+            "T-Shirt",
+            "Sunglass"
+    ],
+    [
+        8252,
+        "Quel objet Johnny a-t-il commandé et reçu par courrier?",
+            "Gel pour Cheveux",
+            "Barres Protéinées",
+            "T-Shirt",
+            "Lunettes de Soleil"
+    ],
+    [
+        8203,
+        "As what did Suzy disguise herself in the subway train?",
+            "Old Man",
+            "Woman",
+            "Baby",
+            "Dog"
+    ],
+    [
+        8253,
+        "En quoi Suzy s'est-elle déguisée dans le métro?",
+            "Vieil Homme",
+            "Femme",
+            "Bébé",
+            "Chien"
+    ],
+    [
+        8204,
+        "How many cookies did Johnny buy in total?",
+            "100,002",
+            "1,000,002",
+            "10,000,002",
+            "100,000,002"
+    ],
+    [
+        8254,
+        "Combien de biscuits Johnny a-t-il achetés au total?",
+            "100 002",
+            "1 000 002",
+            "10 000 002",
+            "100 000 002"
+    ],
+    [
         0001,
         "",
             "",
@@ -5276,6 +5615,36 @@ function romType12LeaderboardCancel(series, episode) {
           + bit(7, mem_romType12Input) == 1) ||
           (dword(mem_romType12MenuState) == 0x00 &&
            dword(mem_romType12EpisodePointer) != getEpisodePointer(series, episode))
+}
+
+function romType13Cartridge() {
+    mem_romType12VideoState = 0x016794
+    return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) && dword(0x7EC0) == 0x08000E98
+}
+
+function romType13RunningVideo() {
+    mem_romType12VideoState = 0x016794
+    return romType12RunningVideo()                  
+}
+
+function romType13VideoStarted(series, episode) {
+    mem_romType12VideoState = 0x016794
+    return romType12VideoStarted(series, episode)
+}
+
+function romType13CorrectAnswer(totalQuestion, currentQuestion, index) {
+    mem_romType12VideoState = 0x016794
+    return romType12CorrectAnswer(totalQuestion, currentQuestion, index)
+}
+
+function romType13LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
+    em_romType12VideoState = 0x016794
+    return romType12LeaderboardQuestionSelect(totalQuestion, currentQuestion)
+}
+
+function romType13LeaderboardCancel(series, episode) {
+    mem_romType12VideoState = 0x016794
+    return romType12LeaderboardCancel(series, episode)
 }
 
 //--------------------------------------------------
@@ -10769,6 +11138,422 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitle("Courage the Cowardly Dog", "The Shadow of Courage"), type = "progression",
+    description = getAchievementDescription("Courage the Cowardly Dog", "The Shadow of Courage"),
+    id = 577280, badge = "654738", points = 2,
+    trigger = (romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
+               (romType11CorrectAnswer(4, 0, 4) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 4) ||
+                romType11CorrectAnswer(4, 3, 5))) ||
+              (romType13VideoStarted("Courage the Cowardly Dog (FR)", "The Shadow of Courage") &&
+               (romType13CorrectAnswer(4, 0, 4) ||
+                romType13CorrectAnswer(4, 1, 5) ||
+                romType13CorrectAnswer(4, 2, 4) ||
+                romType13CorrectAnswer(4, 3, 5)))
+            )
+            leaderboard(
+                 id = 153682,
+                 title       = getQuestionTitle(7901), 
+                 description = getQuestionDescription(7901),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153683,
+                 title       = getQuestionTitle(7902), 
+                 description = getQuestionDescription(7902),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153684,
+                 title       = getQuestionTitle(7903), 
+                 description = getQuestionDescription(7903),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153685,
+                 title       = getQuestionTitle(7904), 
+                 description = getQuestionDescription(7904),
+                 start  = romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Courage the Cowardly Dog", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153686,
+                 title       = getQuestionTitle(7951), 
+                 description = getQuestionDescription(7951),
+                 start  = romType13VideoStarted("Courage the Cowardly Dog (FR)", "The Shadow of Courage") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Courage the Cowardly Dog (FR)", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153687,
+                 title       = getQuestionTitle(7952), 
+                 description = getQuestionDescription(7952),
+                 start  = romType13VideoStarted("Courage the Cowardly Dog (FR)", "The Shadow of Courage") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Courage the Cowardly Dog (FR)", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153688,
+                 title       = getQuestionTitle(7953), 
+                 description = getQuestionDescription(7953),
+                 start  = romType13VideoStarted("Courage the Cowardly Dog (FR)", "The Shadow of Courage") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Courage the Cowardly Dog (FR)", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153689,
+                 title       = getQuestionTitle(7954), 
+                 description = getQuestionDescription(7954),
+                 start  = romType13VideoStarted("Courage the Cowardly Dog (FR)", "The Shadow of Courage") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Courage the Cowardly Dog (FR)", "The Shadow of Courage"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Ed, Edd n Eddy", "A Glass of Warm Ed"), type = "progression",
+    description = getAchievementDescription("Ed, Edd n Eddy", "A Glass of Warm Ed"),
+    id = 577282, badge = "654752", points = 2,
+    trigger = (romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 4))) ||
+              (romType13VideoStarted("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed") &&
+               (romType13CorrectAnswer(4, 0, 5) ||
+                romType13CorrectAnswer(4, 1, 5) ||
+                romType13CorrectAnswer(4, 2, 6) ||
+                romType13CorrectAnswer(4, 3, 4)))
+            )
+            leaderboard(
+                 id = 153690,
+                 title       = getQuestionTitle(8001), 
+                 description = getQuestionDescription(8001),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153691,
+                 title       = getQuestionTitle(8002), 
+                 description = getQuestionDescription(8002),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153692,
+                 title       = getQuestionTitle(8003), 
+                 description = getQuestionDescription(8003),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153693,
+                 title       = getQuestionTitle(8004), 
+                 description = getQuestionDescription(8004),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153694,
+                 title       = getQuestionTitle(8051), 
+                 description = getQuestionDescription(8051),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153695,
+                 title       = getQuestionTitle(8052), 
+                 description = getQuestionDescription(8052),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153696,
+                 title       = getQuestionTitle(8053), 
+                 description = getQuestionDescription(8053),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153697,
+                 title       = getQuestionTitle(8054), 
+                 description = getQuestionDescription(8054),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "A Glass of Warm Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Dexter's Laboratory", "Double Trouble"), type = "progression",
+    description = getAchievementDescription("Dexter's Laboratory", "Double Trouble"),
+    id = 577354, badge = "654914", points = 2,
+    trigger = (romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
+               (romType11CorrectAnswer(4, 0, 5) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 7) ||
+                romType11CorrectAnswer(4, 3, 5))) ||
+              (romType13VideoStarted("Dexter's Laboratory (FR)", "Les Clones") &&
+               (romType13CorrectAnswer(4, 0, 5) ||
+                romType13CorrectAnswer(4, 1, 7) ||
+                romType13CorrectAnswer(4, 2, 7) ||
+                romType13CorrectAnswer(4, 3, 5)))
+            )
+            leaderboard(
+                 id = 153752,
+                 title       = getQuestionTitle(8101), 
+                 description = getQuestionDescription(8101),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Double Trouble"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153753,
+                 title       = getQuestionTitle(8102), 
+                 description = getQuestionDescription(8102),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Double Trouble"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153754,
+                 title       = getQuestionTitle(8103), 
+                 description = getQuestionDescription(8103),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Double Trouble"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153755,
+                 title       = getQuestionTitle(8104), 
+                 description = getQuestionDescription(8104),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Double Trouble"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153756,
+                 title       = getQuestionTitle(8151), 
+                 description = getQuestionDescription(8151),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Les Clones") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Les Clones"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153757,
+                 title       = getQuestionTitle(8152), 
+                 description = getQuestionDescription(8152),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Les Clones") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Les Clones"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153758,
+                 title       = getQuestionTitle(8153), 
+                 description = getQuestionDescription(8153),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Les Clones") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Les Clones"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 153759,
+                 title       = getQuestionTitle(8154), 
+                 description = getQuestionDescription(8154),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Les Clones") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Les Clones"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitle("Johnny Bravo", "Cookie Crisis"), type = "progression",
+    description = getAchievementDescription("Johnny Bravo", "Cookie Crisis"),
+    id = 577866, badge = "655373", points = 2,
+    trigger = (romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
+               (romType11CorrectAnswer(4, 0, 7) ||
+                romType11CorrectAnswer(4, 1, 6) ||
+                romType11CorrectAnswer(4, 2, 5) ||
+                romType11CorrectAnswer(4, 3, 5))) ||
+              (romType13VideoStarted("Johnny Bravo (FR)", "Cookie Crisis") &&
+               (romType13CorrectAnswer(4, 0, 7) ||
+                romType13CorrectAnswer(4, 1, 6) ||
+                romType13CorrectAnswer(4, 2, 5) ||
+                romType13CorrectAnswer(4, 3, 5)))
+            )
+            leaderboard(
+                 id = 154708,
+                 title       = getQuestionTitle(8201), 
+                 description = getQuestionDescription(8201),
+                 start  = romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154709,
+                 title       = getQuestionTitle(8202), 
+                 description = getQuestionDescription(8202),
+                 start  = romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154710,
+                 title       = getQuestionTitle(8203), 
+                 description = getQuestionDescription(8203),
+                 start  = romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154711,
+                 title       = getQuestionTitle(8204), 
+                 description = getQuestionDescription(8204),
+                 start  = romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154712,
+                 title       = getQuestionTitle(8251), 
+                 description = getQuestionDescription(8251),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Cookie Crisis") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154713,
+                 title       = getQuestionTitle(8252), 
+                 description = getQuestionDescription(8252),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Cookie Crisis") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154714,
+                 title       = getQuestionTitle(8253), 
+                 description = getQuestionDescription(8253),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Cookie Crisis") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154715,
+                 title       = getQuestionTitle(8254), 
+                 description = getQuestionDescription(8254),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Cookie Crisis") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Cookie Crisis"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -10877,18 +11662,26 @@ romType11Videos = {
     0x08A10078: "Watching the episode 'Courage the Fly' from the series 'Courage the Cowardly Dog'",
     0x09B7BDF0: "Watching the episode 'Queen of the Black Puddle' from the series 'Courage the Cowardly Dog'",
     0x08D14E60: "Watching the episode 'Cowboy Courage' from the series 'Courage the Cowardly Dog'", // English
+    0x098EF9D0: "Watching the episode 'The Shadow of Courage' from the series 'Courage the Cowardly Dog'", // English
     0x08CDC354: "Watching the episode 'The Big Sister' from the series 'Dexter's Laboratory'",
+    0x08C7D7A8: "Watching the episode 'Double Trouble' from the series 'Dexter's Laboratory'", // English
     0x0825C7D0: "Watching the episode 'Key to My Ed' from the series 'Ed, Edd n Eddy'",
     0x0826BF04: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // English
+    0x0824C030: "Watching the episode 'A Glass of Warm Ed' from the series 'Ed, Edd n Eddy'", // English
     0x0955AF24: "Watching the episode 'Balloon Platoon' from the series 'Johnny Bravo'",
+    0x092BAAE4: "Watching the episode 'Cookie Crisis' from the series 'Johnny Bravo'", // English
     0x08F7EC0C: "Watching the episode 'Mandy the Merciless' from the series 'The Grim Adventures of Billy & Mandy'",
     0x09AACD18: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // English
 }
 
-romType12Videos = {
+romType12_13Videos = {
     0x09451920: "Watching the episode 'Operation: T.O.M.M.Y.' from the series 'Codename: Kids Next Door'", // French
     0x08D20300: "Watching the episode 'Cowboy Courage' from the series 'Courage the Cowardly Dog'", // French
+    0x093A6D78: "Watching the episode 'The Shadow of Courage' from the series 'Courage the Cowardly Dog'", // French
+    0x08CC7A9C: "Watching the episode 'Double Trouble' from the series 'Dexter's Laboratory'", // French
     0x0826E7D4: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // French
+    0x0825E0C4: "Watching the episode 'A Glass of Warm Ed' from the series 'Ed, Edd n Eddy'", // French
+    0x0980FD10: "Watching the episode 'Cookie Crisis' from the series 'Johnny Bravo'", // French
     0x09A261D4: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // French
 }
 
@@ -10984,7 +11777,7 @@ rich_presence_conditional_display(romType12Cartridge() && romType12RunningVideo(
     "{0}",
      rich_presence_lookup("romType12Videos",
                           dword(mem_romType12EpisodePointer),
-                          romType12Videos,
+                          romType12_13Videos,
                           fallback = "Selecting a video from their GBA video collection")
 )
 
