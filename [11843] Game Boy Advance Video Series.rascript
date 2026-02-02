@@ -75,6 +75,7 @@ mem_romType6Input           = 0x007EC8
 mem_romType6MenuState       = 0x007EB4
 mem_romType6RNG             = 0x007EF0
     // Cartoon Network Collection - Volume 1
+    // Codename: Kids Next Door - Volume 1
     // Yu-Gi-Oh! Yugi vs. Joey - Volume 1 (EN)
     // Teenage Mutant Ninja Turtles: Things Change - Volume 1 (EN)
 
@@ -131,6 +132,7 @@ mem_romType11RNG             = 0x007F98
     // Cartoon Network Collection - Limited Edition
     // Cartoon Network Collection - Platinum Edition (EN)
     // Cartoon Network Collection - Premium Edition (EN)
+    // Cartoon Network Collection - Special Edition (EN)
     // Cartoon Network Collection - Volume 2
     
 mem_romType12EpisodePointer  = 0x006694
@@ -152,6 +154,32 @@ mem_romType13Input           = 0x007EA4
 mem_romType13MenuState       = 0x007E8C
 mem_romType13RNG             = 0x007F98
     // Cartoon Network Collection - Édition Premium (FR)
+    // Cartoon Network Collection - Édition Speciale (FR)
+    
+    
+    
+mem_romTypeM1MoviePointer    = 0x047FF8
+mem_romTypeM1SkipProgress    = 0x007EA8
+mem_romTypeM1PauseCheck1     = 0x007E74
+mem_romTypeM1PauseCheck2     = 0x007F88
+mem_romTypeM1Input           = 0x007E60
+mem_romTypeM1StartingTime    = 0x047FF4
+mem_romTypeM1MenuState       = 0x0094E4
+mem_romTypeM1CartridgeState  = 0x047FFC
+mem_romTypeM1RNG             = 0x007F9C
+    // Shrek (Rev 5)
+    // Shark Tale (Rev 5)
+    
+mem_romTypeM2MoviePointer    = 0x047FF8
+mem_romTypeM2VideoState      = 0x007E94
+mem_romTypeM2PauseCheck1     = 0x007E70
+mem_romTypeM2PauseCheck2     = 0x007F88
+mem_romTypeM2Input           = 0x007E60
+mem_romTypeM2StartingTime    = 0x047FF4
+mem_romTypeM2MenuState       = 0x0094E4
+mem_romTypeM2CartridgeState  = 0x047FFC
+mem_romTypeM2RNG             = 0x007F9C
+    // Shrek (Rev 6)
 
     
 //--------------------------------------------------
@@ -228,6 +256,42 @@ episodes = [
         0x00000005, // Chapters
         0x00001FA3, // Total Playtime
         12,         // Rom-Type 12
+    ],
+    [
+        "Codename: Kids Next Door",
+        "Operation: N.O.-P.O.W.U.H.",
+        "Codename: Kids Next Door - Volume 1",
+        0x08023008, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001DDB, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Codename: Kids Next Door",
+        "Operation: R.E.P.O.R.T.",
+        "Codename: Kids Next Door - Volume 1",
+        0x086EF1C4, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001E31, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Codename: Kids Next Door",
+        "Operation: B.R.I.E.F.",
+        "Codename: Kids Next Door - Volume 1",
+        0x08F4EE14, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001DD9, // Total Playtime
+        06,         // Rom-Type 6
+    ],
+    [
+        "Codename: Kids Next Door",
+        "Operation: D.O.G.F.I.G.H.T.",
+        "Codename: Kids Next Door - Volume 1",
+        0x0968AAF8, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001E6D, // Total Playtime
+        06,         // Rom-Type 6
     ],
     [
         "Courage the Cowardly Dog",
@@ -329,6 +393,24 @@ episodes = [
         13,         // Rom-Type 13
     ],
     [
+        "Dexter's Laboratory",
+        "Dexter's Rival",
+        "Cartoon Network Collection - Special Edition", // English
+        0x08DF1368, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014A7, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Dexter's Laboratory (FR)",
+        "Dexter's Rival",
+        "Cartoon Network Collection - Édition Speciale", // French
+        0x08DD9FD0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014A9, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
         "Dora the Explorer",
         "Three Little Piggies",
         "Dora the Explorer - Volume 1",
@@ -419,6 +501,24 @@ episodes = [
         13,         // Rom-Type 13
     ],
     [
+        "Ed, Edd n Eddy",
+        "Oath to an Ed",
+        "Cartoon Network Collection - Special Edition", // English
+        0x08254800, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001FA9, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Ed, Edd n Eddy (FR)",
+        "Oath to an Ed",
+        "Cartoon Network Collection - Édition Speciale", // French
+        0x082594E0, // Episode Pointer
+        0x00000005, // Chapters
+        0x00001F9A, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
         "Johnny Bravo",
         "The Perfect Gift",
         "Cartoon Network Collection - Volume 1",
@@ -452,6 +552,24 @@ episodes = [
         0x0980FD10, // Episode Pointer
         0x00000005, // Chapters
         0x000013BE, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
+        "Johnny Bravo",
+        "Beach Blanket Bravo",
+        "Cartoon Network Collection - Special Edition", // English
+        0x09530B28, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014A5, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Johnny Bravo (FR)",
+        "Beach Blanket Bravo",
+        "Cartoon Network Collection - Édition Speciale", // French
+        0x09535160, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014A4, // Total Playtime
         13,         // Rom-Type 13
     ],
     [
@@ -824,6 +942,24 @@ episodes = [
         12,         // Rom-Type 12
     ],
     [
+        "The Grim Adventures of Billy & Mandy",
+        "Billy & the Bully",
+        "Cartoon Network Collection - Special Edition", // English
+        0x09C0A3C0, // Episode Pointer
+        0x00000005, // Chapters
+        0x000015D8, // Total Playtime
+        11,         // Rom-Type 11
+    ],
+    [
+        "Billy & Mandy: Adventuriers de l'Au-delà (FR)",
+        "Billy & Brutos",
+        "Cartoon Network Collection - Édition Speciale", // French
+        0x09C0B020, // Episode Pointer
+        0x00000005, // Chapters
+        0x000014DA, // Total Playtime
+        13,         // Rom-Type 13
+    ],
+    [
         "The Fairly OddParents!",
         "The Big Problem!",
         "Nicktoons Collection - Volume 1",
@@ -1020,6 +1156,16 @@ episodes = [
         0x00000005, // Chapters
         0x0000358C, // Total Playtime
         07,         // Rom-Type 7
+    ],
+]
+
+movies = [
+    [
+        "Shrek (Rev 5)",
+        "Shrek",
+        0x08020200, // Episode Pointer
+        0x0000884C, // Total Playtime: 0000297700 Frames
+        101,        // Rom-Type M-1
     ],
 ]
 
@@ -2605,7 +2751,7 @@ questions = [
         "What did Timmy use to escape the guards of his dad?",
             "Lava Lamp",
             "Heat Vision",
-            "Bubblegum",
+            "Bubble Gum",
             "Bicycle"
     ],
     [
@@ -3746,7 +3892,7 @@ questions = [
     ],
     [
         6502,
-        "In what environment did Ed and Eddy play while ignoring the signs?",
+        "Where did Ed and Eddy play while ignoring the signs?",
             "Swamp",
             "Mud",
             "Cement",
@@ -3794,7 +3940,7 @@ questions = [
     ],
     [
         6604,
-        "What part of the tree needed to be mixed with honey for the remedy?",
+        "What tree part needed to be mixed with honey for the remedy?",
             "Leaves",
             "Acorns",
             "Roots",
@@ -3834,7 +3980,7 @@ questions = [
     ],
     [
         6801,
-        "What did Johnny bring to his observation of Raymond he made with Suzi?",
+        "What item did Johnny bring to the observation of Raymond?",
             "Binoculars",
             "Microphone",
             "Camera",
@@ -3850,7 +3996,7 @@ questions = [
     ],
     [
         6803,
-        "Who was supposedly captured by the enemy during the water bomb war?",
+        "Who was supposedly captured by the enemy in the water bomb war?",
             "Suzy",
             "Carl",
             "Johnny",
@@ -4569,6 +4715,534 @@ questions = [
             "100 000 002"
     ],
     [
+        8301,
+        "How did Dexter's rival name himself in school?",
+            "Noctess",
+            "Slimshade",
+            "Mandark",
+            "Nitestar"
+    ],
+    [
+        8351,
+        "Comment le rival de Dexter se faisait-il appeler à l'école?",
+            "Noctess",
+            "Slimshade",
+            "Mandark",
+            "Nitestar"
+    ],
+    [
+        8302,
+        "Who was seen on the picture in Dexter's locker?",
+            "Newton",
+            "Darwin",
+            "Einstein",
+            "Galilei"
+    ],
+    [
+        8352,
+        "Qui était sur la photo dans le casier de Dexter?",
+            "Newton",
+            "Darwin",
+            "Einstein",
+            "Galilei"
+    ],
+    [
+        8303,
+        "What color did Dexter's raincoat have?",
+            "Mint",
+            "Orange",
+            "White",
+            "Yellow"
+    ],
+    [
+        8353,
+        "Quelle couleur avait l'imperméable de Dexter?",
+            "Menthe",
+            "Orange",
+            "Blanc",
+            "Jaune"
+    ],
+    [
+        8304,
+        "What did Dexter's rival use to lure Dee Dee to his house?",
+            "Cookies",
+            "Candies",
+            "Berries",
+            "Nuts"
+    ],
+    [
+        8354,
+        "Qu'a utilisé le rival de Dexter pour attirer Dee Dee chez lui?",
+            "Biscuits",
+            "Bonbons",
+            "Baies",
+            "Noix"
+    ],
+    [
+        8401,
+        "How did Edd's mother call him in the message she wrote?",
+            "Edward",
+            "Edgar",
+            "Edwyn",
+            "Edison"
+    ],
+    [
+        8451,
+        "Comment la mère d'Edd l'a-t-elle appelé dans son message?",
+            "Edward",
+            "Edgar",
+            "Edwyn",
+            "Edison"
+    ],
+    [
+        8402,
+        "Who captured Eddy in the tree using a net?",
+            "Jimmy",
+            "Ed",
+            "Rolf",
+            "Jonny"
+    ],
+    [
+        8452,
+        "Qui a capturé Eddy dans l'arbre avec un filet?",
+            "Jimmy",
+            "Ed",
+            "Rolf",
+            "Jonny"
+    ],
+    [
+        8403,
+        "Who were the kids supposed to escort across the street?",
+            "Nazz",
+            "Plank",
+            "Sarah",
+            "Rolf"
+    ],
+    [
+        8453,
+        "Qui les enfants devaient-ils faire traverser la rue?",
+            "Nazz",
+            "Planche",
+            "Sarah",
+            "Rolf"
+    ],
+    [
+        8404,
+        "Who did Eddy try to give a blueberry pie to get a badge?",
+            "Sarah",
+            "Jimmy",
+            "Jonny",
+            "Nazz"
+    ],
+    [
+        8454,
+        "À qui Eddy a-t-il voulu donner une tarte pour un badge?",
+            "Sarah",
+            "Jimmy",
+            "Jonny",
+            "Nazz"
+    ],
+    [
+        8501,
+        "What did the bully do to Billy on the sports field at night?",
+            "Wedgie",
+            "Knuckle Sandwich",
+            "Purple Nurple",
+            "Wet Willy"
+    ],
+    [
+        8551,
+        "Que lui a fait le harceleur sur le terrain de sport la nuit?",
+            "Wedgie",
+            "Gifle",
+            "Téton Pincement",
+            "Doigt Mouillé "
+    ],
+    [
+        8502,
+        "What's seen on the tattoo that is on Sperg's arm?",
+            "Skull",
+            "Heart",
+            "Rose",
+            "Bat"
+    ],
+    [
+        8552,
+        "Que représente le tatouage sur le bras de Brutos?",
+            "Crâne",
+            "Cœur",
+            "Rose",
+            "Chauve-Souris"
+    ],
+    [
+        8503,
+        "Who intimidated Sperg so badly that he became afraid?",
+            "Grim",
+            "Billy",
+            "Mandy",
+            "Irwin"
+    ],
+    [
+        8553,
+        "Qui a tant intimidé Brutos qu'il en a eu peur?",
+            "Grim",
+            "Billy",
+            "Mandy",
+            "Irwin"
+    ],
+    [
+        8504,
+        "What did Billy give Sperg in his room to cheer him up?",
+            "Cookie",
+            "Hug",
+            "Tissue",
+            "Present"
+    ],
+    [
+        8554,
+        "Que donne Billy à Brutos dans sa chambre pour le réconforter?",
+            "Biscuit",
+            "Câlin",
+            "Mouchoir",
+            "Cadeau"
+    ],
+    [
+        8601,
+        "What did the shark put on to look more like the other humans?",
+            "Wig",
+            "Sunglasses",
+            "Aloha Shirt",
+            "Mask"
+    ],
+    [
+        8651,
+        "Que le requin a-t-il mis pour ressembler aux humains?",
+            "Perruque",
+            "Lunettes de Soleil",
+            "Chemise Hawaïenne",
+            "Masque"
+    ],
+    [
+        8602,
+        "Who did the shark try to disguise as to be accepted as human?",
+            "G. Washington",
+            "R. Nixon",
+            "A. Lincoln",
+            "T. Roosevelt"
+    ],
+    [
+        8652,
+        "En qui le requin a-t-il tenté de se déguiser?",
+            "G. Washington",
+            "R. Nixon",
+            "A. Lincoln",
+            "T. Roosevelt"
+    ],
+    [
+        8603,
+        "Who was the judge of the beach competition?",
+            "Franny",
+            "Johnny",
+            "Andy",
+            "Shark"
+    ],
+    [
+        8653,
+        "Qui était le juge de la compétition sur la plage?",
+            "Franny",
+            "Johnny",
+            "Andy",
+            "Requin"
+    ],
+    [
+        8604,
+        "What was the main focus of the real-world video?",
+            "Sun",
+            "Fish",
+            "Girls",
+            "Waves"
+    ],
+    [
+        8654,
+        "Quel était le sujet principal de la vidéo du monde réel?",
+            "Soleil",
+            "Poisson",
+            "Filles",
+            "Vagues"
+    ],
+    [
+        8701,
+        "What kind of weapon did Numbuh 2 use in the first fight?",
+            "Plushy Cannon",
+            "Hammer Planket",
+            "Laser Pistol",
+            "Rubberband Flinger"
+    ],
+    [
+        8702,
+        "What is the power source of the treehouse electricity?",
+            "Solar Energy",
+            "Wind Energy",
+            "Potatoes",
+            "Hamsters"
+    ],
+    [
+        8703,
+        "Who was fired by the Delightful Children From Down the Lane?",
+            "Big Brother",
+            "Toiletnator",
+            "Mad Dad",
+            "Common Cold"
+    ],
+    [
+        8704,
+        "Which army of Gramma Stuffum did the hamsters eat?",
+            "Pastry",
+            "Dessert",
+            "Feast",
+            "Lunch"
+    ],
+    [
+        8801,
+        "What graphic style did Numbuh 2's story have?",
+            "Child Drawing",
+            "Surreal Cartoon",
+            "3D Animation",
+            "Comic Book"
+    ],
+    [
+        8802,
+        "What did the goods squash in Numbuh 3's story?",
+            "Squirrel",
+            "Numbuh 4",
+            "Flowers",
+            "Butterfly"
+    ],
+    [
+        8803,
+        "What anime was Numbuh 4’s story a parody of?",
+            "One Piece",
+            "Dragon Ball",
+            "Naruto",
+            "Pokémon"
+    ],
+    [
+        8804,
+        "What was the true identity of the goods?",
+            "Pizza",
+            "Report Cards",
+            "Comic Book",
+            "Video Game"
+    ],
+    [
+        8901,
+        "Who grabbed Numbuh 1's package to show the content?",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4",
+            "Numbuh 5"
+    ],
+    [
+        8902,
+        "What name did the underwear introduce itself with?",
+            "Mr. White",
+            "Mr. Pants",
+            "Mr. Shorty",
+            "Mr. Undie"
+    ],
+    [
+        8903,
+        "Who defended the underwear when it wanted to help Numbuh 1?",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4",
+            "Numbuh 5"
+    ],
+    [
+        8904,
+        "What was in the present that the Delightful Children got?",
+            "Undershirt",
+            "Socks",
+            "Bra",
+            "Underwear"
+    ],
+    [
+        9001,
+        "What did the food stand in front of Mr. Washer's shop sell?",
+            "Burritos",
+            "Chili Dogs",
+            "Ice Cream",
+            "Tacos"
+    ],
+    [
+        9002,
+        "What did Numbuh 2's first vehicle use as ammo?",
+            "Bubble Gum",
+            "Food Cans",
+            "Light Bulbs",
+            "Billiard Balls"
+    ],
+    [
+        9003,
+        "Who wanted to destroy the chili dog factory?",
+            "Mr. Washer",
+            "Gramma Stuffum",
+            "The Kid",
+            "Numbuh 2"
+    ],
+    [
+        9004,
+        "Who offered the Kid to join the Kids Next Door?",
+            "Numbuh 1",
+            "Numbuh 2",
+            "Numbuh 3",
+            "Numbuh 4"
+    ],
+    [
+        9501,
+        "What did Donkey's owner claim he could do at the fairytale sale?",
+            "Flying",
+            "Talking", //
+            "Dancing",
+            "Swimming"
+    ],
+    [
+        9502,
+        "Who broke into Shrek’s hut first when the fairytales were exiled?",
+            "Blind Mice", //
+            "Big Bad Wolf",
+            "Dwarves",
+            "Pinocchio"
+    ],
+    [
+        9503,
+        "Who did Lord Farquaad torture to find the other fairytales?",
+            "Donkey",
+            "Gingerbread Man", //
+            "Pinocchio",
+            "Big Bad Wolf"
+    ],
+    [
+        9504,
+        "Who did the Magic Mirror not suggest as Lord Farquaad's wife?",
+            "Snow White",
+            "Rapunzel", //
+            "Cinderella",
+            "Fiona"
+    ],
+    [
+        9505,
+        "What was the name of the city that Lord Farquaad was ruling?",
+            "Lexin",
+            "Ronda",
+            "Farway",
+            "Duloc" //
+    ],
+    [
+        9506,
+        "What vegetables were like ogres according to Shrek?",
+            "Corn",
+            "Broccoli",
+            "Onions", //
+            "Pumpkins"
+    ],
+    [
+        9507,
+        "Where in Princess Fiona’s castle did Shrek prank Donkey?",
+            "Tower",
+            "Gatehouse",
+            "Courtyard",
+            "Bridge" //
+    ],
+    [
+        9508,
+        "Who complimented the dragon to prevent getting eaten?",
+            "Donkey", //
+            "Fiona",
+            "Shrek",
+            "Lord Farquaad"
+    ],
+    [
+        9509,
+        "Where did Fiona sleep the first night to hide her secret?",
+            "Cave", //
+            "Tree",
+            "Windmill",
+            "Stable"
+    ],
+    [
+        9510,
+        "What did Princess Fiona turn into during night?",
+            "Dragon",
+            "Witch",
+            "Wolf",
+            "Ogre" //
+    ],
+    [
+        9511,
+        "What animal did Fiona kill to make breakfast?",
+            "Rabbit",
+            "Boar",
+            "Deer",
+            "Bird" //
+    ],
+    [
+        9512,
+        "Who tried to kidnap Princess Fiona in the woods?",
+            "Puss in Boots",
+            "Monsieur Hood", //
+            "Pied Piper",
+            "Rumpelstiltskin"
+    ],
+    [
+        9513,
+        "Who knocked out the robbers in the woods all by themselves?",
+            "Fiona", //
+            "Dragon",
+            "Shrek",
+            "Donkey"
+    ],
+    [
+        9514,
+        "What animal did Shrek use to make a balloon for Fiona?",
+            "Snake",
+            "Lizard",
+            "Fish",
+            "Frog" //
+    ],
+    [
+        9515,
+        "What animal did Fiona use to make a balloon for Shrek?",
+            "Snake", //
+            "Lizard",
+            "Fish",
+            "Frog"
+    ],
+    [
+        9516,
+        "Where did Fiona sleep the second night to hide her secret?",
+            "Windmill", //
+            "Shrek's Hut",
+            "Barn",
+            "Stone Tower"
+    ],
+    [
+        9517,
+        "Who was the first one seeing Fiona at night?",
+            "Shrek",
+            "Lord Farquaad",
+            "Donkey", //
+            "Pinocchio"
+    ],
+    [
+        9518,
+        "Who did Donkey meet at the river after Fiona reached Duloc?",
+            "Puss in Boots",
+            "Shrek",
+            "Dragon", //
+            "Big Bad Wolf"
+    ],
+    [
         0001,
         "",
             "",
@@ -4588,22 +5262,40 @@ function isCartridge(value1, value2, value3, value4) {
            dword(0x00000C) == value4
 }
 
-function getAchievementTitle(series, episode) {
+function getAchievementTitleForEpisodes(series, episode) {
     for episodeData in episodes {
         if (episodeData[0] == series && episodeData[1] == episode) {
             return episodeData[2]           
         }
     }
-    assert(0 == 1, "Could not find Episode '" + episode + "' of '" + series + "'")
+    assert(0 == 1, "Could not find episode '" + episode + "' of '" + series + "'")
 }
 
-function getAchievementDescription(series, episode) {
+function getAchievementDescriptionForEpisodes(series, episode) {
     for episodeData in episodes {
-        if(episodeData[0] == series && episodeData[1] == episode) {
+        if (episodeData[0] == series && episodeData[1] == episode) {
             return "Answer a question for the episode '" + episode + "' of '" + series + "' correctly."            
         }
     }
-    assert(0 == 1, "Could not find Episode '" + episode + "' of '" + series + "'")
+    assert(0 == 1, "Could not find episode '" + episode + "' of '" + series + "'")
+}
+
+function getAchievementTitleForMovies(movieVersion, movie) {
+    for movieData in movies {
+        if (movieData[0] == movieVersion && movieData[1] == movie) {
+            return movie          
+        }
+    }
+    assert(0 == 1, "Could not find movie '" + movie + "'")
+}
+
+function getAchievementDescriptionForMovies(movieVersion, movie) {
+    for movieData in movies {
+        if (movieData[0] == movieVersion && movieData[1] == movie) {
+            return "Answer three question for the movie '" + movie + "' correctly."            
+        }
+    }
+    assert(0 == 1, "Could not find movie '" + movie + "'")
 }
 
 function getEpisodePointer(series, episode) {
@@ -4612,7 +5304,16 @@ function getEpisodePointer(series, episode) {
             return episodeData[3]           
         }
     }
-    assert(0 == 1, "Could not find Episode '" + episode + "' of '" + series + "'")
+    assert(0 == 1, "Could not find episode '" + episode + "' of '" + series + "'")
+}
+
+function getMoviePointer(movieVersion, movie) {
+    for movieData in movies {
+        if (movieData[0] == movieVersion && movieData[1] == movie) {
+            return movieData[2]           
+        }
+    }
+    assert(0 == 1, "Could not find movie '" + movie + "'")
 }
 
 function getTotalChapters(series, episode) {
@@ -4621,25 +5322,38 @@ function getTotalChapters(series, episode) {
             return episodeData[4]           
         }
     }
-    assert(0 == 1, "Could not find Episode '" + episode + "' of '" + series + "'")
+    assert(0 == 1, "Could not find episode '" + episode + "' of '" + series + "'")
 }
 
-function getTotalPlaytime(series, episode) {
+function getTotalPlaytimeForEpisodes(series, episode) {
     for episodeData in episodes {
         if (episodeData[0] == series && episodeData[1] == episode) {
             return episodeData[5]           
         }
     }
-    assert(0 == 1, "Could not find Episode '" + episode + "' of '" + series + "'")
+    assert(0 == 1, "Could not find episode '" + episode + "' of '" + series + "'")
+}
+
+function getTotalPlaytimeForMovies(movieVersion, movie) {
+    for movieData in movies {
+        if (movieData[0] == movieVersion && movieData[1] == movie) {
+            return movieData[3]           
+        }
+    }
+    assert(0 == 1, "Could not find movie '" + movie + "'")
 }
 
 function getQuestionTitle(questionID) {
     for questionData in questions {
         if (questionData[0] == questionID) {
-            return questionData[1]
+            if (length(questionData[1]) > 65) {
+                assert(0 == 1, "The question is too long -> " + length(questionData[1]) + " characters")
+            } else {
+                return questionData[1]
+            }
         }
     }
-    assert(0 == 1, "Could not find Question ID " + questionID)
+    assert(0 == 1, "Could not find question ID " + questionID)
 }
 
 function getQuestionDescription(questionID) {
@@ -4671,7 +5385,7 @@ function romType1VideoStarted(series, episode) {
            trigger_when(dword(mem_romType1SceneCountdown) == 0xFFFFFFFF) &&
            never(dword(mem_romType1EpisodePointer) == getEpisodePointer(series, episode) &&
                  dword(mem_romType1VideoPlaytime) == 0x00) &&
-           never(dword(mem_romType1VideoPlaytime) < getTotalPlaytime(series, episode) &&
+           never(dword(mem_romType1VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  prev(dword(mem_romType1VideoState)) != 0x04 &&
                  prev(dword(mem_romType1VideoState)) != 0x08 &&
                       dword(mem_romType1VideoState)  == 0x08) &&
@@ -4742,7 +5456,7 @@ function romType2VideoStarted(series, episode) {
            never(prev(dword(mem_romType2EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType2EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType2VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType2VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType2VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  prev(dword(mem_romType2VideoState)) != 0x04 &&
                  prev(dword(mem_romType2VideoState)) != 0x08 &&
                       dword(mem_romType2VideoState)  == 0x08) &&
@@ -4822,7 +5536,7 @@ function romType3VideoStarted(series, episode) {
            never(prev(dword(mem_romType3EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType3EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType3VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType3VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType3VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  prev(dword(mem_romType3VideoState)) != 0x04 &&
                  prev(dword(mem_romType3VideoState)) != 0x08 &&
                       dword(mem_romType3VideoState)  == 0x08) &&
@@ -4901,12 +5615,12 @@ function romType4VideoStarted(series, episode) {
                      dword(mem_romType4VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType4CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType4SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType4VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType4VideoPlaytime)) == getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(dword(mem_romType4MenuState) == 0x1A) &&
            never(prev(dword(mem_romType4EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType4EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType4VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType4VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType4VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  dword(mem_romType4MenuState) == 0x15 &&
                  prev(dword(mem_romType4VideoState)) != 0x04 &&
                  prev(dword(mem_romType4VideoState)) != 0x08 &&
@@ -4982,14 +5696,14 @@ function romType5VideoStarted(series, episode) {
            once(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
                 prev(dword(mem_romType5VideoPlaytime)) == 0x00 &&
                      dword(mem_romType5VideoPlaytime)  == 0x01) &&
-           trigger_when(dword(mem_romType5VideoPlaytime) >= getTotalPlaytime(series, episode)) &&
+           trigger_when(dword(mem_romType5VideoPlaytime) >= getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(prior(byte(mem_romType5MenuState)) == 0x01) &&
                  trigger_when(byte(mem_romType5MenuState)  == 0x00) &&
            never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
                  dword(mem_romType5VideoPlaytime) == 0x00) &&
            never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
                  dword(mem_romType5VideoPlaytime) > 0x00 &&
-                 dword(mem_romType5VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType5VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  prev(byte(mem_romType5VideoState)) == 0x01 && 
                       byte(mem_romType5VideoState)  == 0x00) &&
            never(repeated(600, byte(mem_romType5MenuState) == 0x00)) &&
@@ -5023,7 +5737,7 @@ function romType5LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
 }
 
 function romType5LeaderboardCancel(series, episode) {
-    return (dword(mem_romType5VideoPlaytime) < getTotalPlaytime(series, episode)) ||
+    return (dword(mem_romType5VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode)) ||
            (repeated(600, byte(mem_romType5MenuState) == 0x00 &&
                           never(dword(mem_romType5EpisodePointer) == getEpisodePointer(series, episode) &&
                                 dword(mem_romType5VideoPlaytime) == 0x00 &&
@@ -5066,7 +5780,7 @@ function romType6VideoStarted(series, episode) {
            trigger_when(dword(mem_romType6SceneCountdown) == 0xFFFFFFFF) &&
            never(dword(mem_romType6EpisodePointer) == getEpisodePointer(series, episode) &&
                  dword(mem_romType6VideoPlaytime) == 0x00) &&
-           never(dword(mem_romType6VideoPlaytime) < getTotalPlaytime(series, episode) &&
+           never(dword(mem_romType6VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  prev(dword(mem_romType6VideoState)) != 0x04 &&
                  prev(dword(mem_romType6VideoState)) != 0x08 &&
                       dword(mem_romType6VideoState)  == 0x08) &&
@@ -5135,13 +5849,13 @@ function romType7VideoStarted(series, episode) {
                      dword(mem_romType7VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType7CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType7SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType7VideoPlaytime)) >= getTotalPlaytime(series, episode) - 3) &&
-           trigger_when(prior(dword(mem_romType7VideoPlaytime)) <= getTotalPlaytime(series, episode) + 3) &&
+           trigger_when(prior(dword(mem_romType7VideoPlaytime)) >= getTotalPlaytimeForEpisodes(series, episode) - 3) &&
+           trigger_when(prior(dword(mem_romType7VideoPlaytime)) <= getTotalPlaytimeForEpisodes(series, episode) + 3) &&
            trigger_when(dword(mem_romType7MenuState) == 0x1A) &&
            never(prev(dword(mem_romType7EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType7EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType7VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType7VideoPlaytime) < getTotalPlaytime(series, episode) - 3 &&
+                 dword(mem_romType7VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) - 3 &&
                  dword(mem_romType7MenuState) == 0x15 &&
                  prev(dword(mem_romType7VideoState)) != 0x04 &&
                  prev(dword(mem_romType7VideoState)) != 0x08 &&
@@ -5221,11 +5935,11 @@ function romType8VideoStarted(series, episode) {
                      dword(mem_romType8VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType8CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType8SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType8VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType8VideoPlaytime)) == getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(dword(mem_romType8MenuState) == 0x18) &&
            never(dword(mem_romType8MenuState) == 0x15) &&
            never(dword(mem_romType8VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType8VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType8VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  dword(mem_romType8MenuState) == 0x13 &&
                  prev(dword(mem_romType8VideoState)) != 0x04 &&
                  prev(dword(mem_romType8VideoState)) != 0x08 &&
@@ -5300,12 +6014,12 @@ function romType9VideoStarted(series, episode) {
                      dword(mem_romType9VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType9CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType9SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType9VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType9VideoPlaytime)) == getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(dword(mem_romType9MenuState) == 0x1A) &&
            never(prev(dword(mem_romType9EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType9EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType9VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType9VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType9VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  dword(mem_romType9MenuState) == 0x15 &&
                  prev(dword(mem_romType9VideoState)) != 0x04 &&
                  prev(dword(mem_romType9VideoState)) != 0x08 &&
@@ -5385,12 +6099,12 @@ function romType10VideoStarted(series, episode) {
                      dword(mem_romType10VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType10CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType10SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType10VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType10VideoPlaytime)) == getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(dword(mem_romType10MenuState) == 0x1A) &&
            never(prev(dword(mem_romType10EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType10EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType10VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType10VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType10VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  dword(mem_romType10MenuState) == 0x15 &&
                  prev(dword(mem_romType10VideoState)) != 0x04 &&
                  prev(dword(mem_romType10VideoState)) != 0x08 &&
@@ -5470,10 +6184,10 @@ function romType11VideoStarted(series, episode) {
                      dword(mem_romType11VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType11CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType11SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType11VideoPlaytime)) == getTotalPlaytime(series, episode)) &&
+           trigger_when(prior(dword(mem_romType11VideoPlaytime)) == getTotalPlaytimeForEpisodes(series, episode)) &&
            trigger_when(dword(mem_romType11MenuState) == 0x18) &&
            never(dword(mem_romType11VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType11VideoPlaytime) < getTotalPlaytime(series, episode) &&
+                 dword(mem_romType11VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) &&
                  dword(mem_romType11MenuState) == 0x13 &&
                  prev(dword(mem_romType11VideoState)) != 0x04 &&
                  prev(dword(mem_romType11VideoState)) != 0x08 &&
@@ -5550,13 +6264,13 @@ function romType12VideoStarted(series, episode) {
                      dword(mem_romType12VideoPlaytime)  == 0x01) &&
            trigger_when(dword(mem_romType12CurrentChapter) == getTotalChapters(series, episode)) &&
            trigger_when(dword(mem_romType12SceneCountdown) == 0x00000000) &&
-           trigger_when(prior(dword(mem_romType12VideoPlaytime)) >= getTotalPlaytime(series, episode) - 3) &&
-           trigger_when(prior(dword(mem_romType12VideoPlaytime)) <= getTotalPlaytime(series, episode) + 3) &&
+           trigger_when(prior(dword(mem_romType12VideoPlaytime)) >= getTotalPlaytimeForEpisodes(series, episode) - 3) &&
+           trigger_when(prior(dword(mem_romType12VideoPlaytime)) <= getTotalPlaytimeForEpisodes(series, episode) + 3) &&
            trigger_when(dword(mem_romType12MenuState) == 0x1A) &&
            never(prev(dword(mem_romType12EpisodePointer) == getEpisodePointer(series, episode)) &&
                       dword(mem_romType12EpisodePointer) == 0x00000000) &&
            never(dword(mem_romType12VideoPlaytime) > 0x00000000 &&
-                 dword(mem_romType12VideoPlaytime) < getTotalPlaytime(series, episode) - 3 &&
+                 dword(mem_romType12VideoPlaytime) < getTotalPlaytimeForEpisodes(series, episode) - 3 &&
                  dword(mem_romType12MenuState) == 0x15 &&
                  prev(dword(mem_romType12VideoState)) != 0x04 &&
                  prev(dword(mem_romType12VideoState)) != 0x08 &&
@@ -5617,6 +6331,8 @@ function romType12LeaderboardCancel(series, episode) {
            dword(mem_romType12EpisodePointer) != getEpisodePointer(series, episode))
 }
 
+
+
 function romType13Cartridge() {
     mem_romType12VideoState = 0x016794
     return isCartridge(0xE92D4010, 0xE1B04000, 0x1A000005, 0xE3A0005C) && dword(0x7EC0) == 0x08000E98
@@ -5638,13 +6354,141 @@ function romType13CorrectAnswer(totalQuestion, currentQuestion, index) {
 }
 
 function romType13LeaderboardQuestionSelect(totalQuestion, currentQuestion) {
-    em_romType12VideoState = 0x016794
+    mem_romType12VideoState = 0x016794
     return romType12LeaderboardQuestionSelect(totalQuestion, currentQuestion)
 }
 
 function romType13LeaderboardCancel(series, episode) {
     mem_romType12VideoState = 0x016794
     return romType12LeaderboardCancel(series, episode)
+}
+
+
+
+function romTypeM1Cartridge() {
+    return (dword(0x0000) == 0x020000F0 || dword(0x0000) == 0xE12FFF1E) &&
+           (dword(0x0004) == 0x020000F0 || dword(0x0004) == 0x00000000) &&
+           (dword(0x0008) == 0x020000F0 || dword(0x0008) == 0x00000000) &&
+           (dword(0x000C) == 0x020000F0 || dword(0x000C) == 0x00000000)      
+}
+
+function romTypeM1RunningVideo() {
+    return dword(mem_romTypeM1CartridgeState) == 0x02               
+}
+
+function romTypeM1VideoStarted(movieVersion, movie) {
+    return unless(!romTypeM1Cartridge()) &&
+           once(dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                dword(mem_romTypeM1StartingTime) == 0 &&
+                prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                     dword(mem_romTypeM1PauseCheck2) != prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                     dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&        
+                     dword(mem_romTypeM1PauseCheck2) >= 3 &&
+                     dword(mem_romTypeM1PauseCheck2) <= 7 &&
+                dword(mem_romTypeM1CartridgeState) == 0x02) &&
+           trigger_when(once(dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) - 2) &&
+                        once(dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) - 1) &&
+                        once(dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie))) &&
+           trigger_when(prior(dword(mem_romTypeM1CartridgeState)) == 0x02 &&
+                              dword(mem_romTypeM1CartridgeState)  == 0x01) &&
+           never(dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                 prev(dword(mem_romTypeM1CartridgeState)) == 0x01 &&
+                      dword(mem_romTypeM1CartridgeState)  == 0x02) &&
+           never(once(dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                      dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                      dword(mem_romTypeM1StartingTime) == 0 &&
+                      prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                           dword(mem_romTypeM1PauseCheck2) != prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                           dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&      
+                           dword(mem_romTypeM1PauseCheck2) >= 3 &&
+                           dword(mem_romTypeM1PauseCheck2) <= 7 &&
+                      never(__ornext(dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 0 ||
+                                     dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 1 ||
+                                     dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 2))) &&
+                 dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                 dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                 dword(mem_romTypeM1SkipProgress) > 0x00) &&
+           never(once(dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                      dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                      dword(mem_romTypeM1StartingTime) == 0 &&
+                      prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                           dword(mem_romTypeM1PauseCheck2) != prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                           dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&     
+                           dword(mem_romTypeM1PauseCheck2) >= 3 &&
+                           dword(mem_romTypeM1PauseCheck2) <= 7 &&
+                      never(__ornext(dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 0 ||
+                                     dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 1 ||
+                                     dword(mem_romTypeM1PauseCheck2) == getTotalPlaytimeForMovies(movieVersion, movie) + 2))) &&
+                 dword(mem_romTypeM1MoviePointer) == getMoviePointer(movieVersion, movie) &&
+                 dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                 dword(mem_romTypeM1PauseCheck1) == 0x00 &&
+                 dword(mem_romTypeM1PauseCheck2) == 0x00) &&
+           never(repeated(1800, dword(mem_romTypeM1CartridgeState) == 0x01)) &&
+           never(dword(mem_romTypeM1MoviePointer) != getMoviePointer(movieVersion, movie))
+}
+
+function romTypeM1CorrectAnswer(totalQuestionPools, currentQuestionPool, index) {
+    return trigger_when(once(dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                             dword(mem_romTypeM1StartingTime) == 0 &&
+                             prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                                  dword(mem_romTypeM1PauseCheck2) < prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                                  dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&     
+                                  dword(mem_romTypeM1PauseCheck2) == 5 &&
+                             (low4(mem_romTypeM1RNG + 1) 
+                            + (high4(mem_romTypeM1RNG) % 3)
+                            + (low4(mem_romTypeM1RNG) % 5)
+                            + high4(mem_romTypeM1RNG + 1)
+                            + low4(mem_romTypeM1RNG + 3)) % totalQuestionPools == currentQuestionPool)) &&
+           trigger_when(dword(mem_romTypeM1CartridgeState) == 0x01 &&
+                        bit0(mem_romTypeM1Input + 0x01)
+                      + bit1(mem_romTypeM1Input + 0x01) >= 1 &&
+                        bit(index % 4 + 4, mem_romTypeM1Input) > prev(bit(index % 4 + 4, mem_romTypeM1Input))) &&
+           never(once(dword(mem_romTypeM1CartridgeState) == 0x01 &&
+                bit0(mem_romTypeM1Input + 0x01)
+              + bit1(mem_romTypeM1Input + 0x01) >= 1 &&
+                bit((index + 1) % 4 + 4, mem_romTypeM1Input)
+              + bit((index + 2) % 4 + 4, mem_romTypeM1Input)
+              + bit((index + 3) % 4 + 4, mem_romTypeM1Input) == 1) &&
+                repeated(2, always_true())) &&
+           trigger_when(bit((index + 1) % 4 + 4, mem_romTypeM1Input)
+                      + bit((index + 2) % 4 + 4, mem_romTypeM1Input)
+                      + bit((index + 3) % 4 + 4, mem_romTypeM1Input) == 0)
+}
+
+function romTypeM1LeaderboardQuestionSelect(totalQuestionPools, currentQuestionPool) {
+    return dword(mem_romTypeM1CartridgeState) == 0x01 &&
+           once(dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                             dword(mem_romTypeM1StartingTime) == 0 &&
+                             prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                                  dword(mem_romTypeM1PauseCheck2) < prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                                  dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&     
+                                  dword(mem_romTypeM1PauseCheck2) == 5 &&
+                             (low4(mem_romTypeM1RNG + 1) 
+                            + (high4(mem_romTypeM1RNG) % 3)
+                            + (low4(mem_romTypeM1RNG) % 5)
+                            + high4(mem_romTypeM1RNG + 1)
+                            + low4(mem_romTypeM1RNG + 3)) % totalQuestionPools == currentQuestionPool) &&
+           never(prev(dword(mem_romTypeM1CartridgeState)) == 0x01 &&
+                      dword(mem_romTypeM1CartridgeState)  == 0x02)
+}
+
+function romTypeM1LeaderboardCancel(movieVersion, movie) {
+    return (repeated(1800, dword(mem_romTypeM1CartridgeState) == 0x01 &&
+                           never(dword(mem_romTypeM1CartridgeState) == 0x02 &&
+                                 prev(dword(mem_romTypeM1PauseCheck2)) != 0 &&
+                                      dword(mem_romTypeM1PauseCheck2) < prev(dword(mem_romTypeM1PauseCheck2)) &&   
+                                      dword(mem_romTypeM1PauseCheck2) != dword(mem_romTypeM1PauseCheck1) &&     
+                                      dword(mem_romTypeM1PauseCheck2) == 5))) ||
+           (dword(mem_romTypeM1CartridgeState) == 0x01 &&
+            bit0(mem_romTypeM1Input + 0x01)
+          + bit1(mem_romTypeM1Input + 0x01) >= 1 &&
+            bit(4, mem_romTypeM1Input)
+          + bit(5, mem_romTypeM1Input)
+          + bit(6, mem_romTypeM1Input)
+          + bit(7, mem_romTypeM1Input) == 1) ||
+           (prev(dword(mem_romTypeM1CartridgeState)) == 0x01 &&
+                 dword(mem_romTypeM1CartridgeState)  == 0x02)
 }
 
 //--------------------------------------------------
@@ -5665,8 +6509,8 @@ leaderboard(
 // Achievements
 
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Bubblestand"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Bubblestand"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Bubblestand"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Bubblestand"),
     id = 93881, badge = "103410", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Bubblestand") &&
               (romType1CorrectAnswer(4, 0, 4) ||
@@ -5720,8 +6564,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Ripped Pants"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Ripped Pants"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Ripped Pants"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Ripped Pants"),
     id = 93982, badge = "103412", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Ripped Pants") &&
               (romType1CorrectAnswer(4, 0, 4) ||
@@ -5775,8 +6619,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Jellyfishing"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Jellyfishing"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Jellyfishing"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Jellyfishing"),
     id = 93987, badge = "103414", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Jellyfishing") &&
               (romType1CorrectAnswer(4, 0, 5) ||
@@ -5830,8 +6674,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Plankton!"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Plankton!"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Plankton!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Plankton!"),
     id = 93988, badge = "103460", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Plankton!") &&
               (romType1CorrectAnswer(4, 0, 7) ||
@@ -5885,8 +6729,8 @@ achievement(
             )
 
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Mermaidman and Barnacleboy"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Mermaidman and Barnacleboy"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Mermaidman and Barnacleboy"),
     id = 94325, badge = "103808", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy") &&
               (romType1CorrectAnswer(4, 0, 7) ||
@@ -5940,8 +6784,8 @@ achievement(
             )
 
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Pickles"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Pickles"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Pickles"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Pickles"),
     id = 94333, badge = "103837", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Pickles") &&
               (romType1CorrectAnswer(4, 0, 6) ||
@@ -5995,8 +6839,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Hall Monitor"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Hall Monitor"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Hall Monitor"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Hall Monitor"),
     id = 94396, badge = "104021", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Hall Monitor") &&
               (romType1CorrectAnswer(4, 0, 6) ||
@@ -6050,8 +6894,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Jellyfish Jam"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Jellyfish Jam"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Jellyfish Jam"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Jellyfish Jam"),
     id = 94407, badge = "104022", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Jellyfish Jam") &&
               (romType1CorrectAnswer(4, 0, 5) ||
@@ -6105,8 +6949,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Texas"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Texas"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Texas"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Texas"),
     id = 94538, badge = "639171", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Texas") &&
               (romType2CorrectAnswer(4, 0, 5) ||
@@ -6160,8 +7004,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Walking Small"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Walking Small"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Walking Small"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Walking Small"),
     id = 94540, badge = "104154", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Walking Small") &&
               (romType2CorrectAnswer(4, 0, 6) ||
@@ -6215,8 +7059,8 @@ achievement(
             )
 
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Hooky"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Hooky"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Hooky"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Hooky"),
     id = 97409, badge = "107025", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Hooky") &&
               (romType2CorrectAnswer(4, 0, 6) ||
@@ -6270,8 +7114,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Mermaidman and Barnacleboy II"),
     id = 97410, badge = "107026", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Mermaidman and Barnacleboy II") &&
               (romType2CorrectAnswer(4, 0, 6) ||
@@ -6326,8 +7170,8 @@ achievement(
             
             
 achievement(
-    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), type = "progression",
-    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"),
+    title = getAchievementTitleForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Brobot"),
     id = 97411, badge = "107027", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Brobot") &&
               (romType3CorrectAnswer(4, 0, 5) ||
@@ -6381,8 +7225,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), type = "progression",
-    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"),
+    title = getAchievementTitleForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch"),
     id = 97413, badge = "107032", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "The Big Pinch") &&
               (romType3CorrectAnswer(4, 0, 6) ||
@@ -6436,8 +7280,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), type = "progression",
-    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"),
+    title = getAchievementTitleForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby"),
     id = 97414, badge = "107039", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Granny Baby") &&
               (romType3CorrectAnswer(4, 0, 5) ||
@@ -6491,8 +7335,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), type = "progression",
-    description = getAchievementDescription("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"),
+    title = getAchievementTitleForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money"),
     id = 97515, badge = "640637", points = 2,
     trigger = romType3VideoStarted("The Adventures of Jimmy Neutron: Boy Genius", "Time is Money") &&
               (romType3CorrectAnswer(4, 0, 5) ||
@@ -6546,8 +7390,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("All Grown Up!", "Susie Sings The Blues"), type = "progression",
-    description = getAchievementDescription("All Grown Up!", "Susie Sings The Blues"),
+    title = getAchievementTitleForEpisodes("All Grown Up!", "Susie Sings The Blues"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("All Grown Up!", "Susie Sings The Blues"),
     id = 97655, badge = "107192", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Susie Sings The Blues") &&
               (romType1CorrectAnswer(6, 0, 5) ||
@@ -6625,8 +7469,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("All Grown Up!", "Coup DeVille"), type = "progression",
-    description = getAchievementDescription("All Grown Up!", "Coup DeVille"),
+    title = getAchievementTitleForEpisodes("All Grown Up!", "Coup DeVille"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("All Grown Up!", "Coup DeVille"),
     id = 97664, badge = "107200", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Coup DeVille") &&
               (romType1CorrectAnswer(6, 0, 5) ||
@@ -6704,8 +7548,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dora the Explorer", "Three Little Piggies"), type = "progression",
-    description = getAchievementDescription("Dora the Explorer", "Three Little Piggies"),
+    title = getAchievementTitleForEpisodes("Dora the Explorer", "Three Little Piggies"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dora the Explorer", "Three Little Piggies"),
     id = 114580, badge = "641195", points = 4,
     trigger = romType1VideoStarted("Dora the Explorer", "Three Little Piggies") &&
               (romType1CorrectAnswer(6, 0, 5) ||
@@ -6783,8 +7627,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dora the Explorer", "The Big River"), type = "progression",
-    description = getAchievementDescription("Dora the Explorer", "The Big River"),
+    title = getAchievementTitleForEpisodes("Dora the Explorer", "The Big River"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dora the Explorer", "The Big River"),
     id = 114581, badge = "125228", points = 4,
     trigger = romType1VideoStarted("Dora the Explorer", "The Big River") &&
               (romType1CorrectAnswer(6, 0, 5) ||
@@ -6862,8 +7706,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("All Grown Up!", "Chuckie's in Love"), type = "progression",
-    description = getAchievementDescription("All Grown Up!", "Chuckie's in Love"),
+    title = getAchievementTitleForEpisodes("All Grown Up!", "Chuckie's in Love"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("All Grown Up!", "Chuckie's in Love"),
     id = 114590, badge = "125258", points = 4,
     trigger = romType1VideoStarted("All Grown Up!", "Chuckie's in Love") &&
               (romType1CorrectAnswer(6, 0, 5) ||
@@ -6941,8 +7785,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "The Big Problem!"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "The Big Problem!"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "The Big Problem!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "The Big Problem!"),
     id = 114638, badge = "125375", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "The Big Problem!") &&
               (romType1CorrectAnswer(4, 0, 5) ||
@@ -6996,8 +7840,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Pizza Delivery"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Pizza Delivery"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Pizza Delivery"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Pizza Delivery"),
     id = 114643, badge = "641734", points = 2,
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Pizza Delivery") &&
               (romType1CorrectAnswer(4, 0, 4) ||
@@ -7051,8 +7895,8 @@ achievement(
             )
            
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Odd Ball"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Odd Ball"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Odd Ball"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Odd Ball"),
     id = 114646, badge = "125400", points = 2,
     trigger = romType2VideoStarted("The Fairly OddParents!", "Odd Ball") &&
               (romType2CorrectAnswer(4, 0, 6) ||
@@ -7106,8 +7950,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Rocket Power", "Big Air Dare"), type = "progression",
-    description = getAchievementDescription("Rocket Power", "Big Air Dare"),
+    title = getAchievementTitleForEpisodes("Rocket Power", "Big Air Dare"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Rocket Power", "Big Air Dare"),
     id = 114721, badge = "125492", points = 2,
     trigger = romType2VideoStarted("Rocket Power", "Big Air Dare") &&
               (romType2CorrectAnswer(4, 0, 4) ||
@@ -7161,8 +8005,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Nature Pants"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Nature Pants"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Nature Pants"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Nature Pants"),
     id = 114722, badge = "641864", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Nature Pants") &&
               (romType2CorrectAnswer(4, 0, 7) ||
@@ -7216,8 +8060,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Opposite Day"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Opposite Day"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Opposite Day"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Opposite Day"),
     id = 114728, badge = "641865", points = 2,
     trigger = romType2VideoStarted("SpongeBob SquarePants", "Opposite Day") &&
               (romType2CorrectAnswer(4, 0, 5) ||
@@ -7271,8 +8115,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Danny Phantom", "Attack of the Killer Garage Sale"), type = "progression",
-    description = getAchievementDescription("Danny Phantom", "Attack of the Killer Garage Sale"),
+    title = getAchievementTitleForEpisodes("Danny Phantom", "Attack of the Killer Garage Sale"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Danny Phantom", "Attack of the Killer Garage Sale"),
     id = 114754, badge = "643472", points = 4,
     trigger = romType4VideoStarted("Danny Phantom", "Attack of the Killer Garage Sale") &&
               (romType4CorrectAnswer(6, 0, 4) ||
@@ -7350,8 +8194,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Timvisible"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Timvisible"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Timvisible"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Timvisible"),
     id = 114755, badge = "125652", points = 2,
     trigger = romType4VideoStarted("The Fairly OddParents!", "Timvisible") &&
               (romType4CorrectAnswer(4, 0, 6) ||
@@ -7405,8 +8249,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("SpongeBob SquarePants", "Squeaky Boots"), type = "progression",
-    description = getAchievementDescription("SpongeBob SquarePants", "Squeaky Boots"),
+    title = getAchievementTitleForEpisodes("SpongeBob SquarePants", "Squeaky Boots"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("SpongeBob SquarePants", "Squeaky Boots"),
     id = 114756, badge = "125655", points = 2,
     trigger = romType4VideoStarted("SpongeBob SquarePants", "Squeaky Boots") &&
               (romType4CorrectAnswer(4, 0, 5) ||
@@ -7460,8 +8304,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Pokémon: Johto League Champions", "A Hot Water Battle"), type = "progression",
-    description = getAchievementDescription("Pokémon: Johto League Champions", "A Hot Water Battle"),
+    title = getAchievementTitleForEpisodes("Pokémon: Johto League Champions", "A Hot Water Battle"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Johto League Champions", "A Hot Water Battle"),
     id = 115131, badge = "125908", points = 4,
     trigger = romType5VideoStarted("Pokémon: Johto League Champions", "A Hot Water Battle") &&
               (romType5CorrectAnswer(6, 0, 6) ||
@@ -7539,8 +8383,8 @@ achievement(
             )
            
 achievement(
-    title = getAchievementTitle("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), type = "progression",
-    description = getAchievementDescription("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"),
+    title = getAchievementTitleForEpisodes("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!"),
     id = 115215, badge = "176297", points = 4,
     trigger = romType5VideoStarted("Pokémon: Master Quest", "For Ho-Oh The Bells Toll!") &&
               (romType5CorrectAnswer(6, 0, 7) ||
@@ -7618,8 +8462,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Pokémon: Master Quest", "Playing with Fire!"), type = "progression",
-    description = getAchievementDescription("Pokémon: Master Quest", "Playing with Fire!"),
+    title = getAchievementTitleForEpisodes("Pokémon: Master Quest", "Playing with Fire!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Master Quest", "Playing with Fire!"),
     id = 115217, badge = "125978", points = 4,
     trigger = romType5VideoStarted("Pokémon: Master Quest", "Playing with Fire!") &&
               (romType5CorrectAnswer(6, 0, 7) ||
@@ -7697,8 +8541,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Pokémon: Master Quest", "Johto Photo Finish"), type = "progression",
-    description = getAchievementDescription("Pokémon: Master Quest", "Johto Photo Finish"),
+    title = getAchievementTitleForEpisodes("Pokémon: Master Quest", "Johto Photo Finish"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Master Quest", "Johto Photo Finish"),
     id = 115219, badge = "125989", points = 4,
     trigger = romType5VideoStarted("Pokémon: Master Quest", "Johto Photo Finish") &&
               (romType5CorrectAnswer(6, 0, 5) ||
@@ -7776,8 +8620,8 @@ achievement(
             )
            
 achievement(
-    title = getAchievementTitle("Pokémon: Indigo League", "Pokémon - I Choose You!"), type = "progression",
-    description = getAchievementDescription("Pokémon: Indigo League", "Pokémon - I Choose You!"),
+    title = getAchievementTitleForEpisodes("Pokémon: Indigo League", "Pokémon - I Choose You!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Indigo League", "Pokémon - I Choose You!"),
     id = 115221, badge = "125991", points = 4,
     trigger = romType5VideoStarted("Pokémon: Indigo League", "Pokémon - I Choose You!") &&
               (romType5CorrectAnswer(6, 0, 7) ||
@@ -7855,8 +8699,8 @@ achievement(
             )
            
 achievement(
-    title = getAchievementTitle("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), type = "progression",
-    description = getAchievementDescription("Pokémon: Indigo League", "Here Comes The Squirtle Squad"),
+    title = getAchievementTitleForEpisodes("Pokémon: Indigo League", "Here Comes The Squirtle Squad"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Indigo League", "Here Comes The Squirtle Squad"),
     id = 115267, badge = "126026", points = 4,
     trigger = romType5VideoStarted("Pokémon: Indigo League", "Here Comes The Squirtle Squad") &&
               (romType5CorrectAnswer(6, 0, 5) ||
@@ -7934,8 +8778,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), type = "progression",
-    description = getAchievementDescription("Pokémon: Indigo League", "Beach Blank-Out Blastoise"),
+    title = getAchievementTitleForEpisodes("Pokémon: Indigo League", "Beach Blank-Out Blastoise"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Indigo League", "Beach Blank-Out Blastoise"),
     id = 115525, badge = "126353", points = 4,
     trigger = romType5VideoStarted("Pokémon: Indigo League", "Beach Blank-Out Blastoise") &&
               (romType5CorrectAnswer(6, 0, 5) ||
@@ -8013,8 +8857,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Pokémon: Indigo League", "Go West Young Meowth"), type = "progression",
-    description = getAchievementDescription("Pokémon: Indigo League", "Go West Young Meowth"),
+    title = getAchievementTitleForEpisodes("Pokémon: Indigo League", "Go West Young Meowth"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Pokémon: Indigo League", "Go West Young Meowth"),
     id = 115531, badge = "126354", points = 4,
     trigger = romType5VideoStarted("Pokémon: Indigo League", "Go West Young Meowth") &&
               (romType5CorrectAnswer(6, 0, 4) ||
@@ -8092,8 +8936,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Foul Balled"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Foul Balled"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Foul Balled"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Foul Balled"),
     id = 125929, badge = "126385", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "Foul Balled") &&
               (romType1CorrectAnswer(4, 0, 7) ||
@@ -8147,8 +8991,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "The Boy Who Would Be Queen"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "The Boy Who Would Be Queen"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "The Boy Who Would Be Queen"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "The Boy Who Would Be Queen"),
     id = 125931, badge = "138494", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "The Boy Who Would Be Queen") &&
               (romType1CorrectAnswer(4, 0, 7) ||
@@ -8202,8 +9046,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Information Stupor Highway"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Information Stupor Highway"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Information Stupor Highway"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Information Stupor Highway"),
     id = 125932, badge = "138504", points = 4,
     trigger = romType1VideoStarted("The Fairly OddParents!", "Information Stupor Highway") &&
               (romType1CorrectAnswer(6, 0, 7) ||
@@ -8281,8 +9125,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Father Time!"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Father Time!"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Father Time!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Father Time!"),
     id = 126192, badge = "138562", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "Father Time!") &&
               (romType1CorrectAnswer(4, 0, 5) ||
@@ -8336,8 +9180,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Apartnership!"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Apartnership!"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Apartnership!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Apartnership!"),
     id = 126193, badge = "138565", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "Apartnership!") &&
               (romType1CorrectAnswer(4, 0, 6) ||
@@ -8391,8 +9235,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "Ruled Out"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "Ruled Out"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "Ruled Out"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "Ruled Out"),
     id = 161333, badge = "181413", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "Ruled Out") &&
               (romType1CorrectAnswer(4, 0, 5) ||
@@ -8446,8 +9290,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Fairly OddParents!", "That's Life!"), type = "progression",
-    description = getAchievementDescription("The Fairly OddParents!", "That's Life!"),
+    title = getAchievementTitleForEpisodes("The Fairly OddParents!", "That's Life!"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Fairly OddParents!", "That's Life!"),
     id = 161334, badge = "181414", points = 2,
     trigger = romType1VideoStarted("The Fairly OddParents!", "That's Life!") &&
               (romType1CorrectAnswer(4, 0, 4) ||
@@ -8501,8 +9345,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), type = "progression",
-    description = getAchievementDescription("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"),
+    title = getAchievementTitleForEpisodes("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Yu-Gi-Oh!", "Friends 'Til the End - Part 3"),
     id = 568208, badge = "645989", points = 4,
     trigger = (romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 3") &&
                 (romType6CorrectAnswer(6, 0, 7) ||
@@ -8653,8 +9497,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), type = "progression",
-    description = getAchievementDescription("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"),
+    title = getAchievementTitleForEpisodes("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Yu-Gi-Oh!", "Friends 'Til the End - Part 4"),
     id = 568209, badge = "645990", points = 4,
     trigger = (romType6VideoStarted("Yu-Gi-Oh!", "Friends 'Til the End - Part 4") &&
                 (romType6CorrectAnswer(6, 0, 7) ||
@@ -8805,8 +9649,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dragon Ball GT", "A Grand Problem"), type = "progression",
-    description = getAchievementDescription("Dragon Ball GT", "A Grand Problem"),
+    title = getAchievementTitleForEpisodes("Dragon Ball GT", "A Grand Problem"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dragon Ball GT", "A Grand Problem"),
     id = 568604, badge = "646535", points = 4,
     trigger = romType8VideoStarted("Dragon Ball GT", "A Grand Problem") &&
               (romType8CorrectAnswer(6, 0, 5) ||
@@ -8884,8 +9728,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dragon Ball GT", "Pan's Gambit"), type = "progression",
-    description = getAchievementDescription("Dragon Ball GT", "Pan's Gambit"),
+    title = getAchievementTitleForEpisodes("Dragon Ball GT", "Pan's Gambit"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dragon Ball GT", "Pan's Gambit"),
     id = 568605, badge = "646536", points = 4,
     trigger = romType8VideoStarted("Dragon Ball GT", "Pan's Gambit") &&
               (romType8CorrectAnswer(6, 0, 6) ||
@@ -8963,8 +9807,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Super Robot Monkey Team Hyper Force Go!", "Depths of Fear"), type = "progression",
-    description = getAchievementDescription("Super Robot Monkey Team Hyper Force Go!", "Depths of Fear"),
+    title = getAchievementTitleForEpisodes("Super Robot Monkey Team Hyper Force Go!", "Depths of Fear"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Super Robot Monkey Team Hyper Force Go!", "Depths of Fear"),
     id = 570634, badge = "648153", points = 4,
     trigger = romType9VideoStarted("Super Robot Monkey Team Hyper Force Go!", "Depths of Fear") &&
               (romType9CorrectAnswer(6, 0, 7) ||
@@ -9042,8 +9886,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"), type = "progression",
-    description = getAchievementDescription("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"),
+    title = getAchievementTitleForEpisodes("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q"),
     id = 570679, badge = "648230", points = 4,
     trigger = romType9VideoStarted("Super Robot Monkey Team Hyper Force Go!", "Planetoid Q") &&
               (romType9CorrectAnswer(6, 0, 7) ||
@@ -9121,8 +9965,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Kim Possible", "Ron the Man"), type = "progression",
-    description = getAchievementDescription("Kim Possible", "Ron the Man"),
+    title = getAchievementTitleForEpisodes("Kim Possible", "Ron the Man"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Kim Possible", "Ron the Man"),
     id = 570767, badge = "648366", points = 4,
     trigger = romType10VideoStarted("Kim Possible", "Ron the Man") &&
               (romType10CorrectAnswer(6, 0, 5) ||
@@ -9200,8 +10044,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Lilo & Stitch: The Series", "Slushy"), type = "progression",
-    description = getAchievementDescription("Lilo & Stitch: The Series", "Slushy"),
+    title = getAchievementTitleForEpisodes("Lilo & Stitch: The Series", "Slushy"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Lilo & Stitch: The Series", "Slushy"),
     id = 570770, badge = "648370", points = 4,
     trigger = romType10VideoStarted("Lilo & Stitch: The Series", "Slushy") &&
               (romType10CorrectAnswer(6, 0, 6) ||
@@ -9279,8 +10123,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Strawberry Shortcake", "Meet Strawberry Shortcake"), type = "progression",
-    description = getAchievementDescription("Strawberry Shortcake", "Meet Strawberry Shortcake"),
+    title = getAchievementTitleForEpisodes("Strawberry Shortcake", "Meet Strawberry Shortcake"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Strawberry Shortcake", "Meet Strawberry Shortcake"),
     id = 571082, badge = "648725", points = 4,
     trigger = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
               (romType1CorrectAnswer(6, 0, 6) ||
@@ -9358,8 +10202,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Strawberry Shortcake", "Spring for Strawberry"), type = "progression",
-    description = getAchievementDescription("Strawberry Shortcake", "Spring for Strawberry"),
+    title = getAchievementTitleForEpisodes("Strawberry Shortcake", "Spring for Strawberry"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Strawberry Shortcake", "Spring for Strawberry"),
     id = 571083, badge = "648726", points = 4,
     trigger = romType1VideoStarted("Strawberry Shortcake", "Spring for Strawberry") &&
               (romType1CorrectAnswer(6, 0, 6) ||
@@ -9437,8 +10281,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "Things Change"), type = "progression",
-    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "Things Change"),
+    title = getAchievementTitleForEpisodes("Teenage Mutant Ninja Turtles", "Things Change"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Teenage Mutant Ninja Turtles", "Things Change"),
     id = 571089, badge = "648732", points = 4,
     trigger = (romType6VideoStarted("Teenage Mutant Ninja Turtles", "Things Change") &&
                 (romType6CorrectAnswer(6, 0, 7) ||
@@ -9589,8 +10433,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), type = "progression",
-    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "A Better Mousetrap"),
+    title = getAchievementTitleForEpisodes("Teenage Mutant Ninja Turtles", "A Better Mousetrap"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Teenage Mutant Ninja Turtles", "A Better Mousetrap"),
     id = 571098, badge = "648756", points = 4,
     trigger = romType6VideoStarted("Teenage Mutant Ninja Turtles", "A Better Mousetrap") &&
                (romType6CorrectAnswer(6, 0, 4) ||
@@ -9668,8 +10512,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Teenage Mutant Ninja Turtles", "Attack of the Mousers"), type = "progression",
-    description = getAchievementDescription("Teenage Mutant Ninja Turtles", "Attack of the Mousers"),
+    title = getAchievementTitleForEpisodes("Teenage Mutant Ninja Turtles", "Attack of the Mousers"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Teenage Mutant Ninja Turtles", "Attack of the Mousers"),
     id = 571103, badge = "648803", points = 4,
     trigger = romType7VideoStarted("Tortues Ninja (FR)", "L'attaque des dératiseurs") &&
                (romType7CorrectAnswer(6, 0, 7) ||
@@ -9747,8 +10591,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Sonic X", "Chaos Control Freaks"), type = "progression",
-    description = getAchievementDescription("Sonic X", "Chaos Control Freaks"),
+    title = getAchievementTitleForEpisodes("Sonic X", "Chaos Control Freaks"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Sonic X", "Chaos Control Freaks"),
     id = 571493, badge = "649116", points = 4,
     trigger = romType1VideoStarted("Sonic X", "Chaos Control Freaks") &&
               (romType1CorrectAnswer(6, 0, 6) ||
@@ -9826,8 +10670,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Sonic X", "Sonic to the Rescue"), type = "progression",
-    description = getAchievementDescription("Sonic X", "Sonic to the Rescue"),
+    title = getAchievementTitleForEpisodes("Sonic X", "Sonic to the Rescue"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Sonic X", "Sonic to the Rescue"),
     id = 571539, badge = "649117", points = 4,
     trigger = romType1VideoStarted("Sonic X", "Sonic to the Rescue") &&
               (romType1CorrectAnswer(6, 0, 6) ||
@@ -9905,8 +10749,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Proud Family", "Tween Town"), type = "progression",
-    description = getAchievementDescription("The Proud Family", "Tween Town"),
+    title = getAchievementTitleForEpisodes("The Proud Family", "Tween Town"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Proud Family", "Tween Town"),
     id = 572016, badge = "650091", points = 4,
     trigger = romType9VideoStarted("The Proud Family", "Tween Town") &&
               (romType9CorrectAnswer(6, 0, 5) ||
@@ -9984,8 +10828,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Proud Family", "Twins to Tweens"), type = "progression",
-    description = getAchievementDescription("The Proud Family", "Twins to Tweens"),
+    title = getAchievementTitleForEpisodes("The Proud Family", "Twins to Tweens"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Proud Family", "Twins to Tweens"),
     id = 572324, badge = "650092", points = 4,
     trigger = romType9VideoStarted("The Proud Family", "Twins to Tweens") &&
               (romType9CorrectAnswer(6, 0, 7) ||
@@ -10063,8 +10907,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), type = "progression",
-    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"),
+    title = getAchievementTitleForEpisodes("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Grim Adventures of Billy & Mandy", "The Crawling Niceness"),
     id = 572327, badge = "650095", points = 2,
     trigger = romType6VideoStarted("The Grim Adventures of Billy & Mandy", "The Crawling Niceness") &&
                (romType6CorrectAnswer(4, 0, 6) ||
@@ -10118,8 +10962,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Johnny Bravo", "The Perfect Gift"), type = "progression",
-    description = getAchievementDescription("Johnny Bravo", "The Perfect Gift"),
+    title = getAchievementTitleForEpisodes("Johnny Bravo", "The Perfect Gift"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Johnny Bravo", "The Perfect Gift"),
     id = 572406, badge = "650128", points = 2,
     trigger = romType6VideoStarted("Johnny Bravo", "The Perfect Gift") &&
                (romType6CorrectAnswer(4, 0, 5) ||
@@ -10173,8 +11017,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Ed, Edd n Eddy", "Stop, Look and Ed"), type = "progression",
-    description = getAchievementDescription("Ed, Edd n Eddy", "Stop, Look and Ed"),
+    title = getAchievementTitleForEpisodes("Ed, Edd n Eddy", "Stop, Look and Ed"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Ed, Edd n Eddy", "Stop, Look and Ed"),
     id = 572407, badge = "650129", points = 2,
     trigger = romType6VideoStarted("Ed, Edd n Eddy", "Stop, Look and Ed") &&
                (romType6CorrectAnswer(4, 0, 7) ||
@@ -10228,8 +11072,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), type = "progression",
-    description = getAchievementDescription("Courage the Cowardly Dog", "The Magic Tree of Nowhere"),
+    title = getAchievementTitleForEpisodes("Courage the Cowardly Dog", "The Magic Tree of Nowhere"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Courage the Cowardly Dog", "The Magic Tree of Nowhere"),
     id = 572408, badge = "650130", points = 2,
     trigger = romType6VideoStarted("Courage the Cowardly Dog", "The Magic Tree of Nowhere") &&
                (romType6CorrectAnswer(4, 0, 7) ||
@@ -10283,8 +11127,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Courage the Cowardly Dog", "Courage the Fly"), type = "progression",
-    description = getAchievementDescription("Courage the Cowardly Dog", "Courage the Fly"),
+    title = getAchievementTitleForEpisodes("Courage the Cowardly Dog", "Courage the Fly"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Courage the Cowardly Dog", "Courage the Fly"),
     id = 572423, badge = "650131", points = 2,
     trigger = romType11VideoStarted("Courage the Cowardly Dog", "Courage the Fly") &&
                (romType11CorrectAnswer(4, 0, 4) ||
@@ -10338,8 +11182,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Johnny Bravo", "Balloon Platoon"), type = "progression",
-    description = getAchievementDescription("Johnny Bravo", "Balloon Platoon"),
+    title = getAchievementTitleForEpisodes("Johnny Bravo", "Balloon Platoon"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Johnny Bravo", "Balloon Platoon"),
     id = 572424, badge = "650140", points = 2,
     trigger = romType11VideoStarted("Johnny Bravo", "Balloon Platoon") &&
                (romType11CorrectAnswer(4, 0, 4) ||
@@ -10393,8 +11237,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), type = "progression",
-    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"),
+    title = getAchievementTitleForEpisodes("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Grim Adventures of Billy & Mandy", "Mandy the Merciless"),
     id = 573717, badge = "651510", points = 2,
     trigger = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Mandy the Merciless") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -10448,8 +11292,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), type = "progression",
-    description = getAchievementDescription("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."),
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: T.U.R.N.I.P."),
     id = 573725, badge = "651511", points = 2,
     trigger = romType11VideoStarted("Codename: Kids Next Door", "Operation: T.U.R.N.I.P.") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -10503,8 +11347,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Courage the Cowardly Dog", "Queen of the Black Puddle"), type = "progression",
-    description = getAchievementDescription("Courage the Cowardly Dog", "Queen of the Black Puddle"),
+    title = getAchievementTitleForEpisodes("Courage the Cowardly Dog", "Queen of the Black Puddle"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Courage the Cowardly Dog", "Queen of the Black Puddle"),
     id = 575149, badge = "653039", points = 2,
     trigger = romType11VideoStarted("Courage the Cowardly Dog", "Queen of the Black Puddle") &&
                (romType11CorrectAnswer(4, 0, 7) ||
@@ -10558,8 +11402,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Ed, Edd n Eddy", "Key to My Ed"), type = "progression",
-    description = getAchievementDescription("Ed, Edd n Eddy", "Key to My Ed"),
+    title = getAchievementTitleForEpisodes("Ed, Edd n Eddy", "Key to My Ed"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Ed, Edd n Eddy", "Key to My Ed"),
     id = 575721, badge = "653554", points = 2,
     trigger = romType11VideoStarted("Ed, Edd n Eddy", "Key to My Ed") &&
                (romType11CorrectAnswer(4, 0, 7) ||
@@ -10613,8 +11457,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dexter's Laboratory", "The Big Sister"), type = "progression",
-    description = getAchievementDescription("Dexter's Laboratory", "The Big Sister"),
+    title = getAchievementTitleForEpisodes("Dexter's Laboratory", "The Big Sister"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dexter's Laboratory", "The Big Sister"),
     id = 575726, badge = "653562", points = 2,
     trigger = romType11VideoStarted("Dexter's Laboratory", "The Big Sister") &&
                (romType11CorrectAnswer(4, 0, 7) ||
@@ -10668,8 +11512,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), type = "progression",
-    description = getAchievementDescription("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."),
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F."),
     id = 576033, badge = "653807", points = 2,
     trigger = romType11VideoStarted("Codename: Kids Next Door", "Operation: M.I.N.I.-G.O.L.F.") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -10723,8 +11567,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Courage the Cowardly Dog", "Cowboy Courage"), type = "progression",
-    description = getAchievementDescription("Courage the Cowardly Dog", "Cowboy Courage"),
+    title = getAchievementTitleForEpisodes("Courage the Cowardly Dog", "Cowboy Courage"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Courage the Cowardly Dog", "Cowboy Courage"),
     id = 576870, badge = "654248", points = 2,
     trigger = (romType11VideoStarted("Courage the Cowardly Dog", "Cowboy Courage") &&
                (romType11CorrectAnswer(4, 0, 6) ||
@@ -10827,8 +11671,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Ed, Edd n Eddy", "The Luck of the Ed"), type = "progression",
-    description = getAchievementDescription("Ed, Edd n Eddy", "The Luck of the Ed"),
+    title = getAchievementTitleForEpisodes("Ed, Edd n Eddy", "The Luck of the Ed"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Ed, Edd n Eddy", "The Luck of the Ed"),
     id = 576982, badge = "654347", points = 2,
     trigger = (romType11VideoStarted("Ed, Edd n Eddy", "The Luck of the Ed") &&
                (romType11CorrectAnswer(4, 0, 6) ||
@@ -10931,8 +11775,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), type = "progression",
-    description = getAchievementDescription("The Grim Adventures of Billy & Mandy", "A Grim Surprise"),
+    title = getAchievementTitleForEpisodes("The Grim Adventures of Billy & Mandy", "A Grim Surprise"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Grim Adventures of Billy & Mandy", "A Grim Surprise"),
     id = 576983, badge = "654357", points = 2,
     trigger = (romType11VideoStarted("The Grim Adventures of Billy & Mandy", "A Grim Surprise") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -11035,8 +11879,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), type = "progression",
-    description = getAchievementDescription("Codename: Kids Next Door", "Operation: T.O.M.M.Y."),
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: T.O.M.M.Y."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: T.O.M.M.Y."),
     id = 576986, badge = "654380", points = 2,
     trigger = (romType11VideoStarted("Codename: Kids Next Door", "Operation: T.O.M.M.Y.") &&
                (romType11CorrectAnswer(4, 0, 6) ||
@@ -11139,8 +11983,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Courage the Cowardly Dog", "The Shadow of Courage"), type = "progression",
-    description = getAchievementDescription("Courage the Cowardly Dog", "The Shadow of Courage"),
+    title = getAchievementTitleForEpisodes("Courage the Cowardly Dog", "The Shadow of Courage"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Courage the Cowardly Dog", "The Shadow of Courage"),
     id = 577280, badge = "654738", points = 2,
     trigger = (romType11VideoStarted("Courage the Cowardly Dog", "The Shadow of Courage") &&
                (romType11CorrectAnswer(4, 0, 4) ||
@@ -11243,8 +12087,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Ed, Edd n Eddy", "A Glass of Warm Ed"), type = "progression",
-    description = getAchievementDescription("Ed, Edd n Eddy", "A Glass of Warm Ed"),
+    title = getAchievementTitleForEpisodes("Ed, Edd n Eddy", "A Glass of Warm Ed"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Ed, Edd n Eddy", "A Glass of Warm Ed"),
     id = 577282, badge = "654752", points = 2,
     trigger = (romType11VideoStarted("Ed, Edd n Eddy", "A Glass of Warm Ed") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -11347,8 +12191,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Dexter's Laboratory", "Double Trouble"), type = "progression",
-    description = getAchievementDescription("Dexter's Laboratory", "Double Trouble"),
+    title = getAchievementTitleForEpisodes("Dexter's Laboratory", "Double Trouble"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dexter's Laboratory", "Double Trouble"),
     id = 577354, badge = "654914", points = 2,
     trigger = (romType11VideoStarted("Dexter's Laboratory", "Double Trouble") &&
                (romType11CorrectAnswer(4, 0, 5) ||
@@ -11451,8 +12295,8 @@ achievement(
             )
             
 achievement(
-    title = getAchievementTitle("Johnny Bravo", "Cookie Crisis"), type = "progression",
-    description = getAchievementDescription("Johnny Bravo", "Cookie Crisis"),
+    title = getAchievementTitleForEpisodes("Johnny Bravo", "Cookie Crisis"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Johnny Bravo", "Cookie Crisis"),
     id = 577866, badge = "655373", points = 2,
     trigger = (romType11VideoStarted("Johnny Bravo", "Cookie Crisis") &&
                (romType11CorrectAnswer(4, 0, 7) ||
@@ -11554,6 +12398,642 @@ achievement(
                  format = "Frames"
             )
             
+achievement(
+    title = getAchievementTitleForEpisodes("Dexter's Laboratory", "Dexter's Rival"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Dexter's Laboratory", "Dexter's Rival"),
+    id = 577895, badge = "655374", points = 2,
+    trigger = (romType11VideoStarted("Dexter's Laboratory", "Dexter's Rival") &&
+               (romType11CorrectAnswer(4, 0, 7) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 4) ||
+                romType11CorrectAnswer(4, 3, 5))) ||
+              (romType13VideoStarted("Dexter's Laboratory (FR)", "Dexter's Rival") &&
+               (romType13CorrectAnswer(4, 0, 7) ||
+                romType13CorrectAnswer(4, 1, 7) ||
+                romType13CorrectAnswer(4, 2, 4) ||
+                romType13CorrectAnswer(4, 3, 5)))
+            )
+            leaderboard(
+                 id = 154716,
+                 title       = getQuestionTitle(8301), 
+                 description = getQuestionDescription(8301),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Dexter's Rival") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154717,
+                 title       = getQuestionTitle(8302), 
+                 description = getQuestionDescription(8302),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Dexter's Rival") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154718,
+                 title       = getQuestionTitle(8303), 
+                 description = getQuestionDescription(8303),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Dexter's Rival") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154719,
+                 title       = getQuestionTitle(8304), 
+                 description = getQuestionDescription(8304),
+                 start  = romType11VideoStarted("Dexter's Laboratory", "Dexter's Rival") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Dexter's Laboratory", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154720,
+                 title       = getQuestionTitle(8351), 
+                 description = getQuestionDescription(8351),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Dexter's Rival") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154721,
+                 title       = getQuestionTitle(8352), 
+                 description = getQuestionDescription(8352),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Dexter's Rival") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154722,
+                 title       = getQuestionTitle(8353), 
+                 description = getQuestionDescription(8353),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Dexter's Rival") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154723,
+                 title       = getQuestionTitle(8354), 
+                 description = getQuestionDescription(8354),
+                 start  = romType13VideoStarted("Dexter's Laboratory (FR)", "Dexter's Rival") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Dexter's Laboratory (FR)", "Dexter's Rival"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Ed, Edd n Eddy", "Oath to an Ed"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Ed, Edd n Eddy", "Oath to an Ed"),
+    id = 578045, badge = "655701", points = 2,
+    trigger = (romType11VideoStarted("Ed, Edd n Eddy", "Oath to an Ed") &&
+               (romType11CorrectAnswer(4, 0, 6) ||
+                romType11CorrectAnswer(4, 1, 7) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 6))) ||
+              (romType13VideoStarted("Ed, Edd n Eddy (FR)", "Oath to an Ed") &&
+               (romType13CorrectAnswer(4, 0, 6) ||
+                romType13CorrectAnswer(4, 1, 7) ||
+                romType13CorrectAnswer(4, 2, 6) ||
+                romType13CorrectAnswer(4, 3, 6)))
+            )
+            leaderboard(
+                 id = 154778,
+                 title       = getQuestionTitle(8401), 
+                 description = getQuestionDescription(8401),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Oath to an Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154779,
+                 title       = getQuestionTitle(8402), 
+                 description = getQuestionDescription(8402),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Oath to an Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154780,
+                 title       = getQuestionTitle(8403), 
+                 description = getQuestionDescription(8403),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Oath to an Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154781,
+                 title       = getQuestionTitle(8404), 
+                 description = getQuestionDescription(8404),
+                 start  = romType11VideoStarted("Ed, Edd n Eddy", "Oath to an Ed") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Ed, Edd n Eddy", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154782,
+                 title       = getQuestionTitle(8451), 
+                 description = getQuestionDescription(8451),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "Oath to an Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154783,
+                 title       = getQuestionTitle(8452), 
+                 description = getQuestionDescription(8452),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "Oath to an Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154784,
+                 title       = getQuestionTitle(8453), 
+                 description = getQuestionDescription(8453),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "Oath to an Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154785,
+                 title       = getQuestionTitle(8454), 
+                 description = getQuestionDescription(8454),
+                 start  = romType13VideoStarted("Ed, Edd n Eddy (FR)", "Oath to an Ed") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Ed, Edd n Eddy (FR)", "Oath to an Ed"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("The Grim Adventures of Billy & Mandy", "Billy & the Bully"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("The Grim Adventures of Billy & Mandy", "Billy & the Bully"),
+    id = 578761, badge = "656748", points = 2,
+    trigger = (romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Billy & the Bully") &&
+               (romType11CorrectAnswer(4, 0, 6) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 7) ||
+                romType11CorrectAnswer(4, 3, 7))) ||
+              (romType13VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos") &&
+               (romType13CorrectAnswer(4, 0, 6) ||
+                romType13CorrectAnswer(4, 1, 5) ||
+                romType13CorrectAnswer(4, 2, 7) ||
+                romType13CorrectAnswer(4, 3, 7)))
+            )
+            leaderboard(
+                 id = 154951,
+                 title       = getQuestionTitle(8501), 
+                 description = getQuestionDescription(8501),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Billy & the Bully") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Billy & the Bully"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154952,
+                 title       = getQuestionTitle(8502), 
+                 description = getQuestionDescription(8502),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Billy & the Bully") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Billy & the Bully"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154953,
+                 title       = getQuestionTitle(8503), 
+                 description = getQuestionDescription(8503),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Billy & the Bully") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Billy & the Bully"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154954,
+                 title       = getQuestionTitle(8504), 
+                 description = getQuestionDescription(8504),
+                 start  = romType11VideoStarted("The Grim Adventures of Billy & Mandy", "Billy & the Bully") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("The Grim Adventures of Billy & Mandy", "Billy & the Bully"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154955,
+                 title       = getQuestionTitle(8551), 
+                 description = getQuestionDescription(8551),
+                 start  = romType13VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154956,
+                 title       = getQuestionTitle(8552), 
+                 description = getQuestionDescription(8552),
+                 start  = romType13VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154957,
+                 title       = getQuestionTitle(8553), 
+                 description = getQuestionDescription(8553),
+                 start  = romType13VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154958,
+                 title       = getQuestionTitle(8554), 
+                 description = getQuestionDescription(8554),
+                 start  = romType13VideoStarted("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Billy & Mandy: Adventuriers de l'Au-delà (FR)", "Billy & Brutos"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Johnny Bravo", "Beach Blanket Bravo"), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Johnny Bravo", "Beach Blanket Bravo"),
+    id = 578919, badge = "657038", points = 2,
+    trigger = (romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
+               (romType11CorrectAnswer(4, 0, 4) ||
+                romType11CorrectAnswer(4, 1, 5) ||
+                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 3, 4))) ||
+              (romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
+               (romType13CorrectAnswer(4, 0, 4) ||
+                romType13CorrectAnswer(4, 1, 5) ||
+                romType13CorrectAnswer(4, 2, 6) ||
+                romType13CorrectAnswer(4, 3, 4)))
+            )
+            leaderboard(
+                 id = 154963,
+                 title       = getQuestionTitle(8601), 
+                 description = getQuestionDescription(8601),
+                 start  = romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
+                          romType11LeaderboardQuestionSelect(4, 0),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154964,
+                 title       = getQuestionTitle(8602), 
+                 description = getQuestionDescription(8602),
+                 start  = romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
+                          romType11LeaderboardQuestionSelect(4, 1),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154965,
+                 title       = getQuestionTitle(8603), 
+                 description = getQuestionDescription(8603),
+                 start  = romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
+                          romType11LeaderboardQuestionSelect(4, 2),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154966,
+                 title       = getQuestionTitle(8604), 
+                 description = getQuestionDescription(8604),
+                 start  = romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
+                          romType11LeaderboardQuestionSelect(4, 3),
+                 cancel = romType11LeaderboardCancel("Johnny Bravo", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154967,
+                 title       = getQuestionTitle(8651), 
+                 description = getQuestionDescription(8651),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
+                          romType13LeaderboardQuestionSelect(4, 0),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154968,
+                 title       = getQuestionTitle(8652), 
+                 description = getQuestionDescription(8652),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
+                          romType13LeaderboardQuestionSelect(4, 1),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154969,
+                 title       = getQuestionTitle(8653), 
+                 description = getQuestionDescription(8653),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
+                          romType13LeaderboardQuestionSelect(4, 2),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 154970,
+                 title       = getQuestionTitle(8654), 
+                 description = getQuestionDescription(8654),
+                 start  = romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
+                          romType13LeaderboardQuestionSelect(4, 3),
+                 cancel = romType13LeaderboardCancel("Johnny Bravo (FR)", "Beach Blanket Bravo"), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."),
+    id = 579283, badge = "657166", points = 2,
+    trigger = romType6VideoStarted("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H.") &&
+               (romType6CorrectAnswer(4, 0, 4) ||
+                romType6CorrectAnswer(4, 1, 4) ||
+                romType6CorrectAnswer(4, 2, 5) ||
+                romType6CorrectAnswer(4, 3, 5))
+            )
+            leaderboard(
+                 id = 155022,
+                 title       = getQuestionTitle(8701), 
+                 description = getQuestionDescription(8701),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H.") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155023,
+                 title       = getQuestionTitle(8702), 
+                 description = getQuestionDescription(8702),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H.") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155024,
+                 title       = getQuestionTitle(8703), 
+                 description = getQuestionDescription(8703),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H.") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155025,
+                 title       = getQuestionTitle(8704), 
+                 description = getQuestionDescription(8704),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H.") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: N.O.-P.O.W.U.H."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."),
+    id = 579289, badge = "657177", points = 2,
+    trigger = romType6VideoStarted("Codename: Kids Next Door", "Operation: R.E.P.O.R.T.") &&
+               (romType6CorrectAnswer(4, 0, 4) ||
+                romType6CorrectAnswer(4, 1, 7) ||
+                romType6CorrectAnswer(4, 2, 5) ||
+                romType6CorrectAnswer(4, 3, 6))
+            )
+            leaderboard(
+                 id = 155026,
+                 title       = getQuestionTitle(8801), 
+                 description = getQuestionDescription(8801),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: R.E.P.O.R.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155027,
+                 title       = getQuestionTitle(8802), 
+                 description = getQuestionDescription(8802),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: R.E.P.O.R.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155028,
+                 title       = getQuestionTitle(8803), 
+                 description = getQuestionDescription(8803),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: R.E.P.O.R.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155029,
+                 title       = getQuestionTitle(8804), 
+                 description = getQuestionDescription(8804),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: R.E.P.O.R.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: R.E.P.O.R.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: B.R.I.E.F."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: B.R.I.E.F."),
+    id = 579321, badge = "657209", points = 2,
+    trigger = romType6VideoStarted("Codename: Kids Next Door", "Operation: B.R.I.E.F.") &&
+               (romType6CorrectAnswer(4, 0, 7) ||
+                romType6CorrectAnswer(4, 1, 6) ||
+                romType6CorrectAnswer(4, 2, 5) ||
+                romType6CorrectAnswer(4, 3, 5))
+            )
+            leaderboard(
+                 id = 155030,
+                 title       = getQuestionTitle(8901), 
+                 description = getQuestionDescription(8901),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: B.R.I.E.F.") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: B.R.I.E.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155031,
+                 title       = getQuestionTitle(8902), 
+                 description = getQuestionDescription(8902),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: B.R.I.E.F.") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: B.R.I.E.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155032,
+                 title       = getQuestionTitle(8903), 
+                 description = getQuestionDescription(8903),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: B.R.I.E.F.") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: B.R.I.E.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155033,
+                 title       = getQuestionTitle(8904), 
+                 description = getQuestionDescription(8904),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: B.R.I.E.F.") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: B.R.I.E.F."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
+achievement(
+    title = getAchievementTitleForEpisodes("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."), type = "progression",
+    description = getAchievementDescriptionForEpisodes("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."),
+    id = 579324, badge = "657212", points = 2,
+    trigger = romType6VideoStarted("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T.") &&
+               (romType6CorrectAnswer(4, 0, 5) ||
+                romType6CorrectAnswer(4, 1, 5) ||
+                romType6CorrectAnswer(4, 2, 6) ||
+                romType6CorrectAnswer(4, 3, 5))
+            )
+            leaderboard(
+                 id = 155034,
+                 title       = getQuestionTitle(9001), 
+                 description = getQuestionDescription(9001),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 0),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155035,
+                 title       = getQuestionTitle(9002), 
+                 description = getQuestionDescription(9002),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 1),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155036,
+                 title       = getQuestionTitle(9003), 
+                 description = getQuestionDescription(9003),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 2),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            leaderboard(
+                 id = 155037,
+                 title       = getQuestionTitle(9004), 
+                 description = getQuestionDescription(9004),
+                 start  = romType6VideoStarted("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T.") &&
+                          romType6LeaderboardQuestionSelect(4, 3),
+                 cancel = romType6LeaderboardCancel("Codename: Kids Next Door", "Operation: D.O.G.F.I.G.H.T."), 
+                 submit = always_false(), 
+                 value  = always_true(),
+                 format = "Frames"
+            )
+            
 //--------------------------------------------------
 // Rich Presence
 romType1Videos = {
@@ -11621,6 +13101,10 @@ romType5Videos = {
 }
 
 romType6Videos = {
+    0x08023008: "Watching the episode 'Operation: N.O.-P.O.W.U.H.' from the series 'Codename: Kids Next Door'",
+    0x086EF1C4: "Watching the episode 'Operation: R.E.P.O.R.T.' from the series 'Codename: Kids Next Door'",
+    0x08F4EE14: "Watching the episode 'Operation: B.R.I.E.F.' from the series 'Codename: Kids Next Door'",
+    0x0968AAF8: "Watching the episode 'Operation: D.O.G.F.I.G.H.T.' from the series 'Codename: Kids Next Door'",
     0x09896CD8: "Watching the episode 'The Magic Tree of Nowhere' from the series 'Courage the Cowardly Dog'",
     0x08CD6D58: "Watching the episode 'Stop, Look and Ed' from the series 'Ed, Edd n Eddy'",
     0x085EB210: "Watching the episode 'The Perfect Gift' from the series 'Johnny Bravo'",
@@ -11665,12 +13149,16 @@ romType11Videos = {
     0x098EF9D0: "Watching the episode 'The Shadow of Courage' from the series 'Courage the Cowardly Dog'", // English
     0x08CDC354: "Watching the episode 'The Big Sister' from the series 'Dexter's Laboratory'",
     0x08C7D7A8: "Watching the episode 'Double Trouble' from the series 'Dexter's Laboratory'", // English
+    0x08DF1368: "Watching the episode 'Dexter's Rival' from the series 'Dexter's Laboratory'", // English
     0x0825C7D0: "Watching the episode 'Key to My Ed' from the series 'Ed, Edd n Eddy'",
     0x0826BF04: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // English
     0x0824C030: "Watching the episode 'A Glass of Warm Ed' from the series 'Ed, Edd n Eddy'", // English
+    0x08254800: "Watching the episode 'Oath to an Ed' from the series 'Ed, Edd n Eddy'", // English
     0x0955AF24: "Watching the episode 'Balloon Platoon' from the series 'Johnny Bravo'",
     0x092BAAE4: "Watching the episode 'Cookie Crisis' from the series 'Johnny Bravo'", // English
+    0x09530B28: "Watching the episode 'Beach Blanket Bravo' from the series 'Johnny Bravo'", // English
     0x08F7EC0C: "Watching the episode 'Mandy the Merciless' from the series 'The Grim Adventures of Billy & Mandy'",
+    0x09C0A3C0: "Watching the episode 'Billy & the Bully' from the series 'The Grim Adventures of Billy & Mandy'", // English
     0x09AACD18: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // English
 }
 
@@ -11679,10 +13167,14 @@ romType12_13Videos = {
     0x08D20300: "Watching the episode 'Cowboy Courage' from the series 'Courage the Cowardly Dog'", // French
     0x093A6D78: "Watching the episode 'The Shadow of Courage' from the series 'Courage the Cowardly Dog'", // French
     0x08CC7A9C: "Watching the episode 'Double Trouble' from the series 'Dexter's Laboratory'", // French
+    0x08DD9FD0: "Watching the episode 'Dexter's Rival' from the series 'Dexter's Laboratory'", // French
     0x0826E7D4: "Watching the episode 'The Luck of the Ed' from the series 'Ed, Edd n Eddy'", // French
     0x0825E0C4: "Watching the episode 'A Glass of Warm Ed' from the series 'Ed, Edd n Eddy'", // French
+    0x082594E0: "Watching the episode 'Oath to an Ed' from the series 'Ed, Edd n Eddy'", // French
     0x0980FD10: "Watching the episode 'Cookie Crisis' from the series 'Johnny Bravo'", // French
+    0x09535160: "Watching the episode 'Beach Blanket Bravo' from the series 'Johnny Bravo'", // French
     0x09A261D4: "Watching the episode 'A Grim Surprise' from the series 'The Grim Adventures of Billy & Mandy'", // French
+    0x09C0B020: "Watching the episode 'Billy & the Bully' from the series 'The Grim Adventures of Billy & Mandy'", // French
 }
 
 rich_presence_conditional_display(romType1Cartridge() && romType1RunningVideo(), 
@@ -11782,3 +13274,4 @@ rich_presence_conditional_display(romType12Cartridge() && romType12RunningVideo(
 )
 
 rich_presence_display("Selecting a video from their GBA video collection")
+
