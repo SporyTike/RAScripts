@@ -549,6 +549,21 @@ function checkfriendAreaGotNewPokemon(friendAreaName) {
            __ornext(code)
 }
 
+function checkRecruitedLatiasOrLatios(friendAreaName) {
+    memoryStart = getfriendAreaMemoryStart(friendAreaName)
+    totalSlots  = getfriendAreaTotalSlots(friendAreaName)
+    code = always_false()
+    
+    for i in range(0, totalSlots - 1) {
+        code = code || word(memoryStart + (i * 0x58) + 0x08) != prev(word(memoryStart + (i * 0x58) + 0x08)) ||
+                       bit0(memoryStart + (i * 0x58)) > prev(bit0(memoryStart + (i * 0x58)))
+    }
+    return __ornext(pokeSquareMapID == 0x01 ||  // recruited on Pokemon Square
+                    isInFrontOfRescueBase()) && // got new Friend via Wish Stone
+           byte(0x04303c) == 0x02 &&
+           __ornext(code)
+}
+
 function isInFrontOfRescueBase() {
     return __ornext(pokeSquareMapID == 0x09 || pokeSquareMapID == 0x0A || pokeSquareMapID == 0x0B || // Pikachu Base
                     pokeSquareMapID == 0x0F || pokeSquareMapID == 0x10 || pokeSquareMapID == 0x11 || // Meowth Base
@@ -1258,7 +1273,7 @@ achievement(
     id = 11859, badge = "309159", published = "21.08.2014 19:44:52", modified = "10.01.2023 20:55:18",
     trigger = checkfriendAreaForPokemon("Southern Island", "Latias") &&
               checkfriendAreaForPokemon("Southern Island", "Latios") &&
-              checkfriendAreaGotNewPokemon("Southern Island")
+              checkRecruitedLatiasOrLatios("Southern Island")
 )
 
 achievement(
