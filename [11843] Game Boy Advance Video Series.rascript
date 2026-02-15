@@ -10127,12 +10127,12 @@ achievement(
     description = getAchievementDescriptionForEpisodes("Strawberry Shortcake", "Meet Strawberry Shortcake"),
     id = 571082, badge = "648725", points = 4,
     trigger = romType1VideoStarted("Strawberry Shortcake", "Meet Strawberry Shortcake") &&
-              (romType1CorrectAnswer(6, 0, 6) ||
-               romType1CorrectAnswer(6, 1, 6) ||
-               romType1CorrectAnswer(6, 2, 4) ||
-               romType1CorrectAnswer(6, 3, 5) ||
-               romType1CorrectAnswer(6, 4, 6) ||
-               romType1CorrectAnswer(6, 5, 5))
+              (romType1CorrectAnswer(6, 0, 7) ||
+               romType1CorrectAnswer(6, 1, 5) ||
+               romType1CorrectAnswer(6, 2, 7) ||
+               romType1CorrectAnswer(6, 3, 7) ||
+               romType1CorrectAnswer(6, 4, 7) ||
+               romType1CorrectAnswer(6, 5, 4))
             )
             leaderboard(
                  id = 150645,
