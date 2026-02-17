@@ -12717,12 +12717,12 @@ achievement(
     trigger = (romType11VideoStarted("Johnny Bravo", "Beach Blanket Bravo") &&
                (romType11CorrectAnswer(4, 0, 4) ||
                 romType11CorrectAnswer(4, 1, 5) ||
-                romType11CorrectAnswer(4, 2, 6) ||
+                romType11CorrectAnswer(4, 2, 4) ||
                 romType11CorrectAnswer(4, 3, 4))) ||
               (romType13VideoStarted("Johnny Bravo (FR)", "Beach Blanket Bravo") &&
                (romType13CorrectAnswer(4, 0, 4) ||
                 romType13CorrectAnswer(4, 1, 5) ||
-                romType13CorrectAnswer(4, 2, 6) ||
+                romType13CorrectAnswer(4, 2, 4) ||
                 romType13CorrectAnswer(4, 3, 4)))
             )
             leaderboard(
