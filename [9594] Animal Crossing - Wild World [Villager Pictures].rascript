@@ -4,6 +4,7 @@ achievementsetvillagerpictures = achievement_set("Villager Pictures", type="BONU
 
 //--------------------------------------------------
 // Addresses
+mem_mapID                = 0x000e4e04
 mem_interactedObject     = 0x001c6de2
 mem_NPCslotTalkingTo     = 0x001c6de0
 mem_playerID             = 0x001dcc84
@@ -54,7 +55,7 @@ function checkFriendship(villagerID, villagerSlot, villagerPlayerSlot) {
     return measured(byte(villagerPlayerFriendshipAddress) == 127,
                 when = byte(villagerIDAddress) == villagerID &&
                        checkPlayerChecksum(villagerSlot, villagerPlayerSlot),
-                format = "raw")
+                format = "percent")
 }
 
 function checkAnyVillagerPlayerSlot(villagerID) {
@@ -69,10 +70,15 @@ function checkAnyVillagerPlayerSlot(villagerID) {
     return code
 }
 
+function getMapID() {
+    return dword(mem_mapID)
+}
+
 function getVillagerPicture(villagerID) {
     return playerTalkingToVillager(villagerID) &&
            playerReceivingPictureFurniture(villagerID) &&
-           (checkAnyVillagerPlayerSlot(villagerID))
+           (checkAnyVillagerPlayerSlot(villagerID) ||
+            (getMapID() == 0x00))
 }
 
 //--------------------------------------------------
