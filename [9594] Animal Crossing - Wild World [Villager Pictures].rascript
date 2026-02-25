@@ -1053,20 +1053,21 @@ achievement(
 )
 
 achievement(
-    title = "Hai-ya!", points = 5,
-    description = "Obtain the Villager Picture of Genji.",
-    set = achievementsetvillagerpictures,
-    id = 259332, badge = "287277", published = "23.10.2022 13:40:31", modified = "28.03.2025 16:43:43",
-    trigger = getVillagerPicture(0x79)
-)
-
-achievement(
     title = "What's up, bunbun?", points = 5,
     description = "Obtain the Villager Picture of Tiffany.",
     set = achievementsetvillagerpictures,
     id = 259333, badge = "287278", published = "23.10.2022 13:40:31", modified = "28.03.2025 16:43:43",
+    trigger = getVillagerPicture(0x79)
+)
+
+achievement(
+    title = "Hai-ya!", points = 5,
+    description = "Obtain the Villager Picture of Genji.",
+    set = achievementsetvillagerpictures,
+    id = 259332, badge = "287277", published = "23.10.2022 13:40:31", modified = "28.03.2025 16:43:43",
     trigger = getVillagerPicture(0x7A)
 )
+
 
 achievement(
     title = "I'm not sick, I'm just albino!", points = 5,
