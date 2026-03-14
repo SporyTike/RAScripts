@@ -13,6 +13,7 @@ Mem_PartyMode2             = 0x0025fd1a
 Mem_PartyPlayerControlling = 0x0025fb6a
 Mem_StarBattleCharacter    = 0x0025fcdd
 Mem_StarBattleProgress     = 0x0025fd04
+Mem_CeremonyData           = 0x007737a4
 Mem_BoardID                = 0x0025fb68
 Mem_CurrentTurn            = 0x0025fb64
 Mem_TotalTurns             = 0x0025fb65
@@ -25,11 +26,51 @@ Mem_KingBooMansionMapFlags = 0x0025fbbc
 Mem_ExpressCarOrder        = 0x0025fba8
 Mem_KoopaHotelInvestments  = 0x0025fba8
 Mem_BowserBoardDirection   = 0x0025fba8
+Mem_CrownShowdownDynamic   = 0x007781a8
 
 pointerMask = 0x7FFFFFFF
 
 //--------------------------------------------------
 // Arrays and Dictionaries
+
+characterIDs = {
+    0x00: "Mario",
+    0x01: "Luigi",
+    0x02: "Peach",
+    0x03: "Yoshi",
+    0x04: "Wario",
+    0x05: "Daisy",
+    0x06: "Waluigi",
+    0x07: "Toad",
+    0x08: "Boo",
+    0x09: "Toadette",
+    0x0A: "Birdo",
+    0x0B: "Dry Bones",
+    0x0C: "Blooper",
+    0x0D: "Hammer Bro",
+    0x0E: "Mii"
+}
+
+boardIDs = {
+    0x00: "DK's Treetop Temple",
+    0x01: "Goomba's Booty Boardwalk",
+    0x02: "King Boo's Haunted Hideaway",
+    0x03: "Shy Guy's Perplex Express",
+    0x04: "Koopa's Tycoon Town",
+    0x05: "Bowser's Warped Orbit"
+}
+
+extraZoneLocations = {
+    0x00: "Lobby",
+    0x45: "'Table Menace'",
+    0x46: "'Flagging Rights'",
+    0x47: "'Trial by Tile'",
+    0x48: "'Star Carnival Bowling'",
+    0x49: "'Puzzle Pillars'",
+    0x4A: "'Canyon Cruisers'",
+    0x4B: "'Chomping Frenzy'",
+    0x4C: "'Moped Mayhem'",
+}
 
 //--------------------------------------------------
 // Functions
@@ -41,6 +82,10 @@ function notLoadingSave() {
 function getGameState(gameStateID) {
     return __ornext(word_be(Mem_GameState + 2) + word_be(Mem_GameState + 6) * 0x10000 == 0xFFFF0000 + gameStateID ||
                     word_be(Mem_GameState + 6) + word_be(Mem_GameState + 2) * 0x10000 == 0xFFFF0000 + gameStateID)
+}
+
+function getGameStateID() {
+    return dword_be(Mem_GameState)
 }
 
 function wasInGameState(gameStateID) {
@@ -135,6 +180,10 @@ function getPlayerDifficulty(playerSlot) {
     return word_be(Mem_Player1CharacterID + playerSlot * 0x0A + 0x04)
 }
 
+function getPlayerHandicap(playerSlot) {
+    return byte(Mem_Player1PartyData + playerSlot * 0x118 + 0x04)
+}
+
 function getPlayerTeamSlot(playerSlot) {
     return bit0(Mem_Player1PartyData + playerSlot * 0x118 + 0x0E)
          + bit1(Mem_Player1PartyData + playerSlot * 0x118 + 0x0E) * 2
@@ -157,6 +206,10 @@ function getCurrentPlayerCoins() {
     return word_be(Mem_Player1PartyData + getCurrentPlayerTeamSlot() * 0x118 + 0x26)
 }
 
+function getPlayerCoinRecord(playerSlot) {
+    return word_be(Mem_Player1PartyData + getCurrentPlayerTeamSlot() * 0x118 + 0x2C)
+}
+
 function getPlayerCandyEffect(playerSlot) {
     return word_be(Mem_Player1PartyData + playerSlot * 0x118 + 0x1A)
 }
@@ -165,8 +218,12 @@ function getCurrentPlayerCandyEffect() {
     return word_be(Mem_Player1PartyData + byte(Mem_CurrentPlayerPlaying) * 0x118 + 0x1A)
 }
 
+function getPlayerMinigameTeam(playerSlot) {
+    return byte(Mem_Player1CharacterID + playerSlot * 0x0A + 0x07)
+}
+
 function getPlayerMinigamePrize(playerSlot) {
-    return word_be(Mem_Player1PartyData + playerSlot * 0x118 + 0x30)
+    return dword_be(Mem_Player1PartyData + playerSlot * 0x118 + 0x30)
 }
 
 function getPlayerSpacesWalked(playerSlot) {
@@ -302,6 +359,55 @@ function checkAllMinigameFlags() {
          + getMinigameUnlockFlag(0x49)
 }
 
+function checkAllCarnivalFigurineFlags() {
+    return bit5(Mem_EventFlags + 0x01)
+         + bit6(Mem_EventFlags + 0x01)
+         + bit7(Mem_EventFlags + 0x01)
+         + bit0(Mem_EventFlags + 0x00)
+         + bit5(Mem_EventFlags + 0x00)
+         + bit4(Mem_EventFlags + 0x00)
+         + bit7(Mem_EventFlags + 0x00)
+         + bit6(Mem_EventFlags + 0x00)
+         + bit5(Mem_EventFlags + 0x07)
+         + bit6(Mem_EventFlags + 0x07)
+         + bit7(Mem_EventFlags + 0x07)
+         + bit0(Mem_EventFlags + 0x06)
+         + bit0(Mem_EventFlags + 0x01)
+         + bit7(Mem_EventFlags + 0x02)
+         + bit2(Mem_EventFlags + 0x00)
+         + bit1(Mem_EventFlags + 0x07)
+         + bit3(Mem_EventFlags + 0x00)
+         + bit5(Mem_EventFlags + 0x02)
+         + bit4(Mem_EventFlags + 0x02)
+         + bit4(Mem_EventFlags + 0x01)
+         + bit6(Mem_EventFlags + 0x02)
+         + bit4(Mem_EventFlags + 0x07)
+         + bit1(Mem_EventFlags + 0x01)
+         + bit2(Mem_EventFlags + 0x01)
+         + bit2(Mem_EventFlags + 0x07)
+         + bit3(Mem_EventFlags + 0x07)
+         + bit1(Mem_EventFlags + 0x00)
+         + bit0(Mem_EventFlags + 0x07)
+         + bit3(Mem_EventFlags + 0x01)
+         + bit1(Mem_EventFlags + 0x06)
+}
+
+function checkAllSurpriseWagonFlags() {
+    return bit0(Mem_EventFlags + 0x03)
+         + bit1(Mem_EventFlags + 0x03)
+         + bit2(Mem_EventFlags + 0x03)
+         + bit3(Mem_EventFlags + 0x03)
+         + bit4(Mem_EventFlags + 0x03)
+         + bit5(Mem_EventFlags + 0x03)
+         + bit6(Mem_EventFlags + 0x03)
+         + bit7(Mem_EventFlags + 0x03)
+         + bit0(Mem_EventFlags + 0x02)
+         + bit1(Mem_EventFlags + 0x02)
+         + bit2(Mem_EventFlags + 0x02)
+         + bit3(Mem_EventFlags + 0x02)
+         + checkAllCarnivalFigurineFlags()
+}
+
 function getMinigameState() {
     return word_be(Mem_MinigameState)
 }
@@ -335,12 +441,64 @@ function getMinigameHuman_SwingKings(player) {
     return dword_be((dword_be((dword_be(Mem_PointerMinigameData) & pointerMask) + 0x5C) & pointerMask) + 0x258 + player * 0x2A0)
 }
 
+function partyCeremonyFinishedGame() {
+    return getGameState(0x01) &&
+           prev(getGameState(0x01)) &&
+           prev(getPlayerCeremonyStars(0)) + prev(getPlayerCeremonyCoins(0)) > 0 &&
+           prev(getPlayerCeremonyStars(1)) + prev(getPlayerCeremonyCoins(1)) > 0 &&
+           getPlayerCeremonyStars(0) == prev(getPlayerCeremonyStars(0)) &&
+           getPlayerCeremonyCoins(0) == prev(getPlayerCeremonyCoins(0)) &&
+           getPlayerCeremonyStars(1) == prev(getPlayerCeremonyStars(1)) &&
+           getPlayerCeremonyCoins(1) == prev(getPlayerCeremonyCoins(1)) &&
+           __ornext(prev(getTotalPlayersInMinigame()) == 2 ||
+                    prev(getTotalPlayersInMinigame()) == 4) &&
+           getTotalPlayersInMinigame() == 0
+           
+}
+
+function getPlayerCeremonyPlacement(playerSlot) {
+    return byte(Mem_CeremonyData + 1 + (playerSlot * 52))
+}
+
+function getPlayerCeremonyStars(playerSlot) {
+    return word_be(Mem_CeremonyData + 2 + (playerSlot * 52))
+}
+
+function getPlayerCeremonyCoins(playerSlot) {
+    return word_be(Mem_CeremonyData + 4 + (playerSlot * 52))
+}
+
+function getExtraPlayerAmount() {
+    return 4
+         - byte(Mem_Player1CharacterID + 0 * 0x0A + 9)
+         - byte(Mem_Player1CharacterID + 1 * 0x0A + 9)
+         - byte(Mem_Player1CharacterID + 2 * 0x0A + 9)
+         - byte(Mem_Player1CharacterID + 3 * 0x0A + 9)
+}
+
+function getCrownShowdownRounds() {
+    return byte(Mem_CrownShowdownDynamic + 0x00)
+}
+
+function getCrownShowdownMode() {
+    return byte(Mem_CrownShowdownDynamic + 0x01)
+}
+
+function getCrownShowdownPlayerWins(playerSlot) {
+    return byte(Mem_CrownShowdownDynamic + 0x07 + getCrownShowdownPlayerTeam(playerSlot))
+}
+
+function getCrownShowdownPlayerTeam(playerSlot) {
+    return byte(Mem_CrownShowdownDynamic + 0x1C + playerSlot)
+}
+
 function pseudoImpossibleCondition() {
     return getCurrentPlayerCharacterID() == 0xFF
 }
 
 //--------------------------------------------------
 // Achievements
+
 achievement(
     id          = 586749, 
     badge       = "665339",
@@ -474,6 +632,59 @@ achievement(
 )
 
 achievement(
+    id          = 594403, 
+    badge       = "674008",
+    type        = "",
+    title       = "No Monkeying Around!",
+    description = "Win a Battle Royale on the board \"DK's Treetop Temple\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x00 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x70 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
+)
+
+achievement(
     id          = 592318, 
     badge       = "671413",
     type        = "",
@@ -499,8 +710,10 @@ achievement(
                                                 getPlayerControlType(0) == 0x00 &&
                                                 getPlayerSpaceStanding(0) == 0x28) &&
                                                 prev(getPlayerSpaceStanding(0)) == 0x6A),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
                                               never(getPlayerControlType(0) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(1) == 0x00 &&
@@ -518,8 +731,10 @@ achievement(
                                                 getPlayerControlType(1) == 0x00 &&
                                                 getPlayerSpaceStanding(1) == 0x28) &&
                                                 prev(getPlayerSpaceStanding(1)) == 0x6A),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
                                               never(getPlayerControlType(1) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(2) == 0x00 &&
@@ -537,8 +752,10 @@ achievement(
                                                 getPlayerControlType(2) == 0x00 &&
                                                 getPlayerSpaceStanding(2) == 0x28) &&
                                                 prev(getPlayerSpaceStanding(2)) == 0x6A),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
                                               never(getPlayerControlType(2) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(3) == 0x00 &&
@@ -556,8 +773,10 @@ achievement(
                                                 getPlayerControlType(3) == 0x00 &&
                                                 getPlayerSpaceStanding(3) == 0x28) &&
                                                 prev(getPlayerSpaceStanding(3)) == 0x6A),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
                                               never(getPlayerControlType(3) == 0x01))) ||
                    (measured(tally(10, __ornext(checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(0) == 0x00 &&
@@ -575,8 +794,10 @@ achievement(
                                                 getPlayerControlType(0) == 0x00 &&
                                                 getPlayerSpaceStanding(0) == 0x13) &&
                                                 prev(getPlayerSpaceStanding(0)) == 0x6B),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
                                               never(getPlayerControlType(0) == 0x01))) ||
                    (measured(tally(10, __ornext(checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(1) == 0x00 &&
@@ -594,9 +815,11 @@ achievement(
                                                 getPlayerControlType(1) == 0x00 &&
                                                 getPlayerSpaceStanding(1) == 0x13) &&
                                                 prev(getPlayerSpaceStanding(1)) == 0x6B),
-                                       when = once(dword_be(Mem_GameState) == 0x70 &&
-                                                   byte(Mem_CurrentTurn) == 0x01) &&
-                                              never(getPlayerControlType(0) == 0x01))))
+                                       when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                               getGameState(0x6F))),
+                                                       once(dword_be(Mem_GameState) == 0x70 &&
+                     	                                      byte(Mem_CurrentTurn) == 0x01)) &&
+                                              never(getPlayerControlType(1) == 0x01))))
 )
 
 achievement(
@@ -612,6 +835,59 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   getCurrentPlayerSpaceStanding() >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
+)
+
+achievement(
+    id          = 594404, 
+    badge       = "674009",
+    type        = "",
+    title       = "Summer, Sun, Stars",
+    description = "Win a Battle Royale on the board \"Goomba's Booty Boardwalk\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x01 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x71 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
 )
 
 achievement(
@@ -648,6 +924,59 @@ achievement(
 )
 
 achievement(
+    id          = 594406, 
+    badge       = "674011",
+    type        = "",
+    title       = "I'm Scared Of No-Boo-dy",
+    description = "Win a Battle Royale on the board \"King Boo's Haunted Hideaway\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x02 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x72 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
+)
+
+achievement(
     id          = 592328, 
     badge       = "671420",
     type        = "",
@@ -659,8 +988,10 @@ achievement(
                   getPlayerIsDoingTurn() &&
                   measured(getDiscoveredRoomsInMansion() == 24,
                            when = checkPartySubMode("Duel Battle") &&
-                                  once(dword_be(Mem_GameState) == 0x72 &&
-                                       byte(Mem_CurrentTurn) == 0x01)) &&
+                                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                   getGameState(0x6F))),
+                                           once(dword_be(Mem_GameState) == 0x72 &&
+                     	                          byte(Mem_CurrentTurn) == 0x01))) &&
                   prev(getDiscoveredRoomsInMansion() == 23)
 )
 
@@ -677,6 +1008,59 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   prior(getCurrentPlayerSpaceStanding()) >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
+)
+
+achievement(
+    id          = 594435, 
+    badge       = "674012",
+    type        = "",
+    title       = "Ticket to Victory",
+    description = "Win a Battle Royale on the board \"Shy Guy's Perplex Express\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x03 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x73 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
 )
 
 achievement(
@@ -697,7 +1081,8 @@ achievement(
                     prev(byte(Mem_ExpressCarOrder)) == 0x04) ||
                    (pseudoImpossibleCondition() &&
                     measured(byte(Mem_ExpressCarOrder) == 5,
-                             when = once(dword_be(Mem_GameState) == 0x73 &&
+                             when = !checkPartySubMode("Duel Battle") &&
+                                    once(dword_be(Mem_GameState) == 0x73 &&
                                          byte(Mem_CurrentTurn) == 0x01))))
 )
 
@@ -717,11 +1102,64 @@ achievement(
 )
 
 achievement(
-    id          = 592230, 
+    id          = 594436, 
+    badge       = "674013",
+    type        = "",
+    title       = "Professional Business Investor",
+    description = "Win a Battle Royale on the board \"Koopa's Tycoon Town\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x04 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x74 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
+)
+
+achievement(
+    id          = 592330, 
     badge       = "671422",
     type        = "",
     title       = "Mr. Monopoly",
-    description = "Own all hotels on a 3-star rank on the bigger version of \"Koopa's Tycoon Town\" without reloading while playing with 3 CPUs.",
+    description = "Own all hotels on a 3-star rank on the bigger version of \"Koopa's Tycoon Town\" without reloading while playing with three CPUs.",
     points      = 10,
     trigger     = getGameState(0x74) &&
                   never(getGameState(0x5C)) &&
@@ -731,27 +1169,28 @@ achievement(
                       + getPlayerControlType(3) != 3) &&
                   ((measured(getPlayerStars(0) == 21,
                            when = !checkPartySubMode("Duel Battle") &&
-                                  getPlayerControlType(0) == 0x00 &&
-                                  once(dword_be(Mem_GameState) == 0x74 &&
-                                       byte(Mem_CurrentTurn) == 0x01) &&
+                                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                   getGameState(0x6F))),
+                                           once(dword_be(Mem_GameState) == 0x74 &&
+                     	                          byte(Mem_CurrentTurn) == 0x01)) &&
                                   never(getPlayerControlType(0) == 0x01))) ||
                    (measured(getPlayerStars(1) == 21,
-                           when = !checkPartySubMode("Duel Battle") &&
-                                  getPlayerControlType(1) == 0x00 &&
-                                  once(dword_be(Mem_GameState) == 0x74 &&
-                                       byte(Mem_CurrentTurn) == 0x01) &&
+                           when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                   getGameState(0x6F))),
+                                           once(dword_be(Mem_GameState) == 0x74 &&
+                     	                          byte(Mem_CurrentTurn) == 0x01)) &&
                                   never(getPlayerControlType(1) == 0x01))) ||
                    (measured(getPlayerStars(2) == 21,
-                           when = !checkPartySubMode("Duel Battle") &&
-                                  getPlayerControlType(2) == 0x00 &&
-                                  once(dword_be(Mem_GameState) == 0x74 &&
-                                       byte(Mem_CurrentTurn) == 0x01) &&
+                           when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                   getGameState(0x6F))),
+                                           once(dword_be(Mem_GameState) == 0x74 &&
+                     	                          byte(Mem_CurrentTurn) == 0x01)) &&
                                   never(getPlayerControlType(2) == 0x01))) ||
                    (measured(getPlayerStars(3) == 21,
-                           when = !checkPartySubMode("Duel Battle") &&
-                                  getPlayerControlType(3) == 0x00 &&
-                                  once(dword_be(Mem_GameState) == 0x74 &&
-                                       byte(Mem_CurrentTurn) == 0x01) &&
+                           when = tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                                   getGameState(0x6F))),
+                                           once(dword_be(Mem_GameState) == 0x74 &&
+                     	                          byte(Mem_CurrentTurn) == 0x01)) &&
                                   never(getPlayerControlType(3) == 0x01))))
 )
 
@@ -768,6 +1207,59 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   prior(getCurrentPlayerSpaceStanding()) >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
+)
+
+achievement(
+    id          = 594437, 
+    badge       = "674014",
+    type        = "",
+    title       = "Master of the Galaxy",
+    description = "Win a Battle Royale on the board \"Bowser's Warped Orbit\" against three CPUs on Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() == 0x05 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 2) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 2) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 2) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 2) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) == 0x75 &&
+                     	          byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
 )
 
 achievement(
@@ -802,6 +1294,91 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   prev(getCurrentPlayerSpaceStanding()) == 0x108 &&
                   prev(getCurrentPlayerSpaceStanding()) != getCurrentPlayerSpaceStanding()
+)
+
+achievement(
+    id          = 594439, 
+    badge       = "674016",
+    type        = "",
+    title       = "Legendary Party King",
+    description = "Win a Battle Royale on any board against three CPUs on Very Hard without reloading and without using Handicaps.",
+    points      = 25,
+    trigger     = checkPartySubMode("Battle Royale") &&
+                  never(getGameState(0x5C)) &&
+                  getBoardID() >= 0x00 &&
+                  getBoardID() <= 0x05 &&
+                  never(getPlayerControlType(0)
+                      + getPlayerControlType(1)
+                      + getPlayerControlType(2)
+                      + getPlayerControlType(3) != 3) &&
+                  never(getPlayerCoinRecord(0) > 0 &&
+                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
+                  never(getPlayerControlType(0) == 0x01 &&
+                        getPlayerDifficulty(0) < 3) &&
+                  never(getPlayerControlType(0) == 0x00 &&
+                        getPlayerHandicap(0) > 0) &&
+                  never(getPlayerCoinRecord(1) > 0 &&
+                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
+                  never(getPlayerControlType(1) == 0x01 &&
+                        getPlayerDifficulty(1) < 3) &&
+                  never(getPlayerControlType(1) == 0x00 &&
+                        getPlayerHandicap(1) > 0) &&
+                  never(getPlayerCoinRecord(2) > 0 &&
+                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
+                  never(getPlayerControlType(2) == 0x01 &&
+                        getPlayerDifficulty(2) < 3) &&
+                  never(getPlayerControlType(2) == 0x00 &&
+                        getPlayerHandicap(2) > 0) &&
+                  never(getPlayerCoinRecord(3) > 0 &&
+                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
+                  never(getPlayerControlType(3) == 0x01 &&
+                        getPlayerDifficulty(3) < 3) &&
+                  never(getPlayerControlType(3) == 0x00 &&
+                        getPlayerHandicap(3) > 0) &&
+                  tally(2, once(__ornext(getGameState(0x5B) ||
+                     	                   getGameState(0x6F))),
+                           once(dword_be(Mem_GameState) >= 0x70 &&
+                     	          dword_be(Mem_GameState) <= 0x75 &&
+                                byte(Mem_CurrentTurn) == 0x01)) &&
+                  trigger_when(partyCeremonyFinishedGame()) &&
+                  (trigger_when(getPlayerControlType(0) == 0x00 &&
+                                getPlayerCeremonyPlacement(0) == 0x00) ||
+                   trigger_when(getPlayerControlType(1) == 0x00 &&
+                                getPlayerCeremonyPlacement(1) == 0x00) ||
+                   trigger_when(getPlayerControlType(2) == 0x00 &&
+                                getPlayerCeremonyPlacement(2) == 0x00) ||
+                   trigger_when(getPlayerControlType(3) == 0x00 &&
+                                getPlayerCeremonyPlacement(3) == 0x00))
+)
+
+achievement(
+    id          = 594440, 
+    badge       = "674018",
+    type        = "",
+    title       = "Fan's Favorite",
+    description = "Get all three bonus stars during the ceremony of a Battle Royale.",
+    points      = 10,
+    trigger     = never(!getGameState(0x01)) &&
+                  ((tally(3, getTotalPlayersInMinigame() == 4 &&
+                             prev(getPlayerCeremonyPlacement(0))
+                           + prev(getPlayerCeremonyPlacement(1)) > 0 &&
+                             getPlayerCeremonyStars(0) > prev(getPlayerCeremonyStars(0)) &&
+                           never(getPlayerControlType(0) == 0x01))) ||
+                   (tally(3, getTotalPlayersInMinigame() == 4 &&
+                             prev(getPlayerCeremonyPlacement(0))
+                           + prev(getPlayerCeremonyPlacement(1)) > 0 &&
+                             getPlayerCeremonyStars(1) > prev(getPlayerCeremonyStars(1)) &&
+                           never(getPlayerControlType(1) == 0x01))) ||
+                   (tally(3, getTotalPlayersInMinigame() == 4 &&
+                             prev(getPlayerCeremonyPlacement(0))
+                           + prev(getPlayerCeremonyPlacement(1)) > 0 &&
+                             getPlayerCeremonyStars(2) > prev(getPlayerCeremonyStars(2)) &&
+                           never(getPlayerControlType(2) == 0x01))) ||
+                   (tally(3, getTotalPlayersInMinigame() == 4 &&
+                             prev(getPlayerCeremonyPlacement(0))
+                           + prev(getPlayerCeremonyPlacement(1)) > 0 &&
+                             getPlayerCeremonyStars(3) > prev(getPlayerCeremonyStars(3)) &&
+                           never(getPlayerControlType(3) == 0x01))))
 )
 
 achievement(
@@ -1421,10 +1998,32 @@ achievement(
 )
 
 achievement(
+    id          = 594442, 
+    badge       = "674020",
+    type        = "",
+    title       = "Digital Dexterity",
+    description = "While using a Twice Candy or Thrice Candy get some Coins by rolling the same number with all dice.",
+    points      = 5,
+    trigger     = never(!getGameState(0x70) &&
+                        !getGameState(0x71) &&
+                        !getGameState(0x72) &&
+                        !getGameState(0x73) &&
+                        !getGameState(0x74) &&
+                        !getGameState(0x75)) &&
+                  getPlayerIsDoingTurn() &&
+                  never(getPartyPlayerChanging()) &&    
+                  never(getCurrentPlayerControlType() != 0x00) &&
+                  once(getCurrentPlayerCandyEffect() <= 0x01 &&
+                       prev(getCurrentPlayerCandyEffect()) == 0xFFFF) &&
+                  getCurrentPlayerCoins() > prev(getCurrentPlayerCoins()) &&
+                  never(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding()))
+)
+
+achievement(
     id          = 593728, 
     badge       = "673076",
     type        = "",
-    title       = "That's What I Call A Strike",
+    title       = "That's What I Call A Strike!",
     description = "While using the Bowlo Candy hit all three of your opponents in a single turn.",
     points      = 5,
     trigger     = never(!getGameState(0x70) &&
@@ -1433,7 +2032,6 @@ achievement(
                         !getGameState(0x73) &&
                         !getGameState(0x74) &&
                         !getGameState(0x75)) &&
-                  never(getCurrentPlayerCharacterID() != 0x04) &&
                   never(!checkPartySubMode("Battle Royale")) &&
                   getPlayerIsDoingTurn() &&
                   never(getPartyPlayerChanging()) &&
@@ -1461,11 +2059,11 @@ achievement(
 )
 
 achievement(
-    id          = 0, 
-    badge       = "665857",
+    id          = 594202, 
+    badge       = "673891",
     type        = "",
     title       = "One With the Waves",
-    description = "Get all 17 Coins in the minigame \"Water Ski Spree\".",
+    description = "Get 17 Coins in the minigame \"Water Ski Spree\".",
     points      = 3,
     trigger     = getGameState(0x0B) &&
                   ((getPlayerControlType(0) == 0x00 &&
@@ -1479,6 +2077,126 @@ achievement(
                     prev(getPlayerMinigamePrize(2)) == 0) ||
                    (getPlayerControlType(3) == 0x00 &&
                     getPlayerMinigamePrize(3) == 17 &&
+                    prev(getPlayerMinigamePrize(3)) == 0) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getPlayerMinigamePrize(0) == 17 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerMinigamePrize(1) == 17 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerMinigamePrize(2) == 17 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerMinigamePrize(3) == 17 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(3)) == 0))
+)
+
+achievement(
+    id          = 594398, 
+    badge       = "673947",
+    type        = "",
+    title       = "All That Glitters",
+    description = "Get 16 Coins as single player in the minigame \"Grabbin' Gold\".",
+    points      = 2,
+    trigger     = getGameState(0x19) &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(0) >= 16 &&
+                    getPlayerMinigamePrize(0) <= 100 &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(1) >= 16 &&
+                    getPlayerMinigamePrize(1) <= 100 &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(2) >= 16 &&
+                    getPlayerMinigamePrize(2) <= 100 &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigamePrize(3) >= 16 &&
+                    getPlayerMinigamePrize(3) <= 100 &&
+                    prev(getPlayerMinigamePrize(3)) == 0) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigameTeam(0) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(0) >= 16 * 0x1000 &&
+                    getPlayerMinigamePrize(0) <= 100 * 0x1000 &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigameTeam(1) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(1) >= 16 * 0x1000 &&
+                    getPlayerMinigamePrize(1) <= 100 * 0x1000 &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(2) != getPlayerMinigameTeam(3) &&
+                    getPlayerMinigamePrize(2) >= 16 * 0x1000 &&
+                    getPlayerMinigamePrize(2) <= 100 * 0x1000 &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(0) &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(1) &&
+                    getPlayerMinigameTeam(3) != getPlayerMinigameTeam(2) &&
+                    getPlayerMinigamePrize(3) >= 16 * 0x1000 &&
+                    getPlayerMinigamePrize(3) <= 100 * 0x1000 &&
+                    prev(getPlayerMinigamePrize(3)) == 0))
+)
+
+achievement(
+    id          = 594339, 
+    badge       = "673892",
+    type        = "",
+    title       = "Big Money for a Big Dinner",
+    description = "Get 20 Coins as a team in the minigame \"Winner or Dinner\".",
+    points      = 5,
+    trigger     = getGameState(0x24) &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerMinigamePrize(0) >= 20 &&
+                    getPlayerMinigamePrize(0) <= 100 &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerMinigamePrize(1) >= 20 &&
+                    getPlayerMinigamePrize(1) <= 100 &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerMinigamePrize(2) >= 20 &&
+                    getPlayerMinigamePrize(2) <= 100 &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerMinigamePrize(3) >= 20 &&
+                    getPlayerMinigamePrize(3) <= 100 &&
+                    prev(getPlayerMinigamePrize(3)) == 0) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getPlayerMinigamePrize(0) >= 20 * 0x10000 &&
+                    getPlayerMinigamePrize(0) <= 100 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerMinigamePrize(1) >= 20 * 0x10000 &&
+                    getPlayerMinigamePrize(1) <= 100 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerMinigamePrize(2) >= 20 * 0x10000 &&
+                    getPlayerMinigamePrize(2) <= 100 * 0x10000 &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerMinigamePrize(3) >= 20 * 0x10000 &&
+                    getPlayerMinigamePrize(3) <= 100 * 0x10000 &&
                     prev(getPlayerMinigamePrize(3)) == 0))
 )
 
@@ -1705,6 +2423,427 @@ achievement(
 )
 
 achievement(
+    id          = 594494, 
+    badge       = "674039",
+    type        = "",
+    title       = "Four of a Kind",
+    description = "Win a 4-Player Crown Showdown with 7 wins against three CPUs on Hard.",
+    points      = 10,
+    trigger     = getGameState(0x62) &&
+                  __ornext(prev(getGameState(0x62))) &&
+                  getPlayerControlType(0)
+                  + getPlayerControlType(1)
+                  + getPlayerControlType(2)
+                  + getPlayerControlType(3) == 3 &&
+                  getCrownShowdownRounds() == 2 &&
+                  getCrownShowdownMode() == 0x00 &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
+    id          = 594495, 
+    badge       = "674040",
+    type        = "",
+    title       = "Triple Trouble",
+    description = "Win a 1-VS-3 Crown Showdown with 7 wins against three CPUs on Hard.",
+    points      = 10,
+    trigger     = getGameState(0x62) &&
+                  __ornext(prev(getGameState(0x62))) &&
+                  getPlayerControlType(0)
+                  + getPlayerControlType(1)
+                  + getPlayerControlType(2)
+                  + getPlayerControlType(3) == 3 &&
+                  getCrownShowdownRounds() == 2 &&
+                  getCrownShowdownMode() == 0x01 &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
+    id          = 594496, 
+    badge       = "674041",
+    type        = "",
+    title       = "Dream Team",
+    description = "Win a 2-VS-2 Crown Showdown with 7 wins against two CPUs on Hard.",
+    points      = 10,
+    trigger     = getGameState(0x62) &&
+                  __ornext(prev(getGameState(0x62))) &&
+                  getPlayerControlType(0)
+                  + getPlayerControlType(1)
+                  + getPlayerControlType(2)
+                  + getPlayerControlType(3) >= 2 &&
+                  getCrownShowdownRounds() == 2 &&
+                  getCrownShowdownMode() == 0x02 &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) == getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) == getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) == getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(2) &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) == getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) == getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) == getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(2) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) == getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) == getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(3) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) == getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(1) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) == getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(2) &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) == getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(2) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) == getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(1) &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
+    id          = 594497, 
+    badge       = "674042",
+    type        = "",
+    title       = "Fight Between Friends",
+    description = "Win a Duel Crown Showdown with 7 wins against a CPU on Hard.",
+    points      = 10,
+    trigger     = getGameState(0x62) &&
+                  __ornext(prev(getGameState(0x62))) &&
+                  getPlayerControlType(0)
+                  + getPlayerControlType(1)
+                  + getPlayerControlType(2)
+                  + getPlayerControlType(3) >= 1 &&
+                  getCrownShowdownRounds() == 2 &&
+                  getCrownShowdownMode() == 0x03 &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(0) == 0x00 &&
+                    getCrownShowdownPlayerTeam(0) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getCrownShowdownPlayerTeam(1) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getCrownShowdownPlayerTeam(2) != getCrownShowdownPlayerTeam(3) &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(0) &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(0) <= 0x01 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(1) &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(1) <= 0x01 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getCrownShowdownPlayerTeam(3) != getCrownShowdownPlayerTeam(2) &&
+                    getCrownShowdownPlayerTeam(3) <= 0x01 &&
+                    getCrownShowdownPlayerTeam(2) <= 0x01 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
+    id          = 594498, 
+    badge       = "674043",
+    type        = "",
+    title       = "Mister Unstoppable",
+    description = "Win a Random Crown Showdown with 7 wins against three CPUs on Hard.",
+    points      = 10,
+    trigger     = getGameState(0x62) &&
+                  __ornext(prev(getGameState(0x62))) &&
+                  getPlayerControlType(0)
+                  + getPlayerControlType(1)
+                  + getPlayerControlType(2)
+                  + getPlayerControlType(3) == 3 &&
+                  getCrownShowdownRounds() == 2 &&
+                  getCrownShowdownMode() == 0x04 &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(0) == 7 &&
+                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(1) == 7 &&
+                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getCrownShowdownPlayerWins(2) == 7 &&
+                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getCrownShowdownPlayerWins(3) == 7 &&
+                    prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
     id          = 587252, 
     badge       = "665856",
     type        = "",
@@ -1715,6 +2854,32 @@ achievement(
                   measured(checkAllMinigameFlags() == 73) &&
                       prev(checkAllMinigameFlags()) <= 72 &&
                       prev(checkAllMinigameFlags()) >= 70
+)
+
+achievement(
+    id          = 594447, 
+    badge       = "674022",
+    type        = "",
+    title       = "Ballyhoo's Parade of Fun",
+    description = "Buy all Carnival Figurines from the Surprise Wagon.",
+    points      = 25,
+    trigger     = notLoadingSave() &&
+                  getGameState(0x59) &&
+                  measured(checkAllCarnivalFigurineFlags() == 30) &&
+                      prev(checkAllCarnivalFigurineFlags()) == 29
+)
+
+achievement(
+    id          = 594449, 
+    badge       = "674023",
+    type        = "",
+    title       = "Who Is Surprised Now?",
+    description = "Buy everything from the Surprise Wagon.",
+    points      = 10,
+    trigger     = notLoadingSave() &&
+                  getGameState(0x59) &&
+                  measured(checkAllSurpriseWagonFlags() == 42) &&
+                      prev(checkAllSurpriseWagonFlags()) == 41
 )
 
 //--------------------------------------------------
@@ -1941,32 +3106,7 @@ leaderboard(
 //--------------------------------------------------
 // Rich Presence
 
-characterIDs = {
-    0x00: "Mario",
-    0x01: "Luigi",
-    0x02: "Peach",
-    0x03: "Yoshi",
-    0x04: "Wario",
-    0x05: "Daisy",
-    0x06: "Waluigi",
-    0x07: "Toad",
-    0x08: "Boo",
-    0x09: "Toadette",
-    0x0A: "Birdo",
-    0x0B: "Dry Bones",
-    0x0C: "Blooper",
-    0x0D: "Hammer Bro",
-    0x0E: "Mii"
-}
 
-boardIDs = {
-    0x00: "DK's Treetop Temple",
-    0x01: "Goomba's Booty Boardwalk",
-    0x02: "King Boo's Haunted Hideaway",
-    0x03: "Shy Guy's Perplex Express",
-    0x04: "Koopa's Tycoon Town",
-    0x05: "Bowser's Warped Orbit"
-}
 
 rich_presence_conditional_display(getGameState(0x5B),
     "Mario and his Friends are entering the Party Tent"
@@ -2167,6 +3307,110 @@ rich_presence_conditional_display(wasInGameState(0x5B) && getGameState(0x01) && 
     )
 )
 
+rich_presence_conditional_display(getGameState(0x56),
+    "Mario and his Friends are entering the Extras Zone"
+)
+
+rich_presence_conditional_display(wasInGameState(0x56) && getExtraPlayerAmount() == 4,
+    "{0}, {1}, {2} and {3} are in the Minigame {4} [Extra Zone]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(2),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(3),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "ExtraZoneLocation",
+        getGameStateID(),
+        extraZoneLocations,
+        fallback = extraZoneLocations[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x56) && getExtraPlayerAmount() == 3,
+    "{0}, {1} and {2} are in the Minigame {3} [Extra Zone]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(2),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "ExtraZoneLocation",
+        getGameStateID(),
+        extraZoneLocations,
+        fallback = extraZoneLocations[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x56) && getExtraPlayerAmount() == 2,
+    "{0} and {1} are in the Minigame {2} [Extra Zone]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "ExtraZoneLocation",
+        getGameStateID(),
+        extraZoneLocations,
+        fallback = extraZoneLocations[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x56) && getExtraPlayerAmount() <= 1,
+    "{0} is in the Minigame {1} [Extra Zone]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "ExtraZoneLocation",
+        getGameStateID(),
+        extraZoneLocations,
+        fallback = extraZoneLocations[0]
+    )
+)
+
 rich_presence_conditional_display(getGameState(0x6F),
     "{0} is on the Arena Stage [Star Battle] [👑{1}/6]",
     rich_presence_lookup(
@@ -2215,8 +3459,61 @@ rich_presence_conditional_display(wasInGameState(0x6F) && (onPartyBoard() || inM
     )
 )
 
-rich_presence_conditional_display(wasInGameState(0x60),
+rich_presence_conditional_display(wasInGameState(0x60) && never(getGameState(0x57)),
     "{0}, {1}, {2} and {3} are in the Free Play Arcade [Minigames]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(2),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(3),
+        characterIDs,
+        fallback = characterIDs[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)) && getCrownShowdownMode() == 0x03 && getCrownShowdownPlayerTeam(0) 
+                                                                                                                       + getCrownShowdownPlayerTeam(1) 
+                                                                                                                       + getCrownShowdownPlayerTeam(2) 
+                                                                                                                       + getCrownShowdownPlayerTeam(3) == 5,
+    "{0} and {1} are in the Arena [Crown Showdown]",
+    rich_presence_lookup(
+        "CharacterID",
+        max_of(measured(getPlayerCharacterID(0), when = getCrownShowdownPlayerTeam(0) == 0),
+               measured(getPlayerCharacterID(1), when = getCrownShowdownPlayerTeam(1) == 0),
+               measured(getPlayerCharacterID(2), when = getCrownShowdownPlayerTeam(2) == 0),
+               measured(getPlayerCharacterID(3), when = getCrownShowdownPlayerTeam(3) == 0)),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        max_of(measured(getPlayerCharacterID(0), when = getCrownShowdownPlayerTeam(0) == 1),
+               measured(getPlayerCharacterID(1), when = getCrownShowdownPlayerTeam(1) == 1),
+               measured(getPlayerCharacterID(2), when = getCrownShowdownPlayerTeam(2) == 1),
+               measured(getPlayerCharacterID(3), when = getCrownShowdownPlayerTeam(3) == 1)),
+        characterIDs,
+        fallback = characterIDs[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)),
+    "{0}, {1}, {2} and {3} are in the Arena [Crown Showdown]",
     rich_presence_lookup(
         "CharacterID",
         getPlayerCharacterID(0),
@@ -2253,10 +3550,6 @@ rich_presence_conditional_display(getGameState(0x06),
 
 rich_presence_conditional_display(getGameState(0x55),
     "Mario and his Friends are entering the Fun Bazaar"
-)
-
-rich_presence_conditional_display(getGameState(0x56),
-    "Mario and his Friends are entering the Extras Zone"
 )
 
 rich_presence_conditional_display(getGameState(0x57),
@@ -2296,5 +3589,6 @@ rich_presence_conditional_display(getGameState(0x76) && checkPartySubMode("Duel 
 rich_presence_display(
     "Mario and his Friends are wandering around at the Star Carnival"
 )
+
 
 
