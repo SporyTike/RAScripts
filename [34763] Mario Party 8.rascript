@@ -27,6 +27,8 @@ Mem_ExpressCarOrder        = 0x0025fba8
 Mem_KoopaHotelInvestments  = 0x0025fba8
 Mem_BowserBoardDirection   = 0x0025fba8
 Mem_CrownShowdownDynamic   = 0x007781a8
+Mem_TicTacDropPointer      = 0x0077768c
+Mem_TestForTheBestPointer  = 0x00778428
 
 pointerMask = 0x7FFFFFFF
 
@@ -494,6 +496,46 @@ function getCrownShowdownPlayerTeam(playerSlot) {
 
 function pseudoImpossibleCondition() {
     return getCurrentPlayerCharacterID() == 0xFF
+}
+
+function getTicTacDropState() {
+    return dword_be((dword_be((dword_be(Mem_TicTacDropPointer) & pointerMask) + 0x5C) & pointerMask) + 0x84)
+}
+
+function getTicTacDropPlayerWhoWonMinigame() {
+    return byte((dword_be((dword_be(Mem_TicTacDropPointer) & pointerMask) + 0x5C) & pointerMask) + 0x10)
+}
+
+function checkTicTacDropPlayerWin(playerSlot) {    
+    return byte((dword_be((dword_be(Mem_TicTacDropPointer) & pointerMask) + 0x5C) & pointerMask) + 0x12) == playerSlot &&
+           getTicTacDropState() == 0x1F &&
+           prev(getTicTacDropState()) == 0x1E
+}
+
+function checkTicTacDropPlayerWhoDroppedBall(color) {
+    if (color == "Blue") {
+        color = 0
+    }
+    if (color == "Red") {
+        color = 1
+    }
+    
+    return getTicTacDropState() != prev(getTicTacDropState()) &&
+           prev(getTicTacDropState()) == 0x16 &&
+           getTicTacDropPlayerWhoWonMinigame() == color
+}
+
+function getTestForTheBestState() {
+    return dword_be((dword_be((dword_be(Mem_TestForTheBestPointer) & pointerMask) + 0x5C) & pointerMask) + 0x10)
+}
+
+function getTestForTheBestScore() {
+    return word_be((dword_be((dword_be(Mem_TestForTheBestPointer) & pointerMask) + 0x5C) & pointerMask) + 0x4C)
+}
+
+function getTestForTheBestFinished() {
+    return getTestForTheBestState() == 0x15 &&
+           prev(getTestForTheBestState()) == 0x14
 }
 
 //--------------------------------------------------
@@ -2427,7 +2469,7 @@ achievement(
     badge       = "674039",
     type        = "",
     title       = "Four of a Kind",
-    description = "Win a 4-Player Crown Showdown with 7 wins against three CPUs on Hard.",
+    description = "Win a \"4-Player Crown Showdown\" with 7 wins against three CPUs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2480,7 +2522,7 @@ achievement(
     badge       = "674040",
     type        = "",
     title       = "Triple Trouble",
-    description = "Win a 1-VS-3 Crown Showdown with 7 wins against three CPUs on Hard.",
+    description = "Win a \"1-VS-3 Crown Showdown\" with 7 wins against three CPUs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2545,7 +2587,7 @@ achievement(
     badge       = "674041",
     type        = "",
     title       = "Dream Team",
-    description = "Win a 2-VS-2 Crown Showdown with 7 wins against two CPUs on Hard.",
+    description = "Win a \"2-VS-2 Crown Showdown\" with 7 wins against two CPUs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2682,7 +2724,7 @@ achievement(
     badge       = "674042",
     type        = "",
     title       = "Fight Between Friends",
-    description = "Win a Duel Crown Showdown with 7 wins against a CPU on Hard.",
+    description = "Win a \"Duel Crown Showdown\" with 7 wins against a CPU on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2795,7 +2837,7 @@ achievement(
     badge       = "674043",
     type        = "",
     title       = "Mister Unstoppable",
-    description = "Win a Random Crown Showdown with 7 wins against three CPUs on Hard.",
+    description = "Win a \"Random Crown Showdown\" with 7 wins against three CPUs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2841,6 +2883,79 @@ achievement(
                     getPlayerDifficulty(2) >= 0x02 &&
                     getCrownShowdownPlayerWins(3) == 7 &&
                     prev(getCrownShowdownPlayerWins(3)) == 6))
+)
+
+achievement(
+    id          = 594719, 
+    badge       = "674343",
+    type        = "",
+    title       = "I Drop, You Flop",
+    description = "Win a game of \"Tic-Tac Drop\" against a CPU on Hard.",
+    points      = 5,
+    trigger     = getGameState(0x65) &&
+                  __ornext(prev(getGameState(0x65))) &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    checkTicTacDropPlayerWin(0)) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(01) >= 0x02 &&
+                    checkTicTacDropPlayerWin(1)))
+)
+
+achievement(
+    id          = 594720, 
+    badge       = "674344",
+    type        = "",
+    title       = "Tic-Tac-Trauma",
+    description = "Win a game of \"Tic-Tac Drop\" against a CPU on Very Hard without letting them drop a single ball.",
+    points      = 5,
+    trigger     = never(getGameState(0x57)) &&
+                  never(getGameState(0x5C)) &&
+                  trigger_when(getGameState(0x65)) &&
+                  trigger_when(__ornext(prev(getGameState(0x65)))) &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    trigger_when(checkTicTacDropPlayerWin(0)) &&
+                    once(__ornext(getTicTacDropState() == 0x06 ||
+                                  getTicTacDropState() == 0x1B) &&
+                         never(checkTicTacDropPlayerWhoDroppedBall("Red")))) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    trigger_when(checkTicTacDropPlayerWin(1)) &&
+                    once(__ornext(getTicTacDropState() == 0x06 ||
+                                  getTicTacDropState() == 0x1B) &&
+                         never(checkTicTacDropPlayerWhoDroppedBall("Red")))))
+)
+
+achievement(
+    id          = 594728, 
+    badge       = "674527",
+    type        = "",
+    title       = "Quarter Until Master",
+    description = "Finish a game of \"Test of the Best\" with 7,500 points.",
+    points      = 10,
+    trigger     = getGameState(0x63) &&
+                  __ornext(prev(getGameState(0x63))) &&
+                  getTestForTheBestFinished() &&
+                  getTestForTheBestScore() >= 7500 &&
+                  getTestForTheBestScore() <= 10000
+)
+
+achievement(
+    id          = 594729, 
+    badge       = "674528",
+    type        = "",
+    title       = "Hot Air Ba-Moon",
+    description = "Finish a game of \"Test of the Best\" with 10,000 points.",
+    points      = 25,
+    trigger     = getGameState(0x63) &&
+                  __ornext(prev(getGameState(0x63))) &&
+                  getTestForTheBestFinished() &&
+                  getTestForTheBestScore() == 10000
 )
 
 achievement(
@@ -3487,7 +3602,7 @@ rich_presence_conditional_display(wasInGameState(0x60) && never(getGameState(0x5
     )
 )
 
-rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)) && getCrownShowdownMode() == 0x03 && getCrownShowdownPlayerTeam(0) 
+rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)) && never(getGameState(0x5C)) && getCrownShowdownMode() == 0x03 && getCrownShowdownPlayerTeam(0) 
                                                                                                                        + getCrownShowdownPlayerTeam(1) 
                                                                                                                        + getCrownShowdownPlayerTeam(2) 
                                                                                                                        + getCrownShowdownPlayerTeam(3) == 5,
@@ -3512,7 +3627,7 @@ rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x5
     )
 )
 
-rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)),
+rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)) && never(getGameState(0x5C)),
     "{0}, {1}, {2} and {3} are in the Arena [Crown Showdown]",
     rich_presence_lookup(
         "CharacterID",
@@ -3535,6 +3650,32 @@ rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x5
     rich_presence_lookup(
         "CharacterID",
         getPlayerCharacterID(3),
+        characterIDs,
+        fallback = characterIDs[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x65) && never(getGameState(0x57)) && never(getGameState(0x5C)),
+    "{0} and {1} are dropping Balls on the Board [Tic-Tac Drop]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x63) && never(getGameState(0x57)) && never(getGameState(0x5C)),
+    "{0} is flying with a hot air balloon [Test for the Best]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
         characterIDs,
         fallback = characterIDs[0]
     )
