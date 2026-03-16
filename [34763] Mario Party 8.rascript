@@ -29,6 +29,8 @@ Mem_BowserBoardDirection   = 0x0025fba8
 Mem_CrownShowdownDynamic   = 0x007781a8
 Mem_TicTacDropPointer      = 0x0077768c
 Mem_TestForTheBestPointer  = 0x00778428
+Mem_FlipOutFrenzyData      = 0x00272548
+Mem_FlipOutFrenzyPoints    = 0x00768ad2
 
 pointerMask = 0x7FFFFFFF
 
@@ -494,8 +496,21 @@ function getCrownShowdownPlayerTeam(playerSlot) {
     return byte(Mem_CrownShowdownDynamic + 0x1C + playerSlot)
 }
 
-function pseudoImpossibleCondition() {
-    return getCurrentPlayerCharacterID() == 0xFF
+function getFlipOutFrenzyFinished() {
+    return getGameState(0x66) &&
+           prev(getGameState(0x66)) &&
+           getFlipOutFrenzyPlayerPoints(0)
+         + getFlipOutFrenzyPlayerPoints(1)
+         + getFlipOutFrenzyPlayerPoints(2)
+         + getFlipOutFrenzyPlayerPoints(3) == 34 &&
+           __ornext(getFlipOutFrenzyPlayerPoints(0) > prev(getFlipOutFrenzyPlayerPoints(0)) ||
+                    getFlipOutFrenzyPlayerPoints(1) > prev(getFlipOutFrenzyPlayerPoints(1)) ||
+                    getFlipOutFrenzyPlayerPoints(2) > prev(getFlipOutFrenzyPlayerPoints(2)) ||
+                    getFlipOutFrenzyPlayerPoints(3) > prev(getFlipOutFrenzyPlayerPoints(3)))
+}
+
+function getFlipOutFrenzyPlayerPoints(playerSlot) {
+    return word_be(Mem_FlipOutFrenzyPoints + 2 * playerSlot)
 }
 
 function getTicTacDropState() {
@@ -536,6 +551,10 @@ function getTestForTheBestScore() {
 function getTestForTheBestFinished() {
     return getTestForTheBestState() == 0x15 &&
            prev(getTestForTheBestState()) == 0x14
+}
+
+function pseudoImpossibleCondition() {
+    return getCurrentPlayerCharacterID() == 0xFF
 }
 
 //--------------------------------------------------
@@ -678,7 +697,7 @@ achievement(
     badge       = "674008",
     type        = "",
     title       = "No Monkeying Around!",
-    description = "Win a Battle Royale on the board \"DK's Treetop Temple\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"DK's Treetop Temple\" against three COMs on Very Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -690,25 +709,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) < 3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -884,7 +903,7 @@ achievement(
     badge       = "674009",
     type        = "",
     title       = "Summer, Sun, Stars",
-    description = "Win a Battle Royale on the board \"Goomba's Booty Boardwalk\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"Goomba's Booty Boardwalk\" against three COMs on Very Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -896,25 +915,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) < 3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -954,7 +973,7 @@ achievement(
     id          = 593718, 
     badge       = "673069",
     type        = "",
-    title       = "Path to Weath and Glory",
+    title       = "Path to Wealth and Glory",
     description = "Ride a dolphin to the secret island of \"Goomba's Booty Boardwalk\" and get a free Star.",
     points      = 3,
     trigger     = getGameState(0x71) &&
@@ -970,7 +989,7 @@ achievement(
     badge       = "674011",
     type        = "",
     title       = "I'm Scared Of No-Boo-dy",
-    description = "Win a Battle Royale on the board \"King Boo's Haunted Hideaway\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"King Boo's Haunted Hideaway\" against three COMs on Very Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -982,25 +1001,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) < 3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -1057,7 +1076,7 @@ achievement(
     badge       = "674012",
     type        = "",
     title       = "Ticket to Victory",
-    description = "Win a Battle Royale on the board \"Shy Guy's Perplex Express\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"Shy Guy's Perplex Express\" against three COMs on Very Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1069,25 +1088,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) < 3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -1148,7 +1167,7 @@ achievement(
     badge       = "674013",
     type        = "",
     title       = "Professional Business Investor",
-    description = "Win a Battle Royale on the board \"Koopa's Tycoon Town\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"Koopa's Tycoon Town\" against three COMs on Very Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1160,25 +1179,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) <3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -1201,7 +1220,7 @@ achievement(
     badge       = "671422",
     type        = "",
     title       = "Mr. Monopoly",
-    description = "Own all hotels on a 3-star rank on the bigger version of \"Koopa's Tycoon Town\" without reloading while playing with three CPUs.",
+    description = "Own all hotels on a 3-star rank on the bigger version of \"Koopa's Tycoon Town\" without reloading while playing with three COMs.",
     points      = 10,
     trigger     = getGameState(0x74) &&
                   never(getGameState(0x5C)) &&
@@ -1256,7 +1275,7 @@ achievement(
     badge       = "674014",
     type        = "",
     title       = "Master of the Galaxy",
-    description = "Win a Battle Royale on the board \"Bowser's Warped Orbit\" against three CPUs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the board \"Bowser's Warped Orbit\" against three COMs on Hard without reloading and without using Handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1268,25 +1287,25 @@ achievement(
                   never(getPlayerCoinRecord(0) > 0 &&
                         getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
                   never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 2) &&
+                        getPlayerDifficulty(0) < 3) &&
                   never(getPlayerControlType(0) == 0x00 &&
                         getPlayerHandicap(0) > 0) &&
                   never(getPlayerCoinRecord(1) > 0 &&
                         getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
                   never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 2) &&
+                        getPlayerDifficulty(1) < 3) &&
                   never(getPlayerControlType(1) == 0x00 &&
                         getPlayerHandicap(1) > 0) &&
                   never(getPlayerCoinRecord(2) > 0 &&
                         getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
                   never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 2) &&
+                        getPlayerDifficulty(2) < 3) &&
                   never(getPlayerControlType(2) == 0x00 &&
                         getPlayerHandicap(2) > 0) &&
                   never(getPlayerCoinRecord(3) > 0 &&
                         getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
                   never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 2) &&
+                        getPlayerDifficulty(3) < 3) &&
                   never(getPlayerControlType(3) == 0x00 &&
                         getPlayerHandicap(3) > 0) &&
                   tally(2, once(__ornext(getGameState(0x5B) ||
@@ -1336,61 +1355,6 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   prev(getCurrentPlayerSpaceStanding()) == 0x108 &&
                   prev(getCurrentPlayerSpaceStanding()) != getCurrentPlayerSpaceStanding()
-)
-
-achievement(
-    id          = 594439, 
-    badge       = "674016",
-    type        = "",
-    title       = "Legendary Party King",
-    description = "Win a Battle Royale on any board against three CPUs on Very Hard without reloading and without using Handicaps.",
-    points      = 25,
-    trigger     = checkPartySubMode("Battle Royale") &&
-                  never(getGameState(0x5C)) &&
-                  getBoardID() >= 0x00 &&
-                  getBoardID() <= 0x05 &&
-                  never(getPlayerControlType(0)
-                      + getPlayerControlType(1)
-                      + getPlayerControlType(2)
-                      + getPlayerControlType(3) != 3) &&
-                  never(getPlayerCoinRecord(0) > 0 &&
-                        getPlayerControlType(0) != prev(getPlayerControlType(0))) &&
-                  never(getPlayerControlType(0) == 0x01 &&
-                        getPlayerDifficulty(0) < 3) &&
-                  never(getPlayerControlType(0) == 0x00 &&
-                        getPlayerHandicap(0) > 0) &&
-                  never(getPlayerCoinRecord(1) > 0 &&
-                        getPlayerControlType(1) != prev(getPlayerControlType(1))) &&
-                  never(getPlayerControlType(1) == 0x01 &&
-                        getPlayerDifficulty(1) < 3) &&
-                  never(getPlayerControlType(1) == 0x00 &&
-                        getPlayerHandicap(1) > 0) &&
-                  never(getPlayerCoinRecord(2) > 0 &&
-                        getPlayerControlType(2) != prev(getPlayerControlType(2))) &&
-                  never(getPlayerControlType(2) == 0x01 &&
-                        getPlayerDifficulty(2) < 3) &&
-                  never(getPlayerControlType(2) == 0x00 &&
-                        getPlayerHandicap(2) > 0) &&
-                  never(getPlayerCoinRecord(3) > 0 &&
-                        getPlayerControlType(3) != prev(getPlayerControlType(3))) &&
-                  never(getPlayerControlType(3) == 0x01 &&
-                        getPlayerDifficulty(3) < 3) &&
-                  never(getPlayerControlType(3) == 0x00 &&
-                        getPlayerHandicap(3) > 0) &&
-                  tally(2, once(__ornext(getGameState(0x5B) ||
-                     	                   getGameState(0x6F))),
-                           once(dword_be(Mem_GameState) >= 0x70 &&
-                     	          dword_be(Mem_GameState) <= 0x75 &&
-                                byte(Mem_CurrentTurn) == 0x01)) &&
-                  trigger_when(partyCeremonyFinishedGame()) &&
-                  (trigger_when(getPlayerControlType(0) == 0x00 &&
-                                getPlayerCeremonyPlacement(0) == 0x00) ||
-                   trigger_when(getPlayerControlType(1) == 0x00 &&
-                                getPlayerCeremonyPlacement(1) == 0x00) ||
-                   trigger_when(getPlayerControlType(2) == 0x00 &&
-                                getPlayerCeremonyPlacement(2) == 0x00) ||
-                   trigger_when(getPlayerControlType(3) == 0x00 &&
-                                getPlayerCeremonyPlacement(3) == 0x00))
 )
 
 achievement(
@@ -2101,6 +2065,70 @@ achievement(
 )
 
 achievement(
+    id          = 594439, 
+    badge       = "675133",
+    type        = "",
+    title       = "Quick! Call the Nintendo Police!",
+    description = "Win a round of \"Shake It Up\" between Peach, Daisy, Toadette and Birdo against three COMs on Very Hard.",
+    points      = 3,
+    trigger     = getGameState(0x28) &&
+                  __ornext(prev(getGameState(0x28))) &&
+                  getTotalPlayersInMinigame() == 4 &&
+                  __ornext(getPlayerCharacterID(0) == 0x02 ||
+                           getPlayerCharacterID(1) == 0x02 ||
+                           getPlayerCharacterID(2) == 0x02 ||
+                           getPlayerCharacterID(3) == 0x02) &&
+                  __ornext(getPlayerCharacterID(0) == 0x05 ||
+                           getPlayerCharacterID(1) == 0x05 ||
+                           getPlayerCharacterID(2) == 0x05 ||
+                           getPlayerCharacterID(3) == 0x05) &&
+                  __ornext(getPlayerCharacterID(0) == 0x09 ||
+                           getPlayerCharacterID(1) == 0x09 ||
+                           getPlayerCharacterID(2) == 0x09 ||
+                           getPlayerCharacterID(3) == 0x09) &&
+                  __ornext(getPlayerCharacterID(0) == 0x0A ||
+                           getPlayerCharacterID(1) == 0x0A ||
+                           getPlayerCharacterID(2) == 0x0A ||
+                           getPlayerCharacterID(3) == 0x0A) &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getPlayerMinigamePrize(0) > prev(getPlayerMinigamePrize(0)) &&
+                    prev(getPlayerMinigamePrize(0)) == 0) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getPlayerMinigamePrize(1) > prev(getPlayerMinigamePrize(1)) &&
+                    prev(getPlayerMinigamePrize(1)) == 0) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getPlayerMinigamePrize(2) > prev(getPlayerMinigamePrize(2)) &&
+                    prev(getPlayerMinigamePrize(2)) == 0) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getPlayerMinigamePrize(3) > prev(getPlayerMinigamePrize(3)) &&
+                    prev(getPlayerMinigamePrize(3)) == 0))
+)
+
+achievement(
     id          = 594202, 
     badge       = "673891",
     type        = "",
@@ -2469,7 +2497,7 @@ achievement(
     badge       = "674039",
     type        = "",
     title       = "Four of a Kind",
-    description = "Win a \"4-Player Crown Showdown\" with 7 wins against three CPUs on Hard.",
+    description = "Win a \"4-Player Crown Showdown\" with 7 wins against three COMs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2522,7 +2550,7 @@ achievement(
     badge       = "674040",
     type        = "",
     title       = "Triple Trouble",
-    description = "Win a \"1-VS-3 Crown Showdown\" with 7 wins against three CPUs on Hard.",
+    description = "Win a \"1-VS-3 Crown Showdown\" with 7 wins against three COMs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2587,7 +2615,7 @@ achievement(
     badge       = "674041",
     type        = "",
     title       = "Dream Team",
-    description = "Win a \"2-VS-2 Crown Showdown\" with 7 wins against two CPUs on Hard.",
+    description = "Win a \"2-VS-2 Crown Showdown\" with 7 wins against two COMs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2724,7 +2752,7 @@ achievement(
     badge       = "674042",
     type        = "",
     title       = "Fight Between Friends",
-    description = "Win a \"Duel Crown Showdown\" with 7 wins against a CPU on Hard.",
+    description = "Win a \"Duel Crown Showdown\" with 7 wins against a COMs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2837,7 +2865,7 @@ achievement(
     badge       = "674043",
     type        = "",
     title       = "Mister Unstoppable",
-    description = "Win a \"Random Crown Showdown\" with 7 wins against three CPUs on Hard.",
+    description = "Win a \"Random Crown Showdown\" with 7 wins against three COMs on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2886,11 +2914,107 @@ achievement(
 )
 
 achievement(
+    id          = 595313, 
+    badge       = "675127",
+    type        = "",
+    title       = "It Was Your's, Now It's Mine",
+    description = "Win a game of \"Flip-Out Frenzy\" against three COMs on Hard.",
+    points      = 5,
+    trigger     = getGameState(0x66) &&
+                  __ornext(prev(getGameState(0x66))) &&
+                  getFlipOutFrenzyFinished() &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getFlipOutFrenzyPlayerPoints(0) > getFlipOutFrenzyPlayerPoints(1) &&
+                    getFlipOutFrenzyPlayerPoints(0) > getFlipOutFrenzyPlayerPoints(2) &&
+                    getFlipOutFrenzyPlayerPoints(0) > getFlipOutFrenzyPlayerPoints(3)) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getFlipOutFrenzyPlayerPoints(1) > getFlipOutFrenzyPlayerPoints(0) &&
+                    getFlipOutFrenzyPlayerPoints(1) > getFlipOutFrenzyPlayerPoints(2) &&
+                    getFlipOutFrenzyPlayerPoints(1) > getFlipOutFrenzyPlayerPoints(3)) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) >= 0x02 &&
+                    getFlipOutFrenzyPlayerPoints(2) > getFlipOutFrenzyPlayerPoints(0) &&
+                    getFlipOutFrenzyPlayerPoints(2) > getFlipOutFrenzyPlayerPoints(1) &&
+                    getFlipOutFrenzyPlayerPoints(2) > getFlipOutFrenzyPlayerPoints(3)) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) >= 0x02 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) >= 0x02 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) >= 0x02 &&
+                    getFlipOutFrenzyPlayerPoints(3) > getFlipOutFrenzyPlayerPoints(0) &&
+                    getFlipOutFrenzyPlayerPoints(3) > getFlipOutFrenzyPlayerPoints(1) &&
+                    getFlipOutFrenzyPlayerPoints(3) > getFlipOutFrenzyPlayerPoints(2)))
+)
+
+achievement(
+    id          = 595314, 
+    badge       = "675128",
+    type        = "",
+    title       = "I'm Gonna Make You Flip Out",
+    description = "Win a game of \"Flip-Out Frenzy\" while owning 34 tiles against three COMs on Very Hard.",
+    points      = 10,
+    trigger     = getGameState(0x66) &&
+                  __ornext(prev(getGameState(0x66))) &&
+                  getFlipOutFrenzyFinished() &&
+                  ((getPlayerControlType(0) == 0x00 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getFlipOutFrenzyPlayerPoints(0) == 34) ||
+                   (getPlayerControlType(1) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getFlipOutFrenzyPlayerPoints(1) == 34) ||
+                   (getPlayerControlType(2) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(3) == 0x01 &&
+                    getPlayerDifficulty(3) == 0x03 &&
+                    getFlipOutFrenzyPlayerPoints(2) == 34) ||
+                   (getPlayerControlType(3) == 0x00 &&
+                    getPlayerControlType(0) == 0x01 &&
+                    getPlayerDifficulty(0) == 0x03 &&
+                    getPlayerControlType(1) == 0x01 &&
+                    getPlayerDifficulty(1) == 0x03 &&
+                    getPlayerControlType(2) == 0x01 &&
+                    getPlayerDifficulty(2) == 0x03 &&
+                    getFlipOutFrenzyPlayerPoints(3) == 34))
+)
+
+achievement(
     id          = 594719, 
     badge       = "674343",
     type        = "",
     title       = "I Drop, You Flop",
-    description = "Win a game of \"Tic-Tac Drop\" against a CPU on Hard.",
+    description = "Win a game of \"Tic-Tac Drop\" against a COM on Hard.",
     points      = 5,
     trigger     = getGameState(0x65) &&
                   __ornext(prev(getGameState(0x65))) &&
@@ -2909,7 +3033,7 @@ achievement(
     badge       = "674344",
     type        = "",
     title       = "Tic-Tac-Trauma",
-    description = "Win a game of \"Tic-Tac Drop\" against a CPU on Very Hard without letting them drop a single ball.",
+    description = "Win a game of \"Tic-Tac Drop\" against a COM on Very Hard without letting them drop a single ball.",
     points      = 5,
     trigger     = never(getGameState(0x57)) &&
                   never(getGameState(0x5C)) &&
@@ -3629,6 +3753,34 @@ rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x5
 
 rich_presence_conditional_display(wasInGameState(0x62) && never(getGameState(0x57)) && never(getGameState(0x5C)),
     "{0}, {1}, {2} and {3} are in the Arena [Crown Showdown]",
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(0),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(1),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(2),
+        characterIDs,
+        fallback = characterIDs[0]
+    ),
+    rich_presence_lookup(
+        "CharacterID",
+        getPlayerCharacterID(3),
+        characterIDs,
+        fallback = characterIDs[0]
+    )
+)
+
+rich_presence_conditional_display(wasInGameState(0x66) && never(getGameState(0x57)) && never(getGameState(0x5C)),
+    "{0}, {1}, {2} and {3} are flipping Tiles at an Oasis [Flip-Out Frenzy]",
     rich_presence_lookup(
         "CharacterID",
         getPlayerCharacterID(0),
