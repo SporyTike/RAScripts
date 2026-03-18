@@ -565,7 +565,7 @@ achievement(
     badge       = "665339",
     type        = "progression",
     title       = "King of the Jungle",
-    description = "In the Star Battle Arena on the board \"DK's Treetop Temple\" get 2 Stars and win the match.",
+    description = "In the Star Battle Arena and on the \"DK's Treetop Temple\" board, obtain 2 Stars and win the match.",
     points      = 5,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x00 &&
@@ -578,7 +578,7 @@ achievement(
     badge       = "665340",
     type        = "progression",
     title       = "Treasure Chest Hunter",
-    description = "In the Star Battle Arena on the board \"Goomba's Booty Boardwalk\" trade 50 Coins with Captain Goomba and win the match.",
+    description = "In the Star Battle Arena and on the \"Goomba's Booty Boardwalk\" board, trade 50 coins with Captain Goomba and win the match.",
     points      = 5,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x01 &&
@@ -591,7 +591,7 @@ achievement(
     badge       = "665341",
     type        = "progression",
     title       = "Shining at the End of the Corridor",
-    description = "In the Star Battle Arena on the board \"King Boo's Haunted Hideaway\" trade 10 Coins with King Boo twice and win the match.",
+    description = "In the Star Battle Arena and on the \"King Boo's Haunted Hideaway\" board, trade 10 coins with King Boo twice and win the match.",
     points      = 5,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x02 &&
@@ -604,7 +604,7 @@ achievement(
     badge       = "665342",
     type        = "progression",
     title       = "A Day with a Celebrity",
-    description = "In the Star Battle Arena on the board \"Shy Guy's Perplex Express\" give Holly Koopa 50 Coins and win the match.",
+    description = "In the Star Battle Arena and on the \"Shy Guy's Perplex Express\" board, give Holly Koopa 50 coins and win the match.",
     points      = 10,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x03 &&
@@ -617,7 +617,7 @@ achievement(
     badge       = "665343",
     type        = "progression",
     title       = "Investing for Good",
-    description = "In the Star Battle Arena on the board \"Koopa's Tycoon Town\" own hotels worth a total of 4 Stars and win the match.",
+    description = "In the Star Battle Arena and on the \"Koopa's Tycoon Town\" board, own hotels worth a total of 4 Stars and win the match.",
     points      = 10,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x04 &&
@@ -630,7 +630,7 @@ achievement(
     badge       = "665344",
     type        = "progression",
     title       = "Superstar Countdown",
-    description = "In the Star Battle Arena on the board \"Bowser's Warped Orbit\" make the opponent lose all their Stars and win the match.",
+    description = "In the Star Battle Arena and on the \"Bowser's Warped Orbit\" board, make your opponent lose all of their Stars and win the match.",
     points      = 10,
     trigger     = checkPartyMode("Star Battle") &&
                   getBoardID() == 0x05 &&
@@ -658,7 +658,7 @@ achievement(
     badge       = "665347",
     type        = "win_condition",
     title       = "A Rod for a Superstar",
-    description = "In the Star Battle Arena defeat Bowser and bring back the Star Rod.",
+    description = "In the Star Battle Arena, defeat Bowser during the \"Superstar Showdown\" minigame and bring back the Star Rod.",
     points      = 5,
     trigger     = checkPartyMode("Star Battle") &&
                   getStarBattleProgress() == 0x6 &&
@@ -697,7 +697,7 @@ achievement(
     badge       = "674008",
     type        = "",
     title       = "No Monkeying Around!",
-    description = "Win a Battle Royale on the board \"DK's Treetop Temple\" against three COMs on Very Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the \"DK's Treetop Temple\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -903,7 +903,7 @@ achievement(
     badge       = "674009",
     type        = "",
     title       = "Summer, Sun, Stars",
-    description = "Win a Battle Royale on the board \"Goomba's Booty Boardwalk\" against three COMs on Very Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the \"Goomba's Booty Boardwalk\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -988,8 +988,8 @@ achievement(
     id          = 594406, 
     badge       = "674011",
     type        = "",
-    title       = "I'm Scared Of No-Boo-dy",
-    description = "Win a Battle Royale on the board \"King Boo's Haunted Hideaway\" against three COMs on Very Hard without reloading and without using Handicaps.",
+    title       = "I'm Scared of No-Boo-dy",
+    description = "Win a Battle Royale on the \"King Boo's Haunted Hideaway\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1042,7 +1042,7 @@ achievement(
     badge       = "671420",
     type        = "",
     title       = "A-Maze-Ing Paranormal Investigation",
-    description = "Uncover the whole mansion map of the bigger version of \"King Boo's Haunted Hideaway\" without reloading.",
+    description = "Uncover all of the mansion's map on the bigger version of \"King Boo's Haunted Hideaway\" without reloading.",
     points      = 10,
     trigger     = getGameState(0x72) &&
                   never(getGameState(0x5C)) &&
@@ -1061,7 +1061,7 @@ achievement(
     badge       = "673070",
     type        = "",
     title       = "Attic Fantastic",
-    description = "Drop down from the 2nd floor of \"King Boo's Haunted Hideaway\" to find King Boo and get a Star.",
+    description = "Drop down from the second floor of \"King Boo's Haunted Hideaway\" to find King Boo and get a Star.",
     points      = 3,
     trigger     = getGameState(0x72) &&
                   !checkPartySubMode("Duel Battle") &&
@@ -1076,7 +1076,7 @@ achievement(
     badge       = "674012",
     type        = "",
     title       = "Ticket to Victory",
-    description = "Win a Battle Royale on the board \"Shy Guy's Perplex Express\" against three COMs on Very Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the \"Shy Guy's Perplex Express\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1129,7 +1129,7 @@ achievement(
     badge       = "671466",
     type        = "",
     title       = "Plug and Play",
-    description = "Shuffle all train cars and bring them back to their original order on the bigger version of \"Shy Guy's Perplex Express\" without reloading.",
+    description = "Shuffle all of the train cars and bring them back to their original order on the bigger version of \"Shy Guy's Perplex Express\" without reloading.",
     points      = 10,
     trigger     = getGameState(0x73) &&
                   never(getGameState(0x5C)) &&
@@ -1167,7 +1167,7 @@ achievement(
     badge       = "674013",
     type        = "",
     title       = "Professional Business Investor",
-    description = "Win a Battle Royale on the board \"Koopa's Tycoon Town\" against three COMs on Very Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the \"Koopa's Tycoon Town\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1220,7 +1220,7 @@ achievement(
     badge       = "671422",
     type        = "",
     title       = "Mr. Monopoly",
-    description = "Own all hotels on a 3-star rank on the bigger version of \"Koopa's Tycoon Town\" without reloading while playing with three COMs.",
+    description = "Own every 3-star hotel on the bigger version of \"Koopa's Tycoon Town\" while playing with 3 COMs and without reloading.",
     points      = 10,
     trigger     = getGameState(0x74) &&
                   never(getGameState(0x5C)) &&
@@ -1260,7 +1260,7 @@ achievement(
     badge       = "673072",
     type        = "",
     title       = "Road of Fortune",
-    description = "Visit a luxury hotel in \"Koopa's Tycoon Town\" and invest in it to get three Stars.",
+    description = "Visit a luxury hotel in \"Koopa's Tycoon Town\" and invest in it to get 3 Stars.",
     points      = 3,
     trigger     = getGameState(0x74) &&
                   !checkPartySubMode("Duel Battle") &&
@@ -1275,7 +1275,7 @@ achievement(
     badge       = "674014",
     type        = "",
     title       = "Master of the Galaxy",
-    description = "Win a Battle Royale on the board \"Bowser's Warped Orbit\" against three COMs on Hard without reloading and without using Handicaps.",
+    description = "Win a Battle Royale on the \"Bowser's Warped Orbit\" board against 3 COMs on Very Hard without reloading or using handicaps.",
     points      = 25,
     trigger     = checkPartySubMode("Battle Royale") &&
                   never(getGameState(0x5C)) &&
@@ -1328,7 +1328,7 @@ achievement(
     badge       = "673075",
     type        = "",
     title       = "Where Do We Go Now?!",
-    description = "Change the board direction a total of 7 times on the bigger version of \"Bowser's Warped Orbit\" without reloading.",
+    description = "Change the direction of the board 7 times on the bigger version of \"Bowser's Warped Orbit\" without reloading.",
     points      = 10,
     trigger     = getGameState(0x75) &&
                   never(getGameState(0x5C)) &&
@@ -1347,7 +1347,7 @@ achievement(
     badge       = "673074",
     type        = "",
     title       = "Sugar Space Rush",
-    description = "Visit the Space Buffet near \"Bowser's Warped Orbit\" and get three Candies.",
+    description = "Visit the Space Buffet near \"Bowser's Warped Orbit\" and get 3 Candies.",
     points      = 3,
     trigger     = getGameState(0x75) &&
                   !checkPartySubMode("Duel Battle") &&
@@ -1362,7 +1362,7 @@ achievement(
     badge       = "674018",
     type        = "",
     title       = "Fan's Favorite",
-    description = "Get all three bonus stars during the ceremony of a Battle Royale.",
+    description = "Obtain all 3 Bonus Stars during the ceremony of a Battle Royale.",
     points      = 10,
     trigger     = never(!getGameState(0x01)) &&
                   ((tally(3, getTotalPlayersInMinigame() == 4 &&
@@ -1392,7 +1392,7 @@ achievement(
     badge       = "668767",
     type        = "",
     title       = "Village Incident of 2002",
-    description = "As Mario go through a trauma on \"Goomba's Booty Boardwalk\".",
+    description = "As Mario, get flung into the air by a familiar face on \"Goomba's Booty Boardwalk\".",
     points      = 2,
     trigger     = never(!getGameState(0x71)) &&
                   never(getCurrentPlayerCharacterID() != 0x00) &&
@@ -1435,7 +1435,7 @@ achievement(
     badge       = "669024",
     type        = "",
     title       = "Back to the Lobby",
-    description = "As Luigi use a unique method to travel through the mansion of \"King Boo's Haunted Hideaway\".",
+    description = "As Luigi, use a unique method to travel through the mansion of \"King Boo's Haunted Hideaway\".",
     points      = 2,
     trigger     = never(!getGameState(0x72)) &&
                   never(getCurrentPlayerCharacterID() != 0x01) &&
@@ -1467,8 +1467,8 @@ achievement(
     id          = 590502, 
     badge       = "669860",
     type        = "",
-    title       = "Least I Can Do As A Princess",
-    description = "As Peach fully trust in the business ambitions of a Koopa in \"Koopa's Tycoon Town\".",
+    title       = "The Least I Can Do as a Princess",
+    description = "As Peach, fully trust in the business ambitions of a Koopa in \"Koopa's Tycoon Town\".",
     points      = 2,
     trigger     = getGameState(0x74) &&
                   getPlayerIsDoingTurn() &&
@@ -1696,8 +1696,8 @@ achievement(
     id          = 592091, 
     badge       = "671059",
     type        = "",
-    title       = "Dinosaur Steak On the Run",
-    description = "As Yoshi get attacked by a hungry jungle tribe who is hunting for food on \"DK's Treetop Temple\".",
+    title       = "Dinosaur Steak on the Run",
+    description = "As Yoshi, get attacked by a hungry jungle tribe hunting for food on \"DK's Treetop Temple\".",
     points      = 2,
     trigger     = getGameState(0x70) &&
                   getCurrentPlayerCharacterID() == 0x03 &&
@@ -1720,7 +1720,7 @@ achievement(
     badge       = "670422",
     type        = "",
     title       = "Wario Blast 2: The Stars",
-    description = "As Wario blast away three of your opponents using one explosive in \"Bowser's Warped Orbit\".",
+    description = "As Wario, blast away all 3 of your opponents in a single turn on \"Bowser's Warped Orbit\".",
     points      = 2,
     trigger     = never(!getGameState(0x75)) &&
                   never(getCurrentPlayerCharacterID() != 0x04) &&
@@ -1755,8 +1755,8 @@ achievement(
     id          = 590490, 
     badge       = "669840",
     type        = "",
-    title       = "Just What I Need-oh!",
-    description = "As Daisy get hit by a coin rain while walking through the streets of \"Koopa's Tycoon Town\".",
+    title       = "Just What I Nee-doh!",
+    description = "As Daisy, get hit by a coin rain while walking through the streets of \"Koopa's Tycoon Town\".",
     points      = 2,
     trigger     = never(!getGameState(0x74)) &&
                   never(getCurrentPlayerCharacterID() != 0x05) &&
@@ -1784,7 +1784,7 @@ achievement(
     badge       = "668695",
     type        = "",
     title       = "Biting Heat of the Sun",
-    description = "As Waluigi suffer from the sun on \"Goomba's Booty Boardwalk\".",
+    description = "As Waluigi, suffer from the sun on \"Goomba's Booty Boardwalk\".",
     points      = 2,
     trigger     = getGameState(0x71) &&
                   getCurrentPlayerCharacterID() == 0x06 &&
@@ -1800,7 +1800,7 @@ achievement(
     badge       = "671391",
     type        = "",
     title       = "Mischievous Train Mystery",
-    description = "As Toad help to arrest a criminal on \"Shy Guy's Perplex Express\".",
+    description = "As Toad, help arrest a criminal on \"Shy Guy's Perplex Express\".",
     points      = 2,
     trigger     = never(!getGameState(0x73)) &&
                   never(getCurrentPlayerCharacterID() != 0x07) &&
@@ -1827,7 +1827,7 @@ achievement(
     badge       = "670159",
     type        = "",
     title       = "Call of the Haunted King",
-    description = "As Boo get a Star from your leader during your first 15 spaces in the mansion on \"King Boo's Haunted Hideaway\".",
+    description = "As Boo, obtain a Star from King Boo during your first 15 spaces in the mansion of \"King Boo's Haunted Hideaway\".",
     points      = 2,
     trigger     = getGameState(0x72) &&
                   wasInGameState(0x72) &&
@@ -1870,7 +1870,7 @@ achievement(
     badge       = "670424",
     type        = "",
     title       = "Sweet Tooth Delivery Service",
-    description = "As Toadette buy some Candy at the shop and immediately share it with one of the other guests in \"Shy Guy's Perplex Express\".",
+    description = "As Toadette, buy some Candy at the shop and immediately share it with one of the other guests on \"Shy Guy's Perplex Express\".",
     points      = 2,
     trigger     = never(!getGameState(0x73)) &&
                   never(getCurrentPlayerCharacterID() != 0x09) &&
@@ -1891,7 +1891,7 @@ achievement(
     badge       = "671392",
     type        = "",
     title       = "Luxury Life of a Queen",
-    description = "As Birdo get a free ride in \"Koopa's Tycoon Town\".",
+    description = "As Birdo, get a free ride in \"Koopa's Tycoon Town\".",
     points      = 2,
     trigger     = never(!getGameState(0x74)) &&
                   never(getCurrentPlayerCharacterID() != 0x0A) &&
@@ -1928,7 +1928,7 @@ achievement(
     badge       = "671361",
     type        = "",
     title       = "Paleontological Discovery",
-    description = "As Dry Bones excavate some valuables on \"Goomba's Booty Boardwalk\".",
+    description = "As Dry Bones, excavate some valuables on \"Goomba's Booty Boardwalk\".",
     points      = 2,
     trigger     = never(!getGameState(0x71)) &&
                   never(getCurrentPlayerCharacterID() != 0x0B) &&
@@ -1948,7 +1948,7 @@ achievement(
     badge       = "671369",
     type        = "",
     title       = "Hyper Space Jelly Experiment",
-    description = "As Blooper travel with hyperspeed to the other side of \"Bowser's Warped Orbit\".",
+    description = "As Blooper, travel with hyperspeed to the other side of \"Bowser's Warped Orbit\".",
     points      = 2,
     trigger     = getGameState(0x75) &&
                   getCurrentPlayerCharacterID() == 0x0C &&
@@ -1991,7 +1991,7 @@ achievement(
     badge       = "671058",
     type        = "",
     title       = "King Koopa Knockout",
-    description = "As Hammer Bro get 5 Stars in a single turn on \"Bowser's Warped Orbit\".",
+    description = "As Hammer Bro, obtain 5 Stars in a single turn on \"Bowser's Warped Orbit\".",
     points      = 2,
     trigger     = never(!getGameState(0x75)) &&
                   never(getCurrentPlayerCharacterID() != 0x0D) &&
@@ -2008,7 +2008,7 @@ achievement(
     badge       = "674020",
     type        = "",
     title       = "Digital Dexterity",
-    description = "While using a Twice Candy or Thrice Candy get some Coins by rolling the same number with all dice.",
+    description = "Use a Twice Candy or Thrice Candy to earn free coins by rolling the same number with every dice.",
     points      = 5,
     trigger     = never(!getGameState(0x70) &&
                         !getGameState(0x71) &&
@@ -2029,8 +2029,8 @@ achievement(
     id          = 593728, 
     badge       = "673076",
     type        = "",
-    title       = "That's What I Call A Strike!",
-    description = "While using the Bowlo Candy hit all three of your opponents in a single turn.",
+    title       = "That's What I Call a Strike!",
+    description = "Use a Bowlo Candy to hit all 3 of your opponents in a single turn.",
     points      = 5,
     trigger     = never(!getGameState(0x70) &&
                         !getGameState(0x71) &&
@@ -2069,7 +2069,7 @@ achievement(
     badge       = "675133",
     type        = "",
     title       = "Quick! Call the Nintendo Police!",
-    description = "Win a round of \"Shake It Up\" between Peach, Daisy, Toadette and Birdo against three COMs on Very Hard.",
+    description = "Win a round of \"Shake It Up\" between Peach, Daisy, Toadette, and Birdo against 3 COMs on Very Hard.",
     points      = 3,
     trigger     = getGameState(0x28) &&
                   __ornext(prev(getGameState(0x28))) &&
@@ -2132,8 +2132,8 @@ achievement(
     id          = 594202, 
     badge       = "673891",
     type        = "",
-    title       = "One With the Waves",
-    description = "Get 17 Coins in the minigame \"Water Ski Spree\".",
+    title       = "One with the Waves",
+    description = "Obtain 17 coins in the \"Water Ski Spree\" minigame.",
     points      = 3,
     trigger     = getGameState(0x0B) &&
                   ((getPlayerControlType(0) == 0x00 &&
@@ -2167,7 +2167,7 @@ achievement(
     badge       = "673947",
     type        = "",
     title       = "All That Glitters",
-    description = "Get 16 Coins as single player in the minigame \"Grabbin' Gold\".",
+    description = "Obtain 16 coins as the lone player in the \"Grabbin' Gold\" minigame.",
     points      = 2,
     trigger     = getGameState(0x19) &&
                   ((getPlayerControlType(0) == 0x00 &&
@@ -2233,7 +2233,7 @@ achievement(
     badge       = "673892",
     type        = "",
     title       = "Big Money for a Big Dinner",
-    description = "Get 20 Coins as a team in the minigame \"Winner or Dinner\".",
+    description = "Obtain 20 coins as a team in the \"Winner or Dinner\" minigame.",
     points      = 5,
     trigger     = getGameState(0x24) &&
                   ((getPlayerControlType(0) == 0x00 &&
@@ -2275,7 +2275,7 @@ achievement(
     badge       = "665857",
     type        = "",
     title       = "Bringing Home the Big Twenty",
-    description = "Beat the staff record in the minigame \"Swing Kings\" by getting a score of 20.",
+    description = "Beat the staff record in the \"Swing Kings\" minigame by getting a score of 20.",
     points      = 2,
     trigger     = getGameState(0x0A) &&
                   dword_be(0x0025fdbc) > prev(dword_be(0x0025fdbc)) &&
@@ -2287,7 +2287,7 @@ achievement(
     badge       = "665914",
     type        = "",
     title       = "Flag Pole Enthusiast",
-    description = "Beat the staff record in the minigame \"Crank to Rank\" by getting a time of 0\'05\"12 or less.",
+    description = "Beat the staff record in the \"Crank to Rank\" minigame by getting a time of 0'05\"12 or less.",
     points      = 1,
     trigger     = getGameState(0x0D) &&
                   dword_be(0x0025fdc0) < prev(dword_be(0x0025fdc0)) &&
@@ -2300,7 +2300,7 @@ achievement(
     badge       = "666453",
     type        = "",
     title       = "Chaotic Driver",
-    description = "Beat the staff record in the minigame \"Kartastrophe\" by getting a time of 0\'47\"98 or less.",
+    description = "Beat the staff record in the \"Kartastrophe\" minigame by getting a time of 0'47\"98 or less.",
     points      = 3,
     trigger     = getGameState(0x14) &&
                   dword_be(0x0025fdc4) < prev(dword_be(0x0025fdc4)) &&
@@ -2313,7 +2313,7 @@ achievement(
     badge       = "668568",
     type        = "",
     title       = "River Raft Chaser",
-    description = "Beat the staff record in the minigame \"Lean, Mean Ravine\" by getting a time of 0\'34\"84 or less.",
+    description = "Beat the staff record in the \"Lean, Mean Ravine\" minigame by getting a time of 0'34\"84 or less.",
     points      = 3,
     trigger     = getGameState(0x29) &&
                   dword_be(0x0025fdc8) < prev(dword_be(0x0025fdc8)) &&
@@ -2326,7 +2326,7 @@ achievement(
     badge       = "668569",
     type        = "",
     title       = "Earth Defence Force",
-    description = "Beat the staff record in the minigame \"Saucer Swarm\" by getting a score of 44 or more.",
+    description = "Beat the staff record in the \"Saucer Swarm\" minigame by getting a score of 44 or more.",
     points      = 2,
     trigger     = getGameState(0x2F) &&
                   dword_be(0x0025fdcc) > prev(dword_be(0x0025fdcc)) &&
@@ -2338,7 +2338,7 @@ achievement(
     badge       = "666457",
     type        = "",
     title       = "Quick Flicks to the Top",
-    description = "Beat the staff record in the minigame \"Rotation Station\" by getting a time of 0\'44\"16 or less.",
+    description = "Beat the staff record in the \"Rotation Station\" minigame by getting a time of 0'44\"16 or less.",
     points      = 3,
     trigger     = getGameState(0x43) &&
                   dword_be(0x0025fdd4) < prev(dword_be(0x0025fdd4)) &&
@@ -2351,7 +2351,7 @@ achievement(
     badge       = "666456",
     type        = "",
     title       = "1080° Blizzard",
-    description = "Beat the staff record in the minigame \"Alpine Assault\" by getting a time of 0\'39\"12 or less.",
+    description = "Beat the staff record in the \"Alpine Assault\" minigame by getting a time of 0'39\"12 or less.",
     points      = 3,
     trigger     = getGameState(0x53) &&
                   dword_be(0x0025fe00) < prev(dword_be(0x0025fe00)) &&
@@ -2364,7 +2364,7 @@ achievement(
     badge       = "668570",
     type        = "",
     title       = "Red'y to White'out",
-    description = "Beat the staff record in the minigame \"Flagging Rights\" by getting a score of 33 or more.",
+    description = "Beat the staff record in the \"Flagging Rights\" minigame by getting a score of 33 or more.",
     points      = 2,
     trigger     = getGameState(0x46) &&
                   dword_be(0x0025fdd8) > prev(dword_be(0x0025fdd8)) &&
@@ -2376,7 +2376,7 @@ achievement(
     badge       = "668571",
     type        = "",
     title       = "Picture This, Picture That",
-    description = "Beat the staff record in the minigame \"Trial by Tial\" by getting a time of 0\'33\"48 or less.",
+    description = "Beat the staff record in the \"Trial by Tile\" minigame by getting a time of 0'33\"48 or less.",
     points      = 1,
     trigger     = getGameState(0x47) &&
                   dword_be(0x0025fddc) < prev(dword_be(0x0025fddc)) &&
@@ -2389,7 +2389,7 @@ achievement(
     badge       = "668572",
     type        = "",
     title       = "Keepin' These Pins Rollin'",
-    description = "Beat the staff record in the minigame \"Star Carnival Bowling\" by getting a score of 183 or more in a 10 Frames game.",
+    description = "Beat the staff record in the \"Star Carnival Bowling\" minigame by getting a score of 183 or more in a 10 frame game.",
     points      = 10,
     trigger     = getGameState(0x48) &&
                   dword_be(0x0025fde4) > prev(dword_be(0x0025fde4)) &&
@@ -2401,7 +2401,7 @@ achievement(
     badge       = "668682",
     type        = "",
     title       = "Color Chain Reactions",
-    description = "Beat the staff record in the minigame \"Puzzle Pillars\" by getting a score of 11400 or more.",
+    description = "Beat the staff record in the \"Puzzle Pillars\" minigame by getting a score of 11,400 or more.",
     points      = 10,
     trigger     = getGameState(0x49) &&
                   dword_be(0x0025fde8) > prev(dword_be(0x0025fde8)) &&
@@ -2413,7 +2413,7 @@ achievement(
     badge       = "668689",
     type        = "",
     title       = "Fast, Faster, Canyon Cruiser",
-    description = "Beat the staff record in the minigame \"Canyon Cruisers\" by getting a time of 1\'10\"52 or less.",
+    description = "Beat the staff record in the \"Canyon Cruisers\" minigame by getting a time of 1'10\"52 or less.",
     points      = 4,
     trigger     = getGameState(0x4A) &&
                   dword_be(0x0025fdec) < prev(dword_be(0x0025fdec)) &&
@@ -2425,8 +2425,8 @@ achievement(
     id          = 589973, 
     badge       = "668690",
     type        = "",
-    title       = "Easy As Throwing a Bone to a Dog",
-    description = "Beat the staff record in the minigame \"Chomping Frenzy\" by getting a score of 117 or more.",
+    title       = "Easy as Throwing a Bone to a Dog",
+    description = "Beat the staff record in the \"Chomping Frenzy\" minigame by getting a score of 117 or more.",
     points      = 4,
     trigger     = getGameState(0x4B) &&
                   dword_be(0x0025fdf0) > prev(dword_be(0x0025fdf0)) &&
@@ -2438,7 +2438,7 @@ achievement(
     badge       = "668691",
     type        = "",
     title       = "Mario Kart Tour",
-    description = "Beat the staff record in the minigame \"Moped Mayhem\" by getting a time of 2\'29\"04 or less on Course 1.",
+    description = "Beat the staff record in Course 1 of the \"Moped Mayhem\" minigame by getting a time of 2'29\"84 or less.",
     points      = 5,
     trigger     = getGameState(0x4D) &&
                   dword_be(0x0025fdf4) < prev(dword_be(0x0025fdf4)) &&
@@ -2451,7 +2451,7 @@ achievement(
     badge       = "668692",
     type        = "",
     title       = "Mario Kart World",
-    description = "Beat the staff record in the minigame \"Moped Mayhem\" by getting a time of 2\'52\"60 or less on Course 2.",
+    description = "Beat the staff record in Course 2 of the \"Moped Mayhem\" minigame by getting a time of 2'52\"60 or less.",
     points      = 5,
     trigger     = getGameState(0x4D) &&
                   dword_be(0x0025fdf8) < prev(dword_be(0x0025fdf8)) &&
@@ -2464,7 +2464,7 @@ achievement(
     badge       = "668693",
     type        = "",
     title       = "Mario Kart Ultimate",
-    description = "Beat the staff record in the minigame \"Moped Mayhem\" by getting a time of 5\'19\"60 or less on Course 3.",
+    description = "Beat the staff record in Course 3 of the \"Moped Mayhem\" minigame by getting a time of 5'19\"60 or less.",
     points      = 10,
     trigger     = getGameState(0x4D) &&
                   dword_be(0x0025fdfc) < prev(dword_be(0x0025fdfc)) &&
@@ -2917,7 +2917,7 @@ achievement(
     id          = 595313, 
     badge       = "675127",
     type        = "",
-    title       = "It Was Your's, Now It's Mine",
+    title       = "It Was Yours, Now It's Mine",
     description = "Win a game of \"Flip-Out Frenzy\" against three COMs on Hard.",
     points      = 5,
     trigger     = getGameState(0x66) &&
@@ -3087,7 +3087,7 @@ achievement(
     badge       = "665856",
     type        = "",
     title       = "Minigame Maestro",
-    description = "Unlock all normal minigames in the Free Play Arcade.",
+    description = "Unlock every regular minigame in the Free Play Arcade.",
     points      = 25,
     trigger     = notLoadingSave() &&
                   measured(checkAllMinigameFlags() == 73) &&
@@ -3100,7 +3100,7 @@ achievement(
     badge       = "674022",
     type        = "",
     title       = "Ballyhoo's Parade of Fun",
-    description = "Buy all Carnival Figurines from the Surprise Wagon.",
+    description = "Buy all of the Carnival Figurines from the Surprise Wagon.",
     points      = 25,
     trigger     = notLoadingSave() &&
                   getGameState(0x59) &&
