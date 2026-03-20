@@ -1331,13 +1331,16 @@ achievement(
     description = "Change the direction of the board 7 times on the bigger version of \"Bowser's Warped Orbit\" without reloading.",
     points      = 10,
     trigger     = getGameState(0x75) &&
+                  !checkPartySubMode("Duel Battle") &&
                   never(getGameState(0x5C)) &&
                   getPlayerIsDoingTurn() &&
                   once(dword_be(Mem_GameState) == 0x75 &&
                        byte(Mem_CurrentTurn) == 0x01) &&
-                  once(getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces()) &&
+                  once(!checkPartySubMode("Duel Battle") &&
+                       getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces()) &&
                        never(getPartyPlayerChanging())) &&
-                  measured(tally(7, byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
+                  measured(tally(7, !checkPartySubMode("Duel Battle") &&
+                                    byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
                            when = once(dword_be(Mem_GameState) == 0x75 &&
                                        byte(Mem_CurrentTurn) == 0x01))
 )
