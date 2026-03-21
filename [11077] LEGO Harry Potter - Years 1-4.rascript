@@ -1901,7 +1901,7 @@ function calculateGoldBricks() {
                                                                                             brickEventFlag(0x13C, 2) + // Gold Brick for destroying all seven Metallic Objects in Defence Against the Dark Arts Class II
            brickEventFlag(0x066, 2) + brickEventFlag(0x0A9, 2) + brickEventFlag(0x0E3, 2) + brickEventFlag(0x13D, 2) + // Gold Brick for flying through all Rings in the Clock Tower Courtyard
            brickEventFlag(0x067, 2) + brickEventFlag(0x0AA, 2) + brickEventFlag(0x0E4, 2) + brickEventFlag(0x13E, 2) + // Gold Brick for flying through all Rings in the Training Grounds
-                                      brickEventFlag(0x0AB, 1) +                                                       // Gold Brick high in the Air in Herbology Class
+                                      brickEventFlag(0x0AB, 2) +                                                       // Gold Brick high in the Air in Herbology Class
                                                                  brickEventFlag(0x0E5, 2) + brickEventFlag(0x13F, 2) + // Gold Brick for opening the upper Chest in Owl Tower
                                                                  brickEventFlag(0x0E6, 2) +                            // Gold Brick for using Owl Mail Boxes in Owl Tower
                                                                  brickEventFlag(0x0E7, 2) + brickEventFlag(0x140, 2) + // Gold Brick for ringing the Clock Tower Bell
