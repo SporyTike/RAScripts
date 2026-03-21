@@ -2325,7 +2325,7 @@ achievement(
 )
 
 achievement(
-    title = "Stack of Trouble", type = "progression",
+    title = "Stacks of Trouble", type = "progression",
     description = format("Learn how to stack from Slowking."),
     id = 558150, badge = "633901", points = 1,
     trigger = inGame() &&
@@ -2366,8 +2366,8 @@ achievement(
 
 
 achievement(
-    title = "Too Sweet To Die", type = "progression",
-    description = format("Find the delicious-looking chocolate in {0}.", getDungeonName(0x04)),
+    title = "Too Sweet to Die", type = "progression",
+    description = format("Find the delicious-looking chocolate on {0}.", getDungeonName(0x04)),
     id = 559345, badge = "635296", points = 10,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x04) &&
@@ -2388,7 +2388,7 @@ achievement(
 
 achievement(
     title = "Swirling Waves", type = "",
-    description = format("Defeat the lord of the seas at {0}.", getDungeonName(0x06)),
+    description = format("Defeat the lord of the seas on {0}.", getDungeonName(0x06)),
     id = 560222, badge = "636625", points = 25,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x06) &&
@@ -2401,7 +2401,7 @@ achievement(
 
 achievement(
     title = "Rising Wind", type = "",
-    description = format("Defeat the guardian of the seas at {0}.", getDungeonName(0x08)),
+    description = format("Defeat the guardian of the seas in {0}.", getDungeonName(0x08)),
     id = 560620, badge = "636731", points = 10,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x08) &&
@@ -2424,7 +2424,7 @@ achievement(
 
 achievement(
     title = "Resistance Blizzard", type = "",
-    description = format("Defeat the ice exterminator at {0}.", getDungeonName(0x0A)),
+    description = format("Defeat the ice exterminator in {0}.", getDungeonName(0x0A)),
     id = 560711, badge = "636938", points = 25,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x0A) &&
@@ -2437,7 +2437,7 @@ achievement(
 
 achievement(
     title = "Psychic Sphere", type = "",
-    description = format("Defeat the research specimen at {0}.", getDungeonName(0x0B)),
+    description = format("Defeat the research specimen in {0}.", getDungeonName(0x0B)),
     id = 560784, badge = "637011", points = 25,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x0B) &&
@@ -2449,7 +2449,7 @@ achievement(
 )
 
 achievement(
-    title = "Resorting Alphabet", type = "",
+    title = "Resorting to Alphabetics", type = "",
     description = format("Reach the end of {0}.", getDungeonName(0x0C)),
     id = 561260, badge = "637519", points = 5,
     trigger = inGame() &&
@@ -2461,7 +2461,7 @@ achievement(
 
 achievement(
     title = "Wild Freeze", type = "",
-    description = format("Defeat the warder of ice at {0}.", getDungeonName(0x1E)),
+    description = format("Defeat the warder of ice in {0}.", getDungeonName(0x1E)),
     id = 561446, badge = "637701", points = 50,
     trigger = inGame() &&
               checkAdventureResultDungeonID() == getDungeonID(0x1E) &&
@@ -2521,7 +2521,7 @@ achievement(
 
 achievement(
     title = "Wigglytuff's Left Hand", type = "",
-    description = format("Form a Pokémon Stack every friend of Wigglypuff would recognize."),
+    description = format("Form a Pokémon Stack every friend of Wigglytuff would recognize."),
     id = 561442, badge = "637696", points = 5,
     trigger = inGame() &&
               gameState() == 0x02 &&
@@ -2533,7 +2533,7 @@ achievement(
 
 achievement(
     title = "Riding the Ghost Train", type = "",
-    description = format("Ride a Ghost-type Pokémon which can go through walls."),
+    description = format("As a leader ride a Ghost-type Pokémon that can go through walls."),
     id = 561948, badge = "638328", points = 2,
     trigger = inGame() &&
               gameState() == 0x02 &&
@@ -2570,7 +2570,7 @@ achievement(
 
 achievement(
     title = "Spelling Friends", type = "",
-    description = format("Have every Unown version befriended at the same time."),
+    description = format("Have every form of Unown recruited at the same time."),
     id = 561730, badge = "638082", points = 10,
     trigger = inGame() &&
               measured(checkAllUnownRecruited()) &&
@@ -2598,7 +2598,7 @@ achievement(
 
 achievement(
     title = "Star Force", type = "",
-    description = format("Recruit Deoxys at {0}.", getDungeonName(0x09)),
+    description = format("Recruit Deoxys in {0}.", getDungeonName(0x09)),
     id = 561788, badge = "638138", points = 10,
     trigger = inGame() &&
               gameState() == 0x02 &&
@@ -2610,7 +2610,7 @@ achievement(
 
 achievement(
     title = "Neurokinesis", type = "",
-    description = format("Recruit Azelf at {0}.", getDungeonName(0x07)),
+    description = format("Recruit Azelf in {0}.", getDungeonName(0x07)),
     id = 561786, badge = "638093", points = 10,
     trigger = inGame() &&
               gameState() == 0x02 &&
@@ -2622,7 +2622,7 @@ achievement(
 
 achievement(
     title = "Sea Feast", type = "",
-    description = format("Recruit Phione at {0}.", getDungeonName(0x06)),
+    description = format("Recruit Phione on {0}.", getDungeonName(0x06)),
     id = 561934, badge = "638285", points = 10,
     trigger = inGame() &&
               gameState() == 0x02 &&
@@ -2665,7 +2665,7 @@ achievement(
 )
 
 achievement(
-    title = "Make Yourself a Name", type = "",
+    title = "Making Yourself a Name", type = "",
     description = format("Get promoted to Gold Rank."),
     id = 561291, badge = "637586", points = 3,
     trigger = inGame() &&
@@ -2695,7 +2695,7 @@ achievement(
 )
 
 achievement(
-    title = "Officially Better Than Good", type = "",
+    title = "Officially Better than Good", type = "",
     description = format("Get promoted to Super Rank."),
     id = 561294, badge = "637589", points = 10,
     trigger = inGame() &&
@@ -2705,7 +2705,7 @@ achievement(
 )
 
 achievement(
-    title = "Super Dooper Hyper Trooper", type = "",
+    title = "Super Duper Hyper Trooper", type = "",
     description = format("Get promoted to Hyper Rank."),
     id = 561295, badge = "637590", points = 10,
     trigger = inGame() &&
