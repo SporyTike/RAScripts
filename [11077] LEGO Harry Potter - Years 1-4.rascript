@@ -1553,6 +1553,10 @@ function resetOnLevelLeave() {
                  dword_be(0x00826728) == 3)
 }
 
+function levelNotLeftEarly() {
+    return prev(dword_be(0x00826728)) != 3
+}
+
 function levelCollectibleFlag(levelID, collectible) {
     address = 0x10084796 + (levelID * 0x14)
     if(collectible == "Story") {
@@ -2063,7 +2067,8 @@ achievement(
     trigger = checkLevelID(0x01) && 
               levelMode("Story") &&
               prev(checkMapID(0x48)) &&
-                   checkMapID(0x4B)
+                   checkMapID(0x4B) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2073,7 +2078,8 @@ achievement(
     trigger = checkLevelID(0x06) && 
               levelMode("Story") &&
               prev(checkMapID(0x6D)) &&
-                   checkMapID(0x6E)
+                   checkMapID(0x6E) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2083,7 +2089,8 @@ achievement(
     trigger = checkLevelID(0x07) && 
               levelMode("Story") &&
               prev(checkMapID(0x5D)) &&
-                   checkMapID(0x5E)
+                   checkMapID(0x5E) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2093,7 +2100,8 @@ achievement(
     trigger = checkLevelID(0x0A) && 
               levelMode("Story") &&
               prev(checkMapID(0x7A)) &&
-                   checkMapID(0x7B)
+                   checkMapID(0x7B) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2103,7 +2111,8 @@ achievement(
     trigger = checkLevelID(0x08) && 
               levelMode("Story") &&
               prev(checkMapID(0x58)) &&
-                   checkMapID(0x5A)
+                   checkMapID(0x5A) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2113,7 +2122,8 @@ achievement(
     trigger = checkLevelID(0x0B) && 
               levelMode("Story") &&
               prev(checkMapID(0x74)) &&
-                   checkMapID(0x75)
+                   checkMapID(0x75) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2123,7 +2133,8 @@ achievement(
     trigger = checkLevelID(0x0C) && 
               levelMode("Story") &&
               prev(checkMapID(0x88)) &&
-                   checkMapID(0x8D)
+                   checkMapID(0x8D) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2133,7 +2144,8 @@ achievement(
     trigger = checkLevelID(0x10) && 
               levelMode("Story") &&
               prev(checkMapID(0x9D)) &&
-                   checkMapID(0x9E)
+                   checkMapID(0x9E) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2143,7 +2155,8 @@ achievement(
     trigger = checkLevelID(0x11) && 
               levelMode("Story") &&
               prev(checkMapID(0xB2)) &&
-                   checkMapID(0xB3)
+                   checkMapID(0xB3) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2152,8 +2165,10 @@ achievement(
     id = 548388, badge = "623506", points = 5,
     trigger = checkLevelID(0x13) && 
               levelMode("Story") &&
-              prev(checkMapID(0xB7)) &&
-                   checkMapID(0xB8)
+              __ornext(prev(checkMapID(0xB6)) ||
+               prev(checkMapID(0xB7))) &&
+                   checkMapID(0xB8) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2163,7 +2178,8 @@ achievement(
     trigger = checkLevelID(0x14) && 
               levelMode("Story") &&
               prev(checkMapID(0x96)) &&
-                   checkMapID(0x95)
+                   checkMapID(0x95) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2173,7 +2189,8 @@ achievement(
     trigger = checkLevelID(0x15) && 
               levelMode("Story") &&
               prev(checkMapID(0xA7)) &&
-                   checkMapID(0xA8)
+                   checkMapID(0xA8) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2183,7 +2200,8 @@ achievement(
     trigger = checkLevelID(0x16) && 
               levelMode("Story") &&
               prev(checkMapID(0xCB)) &&
-                   checkMapID(0xCC)
+                   checkMapID(0xCC) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2192,8 +2210,10 @@ achievement(
     id = 549946, badge = "624381", points = 5,
     trigger = checkLevelID(0x18) && 
               levelMode("Story") &&
-              prev(checkMapID(0xFD)) &&
-                   checkMapID(0xFE)
+              __ornext(prev(checkMapID(0xFC)) ||
+                       prev(checkMapID(0xFD))) &&
+                            checkMapID(0xFE) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2203,7 +2223,8 @@ achievement(
     trigger = checkLevelID(0x19) && 
               levelMode("Story") &&
               prev(checkMapID(0x106)) &&
-                   checkMapID(0x107)
+                   checkMapID(0x107) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2212,8 +2233,10 @@ achievement(
     id = 550167, badge = "624806", points = 5,
     trigger = checkLevelID(0x1A) && 
               levelMode("Story") &&
-              prev(checkMapID(0xD6)) &&
-                   checkMapID(0xD8)
+              __ornext(prev(checkMapID(0xD5)) || 
+                       prev(checkMapID(0xD6))) &&
+                            checkMapID(0xD8) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2223,7 +2246,8 @@ achievement(
     trigger = checkLevelID(0x1B) && 
               levelMode("Story") &&
               prev(checkMapID(0xEC)) &&
-                   checkMapID(0xEF)
+                   checkMapID(0xEF) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2233,7 +2257,8 @@ achievement(
     trigger = checkLevelID(0x1C) && 
               levelMode("Story") &&
               prev(checkMapID(0xF5)) &&
-                   checkMapID(0xF6)
+                   checkMapID(0xF6) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2243,7 +2268,8 @@ achievement(
     trigger = checkLevelID(0x1D) && 
               levelMode("Story") &&
               prev(checkMapID(0x114)) &&
-                   checkMapID(0x115)
+                   checkMapID(0x115) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2253,7 +2279,8 @@ achievement(
     trigger = checkLevelID(0x1F) && 
               levelMode("Story") &&
               prev(checkMapID(0x11D)) &&
-                   checkMapID(0x11E)
+                   checkMapID(0x11E) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2262,8 +2289,10 @@ achievement(
     id = 550571, badge = "625502", points = 5,
     trigger = checkLevelID(0x20) && 
               levelMode("Story") &&
-              prev(checkMapID(0x124)) &&
-                   checkMapID(0x126)
+              __ornext(prev(checkMapID(0x123)) || 
+                       prev(checkMapID(0x124))) &&
+                            checkMapID(0x126) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2273,7 +2302,8 @@ achievement(
     trigger = checkLevelID(0x22) && 
               levelMode("Story") &&
               prev(checkMapID(0x146)) &&
-                   checkMapID(0x147)
+                   checkMapID(0x147) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2283,17 +2313,21 @@ achievement(
     trigger = checkLevelID(0x23) && 
               levelMode("Story") &&
               prev(checkMapID(0x130)) &&
-                   checkMapID(0x131)
+                   checkMapID(0x131) &&
+              levelNotLeftEarly()
 )
 
 achievement(
-    title = "An Unpleasant Triumph", type = "win_condition",
+    title = "An Unpleasant Triumph", type = "progression",
     description = "Complete \"The Dark Lord Returns\" in Story mode.",
     id = 550583, badge = "625513", points = 10,
     trigger = checkLevelID(0x24) && 
               levelMode("Story") &&
-              prev(checkMapID(0x138)) &&
-                   checkMapID(0x139)
+              __ornext(prev(checkMapID(0x136)) || 
+                       prev(checkMapID(0x137)) || 
+                       prev(checkMapID(0x138))) &&
+                   checkMapID(0x139) &&
+              levelNotLeftEarly()
 )
 
 achievement(
@@ -2320,7 +2354,7 @@ achievement(
     description = "Become a Master Builder by completing all Builder Levels.",
     id = 552125, badge = "627118", points = 5,
     trigger = checkLevelID(0x26) &&
-              checkMapID(0x44) &&
+              checkMapID(0x161) &&
               measured(checkBuilderProgress() == 4) &&
               prev(checkBuilderProgress()) == 3
 )
@@ -2441,7 +2475,8 @@ achievement(
                     dword_be(0x00868f40) == prev(dword_be(0x00868f40)) &&
                     !checkMapID(0xA7)) && 
               startBossFight(0x1F3) &&
-              winBossFight(0xA8) &&
+              (winBossFight(0xA8) ||
+               checkMapID(0xA8)) &&
               never(checkCharacterExistence(0) &&
                     getCharacterIsPlayer(0) == 1 && 
                     characterTookDamage(0)) &&
@@ -2553,7 +2588,8 @@ achievement(
                     !checkMapID(0xF4) &&
                     !checkMapID(0xF5)) && 
               startBossFight(0x19A) &&
-              winBossFight(0xF5) &&
+              (winBossFight(0xF5) ||
+               winBossFightHealth()) &&
               never(checkCharacterExistence(0) &&
                     getCharacterIsPlayer(0) == 1 && 
                     characterTookDamage(0)) &&
@@ -2579,13 +2615,15 @@ achievement(
                     !checkMapID(0x136) &&
                     !checkMapID(0x137)) && 
               startBossFight(0x13A) &&
-              winBossFight(0x137) &&
+              (winBossFight(0x137) ||
+               winBossFightHealth()) &&
               never(checkCharacterExistence(0) &&
                     getCharacterIsPlayer(0) == 1 && 
                     characterTookDamage(0)) &&
               never(checkCharacterExistence(1) &&
                     getCharacterIsPlayer(1) == 1 && 
-                    characterTookDamage(1))
+                    characterTookDamage(1)) &&
+              resetOnLevelLeave()
 )
 
 achievement(
@@ -3203,7 +3241,6 @@ rich_presence_display(
         calculateCrests()
     )
 )
-
 
 
 
