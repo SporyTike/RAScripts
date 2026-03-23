@@ -775,7 +775,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(0) == 0x01))) ||
+                                              never(getPlayerCoinRecord(0) > 0 &&
+                                                    getPlayerControlType(0) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(1) == 0x00 &&
                                                 getPlayerSpaceStanding(1) == 0x1F) &&
@@ -796,7 +797,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(1) == 0x01))) ||
+                                              never(getPlayerCoinRecord(1) > 0 &&
+                                                    getPlayerControlType(1) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(2) == 0x00 &&
                                                 getPlayerSpaceStanding(2) == 0x1F) &&
@@ -817,7 +819,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(2) == 0x01))) ||
+                                              never(getPlayerCoinRecord(2) > 0 &&
+                                                    getPlayerControlType(2) == 0x01))) ||
                    (measured(tally(10, __ornext(!checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(3) == 0x00 &&
                                                 getPlayerSpaceStanding(3) == 0x1F) &&
@@ -838,7 +841,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(3) == 0x01))) ||
+                                              never(getPlayerCoinRecord(3) > 0 &&
+                                                    getPlayerControlType(3) == 0x01))) ||
                    (measured(tally(10, __ornext(checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(0) == 0x00 &&
                                                 getPlayerSpaceStanding(0) == 0x0E) &&
@@ -859,7 +863,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(0) == 0x01))) ||
+                                              never(getPlayerCoinRecord(0) > 0 &&
+                                                    getPlayerControlType(0) == 0x01))) ||
                    (measured(tally(10, __ornext(checkPartySubMode("Duel Battle") &&
                                                 getPlayerControlType(1) == 0x00 &&
                                                 getPlayerSpaceStanding(1) == 0x0E) &&
@@ -880,7 +885,8 @@ achievement(
                      	                                               getGameState(0x6F))),
                                                        once(dword_be(Mem_GameState) == 0x70 &&
                      	                                      byte(Mem_CurrentTurn) == 0x01)) &&
-                                              never(getPlayerControlType(1) == 0x01))))
+                                              never(getPlayerCoinRecord(1) > 0 &&
+                                                    getPlayerControlType(1) == 0x01))))
 )
 
 achievement(
@@ -892,7 +898,8 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x70) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
                   getCurrentPlayerSpaceStanding() >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
@@ -978,7 +985,8 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x71) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
                   getCurrentPlayerSpaceStanding() >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
@@ -1065,7 +1073,8 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x72) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
                   prior(getCurrentPlayerSpaceStanding()) >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
@@ -1156,9 +1165,10 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x73) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
-                  prior(getCurrentPlayerSpaceStanding()) >= 0x100 &&
+                  getCurrentPlayerSpaceStanding() >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
 )
 
@@ -1234,25 +1244,29 @@ achievement(
                      	                                   getGameState(0x6F))),
                                            once(dword_be(Mem_GameState) == 0x74 &&
                      	                          byte(Mem_CurrentTurn) == 0x01)) &&
-                                  never(getPlayerControlType(0) == 0x01))) ||
+                                  never(getPlayerCoinRecord(0) > 0 &&
+                                        getPlayerControlType(0) == 0x01))) ||
                    (measured(getPlayerStars(1) == 21,
                            when = tally(2, once(__ornext(getGameState(0x5B) ||
                      	                                   getGameState(0x6F))),
                                            once(dword_be(Mem_GameState) == 0x74 &&
                      	                          byte(Mem_CurrentTurn) == 0x01)) &&
-                                  never(getPlayerControlType(1) == 0x01))) ||
+                                  never(getPlayerCoinRecord(1) > 0 &&
+                                        getPlayerControlType(1) == 0x01))) ||
                    (measured(getPlayerStars(2) == 21,
                            when = tally(2, once(__ornext(getGameState(0x5B) ||
                      	                                   getGameState(0x6F))),
                                            once(dword_be(Mem_GameState) == 0x74 &&
                      	                          byte(Mem_CurrentTurn) == 0x01)) &&
-                                  never(getPlayerControlType(2) == 0x01))) ||
+                                  never(getPlayerCoinRecord(2) > 0 &&
+                                        getPlayerControlType(2) == 0x01))) ||
                    (measured(getPlayerStars(3) == 21,
                            when = tally(2, once(__ornext(getGameState(0x5B) ||
                      	                                   getGameState(0x6F))),
                                            once(dword_be(Mem_GameState) == 0x74 &&
                      	                          byte(Mem_CurrentTurn) == 0x01)) &&
-                                  never(getPlayerControlType(3) == 0x01))))
+                                  never(getPlayerCoinRecord(3) > 0 &&
+                                        getPlayerControlType(3) == 0x01))))
 )
 
 achievement(
@@ -1264,9 +1278,10 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x74) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
-                  prior(getCurrentPlayerSpaceStanding()) >= 0x100 &&
+                  getCurrentPlayerSpaceStanding() >= 0x100 &&
                   getCurrentPlayerStars() > prev(getCurrentPlayerStars())
 )
 
@@ -1340,7 +1355,7 @@ achievement(
                        getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces()) &&
                        never(getPartyPlayerChanging())) &&
                   measured(tally(7, !checkPartySubMode("Duel Battle") &&
-                                    byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
+                  byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
                            when = once(dword_be(Mem_GameState) == 0x75 &&
                                        byte(Mem_CurrentTurn) == 0x01))
 )
@@ -1354,7 +1369,8 @@ achievement(
     points      = 3,
     trigger     = getGameState(0x75) &&
                   !checkPartySubMode("Duel Battle") &&
-                  !getPartyPlayerChanging() &&
+                  never(getPartyPlayerChanging()) &&
+                  once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   getCurrentPlayerControlType() == 0x00 &&
                   prev(getCurrentPlayerSpaceStanding()) == 0x108 &&
                   prev(getCurrentPlayerSpaceStanding()) != getCurrentPlayerSpaceStanding()
@@ -1707,6 +1723,7 @@ achievement(
                   getCurrentPlayerControlType() == 0x00 &&
                   getPlayerIsDoingTurn() &&
                   !getPartyPlayerChanging() &&
+                  once(getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces())) &&
                   getCurrentPlayerCoins() > prev(getCurrentPlayerCoins()) &&
                   ((!checkPartySubMode("Duel Battle") &&
                      getCurrentPlayerSpaceStanding() == 0x31) ||
@@ -2446,7 +2463,7 @@ achievement(
     trigger     = getGameState(0x4D) &&
                   dword_be(0x0025fdf4) < prev(dword_be(0x0025fdf4)) &&
                   dword_be(0x0025fdf4) > 0 &&
-                  dword_be(0x0025fdf4) <= 14904 / 2
+                  dword_be(0x0025fdf4) <= 14984 / 2
 )
 
 achievement(
@@ -2479,19 +2496,17 @@ achievement(
     id          = 589987, 
     badge       = "668697",
     type        = "",
-    title       = "King of the Pong ",
-    description = "Win a game of \"Table Menace\" against a COM on Hard or Very Hard.",
+    title       = "Don't Forget Your Table Manners",
+    description = "Win a game of \"Table Menace\" against a COM on Vey Hard.",
     points      = 5,
     trigger     = getGameState(0x45) &&
                   ((getPlayerControlType(0) == 0x00 &&
                     getPlayerControlType(1) == 0x01 &&
-                    getPlayerDifficulty(1) >= 0x02 &&
-                    getPlayerDifficulty(1) <= 0x03 &&
+                    getPlayerDifficulty(1) == 0x03 &&
                     getPlayerMinigamePrize(0) > prev(getPlayerMinigamePrize(0))) ||
                    (getPlayerControlType(1) == 0x00 &&
                     getPlayerControlType(0) == 0x01 &&
-                    getPlayerDifficulty(0) >= 0x02 &&
-                    getPlayerDifficulty(0) <= 0x03 &&
+                    getPlayerDifficulty(0) == 0x03 &&
                     getPlayerMinigamePrize(1) > prev(getPlayerMinigamePrize(1))))
 )
 
