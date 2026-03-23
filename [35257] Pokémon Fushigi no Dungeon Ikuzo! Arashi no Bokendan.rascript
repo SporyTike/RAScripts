@@ -2169,6 +2169,7 @@ function checkTotalRecruitments() {
        + checkPokemonRecruitedFlag("Feebas")        // 349
        + checkPokemonRecruitedFlag("Milotic")       // 350
        + checkPokemonRecruitedFlag("Castform")      // 351
+       + checkPokemonRecruitedFlag("Kecleon")       // 352
        + checkPokemonRecruitedFlag("Shuppet")       // 353
        + checkPokemonRecruitedFlag("Banette")       // 354
        + checkPokemonRecruitedFlag("Duskull")       // 355
@@ -2564,8 +2565,8 @@ achievement(
     description = format("Recruit every available Pokémon at least once."),
     id = 561699, badge = "638073", points = 50,
     trigger = inGame() &&
-              measured(checkTotalRecruitments() == 225) &&
-                 prev(checkTotalRecruitments()) == 224
+              measured(checkTotalRecruitments() == 226) &&
+                 prev(checkTotalRecruitments()) == 225
 )
 
 achievement(
@@ -2581,7 +2582,7 @@ achievement(
 achievement(
     title = "My Tummy Is Ready!", type = "",
     description = format("Recruit a shiny Pokémon."),
-    id = 561689, badge = "637973", points = 5,
+    id = 561689, badge = "637973", points = 2,
     trigger = inGame() &&
               checkShinyPokemonRecruited()
 )
