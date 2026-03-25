@@ -1827,7 +1827,8 @@ function calculateStudentsInPeril() {
           brickEventFlag(0x062, 1) +                                                                                  // Student captured in Devil's Snare in Lumos Dungeon
                                                                 brickEventFlag(0x0E5, 1) + brickEventFlag(0x13F, 1) + // Student captured in Scroll in Owl Tower
                                                                 brickEventFlag(0x0E6, 1) +                            // Student captured in Feeding Stand in Owl Tower
-                                                                brickEventFlag(0x0E7, 1) + brickEventFlag(0x140, 1) + // Student daptured in Spider Web in Clock Tower
+                                                                brickEventFlag(0x0E7, 1) + brickEventFlag(0x140, 1) + // Student captured in Spider Web in Clock Tower (Present)
+                                                                brickEventFlag(0x0E8, 1) +                            // Student captured in Spider Web in Clock Tower (Past)
           brickEventFlag(0x069, 1) + brickEventFlag(0x0AC, 1) + brickEventFlag(0x0F7, 1) + brickEventFlag(0x141, 1) + // Student stuck in Banner in Main Corridor
           brickEventFlag(0x06B, 1) + brickEventFlag(0x0AD, 1) + brickEventFlag(0x0F8, 1) + brickEventFlag(0x142, 1) + // Student captured in Spider Web in Great Hall
                                      brickEventFlag(0x0AF, 1) + brickEventFlag(0x0F9, 1) + brickEventFlag(0x144, 1) + // Student stuck in Toilet in Boys' Bathroom
@@ -1885,7 +1886,7 @@ function calculateGoldBricks() {
            skillEventFlag(0x05, 7) +
            skillEventFlag(0x06, 6) +
            // Year 1 - Flag         | Year 2 - Flag            | Year 3 - Flag            | Year 4 - Flag
-           brickEventFlag(0x043, 2) +                                                                                  // Gold Brick for cöeaning Eeylops Owl Emporium
+           brickEventFlag(0x043, 2) +                                                                                  // Gold Brick for cleaning Eeylops Owl Emporium
            brickEventFlag(0x045, 2) +                                                                                  // Gold Brick behind Borgin & Burkes Counter
            brickEventFlag(0x051, 2) + brickEventFlag(0x08E, 2) + brickEventFlag(0x0CE, 2) + brickEventFlag(0x118, 2) + // Gold Brick for hitting six Candles in Main Foyer
            brickEventFlag(0x052, 2) + brickEventFlag(0x08F, 2) + brickEventFlag(0x0CF, 2) + brickEventFlag(0x119, 2) + // Gold Brick for cleaning three Monoliths near Hagrid's Hut
