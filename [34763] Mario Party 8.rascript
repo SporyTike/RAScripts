@@ -1457,7 +1457,7 @@ achievement(
     description = "As Luigi, use a unique method to travel through the mansion of \"King Boo's Haunted Hideaway\".",
     points      = 2,
     trigger     = never(!getGameState(0x72)) &&
-                  never(getCurrentPlayerCharacterID() != 0x01) &&
+                  never(getCurrentPlayerCharacterID() == 0x01) &&
                   getPlayerIsDoingTurn() &&
                   never(getPartyPlayerChanging()) &&
                   ((getPlayerControlType(0) == 0x00 &&
