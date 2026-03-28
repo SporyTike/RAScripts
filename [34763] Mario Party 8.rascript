@@ -1872,7 +1872,11 @@ achievement(
                     measured(repeated(15, getCurrentPlayerCharacterID() == 0x08 &&
                                           getCurrentPlayerSpacesWalked() > prev(getCurrentPlayerSpacesWalked()) &&
                                           never(getDiscoveredRoomsInMansion() == 0x00) &&
-                                          never(getGameState(0x5C))), when = once(getDiscoveredRoomsInMansion() == 0x01) &&
+                                          never(getGameState(0x5C))), when = __ornext(getPlayerControlType(0) * 0x100 + getPlayerCharacterID(0) == 0x08 ||
+                                                                                      getPlayerControlType(1) * 0x100 + getPlayerCharacterID(1) == 0x08 ||
+                                                                                      getPlayerControlType(2) * 0x100 + getPlayerCharacterID(2) == 0x08 ||
+                                                                                      getPlayerControlType(3) * 0x100 + getPlayerCharacterID(3) == 0x08) && 
+                                                                             once(getDiscoveredRoomsInMansion() == 0x01) &&
                                                                              never(getDiscoveredRoomsInMansion() == 0x00) &&
                                                                              never(getGameState(0x5C))) &&
                                                                              never(repeated(16, getCurrentPlayerCharacterID() == 0x08 &&
