@@ -2590,7 +2590,7 @@ achievement(
 achievement(
     title = "Reactive Color", type = "",
     description = "Recruit Kecleon in a dungeon.",
-    id = 0, badge = "638285", points = 25,
+    id = 0, badge = "679520", points = 25,
     trigger = inGame() &&
               gameState() == 0x02 &&
               checkPokemonRecruitedFlag("Kecleon") == 1 &&
