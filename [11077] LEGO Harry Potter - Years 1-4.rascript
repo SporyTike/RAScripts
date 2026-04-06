@@ -2361,7 +2361,7 @@ achievement(
 )
 
 achievement(
-    title = "Destiny of a Young Wizard", type = "",
+    title = "Destiny of a Young Wizard", type = "missable",
     description = "Complete \"Harry's Destiny\" in Borgin & Burkes.",
     id = 552294, badge = "627307", points = 5,
     trigger = checkLevelID(0x27) && 
@@ -2795,7 +2795,7 @@ achievement(
 )
 
 achievement(
-    title = "Licensed to Wear", type = "",
+    title = "Licensed to Wear", type = "missable",
     description = "Find all 167 Characters Tokens.",
     id = 552296, badge = "627308", points = 25,
     trigger = inGame() && 
@@ -2805,7 +2805,7 @@ achievement(
 )
 
 achievement(
-    title = "The Clothes Make the Figurine", type = "",
+    title = "The Clothes Make the Figurine", type = "missable",
     description = "Unlock all 170 Characters.",
     id = 552340, badge = "627340", points = 10,
     trigger = inGame() && 
@@ -2816,7 +2816,7 @@ achievement(
 
 achievement(
     title = "Convenient Owl Postal Service", type = "missable",
-    description = "Send all 24 Red Bricks to Eeylops Owl Emporium using owls.",
+    description = "Send all 20 Red Bricks to Eeylops Owl Emporium using owls.",
     id = 551849, badge = "627056", points = 25,
     trigger = __ornext(checkLevelID(0x02) || checkLevelID(0x03) || checkLevelID(0x04) || checkLevelID(0x05)) && 
               measured(4 + calculateRedBricks() == 24) &&
@@ -2853,7 +2853,7 @@ achievement(
 )
 
 achievement(
-    title = "No Brick Unturned", type = "",
+    title = "No Brick Unturned", type = "missable",
     description = "Collect all 200 Gold Bricks.",
     id = 552341, badge = "627341", points = 25,
     trigger = inGame() &&
@@ -3242,14 +3242,3 @@ rich_presence_display(
         calculateCrests()
     )
 )
-
-
-
-
-
-
-
-
-
-
-
