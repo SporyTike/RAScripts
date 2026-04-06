@@ -2008,7 +2008,7 @@ function hitTentacleCrate() {
         addressForSlotStart = (dword_be(0x868250) & 0x7FFFFFFF) + (spellIndexCalc4)
         
         code = code || (ascii_string_equals(prev((dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x1C) , "icrate_lock_t") &&
-                       bit6(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E) <
+                             bit6(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E) <
                         prev(bit6(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E)))
     }
     
@@ -2027,7 +2027,7 @@ function hitCelebrationLocker() {
         addressForSlotStart = (dword_be(0x868250) & 0x7FFFFFFF) + (spellIndexCalc4)
         
         code = code || (ascii_string_equals(prev((dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x1C) , "LOCK8") &&
-                       bit2(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E) <
+                             bit2(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E) <
                         prev(bit2(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E)))
     }
     
@@ -2698,7 +2698,7 @@ achievement(
     title = "Happy Birthday, Harry!", type = "",
     description = "Celebrate finding a special locker in Hogwarts with some balloons inside.",
     id = 553021, badge = "627996", points = 2,
-    trigger = __ornext(checkMapID(0xAF) || checkMapID(0xF9) || checkMapID(0x144)) &&
+    trigger = __ornext(checkMapID(0xA4) || checkMapID(0xAF) || checkMapID(0xB9) || checkMapID(0xBB) || checkMapID(0xF9) || checkMapID(0x144)) &&
               hitCelebrationLocker()
 )
 
