@@ -1493,37 +1493,37 @@ achievement(
                   getPlayerIsDoingTurn() &&
                   ((checkPartySubMode("Battle Royale") &&
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(0) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(0) > prev(getCurrentPlayerInvestmentOfHotel(0))) ||
                    (checkPartySubMode("Battle Royale") &&
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(1) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(1) > prev(getCurrentPlayerInvestmentOfHotel(1))) ||
                    (checkPartySubMode("Battle Royale") &&
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(2) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(2) > prev(getCurrentPlayerInvestmentOfHotel(2))) ||
                    (checkPartySubMode("Battle Royale") && 
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(3) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(3) > prev(getCurrentPlayerInvestmentOfHotel(3))) ||
                    (checkPartySubMode("Battle Royale") && 
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(4) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(4) > prev(getCurrentPlayerInvestmentOfHotel(4))) ||
                    (checkPartySubMode("Battle Royale") &&
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(5) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(5) > prev(getCurrentPlayerInvestmentOfHotel(5))) ||
                    (checkPartySubMode("Battle Royale") &&
                     getCurrentPlayerCharacterID() == 0x02 &&
-                    getPlayerControlType(0) == 0x00 &&
+                    getCurrentPlayerControlType() == 0x00 &&
                     getCurrentPlayerInvestmentOfHotel(6) == 100 &&
                     getCurrentPlayerInvestmentOfHotel(6) > prev(getCurrentPlayerInvestmentOfHotel(6))) ||
                    (checkPartySubMode("Tag Battle") &&
@@ -3097,7 +3097,7 @@ achievement(
     type        = "",
     title       = "Hot Air Ba-Moon",
     description = "Finish a game of \"Test of the Best\" with 10,000 points.",
-    points      = 25,
+    points      = 50,
     trigger     = getGameState(0x63) &&
                   __ornext(prev(getGameState(0x63))) &&
                   getTestForTheBestFinished() &&
