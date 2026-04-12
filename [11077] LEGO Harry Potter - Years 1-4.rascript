@@ -1811,8 +1811,13 @@ function calculateStudentsInPeril() {
           levelCollectibleFlag(0x22, "Student") +
           levelCollectibleFlag(0x23, "Student") +
           levelCollectibleFlag(0x24, "Student") +
+          calculateStudentsInPerilInHogwarts()
+}
+
+function calculateStudentsInPerilInHogwarts() {
+    return 0 +
           // Year 1 - Flag         | Year 2 - Flag            | Year 3 - Flag            | Year 4 - Flag
-          brickEventFlag(0x052, 1) + brickEventFlag(0x08F, 1) + brickEventFlag(0x0CF, 1) + brickEventFlag(0x119, 1) + // Student captured in Devil's Snare near Hagrid's Hut
+          brickEventFlag(0x052, 1) + brickEventFlag(0x08F, 1) + brickEventFlag(0x0CF, 1) + brickEventFlag(0x119, 1) + // Student captured in Devil's Snare near Hagrid's Hut - DOES NOT COUNT INTO PROGRESSION
           brickEventFlag(0x051, 1) + brickEventFlag(0x08E, 1) + brickEventFlag(0x0CE, 1) + brickEventFlag(0x118, 1) + // Student hanging above Bookcase in Main Foyer
           brickEventFlag(0x05C, 1) + brickEventFlag(0x098, 1) + brickEventFlag(0x0DC, 1) + brickEventFlag(0x128, 1) + // Student stuck on the Viewer Ledge at Quidditch Field
                                      brickEventFlag(0x090, 1) + brickEventFlag(0x0DA, 1) + brickEventFlag(0x129, 1) + // Student in Basket-Pumpkin-Balloon in Hagrid's Garden
@@ -1839,7 +1844,7 @@ function calculateStudentsInPeril() {
                                                                                            brickEventFlag(0x14E, 1) + // Student locked behind Bookshelf in Slytherin Dome
                                                                 brickEventFlag(0x108, 1) + brickEventFlag(0x14F, 1) + // Student afraid by Living Book in Ravenclaw Dome
                                      brickEventFlag(0x0C0, 1) + brickEventFlag(0x109, 1) + brickEventFlag(0x150, 1) + // Student locked inside Fireplace in Hufflepuff Dome
-        0
+          0
 }
 
 function calculateGoldBricks() {
@@ -2839,8 +2844,14 @@ achievement(
     description = "Save all 50 Students in Peril.",
     id = 552117, badge = "627079", points = 25,
     trigger = inGame() &&
-              measured(calculateStudentsInPeril() == 50) &&
-              prev(calculateStudentsInPeril()) == 49
+              ((measured(calculateStudentsInPeril() == 50, when = calculateStudentsInPerilInHogwarts() <= 26) &&
+                    prev(calculateStudentsInPeril()) == 49) ||
+               (measured(calculateStudentsInPeril()
+                       - calculateStudentsInPerilInHogwarts() 
+                       + 26 == 50, when = calculateStudentsInPerilInHogwarts() >= 27) &&
+                    prev(calculateStudentsInPeril())
+                       - calculateStudentsInPerilInHogwarts() 
+                       + 26 == 49))
 )
 
 achievement(
@@ -2857,9 +2868,18 @@ achievement(
     description = "Collect all 200 Gold Bricks.",
     id = 552341, badge = "627341", points = 25,
     trigger = inGame() &&
-              measured(calculateGoldBricks() == 200) &&
-              prev(calculateGoldBricks()) <= 199 &&
-              prev(calculateGoldBricks()) >= 190
+              ((measured(calculateGoldBricks() == 200, when = calculateStudentsInPerilInHogwarts() <= 26) &&
+                    prev(calculateGoldBricks()) >= 190 &&
+                    prev(calculateGoldBricks()) <= 199) ||
+               (measured(calculateGoldBricks()
+                       - calculateStudentsInPerilInHogwarts() 
+                       + 26  == 200, when = calculateStudentsInPerilInHogwarts() >= 27) &&
+                    prev(calculateGoldBricks())
+                       - calculateStudentsInPerilInHogwarts() 
+                       + 26 >= 190 &&
+                    prev(calculateGoldBricks())
+                       - calculateStudentsInPerilInHogwarts() 
+                       + 26 <= 199))
 )
 
 achievement(
