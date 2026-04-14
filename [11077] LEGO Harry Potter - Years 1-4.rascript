@@ -2032,8 +2032,8 @@ function hitCelebrationLocker() {
         addressForSlotStart = (dword_be(0x868250) & 0x7FFFFFFF) + (spellIndexCalc4)
         
         code = code || (ascii_string_equals(prev((dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x1C) , "LOCK8") &&
-                             bit2(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E) <
-                        prev(bit2(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0x4E)))
+                             byte(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0xA3) == 0x01 &&
+                        prev(byte(prev(dword_be((addressForSlotStart + 0x08) & 0x7FFFFFFF) & 0x7FFFFFFF) + 0xA3) == 0x00))
     }
     
     return code
