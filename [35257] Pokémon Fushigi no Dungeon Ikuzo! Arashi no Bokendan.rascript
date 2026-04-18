@@ -2737,7 +2737,7 @@ achievement(
 achievement(
     title = "Certified King of Slowness", type = "",
     description = format("Get promoted to Slowking's Certification Rank."),
-    id = 561298, badge = "637593", points = 25,
+    id = 561298, badge = "637593", points = 50,
     trigger = inGame() &&
               gameState() == 0x00 &&
               measured(checkAdventureRankPoints() >= 100000) &&
