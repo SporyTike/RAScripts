@@ -1524,9 +1524,9 @@ function BeatAllBonus2() {
 
 function TotalScoreAchievement(mode, score) {
     return byte(Mem_GameMode) == mode &&
+           prev(byte(Mem_GameMode)) == mode &&
            measured(LB_TotalScoreSum(mode) >= score) &&
-               prev(LB_TotalScoreSum(mode)) < score &&
-               prev(LB_TotalScoreSum(mode)) >= score - score/5
+               prev(LB_TotalScoreSum(mode)) < score
 }
 
 function RulesCommunity() {
