@@ -7,6 +7,7 @@
 mapID            = 0x00868a38
 levelID          = 0x008628d8
 levelMode        = 0x0086865c
+levelPauseState  = 0x0084fe94
 pointerMapString = 0x00857904
 pointerChar1     = 0x0085a4a8
 pointerBoss      = 0x00868BE0
@@ -1498,6 +1499,21 @@ function getCharacterIsVehicle(slot) {
                     word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) <= 0x25D))
 }
 
+function getCharacterIsGhost(slot) {
+     return __ornext(word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xCD || // Nearly Headless Nick
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xCE || // Nearly Headless Nick
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xCF || // The Bloody Baron
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xD0 || // The Fat Friar
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xD1 || // The Grey Lady
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xD4 || // Professor Binns
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xE7 || // James Potter (Ghost)
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xE9 || // Lily Potter (Ghost)
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xEE || // Moaning Myrtle
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xEF || // Moaning Myrtle
+                    word_be((getPointerChar(slot) & 0x7FFFFFFF) + 0x1362) == 0xF0)   // Moaning Myrtle (Swimsuit)
+             
+}
+
 function getCharacterFunnyEarmuffs(slot) {
     funnyEarmuffs = {
         0x0150: "Antenna Headset",
@@ -1548,8 +1564,8 @@ function winBossFightHealth() {
 }
 
 function resetOnLevelLeave() {
-    return never(dword_be(0x0084FE94) == 0 &&
-            prev(dword_be(0x0084FE94)) == 1 &&
+    return never(dword_be(levelPauseState) == 0 &&
+            prev(dword_be(levelPauseState)) == 1 &&
                  dword_be(0x00826728) == 3)
 }
 
@@ -2386,7 +2402,25 @@ achievement(
                     !checkMapID(0x6E)) && 
               startBossFight(0x1BD) &&
               winBossFightHealth() &&
-              never(repeated(3601, word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0x1BD))
+              never(repeated(3601, dword_be(levelPauseState) == 0 &&
+                                   word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0x1BD))
+)
+
+leaderboard(
+    id = 161954,
+    title       = "Her Might Nausea", 
+    description = "Total time fighting against the Troll.",
+    start  = checkLevelID(0x06) &&
+             __ornext(checkMapID(0x6D) ||
+                      checkMapID(0x6E)),
+    cancel = !checkLevelID(0x06) ||
+             (!checkMapID(0x6D) &&
+              !checkMapID(0x6E)), 
+    submit = always_false(), 
+    value  = measured(tally(0, dword_be(levelPauseState) == 0 &&
+                               word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0x1BD)),
+    format = "Frames",
+    lower_is_better = false
 )
 
 achievement(
@@ -2419,7 +2453,25 @@ achievement(
                     !checkMapID(0x9B)) && 
               startBossFight(0xEB) &&
               winBossFightHealth() &&
-              never(repeated(9001, word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0xEB))
+              never(repeated(9001, dword_be(levelPauseState) == 0 &&
+                                   word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0xEB))
+)
+
+leaderboard(
+    id = 161955,
+    title       = "Quick Quidditch Rescue", 
+    description = "Total time fighting against Dobby.",
+    start  = checkLevelID(0x10) &&
+             __ornext(checkMapID(0x9A) ||
+                      checkMapID(0x9B)),
+    cancel = !checkLevelID(0x10) ||
+             (!checkMapID(0x9A) &&
+              !checkMapID(0x9B)), 
+    submit = always_false(), 
+    value  = measured(tally(0, dword_be(levelPauseState) == 0 &&
+                               word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0xEB)),
+    format = "Frames",
+    lower_is_better = false
 )
 
 achievement(
@@ -2500,24 +2552,59 @@ achievement(
 
 achievement(
     title = "Monsters Under My Bed", type = "",
-    description = "Win the fight against the Monster Book of Monsters without touching the floor of the room for more than 1 second with controlled characters.",
-    id = 553106, badge = "628036", points = 5,
+    description = "Win the fight against the Monster Book of Monsters without touching the floor of the room for more than 1 second with controlled characters and without using ghosts.",
+    id = 553106, badge = "628036", points = 10,
     trigger = checkLevelID(0x16) &&
               never(getMapID() == prev(getMapID()) &&
                     dword_be(0x00868f40) == prev(dword_be(0x00868f40)) &&
                     !checkMapID(0xC8)) && 
               startBossFight(0x1F8) &&
               winBossFightHealth() &&
-              never(tally(61, checkCharacterExistence(0) &&
+              never(tally(61, checkMapID(0xC8) &&
+                                  dword_be(levelPauseState) == 0 &&
+                                  checkCharacterExistence(0) &&
                                   getCharacterIsPlayer(0) == 1 &&
                                   getCharacterYCoordinate(0) <= 1.398 &&
                                   getCharacterYCoordinate(0) >= 1.370 &&
                                   getCharacterAnimation(0) != 0x69,
-                              checkCharacterExistence(1) &&
+                              checkMapID(0xC8) &&
+                                  dword_be(levelPauseState) == 0 &&
+                                  checkCharacterExistence(1) &&
                                   getCharacterIsPlayer(1) == 1 &&
                                   getCharacterYCoordinate(1) <= 1.398 &&
                                   getCharacterYCoordinate(1) >= 1.370 &&
-                                  getCharacterAnimation(1) != 0x69))
+                                  getCharacterAnimation(1) != 0x69)) &&
+             never(getCharacterIsGhost(0)) &&
+             never(getCharacterIsGhost(1))
+)
+
+leaderboard(
+    id = 161953,
+    title       = "Monster Under My Bed", 
+    description = "Total time touching the ground in the fight against the Monster Book of Monsters.",
+    start  = checkLevelID(0x16) &&
+             checkMapID(0xC8),
+    cancel = !checkLevelID(0x16) ||
+             !checkMapID(0xC8), 
+    submit = always_false(), 
+    value  = measured(tally(0, (checkMapID(0xC8) &&
+                                dword_be(levelPauseState) == 0 &&
+                                checkCharacterExistence(0) &&
+                                getCharacterIsPlayer(0) == 1 &&
+                                !getCharacterIsGhost(0) &&
+                                getCharacterYCoordinate(0) <= 1.398 &&
+                                getCharacterYCoordinate(0) >= 1.370 &&
+                                getCharacterAnimation(0) != 0x69),
+                               (checkMapID(0xC8) &&
+                                dword_be(levelPauseState) == 0 &&
+                                checkCharacterExistence(1) &&
+                                getCharacterIsPlayer(1) == 1 &&
+                                !getCharacterIsGhost(1) &&
+                                getCharacterYCoordinate(1) <= 1.398 &&
+                                getCharacterYCoordinate(1) >= 1.370 &&
+                                getCharacterAnimation(1) != 0x69))),
+    format = "Frames",
+    lower_is_better = false
 )
 
 achievement(
