@@ -23,6 +23,7 @@ mem_gameMode              = 0x004557A0
 mem_gameTimer             = 0x0059E520
 mem_missionRewardPointer  = 0x0059C7E8
 mem_partyPokemonData      = dword_be(0x00455798) & pointerMask
+mem_pokemonKindsBattled   = 0x0046e9a0
 
 //----------------------------------------
 // Arrays and Dictionaries
@@ -1854,7 +1855,7 @@ function filterPokemonIDs(pokemonName) {
 }
 
 function inGame() {
-    return bit0(mem_recruitedPokemonData) != 0x00 &&
+    return dword_be(mem_pokemonKindsBattled) != 0x00 &&
            gameState() != 0xFFFFFFFF
 }
 
@@ -2737,7 +2738,7 @@ achievement(
 achievement(
     title = "Certified King of Slowness", type = "",
     description = format("Get promoted to Slowking's Certification Rank."),
-    id = 561298, badge = "637593", points = 50,
+    id = 561298, badge = "637593", points = 5,
     trigger = inGame() &&
               gameState() == 0x00 &&
               measured(checkAdventureRankPoints() >= 100000) &&
