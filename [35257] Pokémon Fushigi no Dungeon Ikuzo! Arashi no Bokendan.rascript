@@ -24,6 +24,7 @@ mem_gameTimer             = 0x0059E520
 mem_missionRewardPointer  = 0x0059C7E8
 mem_partyPokemonData      = dword_be(0x00455798) & pointerMask
 mem_pokemonKindsBattled   = 0x0046e9a0
+mem_eventFlagDPadMovement = 0x00470acc
 
 //----------------------------------------
 // Arrays and Dictionaries
@@ -1855,7 +1856,13 @@ function filterPokemonIDs(pokemonName) {
 }
 
 function inGame() {
-    return dword_be(mem_pokemonKindsBattled) != 0x00 &&
+    return byte(mem_eventFlagDPadMovement) == 0x01 &&
+           gameState() != 0xFFFFFFFF
+}
+
+function inGameRP() {
+    return __ornext(byte(mem_eventFlagDPadMovement) == 0x01 ||
+                    bit0(mem_recruitedPokemonData) != 0x00) &&
            gameState() != 0xFFFFFFFF
 }
 
@@ -2748,7 +2755,7 @@ achievement(
 //----------------------------------------
 // Rich Presence
 
-rich_presence_conditional_display(!inGame(), 
+rich_presence_conditional_display(!inGameRP(), 
     "In the Titlescreen"
 )
 
@@ -2867,6 +2874,3 @@ rich_presence_conditional_display(gameState() == 0x02 && countPartySize() > 0,
 )
 
 rich_presence_display("In the Titlescreen")
-
-
-
