@@ -779,7 +779,7 @@ leaderboard(
     title       = "Futsal", 
     description = "Most Metropolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
-             getMapID() == 0x2A &&
+             getMapID() == 0x23 &&
              inMinigame() &&
              getMinigameID() == 0x00 &&
              getMinigameResultState() == 0x04 &&
