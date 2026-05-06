@@ -6515,7 +6515,7 @@ achievement(
     trigger = romType1VideoStarted("SpongeBob SquarePants", "Bubblestand") &&
               (romType1CorrectAnswer(4, 0, 4) ||
                romType1CorrectAnswer(4, 1, 5) ||
-               romType1CorrectAnswer(4, 2, 6) ||
+               romType1CorrectAnswer(4, 2, 7) ||
                romType1CorrectAnswer(4, 3, 5))
             )
             leaderboard(
