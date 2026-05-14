@@ -777,7 +777,7 @@ leaderboard(
 leaderboard(
     id = 162211,
     title       = "Futsal", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x23 &&
              inMinigame() &&
@@ -794,7 +794,7 @@ leaderboard(
 leaderboard(
     id = 162205,
     title       = "Gunsuits Aguni", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x2A &&
              inMinigame() &&
@@ -811,7 +811,7 @@ leaderboard(
 leaderboard(
     id = 162206,
     title       = "Masked Yaiba vs. The Phantom Army!", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x2A &&
              inMinigame() &&
@@ -828,7 +828,7 @@ leaderboard(
 leaderboard(
     id = 162210,
     title       = "Curling", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x24 &&
              inMinigame() &&
@@ -845,7 +845,7 @@ leaderboard(
 leaderboard(
     id = 162207,
     title       = "Holey Moley Panic Room", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x2A &&
              inMinigame() &&
@@ -862,7 +862,7 @@ leaderboard(
 leaderboard(
     id = 162209,
     title       = "Labyrinth of Ice", 
-    description = "Most Metropolis Points obtained in one game.",
+    description = "Most Mirapolis Points obtained in one game.",
     start  = getGameState() == 0x07 &&
              getMapID() == 0x25 &&
              inMinigame() &&
