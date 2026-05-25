@@ -71,6 +71,12 @@ players = {
     0x04: "4 Players",
 }
 
+activity_courses = {
+    0x00: "Beginner",
+    0x01: "Intermediate",
+    0x02: "Expert"
+}
+
 air_sports_island_flyover_daytimes = {
     0x00: "at daytime",
     0x01: "in the evening",
@@ -95,6 +101,10 @@ function is_ingame() {
            prev(dword_be(mem_pointer006F5518)) != 0x00 &&
            get_mii_name("Player 1") != 0x00 &&
            prev(get_mii_name("Player 1") != 0x00)
+}
+
+function get_activity_difficulty() {
+    return dword_be((dword_be(mem_pointer006F5538) & pointerMask) + 0x1C)
 }
 
 function is_paused() {
@@ -135,6 +145,10 @@ function pseudo_impossible_condition() {
 
 function amount_players() {
     return dword_be((dword_be(mem_pointer006F5378) & 0x3fffffff) + 0x08)
+}
+
+function is_team_play() {
+    return dword_be((dword_be(mem_pointer006F5538) & pointerMask) + 0x20) == 0x00
 }
 
 function sport_activity_modifier_active(player, button) {
@@ -203,6 +217,8 @@ function get_sport_activity_level(sport, mode, player) {
     return any_of(sport_activity_objects, sport_activity_offset => byte(get_mii_savedata_path(player) + sport_activity_offset)
                                                                  + low4(get_mii_savedata_path(player) + sport_activity_offset + 0x02) * 0x100)
 }
+
+// Swordplay / Speed Slice
 
 function swordplay_speed_slice_activity_state() {
     return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x174) & 0x3fffffff) + 0x174)
@@ -291,12 +307,186 @@ function swordplay_speed_slice_object_ID_of_current_round() {
     return dword_be((dword_be((dword_be((dword_be(mem_pointer006F6690) & 0x3fffffff) + 0x180) & 0x3fffffff) + 0x14) & 0x3fffffff) + 0xB0)
 }
 
+// Archery
+
+function archery_activity_state() {
+    return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x12C)
+}
+
+function archery_get_current_player() {
+    return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1B4)
+}
+
+function archery_get_current_stage() {
+    return byte((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1A8)
+}
+
+function archery_get_total_target_hits_of_player(player) {
+    offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }
+    return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x200 + offset)
+}
+
+function archery_get_total_arrows_shot_by_current_player_in_stage() {
+    return byte((dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x174) & 0x3fffffff) + 0xD0) & 0x3fffffff) + 0x118)
+}
+
+function archery_get_current_arrow_shot_of_player(player) {
+    offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }
+    return dword_be((dword_be((dword_be((dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x154) & 0x3fffffff) + 0x48) & 0x3fffffff) + offset) & 0x3fffffff) + 0x5E0) & 0x3fffffff) + 0x40)
+}
+
+function archery_get_player_stage_score(player, stage, shot) {
+    offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }
+    return dword_be((dword_be((dword_be((dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x174) & 0x3fffffff) + 0xF4) & 0x3fffffff) + offset) & 0x3fffffff) + (stage - 1) * 4) & 0x3fffffff) + (shot - 1))
+}
+
+function archery_get_player_total_score(player) {
+    offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }
+    return dword_be((dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x174) & 0x3fffffff) + 0xF8) & 0x3fffffff) + offset)
+}
+
+function archery_get_10_point_zone_combo() {
+    return byte((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1E8)
+}
+
+function archery_get_points_of_last_arrow_shot() {
+    return byte((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1BC)
+}
+
+function archery_get_secret_target_flag_of_player(player, bitflag) {
+    offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }
+    address = (dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1F0 + offset + 0x03
+    return bit(bitflag % 8, address - (bitflag / 8))
+}
+
+function archery_get_secret_targets_of_player(player) {
+    savefile_secret_targets = get_mii_savedata_path(player) + 0x7E4
+    return tally(12,
+                 once(archery_get_secret_target_flag_of_player(player, 0x00) + bit0(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x01) + bit1(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x02) + bit2(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x03) + bit3(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x04) + bit4(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x05) + bit5(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x06) + bit6(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x07) + bit7(savefile_secret_targets + 0x03) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x08) + bit0(savefile_secret_targets + 0x02) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x09) + bit1(savefile_secret_targets + 0x02) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x0A) + bit2(savefile_secret_targets + 0x02) >= 1),
+                 once(archery_get_secret_target_flag_of_player(player, 0x0B) + bit3(savefile_secret_targets + 0x02) >= 1)
+    )
+}
+
+function archery_get_secret_targets_of_player_save(player) {
+    return bit0(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit1(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit2(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit3(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit4(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit5(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit6(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit7(get_mii_savedata_path(player) + 0x7E4 + 0x03)
+         + bit0(get_mii_savedata_path(player) + 0x7E4 + 0x02)
+         + bit1(get_mii_savedata_path(player) + 0x7E4 + 0x02)
+         + bit2(get_mii_savedata_path(player) + 0x7E4 + 0x02)
+         + bit3(get_mii_savedata_path(player) + 0x7E4 + 0x02)
+}
+
+function archery_flags_of_secret_targets_of_player_playthrough_reset(player) {
+  offset = 0x00
+    if(player == "Player 1") {
+        offset = 0x00
+    } else 
+    if(player == "Player 2") {
+        offset = 0x04
+    } else 
+    if(player == "Player 3") {
+        offset = 0x08
+    } else 
+    if(player == "Player 4") {
+        offset = 0x0C 
+    }  
+    return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1F0 + offset) < prev(dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1F0 + offset))
+}
+
+function archery_special_activity_state() {
+    return dword_be((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x140) & 0x3fffffff) + 0x1D8)
+}
+
+function archery_current_arrow_hit_secret_target() {
+    return archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage()) &&
+           archery_get_10_point_zone_combo() == prev(archery_get_10_point_zone_combo) &&
+           archery_get_points_of_last_arrow_shot() == 10
+}
+
+// Air Sports / Island Flyover
+
 function air_sports_island_flyover_activity_state() {
     return byte((dword_be((dword_be(mem_pointer006F5518) & 0x3fffffff) + 0x144) & 0x3fffffff) + 0x08)
 }
 
 function air_sports_island_flyover_daytime() {
-    return dword_be((dword_be(mem_pointer006F5538) & pointerMask) + 0x1C)
+    return get_activity_difficulty()
 }
 
 function air_sports_island_flyover_time_left() {
@@ -382,6 +572,8 @@ function air_sports_island_flyover_total_barrel_rolls() {
 //--------------------------------------------------
 // Achievements
 
+// Swordplay / Speed Slice
+
 achievement(
     title = "Sharp Minded", type = "progression",
     description = "[Swordplay / Speed Slice] Reach Pro Class by getting a level of 1,000 or higher.",
@@ -391,8 +583,7 @@ achievement(
                               check_sport_activity("Swordplay", "Speed Slice"),
                        format = "raw") &&
               prev(get_sport_activity_level("Swordplay", "Speed Slice", "Player 1")) >= 750 &&
-              prev(get_sport_activity_level("Swordplay", "Speed Slice", "Player 1")) < 1000 &&
-              get_opponent_mii_name("Matt")
+              prev(get_sport_activity_level("Swordplay", "Speed Slice", "Player 1")) < 1000
 )
 
 achievement(
@@ -558,6 +749,777 @@ achievement(
                          swordplay_speed_slice_activity_state() <= 0x0F && 
                          is_paused())) 
 )
+
+// Archery
+
+achievement(
+    title = "Princess Miirida", type = "progression",
+    description = "[Archery] Reach Pro Class by getting a level of 1,000 or higher.",
+    id = 611780, badge = "80", points = 10,
+    trigger = (measured(get_sport_activity_level("Archery", "", "Player 1") >= 1000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 1,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 1")) >= 500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 1")) < 1000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 2") >= 1000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 2,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 2")) >= 500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 2")) < 1000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 3") >= 1000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 3,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 3")) >= 500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 3")) < 1000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 4") >= 1000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 4,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 4")) >= 500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 4")) < 1000)
+)
+
+achievement(
+    title = "Bow Down Before Me", type = "progression",
+    description = "[Archery] Reach Superstar Class by getting a level of 2,000 or higher.",
+    id = 611781, badge = "80", points = 25,
+    trigger = (measured(get_sport_activity_level("Archery", "", "Player 1") >= 2000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 1,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 1")) >= 1500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 1")) < 2000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 2") >= 2000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 2,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 2")) >= 1500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 2")) < 2000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 3") >= 2000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 3,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 3")) >= 1500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 3")) < 2000) ||
+              (measured(get_sport_activity_level("Archery", "", "Player 4") >= 2000,
+                        when = is_ingame() &&
+                               check_sport_activity("Archery", "") &&
+                               amount_players() >= 4,
+                        format = "raw") &&
+               prev(get_sport_activity_level("Archery", "", "Player 4")) >= 1500 &&
+               prev(get_sport_activity_level("Archery", "", "Player 4")) < 2000)
+)
+
+achievement(
+    title = "Hitting It Just Right", type = "",
+    description = "[Archery] Hit all three arrow shots of a stage in the 10-point zone on the target without using Team Play.",
+    id = 610382, badge = "80", points = 3,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              trigger_when(archery_get_10_point_zone_combo() == 3) &&
+              trigger_when(prev(archery_get_10_point_zone_combo()) == 2) &&
+              once(archery_activity_state() >= 0x01 &&
+                   archery_activity_state() <= 0x02 &&
+                   archery_get_total_arrows_shot_by_current_player_in_stage() == 0) &&
+              never(archery_get_total_arrows_shot_by_current_player_in_stage() != archery_get_10_point_zone_combo()) &&
+              never(is_team_play())
+)
+
+achievement(
+    title = "Never Losing Your Target", type = "",
+    description = "[Archery] Hit every arrow shot of a game on the target or a secret target without using Team Play.",
+    id = 610413, badge = "80", points = 10,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(is_team_play()) &&
+              trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 0x03) &&
+              trigger_when(prev(archery_get_total_arrows_shot_by_current_player_in_stage()) == 0x02) &&
+              trigger_when(archery_get_current_stage() == 0x03) && 
+              ((archery_get_current_player() == 0x00 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_points_of_last_arrow_shot() == 0 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x01 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_points_of_last_arrow_shot() == 0 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x02 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_points_of_last_arrow_shot() == 0 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x03 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_points_of_last_arrow_shot() == 0 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))))
+)
+
+achievement(
+    title = "Shot of the Century", type = "",
+    description = "[Archery] Hit the target a total of 100 times.",
+    id = 610415, badge = "80", points = 5,
+    trigger = amount_players() <= 4 &&
+              ((measured(archery_get_total_target_hits_of_player("Player 1") == 100,
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 1,
+                         format = "raw") &&
+                prev(archery_get_total_target_hits_of_player("Player 1")) == 99) ||
+               (measured(archery_get_total_target_hits_of_player("Player 2") == 100,
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 2,
+                         format = "raw") &&
+                prev(archery_get_total_target_hits_of_player("Player 2")) == 99) ||
+               (measured(archery_get_total_target_hits_of_player("Player 3") == 100,
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 3,
+                         format = "raw") &&
+                prev(archery_get_total_target_hits_of_player("Player 3")) == 99) ||
+               (measured(archery_get_total_target_hits_of_player("Player 4") == 100,
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() == 4,
+                         format = "raw") &&
+                prev(archery_get_total_target_hits_of_player("Player 4")) == 99))
+)
+
+achievement(
+    title = "Fruity Shish Kebab", type = "",
+    description = "[Archery] Hit the secret target on every stage across all three courses throughout multiple contests.",
+    id = 610713, badge = "80", points = 10,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              amount_players() <= 4 &&
+              never(amount_players() >= 1 &&
+                    archery_flags_of_secret_targets_of_player_playthrough_reset("Player 1")) &&
+              never(amount_players() >= 2 &&
+                    archery_flags_of_secret_targets_of_player_playthrough_reset("Player 2")) &&
+              never(amount_players() >= 3 &&
+                    archery_flags_of_secret_targets_of_player_playthrough_reset("Player 3")) &&
+              never(amount_players() >= 4 &&
+                    archery_flags_of_secret_targets_of_player_playthrough_reset("Player 4")) &&
+              ((measured(archery_get_secret_targets_of_player("Player 1"),
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 1,
+                         format = "raw") &&
+                archery_get_secret_targets_of_player_save("Player 1") >= 8 &&
+                archery_get_secret_targets_of_player_save("Player 1") <= 11) ||
+               (measured(archery_get_secret_targets_of_player("Player 2"),
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 2,
+                         format = "raw") &&
+                archery_get_secret_targets_of_player_save("Player 2") >= 8 &&
+                archery_get_secret_targets_of_player_save("Player 2") <= 11) ||
+               (measured(archery_get_secret_targets_of_player("Player 3"),
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() >= 3,
+                         format = "raw") &&
+                archery_get_secret_targets_of_player_save("Player 3") >= 8 &&
+                archery_get_secret_targets_of_player_save("Player 3") <= 11) ||
+               (measured(archery_get_secret_targets_of_player("Player 4"),
+                         when = is_ingame() &&
+                                check_sport_activity("Archery", "") &&
+                                amount_players() == 4,
+                         format = "raw") &&
+                archery_get_secret_targets_of_player_save("Player 4") >= 8 &&
+                archery_get_secret_targets_of_player_save("Player 4") <= 11))
+)
+
+achievement(
+    title = "That's What They Call Mid Gameplay", type = "",
+    description = "[Archery] Hit every arrow shot of a game in the 10-point zone of the target or a secret target without using Team Play.",
+    id = 0, badge = "80", points = 25,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(is_team_play()) &&
+              trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 0x03) &&
+              trigger_when(prev(archery_get_total_arrows_shot_by_current_player_in_stage()) == 0x02) &&
+              trigger_when(archery_get_current_stage() == 0x03) && 
+              ((archery_get_current_player() == 0x00 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_points_of_last_arrow_shot() < 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x01 &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_points_of_last_arrow_shot() < 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x02 &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_points_of_last_arrow_shot() < 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x03 &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_points_of_last_arrow_shot() < 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))))
+)
+
+achievement(
+    title = "Triplets of William Tell", type = "",
+    description = "[Archery] Hit the secret target in a stage with all three arrows without using Team Play.",
+    id = 610774, badge = "80", points = 5,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(is_team_play()) &&
+              trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+              ((archery_get_current_player() == 0x00 &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_10_point_zone_combo() > 0) &&
+                     never(archery_get_points_of_last_arrow_shot() != 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x01 &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_10_point_zone_combo() > 0) &&
+                     never(archery_get_points_of_last_arrow_shot() != 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x02 &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_10_point_zone_combo() > 0) &&
+                     never(archery_get_points_of_last_arrow_shot() != 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))) ||
+               (archery_get_current_player() == 0x03 &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_10_point_zone_combo() > 0) &&
+                     never(archery_get_points_of_last_arrow_shot() != 10 &&
+                           archery_get_total_arrows_shot_by_current_player_in_stage() > prev(archery_get_total_arrows_shot_by_current_player_in_stage())))))
+)
+
+achievement(
+    title = "Slicing the Fruits", type = "",
+    description = "[Archery] Hit the secret target in every stage of the Beginner course in one run without using Team Play.",
+    id = 610800, badge = "80", points = 10,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(get_activity_difficulty() != 0x00) &&
+              never(is_team_play()) &&
+              archery_activity_state() <= 0x0A &&
+              ((archery_get_current_player() == 0x00 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 1", 0x00)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x01)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x02)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x03) == 4) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x01 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 2", 0x00)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x01)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x02)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x03) == 4) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x02 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 3", 0x00)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x01)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x02)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x03) == 4) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x03 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 4", 0x00)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x01)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x02)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x03) == 4) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x02) == 0))))
+)
+
+achievement(
+    title = "Right on the Apricot", type = "",
+    description = "[Archery] Hit the secret target in every stage of the Intermediate course in one run without using Team Play.",
+    id = 610801, badge = "80", points = 10,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(get_activity_difficulty() != 0x01) &&
+              never(is_team_play()) &&
+              archery_activity_state() <= 0x0A &&
+              ((archery_get_current_player() == 0x00 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 1", 0x04)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x05)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x06)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x07) == 4) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x01 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 2", 0x04)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x05)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x06)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x07) == 4) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x02 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 3", 0x04)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x05)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x06)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x07) == 4) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x03 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 4", 0x04)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x05)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x06)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x07) == 4) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x02) == 0))))
+)
+
+achievement(
+    title = "Time for Some Vitamins", type = "",
+    description = "[Archery] Hit the secret target in every stage of the Expert course in one run without using Team Play.",
+    id = 610802, badge = "80", points = 10,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              never(get_activity_difficulty() != 0x02) &&
+              never(is_team_play()) &&
+              archery_activity_state() <= 0x0A &&
+              ((archery_get_current_player() == 0x00 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 1", 0x08)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x09)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x0A)
+                           + archery_get_secret_target_flag_of_player("Player 1", 0x0B) == 4) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x00 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x00 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 1", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x01 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 2", 0x08)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x09)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x0A)
+                           + archery_get_secret_target_flag_of_player("Player 2", 0x0B) == 4) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x01 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x01 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 2", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x02 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 3", 0x08)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x09)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x0A)
+                           + archery_get_secret_target_flag_of_player("Player 3", 0x0B) == 4) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x02 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x02 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 3", 0x02) == 0))) ||
+               (archery_get_current_player() == 0x03 &&
+                trigger_when(archery_get_current_stage() == 0x03) &&
+                trigger_when(archery_get_total_arrows_shot_by_current_player_in_stage() == 3) &&
+                trigger_when(archery_get_secret_target_flag_of_player("Player 4", 0x08)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x09)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x0A)
+                           + archery_get_secret_target_flag_of_player("Player 4", 0x0B) == 4) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x01 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x00) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x02 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x01) == 0)) &&
+                once(archery_get_current_player() == 0x03 &&
+                     archery_get_current_stage() == 0x00 &&
+                     archery_activity_state() >= 0x01 &&
+                     archery_activity_state() <= 0x02 &&
+                     archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                     never(archery_get_current_player() == 0x03 &&
+                           archery_get_current_stage() == 0x03 &&
+                           archery_get_secret_target_flag_of_player("Player 4", 0x02) == 0))))
+)
+
+achievement(
+    title = "No Aim, No Gain", type = "",
+    description = "[Archery] Finish any course with 100 points or more without using Team Play and in the Expert Mode, that gets activated when any player holds (2) on the Wiimote while the course gets selected.",
+    id = 611779, badge = "80", points = 25,
+    trigger = never(!is_ingame()) &&
+              never(!check_sport_activity("Archery", "")) &&
+              amount_players() <= 4 &&
+              never(is_team_play()) &&
+              never(archery_get_current_stage() == 0x00 &&
+                    archery_activity_state() == 0x00) &&
+              tally(1, (archery_get_current_stage() == 0x00 &&
+                        archery_activity_state() >= 0x01 &&
+                        archery_activity_state() <= 0x02 &&
+                        archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                        amount_players() >= 1 &&
+                        amount_players() <= 4 &&
+                        sport_activity_modifier_active("Player 1", "2")),
+                       (archery_get_current_stage() == 0x00 &&
+                        archery_activity_state() >= 0x01 &&
+                        archery_activity_state() <= 0x02 &&
+                        archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                        amount_players() >= 2 &&
+                        amount_players() <= 4 &&
+                        sport_activity_modifier_active("Player 2", "2")),
+                       (archery_get_current_stage() == 0x00 &&
+                        archery_activity_state() >= 0x01 &&
+                        archery_activity_state() <= 0x02 &&
+                        archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                        amount_players() >= 3 &&
+                        amount_players() <= 4 &&
+                        sport_activity_modifier_active("Player 3", "2")),
+                       (archery_get_current_stage() == 0x00 &&
+                        archery_activity_state() >= 0x01 &&
+                        archery_activity_state() <= 0x02 &&
+                        archery_get_total_arrows_shot_by_current_player_in_stage() == 0 &&
+                        amount_players() == 4 &&
+                        sport_activity_modifier_active("Player 4", "2"))) &&
+              trigger_when(archery_activity_state() == 0x0B) &&
+              trigger_when(prev(archery_activity_state() < 0x0B)) &&
+              ((amount_players() >= 1 &&
+                trigger_when(archery_get_player_total_score("Player 1") >= 100) &&
+                trigger_when(archery_get_player_total_score("Player 1") <= 120)) ||
+               (amount_players() >= 2 &&
+                trigger_when(archery_get_player_total_score("Player 2") >= 100) &&
+                trigger_when(archery_get_player_total_score("Player 2") <= 120)) ||
+               (amount_players() >= 3 &&
+                trigger_when(archery_get_player_total_score("Player 3") >= 100) &&
+                trigger_when(archery_get_player_total_score("Player 3") <= 120)) ||
+               (amount_players() >= 4 &&
+                trigger_when(archery_get_player_total_score("Player 4") >= 100) &&
+                trigger_when(archery_get_player_total_score("Player 4") <= 120)))
+)
+
+achievement(
+    title = "Be Careful, Partner", type = "",
+    description = "[Archery] Get a tip that you stay calm and relax yourself when aiming with a bow.",
+    id = 611782, badge = "80", points = 1,
+    trigger = is_ingame() &&
+              check_sport_activity("Archery", "") &&
+              __ornext(archery_activity_state() == 0x02 ||
+                       archery_activity_state() == 0x04) &&
+              archery_special_activity_state() == 0x05 &&
+              archery_special_activity_state() != prev(archery_special_activity_state())
+)
+
+// Air Sports / Island Flyover
 
 achievement(
     title = "Everybody's Golf Resort", type = "",
@@ -792,6 +1754,426 @@ achievement(
 // Leaderboards
 
 leaderboard(
+    id = 163558,
+    title       = "Archery", 
+    description = "Most points got in the Beginner Course in 1-Player Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x00 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163559,
+    title       = "Archery", 
+    description = "Most points got in the Beginner Course in 1-Player Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x00 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163560,
+    title       = "Archery", 
+    description = "Most points got in the Beginner Course in Team Play Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x00 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163561,
+    title       = "Archery", 
+    description = "Most points got in the Beginner Course in Team Play Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x00 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163562,
+    title       = "Archery", 
+    description = "Most points got in the Intermediate Course in 1-Player Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x01 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163563,
+    title       = "Archery", 
+    description = "Most points got in the Intermediate Course in 1-Player Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x01 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163564,
+    title       = "Archery", 
+    description = "Most points got in the Intermediate Course in Team Play Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x01 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163565,
+    title       = "Archery", 
+    description = "Most points got in the Intermediate Course in Team Play Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x01 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163566,
+    title       = "Archery", 
+    description = "Most points got in the Expert Course in 1-Player Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x02 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163567,
+    title       = "Archery", 
+    description = "Most points got in the Expert Course in 1-Player Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             !is_team_play() &&
+             get_activity_difficulty() == 0x02 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163568,
+    title       = "Archery", 
+    description = "Most points got in the Expert Course in Team Play Mode without using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x02 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             (!sport_activity_modifier_active("Player 1", "2")) &&
+             (__ornext(amount_players() < 2 ||
+                       !sport_activity_modifier_active("Player 2", "2"))) &&
+             (__ornext(amount_players() < 3 ||
+                       !sport_activity_modifier_active("Player 3", "2"))) &&
+             (__ornext(amount_players() < 4 ||
+                       !sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 163569,
+    title       = "Archery", 
+    description = "Most points got in the Expert Course in Team Play Mode while using Expert Mode.",
+    start  = is_ingame() &&
+             check_sport_activity("Archery", "") &&
+             is_team_play() &&
+             get_activity_difficulty() == 0x02 &&
+             archery_activity_state() == 0x0B &&
+             prev(archery_activity_state()) < 0x0B &&
+             ((sport_activity_modifier_active("Player 1", "2")) ||
+              (amount_players() >= 2 &&
+               sport_activity_modifier_active("Player 2", "2")) ||
+              (amount_players() >= 3 &&
+               sport_activity_modifier_active("Player 3", "2")) ||
+              (amount_players() >= 4 &&
+               sport_activity_modifier_active("Player 4", "2"))),
+    cancel = always_false(), 
+    submit = always_true(), 
+    value  = max_of(measured(archery_get_player_total_score("Player 1"),
+                             when = amount_players() >= 1 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 2"),
+                             when = amount_players() >= 2 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 3"),
+                             when = amount_players() >= 3 &&
+                                    amount_players() <= 4),
+                    measured(archery_get_player_total_score("Player 4"),
+                             when = amount_players() >= 4 &&
+                                    amount_players() <= 4)),
+    format = "Value",
+    lower_is_better = false
+)
+
+leaderboard(
     id = 162628,
     title       = "Air Sports / Island Flyover", 
     description = "Most (i) points collected in a single flight.",
@@ -838,6 +2220,100 @@ rich_presence_conditional_display(
 )
 
 rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && !is_team_play() && amount_players() == 1, 
+    "A Mii is shooting arrows at Stage {0} of the {1} Course [🔵{2}] [Archery] [1-Player]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1"))
+)
+
+rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && !is_team_play() && amount_players() == 2, 
+    "Two Miis are shooting arrows at Stage {0} of the {1} Course [🔵{2}] [🔴{3}] [Archery] [1-Player]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 2"))
+)
+
+rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && !is_team_play() && amount_players() == 3, 
+    "Three Miis are shooting arrows at Stage {0} of the {1} Course [🔵{2}] [🔴{3}] [🟢{4}] [Archery] [1-Player]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 2")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 3"))
+)
+
+rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && !is_team_play() && amount_players() == 4, 
+    "Four Miis are shooting arrows at Stage {0} of the {1} Course [🔵{2}] [🔴{3}] [🟢{4}] [🟡{5}] [Archery] [1-Player]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 2")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 3")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 4"))
+)
+
+rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && is_team_play() && amount_players() == 3, 
+    "Three Miis are shooting arrows at Stage {0} of the {1} Course [🔵{2}] [🔴{3}] [Archery] [Team Play]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 2"))
+)
+
+rich_presence_conditional_display(
+    is_ingame() && check_sport_activity("Archery", "") && is_team_play() && amount_players() == 4, 
+    "Four Miis are shooting arrows at Stage {0} of the {1} Course [🔵{2}] [🔴{3}] [Archery] [Team Play]",
+        rich_presence_macro("Number",
+                        archery_get_current_stage() + 1),
+        rich_presence_lookup("ActivityCourse",
+                        get_activity_difficulty(),
+                        activity_courses,
+                        fallback = activity_courses[0]),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 1")),
+        rich_presence_macro("Number",
+                        archery_get_player_total_score("Player 2"))
+)
+
+rich_presence_conditional_display(
     is_ingame() && check_sport_activity("Air Sports", "Island Flyover"), 
     "A Mii is flying over Wuhu Island in a plane {0} [ℹ️{1}] [🎈{2}] [⏱️{3}] [Air Sports / Island Flyover]",
         rich_presence_lookup("FlightDaytime",
@@ -855,3 +2331,5 @@ rich_presence_conditional_display(
 rich_presence_display(
     "In the Main Menu"
 )
+
+
