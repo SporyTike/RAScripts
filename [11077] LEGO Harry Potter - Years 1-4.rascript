@@ -2486,11 +2486,13 @@ achievement(
               never(checkCharacterExistence(1) &&
                     getCharacterIsPlayer(1) == 1 && 
                     characterTookDamage(1)) &&
-              ((once(getCharacterMaxHealth(1) == getCharacterHealth(1) &&
+              ((once(checkCharacterExistence(1) &&
+                     getCharacterMaxHealth(1) == getCharacterHealth(1) &&
                      never(getCharacterIsPlayer(1) == 1)) &&
                      trigger_when(prev(getCharacterHealth(1)) == 1 &&
                                   getCharacterHealth(1) == 0)) ||
-               (once(getCharacterMaxHealth(2) == getCharacterHealth(2) &&
+               (once(checkCharacterExistence(2) &&
+                     getCharacterMaxHealth(2) == getCharacterHealth(2) &&
                      never(getCharacterIsPlayer(2) == 1)) &&
                      trigger_when(prev(getCharacterHealth(2)) == 1 &&
                                   getCharacterHealth(2) == 0)))
