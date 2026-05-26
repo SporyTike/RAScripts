@@ -1509,7 +1509,7 @@ achievement(
 
 achievement(
     title = "Be Careful, Partner", type = "",
-    description = "[Archery] Get a tip that you stay calm and relax yourself when aiming with a bow.",
+    description = "[Archery] Get a tip that you should stay calm and relax yourself when aiming with a bow.",
     id = 611782, badge = "80", points = 1,
     trigger = is_ingame() &&
               check_sport_activity("Archery", "") &&
@@ -1847,12 +1847,6 @@ leaderboard(
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
                              when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
                                     amount_players() <= 4)),
     format = "Value",
     lower_is_better = false
@@ -1882,12 +1876,6 @@ leaderboard(
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
                              when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
                                     amount_players() <= 4)),
     format = "Value",
     lower_is_better = false
@@ -1987,12 +1975,6 @@ leaderboard(
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
                              when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
                                     amount_players() <= 4)),
     format = "Value",
     lower_is_better = false
@@ -2022,12 +2004,6 @@ leaderboard(
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
                              when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
                                     amount_players() <= 4)),
     format = "Value",
     lower_is_better = false
@@ -2127,12 +2103,6 @@ leaderboard(
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
                              when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
                                     amount_players() <= 4)),
     format = "Value",
     lower_is_better = false
@@ -2161,14 +2131,7 @@ leaderboard(
                              when = amount_players() >= 1 &&
                                     amount_players() <= 4),
                     measured(archery_get_player_total_score("Player 2"),
-                             when = amount_players() >= 2 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 3"),
-                             when = amount_players() >= 3 &&
-                                    amount_players() <= 4),
-                    measured(archery_get_player_total_score("Player 4"),
-                             when = amount_players() >= 4 &&
-                                    amount_players() <= 4)),
+                             when = amount_players() >= 2)),
     format = "Value",
     lower_is_better = false
 )
