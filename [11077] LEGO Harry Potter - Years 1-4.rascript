@@ -2036,7 +2036,7 @@ function hitTentacleCrate() {
     return code
 }
 
-function hitCelebrationLocker() {
+function hitCelebrationLocker() { // Actual Code checking the Object State
     code = always_false() 
     
     for i in range (1, 6) {
@@ -2052,6 +2052,13 @@ function hitCelebrationLocker() {
     }
     
     return code
+}
+
+function hitCelebrationLockerBackup() { // Backup Code checking the Savefile Progress in case player blindfires and hits it offscreen
+    address = byte((dword_be((dword_be((dword_be((dword_be((dword_be((dword_be(0x00868F34) & 0x7FFFFFFF) + 0x23C) & 0x7FFFFFFF) + 0x10) & 0x7FFFFFFF) + 0x0C) & 0x7FFFFFFF) + 0x00) & 0x7FFFFFFF) + 0x04) & 0x7FFFFFFF) + 0x2E)
+    return dword_be(0x00868F34) == prev(dword_be(0x00868F34)) &&
+           address == 0x02 &&
+           prev(address) < 0x02
 }
 
 function hitWhompingWillowNotWithNeville() {
@@ -2791,8 +2798,10 @@ achievement(
     title = "Happy Birthday, Harry!", type = "",
     description = "Celebrate finding a special locker in Hogwarts with some balloons inside.",
     id = 553021, badge = "627996", points = 2,
-    trigger = __ornext(checkMapID(0xA4) || checkMapID(0xAF) || checkMapID(0xB9) || checkMapID(0xBB) || checkMapID(0xF9) || checkMapID(0x144)) &&
-              hitCelebrationLocker()
+    trigger = (__ornext(checkMapID(0xA4) || checkMapID(0xAF) || checkMapID(0xB9) || checkMapID(0xBB) || checkMapID(0xF9) || checkMapID(0x144)) &&
+                 hitCelebrationLocker()) ||
+              (__ornext(prev(checkMapID(0xA4)) || prev(checkMapID(0xAF)) || prev(checkMapID(0xB9)) || prev(checkMapID(0xBB)) || prev(checkMapID(0xF9)) || prev(checkMapID(0x144))) &&
+                 hitCelebrationLockerBackup())
 )
 
 achievement(
