@@ -2092,28 +2092,12 @@ achievement(
     id          = 594439, 
     badge       = "675133",
     type        = "",
-    title       = "Quick! Call the Nintendo Police!",
-    description = "Win a round of \"Shake It Up\" between Peach, Daisy, Toadette, and Birdo against 3 COMs on Very Hard.",
+    title       = "Shake It Like a Swiftie",
+    description = "Win a round of \"Shake It Up\" against 3 COMs on Very Hard.",
     points      = 3,
     trigger     = getGameState(0x28) &&
                   __ornext(prev(getGameState(0x28))) &&
                   getTotalPlayersInMinigame() == 4 &&
-                  __ornext(getPlayerCharacterID(0) == 0x02 ||
-                           getPlayerCharacterID(1) == 0x02 ||
-                           getPlayerCharacterID(2) == 0x02 ||
-                           getPlayerCharacterID(3) == 0x02) &&
-                  __ornext(getPlayerCharacterID(0) == 0x05 ||
-                           getPlayerCharacterID(1) == 0x05 ||
-                           getPlayerCharacterID(2) == 0x05 ||
-                           getPlayerCharacterID(3) == 0x05) &&
-                  __ornext(getPlayerCharacterID(0) == 0x09 ||
-                           getPlayerCharacterID(1) == 0x09 ||
-                           getPlayerCharacterID(2) == 0x09 ||
-                           getPlayerCharacterID(3) == 0x09) &&
-                  __ornext(getPlayerCharacterID(0) == 0x0A ||
-                           getPlayerCharacterID(1) == 0x0A ||
-                           getPlayerCharacterID(2) == 0x0A ||
-                           getPlayerCharacterID(3) == 0x0A) &&
                   ((getPlayerControlType(0) == 0x00 &&
                     getPlayerControlType(1) == 0x01 &&
                     getPlayerDifficulty(1) == 0x03 &&
