@@ -1997,6 +1997,7 @@ function sleepyNevilleGotFrozen() {
     
         for j in range (0x00, 0x07) {
             addressForSlotStart = (dword_be(0x868250) & 0x7FFFFFFF) + (spellIndexCalc4)
+            rememberedAddress   = remembered(word_be((dword_be(addressForSlotStart + 0x04) & 0x7FFFFFFF) + 0x1362))
             
             code = code || // Check for Neville being frozen
                            (checkCharacterExistence(j) &&
@@ -2007,13 +2008,12 @@ function sleepyNevilleGotFrozen() {
                             // Check for spell "freeze" and spell disappears
                             dword_be((dword_be(addressForSlotStart) & 0x7FFFFFFF) + 0) == 0x66726565 &&
                              word_be((dword_be(addressForSlotStart) & 0x7FFFFFFF) + 4) == 0x7A65 &&
-                            bit7(addressForSlotStart + 0x118) < prev(bit7(addressForSlotStart + 0x118)) // &&
+                            bit7(addressForSlotStart + 0x118) < prev(bit7(addressForSlotStart + 0x118)) &&
                             // Check for Hermione shot Spell
-                            // any_of(hermioneIDs, hermioneID => __ornext(word_be((dword_be(addressForSlotStart + 0x04) & 0x7FFFFFFF) + 0x1362) == hermioneID))
+                            any_of(hermioneIDs, hermioneID => __ornext(rememberedAddress == hermioneID))
                             )
         }
     }
-    
     return code
 }
 
@@ -2457,7 +2457,10 @@ achievement(
                     dword_be(0x00868f40) == prev(dword_be(0x00868f40)) &&
                     !checkMapID(0x9A) &&
                     !checkMapID(0x9B)) && 
-              startBossFight(0xEB) &&
+              once(checkMapID(0x9A) &&
+                   prev(dword_be(pointerBoss)) == 0 &&
+                   dword_be(pointerBoss) > 0 &&
+                   word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0xEB) &&
               winBossFightHealth() &&
               never(repeated(9001, dword_be(levelPauseState) == 0 &&
                                    word_be((dword_be(pointerBoss) & 0x7FFFFFFF) + 0x1362) == 0xEB))
