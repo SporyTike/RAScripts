@@ -156,8 +156,12 @@ function countPlayersScouted() {
     return code
 }
 
-function checkPlayerScoutabeFlag(characterID) {
+function getPlayerScoutableFlag(characterID) {
     return bit((characterID + 27) % 8, mem_PlayerBuyableFlags + 0x03 - (((characterID + 27) / 8) % 4) + (((characterID + 27) / 32) * 4))
+}
+
+function getPlayerScoutedFlag(characterID) {
+    return bit((characterID + 27) % 8, mem_PlayerScoutFlags + 0x03 - (((characterID + 27) / 8) % 4) + (((characterID + 27) / 32) * 4))
 }
 
 function countCoachesUnlocked() {
@@ -174,6 +178,23 @@ function countManagersUnlocked() {
          + bit0(mem_SupporterFlags + 0x07)
          + bit1(mem_SupporterFlags + 0x07)
          + bit2(mem_SupporterFlags + 0x07)
+}
+
+function countManagersForAureliaWithoutCammy() {
+    aureliaFlag = remembered((getPlayerScoutedFlag(0x9D)
+                             + getPlayerScoutedFlag(0xA4)
+                             + getPlayerScoutedFlag(0xA6)) / 3)
+    return aureliaFlag
+           + countManagersUnlocked()
+}
+
+function countManagersForAureliaWithCammy() {
+    aureliaFlag = remembered((getPlayerScoutedFlag(0x9D)
+                             + getPlayerScoutedFlag(0xA0)
+                             + getPlayerScoutedFlag(0xA4)
+                             + getPlayerScoutedFlag(0xA6)) / 4)
+    return aureliaFlag
+           + countManagersUnlocked()
 }
 
 function checkStoryCompetitionProgress(competition, match) {
@@ -233,13 +254,13 @@ function calculatePlatinumFriendlyMatchMedals() {
 }
 
 function calculateUnlockedPasswordCharacters() {
-    return checkPlayerScoutabeFlag(0xB9)
-         + checkPlayerScoutabeFlag(0xBA)
-         + checkPlayerScoutabeFlag(0xBB)
-         + checkPlayerScoutabeFlag(0xBC)
-         + checkPlayerScoutabeFlag(0xBD)
-         + checkPlayerScoutabeFlag(0xBE)
-         + checkPlayerScoutabeFlag(0xBF)
+    return getPlayerScoutableFlag(0xB9)
+         + getPlayerScoutableFlag(0xBA)
+         + getPlayerScoutableFlag(0xBB)
+         + getPlayerScoutableFlag(0xBC)
+         + getPlayerScoutableFlag(0xBD)
+         + getPlayerScoutableFlag(0xBE)
+         + getPlayerScoutableFlag(0xBF)
 }
 
 //--------------------------------------------------
@@ -703,6 +724,28 @@ achievement(
               getManagerID() != prev(getManagerID())
 )
 
+achievement(
+    title = "Leading Voices", type = "",
+    description = "Unlock all five managers for the support team.",
+    id = 621324, badge = "705933", points = 3,
+    trigger = checkGameState(0x04) &&
+              ((measured(countManagersForAureliaWithoutCammy() == 5,
+                         when = bit1(mem_SupporterFlags + 0x07) == 0x00) &&
+                prev(countManagersForAureliaWithoutCammy() == 4)) || 
+               (measured(countManagersForAureliaWithCammy() == 5,
+                         when = bit1(mem_SupporterFlags + 0x07) == 0x01) &&
+                prev(countManagersForAureliaWithCammy() == 4)))
+)
+
+achievement(
+    title = "Stories of the Past", type = "",
+    description = "Unlock all four coaches for the support team.",
+    id = 621330, badge = "705937", points = 2,
+    trigger = checkGameState(0x04) &&
+              measured(countCoachesUnlocked() == 4) &&
+              prev(countCoachesUnlocked()) == 3
+)
+
 //--------------------------------------------------
 // Leaderboards
 
@@ -816,10 +859,14 @@ rich_presence_conditional_display(checkSubState(0x02, 0x11),
 
 rich_presence_conditional_display(checkSubState(0x02, 0x12) ||
                                   checkSubState(0x02, 0x13) ||
-                                  checkSubState(0x02, 0x14) ||
-                                  checkSubState(0x02, 0x15) ||
+                                  checkSubState(0x02, 0x14),
+    "The Teams are preparing for a Tournament Match [{0}]",
+        matchTypeIDs[2]
+)
+
+rich_presence_conditional_display(checkSubState(0x02, 0x15) ||
                                   checkSubState(0x02, 0x16),
-    "The Team is preparing itself for a Tournament Match [{0}]",
+    "The Teams are checking the Tournament Match-Ups [{0}]",
         matchTypeIDs[2]
 )
 
@@ -837,7 +884,7 @@ rich_presence_conditional_display(checkSubState(0x02, 0x18),
 
 rich_presence_conditional_display(checkSubState(0x02, 0x1B) || 
                                   checkGameState(0x04), 
-    "The Team is waiting in the Club Room for the next Match [⚡{0}] [🫂{1}/198] [🧑🏻‍💼{2}/4] [👧🏻{3}/4]",
+    "The Team is waiting in the Club Room for the next Match [⚡{0}] [🫂{1}/198] [🧑🏻‍💼{2}/4] [👧🏻{3}/5]",
         rich_presence_macro("Number",
                             getInazumaPoints()),
         rich_presence_macro("Number",
@@ -845,7 +892,10 @@ rich_presence_conditional_display(checkSubState(0x02, 0x1B) ||
         rich_presence_macro("Number",
                             countCoachesUnlocked()),
         rich_presence_macro("Number",
-                            countManagersUnlocked())
+                            max_of(measured(countManagersForAureliaWithoutCammy(),
+                                            when = bit1(mem_SupporterFlags + 0x07) == 0x00),
+                                   measured(countManagersForAureliaWithCammy(),
+                                            when = bit1(mem_SupporterFlags + 0x07) == 0x01)))
 )
 
 rich_presence_conditional_display(checkGameState(0x05) && 
@@ -978,7 +1028,7 @@ rich_presence_conditional_display(checkGameState(0x05) &&
 
 
 rich_presence_display(
-    "The Team is waiting in the Club Room for the next Match [⚡{0}] [🫂{1}/198] [🧑🏻‍💼{2}/4] [👧🏻{3}/4]",
+    "The Team is waiting in the Club Room for the next Match [⚡{0}] [🫂{1}/198] [🧑🏻‍💼{2}/4] [👧🏻{3}/5]",
         rich_presence_macro("Number",
                             getInazumaPoints()),
         rich_presence_macro("Number",
@@ -986,5 +1036,8 @@ rich_presence_display(
         rich_presence_macro("Number",
                             countCoachesUnlocked()),
         rich_presence_macro("Number",
-                            countManagersUnlocked())
+                            max_of(measured(countManagersForAureliaWithoutCammy(),
+                                            when = bit1(mem_SupporterFlags + 0x07) == 0x00),
+                                   measured(countManagersForAureliaWithCammy(),
+                                            when = bit1(mem_SupporterFlags + 0x07) == 0x01)))
 )
