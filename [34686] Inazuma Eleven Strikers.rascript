@@ -40,6 +40,24 @@ mem_CompetitionResult   = 0x004bd3d2
 mem_TrophyFlags         = 0x004bd062
 mem_ManagerID           = 0x004bd144
 mem_FriendlyMatchData   = 0x004bd420
+mem_MinigameMedals      = 0x004f131c
+mem_TournamentMatch     = 0x0042397c
+mem_TournamentStartFlag = 0x00423983
+mem_TournamentTeamData  = 0x00423984
+mem_DifficultyCOM       = 0x004233ed
+mem_HalfTime            = 0x00420d48
+mem_ExtraTimePenalties  = 0x00420d43
+mem_SpecialShotsPerTeam = 0x00409535
+
+mem_PointerBusPull      = 0x003e98c0
+mem_PointerTyrePunch    = 0x003e98a8
+mem_PointerVolley       = 0x003e98b0
+mem_PointerTyreDash     = 0x003e98b8
+mem_PointerBungeeShot   = 0x003e9970
+mem_PointerTournament   = 0x003e9a68
+mem_PointerSpecialMove  = 0x003e9730
+
+pointerMask = 0x3fffffff
 
 //--------------------------------------------------
 // Functions
@@ -263,6 +281,244 @@ function calculateUnlockedPasswordCharacters() {
          + getPlayerScoutableFlag(0xBF)
 }
 
+function getMinigameBusPullPlayerAmount() {
+    return byte((dword_be(mem_PointerBusPull) & pointerMask) + 0x0D)
+}
+
+function getMinigameBusPullState() {
+    return dword_be((dword_be(mem_PointerBusPull) & pointerMask) + 0x5D2C)
+}
+
+function getMinigameBusPullDistance() {
+    return float_be((dword_be(mem_PointerBusPull) & pointerMask) + 0x5D38)
+}
+
+function getMinigameBusPullCharacterID(player) {
+    return dword_be((dword_be(mem_PointerBusPull) & pointerMask) + 0x5D4C + (player * 0x04))
+}
+
+function getMinigameTyrePunchPlayerAmount() {
+    return byte((dword_be(mem_PointerTyrePunch) & pointerMask) + 0x0D)
+}
+
+function getMinigameTyrePunchState() {
+    return dword_be((dword_be(mem_PointerTyrePunch) & pointerMask) + 0x5D2C)
+}
+
+function getMinigameTyrePunchPoints(player) {
+    return dword_be((dword_be(mem_PointerTyrePunch) & pointerMask) + 0x5D38 + (player * 0x04))
+}
+
+function getMinigameTyrePunchCharacterID(player) {
+    return dword_be((dword_be(mem_PointerTyrePunch) & pointerMask) + 0x5D88 + (player * 0x04))
+}
+
+function getMinigameVolleyPlayerAmount() {
+    return byte((dword_be(mem_PointerVolley) & pointerMask) + 0x0D)
+}
+
+function getMinigameVolleyState() {
+    return dword_be((dword_be(mem_PointerVolley) & pointerMask) + 0x5D2C)
+}
+
+function getMinigameVolleyPoints(player) {
+    return dword_be((dword_be(mem_PointerVolley) & pointerMask) + 0x5D50 + (player * 0x04))
+}
+
+function getMinigameVolleyCharacterID(player) {
+    return dword_be((dword_be(mem_PointerVolley) & pointerMask) + 0x5D94 + (player * 0x04))
+}
+
+function getMinigameTyreDashPlayerAmount() {
+    return byte((dword_be(mem_PointerTyreDash) & pointerMask) + 0x0D)
+}
+
+function getMinigameTyreDashState() {
+    return dword_be((dword_be(mem_PointerTyreDash) & pointerMask) + 0x5D2C)
+}
+
+function getMinigameTyreDashTime(player) {
+    return dword_be((dword_be(mem_PointerTyreDash) & pointerMask) + 0x5D98 + (player * 0x04))
+}
+
+function getMinigameTyreDashCharacterID(player) {
+    return dword_be((dword_be(mem_PointerTyreDash) & pointerMask) + 0x5D58 + (player * 0x04))
+}
+
+function getMinigameBungeeShotPlayerAmount() {
+    return byte((dword_be(mem_PointerBungeeShot) & pointerMask) + 0x0D)
+}
+
+function getMinigameBungeeShotState() {
+    return dword_be((dword_be(mem_PointerBungeeShot) & pointerMask) + 0x5D28)
+}
+
+function getMinigameBungeeShotGoals(player) {
+    return dword_be((dword_be(mem_PointerBungeeShot) & pointerMask) + 0x5D34 + (player * 0x04))
+}
+
+function getMinigameBungeeCharacterID(player) {
+    return dword_be((dword_be(mem_PointerBungeeShot) & pointerMask) + 0x378 + (player * 0x04))
+}
+
+function getMinigameMedal(minigame, playerAmount, medal) {
+           if (minigame == "Bus Pull!") {
+        minigame = 0
+    } else if (minigame == "Tyre Punch!") {
+        minigame = 1
+    } else if (minigame == "Volley!") {
+        minigame = 2
+    } else if (minigame == "Tyre Dash!") {
+        minigame = 3
+    } else if (minigame == "Bungee Shot!") {
+        minigame = 4
+    }
+    playerAmount = playerAmount - 1
+           if (medal == "Bronze") {
+        medal = 0
+    } else if (medal == "Silver") {
+        medal = 1
+    } else if (medal == "Gold") {
+        medal = 2
+    } else if (medal == "Platinum") {
+        medal = 3
+    }
+    return bit(medal, mem_MinigameMedals + minigame + playerAmount * 0x05)
+}
+
+function getDifficultyCOM() {
+    return byte(mem_DifficultyCOM)
+}
+
+function getHalfLength() {
+    return dword_be(mem_HalfTime)
+}
+
+function getExtraTime() {
+    return bit0(mem_ExtraTimePenalties)
+}
+
+function getPenalties() {
+    return bit1(mem_ExtraTimePenalties)
+}
+
+function getTournamentStart() {
+    return byte(mem_TournamentStartFlag)
+}
+
+function getTeamSlotOfPlayer(slot) {
+    return getMinigameSlotState(slot)
+}
+
+function calculateTotalTournamentPlayerTeams() {
+    return getPlayerFlagValueOfTournamentTeam(1) / getPlayerFlagValueOfTournamentTeam(1)
+           + getPlayerFlagValueOfTournamentTeam(2) / getPlayerFlagValueOfTournamentTeam(2)
+           + getPlayerFlagValueOfTournamentTeam(3) / getPlayerFlagValueOfTournamentTeam(3)
+           + getPlayerFlagValueOfTournamentTeam(4) / getPlayerFlagValueOfTournamentTeam(4)
+}
+
+function getTeamIDOfTournamentTeam(slot) {
+    slot = slot - 1
+    return dword_be(mem_TournamentTeamData + 0x04 + (slot * 0xDC0))
+}
+
+function getPlayerFlagValueOfTournamentTeam(slot) {
+    slot = slot - 1
+    return dword_be(mem_TournamentTeamData + 0x0C + (slot * 0xDC0))
+}
+
+function getTournamentMatch() {
+    return word_be(mem_TournamentMatch)
+}
+
+function getTotalTournamentMatches() {
+    return word_be(mem_TournamentMatch + 0x02)
+}
+
+function getTournamentTeamIDInSlot(slot) {
+    slot = slot - 1
+    return dword_be((dword_be((dword_be((dword_be(mem_PointerTournament) & pointerMask) + 0x00) & pointerMask) + 0x180) & pointerMask) + 0x218 + (slot * 0x18))
+}
+
+function getTournamentTeamFlagsValue(slot) {
+    slot = slot - 1
+    return dword_be((dword_be((dword_be((dword_be(mem_PointerTournament) & pointerMask) + 0x00) & pointerMask) + 0x180) & pointerMask) + 0x214 + (slot * 0x18))
+}
+
+function getTournamentTeamPlayerValue(slot) {
+    slot = slot - 1
+    return dword_be((dword_be((dword_be((dword_be(mem_PointerTournament) & pointerMask) + 0x00) & pointerMask) + 0x180) & pointerMask) + 0x21C + (slot * 0x18))
+}
+
+function checkTournamentChallengeWin(totalPlayers) {
+    if (totalPlayers == 4) {
+        totalMatches = 3
+        finalSlot    = 7}
+    if (totalPlayers == 8) {
+        totalMatches = 7
+        finalSlot    = 15}
+    return trigger_when(checkSubState(0x02, 0x16)) &&
+           calculateTotalTournamentPlayerTeams() == 1 &&
+           getTotalTournamentMatches() == totalMatches &&
+           trigger_when(getTournamentMatch() == totalMatches) &&
+           trigger_when(getTournamentTeamFlagsValue(finalSlot) == 0x00) &&
+           trigger_when(prev(getTournamentTeamFlagsValue(finalSlot) == 0x28)) &&
+           never(getTournamentMatch() < prev(getTournamentMatch())) &&
+           never(checkSubState(0x02, 0x07)) &&
+           never(checkSubState(0x02, 0x16) &&
+                 getTournamentTeamIDInSlot(15) >= 0x01 &&
+                 getTournamentTeamIDInSlot(15) <= 0x0D &&
+                 getTournamentTeamPlayerValue(15) == 0xFFFFFFFF) &&
+           never(checkSubState(0x02, 03) &&
+                 getDifficultyCOM() != 0x01) &&
+           never(checkSubState(0x02, 03) &&
+                 getHalfLength() != 0x00) &&
+           once(checkSubState(0x02, 0x16) &&
+                getTournamentMatch() == 0 &&
+                getTotalTournamentMatches() == totalMatches &&
+                getTournamentStart() > prev(getTournamentStart()))
+}
+
+function getTeamStatSpecialShots(team) {
+    
+    if (team == "Team 1") {
+        index = (0 + getMatchPhase()) % 2
+        return byte(mem_SpecialShotsPerTeam + (0x3F4 * index))
+    }
+    if (team == "Team 2") {
+        index = (1 + getMatchPhase()) % 2
+        return byte(mem_SpecialShotsPerTeam + (0x3F4 * index))
+    }
+}
+
+function check2CharactersPerformingSpecialMove(specialMoveID, character1, character2) {
+    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMoveID), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
+    codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID))
+    codeCharacter2ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character2), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID))
+    return codeSpecialMoveID &&
+           codeCharacter1ID &&
+           codeCharacter2ID
+}
+
+function check3CharactersPerformingSpecialMove(specialMoveID, character1, character2, character2) {
+    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMoveID), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
+    codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xABC) == ID))
+    codeCharacter2ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character2), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xABC) == ID))
+    codeCharacter3ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character3), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID ||
+                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xABC) == ID))
+    return codeSpecialMoveID &&
+           codeCharacter1ID &&
+           codeCharacter2ID &&
+           codeCharacter3ID
+}
+
 //--------------------------------------------------
 // Arrays and Dictionaries
 
@@ -483,6 +739,224 @@ for character in characterIDs {
     characterNicknames[character] = characterIDs[character][0]
 }
 
+specialMoveIDs = {
+    0x01: "Earthquake",
+    0x02: "Iron Wall",
+    0x03: "Land of Ice",
+    0x04: "Ignite Steal",
+    0x05: "Killer Slide",
+    0x06: "Quick Draw",
+    0x07: "Sleeping Dust",
+    0x08: "Gravitation",
+    0x09: "Ground Quake",
+    0x0A: "Coil Turn",
+    0x0B: "Heaven's Ascent",
+    0x0C: "Hell's Descent",
+    0x0D: "The Wall",
+    0x0E: "The Tower",
+    0x0F: "The Mountain",
+    0x10: "Mystifying Mist",
+    0x11: "Cyclone",
+    0x12: "Divine Stamp",
+    0x13: "Shooting Star",
+    0x14: "Vac Attack",
+    0x15: "Super Sumo Stomp",
+    0x16: "Snow Angel",
+    0x17: "Whirly-Whirly",
+    0x18: "Spinning Cut",
+    0x19: "The Wall",
+    0x1A: "Whirlwind Force",
+    0x1B: "Diabolical Cut",
+    0x1C: "Desert Blast",
+    0x1D: "Barbarian Shield",
+    0x1E: "Perfect Tower",
+    0x1F: "Power Charge",
+    0x20: "Fake Bomber",
+    0x21: "Flame Dance",
+    0x22: "Frozen Steal",
+    0x23: "Volcano Cut",
+    0x24: "Mega Quake",
+    0x25: "Rolling Slide",
+    0x26: "Hammer of Fury",
+    0x27: "Dimensional Hand",
+    0x28: "Electrap",
+    0x29: "Omega Hand",
+    0x2A: "Gigant Wall",
+    0x2B: "God Catch",
+    0x2C: "God Hand (Evans)",
+    0x2D: "God Hand (LaChance)",
+    0x2E: "God Hand X",
+    0x2F: "Colosseum Guard",
+    0x30: "Colosseum Guard +1",
+    0x31: "The End",
+    0x32: "Temporal Wall",
+    0x33: "Shot Pocket",
+    0x34: "Fist of Justice",
+    0x35: "Double Rocket",
+    0x36: "Soul Hand",
+    0x37: "Tsunami Wall",
+    0x38: "Dual Smash",
+    0x39: "Drill Smasher",
+    0x3A: "Drill Smasher V2",
+    0x3B: "Flower Power",
+    0x3C: "Flower Power +1",
+    0x3D: "Burnout",
+    0x3E: "Burnout V2",
+    0x3F: "High Voltage",
+    0x40: "Power Shield",
+    0x41: "Beast Fang",
+    0x42: "Procyon Net",
+    0x43: "Fiend Hand",
+    0x44: "Majin the Hand (Evans)",
+    0x45: "Majin the Hand +2",
+    0x46: "Majin the Hand (LaChance)",
+    0x47: "Mugen the Hand",
+    0x48: "Infinite Wall",
+    0x49: "Wormhole",
+    0x4A: "", // Normal Keeper Catch
+    0x4B: "", // Normal Keeper Catch
+    0x4C: "Aikido",
+    0x4D: "Illusion Ball",
+    0x4E: "Water Veil",
+    0x4F: "Echo Ball",
+    0x50: "Angel Ball",
+    0x51: "Field of Force",
+    0x52: "Afterimage",
+    0x53: "The Ikaros",
+    0x54: "Bewilder Blast",
+    0x55: "Flurry Dash",
+    0x56: "Breakthrough 2",
+    0x57: "Breakthrough 3",
+    0x58: "Super Elastico",
+    0x59: "Easy Breezy",
+    0x5A: "Dash Accelerator",
+    0x5B: "Dash Storm",
+    0x5C: "Whirlwind Twister",
+    0x5D: "Rodeo Clown",
+    0x5E: "Devil Ball",
+    0x5F: "Abaddon Drop",
+    0x60: "Bubble Gum",
+    0x61: "Prima Donna",
+    0x62: "Flame Veil",
+    0x63: "Hey Presto",
+    0x64: "Clone Faker",
+    0x65: "Heaven's Time",
+    0x66: "Matador Feint",
+    0x67: "Deceptor Dribble",
+    0x68: "Meteor Shower",
+    0x69: "Liar Shot",
+    0x6A: "Lightning Sprint",
+    0x6B: "Warp Drive",
+    0x6C: "Flurry Dash",
+    0x6D: "Wind God's Dance",
+    0x6E: "Remote Combustion",
+    0x6F: "X Blast",
+    0x70: "Astro Break",
+    0x71: "Atomic Flare",
+    0x72: "Inazuma-1",
+    0x73: "Inazuma-1 Drop",
+    0x74: "Inazuma Drop",
+    0x75: "Inazuma Break",
+    0x76: "Legendary Wolf",
+    0x77: "Excalibur",
+    0x78: "Odin Sword",
+    0x79: "Gaia Break",
+    0x7A: "Chaos Break",
+    0x7B: "Ganymede Ray",
+    0x7C: "Gladius Arch",
+    0x7D: "Grand Fire",
+    0x7E: "Grand Fenrir",
+    0x7F: "Grenade Shot",
+    0x80: "Cross Drive",
+    0x81: "Cross Fire",
+    0x82: "Cross Fire",
+    0x83: "Gungnir",
+    0x84: "Emperor Penguin No. 1",
+    0x85: "Emperor Penguin No. 3",
+    0x86: "Emperor Penguin X",
+    0x87: "Almighty Cannon",
+    0x88: "God Knows",
+    0x89: "God Break",
+    0x8A: "The Typhoon",
+    0x8B: "The Dawn",
+    0x8C: "The Hurricane",
+    0x8D: "The Phoenix",
+    0x8E: "Thunder Beast",
+    0x8F: "The Earth",
+    0x90: "Jet Stream",
+    0x91: "Shadow Ray",
+    0x92: "Comet Shot",
+    0x93: "Supernova",
+    0x94: "Samba Strike",
+    0x95: "Spiral Shot",
+    0x96: "Spinning Shot",
+    0x97: "Space Penguin",
+    0x98: "Dark Tornado",
+    0x99: "Dark Tornado +1",
+    0x9A: "Dark Phoenix",
+    0x9B: "Dark Matter",
+    0x9C: "Tiger Storm",
+    0x9D: "Tiger Drive",
+    0x9E: "Whirlwind Drop",
+    0x9F: "Twin Boost",
+    0xA0: "Twin Boost F",
+    0xA1: "Tsunami Boost",
+    0xA2: "Divine Arrows",
+    0xA3: "Doom Spear",
+    0xA4: "Doomsword Slash",
+    0xA5: "Death Zone",
+    0xA6: "Death Zone 2",
+    0xA7: "Doom Dive Drive",
+    0xA8: "Doom Break",
+    0xA9: "Doom Rain",
+    0xAA: "Celestial Smash",
+    0xAB: "Triangle Z",
+    0xAC: "Tri-Pegasus",
+    0xAD: "Dragon Cannon",
+    0xAE: "Dragon Crash",
+    0xAF: "Dragon Crash +1",
+    0xB0: "Dragon Slayer",
+    0xB1: "Dragon Tornado",
+    0xB2: "Triple Boost",
+    0xB3: "Northern Impact",
+    0xB4: "Fireball Screw",
+    0xB5: "Fireball Storm",
+    0xB6: "Butterfly Trance",
+    0xB7: "Back Tornado",
+    0xB8: "Paladin Strike",
+    0xB9: "Big Bang",
+    0xBA: "Wrath Shot",
+    0xBB: "Fire Tornado",
+    0xBC: "Fire Tornado +1",
+    0xBD: "Fire Blizzard",
+    0xBE: "Fire Blizzard",
+    0xBF: "Phantom Shot",
+    0xC0: "Fortissimo Foot",
+    0xC1: "Jumping Jack",
+    0xC2: "Prime Legend",
+    0xC3: "Pegasus Shot",
+    0xC4: "Heavenly Drive",
+    0xC5: "Fire Rooster",
+    0xC6: "Maximum Fire",
+    0xC7: "Mirage Shot",
+    0xC8: "Megaton Head",
+    0xC9: "Spectacle Crash",
+    0xCA: "Spectacle Crash",
+    0xCB: "Megalodon",
+    0xCC: "Unicorn Boost",
+    0xCD: "Cosmic Blast",
+    0xCE: "Reflect Buster",
+    0xCF: "Meteor Blade",
+    0xD0: "Revolution V",
+    0xD1: "Bed of Roses",
+    0xD2: "Bed of Roses V2",
+    0xD3: "Rolling Kick",
+    0xD4: "Wyvern Crash",
+    0xD5: "Wyvern Blizzard",
+    0xD6: "Emperor Penguin No. 2",
+    0xD7: "Eternal Blizzard",
+}
+
 teamIDs = {
     0x00: "Original Team",
     0x01: "Raimon",
@@ -566,7 +1040,7 @@ fillerZero = {
 
 achievement(
     title = "Royal Rank Demotion", type = "progression",
-    description = "Win against the Royal Academy in the 1st competition.",
+    description = "Win against Royal Academy in the 1st competition.",
     id = 620796, badge = "705549", points = 5,
     trigger = getMatchType() == 0x05 &&
               getTeamID("Team 2") == 0x02 &&
@@ -610,7 +1084,7 @@ achievement(
 
 achievement(
     title = "Blast to Another Planet", type = "progression",
-    description = "Win against the Alius Academy in the 2nd competition.",
+    description = "Win against Alius Academy in the 2nd competition.",
     id = 620801, badge = "705552", points = 5,
     trigger = getMatchType() == 0x05 &&
               getTeamID("Team 2") == 0x05 &&
@@ -665,7 +1139,7 @@ achievement(
 
 achievement(
     title = "Beauties and the Beat", type = "",
-    description = "Win against the Girl's Team in the 4th competition.",
+    description = "Win against Girl's Team in the 4th competition.",
     id = 620958, badge = "705548", points = 25,
     trigger = getMatchType() == 0x05 &&
               getTeamID("Team 2") == 0x0D &&
@@ -746,8 +1220,786 @@ achievement(
               prev(countCoachesUnlocked()) == 3
 )
 
+achievement(
+    title = "Great Team from the Very Beginning", type = "",
+    description = "Win an tournament of 8 teams by using Raimon with each match being against strong COMs and half length being 5 minutes.",    
+    id = 622873, badge = "707240", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x01) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x01) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x01) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x01))
+)
+
+achievement(
+    title = "A Team Born to Win", type = "",
+    description = "Win an tournament of 8 teams by using Royal Academy with each match being against strong COMs and half length being 5 minutes.",
+    id = 622874, badge = "707241", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x02) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x02) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x02) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x02))
+)
+
+achievement(
+    title = "Rise of the Gods", type = "",
+    description = "Win an tournament of 8 teams by using Zeus with each match being against strong COMs and half length being 5 minutes.",
+    id = 622875, badge = "707242", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x03) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x03) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x03) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x03))
+)
+
+achievement(
+    title = "Not Quite the Number Two", type = "",
+    description = "Win an tournament of 8 teams by using Raimon II with each match being against strong COMs and half length being 5 minutes.",
+    id = 622876, badge = "707243", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x04) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x04) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x04) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x04))
+)
+
+achievement(
+    title = "Fiercy Strategies Make Everyone Look Cool", type = "",
+    description = "Win an tournament of 8 teams by using Chaos with each match being against strong COMs and half length being 5 minutes.",
+    id = 622877, badge = "707244", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x06) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x06) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x06) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x06))
+)
+
+achievement(
+    title = "Not From This World", type = "",
+    description = "Win an tournament of 8 teams by using Alius Academy with each match being against strong COMs and half length being 5 minutes.",
+    id = 622878, badge = "707245", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x05) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x05) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x05) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x05))
+)
+
+achievement(
+    title = "Soldiers of the Dark", type = "",
+    description = "Win an tournament of 8 teams by using Dark Emperors with each match being against strong COMs and half length being 5 minutes.",
+    id = 622879, badge = "707246", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x07) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x07) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x07) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x07))
+)
+
+achievement(
+    title = "The Best of Japan", type = "",
+    description = "Win an tournament of 8 teams by using Inazuma National with each match being against strong COMs and half length being 5 minutes.",
+    id = 622880, badge = "707247", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x08) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x08) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x08) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x08))
+)
+
+achievement(
+    title = "When Plan B Becomes Plan A", type = "",
+    description = "Win an tournament of 8 teams by using Neo National with each match being against strong COMs and half length being 5 minutes.",
+    id = 622881, badge = "707248", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x09) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x09) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x09) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x09))
+)
+
+achievement(
+    title = "The Dream Everyone Shares", type = "",
+    description = "Win an tournament of 8 teams by using Int'l Allstars with each match being against strong COMs and half length being 5 minutes.",
+    id = 622882, badge = "707249", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x0A) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x0A) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x0A) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x0A))
+)
+
+achievement(
+    title = "Sacrifices for the Demon King", type = "",
+    description = "Win an tournament of 8 teams by using Raimon with each match being against strong COMs and half length being 5 minutes.",
+    id = 622883, badge = "707250", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x0B) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x0B) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x0B) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x0B))
+)
+
+achievement(
+    title = "Military God Eaters", type = "",
+    description = "Win an tournament of 8 teams by using Team Ogre with each match being against strong COMs and half length being 5 minutes.",
+    id = 622884, badge = "707251", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x0C) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x0C) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x0C) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x0C))
+)
+
+achievement(
+    title = "Woman Instincts", type = "",
+    description = "Win an tournament of 8 teams by using Girl's Team with each match being against strong COMs and half length being 5 minutes.",
+    id = 622885, badge = "707252", points = 25,
+    trigger = checkTournamentChallengeWin(8) &&
+              ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
+                getTeamIDOfTournamentTeam(1) == 0x0D) ||
+               (getPlayerFlagValueOfTournamentTeam(2) != 0x00 &&
+                getTeamIDOfTournamentTeam(2) == 0x0D) ||
+               (getPlayerFlagValueOfTournamentTeam(3) != 0x00 &&
+                getTeamIDOfTournamentTeam(3) == 0x0D) ||
+               (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
+                getTeamIDOfTournamentTeam(4) == 0x0D))
+)
+
+achievement(
+    title = "Can't Stop the Rolling Train", type = "",
+    description = "Get all medals in the training lesson \"Bus Pull!\" in any mode.",
+    id = 621984, badge = "706481", points = 10,
+    trigger = checkSubState(0x05, 0x00) &&
+              ((measured(getMinigameMedal("Bus Pull!", 1, "Bronze")
+                       + getMinigameMedal("Bus Pull!", 1, "Silver")
+                       + getMinigameMedal("Bus Pull!", 1, "Gold")
+                       + getMinigameMedal("Bus Pull!", 1, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bus Pull!", 1, "Bronze")
+                   + getMinigameMedal("Bus Pull!", 1, "Silver")
+                   + getMinigameMedal("Bus Pull!", 1, "Gold")
+                   + getMinigameMedal("Bus Pull!", 1, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bus Pull!", 2, "Bronze")
+                       + getMinigameMedal("Bus Pull!", 2, "Silver")
+                       + getMinigameMedal("Bus Pull!", 2, "Gold")
+                       + getMinigameMedal("Bus Pull!", 2, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bus Pull!", 2, "Bronze")
+                   + getMinigameMedal("Bus Pull!", 2, "Silver")
+                   + getMinigameMedal("Bus Pull!", 2, "Gold")
+                   + getMinigameMedal("Bus Pull!", 2, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bus Pull!", 3, "Bronze")
+                       + getMinigameMedal("Bus Pull!", 3, "Silver")
+                       + getMinigameMedal("Bus Pull!", 3, "Gold")
+                       + getMinigameMedal("Bus Pull!", 3, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bus Pull!", 3, "Bronze")
+                   + getMinigameMedal("Bus Pull!", 3, "Silver")
+                   + getMinigameMedal("Bus Pull!", 3, "Gold")
+                   + getMinigameMedal("Bus Pull!", 3, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bus Pull!", 4, "Bronze")
+                       + getMinigameMedal("Bus Pull!", 4, "Silver")
+                       + getMinigameMedal("Bus Pull!", 4, "Gold")
+                       + getMinigameMedal("Bus Pull!", 4, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bus Pull!", 4, "Bronze")
+                   + getMinigameMedal("Bus Pull!", 4, "Silver")
+                   + getMinigameMedal("Bus Pull!", 4, "Gold")
+                   + getMinigameMedal("Bus Pull!", 4, "Platinum")) == 3))
+)
+
+achievement(
+    title = "No Time or Tyre to Spare", type = "",
+    description = "Get all medals in the training lesson \"Tyre Punch!\" in any mode.",
+    id = 622056, badge = "706483", points = 10,
+    trigger = checkSubState(0x05, 0x01) &&
+              ((measured(getMinigameMedal("Tyre Punch!", 1, "Bronze")
+                       + getMinigameMedal("Tyre Punch!", 1, "Silver")
+                       + getMinigameMedal("Tyre Punch!", 1, "Gold")
+                       + getMinigameMedal("Tyre Punch!", 1, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Punch!", 1, "Bronze")
+                   + getMinigameMedal("Tyre Punch!", 1, "Silver")
+                   + getMinigameMedal("Tyre Punch!", 1, "Gold")
+                   + getMinigameMedal("Tyre Punch!", 1, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Punch!", 2, "Bronze")
+                       + getMinigameMedal("Tyre Punch!", 2, "Silver")
+                       + getMinigameMedal("Tyre Punch!", 2, "Gold")
+                       + getMinigameMedal("Tyre Punch!", 2, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Punch!", 2, "Bronze")
+                   + getMinigameMedal("Tyre Punch!", 2, "Silver")
+                   + getMinigameMedal("Tyre Punch!", 2, "Gold")
+                   + getMinigameMedal("Tyre Punch!", 2, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Punch!", 3, "Bronze")
+                       + getMinigameMedal("Tyre Punch!", 3, "Silver")
+                       + getMinigameMedal("Tyre Punch!", 3, "Gold")
+                       + getMinigameMedal("Tyre Punch!", 3, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Punch!", 3, "Bronze")
+                   + getMinigameMedal("Tyre Punch!", 3, "Silver")
+                   + getMinigameMedal("Tyre Punch!", 3, "Gold")
+                   + getMinigameMedal("Tyre Punch!", 3, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Punch!", 4, "Bronze")
+                       + getMinigameMedal("Tyre Punch!", 4, "Silver")
+                       + getMinigameMedal("Tyre Punch!", 4, "Gold")
+                       + getMinigameMedal("Tyre Punch!", 4, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Punch!", 4, "Bronze")
+                   + getMinigameMedal("Tyre Punch!", 4, "Silver")
+                   + getMinigameMedal("Tyre Punch!", 4, "Gold")
+                   + getMinigameMedal("Tyre Punch!", 4, "Platinum")) == 3))
+)
+
+achievement(
+    title = "Tree of Determination", type = "",
+    description = "Get all medals in the training lesson \"Volley!\" in any mode.",
+    id = 622072, badge = "706503", points = 10,
+    trigger = checkSubState(0x05, 0x02) &&
+              ((measured(getMinigameMedal("Volley!", 1, "Bronze")
+                       + getMinigameMedal("Volley!", 1, "Silver")
+                       + getMinigameMedal("Volley!", 1, "Gold")
+                       + getMinigameMedal("Volley!", 1, "Platinum") == 4) &&
+                prev(getMinigameMedal("Volley!", 1, "Bronze")
+                   + getMinigameMedal("Volley!", 1, "Silver")
+                   + getMinigameMedal("Volley!", 1, "Gold")
+                   + getMinigameMedal("Volley!", 1, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Volley!", 2, "Bronze")
+                       + getMinigameMedal("Volley!", 2, "Silver")
+                       + getMinigameMedal("Volley!", 2, "Gold")
+                       + getMinigameMedal("Volley!", 2, "Platinum") == 4) &&
+                prev(getMinigameMedal("Volley!", 2, "Bronze")
+                   + getMinigameMedal("Volley!", 2, "Silver")
+                   + getMinigameMedal("Volley!", 2, "Gold")
+                   + getMinigameMedal("Volley!", 2, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Volley!", 3, "Bronze")
+                       + getMinigameMedal("Volley!", 3, "Silver")
+                       + getMinigameMedal("Volley!", 3, "Gold")
+                       + getMinigameMedal("Volley!", 3, "Platinum") == 4) &&
+                prev(getMinigameMedal("Volley!", 3, "Bronze")
+                   + getMinigameMedal("Volley!", 3, "Silver")
+                   + getMinigameMedal("Volley!", 3, "Gold")
+                   + getMinigameMedal("Volley!", 3, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Volley!", 4, "Bronze")
+                       + getMinigameMedal("Volley!", 4, "Silver")
+                       + getMinigameMedal("Volley!", 4, "Gold")
+                       + getMinigameMedal("Volley!", 4, "Platinum") == 4) &&
+                prev(getMinigameMedal("Volley!", 4, "Bronze")
+                   + getMinigameMedal("Volley!", 4, "Silver")
+                   + getMinigameMedal("Volley!", 4, "Gold")
+                   + getMinigameMedal("Volley!", 4, "Platinum")) == 3))
+)
+
+achievement(
+    title = "Smells Like Burned Rubber", type = "",
+    description = "Get all medals in the training lesson \"Tyre Dash!\" in any mode.",
+    id = 622073, badge = "706504", points = 10,
+    trigger = checkSubState(0x05, 0x03) &&
+              ((measured(getMinigameMedal("Tyre Dash!", 1, "Bronze")
+                       + getMinigameMedal("Tyre Dash!", 1, "Silver")
+                       + getMinigameMedal("Tyre Dash!", 1, "Gold")
+                       + getMinigameMedal("Tyre Dash!", 1, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Dash!", 1, "Bronze")
+                   + getMinigameMedal("Tyre Dash!", 1, "Silver")
+                   + getMinigameMedal("Tyre Dash!", 1, "Gold")
+                   + getMinigameMedal("Tyre Dash!", 1, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Dash!", 2, "Bronze")
+                       + getMinigameMedal("Tyre Dash!", 2, "Silver")
+                       + getMinigameMedal("Tyre Dash!", 2, "Gold")
+                       + getMinigameMedal("Tyre Dash!", 2, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Dash!", 2, "Bronze")
+                   + getMinigameMedal("Tyre Dash!", 2, "Silver")
+                   + getMinigameMedal("Tyre Dash!", 2, "Gold")
+                   + getMinigameMedal("Tyre Dash!", 2, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Dash!", 3, "Bronze")
+                       + getMinigameMedal("Tyre Dash!", 3, "Silver")
+                       + getMinigameMedal("Tyre Dash!", 3, "Gold")
+                       + getMinigameMedal("Tyre Dash!", 3, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Dash!", 3, "Bronze")
+                   + getMinigameMedal("Tyre Dash!", 3, "Silver")
+                   + getMinigameMedal("Tyre Dash!", 3, "Gold")
+                   + getMinigameMedal("Tyre Dash!", 3, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Tyre Dash!", 4, "Bronze")
+                       + getMinigameMedal("Tyre Dash!", 4, "Silver")
+                       + getMinigameMedal("Tyre Dash!", 4, "Gold")
+                       + getMinigameMedal("Tyre Dash!", 4, "Platinum") == 4) &&
+                prev(getMinigameMedal("Tyre Dash!", 4, "Bronze")
+                   + getMinigameMedal("Tyre Dash!", 4, "Silver")
+                   + getMinigameMedal("Tyre Dash!", 4, "Gold")
+                   + getMinigameMedal("Tyre Dash!", 4, "Platinum")) == 3))
+)
+
+achievement(
+    title = "Sick Kicks Between Backwards Flicks", type = "",
+    description = "Get all medals in the training lesson \"Bungee Shot!\" in any mode.",
+    id = 622081, badge = "706512", points = 10,
+    trigger = checkSubState(0x05, 0x04) &&
+              ((measured(getMinigameMedal("Bungee Shot!", 1, "Bronze")
+                       + getMinigameMedal("Bungee Shot!", 1, "Silver")
+                       + getMinigameMedal("Bungee Shot!", 1, "Gold")
+                       + getMinigameMedal("Bungee Shot!", 1, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bungee Shot!", 1, "Bronze")
+                   + getMinigameMedal("Bungee Shot!", 1, "Silver")
+                   + getMinigameMedal("Bungee Shot!", 1, "Gold")
+                   + getMinigameMedal("Bungee Shot!", 1, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bungee Shot!", 2, "Bronze")
+                       + getMinigameMedal("Bungee Shot!", 2, "Silver")
+                       + getMinigameMedal("Bungee Shot!", 2, "Gold")
+                       + getMinigameMedal("Bungee Shot!", 2, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bungee Shot!", 2, "Bronze")
+                   + getMinigameMedal("Bungee Shot!", 2, "Silver")
+                   + getMinigameMedal("Bungee Shot!", 2, "Gold")
+                   + getMinigameMedal("Bungee Shot!", 2, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bungee Shot!", 3, "Bronze")
+                       + getMinigameMedal("Bungee Shot!", 3, "Silver")
+                       + getMinigameMedal("Bungee Shot!", 3, "Gold")
+                       + getMinigameMedal("Bungee Shot!", 3, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bungee Shot!", 3, "Bronze")
+                   + getMinigameMedal("Bungee Shot!", 3, "Silver")
+                   + getMinigameMedal("Bungee Shot!", 3, "Gold")
+                   + getMinigameMedal("Bungee Shot!", 3, "Platinum")) == 3) ||
+               (measured(getMinigameMedal("Bungee Shot!", 4, "Bronze")
+                       + getMinigameMedal("Bungee Shot!", 4, "Silver")
+                       + getMinigameMedal("Bungee Shot!", 4, "Gold")
+                       + getMinigameMedal("Bungee Shot!", 4, "Platinum") == 4) &&
+                prev(getMinigameMedal("Bungee Shot!", 4, "Bronze")
+                   + getMinigameMedal("Bungee Shot!", 4, "Silver")
+                   + getMinigameMedal("Bungee Shot!", 4, "Gold")
+                   + getMinigameMedal("Bungee Shot!", 4, "Platinum")) == 3))
+)
+
+achievement(
+    title = "Feeling the Breath of the Dragon", type = "",
+    description = "Perform a Dragon Tornado with Axel and Kevin.",
+    id = 622921, badge = "707415", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Dragon Tornado", "Axel", "Kevin") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "No Fear About Heights", type = "",
+    description = "Perform an Inazuma Drop with Jack and Axel.",
+    id = 623136, badge = "707583", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Inazuma Drop", "Jack", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Strength of Friendship", type = "",
+    description = "Perform an Inazuma-1 with Mark and Axel.",
+    id = 623144, badge = "707620", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Inazuma-1", "Mark", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Chicken Al Dente", type = "",
+    description = "Perform a Fire Rooster with Nathan and Axel.",
+    id = 623138, badge = "707584", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Fire Rooster", "Nathan", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
 //--------------------------------------------------
 // Leaderboards
+
+leaderboard(
+    id = 166442, title = "Bus Pull!",
+    description = "Furthest Distance with 1 Player.",
+    start  = checkSubState(0x05, 0x00) &&
+             getMinigameBusPullPlayerAmount() == 1 &&
+             prev(getMinigameBusPullState()) == 0x06 &&
+             getMinigameBusPullState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBusPullDistance() * 100,
+    format = "FIXED2",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166443, title = "Bus Pull!",
+    description = "Furthest Distance with 2 Players.",
+    start  = checkSubState(0x05, 0x00) &&
+             getMinigameBusPullPlayerAmount() == 2 &&
+             prev(getMinigameBusPullState()) == 0x06 &&
+             getMinigameBusPullState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBusPullDistance() * 100,
+    format = "FIXED2",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166444, title = "Bus Pull!",
+    description = "Furthest Distance with 3 Players.",
+    start  = checkSubState(0x05, 0x00) &&
+             getMinigameBusPullPlayerAmount() == 3 &&
+             prev(getMinigameBusPullState()) == 0x06 &&
+             getMinigameBusPullState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBusPullDistance() * 100,
+    format = "FIXED2",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166445, title = "Bus Pull!",
+    description = "Furthest Distance with 4 Players.",
+    start  = checkSubState(0x05, 0x00) &&
+             getMinigameBusPullPlayerAmount() == 4 &&
+             prev(getMinigameBusPullState()) == 0x06 &&
+             getMinigameBusPullState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBusPullDistance() * 100,
+    format = "FIXED2",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166446, title = "Tyre Punch!",
+    description = "Most Points with 1 Player.",
+    start  = checkSubState(0x05, 0x01) &&
+             getMinigameTyrePunchPlayerAmount() == 1 &&
+             prev(getMinigameTyrePunchState()) == 0x06 &&
+             getMinigameTyrePunchState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameTyrePunchPoints(0)
+             + getMinigameTyrePunchPoints(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166447, title = "Tyre Punch!",
+    description = "Most Points with 2 Players.",
+    start  = checkSubState(0x05, 0x01) &&
+             getMinigameTyrePunchPlayerAmount() == 2 &&
+             prev(getMinigameTyrePunchState()) == 0x06 &&
+             getMinigameTyrePunchState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameTyrePunchPoints(0)
+             + getMinigameTyrePunchPoints(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166448, title = "Tyre Punch!",
+    description = "Most Points with 3 Players.",
+    start  = checkSubState(0x05, 0x01) &&
+             getMinigameTyrePunchPlayerAmount() == 3 &&
+             prev(getMinigameTyrePunchState()) == 0x06 &&
+             getMinigameTyrePunchState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameTyrePunchPoints(0)
+             + getMinigameTyrePunchPoints(1)
+             + getMinigameTyrePunchPoints(2),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166449, title = "Tyre Punch!",
+    description = "Most Points with 4 Players.",
+    start  = checkSubState(0x05, 0x01) &&
+             getMinigameTyrePunchPlayerAmount() == 4 &&
+             prev(getMinigameTyrePunchState()) == 0x06 &&
+             getMinigameTyrePunchState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameTyrePunchPoints(0)
+             + getMinigameTyrePunchPoints(1)
+             + getMinigameTyrePunchPoints(2)
+             + getMinigameTyrePunchPoints(3),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166450, title = "Volley!",
+    description = "Most Points with 1 Player.",
+    start  = checkSubState(0x05, 0x02) &&
+             getMinigameVolleyPlayerAmount() == 1 &&
+             prev(getMinigameVolleyState()) == 0x07 &&
+             getMinigameVolleyState() == 0x08,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameVolleyPoints(0)
+             + getMinigameVolleyPoints(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166451, title = "Volley!",
+    description = "Most Points with 2 Player.",
+    start  = checkSubState(0x05, 0x02) &&
+             getMinigameVolleyPlayerAmount() == 2 &&
+             prev(getMinigameVolleyState()) == 0x07 &&
+             getMinigameVolleyState() == 0x08,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameVolleyPoints(0)
+             + getMinigameVolleyPoints(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166452, title = "Volley!",
+    description = "Most Points with 3 Player.",
+    start  = checkSubState(0x05, 0x02) &&
+             getMinigameVolleyPlayerAmount() == 3 &&
+             prev(getMinigameVolleyState()) == 0x07 &&
+             getMinigameVolleyState() == 0x08,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameVolleyPoints(0)
+             + getMinigameVolleyPoints(1)
+             + getMinigameVolleyPoints(2),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166453, title = "Volley!",
+    description = "Most Points with 4 Player.",
+    start  = checkSubState(0x05, 0x02) &&
+             getMinigameVolleyPlayerAmount() == 4 &&
+             prev(getMinigameVolleyState()) == 0x07 &&
+             getMinigameVolleyState() == 0x08,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameVolleyPoints(0)
+             + getMinigameVolleyPoints(1)
+             + getMinigameVolleyPoints(2)
+             + getMinigameVolleyPoints(3),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166457, title = "Tyre Dash!",
+    description = "Fastest Average Time with 1 Player.",
+    start  = checkSubState(0x05, 0x03) &&
+             getMinigameTyreDashPlayerAmount() == 1 &&
+             prev(getMinigameTyreDashState()) == 0x08 &&
+             getMinigameTyreDashState() == 0x09,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = (getMinigameTyreDashTime(0) * (1 / 19.2)
+              + getMinigameTyreDashTime(1) * (1 / 19.2)) / 2,
+    format = "MILLISECS",
+    lower_is_better = true
+)
+
+leaderboard(
+    id = 166458, title = "Tyre Dash!",
+    description = "Fastest Average Time with 2 Players.",
+    start  = checkSubState(0x05, 0x03) &&
+             getMinigameTyreDashPlayerAmount() == 2 &&
+             prev(getMinigameTyreDashState()) == 0x08 &&
+             getMinigameTyreDashState() == 0x09,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = (getMinigameTyreDashTime(0) * (1 / 19.2)
+              + getMinigameTyreDashTime(1) * (1 / 19.2)) / 2,
+    format = "MILLISECS",
+    lower_is_better = true
+)
+
+leaderboard(
+    id = 166459, title = "Tyre Dash!",
+    description = "Fastest Average Time with 3 Players.",
+    start  = checkSubState(0x05, 0x03) &&
+             getMinigameTyreDashPlayerAmount() == 3 &&
+             prev(getMinigameTyreDashState()) == 0x08 &&
+             getMinigameTyreDashState() == 0x09,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = (getMinigameTyreDashTime(0) * (1 / 19.2)
+              + getMinigameTyreDashTime(1) * (1 / 19.2)
+              + getMinigameTyreDashTime(2) * (1 / 19.2)) / 3,
+    format = "MILLISECS",
+    lower_is_better = true
+)
+
+leaderboard(
+    id = 166460, title = "Tyre Dash!",
+    description = "Fastest Average Time with 4 Players.",
+    start  = checkSubState(0x05, 0x03) &&
+             getMinigameTyreDashPlayerAmount() == 4 &&
+             prev(getMinigameTyreDashState()) == 0x08 &&
+             getMinigameTyreDashState() == 0x09,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = (getMinigameTyreDashTime(0) * (1 / 19.2)
+              + getMinigameTyreDashTime(1) * (1 / 19.2)
+              + getMinigameTyreDashTime(2) * (1 / 19.2)
+              + getMinigameTyreDashTime(3) * (1 / 19.2)) / 4,
+    format = "MILLISECS",
+    lower_is_better = true
+)
+
+leaderboard(
+    id = 166461, title = "Bungee Shot!",
+    description = "Most Goals with 1 Player.",
+    start  = checkSubState(0x05, 0x04) &&
+             getMinigameBungeeShotPlayerAmount() == 1 &&
+             prev(getMinigameBungeeShotState()) == 0x06 &&
+             getMinigameBungeeShotState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBungeeShotGoals(0)
+             + getMinigameBungeeShotGoals(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166462, title = "Bungee Shot!",
+    description = "Most Goals with 2 Players.",
+    start  = checkSubState(0x05, 0x04) &&
+             getMinigameBungeeShotPlayerAmount() == 2 &&
+             prev(getMinigameBungeeShotState()) == 0x06 &&
+             getMinigameBungeeShotState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBungeeShotGoals(0)
+             + getMinigameBungeeShotGoals(1),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166463, title = "Bungee Shot!",
+    description = "Most Goals with 3 Players.",
+    start  = checkSubState(0x05, 0x04) &&
+             getMinigameBungeeShotPlayerAmount() == 3 &&
+             prev(getMinigameBungeeShotState()) == 0x06 &&
+             getMinigameBungeeShotState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBungeeShotGoals(0)
+             + getMinigameBungeeShotGoals(1)
+             + getMinigameBungeeShotGoals(2),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 166464, title = "Bungee Shot!",
+    description = "Most Goals with 4 Players.",
+    start  = checkSubState(0x05, 0x04) &&
+             getMinigameBungeeShotPlayerAmount() == 4 &&
+             prev(getMinigameBungeeShotState()) == 0x06 &&
+             getMinigameBungeeShotState() == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameBungeeShotGoals(0)
+             + getMinigameBungeeShotGoals(1)
+             + getMinigameBungeeShotGoals(2)
+             + getMinigameBungeeShotGoals(3),
+    format = "VALUE",
+    lower_is_better = false
+)
 
 //--------------------------------------------------
 // Rich Presence
