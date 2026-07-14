@@ -502,7 +502,7 @@ function check2CharactersPerformingSpecialMove(specialMoveID, character1, charac
            codeCharacter2ID
 }
 
-function check3CharactersPerformingSpecialMove(specialMoveID, character1, character2, character2) {
+function check3CharactersPerformingSpecialMove(specialMoveID, character1, character2, character3) {
     codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMoveID), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
     codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
                                                                                                                             dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID ||
@@ -1283,7 +1283,7 @@ achievement(
 achievement(
     title = "Fiercy Strategies Make Everyone Look Cool", type = "",
     description = "Win an tournament of 8 teams by using Chaos with each match being against strong COMs and half length being 5 minutes.",
-    id = 622877, badge = "707244", points = 25,
+    id = 622877, badge = "708261", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
                 getTeamIDOfTournamentTeam(1) == 0x06) ||
@@ -1612,7 +1612,7 @@ achievement(
 
 achievement(
     title = "Feeling the Breath of the Dragon", type = "",
-    description = "Perform a Dragon Tornado with Axel and Kevin.",
+    description = "Perform Dragon Tornado with Axel and Kevin.",
     id = 622921, badge = "707415", points = 2,
     trigger = checkGameState(0x03) &&
               getMatchPhase() == prev(getMatchPhase()) &&
@@ -1632,7 +1632,7 @@ achievement(
 
 achievement(
     title = "No Fear About Heights", type = "",
-    description = "Perform an Inazuma Drop with Jack and Axel.",
+    description = "Perform Inazuma Drop with Jack and Axel.",
     id = 623136, badge = "707583", points = 2,
     trigger = checkGameState(0x03) &&
               getMatchPhase() == prev(getMatchPhase()) &&
@@ -1652,7 +1652,7 @@ achievement(
 
 achievement(
     title = "Strength of Friendship", type = "",
-    description = "Perform an Inazuma-1 with Mark and Axel.",
+    description = "Perform Inazuma-1 with Mark and Axel.",
     id = 623144, badge = "707620", points = 3,
     trigger = checkGameState(0x03) &&
               getMatchPhase() == prev(getMatchPhase()) &&
@@ -1671,12 +1671,532 @@ achievement(
 )
 
 achievement(
+    title = "Three Turn Two Into One", type = "",
+    description = "Perform Inazuma-1 Drop with Mark, Jack and Axel.",
+    id = 623252, badge = "708091", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Inazuma-1 Drop", "Mark", "Jack", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
     title = "Chicken Al Dente", type = "",
-    description = "Perform a Fire Rooster with Nathan and Axel.",
+    description = "Perform Fire Rooster with Nathan and Axel.",
     id = 623138, badge = "707584", points = 2,
     trigger = checkGameState(0x03) &&
               getMatchPhase() == prev(getMatchPhase()) &&
               check2CharactersPerformingSpecialMove("Fire Rooster", "Nathan", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Hail of Lightning Strikes", type = "",
+    description = "Perform Inazuma Break with Mark, Axel and Jude.",
+    id = 623253, badge = "708092", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Inazuma Break", "Mark", "Axel", "Jude") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Granting a Horse Its Wings", type = "",
+    description = "Perform Tri-Pegasus with Mark, Bobby and Erik.",
+    id = 623254, badge = "708107", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Tri-Pegasus", "Mark", "Bobby", "Erik") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Born to Burn", type = "",
+    description = "Perform The Phoenix with Mark, Bobby and Erik.",
+    id = 623270, badge = "708109", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("The Phoenix", "Mark", "Bobby", "Erik") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Royal Fire Twins", type = "",
+    description = "Perform Twin Boost F with Axel and Jude.",
+    id = 623272, badge = "708110", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Twin Boost F", "Axel", "Jude") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Dragon in the Snowstorm", type = "",
+    description = "Perform Wyvern Blizzard with Axel and Jude.",
+    id = 623273, badge = "708236", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Wyvern Blizzard", "Kevin", "Froste") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Wings of Love", type = "",
+    description = "Perform Butterfly Trance with Tori and Hartland.",
+    id = 623305, badge = "708248", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Butterfly Trance", "Tori", "Hartland") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Royal Roots Inside", type = "",
+    description = "Perform Death Zone 2 with Mark, Bobby and Jude.",
+    id = 623310, badge = "708253", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Death Zone 2", "Mark", "Bobby", "Jude") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Thermal Shock", type = "",
+    description = "Perform Fire Blizzard with Torch and Gazelle.",
+    id = 623350, badge = "708262", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Fire Blizzard", "Torch", "Gazelle") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Tower of Lights", type = "",
+    description = "Perform Perfect Tower with Kane, Banyan and Tori.",
+    id = 623376, badge = "708310", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Perfect Tower", "Kane", "Banyan", "Tori") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Ultimate Boundary Break", type = "",
+    description = "Perform Supernova with Xene, Bellatrix and Wittz.",
+    id = 623402, badge = "708336", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Supernova", "Xene", "Bellatrix", "Wittz") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "First Penguin on the Moon", type = "",
+    description = "Perform Space Penguin with Xene, Bellatrix and Wittz.",
+    id = 623409, badge = "708344", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Space Penguin", "Xene", "Bellatrix", "Wittz") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Temperature Gradient Blast", type = "",
+    description = "Perform Cross Fire with Axel and Froste.",
+    id = 623412, badge = "708348", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Cross Fire", "Axel", "Froste") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "United We Are Strong", type = "",
+    description = "Perform The Earth with Mark, Axel and Froste.",
+    id = 623413, badge = "708349", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("The Earth", "Mark", "Axel", "Froste") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Drop Kick From the Sky", type = "",
+    description = "Perform Shooting Star with Timmy and Sam.",
+    id = 623531, badge = "708563", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Shooting Star", "Timmy", "Sam") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Coordination Is the Key", type = "",
+    description = "Perform Dual Smash with Jim and Feldt.",
+    id = 623534, badge = "708564", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Dual Smash", "Jim", "Feldt") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Eye of the Hurricane", type = "",
+    description = "Perform Revolution V with Steve and Max.",
+    id = 623537, badge = "708568", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Revolution V", "Steve", "Max") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Born In Darkness", type = "",
+    description = "Perform Dark Phoenix with Nathan, Max and Kevin.",
+    id = 623535, badge = "708566", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Dark Phoenix", "Nathan", "Max", "Kevin") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Triple Kick Off", type = "",
+    description = "Perform Triple Boost with Nathan, Tod and Sam.",
+    id = 623602, badge = "708633", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Triple Boost", "Nathan", "Tod", "Sam") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Perfect Balance of Three", type = "",
+    description = "Perform Triangle Z with Quagmire, Zell and Wittz.",
+    id = 623410, badge = "708345", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Triangle Z", "Quagmire", "Zell", "Wittz") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "King of the Castle", type = "",
+    description = "Perform Infinite Wall with King, Bargie and Hillvalley.",
+    id = 623755, badge = "708718", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Infinite Wall", "King", "Bargie", "Hillvalley") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Howling Wind and Thunderstorms", type = "",
+    description = "Perform Thunder Beast with Froste and Stoutberg.",
+    id = 623758, badge = "708752", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Thunder Beast", "Froste", "Stoutberg") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Acrobatic Air Screw", type = "",
+    description = "Perform Whirlwind Drop with Nathan and Jack.",
+    id = 623760, badge = "708753", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Whirlwind Drop", "Nathan", "Jack") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Black Hole Into the Void", type = "",
+    description = "Perform Field of Force with Jude and Stonewall.",
+    id = 623762, badge = "708754", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Field of Force", "Jude", "Stonewall") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "He Who Banished the Beast", type = "",
+    description = "Perform Tiger Storm with Axel and Hobbes.",
+    id = 623763, badge = "708768", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Tiger Storm", "Axel", "Hobbes") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Deity of Another Galaxy", type = "",
+    description = "Perform Chaos Break with Aphrodite, Beacons and Whitingale.",
+    id = 623765, badge = "708778", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Chaos Break", "Aphrodite", "Beacons", "Whitingale") &&
               ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
                 __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
                          getTeamSlotOfPlayer("Player 2") == 0x00 ||
