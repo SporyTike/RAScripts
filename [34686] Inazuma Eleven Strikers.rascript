@@ -19,6 +19,7 @@ mem_MatchState          = 0x0040c1fc
 mem_Team1Goals          = 0x0040c1f8
 mem_Team2Goals          = 0x0040c1f9
 mem_StadiumID           = 0x004233dc
+mem_LastSpecialMoveID   = 0x0040c240
 
 mem_MGSlot1State        = 0x004233a8
 mem_MGSlot1CharID       = 0x004233ac
@@ -29,6 +30,7 @@ mem_MGSlot3CharID       = 0x004233c4
 mem_MGSlot4State        = 0x004233cc
 mem_MGSlot4CharID       = 0x004233d0
 
+mem_GameRuntime         = 0x003e9e0c
 mem_InazumaPoints       = 0x004bd0cc
 mem_SupporterFlags      = 0x004bd0c0
 mem_PlayerBuyableFlags  = 0x004bcfb4
@@ -48,6 +50,8 @@ mem_DifficultyCOM       = 0x004233ed
 mem_HalfTime            = 0x00420d48
 mem_ExtraTimePenalties  = 0x00420d43
 mem_SpecialShotsPerTeam = 0x00409535
+mem_teamSlot1ID         = 0x004bd14c
+mem_KitUnlockFlags      = 0x004bd05b
 
 mem_PointerBusPull      = 0x003e98c0
 mem_PointerTyrePunch    = 0x003e98a8
@@ -56,11 +60,17 @@ mem_PointerTyreDash     = 0x003e98b8
 mem_PointerBungeeShot   = 0x003e9970
 mem_PointerTournament   = 0x003e9a68
 mem_PointerSpecialMove  = 0x003e9730
+mem_PointerPenaltyData  = 0x003e9938
+mem_PointerTeamData1    = 0x003f67d0
 
 pointerMask = 0x3fffffff
 
 //--------------------------------------------------
 // Functions
+
+function pseudoImpossibleCondition() {
+    return checkGameState(0x100)
+}
 
 function checkGameState(GameState) {
     return dword_be(mem_GameState) == GameState
@@ -102,6 +112,16 @@ function getTeamGoals(team) {
     return byte(address)
 }
 
+function getTeamPenaltyGoals(team) {
+    if (team == "Team 1") {
+        address = (dword_be(mem_PointerPenaltyData) & pointerMask) + 0xD0
+    }
+    if (team == "Team 2") {
+        address = (dword_be(mem_PointerPenaltyData) & pointerMask) + 0xD4
+    }
+    return dword_be(address)
+}
+
 function getStadiumID() {
     return dword_be(mem_StadiumID)
 }
@@ -120,6 +140,10 @@ function getPhaseTime() {
 
 function getMatchState() {
     return dword_be(mem_MatchState)
+}
+
+function getPenaltyState() {
+    return dword_be((dword_be(mem_PointerPenaltyData) & pointerMask) + 0x0C)
 }
 
 function getMinigamePlayerAmount() {
@@ -480,7 +504,6 @@ function checkTournamentChallengeWin(totalPlayers) {
 }
 
 function getTeamStatSpecialShots(team) {
-    
     if (team == "Team 1") {
         index = (0 + getMatchPhase()) % 2
         return byte(mem_SpecialShotsPerTeam + (0x3F4 * index))
@@ -491,19 +514,35 @@ function getTeamStatSpecialShots(team) {
     }
 }
 
-function check2CharactersPerformingSpecialMove(specialMoveID, character1, character2) {
-    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMoveID), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
+function getLastSpecialMoveID() {
+    return dword_be(mem_LastSpecialMoveID)
+}
+
+function getLastKeeperSpecialMoveSuccessState() {
+    return byte(mem_LastSpecialMoveID + 0x05)
+}
+
+function check1CharacterPerformingSpecialMove(specialMove, character1) {
+    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMove), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
+    codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID))
+    
+    return codeSpecialMoveID &&
+           codeCharacter1ID
+}
+
+function check2CharactersPerformingSpecialMove(specialMove, character1, character2) {
+    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMove), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
     codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
-                                                                                                                            dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID))
+                                                                                                                           dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID))
     codeCharacter2ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character2), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
                                                                                                                             dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID))
     return codeSpecialMoveID &&
            codeCharacter1ID &&
            codeCharacter2ID
 }
-
-function check3CharactersPerformingSpecialMove(specialMoveID, character1, character2, character3) {
-    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMoveID), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
+ 
+function check3CharactersPerformingSpecialMove(specialMove, character1, character2, character3) {
+    codeSpecialMoveID = any_of(array_filter(specialMoveIDs, ID => specialMoveIDs[ID] == specialMove), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB0) == ID))
     codeCharacter1ID  = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character1), ID => __ornext(dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB4) == ID ||
                                                                                                                             dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xAB8) == ID ||
                                                                                                                             dword_be((dword_be(mem_PointerSpecialMove) & pointerMask) + 0xABC) == ID))
@@ -517,6 +556,196 @@ function check3CharactersPerformingSpecialMove(specialMoveID, character1, charac
            codeCharacter1ID &&
            codeCharacter2ID &&
            codeCharacter3ID
+}
+
+function getCharacterIDOfTeamSlot(slot) {
+    slot = slot - 1
+    return dword_be(mem_teamSlot1ID + (slot * 40))
+}
+
+function checkCharactersInTeamChanged() {
+    return getCharacterIDOfTeamSlot(01) != prev(getCharacterIDOfTeamSlot(01)) ||
+           getCharacterIDOfTeamSlot(02) != prev(getCharacterIDOfTeamSlot(02)) ||
+           getCharacterIDOfTeamSlot(03) != prev(getCharacterIDOfTeamSlot(03)) ||
+           getCharacterIDOfTeamSlot(04) != prev(getCharacterIDOfTeamSlot(04)) ||
+           getCharacterIDOfTeamSlot(05) != prev(getCharacterIDOfTeamSlot(05)) ||
+           getCharacterIDOfTeamSlot(06) != prev(getCharacterIDOfTeamSlot(06)) ||
+           getCharacterIDOfTeamSlot(07) != prev(getCharacterIDOfTeamSlot(07)) ||
+           getCharacterIDOfTeamSlot(08) != prev(getCharacterIDOfTeamSlot(08)) ||
+           getCharacterIDOfTeamSlot(09) != prev(getCharacterIDOfTeamSlot(09)) ||
+           getCharacterIDOfTeamSlot(10) != prev(getCharacterIDOfTeamSlot(10)) ||
+           getCharacterIDOfTeamSlot(11) != prev(getCharacterIDOfTeamSlot(11)) ||
+           getCharacterIDOfTeamSlot(12) != prev(getCharacterIDOfTeamSlot(12)) ||
+           getCharacterIDOfTeamSlot(13) != prev(getCharacterIDOfTeamSlot(13)) ||
+           getCharacterIDOfTeamSlot(14) != prev(getCharacterIDOfTeamSlot(14)) ||
+           getCharacterIDOfTeamSlot(15) != prev(getCharacterIDOfTeamSlot(15)) ||
+           getCharacterIDOfTeamSlot(16) != prev(getCharacterIDOfTeamSlot(16))
+}
+
+function calculateTeamSize() {
+    return getCharacterIDOfTeamSlot(01) / getCharacterIDOfTeamSlot(01)
+         + getCharacterIDOfTeamSlot(02) / getCharacterIDOfTeamSlot(02)
+         + getCharacterIDOfTeamSlot(03) / getCharacterIDOfTeamSlot(03)
+         + getCharacterIDOfTeamSlot(04) / getCharacterIDOfTeamSlot(04)
+         + getCharacterIDOfTeamSlot(05) / getCharacterIDOfTeamSlot(05)
+         + getCharacterIDOfTeamSlot(06) / getCharacterIDOfTeamSlot(06)
+         + getCharacterIDOfTeamSlot(07) / getCharacterIDOfTeamSlot(07)
+         + getCharacterIDOfTeamSlot(08) / getCharacterIDOfTeamSlot(08)
+         + getCharacterIDOfTeamSlot(09) / getCharacterIDOfTeamSlot(09)
+         + getCharacterIDOfTeamSlot(10) / getCharacterIDOfTeamSlot(10)
+         + getCharacterIDOfTeamSlot(11) / getCharacterIDOfTeamSlot(11)
+         + getCharacterIDOfTeamSlot(12) / getCharacterIDOfTeamSlot(12)
+         + getCharacterIDOfTeamSlot(13) / getCharacterIDOfTeamSlot(13)
+         + getCharacterIDOfTeamSlot(14) / getCharacterIDOfTeamSlot(14)
+         + getCharacterIDOfTeamSlot(15) / getCharacterIDOfTeamSlot(15)
+         + getCharacterIDOfTeamSlot(16) / getCharacterIDOfTeamSlot(16)
+}
+
+function checkCharacterIDInTeam(characterID) {
+    index = remembered((dword_be(mem_GameRuntime) % 16) + 1)
+    return getCharacterIDOfTeamSlot(index) == characterID
+}
+
+function checkAllVersionsOfCharacterInTeam(character) {
+    code = any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character), ID => __ornext(checkCharacterIDInTeam(ID)))
+    return code
+}
+
+function checkQuadrupleTripletsCombination() {
+    return never(tally(6, once(__ornext(checkAllVersionsOfCharacterInTeam("Mark"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Nathan"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Jack"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Tod"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Axel"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Kevin"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Bobby"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Jude"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Erik"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Froste"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("Samford"))),
+                          once(__ornext(checkAllVersionsOfCharacterInTeam("King"))))) &&
+           never(!checkAllVersionsOfCharacterInTeam("Mark") &&
+                 !checkAllVersionsOfCharacterInTeam("Nathan") &&
+                 !checkAllVersionsOfCharacterInTeam("Jack") &&
+                 !checkAllVersionsOfCharacterInTeam("Tod") &&
+                 !checkAllVersionsOfCharacterInTeam("Axel") &&
+                 !checkAllVersionsOfCharacterInTeam("Kevin") &&
+                 !checkAllVersionsOfCharacterInTeam("Bobby") &&
+                 !checkAllVersionsOfCharacterInTeam("Jude") &&
+                 !checkAllVersionsOfCharacterInTeam("Erik") &&
+                 !checkAllVersionsOfCharacterInTeam("Froste") &&
+                 !checkAllVersionsOfCharacterInTeam("Samford") &&
+                 !checkAllVersionsOfCharacterInTeam("King"))
+}
+
+function checkAllPlayersAreInTeam(team) {
+    if (team == "Team 1") {
+        team = 0x00
+    }
+    if (team == "Team 2") {
+        team = 0x01
+    }
+    return __ornext(getTeamSlotOfPlayer("Player 1") == team ||
+                    getTeamSlotOfPlayer("Player 1") == 0x03) &&
+           __ornext(getTeamSlotOfPlayer("Player 2") == team ||
+                    getTeamSlotOfPlayer("Player 2") == 0x03) &&
+           __ornext(getTeamSlotOfPlayer("Player 3") == team ||
+                    getTeamSlotOfPlayer("Player 3") == 0x03) &&
+           __ornext(getTeamSlotOfPlayer("Player 4") == team ||
+                    getTeamSlotOfPlayer("Player 4") == 0x03)
+}
+
+function checkCharacterIDOfTeamShotGoal(team, character) {
+    offset = 0
+    if (team == "Team 1") {
+        offset = 0
+    }
+    if (team == "Team 2") {
+        offset = 1
+    }
+    code = always_false()
+    for i in range(0, 99) {
+        address = word_be(mem_SpecialShotsPerTeam + 0x197 + (i * 0x02) + (0x3F4 * offset))
+        code = __ornext(code || any_of(array_filter(characterNicknames, ID => characterNicknames[ID] == character), ID => address == ID))
+    }
+    return code
+}
+
+function checkKeeperShotGoal(team) {
+    if (team == "Team 1") {
+        index = (0 + getMatchPhase()) % 2
+        teamPointer = mem_PointerTeamData1 + 0x00
+    }
+    if (team == "Team 2") {
+        index = (1 + getMatchPhase()) % 2
+        teamPointer = mem_PointerTeamData1 + 0x04
+    }
+    addressTeamGoals       = (byte(mem_Team1Goals + (1 * index)))
+    addressCharIDsShotGoal = word_be(mem_SpecialShotsPerTeam + 0x197 + ((addressTeamGoals - 1) * 0x02) + (0x3F4 * index))
+    
+    return addressTeamGoals > prev(addressTeamGoals) &&
+           ((dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (01 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (01 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (02 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (02 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (03 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (03 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (04 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (04 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (05 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (05 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (06 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (06 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (07 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (07 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (08 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (08 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (09 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (09 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (10 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (10 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (11 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (11 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (12 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (12 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (13 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (13 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (14 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (14 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (15 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (15 - 1))) == 0x00) ||
+            (dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x00 + 0x160 * (16 - 1))) == addressCharIDsShotGoal &&
+             dword_be((dword_be(mem_PointerTeamData1) & pointerMask) + (0x5C + 0x160 * (16 - 1))) == 0x00))
+}
+
+function countKitsUnlocked() {
+    return bit1(mem_KitUnlockFlags - 0x00) * 2
+         + bit2(mem_KitUnlockFlags - 0x00)
+         + bit3(mem_KitUnlockFlags - 0x00)
+         + bit5(mem_KitUnlockFlags - 0x00)
+         + bit6(mem_KitUnlockFlags - 0x00)
+         + bit7(mem_KitUnlockFlags - 0x00)
+         + bit0(mem_KitUnlockFlags - 0x01)
+         + bit1(mem_KitUnlockFlags - 0x01)
+         + bit2(mem_KitUnlockFlags - 0x01)
+         + bit3(mem_KitUnlockFlags - 0x01)
+         + bit4(mem_KitUnlockFlags - 0x01)
+         + bit5(mem_KitUnlockFlags - 0x01)
+         + bit6(mem_KitUnlockFlags - 0x01)
+         + bit0(mem_KitUnlockFlags - 0x02)
+         + bit1(mem_KitUnlockFlags - 0x02)
+         + bit2(mem_KitUnlockFlags - 0x02)
+         + bit3(mem_KitUnlockFlags - 0x02)
+         + bit4(mem_KitUnlockFlags - 0x02)
+         + bit5(mem_KitUnlockFlags - 0x02)
+         + bit6(mem_KitUnlockFlags - 0x02)
+         + bit7(mem_KitUnlockFlags - 0x02)
+         + bit0(mem_KitUnlockFlags - 0x03)
+         + bit1(mem_KitUnlockFlags - 0x03)
+         + bit2(mem_KitUnlockFlags - 0x03)
+         + bit3(mem_KitUnlockFlags - 0x03)
+         + bit4(mem_KitUnlockFlags - 0x03)
+         + bit5(mem_KitUnlockFlags + 0x04)
 }
 
 //--------------------------------------------------
@@ -678,7 +907,7 @@ characterIDs = {
     0x98: ["Malphas",   "Malphas",          "Dark Angel",       ""],
     0x99: ["Gaiel",     "Gaiel",            "Dark Angel",       ""],
     0x9A: ["Thanatos",  "Thanatos",         "Dark Angel",       ""],
-    0x9B: ["Sactus",    "Sanctus",          "Dark Angel",       ""],
+    0x9B: ["Sanctus",   "Sanctus",          "Dark Angel",       ""],
     0x9C: ["Destra",    "Destra",           "Dark Angel",       ""],
     0x9D: ["Silvia",    "Silvia Woods",     "Girl's Team",      ""],
     0x9E: ["Downtown",  "Joaquine Downtown","Girl's Team",      ""],
@@ -730,7 +959,7 @@ characterIDs = {
     0xCE: ["Beacons",   "Claude Beacons",   "Fire Dragon",      ""],
     0xCF: ["Whitingale","Bryce Whitingale", "Fire Dragon",      ""],
     0xD0: ["Gabi",      "Gabriel Garcia",   "New Raimon",       ""],
-    0xD1: ["'J.P.'",    "Jean-Pierre Lapin","New Raimon",       ""],
+    0xD1: ["J.P.",      "Jean-Pierre Lapin","New Raimon",       ""],
 }
 
 characterNicknames = {}
@@ -813,8 +1042,8 @@ specialMoveIDs = {
     0x47: "Mugen the Hand",
     0x48: "Infinite Wall",
     0x49: "Wormhole",
-    0x4A: "", // Normal Keeper Catch
-    0x4B: "", // Normal Keeper Catch
+    0x4A: "Normal Catch",
+    0x4B: "Normal Catch",
     0x4C: "Aikido",
     0x4D: "Illusion Ball",
     0x4E: "Water Veil",
@@ -1190,6 +1419,27 @@ achievement(
 )
 
 achievement(
+    title = "Players From All Over the World", type = "",
+    description = "Scout every character and character version.",
+    id = 624719, badge = "710500", points = 25,
+    trigger = checkGameState(0x04) &&
+              measured(countPlayersScouted() == 198) &&
+              prev(countPlayersScouted()) == 197
+)
+
+achievement(
+    title = "These Will Cost Millions... Just Kit-ting", type = "",
+    description = "Unlock every kit and tracksuit.",
+    id = 624718, badge = "710499", points = 10,
+    trigger = __ornext(checkSubState(0x02, 0x1A) ||
+                       checkGameState(0x03) ||
+                       checkGameState(0x04)) &&
+              measured(countKitsUnlocked() == 28) &&
+              prev(countKitsUnlocked()) >= 26 &&
+              prev(countKitsUnlocked()) <= 27
+)
+
+achievement(
     title = "Secret Admirer of Soccer", type = "",
     description = "Let Aurelia be the manager by using all other available managers in the team.",
     id = 620984, badge = "705546", points = 3,
@@ -1221,8 +1471,30 @@ achievement(
 )
 
 achievement(
+    title = "Years Pass Like We Do the Ball", type = "",
+    description = "Witness a seasonal change inside the club room.",
+    id = 624716, badge = "710497", points = 1,
+    trigger = checkGameState(0x04) &&
+              prev(checkGameState(0x04)) &&
+              getSubState() != prev(getSubState())
+)
+
+achievement(
+    title = "Quadrouple Triplets", type = "",
+    description = "Build a team that contains four characters in three different versions and one character in four different versions.",
+    id = 624490, badge = "710118", points = 10,
+    trigger = calculateTeamSize() == 16 &&
+              checkQuadrupleTripletsCombination() &&
+              ((pseudoImpossibleCondition() &&
+                never(checkCharactersInTeamChanged())) ||
+               (unless(once(!checkGameState(0x04))) &&
+                checkGameState(0x04) &&
+                tally(30, dword_be(mem_GameRuntime) - prev(dword_be(mem_GameRuntime)) == 1)))
+)
+
+achievement(
     title = "Great Team from the Very Beginning", type = "",
-    description = "Win an tournament of 8 teams by using Raimon with each match being against strong COMs and half length being 5 minutes.",    
+    description = "Win a tournament of 8 teams by using Raimon with each match being against strong COMs and half length being 5 minutes.",    
     id = 622873, badge = "707240", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1237,7 +1509,7 @@ achievement(
 
 achievement(
     title = "A Team Born to Win", type = "",
-    description = "Win an tournament of 8 teams by using Royal Academy with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Royal Academy with each match being against strong COMs and half length being 5 minutes.",
     id = 622874, badge = "707241", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1252,7 +1524,7 @@ achievement(
 
 achievement(
     title = "Rise of the Gods", type = "",
-    description = "Win an tournament of 8 teams by using Zeus with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Zeus with each match being against strong COMs and half length being 5 minutes.",
     id = 622875, badge = "707242", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1267,7 +1539,7 @@ achievement(
 
 achievement(
     title = "Not Quite the Number Two", type = "",
-    description = "Win an tournament of 8 teams by using Raimon II with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Raimon II with each match being against strong COMs and half length being 5 minutes.",
     id = 622876, badge = "707243", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1282,7 +1554,7 @@ achievement(
 
 achievement(
     title = "Fiercy Strategies Make Everyone Look Cool", type = "",
-    description = "Win an tournament of 8 teams by using Chaos with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Chaos with each match being against strong COMs and half length being 5 minutes.",
     id = 622877, badge = "708261", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1297,7 +1569,7 @@ achievement(
 
 achievement(
     title = "Not From This World", type = "",
-    description = "Win an tournament of 8 teams by using Alius Academy with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Alius Academy with each match being against strong COMs and half length being 5 minutes.",
     id = 622878, badge = "707245", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1312,7 +1584,7 @@ achievement(
 
 achievement(
     title = "Soldiers of the Dark", type = "",
-    description = "Win an tournament of 8 teams by using Dark Emperors with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Dark Emperors with each match being against strong COMs and half length being 5 minutes.",
     id = 622879, badge = "707246", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1327,7 +1599,7 @@ achievement(
 
 achievement(
     title = "The Best of Japan", type = "",
-    description = "Win an tournament of 8 teams by using Inazuma National with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Inazuma National with each match being against strong COMs and half length being 5 minutes.",
     id = 622880, badge = "707247", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1342,7 +1614,7 @@ achievement(
 
 achievement(
     title = "When Plan B Becomes Plan A", type = "",
-    description = "Win an tournament of 8 teams by using Neo National with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Neo National with each match being against strong COMs and half length being 5 minutes.",
     id = 622881, badge = "707248", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1357,7 +1629,7 @@ achievement(
 
 achievement(
     title = "The Dream Everyone Shares", type = "",
-    description = "Win an tournament of 8 teams by using Int'l Allstars with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Int'l Allstars with each match being against strong COMs and half length being 5 minutes.",
     id = 622882, badge = "707249", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1372,7 +1644,7 @@ achievement(
 
 achievement(
     title = "Sacrifices for the Demon King", type = "",
-    description = "Win an tournament of 8 teams by using Raimon with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Dark Angels with each match being against strong COMs and half length being 5 minutes.",
     id = 622883, badge = "707250", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1387,7 +1659,7 @@ achievement(
 
 achievement(
     title = "Military God Eaters", type = "",
-    description = "Win an tournament of 8 teams by using Team Ogre with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Team Ogre with each match being against strong COMs and half length being 5 minutes.",
     id = 622884, badge = "707251", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1402,7 +1674,7 @@ achievement(
 
 achievement(
     title = "Woman Instincts", type = "",
-    description = "Win an tournament of 8 teams by using Girl's Team with each match being against strong COMs and half length being 5 minutes.",
+    description = "Win a tournament of 8 teams by using Girl's Team with each match being against strong COMs and half length being 5 minutes.",
     id = 622885, badge = "707252", points = 25,
     trigger = checkTournamentChallengeWin(8) &&
               ((getPlayerFlagValueOfTournamentTeam(1) != 0x00 &&
@@ -1413,6 +1685,156 @@ achievement(
                 getTeamIDOfTournamentTeam(3) == 0x0D) ||
                (getPlayerFlagValueOfTournamentTeam(4) != 0x00 &&
                 getTeamIDOfTournamentTeam(4) == 0x0D))
+)
+
+achievement(
+    title = "Nothing to Worry About Generation GO", type = "",
+    description = "Score a goal with Arion, Victor, Riccardo, Gabi and J.P. in a single match before going into a penalty shootout.",
+    id = 624700, badge = "710482", points = 10,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              __ornext(getMatchState() == 0x08 ||
+                       getMatchState() == 0x09) &&
+              getMatchState() == prev(getMatchState()) &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                getMatchPhase() == 0 &&
+                getTeamGoals("Team 1") >= 5 &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Arion") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Victor") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Riccardo") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Gabi") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "J.P.")) ||
+               (checkAllPlayersAreInTeam("Team 1") &&
+                getMatchPhase() == 1 &&
+                getTeamGoals("Team 2") >= 5 &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Arion") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Victor") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Riccardo") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Gabi") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "J.P.")) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                getMatchPhase() == 0 &&
+                getTeamGoals("Team 2") >= 5 &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Arion") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Victor") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Riccardo") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "Gabi") &&
+                checkCharacterIDOfTeamShotGoal("Team 2", "J.P.")) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                getMatchPhase() == 1 &&
+                getTeamGoals("Team 1") >= 5 &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Arion") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Victor") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Riccardo") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "Gabi") &&
+                checkCharacterIDOfTeamShotGoal("Team 1", "J.P.")))
+)
+
+achievement(
+    title = "Four-Eye's Big Day", type = "",
+    description = "Score three goals using Spectacle Crash in a single match.",
+    id = 624715, badge = "710496", points = 3,
+    trigger = never(!checkGameState(0x03)) &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                measured(tally(3, getMatchPhase() == prev(getMatchPhase()) &&
+                                  getTeamGoals("Team 1") > prev(getTeamGoals("Team 1")) &&
+                                  getMatchPhase() % 2 == 0 &&
+                                  prior(getLastSpecialMoveID()) >= 0xC9 &&
+                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
+                                  getLastKeeperSpecialMoveSuccessState() == 0x00,
+                                  getMatchPhase() == prev(getMatchPhase()) &&
+                                  getTeamGoals("Team 2") > prev(getTeamGoals("Team 2")) &&
+                                  getMatchPhase() % 2 == 1 &&
+                                  prior(getLastSpecialMoveID()) >= 0xC9 &&
+                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
+                                  getLastKeeperSpecialMoveSuccessState() == 0x00))) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                measured(tally(3, getMatchPhase() == prev(getMatchPhase()) &&
+                                  getTeamGoals("Team 2") > prev(getTeamGoals("Team 2")) &&
+                                  getMatchPhase() % 2 == 0 &&
+                                  prior(getLastSpecialMoveID()) >= 0xC9 &&
+                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
+                                  getLastKeeperSpecialMoveSuccessState() == 0x00,
+                                  getMatchPhase() == prev(getMatchPhase()) &&
+                                  getTeamGoals("Team 1") > prev(getTeamGoals("Team 1")) &&
+                                  getMatchPhase() % 2 == 1 &&
+                                  prior(getLastSpecialMoveID()) >= 0xC9 &&
+                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
+                                  getLastKeeperSpecialMoveSuccessState() == 0x00))))
+)
+
+achievement(
+    title = "Last Minute Victory", type = "",
+    description = "Score the winning goal in the extra time of the 2nd half.",
+    id = 624704, badge = "710483", points = 4,
+    trigger = never(!checkGameState(0x03)) &&
+              never(getMatchPhase() != 0x01) && 
+              once(getPhaseTime() >= 0x34BC00 &&
+                   prev(getPhaseTime()) < 0x34BC00 &&
+                   getTeamGoals("Team 1") == getTeamGoals("Team 2")) &&
+              trigger_when(getMatchState() == 0x0A) &&
+              trigger_when(getMatchState() != prev(getMatchState())) &&
+              never(prev(getMatchState()) == 0x0A) &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                trigger_when(once(getPhaseTime() >= 0x34BC00 &&
+                                  getTeamGoals("Team 2") > prev(getTeamGoals("Team 2")))) &&
+                trigger_when(getTeamGoals("Team 2") > getTeamGoals("Team 1"))) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                trigger_when(once(getPhaseTime() >= 0x34BC00 &&
+                                  getTeamGoals("Team 1") > prev(getTeamGoals("Team 1")))) &&
+                trigger_when(getTeamGoals("Team 1") > getTeamGoals("Team 2"))))
+              
+)
+
+achievement(
+    title = "No Need for Extravaganza", type = "",
+    description = "Score a goal during a match without using a special move.",
+    id = 624691, badge = "710472", points = 4,
+    trigger = never(!checkGameState(0x03)) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              tally(60, getMatchState() == 0x00) &&
+              never(getMatchState() == 0x0C) &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                getMatchPhase() % 2 == 0 &&
+                getTeamGoals("Team 1") > prev(getTeamGoals("Team 1"))) ||
+               (checkAllPlayersAreInTeam("Team 1") &&
+                getMatchPhase() % 2 == 1 &&
+                getTeamGoals("Team 2") > prev(getTeamGoals("Team 2"))) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                getMatchPhase() % 2 == 0 &&
+                getTeamGoals("Team 2") > prev(getTeamGoals("Team 2"))) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                getMatchPhase() % 2 == 1 &&
+                getTeamGoals("Team 1") > prev(getTeamGoals("Team 1"))))
+)
+
+achievement(
+    title = "Libero Ultimo", type = "",
+    description = "Score a goal during the match by using the own goal keeper.",
+    id = 624713, badge = "710495", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                checkKeeperShotGoal("Team 1")) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                checkKeeperShotGoal("Team 2")))
+)
+
+achievement(
+    title = "Twelve Yards Pressure", type = "",
+    description = "Win a game by winning the penalty shootout.",
+    id = 624692, badge = "710474", points = 4,
+    trigger = checkGameState(0x13B) &&
+              getPenaltyState() == 0x08 &&
+              prev(getPenaltyState()) != 0x08 &&
+              ((checkAllPlayersAreInTeam("Team 1") &&
+                getTeamPenaltyGoals("Team 1") > getTeamPenaltyGoals("Team 2")) ||
+               (checkAllPlayersAreInTeam("Team 2") &&
+                getTeamPenaltyGoals("Team 2") > getTeamPenaltyGoals("Team 1")))
 )
 
 achievement(
@@ -2210,6 +2632,306 @@ achievement(
               
 )
 
+achievement(
+    title = "Colony of Emperors", type = "",
+    description = "Perform Emperor Penguin No. 3 with Jude, Stonewall and Samford.",
+    id = 624053, badge = "709406", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Emperor Penguin No. 3", "Jude", "Stonewall", "Samford") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Colossal Heat Wave", type = "",
+    description = "Perform Grand Fire with Axel, Hobbes and Xavier.",
+    id = 624055, badge = "709407", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Grand Fire", "Axel", "Hobbes", "Xavier") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Hail the Wind God", type = "",
+    description = "Perform The Hurricane with Nathan and Froste.",
+    id = 624077, badge = "709429", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("The Hurricane", "Nathan", "Froste") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "The Shot with Piercing Speed", type = "",
+    description = "Perform Unicorn Boost with Krueger and Keats.",
+    id = 624078, badge = "709432", points = 2,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Unicorn Boost", "Krueger", "Keats") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Midnight Howlers", type = "",
+    description = "Perform Grand Fenrir with Erik, Krueger and Keats.",
+    id = 624091, badge = "709446", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Grand Fenrir", "Erik", "Krueger", "Keats") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Out of the Shadow Realm", type = "",
+    description = "Perform Shadow Ray with Sanctus and Destra.",
+    id = 624094, badge = "709451", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Shadow Ray", "Sanctus", "Destra") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Beginning of a New Day", type = "",
+    description = "Perform The Dawn with Froste and Xavier.",
+    id = 624201, badge = "709853", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("The Dawn", "Froste", "Xavier") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Legendary Strike Out", type = "",
+    description = "Perform God Catch with Mark.",
+    id = 624203, badge = "709854", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check1CharacterPerformingSpecialMove("God Catch", "Mark") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Dimensional Breakthrough", type = "",
+    description = "Perform Big Bang with Jude, Froste and Xavier.",
+    id = 624204, badge = "709855", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Big Bang", "Jude", "Froste", "Xavier") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Roaring Cyclone", type = "",
+    description = "Perform Jet Stream with Mark, Axel and Hobbes.",
+    id = 624207, badge = "709858", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Jet Stream", "Mark", "Axel", "Hobbes") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Legend From the Future", type = "",
+    description = "Perform Prime Legend with Axel and Jude.",
+    id = 624205, badge = "709856", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check2CharactersPerformingSpecialMove("Prime Legend", "Axel", "Jude") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Rampaging Ogre Attack", type = "",
+    description = "Perform Doom Break with Callous, Malice and Lancer.",
+    id = 624208, badge = "709868", points = 5,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("Doom Break", "Callous", "Malice", "Lancer") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Evans by Heart", type = "",
+    description = "Perform Omega Hand with Mark.",
+    id = 624210, badge = "709871", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check1CharacterPerformingSpecialMove("Omega Hand", "Mark") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Plus Minus Discharge", type = "",
+    description = "Perform High Voltage with Luceafăr, L. Trungus and B. Trungus.",
+    id = 624211, badge = "709872", points = 3,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check3CharactersPerformingSpecialMove("High Voltage", "Luceafăr", "L. Trungus", "B. Trungus") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
+achievement(
+    title = "Blazing Soul", type = "",
+    description = "Perform Maximum Fire with Axel.",
+    id = 624206, badge = "709857", points = 4,
+    trigger = checkGameState(0x03) &&
+              getMatchPhase() == prev(getMatchPhase()) &&
+              check1CharacterPerformingSpecialMove("Maximum Fire", "Axel") &&
+              ((getTeamStatSpecialShots("Team 1") > prev(getTeamStatSpecialShots("Team 1")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x00 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x00)) ||
+               (getTeamStatSpecialShots("Team 2") > prev(getTeamStatSpecialShots("Team 2")) &&
+                __ornext(getTeamSlotOfPlayer("Player 1") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 2") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 3") == 0x01 ||
+                         getTeamSlotOfPlayer("Player 4") == 0x01)))  
+              
+)
+
 //--------------------------------------------------
 // Leaderboards
 
@@ -2601,6 +3323,36 @@ rich_presence_conditional_display(checkSubState(0x02, 0x03) ||
                              fallback = matchTypeIDs[1])
 )
 
+rich_presence_conditional_display(checkGameState(0x13B), 
+    "{0} is playing against {2} [{1}-{3}] in the {4} [Penalty] [{5}]",
+        rich_presence_lookup("TeamID", 
+                             getTeamID("Team 1"),
+                             teamIDs, 
+                             fallback = teamIDs[0]),
+        rich_presence_macro("Number",
+                            measured(getTeamPenaltyGoals("Team 1"), when = once(checkGameState(0x13B) &&
+                                                                                getTeamPenaltyGoals("Team 1") == 0 &&
+                                                                                getTeamPenaltyGoals("Team 2") == 0) &&
+                                                                           never(!checkGameState(0x13B)))),
+        rich_presence_lookup("TeamID", 
+                             getTeamID("Team 2"),
+                             teamIDs, 
+                             fallback = teamIDs[0]),
+        rich_presence_macro("Number",
+                            measured(getTeamPenaltyGoals("Team 2"), when = once(checkGameState(0x13B) &&
+                                                                                getTeamPenaltyGoals("Team 1") == 0 &&
+                                                                                getTeamPenaltyGoals("Team 2") == 0) &&
+                                                                           never(!checkGameState(0x13B)))),
+        rich_presence_lookup("StadiumID", 
+                             getStadiumID(),
+                             stadiumIDs, 
+                             fallback = stadiumIDs[1]),
+        rich_presence_lookup("MatchTypeID", 
+                             getMatchType(),
+                             matchTypeIDs, 
+                             fallback = matchTypeIDs[1])
+)
+
 rich_presence_conditional_display(checkSubState(0x02, 0x07), 
     "In the Main Menu"
 )
@@ -2813,3 +3565,5 @@ rich_presence_display(
                                    measured(countManagersForAureliaWithCammy(),
                                             when = bit1(mem_SupporterFlags + 0x07) == 0x01)))
 )
+
+
