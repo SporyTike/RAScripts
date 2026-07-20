@@ -199,7 +199,7 @@ function getCurrentPlayerTeamSlot() {
 }
 
 function getPlayerStars(playerSlot) {
-    return word_be(Mem_Player1PartyData + playerSlot * 0x118 + 0x38)
+    return word_be(Mem_Player1PartyData + getPlayerTeamSlot(playerSlot) * 0x118 + 0x38)
 }
 
 function getCurrentPlayerStars() {
@@ -1725,6 +1725,8 @@ achievement(
                   !getPartyPlayerChanging() &&
                   once(getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces())) &&
                   getCurrentPlayerCoins() > prev(getCurrentPlayerCoins()) &&
+                  never(getCurrentPlayerGreenSpaces() == prev(getCurrentPlayerGreenSpaces()) &&
+                        getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
                   ((!checkPartySubMode("Duel Battle") &&
                      getCurrentPlayerSpaceStanding() == 0x31) ||
                    (!checkPartySubMode("Duel Battle") &&
