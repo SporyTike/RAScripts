@@ -646,12 +646,16 @@ function checkAllPlayersAreInTeam(team) {
         team = 0x01
     }
     return __ornext(getTeamSlotOfPlayer("Player 1") == team ||
+                    getTeamSlotOfPlayer("Player 1") == 0x02 ||
                     getTeamSlotOfPlayer("Player 1") == 0x03) &&
            __ornext(getTeamSlotOfPlayer("Player 2") == team ||
+                    getTeamSlotOfPlayer("Player 2") == 0x02 ||
                     getTeamSlotOfPlayer("Player 2") == 0x03) &&
            __ornext(getTeamSlotOfPlayer("Player 3") == team ||
+                    getTeamSlotOfPlayer("Player 3") == 0x02 ||
                     getTeamSlotOfPlayer("Player 3") == 0x03) &&
            __ornext(getTeamSlotOfPlayer("Player 4") == team ||
+                    getTeamSlotOfPlayer("Player 4") == 0x02 ||
                     getTeamSlotOfPlayer("Player 4") == 0x03)
 }
 
@@ -1735,34 +1739,34 @@ achievement(
     description = "Score three goals using Spectacle Crash in a single match.",
     id = 624715, badge = "710496", points = 3,
     trigger = never(!checkGameState(0x03)) &&
-              ((checkAllPlayersAreInTeam("Team 1") &&
+              ((unless(!checkAllPlayersAreInTeam("Team 1")) &&
                 measured(tally(3, getMatchPhase() == prev(getMatchPhase()) &&
                                   getTeamGoals("Team 1") > prev(getTeamGoals("Team 1")) &&
                                   getMatchPhase() % 2 == 0 &&
                                   prior(getLastSpecialMoveID()) >= 0xC9 &&
-                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) <= 0xCA &&
                                   prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
                                   getLastKeeperSpecialMoveSuccessState() == 0x00,
                                   getMatchPhase() == prev(getMatchPhase()) &&
                                   getTeamGoals("Team 2") > prev(getTeamGoals("Team 2")) &&
                                   getMatchPhase() % 2 == 1 &&
                                   prior(getLastSpecialMoveID()) >= 0xC9 &&
-                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) <= 0xCA &&
                                   prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
                                   getLastKeeperSpecialMoveSuccessState() == 0x00))) ||
-               (checkAllPlayersAreInTeam("Team 2") &&
+               (unless(!checkAllPlayersAreInTeam("Team 2")) &&
                 measured(tally(3, getMatchPhase() == prev(getMatchPhase()) &&
                                   getTeamGoals("Team 2") > prev(getTeamGoals("Team 2")) &&
                                   getMatchPhase() % 2 == 0 &&
                                   prior(getLastSpecialMoveID()) >= 0xC9 &&
-                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) <= 0xCA &&
                                   prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
                                   getLastKeeperSpecialMoveSuccessState() == 0x00,
                                   getMatchPhase() == prev(getMatchPhase()) &&
                                   getTeamGoals("Team 1") > prev(getTeamGoals("Team 1")) &&
                                   getMatchPhase() % 2 == 1 &&
                                   prior(getLastSpecialMoveID()) >= 0xC9 &&
-                                  prior(getLastSpecialMoveID()) >= 0xCA &&
+                                  prior(getLastSpecialMoveID()) <= 0xCA &&
                                   prior(getLastSpecialMoveID()) != getLastSpecialMoveID() &&
                                   getLastKeeperSpecialMoveSuccessState() == 0x00))))
 )
