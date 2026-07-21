@@ -1406,7 +1406,7 @@ achievement(
     title = "Wins Hand Down", type = "",
     description = "Obtain a platinum medal in a friendly match against every teams.",
     id = 621099, badge = "705624", points = 25,
-    trigger = __ornext(checkSubState(0x02, 0x18) ||
+    trigger = __ornext(checkSubState(0x02, 0x1A) ||
                        checkGameState(0x03)) &&
               getMatchType() == 0x04 &&
               measured(calculatePlatinumFriendlyMatchMedals() == 13) &&
@@ -1456,13 +1456,23 @@ achievement(
     title = "Leading Voices", type = "",
     description = "Unlock all five managers for the support team.",
     id = 621324, badge = "705933", points = 3,
-    trigger = checkGameState(0x04) &&
-              ((measured(countManagersForAureliaWithoutCammy() == 5,
+    trigger = __ornext(checkSubState(0x02, 0x1A) ||
+                       checkGameState(0x03) ||
+                       checkGameState(0x04)) &&
+              ((pseudoImpossibleCondition() &&
+                measured(countManagersForAureliaWithoutCammy() == 5,
                          when = bit1(mem_SupporterFlags + 0x07) == 0x00) &&
                 prev(countManagersForAureliaWithoutCammy() == 4)) || 
                (measured(countManagersForAureliaWithCammy() == 5,
                          when = bit1(mem_SupporterFlags + 0x07) == 0x01) &&
-                prev(countManagersForAureliaWithCammy() == 4)))
+                __ornext(getPlayerScoutedFlag(0x9D) > prev(getPlayerScoutedFlag(0x9D)) ||
+                         getPlayerScoutedFlag(0xA0) > prev(getPlayerScoutedFlag(0xA0)) ||
+                         getPlayerScoutedFlag(0xA4) > prev(getPlayerScoutedFlag(0xA4)) ||
+                         getPlayerScoutedFlag(0xA6) > prev(getPlayerScoutedFlag(0xA6)) ||
+                         bit7(mem_SupporterFlags + 0x00) > prev(bit7(mem_SupporterFlags + 0x00)) ||
+                         bit0(mem_SupporterFlags + 0x07) > prev(bit0(mem_SupporterFlags + 0x07)) ||
+                         bit1(mem_SupporterFlags + 0x07) > prev(bit1(mem_SupporterFlags + 0x07)) ||
+                         bit2(mem_SupporterFlags + 0x07) > prev(bit2(mem_SupporterFlags + 0x07)))))
 )
 
 achievement(
