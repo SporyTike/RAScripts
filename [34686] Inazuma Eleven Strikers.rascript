@@ -2228,7 +2228,7 @@ achievement(
 
 achievement(
     title = "Dragon in the Snowstorm", type = "",
-    description = "Perform Wyvern Blizzard with Axel and Jude.",
+    description = "Perform Wyvern Blizzard with Kevin and Froste.",
     id = 623273, badge = "708236", points = 2,
     trigger = checkGameState(0x03) &&
               getMatchPhase() == prev(getMatchPhase()) &&
