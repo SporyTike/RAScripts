@@ -9,10 +9,17 @@ mem_PointerGalleryData  = 0x0003ef60
 mem_PointerGameData     = 0x00038a98
 mem_PointerGameData2    = 0x00038a8c
 mem_PointerGameData3    = 0x00038a90
+mem_PointerGameData4    = 0x00038a94
 mem_PointerPlayerData   = 0x00038a4c
+mem_PointerMatchData    = 0x00038a54
+mem_PointerTeamData     = 0x00035d84
 
 //--------------------------------------------------
 // Functions
+
+function pseudoImpossibleCondition() {
+    return dword(mem_PointerPlayerData) == 0x00FFFFFF
+}
 
 function getGameState() {
     return dword(tbyte(mem_PointerGameData3) + 0x264)
@@ -72,6 +79,57 @@ function getFriendshipPoints() {
 
 function getPlaytime() {
     return dword(tbyte(mem_PointerPlayerData) + 0x1C) / 3600
+}
+
+function getMatchType() {
+    return byte(tbyte(mem_PointerGameData4) + 0x1DE)
+}
+
+function getMatchPhase() {
+    return byte(tbyte(mem_PointerMatchData) + 0x7F)
+}
+
+function getMatchTime() {
+    return dword(tbyte(mem_PointerMatchData) + 0x04)
+}
+
+function checkBattleIsStory(boolean) {
+    if (boolean == true) {
+        return byte(tbyte(mem_PointerMapData) + 0x5B30) == 0x17
+    } 
+    if (boolean == false) {
+        return byte(tbyte(mem_PointerMapData) + 0x5B30) == 0x04
+    }
+}
+
+function getTeamID(teamSlot) {
+    teamSlot = teamSlot - 1
+    return word(tbyte(mem_PointerMatchData) + 0x82 + (teamSlot * 0x02))
+}
+
+function getTeamGoals(teamSlot) {
+    teamSlot = teamSlot - 1
+    return byte(tbyte(mem_PointerMatchData) + 0x88 + teamSlot)
+}
+
+function getTeamBallPossession(teamSlot) {
+    teamSlot = teamSlot - 1
+    return dword(tbyte(mem_PointerGameData4) + 0x15C + (teamSlot * 0x10))
+}
+
+function getTeamSize(teamSlot) {
+    teamSlot = teamSlot - 1
+    code = 0
+    for i in range(0, 15) {
+        address = dword(tbyte(mem_PointerTeamData) + 0x81F0 + (i * 0x04) + (teamSlot * 0x40))
+        code = code 
+             + (address / address)
+    }
+    return code
+}
+
+function getCutsceneState() {
+    return byte(tbyte(mem_PointerGameData3) + 0x102)
 }
 
 //--------------------------------------------------
@@ -1867,18 +1925,344 @@ for characterID in characterIDs {
     characterNicknamesRP[characterID] = characterIDs[characterID][2]
 }
 
+teamIDs = {
+    0x0001: "their own Team",
+    0x0002: "Royal Academy",
+    0x0003: "Occult",
+    0x0004: "Wild",
+    0x0005: "Brainwashing",
+    0x0006: "Otaku",
+    0x0007: "Shuriken",
+    0x0008: "Farm",
+    0x0009: "Kirkwood",
+    0x000A: "Zeus",
+    0x000B: "Inazuma Kids FC",
+    0x000C: "Umbrella",
+    0x000D: "Street Sally's",
+    0x000E: "Inazuma Veterans",
+    0x001F: "Gemini Storm",
+    0x0020: "Epsilon",
+    0x0021: "Genesis",
+    0x0022: "Advanced Epsilon",
+    0x0023: "Secret Service",
+    0x0024: "Alpine",
+    0x0025: "Cloister",
+    0x0026: "Royal Redux",
+    0x0027: "Fauxshore",
+    0x0028: "Mary Times",
+    0x0029: "Dark Emperors",
+    0x002A: "Triple C",
+    0x002B: "Robot Guards",
+    0x002C: "Forest Team",
+    0x002D: "Young Inazuma",
+    0x002F: "Prominence",
+    0x0030: "Diamond Dust",
+    0x0031: "Chaos",
+    0x0032: "Future",
+    0x0033: "Inazuma Veterans",
+    0x0046: "Alius Academy",
+    0x0047: "Enemies",
+    0x0048: "Agents",
+    0x0049: "Delinquents",
+    0x004A: "Agents",
+    0x004B: "Agents",
+    0x004C: "Dora & Friends",
+    0x004D: "Agents",
+    0x004F: "Aiden's Allstars",
+    0x0050: "Alpine",
+    0x0051: "The Nakata Allstars",
+    0x0065: "The Sharp Shooters",
+    0x0066: "The Goal Poachers",
+    0x0067: "The Minnows",
+    0x0068: "The Minnows",
+    0x0069: "The Minnows",
+    0x006A: "The Toe-Pokes",
+    0x006B: "The Midfield Generals",
+    0x006C: "The Playmakers",
+    0x006D: "The Scrappers",
+    0x006E: "The Sweepers",
+    0x006F: "The Offside Trap",
+    0x0070: "The Goal Hangers",
+    0x0071: "The Equalisers",
+    0x0072: "The Underdogs",
+    0x0073: "The Hospital Balls",
+    0x0074: "The One-Twos",
+    0x0075: "The Slick Stepovers",
+    0x0076: "The Cheeky Tricks",
+    0x0077: "The Net Busters",
+    0x0078: "The Six Yard Boxes",
+    0x0079: "The Hat-Tricks",
+    0x007A: "The Comeback Kids",
+    0x007B: "The Onion Bags",
+    0x007C: "The Antlers",
+    0x007D: "The Stag Knights",
+    0x007E: "The 4-4-2s",
+    0x007F: "The Tough Tacklers",
+    0x0080: "The Keepsie-Uppies",
+    0x0081: "The Route Ones",
+    0x0082: "The Does and Don'ts",
+    0x0083: "The Hart Breakers",
+    0x0084: "The Corner Flags",
+    0x0085: "The Local Derbies",
+    0x0086: "The Chocolate Moses",
+    0x0087: "The Rain Dears",
+    0x0088: "The Red Noses",
+    0x0089: "Go On My Venison",
+    0x008A: "The No Eye Deers",
+    0x008B: "Buck 'n' Broncos",
+    0x008C: "The Hind Legs",
+    0x008D: "The Fawn Boxes",
+    0x008E: "The Feint Harted",
+    0x008F: "The Sleighers",
+    0x0090: "The Hoofers",
+    0x0091: "The Hoofers",
+    0x0092: "The Goalden Hind",
+    0x0093: "The Hart and Souls",
+    0x0094: "The Raindoes",
+    0x0095: "The Snow Jokes",
+    0x0096: "The Northern Souls",
+    0x0097: "The Ice Caps",
+    0x0098: "The Ice Caps",
+    0x0099: "The Arctic Foxes",
+    0x009A: "The Ski Masks",
+    0x009B: "The All Whites",
+    0x009C: "The Frost Biters",
+    0x009D: "The Cold Shoulders",
+    0x009E: "The Icy Clearlys",
+    0x009F: "The Sleet and Greets",
+    0x00A0: "The Winter Wonders",
+    0x00A1: "The Polar Scorer",
+    0x00A2: "The North Goals",
+    0x00A3: "The Icy Wasters",
+    0x00A4: "Team Tundra",
+    0x00A5: "The Monk Keys",
+    0x00A6: "The Fine Shrines",
+    0x00A7: "The Praymakers",
+    0x00A8: "The Praymakers",
+    0x00A9: "The Kyoto Pokes",
+    0x00AA: "The Friar Ballers",
+    0x00AB: "Divinal Whistles",
+    0x00AC: "The Temple Tantrums",
+    0x00AD: "The Bad Habits",
+    0x00AE: "The Red Cardinals",
+    0x00AF: "The Pastor Bests",
+    0x00B0: "The Wrap Chores",
+    0x00B1: "The Holy Rollers",
+    0x00B2: "The Par Sons",
+    0x00B3: "The Snow Gunners",
+    0x00B4: "The Non-Prophets",
+    0x00B5: "The Zenzitive Zouls",
+    0x00B6: "The Sandal Vandals",
+    0x00B7: "The Holey Robes",
+    0x00B8: "Ehime Zing",
+    0x00B9: "The Ship Shapers",
+    0x00BA: "The Dirty Divers",
+    0x00BB: "The Dirty Divers",
+    0x00BC: "The Sailor Souls",
+    0x00BD: "The Quay Players",
+    0x00BE: "The Mermaids",
+    0x00BF: "The Back of the Nets",
+    0x00C0: "The Captains",
+    0x00C1: "The Salty Sea Dogs",
+    0x00C2: "The Cruisers",
+    0x00C3: "The Jolly Dodgers",
+    0x00C4: "The Boaters",
+    0x00C5: "The Rusty Stanchions",
+    0x00C6: "The Tankers",
+    0x00C7: "The Sub Maroons",
+    0x00C8: "The Overboards",
+    0x00C9: "The Goal Lubbers",
+    0x00CA: "The Ehime Boys",
+    0x00CB: "The Deep Sea Divers",
+    0x00CC: "The Apples & Pears",
+    0x00CD: "The Dog & Bones",
+    0x00CE: "The China Plates",
+    0x00CF: "The Half Inches",
+    0x00D0: "The Lemon Squeezies",
+    0x00D1: "The Porkie Pies",
+    0x00D2: "The Rosie Iees",
+    0x00D3: "The Skyrockets",
+    0x00D4: "The Break Knives",
+    0x00D5: "The Butcher's Hooks",
+    0x00D6: "The Cream Crackers",
+    0x00D7: "The Tea Leaves",
+    0x00D8: "The April Fools",
+    0x00D9: "The Toby Jugs",
+    0x00DA: "The Babbling Brooks",
+    0x00DB: "The Bacon and Eggs",
+    0x00DC: "The Turtle Doves",
+    0x00DD: "The Hit & Misses",
+    0x00DE: "The Tin Tacks",
+    0x00DF: "The Currant Buns",
+    0x00E0: "The Jam Jars",
+    0x00E1: "The Brown Breads",
+    0x00E2: "The Off Ciders",
+    0x00E3: "The Hay Makers",
+    0x00E4: "The Raging Balls",
+    0x00E5: "The Tractor Beams",
+    0x00E6: "The Heavy Reins",
+    0x00E7: "The Heavy Reins",
+    0x00E8: "The Cattle Nine Tails",
+    0x00E9: "The Donkey Hays",
+    0x00EA: "The Rooster Rulers",
+    0x00EB: "The Shear Skills",
+    0x00EC: "The Bumble B Team",
+    0x00ED: "The Penalty Foxes",
+    0x00EE: "The Hoolig Hens",
+    0x00EF: "The Free-Range Kicks",
+    0x00F0: "The Bakers Eleven",
+    0x00F1: "The Stone Walls",
+    0x00F2: "The Surfer Dudes",
+    0x00F3: "The Beach Bombers",
+    0x00F4: "The Beach Bombers",
+    0x00F5: "The Goal-Hang Tens",
+    0x00F6: "The Rip Curlers",
+    0x00F7: "The Mexican Waves",
+    0x00F8: "The Whirlpools",
+    0x00F9: "The Sure Lines",
+    0x00FA: "Shack Tactics",
+    0x00FB: "Beach Volley Ballers",
+    0x00FC: "The Sandballers",
+    0x00FD: "The Sunburns",
+    0x00FE: "The Easy Coasters",
+    0x00FF: "The Sunset Shooters",
+    0x0100: "The Goal Crabbers",
+    0x0101: "The Shin Barkers",
+    0x0102: "The Lichen Its",
+    0x0103: "The Bootanists",
+    0x0104: "The Firs Eleven",
+    0x0105: "The Tree Surgeons",
+    0x0106: "The Square Roots",
+    0x0107: "The Evergreens",
+    0x0108: "The Hatchet Men",
+    0x0109: "The Vinal Whistles",
+    0x010A: "The Pinecones",
+    0x010B: "The Pinalists",
+    0x010C: "The Football Nuts",
+    0x010D: "The Going Fir Goals",
+    0x010E: "The Goal Sharks",
+    0x01F4: "Neo Royal",
+    0x01F5: "Team Canon",
+    0x01F6: "Alius A",
+    0x01F7: "Grown-Ups",
+    0x01F8: "National Team A",
+    0x01F9: "Inazuma 08",
+    0x01FB: "Front & Back Kings A",
+    0x01FC: "Little Team",
+    0x01FD: "Old Kirkwood",
+    0x01FE: "FF Regional Pack",
+    0x01FF: "FF National Pack",
+    0x0200: "Gods and Aliens",
+    0x0201: "Dark's All Stars",
+    0x0202: "Team Blaze",
+    0x0203: "Alius B",
+    0x0204: "Cutesy A",
+    0x0205: "National Team B",
+    0x0206: "Inazuma 09",
+    0x0207: "National Youth A",
+    0x0208: "Front & Back Kings B",
+    0x0209: "Glasses A",
+    0x020A: "Foreign Students",
+    0x020B: "FF Regional Pick B",
+    0x020C: "FF National Pick B",
+    0x020E: "Team Inazuma A",
+    0x020F: "Raimon Subs A",
+    0x0210: "The Card",
+    0x0211: "Super Otaku",
+    0x0212: "Advanced Occult",
+    0x0213: "Super Triple C",
+    0x0214: "Advanced Kids",
+    0x0215: "Benchers 1",
+    0x0216: "Benchers 2",
+    0x0217: "Benchers 3",
+    0x0218: "Benchers 4",
+    0x0219: "Benchers 5",
+    0x021A: "Benchers 6",
+    0x021B: "Masked Men A",
+    0x021C: "Masked Men B",
+    0x021D: "Strange Guys A",
+    0x021E: "Strange Guys B",
+    0x021F: "Raimon Subs B",
+    0x0220: "National Youth B",
+    0x0221: "Glasses B",
+    0x0222: "Cutesy B",
+    0x0224: "Team Inazuma B",
+    0x0225: "Advanced Secret Service",
+    0x0226: "New Alpine",
+    0x0227: "New Cloister",
+    0x0228: "New Fauxshore",
+    0x0229: "New Mary Times",
+    0x022A: "New Royal Redux",
+    0x022B: "New Gemini",
+    0x022C: "New Epsilon",
+    0x022D: "New Genesis",
+    0x022E: "New Wild",
+    0x022F: "New Brainwashing",
+    0x0230: "New Otaku",
+    0x0231: "New Royal Academy",
+    0x0232: "New Shuriken",
+    0x0233: "New Farm",
+    0x0234: "New Kirkwood",
+    0x0235: "New Zeus",
+    0x0258: "NNW-B01",
+    0x0259: "NNW-B02",
+    0x025A: "NWW-B03",
+    0x025B: "NWW-B04",
+    0x025C: "NWW-B05",
+    0x025D: "NWW-B06",
+    0x025E: "NWW-B07",
+    0x025F: "NWW-B08",
+    0x026C: "NNW-Z01",
+    0x026D: "NNW-Z02",
+    0x026E: "NNW-Z03",
+    0x026F: "NNW-Z04",
+    0x0270: "NNW-Z05",
+    0x0271: "NNW-Z06",
+    0x0272: "NNW-Z07",
+    0x0273: "NNW-Z08",
+    0x0274: "NNW-Z09",
+    0x0275: "NWW-Z10",
+    0x0276: "NWW-Z11",
+    0x0277: "NWW-Z12",
+    0x0278: "NWW-Z13",
+    0x0279: "NWW-Z14",
+    0x027A: "NWW-Z15",
+    0x027B: "NWW-Z16",
+    0x027C: "NWW-Z17",
+    0x027D: "NWW-Z18",
+}
+
 mapIDs = {  // Map ID, Ingame Name, Custom Name => check getCurrentMap() for mapIDHash calculation
-    0x6CF261CD: ["globalmap",   "",                 "on the Inazuma Town Map"],
-    0x72016927: ["mr01i27",     "Hospital 2F",      "in the Inazuma Hospital"],             // River Bank Pitch; Side Event of Julia awakening next to Axel
-    0x72016252: ["mr01b52",     "",                 "in the Football Frontier Stadium"],    // River Bank Pitch; Flashback of Football Frontier victory
-    0x72026203: ["mr02b03",     "River Bank Pitch", "at the River Bank Pitch"],
-    0x72026204: ["mr02b04",     "River Bank",       "at the River Bank"],
-    0x72026205: ["mr02b05",     "Mark's Street",    "in Mark's Street"],
-    0x72026291: ["mr02b91",     "",                 "at the Tower"],                        // River Bank Pitch; Flashback of Mark and Axel meeting at the lake
-    0x72026912: ["mr02i12",     "Mark's House",     "in Mark's House"],
-    0x72076201: ["mr07b01",     "Raimon Gate",      "at the Raimon Gate"],
-    0x72076202: ["mr07b02",     "Raimon Club Room", "at the Raimon Club Rooms"],
-    0x72076902: ["mr07i02",     "Mark's Room",      "in Mark's Room"],
+    0x00000000: ["",            "",                     "inside Mark's Room"],                                    // Story Start
+    0x6CF261CD: ["globalmap",   "",                     "traveling to another Location"],
+    0x72016927: ["mr01i27",     "Hospital 2F",          "inside the Inazuma Hospital"],
+    0x72016929: ["mr01i29",     "Hospital Reception",   "inside the Inazuma Hospital"],
+    0x72016252: ["mr01b52",     "",                     "at the Raimon Gate"],                  // River Bank Pitch; Flashback of Football Frontier victory
+    0x72016207: ["mr01b07",     "Inazuma Hospital",     "at the Inazuma Hospital"],
+    0x72026203: ["mr02b03",     "River Bank Pitch",     "at the River Bank Pitch"],
+    0x72026204: ["mr02b04",     "River Bank",           "at the River Bank"],
+    0x72026205: ["mr02b05",     "Mark's Street",        "in Mark's Street"],
+    0x72026207: ["mr02b07",     "Inazuma Station",      "at the Inazuma Station"],
+    0x72026291: ["mr02b91",     "",                     "at the Tower"],                        // River Bank Pitch; Flashback of Mark and Axel meeting at the lake
+    0x72026912: ["mr02i12",     "Mark's House",         "inside Mark's House"],
+    0x72026913: ["mr02i13",     "G-Mart",               "inside the G-Mart"],
+    0x72026914: ["mr02i14",     "Chemist",              "inside the Inazuma Station Chemist"],
+    0x72076201: ["mr07b01",     "Raimon Gate",          "at the Raimon Gate"],
+    0x72076202: ["mr07b02",     "Raimon Club Room",     "at the Raimon Club Rooms"],
+    0x72076204: ["mr07b04",     "Raimon Gate",          "at the Raimon Gate"],
+    0x72076205: ["mr07b05",     "Raimon Club Room",     "at the Raimon Club Rooms"],
+    0x72076901: ["mr07i01",     "Governor's Bunker",    "inside the Governor's Bunker"],
+    0x72076902: ["mr07i02",     "Mark's Room",          "inside Mark's Room"],
+    0x72076903: ["mr07i03",     "Hospital 1F",          "inside the Inazuma Hospital"],
+    0x72076906: ["mr07i06",     "Outside Bunker",       "outside the Governor's Bunker"],
+    0x72096202: ["mr09b02",     "Deer Park - Statue",   "in the Deer Park"],
+    0x72086201: ["mr08b01",     "Umbrella Junior High", "at the Umbrella Junior High"],
+    0x72086203: ["mr08b03",     "Umbrella Junior High", "at the Umbrella Junior High"],
+    0x72096203: ["mr09b03",     "Nara - East",          "in Nara"],
+    0x72186200: ["mr18b00",     "",                     "at the Raimon Gate"],                  // Raimon Gate; Inazuma Bus starts to go to Nara
+    0x72186201: ["mr18b01",     "",                     "arriving in Nara"],
+    0x72186202: ["mr18b02",     "",                     "arriving in Tokyo"],
+    0x72996903: ["mr99i03",     "Inazuma Bus",          "inside the Inazuma Bus"],
 }
 
 mapIDHashes = {}
@@ -1922,17 +2306,74 @@ achievement(
     id = 626092, badge = "711825", points = 2,
     trigger = checkNonDebug() &&
               checkMapID("mr07b01") &&
-              getStoryProgress() == 0x29cc &&
-              getMovieFlag(0x00, 1) > prev(getMovieFlag(0x00, 1))
+              getChapter() == 0x01 &&
+              getCutsceneState() == 0x56 &&
+              prev(getCutsceneState()) == 0x55
+)
+
+achievement(
+    title = "So Fast They Never Got a Ball", type = "missable",
+    description = "In Chapter 1 during the 1st half of the match against Gemini Storm let the opponent team not get possession of the ball in the first 15 minutes.",
+    id = 626512, badge = "712561", points = 5,
+    trigger = getGameState() >= 0x07 &&
+              getGameState() <= 0x11 &&
+              checkMapID("mr08b01") &&
+              getMatchPhase() <= 0x01 &&
+              checkBattleIsStory(false) &&
+              getTeamID(2) == 0x1F &&
+              getChapter() == 0x01 &&
+              trigger_when(getMatchTime() >= 0x6978 &&
+                           prev(getMatchTime() < 0x6978)) &&
+              getTeamBallPossession(2) == 0 &&
+              getTeamSize(1) == 12
+)
+
+achievement(
+    title = "Adventure Trip Through Japan", type = "progression",
+    description = "Finish Chapter 1.",
+    id = 626921, badge = "712933", points = 10,
+    trigger = checkNonDebug() &&
+              checkMapID("mr09b02") &&
+              getChapter() == 0x02 &&
+              getCutsceneState() == 0x97 &&
+              prev(getCutsceneState()) == 0x96
 )
 
 //--------------------------------------------------
 // Rich Presence
 
-rich_presence_conditional_display(getGameState() == 0x02 ||
-                                  getGameState() == 0x04 ||
-                                  getGameState() == 0x05, 
+rich_presence_conditional_display(dword(mem_PointerGameData3) != 0x00 &&
+                                  ((getGameState() <= 0x05 &&
+                                    getGameState() != 0x02 &&
+                                    getGameState() != 0x03) ||
+                                   (getGameState() == 0x02 &&
+                                    prior(getGameState() != 0x09)) ||
+                                   (getGameState() == 0x03 &&
+                                    prior(getGameState() != 0x06))), 
     "In the Titlescreen"
+)
+
+rich_presence_conditional_display(dword(mem_PointerGameData3) != 0x00 &&
+                                  getGameState() >= 0x06 &&
+                                  getMatchType() != 0x00, 
+    "Raimon Football Club is playing against {0} [{1}-{2}] [✴️{3}] [🫂{4}] [⏱️{5}] [{6}]",
+        rich_presence_lookup("TeamIDs",
+                             getTeamID(2),
+                             teamIDs),
+        rich_presence_macro("Number",
+                             getTeamGoals(1)),
+        rich_presence_macro("Number",
+                             getTeamGoals(2)),
+        rich_presence_macro("Number",
+                             getPrestigePoints()),
+        rich_presence_macro("Number",
+                             getFriendshipPoints()),
+        rich_presence_macro("Minutes",
+                             getPlaytime()),
+        rich_presence_lookup("Chapters",
+                             measured(getChapter(),
+                                      when = getStoryProgress() >= 0x29CC),
+                             chapterIDs)
 )
 
 rich_presence_conditional_display(getRPGCharacterIDInTeamSlot(1) == 0x00, 
@@ -1971,7 +2412,8 @@ rich_presence_display(
                              chapterIDs),
         rich_presence_lookup("CharacterID",
                              getRPGCharacterIDInTeamSlot(1),
-                             characterNicknamesRP),
+                             characterNicknamesRP,
+                             fallback = "???"),
         rich_presence_lookup("PartyConnector",
                              measured(getRPGCharacterIDInTeamSlot(2) / getRPGCharacterIDInTeamSlot(2)
                                     + getRPGCharacterIDInTeamSlot(3) / getRPGCharacterIDInTeamSlot(3)
@@ -1982,7 +2424,8 @@ rich_presence_display(
                              fallback = ", "),
         rich_presence_lookup("CharacterID",
                              getRPGCharacterIDInTeamSlot(2),
-                             characterNicknamesRP),
+                             characterNicknamesRP,
+                             fallback = "???"),
         rich_presence_lookup("PartyConnector",
                              measured(getRPGCharacterIDInTeamSlot(3) / getRPGCharacterIDInTeamSlot(3)
                                     + getRPGCharacterIDInTeamSlot(4) / getRPGCharacterIDInTeamSlot(4)
@@ -1992,7 +2435,8 @@ rich_presence_display(
                              fallback = ", "),
         rich_presence_lookup("CharacterID",
                              getRPGCharacterIDInTeamSlot(3),
-                             characterNicknamesRP),
+                             characterNicknamesRP,
+                             fallback = "???"),
         rich_presence_lookup("PartyConnector",
                              measured(getRPGCharacterIDInTeamSlot(4) / getRPGCharacterIDInTeamSlot(4)
                                     + getRPGCharacterIDInPartnerSlot() / getRPGCharacterIDInPartnerSlot(),
@@ -2001,7 +2445,8 @@ rich_presence_display(
                              fallback = ", "),
         rich_presence_lookup("CharacterID",
                              getRPGCharacterIDInTeamSlot(4),
-                             characterNicknamesRP),
+                             characterNicknamesRP,
+                             fallback = "???"),
         rich_presence_lookup("PartyConnector",
                              measured(getRPGCharacterIDInPartnerSlot() / getRPGCharacterIDInPartnerSlot(),
                                       when = getRPGCharacterIDInTeamSlot(4) / getRPGCharacterIDInTeamSlot(4) != 0),
@@ -2009,7 +2454,8 @@ rich_presence_display(
                              fallback = ", "),
         rich_presence_lookup("CharacterID",
                              getRPGCharacterIDInPartnerSlot(),
-                             characterNicknamesRP),
+                             characterNicknamesRP,
+                             fallback = "???"),
         rich_presence_lookup("ToBe",
                              measured(getRPGCharacterIDInTeamSlot(1) / getRPGCharacterIDInTeamSlot(1)
                                     + getRPGCharacterIDInTeamSlot(2) / getRPGCharacterIDInTeamSlot(2)
