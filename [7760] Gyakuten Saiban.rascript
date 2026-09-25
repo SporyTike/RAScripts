@@ -323,7 +323,7 @@ achievement(
     title       = "Ace Attorney and an Ace Medium", 
     points      = 5,
     type        = "missable",
-    description = "At the end of \"The First Turnabout\", show Maya some evidence that explains how she helped solving the case.",
+    description = "At the end of \"Turnabout Goodbyes\", show Maya some evidence that explains how she helped solving the case.",
     id          = 61648, 
     badge       = "64769", 
     trigger     = get_ChapterID() == 0x10 &&
