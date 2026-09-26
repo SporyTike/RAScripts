@@ -83,6 +83,7 @@ function winIngoHand(id) {
 // ------------------------------------------------------------
 // Achievement Logic
 
+//--- Debug ---
 achievement(
     id          = 0, 
     badge       = "0",
@@ -140,7 +141,7 @@ achievement(
 achievement(
     id          = 532858, 
     badge       = "604614",
-    title       = "Something Smells Wrong",
+    title       = "Something Smells Fishy",
     description = "[Main] Finish Ingo's first cross-examination.",
     points      = 3,
     trigger     = inGame() &&
@@ -151,7 +152,7 @@ achievement(
 achievement(
     id          = 532961, 
     badge       = "604699",
-    title       = "Reasons of Doubt",
+    title       = "Reasons to Doubt",
     description = "[Main] Finish Ingo's second cross-examination.",
     points      = 3,
     trigger     = inGame() &&
@@ -162,7 +163,7 @@ achievement(
 achievement(
     id          = 532962, 
     badge       = "604701",
-    title       = "Goddess' Bless",
+    title       = "Goddess' Blessing",
     description = "[Main] Discover the truth behind the murder and explain it to the court.",
     points      = 2,
     trigger     = inGame() &&
@@ -184,8 +185,8 @@ achievement(
 achievement(
     id          = 532967, 
     badge       = "604706",
-    title       = "No Doubt About",
-    description = "[Main] Rebuttal all of Dragmire's statements.",
+    title       = "No Doubt About It",
+    description = "[Main] Rebut all of Dragmire's statements.",
     points      = 3,
     trigger     = inGame() &&
                   chapterCompleted(0x20),
@@ -207,7 +208,7 @@ achievement(
 achievement(
     id          = 532970, 
     badge       = "604709",
-    title       = "Farmer For Life",
+    title       = "Farmer for Life",
     description = "[Main] Win the case and look forward to the next one.",
     points      = 5,
     trigger     = inGame() &&
@@ -244,7 +245,7 @@ achievement(
     id          = 532972, 
     badge       = "604711",
     title       = "On a Chicken Run",
-    description = "[Extra 1] Beat the Super Talon Game with 115 seconds left.",
+    description = "[Extra 1] Beat the Super Talon Game with 115 or more seconds left.",
     points      = 5,
     trigger     = beatSuperTalon() &&
                   dword(Mem_SuperTalonTime) / 100 >= 115,
@@ -255,7 +256,7 @@ achievement(
     id          = 532974, 
     badge       = "604727",
     title       = "Hero of Climate and Time",
-    description = "[Extra 1] Unlock 'Ingo's Casino' without cheating.",
+    description = "[Extra 1] Unlock Ingo's Casino without cheating.",
     points      = 1,
     trigger     = dword(Mem_GameState) == 1 &&
                   currentMap(0x36) &&
@@ -270,7 +271,7 @@ achievement(
     id          = 532973, 
     badge       = "604726",
     title       = "Hero of Dreams",
-    description = "[Extra 1] Unlock 'Turnabout Thief' without cheating.",
+    description = "[Extra 1] Unlock Turnabout Thief without cheating.",
     points      = 1,
     trigger     = dword(Mem_GameState) == 1 &&
                   currentMap(0x36) &&
@@ -284,7 +285,7 @@ achievement(
     id          = 547640, 
     badge       = "622657",
     title       = "History of Music",
-    description = "[Extra 2] Read background info about every song in a single visit.",
+    description = "[Extra 2] In a single session, read the background info about every song.",
     points      = 2,
     trigger     = never(!currentMap(0x29)) &&
                   measured(
@@ -352,7 +353,7 @@ achievement(
 achievement(
     id          = 533018, 
     badge       = "604772",
-    title       = "It's Enough For You",
+    title       = "It's Enough for You",
     description = "[Extra 2] Win with One Pair.",
     points      = 3,
     trigger     = inGame() &&
@@ -388,7 +389,7 @@ achievement(
 achievement(
     id          = 533021, 
     badge       = "604775",
-    title       = "Filled With Joy",
+    title       = "Filled with Joy",
     description = "[Extra 2] Win with a Full House.",
     points      = 3,
     trigger     = inGame() &&
@@ -412,7 +413,7 @@ achievement(
 achievement(
     id          = 533023, 
     badge       = "604777",
-    title       = "Royal Flush",
+    title       = "High Five",
     description = "[Extra 2] Win with Five of a Kind.",
     points      = 3,
     trigger     = inGame() &&
@@ -436,7 +437,7 @@ achievement(
 achievement(
     id          = 532965, 
     badge       = "604703",
-    title       = "Galactic Overrule",
+    title       = "Galactic Objection",
     description = "[Extra 2] Get your evidence judged unworthy by the moon.",
     points      = 2,
     trigger     = inGame() &&
@@ -458,7 +459,7 @@ achievement(
 achievement(
     id          = 533010, 
     badge       = "604767",
-    title       = "Keep 'Er Hands Of Ma Wares",
+    title       = "Keep Yer Hands Off Me Wares",
     description = "[Extra 3] Finish the Shopkeeper's cross-examination.",
     points      = 1,
     trigger     = inGame() &&
@@ -469,7 +470,7 @@ achievement(
 achievement(
     id          = 533011, 
     badge       = "604768",
-    title       = "Dream In A Dream",
+    title       = "Dream in a Dream",
     description = "[Extra 3] Finish the Owl's cross-examination.",
     points      = 1,
     trigger     = inGame() &&
@@ -481,7 +482,7 @@ achievement(
     id          = 532976, 
     badge       = "604729",
     title       = "Spell My Name",
-    description = "[Extra 3] Successfully remove the curse from your defendant on Koholint Island.",
+    description = "[Extra 3] [Extra 3] Successfully remove the curse from your defendant.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -495,7 +496,7 @@ achievement(
     id          = 535986, 
     badge       = "608161",
     title       = "Still Can't Say It",
-    description = "[Extra 3] Let Link have issues to read the defendant's name...",
+    description = "[Extra 3] Let Link have issues reading the defendant's name.",
     points      = 2,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -508,7 +509,7 @@ achievement(
     id          = 535987, 
     badge       = "608155",
     title       = "Quick, Easy and Clean",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    description = "[Extra 3] Let Link realize the defendant's name is incredibly short.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -521,7 +522,7 @@ achievement(
     id          = 532978, 
     badge       = "604738",
     title       = "Linked Together",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    description = "[Extra 3] Let Link realize the defendant's name is his own.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -533,8 +534,8 @@ achievement(
 achievement(
     id          = 532980, 
     badge       = "604735",
-    title       = "Great Taste of Music",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Great Taste in Music",
+    description = "[Extra 3] Let Link realize the defendant's name is the princess's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -546,8 +547,8 @@ achievement(
 achievement(
     id          = 535988, 
     badge       = "608156",
-    title       = "Fits From Another Perspective",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Fits from Another Perspective",
+    description = "[Extra 3] Let Link realize the defendant's name is between worlds.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -560,7 +561,7 @@ achievement(
     id          = 532979, 
     badge       = "604737",
     title       = "Unfunny Coincidence",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    description = "[Extra 3] Let Link realize the defendant's name is a beast's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -572,8 +573,8 @@ achievement(
 achievement(
     id          = 532982, 
     badge       = "604740",
-    title       = "Opening Fresh Wounds",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Opening Old Wounds",
+    description = "[Extra 3] Let Link realize the defendant's name is a farmer's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -586,7 +587,7 @@ achievement(
     id          = 532981, 
     badge       = "604734",
     title       = "Legacy of Loyalty",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    description = "[Extra 3] Let Link realize the defendant's name is a Sheikah's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -598,8 +599,8 @@ achievement(
 achievement(
     id          = 532983, 
     badge       = "604741",
-    title       = "Singer From Heart",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Singing from the Heart",
+    description = "[Extra 3] Let Link realize the defendant's name is a young singer's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -611,8 +612,8 @@ achievement(
 achievement(
     id          = 532977, 
     badge       = "604730",
-    title       = "Why Doing This Then?!",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Why Are We Even Here, Then?",
+    description = "[Extra 3] Let Link realize the defendant's name is exactly what it seemed like.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -624,8 +625,8 @@ achievement(
 achievement(
     id          = 532984, 
     badge       = "604742",
-    title       = "Guilty via Identity Theft",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Guilty of Identity Theft",
+    description = "[Extra 3] Let Link realize the defendant's name is the developer's...?",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -637,8 +638,8 @@ achievement(
 achievement(
     id          = 535989, 
     badge       = "608157",
-    title       = "You Listened To It All The Time",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "You've Been Hearing It All Along",
+    description = "[Extra 3] Let Link realize the defendant's name is the hack composer's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -650,8 +651,8 @@ achievement(
 achievement(
     id          = 535990, 
     badge       = "608158",
-    title       = "Come From Deep Down",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "It Comes from Deep Down",
+    description = "[Extra 3] Let Link realize the defendant's name has to be screamed out loud.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -664,7 +665,7 @@ achievement(
     id          = 535991, 
     badge       = "608159",
     title       = "Stop the War!",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    description = "[Extra 3] Let Link realize the defendant's name is the German localizer's.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -676,8 +677,8 @@ achievement(
 achievement(
     id          = 535992, 
     badge       = "608160",
-    title       = "Grow Up Buddy",
-    description = "[Extra 3] Let Link realize the defendant's name...",
+    title       = "Grow Up, Buddy",
+    description = "[Extra 3] Let Link realize the defendant's name is immature in another language.",
     points      = 1,
     trigger     = inGame() &&
                   currentChapter(0x32) &&
@@ -689,7 +690,7 @@ achievement(
     id          = 532975, 
     badge       = "604728",
     title       = "Slumber of Time",
-    description = "[Extra 3] Win the case and wake up yourself.",
+    description = "[Extra 3] Win the case and wake up.",
     points      = 1,
     trigger     = inGame() &&
                   currentMap(0x36) &&
@@ -701,7 +702,7 @@ achievement(
     id          = 547641, 
     badge       = "622658",
     title       = "Be Not Afraid!",
-    description = "[Menu] Get haunted by yourself.",
+    description = "[Secret] Be haunted by an image from your past.",
     points      = 3,
     trigger     = dword(Mem_GameState) == 1 &&
                   currentMap(0x36) &&
