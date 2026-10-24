@@ -492,6 +492,10 @@ function getCrownShowdownPlayerWins(playerSlot) {
     return byte(Mem_CrownShowdownDynamic + 0x07 + getCrownShowdownPlayerTeam(playerSlot))
 }
 
+function getCrownShowdownPlayerWinsWithoutSlot(playerSlot) {
+    return byte(Mem_CrownShowdownDynamic + 0x07 + playerSlot)
+}
+
 function getCrownShowdownPlayerTeam(playerSlot) {
     return byte(Mem_CrownShowdownDynamic + 0x1C + playerSlot)
 }
@@ -637,20 +641,20 @@ achievement(
                   getStarBattleProgress() == 0x5 &&
                   ((__ornext(getPlayerCharacterID(0) == 0x0C ||
                              getPlayerCharacterID(0) == 0x0D) &&
-                   getPlayerControlType(0) == 1 &&
-                   getPlayerStars(0) == 0 && 
-                   getPlayerControlType(1) == 0 &&
-                   getPlayerStars(1) > 0 &&
-                   getPlayerSpaceStanding(1) == 0x27 &&
-                   getPlayerSpaceStanding(1) != prev(getPlayerSpaceStanding(1))) ||
+                    getPlayerControlType(0) == 1 &&
+                    getPlayerStars(0) == 0 && 
+                    getPlayerControlType(1) == 0 &&
+                    getPlayerStars(1) > 0 &&
+                    getPlayerSpaceStanding(1) == 0x27 &&
+                    getPlayerSpaceStanding(1) != prev(getPlayerSpaceStanding(1))) ||
                    (__ornext(getPlayerCharacterID(1) == 0x0C ||
                              getPlayerCharacterID(1) == 0x0D) &&
-                   getPlayerControlType(1) == 1 &&
-                   getPlayerStars(1) == 0 && 
-                   getPlayerControlType(0) == 0 &&
-                   getPlayerStars(0) > 0 &&
-                   getPlayerSpaceStanding(0) == 0x27 &&
-                   getPlayerSpaceStanding(0) != prev(getPlayerSpaceStanding(0))))
+                    getPlayerControlType(1) == 1 &&
+                    getPlayerStars(1) == 0 && 
+                    getPlayerControlType(0) == 0 &&
+                    getPlayerStars(0) > 0 &&
+                    getPlayerSpaceStanding(0) == 0x27 &&
+                    getPlayerSpaceStanding(0) != prev(getPlayerSpaceStanding(0))))
 )
 
 achievement(
@@ -896,7 +900,7 @@ achievement(
     title       = "Temple Topple",
     description = "Reach the hidden section of \"DK's Treetop Temple\" and get a free Star.",
     points      = 3,
-    trigger     = getGameState(0x70) &&
+    trigger     = never(!getGameState(0x70)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -983,7 +987,7 @@ achievement(
     title       = "Path to Wealth and Glory",
     description = "Ride a dolphin to the secret island of \"Goomba's Booty Boardwalk\" and get a free Star.",
     points      = 3,
-    trigger     = getGameState(0x71) &&
+    trigger     = never(!getGameState(0x71)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -1071,7 +1075,7 @@ achievement(
     title       = "Attic Fantastic",
     description = "Drop down from the second floor of \"King Boo's Haunted Hideaway\" to find King Boo and get a Star.",
     points      = 3,
-    trigger     = getGameState(0x72) &&
+    trigger     = never(!getGameState(0x72)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -1163,7 +1167,7 @@ achievement(
     title       = "Next Stop: Coin Heaven",
     description = "Travel to Payday Waystation using \"Shy Guy's Perplex Express\" and get a free Star.",
     points      = 3,
-    trigger     = getGameState(0x73) &&
+    trigger     = never(!getGameState(0x73)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -1276,7 +1280,7 @@ achievement(
     title       = "Road of Fortune",
     description = "Visit a luxury hotel in \"Koopa's Tycoon Town\" and invest in it to get 3 Stars.",
     points      = 3,
-    trigger     = getGameState(0x74) &&
+    trigger     = never(!getGameState(0x74)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -1355,7 +1359,8 @@ achievement(
                        getCurrentPlayerGreenSpaces() > prev(getCurrentPlayerGreenSpaces()) &&
                        never(getPartyPlayerChanging())) &&
                   measured(tally(7, !checkPartySubMode("Duel Battle") &&
-                  byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
+                                    getPlayerCoinRecord(0) >= 10 &&
+                                    byte(Mem_BowserBoardDirection) != prev(byte(Mem_BowserBoardDirection))),
                            when = once(dword_be(Mem_GameState) == 0x75 &&
                                        byte(Mem_CurrentTurn) == 0x01))
 )
@@ -1367,7 +1372,7 @@ achievement(
     title       = "Sugar Space Rush",
     description = "Visit the Space Buffet near \"Bowser's Warped Orbit\" and get 3 Candies.",
     points      = 3,
-    trigger     = getGameState(0x75) &&
+    trigger     = never(!getGameState(0x75)) &&
                   !checkPartySubMode("Duel Battle") &&
                   never(getPartyPlayerChanging()) &&
                   once(getCurrentPlayerSpaceStanding() != prev(getCurrentPlayerSpaceStanding())) &&
@@ -2760,7 +2765,7 @@ achievement(
     badge       = "674042",
     type        = "",
     title       = "Fight Between Friends",
-    description = "Win a \"Duel Crown Showdown\" with 7 wins against a COMs on Hard.",
+    description = "Win a \"Duel Crown Showdown\" with 7 wins against a COM on Hard.",
     points      = 10,
     trigger     = getGameState(0x62) &&
                   __ornext(prev(getGameState(0x62))) &&
@@ -2890,8 +2895,8 @@ achievement(
                     getPlayerDifficulty(2) >= 0x02 &&
                     getPlayerControlType(3) == 0x01 &&
                     getPlayerDifficulty(3) >= 0x02 &&
-                    getCrownShowdownPlayerWins(0) == 7 &&
-                    prev(getCrownShowdownPlayerWins(0)) == 6) ||
+                    getCrownShowdownPlayerWinsWithoutSlot(0) == 7 &&
+                    prev(getCrownShowdownPlayerWinsWithoutSlot(0)) == 6) ||
                    (getPlayerControlType(1) == 0x00 &&
                     getPlayerControlType(0) == 0x01 &&
                     getPlayerDifficulty(0) >= 0x02 &&
@@ -2899,8 +2904,8 @@ achievement(
                     getPlayerDifficulty(2) >= 0x02 &&
                     getPlayerControlType(3) == 0x01 &&
                     getPlayerDifficulty(3) >= 0x02 &&
-                    getCrownShowdownPlayerWins(1) == 7 &&
-                    prev(getCrownShowdownPlayerWins(1)) == 6) ||
+                    getCrownShowdownPlayerWinsWithoutSlot(1) == 7 &&
+                    prev(getCrownShowdownPlayerWinsWithoutSlot(1)) == 6) ||
                    (getPlayerControlType(2) == 0x00 &&
                     getPlayerControlType(0) == 0x01 &&
                     getPlayerDifficulty(0) >= 0x02 &&
@@ -2908,8 +2913,8 @@ achievement(
                     getPlayerDifficulty(1) >= 0x02 &&
                     getPlayerControlType(3) == 0x01 &&
                     getPlayerDifficulty(3) >= 0x02 &&
-                    getCrownShowdownPlayerWins(2) == 7 &&
-                    prev(getCrownShowdownPlayerWins(2)) == 6) ||
+                    getCrownShowdownPlayerWinsWithoutSlot(2) == 7 &&
+                    prev(getCrownShowdownPlayerWinsWithoutSlot(2)) == 6) ||
                    (getPlayerControlType(3) == 0x00 &&
                     getPlayerControlType(0) == 0x01 &&
                     getPlayerDifficulty(0) >= 0x02 &&
@@ -2917,8 +2922,8 @@ achievement(
                     getPlayerDifficulty(1) >= 0x02 &&
                     getPlayerControlType(2) == 0x01 &&
                     getPlayerDifficulty(2) >= 0x02 &&
-                    getCrownShowdownPlayerWins(3) == 7 &&
-                    prev(getCrownShowdownPlayerWins(3)) == 6))
+                    getCrownShowdownPlayerWinsWithoutSlot(3) == 7 &&
+                    prev(getCrownShowdownPlayerWinsWithoutSlot(3)) == 6))
 )
 
 achievement(
