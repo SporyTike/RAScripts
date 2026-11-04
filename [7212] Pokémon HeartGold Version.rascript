@@ -43,6 +43,9 @@ function getData(memorySize, address) {
     if (memorySize == "16-bit") {
         return word(address)
     } else
+    if (memorySize == "24-bit") {
+        return tbyte(address)
+    } else
     if (memorySize == "32-bit") {
         return dword(address)
     } else
@@ -143,50 +146,124 @@ function calculatePokeathlonMedalistPokemonInRange(startNationalID, endNationalI
     return sum
 }
 
-function calculatePokeathlonBeatenNormalRecords() {
-    return tally(10, once(getSavefileDataRemember("16-bit", 0xDCB0) < 3000 &&  // Hurdle Dash -> 100.0
+function calculatePokeathlonBeatenNormalRecords(type) {
+    extraCondition = always_true()
+    if (type == "Save Protection") {
+        extraCondition = getMusicID() == 0x3F0
+    }
+    return tally(10, once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDCB0) < 3000 &&  // Hurdle Dash -> 100.0
                           getSavefileDataRemember("16-bit", 0xDCB0) > 0),
-                     once(getSavefileDataRemember("16-bit", 0xDCDC) > 35 &&    // Pennant Capture
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDCDC) > 35 &&    // Pennant Capture
                           getSavefileDataRemember("16-bit", 0xDCDC) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD08) > 40 &&    // Circle Push
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD08) > 40 &&    // Circle Push
                           getSavefileDataRemember("16-bit", 0xDD08) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD34) > 80 &&    // Block Smash
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD34) > 80 &&    // Block Smash
                           getSavefileDataRemember("16-bit", 0xDD34) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD60) > 40 &&    // Disc Catch
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD60) > 40 &&    // Disc Catch
                           getSavefileDataRemember("16-bit", 0xDD60) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD8C) > 350 &&   // Lamp Jump
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD8C) > 350 &&   // Lamp Jump
                           getSavefileDataRemember("16-bit", 0xDD8C) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDDB8) > 12288 && // Relay Run -> 12.0
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDDB8) > 12288 && // Relay Run -> 12.0
                           getSavefileDataRemember("16-bit", 0xDDB8) < 50000),
-                     once(getSavefileDataRemember("16-bit", 0xDDE4) > 70 &&    // Ring Drop
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDDE4) > 70 &&    // Ring Drop
                           getSavefileDataRemember("16-bit", 0xDDE4) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDE10) > 30 &&    // Snow Throw
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDE10) > 30 &&    // Snow Throw
                           getSavefileDataRemember("16-bit", 0xDE10) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDE3C) > 3 &&    // Goal Roll
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDE3C) > 3 &&    // Goal Roll
                           getSavefileDataRemember("16-bit", 0xDE3C) < 5000))
 }
 
-function calculatePokeathlonBeatenMasterRecords() {
-    return tally(10, once(getSavefileDataRemember("16-bit", 0xDCB0) < 2400 &&  // Hurdle Dash -> 80.0
+function calculatePokeathlonBeatenMasterRecords(type) {
+    extraCondition = always_true()
+    if (type == "Save Protection") {
+        extraCondition = getMusicID() == 0x3F0
+    }
+    return tally(10, once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDCB0) < 2400 &&  // Hurdle Dash -> 80.0
                           getSavefileDataRemember("16-bit", 0xDCB0) > 0),
-                     once(wetSavefileDataRemember("16-bit", 0xDCDC) > 50 &&    // Pennant Capture
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDCDC) > 50 &&    // Pennant Capture
                           getSavefileDataRemember("16-bit", 0xDCDC) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD08) > 60 &&    // Circle Push
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD08) > 60 &&    // Circle Push
                           getSavefileDataRemember("16-bit", 0xDD08) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD34) > 130 &&   // Block Smash
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD34) > 130 &&   // Block Smash
                           getSavefileDataRemember("16-bit", 0xDD34) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD60) > 70 &&    // Disc Catch
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD60) > 70 &&    // Disc Catch
                           getSavefileDataRemember("16-bit", 0xDD60) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDD8C) > 500 &&   // Lamp Jump
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDD8C) > 500 &&   // Lamp Jump
                           getSavefileDataRemember("16-bit", 0xDD8C) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDDB8) > 16384 && // Relay Run -> 16.0
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDDB8) > 16384 && // Relay Run -> 16.0
                           getSavefileDataRemember("16-bit", 0xDDB8) < 50000),
-                     once(getSavefileDataRemember("16-bit", 0xDDE4) > 100 &&   // Ring Drop
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDDE4) > 100 &&   // Ring Drop
                           getSavefileDataRemember("16-bit", 0xDDE4) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDE10) > 55 &&    // Snow Throw
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDE10) > 55 &&    // Snow Throw
                           getSavefileDataRemember("16-bit", 0xDE10) < 5000),
-                     once(getSavefileDataRemember("16-bit", 0xDE3C) > 9 &&     // Goal Roll
+                     once(extraCondition &&
+                          getSavefileDataRemember("16-bit", 0xDE3C) > 9 &&     // Goal Roll
                           getSavefileDataRemember("16-bit", 0xDE3C) < 5000))
+}
+
+function calculatePokeathlonDataCards() {
+           code = 0
+           for dataCard in range(1, 27) {
+               code = code + getPokeathlonDataCard(dataCard)
+           }
+
+    return code
+}
+
+function calculatePokeathlonMinigames50Wins(type) {
+    extraCondition = always_true()
+    if (type == "Save Protection") {
+        extraCondition = getMusicID() == 0x3F0
+    }
+    return tally(10, once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE528) >= 50 &&   // Hurdle Dash
+                          getSavefileDataRemember("32-bit", 0xE528) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE52C) >= 50 &&   // Pennant Capture
+                          getSavefileDataRemember("32-bit", 0xE52C) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE530) >= 50 &&   // Circle Push
+                          getSavefileDataRemember("32-bit", 0xE530) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE534) >= 50 &&   // Block Smash
+                          getSavefileDataRemember("32-bit", 0xE534) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE538) >= 50 &&   // Disc Catch
+                          getSavefileDataRemember("32-bit", 0xE538) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE53C) >= 50 &&   // Lamp Jump
+                          getSavefileDataRemember("32-bit", 0xE53C) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE540) >= 50 &&   // Relay Run
+                          getSavefileDataRemember("32-bit", 0xE540) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE544) >= 50 &&   // Ring Drop
+                          getSavefileDataRemember("32-bit", 0xE544) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE548) >= 50 &&   // Snow Throw
+                          getSavefileDataRemember("32-bit", 0xE548) < 100000),
+                     once(extraCondition &&
+                          getSavefileDataRemember("32-bit", 0xE54C) >= 50 &&   // Goal Roll
+                          getSavefileDataRemember("32-bit", 0xE54C) < 100000))
 }
 
 function calculatePokeathlonFriendshipPoints() {
@@ -208,35 +285,24 @@ function calculatePokeathlonFriendshipPoints() {
          + calculatePokeathlonMedals()
 }
 
-function calculatePokeathlon50WinsPerEvent() {
-    return tally(10, once(getSavefileDataRemember("32-bit", 0xE528) >= 50 &&   // Hurdle Dash
-                          getSavefileDataRemember("32-bit", 0xE528) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE52C) >= 50 &&   // Pennant Capture
-                          getSavefileDataRemember("32-bit", 0xE52C) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE530) >= 50 &&   // Circle Push
-                          getSavefileDataRemember("32-bit", 0xE530) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE534) >= 50 &&   // Block Smash
-                          getSavefileDataRemember("32-bit", 0xE534) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE538) >= 50 &&   // Disc Catch
-                          getSavefileDataRemember("32-bit", 0xE538) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE53C) >= 50 &&   // Lamp Jump
-                          getSavefileDataRemember("32-bit", 0xE53C) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE540) >= 50 &&   // Relay Run
-                          getSavefileDataRemember("32-bit", 0xE540) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE544) >= 50 &&   // Ring Drop
-                          getSavefileDataRemember("32-bit", 0xE544) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE548) >= 50 &&   // Snow Throw
-                          getSavefileDataRemember("32-bit", 0xE548) < 100000),
-                     once(getSavefileDataRemember("32-bit", 0xE54C) >= 50 &&   // Goal Roll
-                          getSavefileDataRemember("32-bit", 0xE54C) < 100000))
+
+
+function getPokeathlonCourseID() {
+    return getHeapData(92, "32-bit", 0x29C)
 }
 
 function getPokeathlonCurrentPhase() {
     return getHeapData(92, "32-bit", 0x210)
 }
 
-function getPokeathlonMinigameIDInSlot(eventSlot) {
-    return getHeapData(92, "8-bit", 0x208 + eventSlot)
+function getPokeathlonDataCard(dataCardNumber) {
+    dataCardBit    = (dataCardNumber - 1) % 8
+    dataCardOffset = (dataCardNumber - 1) / 8
+    return getSavefileDataRemember("Bit" + dataCardBit, 0xE55C + dataCardOffset)
+}
+
+function getPokeathlonMinigameID() {
+    return getHeapData(92, "8-bit", 0x208 + getPokeathlonCurrentPhase())
 }
 
 function getPokeathlonMinigameScore() {
@@ -257,84 +323,84 @@ function getPokeathlonResultState() {
 achievement(
     title = "Unbeatable Pokéathlete", points = 25,
     description = "Obtain all 10 Solidarity Crowns in the Pokéathlon Dome by getting an end result of 450 or more in every course.",
-    id = 125519, badge = "138582", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonSolidaryCrowns() == 10) &&
-              //DEL prev(calculatePokeathlonSolidaryCrowns()) >= 8 &&
-              //DEL prev(calculatePokeathlonSolidaryCrowns()) < 10
+    id = 125519, badge = "741783", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonSolidaryCrowns() == 10) &&
+              prev(calculatePokeathlonSolidaryCrowns()) >= 8 &&
+              prev(calculatePokeathlonSolidaryCrowns()) < 10
 )
 
 achievement(
-    title = "The Half of Ten Is Not Eight", points = 50,
+    title = "The Half of Ten Is Not Eight", points = 100,
     description = "Obtain 8 Trust Crowns in the Pokéathlon Dome by registering at least 100 Medalist Pokémon.",
-    id = 646778, badge = "80", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemon() == 100) &&
-              //DEL prev(calculatePokeathlonMedalistPokemon()) >= 90 &&
-              //DEL prev(calculatePokeathlonMedalistPokemon()) < 100
+    id = 646778, badge = "741651", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemon() == 100) &&
+              prev(calculatePokeathlonMedalistPokemon()) >= 90 &&
+              prev(calculatePokeathlonMedalistPokemon()) < 100
 )
 
 achievement(
     title = "Get Potential out of Everything", points = 50,
     description = "Obtain all 10 Trust Crowns in the Pokéathlon Dome by registering at least 200 Medalist Pokémon.",
-    id = 125520, badge = "138583", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemon() == 200) &&
-              //DEL prev(calculatePokeathlonMedalistPokemon()) >= 190 &&
-              //DEL prev(calculatePokeathlonMedalistPokemon()) < 200
+    id = 125520, badge = "741784", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemon() == 200) &&
+              prev(calculatePokeathlonMedalistPokemon()) >= 190 &&
+              prev(calculatePokeathlonMedalistPokemon()) < 200
 )
 
 achievement(
     title = "Keen Athletes Nominate Three Originals", points = 100,
     description = "Get all 151 Pokémon from the Kanto region registered as Medalist Pokémon.",
-    id = 646774, badge = "80", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemonInRange(001, 151) == 151) &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(001, 151)) >= 141 &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(001, 151)) < 151
+    id = 649248, badge = "741072", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemonInRange(001, 151) == 151) &&
+              prev(calculatePokeathlonMedalistPokemonInRange(001, 151)) >= 141 &&
+              prev(calculatePokeathlonMedalistPokemonInRange(001, 151)) < 151
 )
 
 achievement(
     title = "Journey of Heroes Toward Olympia", points = 100,
     description = "Get all 100 Pokémon from the Johto region registered as Medalist Pokémon.",
-    id = 646775, badge = "80", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemonInRange(152, 251) == 100) &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(152, 251)) >= 90 &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(152, 251)) < 100
+    id = 649249, badge = "741073", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemonInRange(152, 251) == 100) &&
+              prev(calculatePokeathlonMedalistPokemonInRange(152, 251)) >= 90 &&
+              prev(calculatePokeathlonMedalistPokemonInRange(152, 251)) < 100
 )
 
 achievement(
     title = "Highly Outstanding Elite Never Naps", points = 100,
     description = "Get all 135 Pokémon from the Hoenn region registered as Medalist Pokémon.",
-    id = 646776, badge = "80", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemonInRange(252, 386) == 135) &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(252, 386)) >= 125 &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(252, 386)) < 135
+    id = 649250, badge = "741074", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemonInRange(252, 386) == 135) &&
+              prev(calculatePokeathlonMedalistPokemonInRange(252, 386)) >= 125 &&
+              prev(calculatePokeathlonMedalistPokemonInRange(252, 386)) < 135
 )
 
 achievement(
     title = "Sports Icons Neutralize New Opponents Hastily", points = 100,
     description = "Get all 107 Pokémon from the Sinnoh region registered as Medalist Pokémon.",
-    id = 646777, badge = "80", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonMedalistPokemonInRange(387, 493) == 107) &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(387, 493)) >= 97 &&
-              //DEL prev(calculatePokeathlonMedalistPokemonInRange(387, 493)) < 107
+    id = 649251, badge = "741075", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonMedalistPokemonInRange(387, 493) == 107) &&
+              prev(calculatePokeathlonMedalistPokemonInRange(387, 493)) >= 97 &&
+              prev(calculatePokeathlonMedalistPokemonInRange(387, 493)) < 107
 )
 
 achievement(
     title = "Not Even Mr. Mime's Barrier Can Stop Me", points = 10,
     description = "Get a record of 80.0 seconds or better in the single-player Pokéathlon event \"Hurdle Dash\" and finish the course.",
-    id = 646892, badge = "80", set = 45860,
+    id = 646892, badge = "741076", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDCB0) >= 1 &&
@@ -345,7 +411,7 @@ achievement(
 achievement(
     title = "Cheeky Rivals and Sandy Cheeks", points = 10,
     description = "Get a record of 50 flags or better in the single-player Pokéathlon event \"Pennant Capture\" and finish the course.",
-    id = 646893, badge = "80", set = 45860,
+    id = 646893, badge = "741077", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDCDC) >= 50 &&
@@ -356,7 +422,7 @@ achievement(
 achievement(
     title = "Pushing In the Spotlight", points = 10,
     description = "Get a record of 60 points or better in the single-player Pokéathlon event \"Circle Push\" and finish the course.",
-    id = 646894, badge = "80", set = 45860,
+    id = 646894, badge = "741078", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDD08) >= 60 &&
@@ -367,7 +433,7 @@ achievement(
 achievement(
     title = "Breaking the Paws of Physics", points = 5,
     description = "Get a record of 130 pieces or better in the single-player Pokéathlon event \"Block Smash\" and finish the course.",
-    id = 646895, badge = "80", set = 45860,
+    id = 646895, badge = "741079", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDD34) >= 130 &&
@@ -378,7 +444,7 @@ achievement(
 achievement(
     title = "The Early Dog Catches the Disc", points = 5,
     description = "Get a record of 70 points or better in the single-player Pokéathlon event \"Disc Catch\" and finish the course.",
-    id = 646896, badge = "80", set = 45860,
+    id = 646896, badge = "741080", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDD60) >= 70 &&
@@ -389,7 +455,7 @@ achievement(
 achievement(
     title = "Bouncing Into the Lights of Glory", points = 5,
     description = "Get a record of 500 points or better in the single-player Pokéathlon event \"Lamp Jump\" and finish the course.",
-    id = 646897, badge = "80", set = 45860,
+    id = 646897, badge = "741081", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDD8C) >= 500 &&
@@ -400,7 +466,7 @@ achievement(
 achievement(
     title = "I Would Walk 10 Miles To Be The Mon", points = 10,
     description = "Get a record of 16.0 laps or better in the single-player Pokéathlon event \"Relay Run\" and finish the course.",
-    id = 646898, badge = "80", set = 45860,
+    id = 646898, badge = "741082", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDDB8) >= 16384 &&
@@ -411,7 +477,7 @@ achievement(
 achievement(
     title = "Power Beyond the Boundaries", points = 5,
     description = "Get a record of 100 points or better in the single-player Pokéathlon event \"Ring Drop\" and finish the course.",
-    id = 646899, badge = "80", set = 45860,
+    id = 646899, badge = "741083", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDDE4) >= 100 &&
@@ -422,7 +488,7 @@ achievement(
 achievement(
     title = "Strike Outs in the Cold", points = 5,
     description = "Get a record of 55 hits or better in the single-player Pokéathlon event \"Snow Throw\" and finish the course.",
-    id = 646900, badge = "80", set = 45860,
+    id = 646900, badge = "741084", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDE10) >= 100 &&
@@ -433,7 +499,7 @@ achievement(
 achievement(
     title = "Triple Hat-Trick Strikers", points = 3,
     description = "Get a record of 9 points or better in the single-player Pokéathlon event \"Goal Roll\" and finish the course.",
-    id = 646901, badge = "80", set = 45860,
+    id = 646901, badge = "741085", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               getSavefileData("16-bit", 0xDE3C) >= 9 &&
@@ -444,34 +510,34 @@ achievement(
 achievement(
     title = "Professional Team Captain", points = 5,
     description = "Obtain all 10 Potential Crowns in the Pokéathlon Dome by beating the master record of every Pokéathlon discipline.",
-    id = 125522, badge = "138587", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL (measured(calculatePokeathlonBeatenMasterRecords(), 
-              //DEL           getSavefileData("8-bit", 0x1000) != 0x00 &&
-              //DEL                  once(getMusicID() == 0x3F0)) &&
-              //DEL  unless(getMusicID() == 0x3F0 &&
-              //DEL         calculatePokeathlonBeatenMasterRecords()) ||
-              //DEL (pseudoImpossibleCondition() &&
-              //DEL  never(getContextPointer() == 0x00000000) &&
-              //DEL  never(getSavefileData("8-bit", 0x1000) == 0x00)))
+    id = 125522, badge = "741785", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              (measured(calculatePokeathlonBeatenMasterRecords(""), 
+                        getSavefileData("8-bit", 0x1000) != 0x00 &&
+                               once(getMusicID() == 0x3F0)) &&
+               unless(getMusicID() == 0x3F0 &&
+                      calculatePokeathlonBeatenMasterRecords("Save Protection")) ||
+              (pseudoImpossibleCondition() &&
+               never(getContextPointer() == 0x00000000) &&
+               never(getSavefileData("8-bit", 0x1000) == 0x00)))
 )
 
 achievement(
     title = "Greatest Pokéathlete of All Time", points = 50,
     description = "Obtain all 10 Friendship Crowns in the Pokéathlon Dome by having a total of 4.500 Pokéathlon Points.",
-    id = 125523, badge = "138585", set = 45860,
-    trigger = checkSaveLoaded() //DEL &&
-              //DEL getMapID() == 0x119 &&
-              //DEL measured(calculatePokeathlonFriendshipPoints() >= 4500) &&
-              //DEL prev(calculatePokeathlonFriendshipPoints()) >= 4000 &&
-              //DEL prev(calculatePokeathlonFriendshipPoints()) < 4500
+    id = 125523, badge = "741786", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonFriendshipPoints() >= 4500) &&
+              prev(calculatePokeathlonFriendshipPoints()) >= 4000 &&
+              prev(calculatePokeathlonFriendshipPoints()) < 4500
 )
 
 achievement(
-    title = "Run, Forretress! Run!", points = 5,
+    title = "Run, Forretress! Run!", points = 10,
     description = "Obtain the golden running shoes trophy in the Pokéathlon Dome by dashing a total of 5.000 times in the event \"Hurdle Dash\".",
-    id = 647644, badge = "80", set = 45860,
+    id = 647644, badge = "741526", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               ((measured(getSavefileData("32-bit", 0xE510) >= 5000) &&
@@ -492,7 +558,7 @@ achievement(
 achievement(
     title = "Let's Get to Business!", points = 2,
     description = "Obtain the golden jersey trophy in the Pokéathlon Dome by participating in a total of 50 courses.",
-    id = 647815, badge = "80", set = 45860,
+    id = 647815, badge = "741527", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE4E8) == 50) &&
@@ -502,7 +568,7 @@ achievement(
 achievement(
     title = "What's the Matter, Trainer?", points = 2,
     description = "Obtain the golden flag trophy in the Pokéathlon Dome by switching Pokémon a total of 200 times.",
-    id = 647862, badge = "80", set = 45860,
+    id = 647862, badge = "741524", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               ((measured(getSavefileData("32-bit", 0xE514) == 200) &&
@@ -523,44 +589,163 @@ achievement(
 achievement(
     title = "Call Me a Champion!", points = 2,
     description = "Obtain the golden Pokégear trophy in the Pokéathlon Dome by winning a total of 100 courses.",
-    id = 847863, badge = "80", set = 45860,
+    id = 847863, badge = "741525", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE4EC) == 100) &&
                   prev(getSavefileData("32-bit", 0xE4EC)) == 99
 )
+
 achievement(
-    title = "Star of the Dome", points = 25,
-    description = "Obtain the Poké Ball trophy in the Pokéathlon Dome by winning every event at least 50 times.",
-    id = 0, badge = "138587", set = 45860,
+    title = "Get the Jump, Avoid the Bump", points = 10,
+    description = "Win the single-player Pokéathlon event \"Hurdle Dash\" a total of 50 times and finish the course.",
+    id = 741513, badge = "80", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
-              (measured(calculatePokeathlon50WinsPerEvent(), 
+              measured(getSavefileData("32-bit", 0xE528) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE528)) == 49
+)
+
+achievement(
+    title = "Quick Race Through Piles of Sand", points = 10,
+    description = "Win the single-player Pokéathlon event \"Pennant Capture\" a total of 50 times and finish the course.",
+    id = 741514, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE52C) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE52C)) == 49
+)
+
+achievement(
+    title = "Taking a Stance", points = 10,
+    description = "Win the single-player Pokéathlon event \"Circle Push\" a total of 50 times and finish the course.",
+    id = 741515, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE530) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE530)) == 49
+)
+
+achievement(
+    title = "De-Constructor of the Month", points = 10,
+    description = "Win the single-player Pokéathlon event \"Block Smash\" a total of 50 times and finish the course.",
+    id = 741516, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE534) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE534)) == 49
+)
+
+achievement(
+    title = "Catch It If You Can", points = 10,
+    description = "Win the single-player Pokéathlon event \"Disc Catch\" a total of 50 times and finish the course.",
+    id = 741517, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE538) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE538)) == 49
+)
+
+achievement(
+    title = "Enlightment on the Bouncy Castle", points = 10,
+    description = "Win the single-player Pokéathlon event \"Lamp Jump\" a total of 50 times and finish the course.",
+    id = 741518, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE53C) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE53C)) == 49
+)
+
+achievement(
+    title = "Ready for a Marathon", points = 10,
+    description = "Win the single-player Pokéathlon event \"Relay Run\" a total of 50 times and finish the course.",
+    id = 741519, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE540) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE540)) == 49
+)
+
+achievement(
+    title = "Pushing to the Limit", points = 10,
+    description = "Win the single-player Pokéathlon event \"Ring Drop\" a total of 50 times and finish the course.",
+    id = 741520, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE544) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE544)) == 49
+)
+
+achievement(
+    title = "Snowmen and the Ice Princess", points = 10,
+    description = "Win the single-player Pokéathlon event \"Snow Throw\" a total of 50 times and finish the course.",
+    id = 741521, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE548) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE548)) == 49
+)
+
+achievement(
+    title = "Pocket World Cup", points = 10,
+    description = "Win the single-player Pokéathlon event \"Goal Roll\" a total of 50 times and finish the course.",
+    id = 741522, badge = "80", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(getSavefileData("32-bit", 0xE54C) == 50) &&
+                  prev(getSavefileData("32-bit", 0xE54C)) == 49
+)
+
+achievement(
+    title = "Star of the Dome", points = 5,
+    description = "Obtain the Poké Ball trophy in the Pokéathlon Dome by winning every event at least 50 times.",
+    id = 649076, badge = "741649", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              (measured(calculatePokeathlonMinigames50Wins(""), 
                         when = getSavefileData("8-bit", 0x1000) != 0x00 &&
                                once(getMusicID() == 0x3F0)) &&
                unless(getMusicID() == 0x3F0 &&
-                      calculatePokeathlon50WinsPerEvent()) ||
+                      calculatePokeathlonMinigames50Wins("Save Protection")) ||
               (pseudoImpossibleCondition() &&
                never(getContextPointer() == 0x00000000) &&
                never(getSavefileData("8-bit", 0x1000) == 0x00)))
+)
+
+achievement(
+    title = "Winner of the Viewer Hearts", points = 25,
+    description = "Get a total of 500 bonuses in Pokéathlon courses.",
+    id = 648695, badge = "741233", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              getSavefileData("32-bit", 0xE4F4) <= 1000 &&
+              measured(getSavefileData("32-bit", 0xE4F4) >= 500) &&
+                  prev(getSavefileData("32-bit", 0xE4F4)) <= 499
+)
+
+achievement(
+    title = "Why Don't You Give Out Information for Free?", points = 25,
+    description = "Buy all 27 Data Cards in the Pokéathlon Dome.",
+    id = 125518, badge = "741787", set = 45860,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x119 &&
+              measured(calculatePokeathlonDataCards() == 27) &&
+                  prev(calculatePokeathlonDataCards()) == 26
 )
 
 //--------------------------------------------------
 // Pokéathlon - Leaderboards
 
 leaderboard(
-    id = 19141, set = 45860, title = "Hurdle Dash",
-    description = "Least time needed in a single event.",
-    start  = always_false() && checkSaveLoaded() &&
+    id = 19141, set = 45860, title = "Event Record",
+    description = "Least time needed in the Pokéathlon event \"Hurdle Dash\".",
+    start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x00) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x00) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x00) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x00)),
+             getPokeathlonMinigameID() == 0x00,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore() / 3,
@@ -569,18 +754,15 @@ leaderboard(
 )
 
 leaderboard(
-    id = 19143, set = 45860, title = "Pennant Capture",
-    description = "Most pennants captured in a single event.",
+    id = 19143, set = 45860, title = "Event Record",
+    description = "Most pennants captured in the Pokéathlon event \"Pennant Capture\".",
     start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x01) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x01) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x01) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x01)),
+             getPokeathlonMinigameID() == 0x01,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore(),
@@ -589,98 +771,83 @@ leaderboard(
 )
 
 leaderboard(
-    id = 19138, set = 45860, title = "Circle Push",
-    description = "Most points collected in a single event.",
-    start  = always_false() && checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
-             getMapID() == 0x119 &&
-             getPokeathlonPhaseState() == 0x12 &&
-             getPokeathlonResultState() == 0x02 &&
-             prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x02) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x02) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x02) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x02)),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = getPokeathlonMinigameScore() / 3,
-    format = "VALUE",
-    lower_is_better = false
-)
-
-leaderboard(
-    id = 19137, set = 45860, title = "Block Smash",
-    description = "Most blocks destroyed in a single event.",
-    start  = always_false() && checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
-             getMapID() == 0x119 &&
-             getPokeathlonPhaseState() == 0x12 &&
-             getPokeathlonResultState() == 0x02 &&
-             prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x03) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x03) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x03) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x03)),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = getPokeathlonMinigameScore() / 3,
-    format = "VALUE",
-    lower_is_better = false
-)
-
-leaderboard(
-    id = 19139, set = 45860, title = "Disc Catch",
-    description = "Most points collected in a single event.",
-    start  = always_false() && checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
-             getMapID() == 0x119 &&
-             getPokeathlonPhaseState() == 0x12 &&
-             getPokeathlonResultState() == 0x02 &&
-             prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x04) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x04) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x04) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x04)),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = getPokeathlonMinigameScore() / 3,
-    format = "VALUE",
-    lower_is_better = false
-)
-
-leaderboard(
-    id = 19142, set = 45860, title = "Lamp Jump",
-    description = "Most points collected in a single event.",
-    start  = always_false() && checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
-             getMapID() == 0x119 &&
-             getPokeathlonPhaseState() == 0x12 &&
-             getPokeathlonResultState() == 0x02 &&
-             prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x05) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x05) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x05) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x05)),
-    cancel = always_false(),
-    submit = always_true(),
-    value  = getPokeathlonMinigameScore() / 3,
-    format = "VALUE",
-    lower_is_better = false
-)
-
-leaderboard(
-    id = 19144, set = 45860, title = "Relay Run",
-    description = "Most distance ran in a single event.",
+    id = 19138, set = 45860, title = "Event Record",
+    description = "Most points collected in the Pokéathlon event \"Circle Push\".",
     start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x06) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x06) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x06) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x06)),
+             getPokeathlonMinigameID() == 0x02,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getPokeathlonMinigameScore() / 3,
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19137, set = 45860, title = "Event Record",
+    description = "Most blocks destroyed in the Pokéathlon event \"Block Smash\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonPhaseState() == 0x12 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01 &&
+             getPokeathlonMinigameID() == 0x03,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getPokeathlonMinigameScore() / 3,
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19139, set = 45860, title = "Event Record",
+    description = "Most points collected in the Pokéathlon event \"Disc Catch\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonPhaseState() == 0x12 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01 &&
+             getPokeathlonMinigameID() == 0x04,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getPokeathlonMinigameScore() / 3,
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19142, set = 45860, title = "Event Record",
+    description = "Most points collected in the Pokéathlon event \"Lamp Jump\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonPhaseState() == 0x12 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01 &&
+             getPokeathlonMinigameID() == 0x05,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getPokeathlonMinigameScore() / 3,
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19144, set = 45860, title = "Event Record",
+    description = "Most distance ran in the Pokéathlon event \"Relay Run\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonPhaseState() == 0x12 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01 &&
+             getPokeathlonMinigameID() == 0x06,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore() / 102.4,
@@ -689,18 +856,15 @@ leaderboard(
 )
 
 leaderboard(
-    id = 19145, set = 45860, title = "Ring Drop",
-    description = "Most points collected in a single event.",
+    id = 19145, set = 45860, title = "Event Record",
+    description = "Most points collected in the Pokéathlon event \"Ring Drop\".",
     start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x07) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x07) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x07) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x07)),
+             getPokeathlonMinigameID() == 0x07,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore(),
@@ -709,18 +873,15 @@ leaderboard(
 )
 
 leaderboard(
-    id = 19146, set = 45860, title = "Snow Throw",
-    description = "Most Pokémon hit in a single event.",
+    id = 19146, set = 45860, title = "Event Record",
+    description = "Most Pokémon hit in the Pokéathlon event \"Snow Throw\".",
     start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x08) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x08) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x08) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x08)),
+             getPokeathlonMinigameID() == 0x08,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore(),
@@ -729,21 +890,530 @@ leaderboard(
 )
 
 leaderboard(
-    id = 19140, set = 45860, title = "Goal Roll",
-    description = "Most points collected in a single event.",
+    id = 19140, set = 45860, title = "Event Record",
+    description = "Most points collected in the Pokéathlon event \"Goal Roll\".",
     start  = checkSaveLoaded() &&
              checkHeapLoaded(92) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
              prev(getPokeathlonResultState()) == 0x01 &&
-             ((getPokeathlonCurrentPhase() == 0x00 && getPokeathlonMinigameIDInSlot(0) == 0x09) ||
-              (getPokeathlonCurrentPhase() == 0x01 && getPokeathlonMinigameIDInSlot(1) == 0x09) ||
-              (getPokeathlonCurrentPhase() == 0x02 && getPokeathlonMinigameIDInSlot(2) == 0x09) ||
-              (getPokeathlonCurrentPhase() == 0x03 && getPokeathlonMinigameIDInSlot(3) == 0x09)),
+             getPokeathlonMinigameID() == 0x09,
     cancel = always_false(),
     submit = always_true(),
     value  = getPokeathlonMinigameScore(),
     format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19147, set = 45860, title = "Course Record",
+    description = "Highest end result in the Pokéathlon Speed course.",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonCourseID() == 0x00 &&
+             getPokeathlonCurrentPhase() == 0x03 &&
+             getPokeathlonPhaseState() == 0x21 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19148, set = 45860, title = "Course Record",
+    description = "Highest end result in the Pokéathlon Power course.",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonCourseID() == 0x01 &&
+             getPokeathlonCurrentPhase() == 0x03 &&
+             getPokeathlonPhaseState() == 0x21 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19149, set = 45860, title = "Course Record",
+    description = "Highest end result in the Pokéathlon Skill course.",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonCourseID() == 0x02 &&
+             getPokeathlonCurrentPhase() == 0x03 &&
+             getPokeathlonPhaseState() == 0x21 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19150, set = 45860, title = "Course Record",
+    description = "Highest end result in the Pokéathlon Stamina course.",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonCourseID() == 0x03 &&
+             getPokeathlonCurrentPhase() == 0x03 &&
+             getPokeathlonPhaseState() == 0x21 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 19151, set = 45860, title = "Course Record",
+    description = "Highest end result in the Pokéathlon Jump course.",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(92) &&
+             getMapID() == 0x119 &&
+             getPokeathlonCourseID() == 0x04 &&
+             getPokeathlonCurrentPhase() == 0x03 &&
+             getPokeathlonPhaseState() == 0x21 &&
+             getPokeathlonResultState() == 0x02 &&
+             prev(getPokeathlonResultState()) == 0x01,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176501, set = 45860, title = "Data Card 00",
+    description = "Total courses joined in the Single-Player Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getSavefileData("32-bit", 0xE4E8) > prev(getSavefileData("32-bit", 0xE4E8)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4E8),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176502, set = 45860, title = "Data Card 00",
+    description = "Total courses joined in the Connection Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getSavefileData("32-bit", 0xE51C) > prev(getSavefileData("32-bit", 0xE51C)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE51C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176503, set = 45860, title = "Data Card 01",
+    description = "Total courses finished as 1st place in the Single-Player Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(01) == 0x01 &&
+             getSavefileData("32-bit", 0xE4EC) > prev(getSavefileData("32-bit", 0xE4EC)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4EC),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176504, set = 45860, title = "Data Card 02",
+    description = "Total courses finished as last place in the Single-Player Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(02) == 0x01 &&
+             getSavefileData("32-bit", 0xE4F0) > prev(getSavefileData("32-bit", 0xE4F0)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4F0),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176505, set = 45860, title = "Data Card 03",
+    description = "Total dashes made with Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(03) == 0x01 &&
+             getSavefileData("32-bit", 0xE510) > prev(getSavefileData("32-bit", 0xE510)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE510),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176506, set = 45860, title = "Data Card 04",
+    description = "Total jumps made with Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(04) == 0x01 &&
+             getSavefileData("32-bit", 0xE500) > prev(getSavefileData("32-bit", 0xE500)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE500),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176507, set = 45860, title = "Data Card 05",
+    description = "Total wins in the Pokéathlon event \"Hurdle Dash\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(05) == 0x01 &&
+             getSavefileData("32-bit", 0xE528) > prev(getSavefileData("32-bit", 0xE528)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE528),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 0, set = 45860, title = "Data Card 06",
+    description = "Total wins in the Pokéathlon event \"Relay Run\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(06) == 0x01 &&
+             getSavefileData("32-bit", 0xE540) > prev(getSavefileData("32-bit", 0xE540)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE540),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176508, set = 45860, title = "Data Card 07",
+    description = "Total wins in the Pokéathlon event \"Pennant Capture\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(07) == 0x01 &&
+             getSavefileData("32-bit", 0xE52C) > prev(getSavefileData("32-bit", 0xE52C)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE52C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 0, set = 45860, title = "Data Card 08",
+    description = "Total wins in the Pokéathlon event \"Block Smash\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(08) == 0x01 &&
+             getSavefileData("32-bit", 0xE534) > prev(getSavefileData("32-bit", 0xE534)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE534),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176509, set = 45860, title = "Data Card 09",
+    description = "Total wins in the Pokéathlon event \"Disc Catch\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(09) == 0x01 &&
+             getSavefileData("32-bit", 0xE538) > prev(getSavefileData("32-bit", 0xE538)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE538),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176510, set = 45860, title = "Data Card 10",
+    description = "Total wins in the Pokéathlon event \"Snow Throw\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(10) == 0x01 &&
+             getSavefileData("32-bit", 0xE548) > prev(getSavefileData("32-bit", 0xE548)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE548),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176511, set = 45860, title = "Data Card 11",
+    description = "Total acquired points in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(11) == 0x01 &&
+             getSavefileData("32-bit", 0xE504) > prev(getSavefileData("32-bit", 0xE504)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE504),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176512, set = 45860, title = "Data Card 12",
+    description = "Total fails made with Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(12) == 0x01 &&
+             getSavefileData("32-bit", 0xE4FC) > prev(getSavefileData("32-bit", 0xE4FC)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4FC),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176513, set = 45860, title = "Data Card 13",
+    description = "Total times that Pokémon self-impeded themselves in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(13) == 0x01 &&
+             getSavefileData("32-bit", 0xE518) > prev(getSavefileData("32-bit", 0xE518)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE518),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176514, set = 45860, title = "Data Card 14",
+    description = "Total tackles made with Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(14) == 0x01 &&
+             getSavefileData("32-bit", 0xE508) > prev(getSavefileData("32-bit", 0xE508)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE508),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176515, set = 45860, title = "Data Card 15",
+    description = "Total times that Pokémon fell down in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(15) == 0x01 &&
+             getSavefileData("32-bit", 0xE50C) > prev(getSavefileData("32-bit", 0xE50C)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE50C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176516, set = 45860, title = "Data Card 16",
+    description = "Total wins in the Pokéathlon event \"Ring Drop\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(16) == 0x01 &&
+             getSavefileData("32-bit", 0xE544) > prev(getSavefileData("32-bit", 0xE544)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE544),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176517, set = 45860, title = "Data Card 17",
+    description = "Total wins in the Pokéathlon event \"Lamp Jump\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(17) == 0x01 &&
+             getSavefileData("32-bit", 0xE53C) > prev(getSavefileData("32-bit", 0xE53C)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE53C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176518, set = 45860, title = "Data Card 18",
+    description = "Total wins in the Pokéathlon event \"Circle Push\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(18) == 0x01 &&
+             getSavefileData("32-bit", 0xE530) > prev(getSavefileData("32-bit", 0xE530)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE530),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176519, set = 45860, title = "Data Card 19",
+    description = "Total courses finished as 1st place in the Connection Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(19) == 0x01 &&
+             getSavefileData("32-bit", 0xE520) > prev(getSavefileData("32-bit", 0xE520)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE520),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176520, set = 45860, title = "Data Card 20",
+    description = "Total courses finished as last place in the Connection Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(20) == 0x01 &&
+             getSavefileData("32-bit", 0xE524) > prev(getSavefileData("32-bit", 0xE524)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE524),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176521, set = 45860, title = "Data Card 21",
+    description = "Total events finished as 1st place in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(21) == 0x01 &&
+             __ornext(getSavefileData("32-bit", 0xE528) > prev(getSavefileData("32-bit", 0xE528)) ||
+                      getSavefileData("32-bit", 0xE52C) > prev(getSavefileData("32-bit", 0xE52C)) ||
+                      getSavefileData("32-bit", 0xE530) > prev(getSavefileData("32-bit", 0xE530)) ||
+                      getSavefileData("32-bit", 0xE534) > prev(getSavefileData("32-bit", 0xE534)) ||
+                      getSavefileData("32-bit", 0xE538) > prev(getSavefileData("32-bit", 0xE538)) ||
+                      getSavefileData("32-bit", 0xE53C) > prev(getSavefileData("32-bit", 0xE53C)) ||
+                      getSavefileData("32-bit", 0xE540) > prev(getSavefileData("32-bit", 0xE540)) ||
+                      getSavefileData("32-bit", 0xE544) > prev(getSavefileData("32-bit", 0xE544)) ||
+                      getSavefileData("32-bit", 0xE548) > prev(getSavefileData("32-bit", 0xE548)) ||
+                      getSavefileData("32-bit", 0xE54C) > prev(getSavefileData("32-bit", 0xE54C))),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE528)
+           + getSavefileData("32-bit", 0xE52C)
+           + getSavefileData("32-bit", 0xE530)
+           + getSavefileData("32-bit", 0xE534)
+           + getSavefileData("32-bit", 0xE538)
+           + getSavefileData("32-bit", 0xE53C)
+           + getSavefileData("32-bit", 0xE540)
+           + getSavefileData("32-bit", 0xE544)
+           + getSavefileData("32-bit", 0xE548)
+           + getSavefileData("32-bit", 0xE54C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176522, set = 45860, title = "Data Card 22",
+    description = "Total events finished as last place in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(22) == 0x01 &&
+             getSavefileData("32-bit", 0xE550) > prev(getSavefileData("32-bit", 0xE550)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE550),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176523, set = 45860, title = "Data Card 23",
+    description = "Total switches made with Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(23) == 0x01 &&
+             getSavefileData("32-bit", 0xE514) > prev(getSavefileData("32-bit", 0xE514)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE514),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176524, set = 45860, title = "Data Card 24",
+    description = "Total wins in the Pokéathlon event \"Goal Roll\".",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(24) == 0x01 &&
+             getSavefileData("32-bit", 0xE54C) > prev(getSavefileData("32-bit", 0xE54C)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE54C),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176525, set = 45860, title = "Data Card 25",
+    description = "Total bonuses earned in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(25) == 0x01 &&
+             getSavefileData("32-bit", 0xE4F4) > prev(getSavefileData("32-bit", 0xE4F4)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4F4),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176526, set = 45860, title = "Data Card 26",
+    description = "Total instructions given to Pokémon in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(26) == 0x01 &&
+             getSavefileData("32-bit", 0xE4F8) > prev(getSavefileData("32-bit", 0xE4F8)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4F8),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176527, set = 45860, title = "Data Card 27",
+    description = "Total time spent in the Pokéathlon.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x119 &&
+             getPokeathlonDataCard(27) == 0x01 &&
+             getSavefileData("32-bit", 0xE4E4) > prev(getSavefileData("32-bit", 0xE4E4)),
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getSavefileData("32-bit", 0xE4E4),
+    format = "MINUTES",
     lower_is_better = false
 )
