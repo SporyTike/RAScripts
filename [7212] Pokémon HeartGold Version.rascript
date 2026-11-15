@@ -20,6 +20,15 @@ function pseudoImpossibleCondition() {
     return dword(mem_ContextPointer) == 0x12345678
 }
 
+function getNationalIDOfPokemon(pokemonName) {
+    for nationalID in nationalIDs {
+        if (nationalID[1] == pokemonName) {
+            return nationalID[0]
+        }
+    }
+    assert(0 == 1, "Could not find National ID for Pokémon: " + pokemonName)
+}
+
 function checkHeapLoaded(heapIndex) {
     return byte(tbyte(getContextPointer() + 0xBFD34) + heapIndex) != 0x1C
 }
@@ -78,17 +87,32 @@ function getData(memorySize, address) {
     }
 }
 
+function getCoordinateX() {
+    return getSavefileData("32-bit", 0x124C)
+}
+
+function getCoordinateY() {
+    return getSavefileData("32-bit", 0x1250)
+}
+
 function getMapID() {
-    return getSavefileData("16-bit", 0x1244)
+    return getSavefileData("32-bit", 0x1244)
 }
 
 function getMusicID() {
     return word(tbyte(0x000BA8) + 0xBECF4)
 }
 
-function getHeapData(heapIndex, memorySize, offset) {
+function getHeapData18(heapIndex, memorySize, offset) {
     headOffset = remembered(byte(tbyte(getContextPointer() + 0xBFD34) + heapIndex) * 0x04)
     address = remembered(tbyte(tbyte(tbyte(getContextPointer() + 0xBFD24) + headOffset) + 0x18))
+    address = address + offset
+    return getData(memorySize, address)
+}
+
+function getHeapData30(heapIndex, memorySize, offset) {
+    headOffset = remembered(byte(tbyte(getContextPointer() + 0xBFD34) + heapIndex) * 0x04)
+    address = remembered(tbyte(tbyte(tbyte(getContextPointer() + 0xBFD24) + headOffset) + 0x30))
     address = address + offset
     return getData(memorySize, address)
 }
@@ -101,6 +125,198 @@ function getSavefileData(memorySize, offset) {
 function getSavefileDataRemember(memorySize, offset) {
     address = remembered(getSavefilePointer()) + offset
     return getData(memorySize, address)
+}
+
+function getField2DataStateID() {
+    return getHeapData30(11, "32-bit", 0x2C)
+}
+
+function getField2DataSubStateID() {
+    return getHeapData30(11, "32-bit", 0x34)
+}
+
+function getPokemonDataBlockOrderID(slot) {
+    pokemonAddress  = 0xA8 + ((slot - 1) * 0xEC)
+    personalityValue = remembered(getSavefileData("32-bit", pokemonAddress + 0x00))
+    return ((personalityValue & 0x3E000) / 8192) % 24
+}
+
+function getPokemonDataAbility(encryptState, slot, block) {
+    blockStart  = 0x08
+    blockTarget = 0x14
+    blockOffset = blockTarget - blockStart + ((block - 1) * 0x20)
+    pokemonAddress  = 0xA8 + ((slot - 1) * 0xEC)
+    pokemonSeed = remembered(getSavefileData("16-bit", pokemonAddress + 0x06))
+    pokemonWord = 0
+    if (encryptState == "encrypted") {
+        for word in range (0, blockOffset / 2) {
+            pokemonSeed     = remembered(pokemonSeed * 0x41C64E6D + 0x6073)
+        }
+        pokemonSeed     = pokemonSeed / 0x10000
+        pokemonWord     = getSavefileData("16-bit", pokemonAddress + 0x08 + blockOffset) ^ pokemonSeed
+
+    } else
+    if (encryptState == "decrypted") {
+        pokemonWord     = getSavefileData("16-bit", pokemonAddress + 0x08 + blockOffset)
+    }
+    return pokemonWord / 0x100
+}
+
+function getPokemonDataPokemonID(encryptState, slot, block) {
+    blockStart  = 0x08
+    blockTarget = 0x08
+    blockOffset = blockTarget - blockStart + ((block - 1) * 0x20)
+    pokemonAddress  = 0xA8 + ((slot - 1) * 0xEC)
+    pokemonSeed = remembered(getSavefileData("16-bit", pokemonAddress + 0x06))
+    pokemonWord = 0
+    if (encryptState == "encrypted") {
+        for word in range (0, blockOffset / 2) {
+            pokemonSeed     = remembered(pokemonSeed * 0x41C64E6D + 0x6073)
+        }
+        pokemonSeed     = pokemonSeed / 0x10000
+        pokemonWord     = getSavefileData("16-bit", pokemonAddress + 0x08 + blockOffset) ^ pokemonSeed
+
+    } else
+    if (encryptState == "decrypted") {
+        pokemonWord     = getSavefileData("16-bit", pokemonAddress + 0x08 + blockOffset)
+    }
+    return pokemonWord
+}
+
+function calculatePokedexCapturedDiplomaRegional() {
+    sum = 0
+    for nationalID in range (1, 251) {
+        bitOffset  = (nationalID - 1) % 8
+        byteOffset = (nationalID - 1) / 8
+        if (nationalID != getNationalIDOfPokemon("Mew") && 
+            nationalID != getNationalIDOfPokemon("Celebi")) {
+                sum = sum + getSavefileDataRemember("Bit" + bitOffset, 0x12CC + byteOffset)
+        }
+    }
+    return sum
+}
+
+function calculatePokedexCapturedDiplomaNational() {
+    sum = 0
+    for nationalID in range (1, 493) {
+        bitOffset  = (nationalID - 1) % 8
+        byteOffset = (nationalID - 1) / 8
+        if (nationalID != getNationalIDOfPokemon("Mew") && 
+            nationalID != getNationalIDOfPokemon("Celebi") && 
+            nationalID != getNationalIDOfPokemon("Jirachi") && 
+            nationalID != getNationalIDOfPokemon("Deoxys") && 
+            nationalID != getNationalIDOfPokemon("Phione") && 
+            nationalID != getNationalIDOfPokemon("Manaphy") && 
+            nationalID != getNationalIDOfPokemon("Darkrai") && 
+            nationalID != getNationalIDOfPokemon("Shaymin") && 
+            nationalID != getNationalIDOfPokemon("Arceus")) {
+                sum = sum + getSavefileDataRemember("Bit" + bitOffset, 0x12CC + byteOffset)
+        }
+    }
+    return sum
+}
+
+function calculatePokedexCapturedNational() {
+    sum = 0
+    for nationalID in range (1, 493) {
+        bitOffset  = (nationalID - 1) % 8
+        byteOffset = (nationalID - 1) / 8
+        sum = sum + getSavefileDataRemember("Bit" + bitOffset, 0x12CC + byteOffset)
+    }
+    return sum
+}
+
+function calculatePokedexSeenGenders() {
+    sum = 0
+    for nationalID in pokemonWithGenderDifference {
+        bitOffset  = (nationalID - 1) % 8
+        byteOffset = (nationalID - 1) / 8
+        sum = sum - getSavefileDataRemember("Bit" + bitOffset, 0x134C + byteOffset) * getSavefileDataRemember("Bit" + bitOffset, 0x138C + byteOffset)
+                  - getSavefileDataRemember("Bit" + bitOffset, 0x134C + byteOffset) * getSavefileDataRemember("Bit" + bitOffset, 0x138C + byteOffset)
+                  + getSavefileDataRemember("Bit" + bitOffset, 0x134C + byteOffset) + getSavefileDataRemember("Bit" + bitOffset, 0x138C + byteOffset)
+    }
+    return sum
+}
+
+function getSafariZoneAreaLevel(areaID) {
+    return getSavefileDataRemember("8-bit", 0xC428 + areaID)
+}
+
+function calculateDiscoveredFormsDeoxys() {
+    return 4
+         - getSavefileData("Bit3", 0x130B)
+         - getSavefileData("Bit7", 0x130B)
+         - getSavefileData("Bit3", 0x134B)
+         - getSavefileData("Bit7", 0x134B)
+}
+
+function calculateDiscoveredFormsRotom() {
+    return 5
+         - getSavefileData("Bit5", 0x1600) * getSavefileData("Bit4", 0x1600)
+         - getSavefileData("Bit0", 0x1601) * getSavefileData("Bit7", 0x1600)
+         - getSavefileData("Bit3", 0x1601) * getSavefileData("Bit2", 0x1601)
+         - getSavefileData("Bit6", 0x1601) * getSavefileData("Bit5", 0x1601)
+         - getSavefileData("Bit1", 0x1602) * getSavefileData("Bit0", 0x1602)
+}
+
+function getShayminFormsInPokedex() {
+    return getSavefileData("Bit0", 0x1604)
+         + getSavefileData("Bit1", 0x1604) * 0x02
+}
+
+function getMinigameSwalotPlopPlayerScore() {
+    return dword(getHeapData18(0x6A, "24-bit", 0x54) + 0x18)
+}
+
+function getMinigameSwalotPlopState() {
+    return getField2DataSubStateID()
+}
+
+function getMinigameMimeJrTopPlayerScore() {
+    return getHeapData18(0x71, "24-bit", 0x44)
+}
+
+function getMinigameMimeJrTopState() {
+    return getField2DataSubStateID()
+}
+
+function getMinigameWobbuffetPopPlayerScore() {
+    return dword(tbyte(getHeapData18(0x75, "24-bit", 0x48) + 0x1C) + 0x3848)
+}
+
+function getMinigameWobbuffetPopState() {
+    return dword(tbyte(getHeapData18(0x75, "24-bit", 0x48) + 0x1C) + 0x20)
+}
+
+function checkVoltOrbFlipLevelComplete() {
+    return word(getHeapData18(0xA0, "24-bit", 0x264) + 0x144) == word(getHeapData18(0xA0, "24-bit", 0x264) + 0x146) &&
+           dword(getHeapData18(0xA0, "24-bit", 0x264) + 0x140) == 0x02 &&
+           prev(dword(getHeapData18(0xA0, "24-bit", 0x264) + 0x140)) != 0x02
+}
+
+function getVoltorbFlipLevel() {
+    return byte(getHeapData18(0xA0, "24-bit", 0x264) + 0x14D)
+}
+
+function getBattleHallSpecialCharacter() {
+    return getSavefileDataRemember("16-bit", 0xE36)
+}
+
+function getBattleHallDifferentRecords() {
+    return getSavefileDataRemember("16-bit", 0xDF4)
+}
+
+function checkTalkingToNPCID(npcID) {
+    return getContextPointer() != 0x00 &&
+           tbyte(getContextPointer() + 0xC28F8) != 0x00 &&
+           tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) != 0x00 &&
+           tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) != 0x00 &&
+           tbyte(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x2C) != 0x00 &&
+           word(tbyte(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x2C) + 0x10) == npcID
+}
+
+function checkTalkingToNPCIDChanged() {
+    return tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) != prev(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10))
 }
 
 function calculatePokeathlonSolidaryCrowns() {
@@ -288,11 +504,11 @@ function calculatePokeathlonFriendshipPoints() {
 
 
 function getPokeathlonCourseID() {
-    return getHeapData(92, "32-bit", 0x29C)
+    return getHeapData18(0x5C, "32-bit", 0x29C)
 }
 
 function getPokeathlonCurrentPhase() {
-    return getHeapData(92, "32-bit", 0x210)
+    return getHeapData18(0x5C, "32-bit", 0x210)
 }
 
 function getPokeathlonDataCard(dataCardNumber) {
@@ -302,20 +518,1091 @@ function getPokeathlonDataCard(dataCardNumber) {
 }
 
 function getPokeathlonMinigameID() {
-    return getHeapData(92, "8-bit", 0x208 + getPokeathlonCurrentPhase())
+    return getHeapData18(0x5C, "8-bit", 0x208 + getPokeathlonCurrentPhase())
 }
 
 function getPokeathlonMinigameScore() {
-    return getHeapData(92, "16-bit", 0xD4A)
+    return getHeapData18(0x5C, "16-bit", 0xD4A)
 }
 
 function getPokeathlonPhaseState() {
-    return getHeapData(92, "8-bit", 0x3EA)
+    return getHeapData18(0x5C, "8-bit", 0x3EA)
 }
 
 function getPokeathlonResultState() {
-    return getHeapData(92, "8-bit", 0x3F2)
-}
+    return getHeapData18(0x5C, "8-bit", 0x3F2)
+} 
+
+//--------------------------------------------------
+// Arrays and Dictionaries
+
+nationalIDs = [
+    [001, "Bulbasaur"],
+    [002, "Ivysaur"],
+    [003, "Venusaur"],
+    [004, "Charmander"],
+    [005, "Charmeleon"],
+    [006, "Charizard"],
+    [007, "Squirtle"],
+    [008, "Wartortle"],
+    [009, "Blastoise"],
+    [010, "Caterpie"],
+    [011, "Metapod"],
+    [012, "Butterfree"],
+    [013, "Weedle"],
+    [014, "Kakuna"],
+    [015, "Beedrill"],
+    [016, "Pidgey"],
+    [017, "Pidgeotto"],
+    [018, "Pidgeot"],
+    [019, "Rattata"],
+    [020, "Raticate"],
+    [021, "Spearow"],
+    [022, "Fearow"],
+    [023, "Ekans"],
+    [024, "Arbok"],
+    [025, "Pikachu"],
+    [026, "Raichu"],
+    [027, "Sandshrew"],
+    [028, "Sandslash"],
+    [029, "Nidoran♀"],
+    [030, "Nidorina"],
+    [031, "Nidoqueen"],
+    [032, "Nidoran♂"],
+    [033, "Nidorino"],
+    [034, "Nidoking"],
+    [035, "Clefairy"],
+    [036, "Clefable"],
+    [037, "Vulpix"],
+    [038, "Ninetales"],
+    [039, "Jigglypuff"],
+    [040, "Wigglytuff"],
+    [041, "Zubat"],
+    [042, "Golbat"],
+    [043, "Oddish"],
+    [044, "Gloom"],
+    [045, "Vileplume"],
+    [046, "Paras"],
+    [047, "Parasect"],
+    [048, "Venonat"],
+    [049, "Venomoth"],
+    [050, "Diglett"],
+    [051, "Dugtrio"],
+    [052, "Meowth"],
+    [053, "Persian"],
+    [054, "Psyduck"],
+    [055, "Golduck"],
+    [056, "Mankey"],
+    [057, "Primeape"],
+    [058, "Growlithe"],
+    [059, "Arcanine"],
+    [060, "Poliwag"],
+    [061, "Poliwhirl"],
+    [062, "Poliwrath"],
+    [063, "Abra"],
+    [064, "Kadabra"],
+    [065, "Alakazam"],
+    [066, "Machop"],
+    [067, "Machoke"],
+    [068, "Machamp"],
+    [069, "Bellsprout"],
+    [070, "Weepinbell"],
+    [071, "Victreebel"],
+    [072, "Tentacool"],
+    [073, "Tentacruel"],
+    [074, "Geodude"],
+    [075, "Graveler"],
+    [076, "Golem"],
+    [077, "Ponyta"],
+    [078, "Rapidash"],
+    [079, "Slowpoke"],
+    [080, "Slowbro"],
+    [081, "Magnemite"],
+    [082, "Magneton"],
+    [083, "Farfetch'd"],
+    [084, "Doduo"],
+    [085, "Dodrio"],
+    [086, "Seel"],
+    [087, "Dewgong"],
+    [088, "Grimer"],
+    [089, "Muk"],
+    [090, "Shellder"],
+    [091, "Cloyster"],
+    [092, "Gastly"],
+    [093, "Haunter"],
+    [094, "Gengar"],
+    [095, "Onix"],
+    [096, "Drowzee"],
+    [097, "Hypno"],
+    [098, "Krabby"],
+    [099, "Kingler"],
+    [100, "Voltorb"],
+    [101, "Electrode"],
+    [102, "Exeggcute"],
+    [103, "Exeggutor"],
+    [104, "Cubone"],
+    [105, "Marowak"],
+    [106, "Hitmonlee"],
+    [107, "Hitmonchan"],
+    [108, "Lickitung"],
+    [109, "Koffing"],
+    [110, "Weezing"],
+    [111, "Rhyhorn"],
+    [112, "Rhydon"],
+    [113, "Chansey"],
+    [114, "Tangela"],
+    [115, "Kangaskhan"],
+    [116, "Horsea"],
+    [117, "Seadra"],
+    [118, "Goldeen"],
+    [119, "Seaking"],
+    [120, "Staryu"],
+    [121, "Starmie"],
+    [122, "Mr. Mime"],
+    [123, "Scyther"],
+    [124, "Jynx"],
+    [125, "Electabuzz"],
+    [126, "Magmar"],
+    [127, "Pinsir"],
+    [128, "Tauros"],
+    [129, "Magikarp"],
+    [130, "Gyarados"],
+    [131, "Lapras"],
+    [132, "Ditto"],
+    [133, "Eevee"],
+    [134, "Vaporeon"],
+    [135, "Jolteon"],
+    [136, "Flareon"],
+    [137, "Porygon"],
+    [138, "Omanyte"],
+    [139, "Omastar"],
+    [140, "Kabuto"],
+    [141, "Kabutops"],
+    [142, "Aerodactyl"],
+    [143, "Snorlax"],
+    [144, "Articuno"],
+    [145, "Zapdos"],
+    [146, "Moltres"],
+    [147, "Dratini"],
+    [148, "Dragonair"],
+    [149, "Dragonite"],
+    [150, "Mewtwo"],
+    [151, "Mew"],
+    [152, "Chikorita"],
+    [153, "Bayleef"],
+    [154, "Meganium"],
+    [155, "Cyndaquil"],
+    [156, "Quilava"],
+    [157, "Typhlosion"],
+    [158, "Totodile"],
+    [159, "Croconaw"],
+    [160, "Feraligatr"],
+    [161, "Sentret"],
+    [162, "Furret"],
+    [163, "Hoothoot"],
+    [164, "Noctowl"],
+    [165, "Ledyba"],
+    [166, "Ledian"],
+    [167, "Spinarak"],
+    [168, "Ariados"],
+    [169, "Crobat"],
+    [170, "Chinchou"],
+    [171, "Lanturn"],
+    [172, "Pichu"],
+    [173, "Cleffa"],
+    [174, "Igglybuff"],
+    [175, "Togepi"],
+    [176, "Togetic"],
+    [177, "Natu"],
+    [178, "Xatu"],
+    [179, "Mareep"],
+    [180, "Flaaffy"],
+    [181, "Ampharos"],
+    [182, "Bellossom"],
+    [183, "Marill"],
+    [184, "Azumarill"],
+    [185, "Sudowoodo"],
+    [186, "Politoed"],
+    [187, "Hoppip"],
+    [188, "Skiploom"],
+    [189, "Jumpluff"],
+    [190, "Aipom"],
+    [191, "Sunkern"],
+    [192, "Sunflora"],
+    [193, "Yanma"],
+    [194, "Wooper"],
+    [195, "Quagsire"],
+    [196, "Espeon"],
+    [197, "Umbreon"],
+    [198, "Murkrow"],
+    [199, "Slowking"],
+    [200, "Misdreavous"],
+    [201, "Unown"],
+    [202, "Wobbuffet"],
+    [203, "Girafarig"],
+    [204, "Pineco"],
+    [205, "Forretress"],
+    [206, "Dunsparce"],
+    [207, "Gligar"],
+    [208, "Steelix"],
+    [209, "Snubbull"],
+    [210, "Granbull"],
+    [211, "Qwilfish"],
+    [212, "Scizor"],
+    [213, "Shuckle"],
+    [214, "Heracross"],
+    [215, "Sneasel"],
+    [216, "Teddiursa"],
+    [217, "Ursaring"],
+    [218, "Slugma"],
+    [219, "Magcargo"],
+    [220, "Swinub"],
+    [221, "Piloswine"],
+    [222, "Corsola"],
+    [223, "Remoraid"],
+    [224, "Octillery"],
+    [225, "Delibird"],
+    [226, "Mantine"],
+    [227, "Skarmory"],
+    [228, "Houndour"],
+    [229, "Houndoom"],
+    [230, "Kingdra"],
+    [231, "Phanpy"],
+    [232, "Donphan"],
+    [233, "Porygon2"],
+    [234, "Stantler"],
+    [235, "Smeargle"],
+    [236, "Tyrogue"],
+    [237, "Hitmontop"],
+    [238, "Smoochum"],
+    [239, "Elekid"],
+    [240, "Magby"],
+    [241, "Miltank"],
+    [242, "Blissey"],
+    [243, "Raikou"],
+    [244, "Entei"],
+    [245, "Suicune"],
+    [246, "Larvitar"],
+    [247, "Pupitar"],
+    [248, "Tyranitar"],
+    [249, "Lugia"],
+    [250, "Ho-oh"],
+    [251, "Celebi"],
+    [252, "Treecko"],
+    [253, "Grovyle"],
+    [254, "Sceptile"],
+    [255, "Torchic"],
+    [256, "Combusken"],
+    [257, "Blaziken"],
+    [258, "Mudkip"],
+    [259, "Marshtomp"],
+    [260, "Swampert"],
+    [261, "Poochyena"],
+    [262, "Mightyena"],
+    [263, "Zigzagoon"],
+    [264, "Linoone"],
+    [265, "Wurmple"],
+    [266, "Silcoon"],
+    [267, "Beautifly"],
+    [268, "Cascoon"],
+    [269, "Dustox"],
+    [270, "Lotad"],
+    [271, "Lombre"],
+    [272, "Ludicolo"],
+    [273, "Seedot"],
+    [274, "Nuzleaf"],
+    [275, "Shiftry"],
+    [276, "Taillow"],
+    [277, "Swellow"],
+    [278, "Wingull"],
+    [279, "Pelipper"],
+    [280, "Ralts"],
+    [281, "Kirlia"],
+    [282, "Gardevoir"],
+    [283, "Surskit"],
+    [284, "Masquerain"],
+    [285, "Shroomish"],
+    [286, "Breloom"],
+    [287, "Slakoth"],
+    [288, "Vigoroth"],
+    [289, "Slaking"],
+    [290, "Nincada"],
+    [291, "Ninjask"],
+    [292, "Shedinja"],
+    [293, "Whismur"],
+    [294, "Loudred"],
+    [295, "Exploud"],
+    [296, "Makuhita"],
+    [297, "Hariyama"],
+    [298, "Azurill"],
+    [299, "Nosepass"],
+    [300, "Skitty"],
+    [301, "Delcatty"],
+    [302, "Sableye"],
+    [303, "Mawile"],
+    [304, "Aron"],
+    [305, "Lairon"],
+    [306, "Aggron"],
+    [307, "Meditite"],
+    [308, "Medicham"],
+    [309, "Electrike"],
+    [310, "Manectric"],
+    [311, "Plusle"],
+    [312, "Minun"],
+    [313, "Volbeat"],
+    [314, "Illumise"],
+    [315, "Roselia"],
+    [316, "Gulpin"],
+    [317, "Swalot"],
+    [318, "Carvanha"],
+    [319, "Sharpedo"],
+    [320, "Wailmer"],
+    [321, "Wailord"],
+    [322, "Numel"],
+    [323, "Camerupt"],
+    [324, "Torkoal"],
+    [325, "Spoink"],
+    [326, "Grumpig"],
+    [327, "Spinda"],
+    [328, "Trapinch"],
+    [329, "Vibrava"],
+    [330, "Flygon"],
+    [331, "Cacnea"],
+    [332, "Cacturne"],
+    [333, "Swablu"],
+    [334, "Altaria"],
+    [335, "Zangoose"],
+    [336, "Seviper"],
+    [337, "Lunatone"],
+    [338, "Solrock"],
+    [339, "Barboach"],
+    [340, "Whiscash"],
+    [341, "Corphish"],
+    [342, "Crawdaunt"],
+    [343, "Baltoy"],
+    [344, "Claydol"],
+    [345, "Lileep"],
+    [346, "Cradily"],
+    [347, "Anorith"],
+    [348, "Armaldo"],
+    [349, "Feebas"],
+    [350, "Milotic"],
+    [351, "Castform"],
+    [352, "Kecleon"],
+    [353, "Shuppet"],
+    [354, "Banette"],
+    [355, "Duskull"],
+    [356, "Dusclops"],
+    [357, "Tropius"],
+    [358, "Chimecho"],
+    [359, "Absol"],
+    [360, "Wynaut"],
+    [361, "Snorunt"],
+    [362, "Glalie"],
+    [363, "Spheal"],
+    [364, "Sealeo"],
+    [365, "Walrein"],
+    [366, "Clamperl"],
+    [367, "Huntail"],
+    [368, "Gorebyss"],
+    [369, "Relicanth"],
+    [370, "Luvdisc"],
+    [371, "Bagon"],
+    [372, "Shelgon"],
+    [373, "Salamence"],
+    [374, "Beldum"],
+    [375, "Metang"],
+    [376, "Metagross"],
+    [377, "Regirock"],
+    [378, "Regice"],
+    [379, "Registeel"],
+    [380, "Latias"],
+    [381, "Latios"],
+    [382, "Kyogre"],
+    [383, "Groudon"],
+    [384, "Rayquaza"],
+    [385, "Jirachi"],
+    [386, "Deoxys"],
+    [387, "Turtwig"],
+    [388, "Grotle"],
+    [389, "Torterra"],
+    [390, "Chimchar"],
+    [391, "Monferno"],
+    [392, "Infernape"],
+    [393, "Piplup"],
+    [394, "Prinplup"],
+    [395, "Empoleon"],
+    [396, "Starly"],
+    [397, "Staravia"],
+    [398, "Staraptor"],
+    [399, "Bidoof"],
+    [400, "Bibarel"],
+    [401, "Kricketot"],
+    [402, "Kricketune"],
+    [403, "Shinx"],
+    [404, "Luxio"],
+    [405, "Luxray"],
+    [406, "Budew"],
+    [407, "Roserade"],
+    [408, "Cranidos"],
+    [409, "Rampardos"],
+    [410, "Shieldon"],
+    [411, "Bastiodon"],
+    [412, "Burmy"],
+    [413, "Wormadam"],
+    [414, "Mothim"],
+    [415, "Combee"],
+    [416, "Vespiquen"],
+    [417, "Pachirisu"],
+    [418, "Buizel"],
+    [419, "Floatzel"],
+    [420, "Cherubi"],
+    [421, "Cherrim"],
+    [422, "Shellos"],
+    [423, "Gastrodon"],
+    [424, "Ambipom"],
+    [425, "Drifloon"],
+    [426, "Drifblim"],
+    [427, "Buneary"],
+    [428, "Lopunny"],
+    [429, "Mismagius"],
+    [430, "Honchkrow"],
+    [431, "Glameow"],
+    [432, "Purugly"],
+    [433, "Chingling"],
+    [434, "Stunky"],
+    [435, "Skuntank"],
+    [436, "Bronzor"],
+    [437, "Bronzong"],
+    [438, "Bonsly"],
+    [439, "Mime Jr."],
+    [440, "Happiny"],
+    [441, "Chatot"],
+    [442, "Spiritomb"],
+    [443, "Gible"],
+    [444, "Gabite"],
+    [445, "Garchomp"],
+    [446, "Munchlax"],
+    [447, "Riolu"],
+    [448, "Lucario"],
+    [449, "Hippopotas"],
+    [450, "Hippowdon"],
+    [451, "Skorupi"],
+    [452, "Drapion"],
+    [453, "Croagunk"],
+    [454, "Toxicroak"],
+    [455, "Carnivine"],
+    [456, "Finneon"],
+    [457, "Lumineon"],
+    [458, "Mantyke"],
+    [459, "Snover"],
+    [460, "Abomasnow"],
+    [461, "Weavile"],
+    [462, "Magnezone"],
+    [463, "Lickilicky"],
+    [464, "Rhyperior"],
+    [465, "Tangrowth"],
+    [466, "Electivire"],
+    [467, "Magmortar"],
+    [468, "Togekiss"],
+    [469, "Yanmega"],
+    [470, "Leafeon"],
+    [471, "Glaceon"],
+    [472, "Gliscor"],
+    [473, "Mamoswine"],
+    [474, "Porygon-Z"],
+    [475, "Gallade"],
+    [476, "Probopass"],
+    [477, "Dusknoir"],
+    [478, "Froslass"],
+    [479, "Rotom"],
+    [480, "Uxie"],
+    [481, "Mesprit"],
+    [482, "Azelf"],
+    [483, "Dialga"],
+    [484, "Palkia"],
+    [485, "Heatran"],
+    [486, "Regigigas"],
+    [487, "Giratina"],
+    [488, "Cresselia"],
+    [489, "Phione"],
+    [490, "Manaphy"],
+    [491, "Darkrai"],
+    [492, "Shaymin"],
+    [493, "Arceus"]
+]
+
+pokemonWithGenderDifference = [
+    getNationalIDOfPokemon("Venusaur"),
+    getNationalIDOfPokemon("Butterfree"),
+    getNationalIDOfPokemon("Rattata"),
+    getNationalIDOfPokemon("Raticate"),
+    getNationalIDOfPokemon("Pikachu"),
+    getNationalIDOfPokemon("Raichu"),
+    getNationalIDOfPokemon("Zubat"),
+    getNationalIDOfPokemon("Golbat"),
+    getNationalIDOfPokemon("Gloom"),
+    getNationalIDOfPokemon("Vileplume"),
+    getNationalIDOfPokemon("Kadabra"),
+    getNationalIDOfPokemon("Alakazam"),
+    getNationalIDOfPokemon("Doduo"),
+    getNationalIDOfPokemon("Dodrio"),
+    getNationalIDOfPokemon("Hypno"),
+    getNationalIDOfPokemon("Rhyhorn"),
+    getNationalIDOfPokemon("Rhydon"),
+    getNationalIDOfPokemon("Goldeen"),
+    getNationalIDOfPokemon("Seaking"),
+    getNationalIDOfPokemon("Scyther"),
+    getNationalIDOfPokemon("Magikarp"),
+    getNationalIDOfPokemon("Gyarados"),
+    getNationalIDOfPokemon("Eevee"),
+    getNationalIDOfPokemon("Meganium"),
+    getNationalIDOfPokemon("Ledyba"),
+    getNationalIDOfPokemon("Ledian"),
+    getNationalIDOfPokemon("Xatu"),
+    getNationalIDOfPokemon("Sudowoodo"),
+    getNationalIDOfPokemon("Politoed"),
+    getNationalIDOfPokemon("Aipom"),
+    getNationalIDOfPokemon("Wooper"),
+    getNationalIDOfPokemon("Quagsire"),
+    getNationalIDOfPokemon("Murkrow"),
+    getNationalIDOfPokemon("Wobbuffet"),
+    getNationalIDOfPokemon("Girafarig"),
+    getNationalIDOfPokemon("Gligar"),
+    getNationalIDOfPokemon("Steelix"),
+    getNationalIDOfPokemon("Scizor"),
+    getNationalIDOfPokemon("Heracross"),
+    getNationalIDOfPokemon("Sneasel"),
+    getNationalIDOfPokemon("Ursaring"),
+    getNationalIDOfPokemon("Piloswine"),
+    getNationalIDOfPokemon("Octillery"),
+    getNationalIDOfPokemon("Houndoom"),
+    getNationalIDOfPokemon("Donphan"),
+    getNationalIDOfPokemon("Torchic"),
+    getNationalIDOfPokemon("Combusken"),
+    getNationalIDOfPokemon("Blaziken"),
+    getNationalIDOfPokemon("Beautifly"),
+    getNationalIDOfPokemon("Dustox"),
+    getNationalIDOfPokemon("Ludicolo"),
+    getNationalIDOfPokemon("Nuzleaf"),
+    getNationalIDOfPokemon("Shiftry"),
+    getNationalIDOfPokemon("Meditite"),
+    getNationalIDOfPokemon("Medicham"),
+    getNationalIDOfPokemon("Roselia"),
+    getNationalIDOfPokemon("Gulpin"),
+    getNationalIDOfPokemon("Swalot"),
+    getNationalIDOfPokemon("Numel"),
+    getNationalIDOfPokemon("Camerupt"),
+    getNationalIDOfPokemon("Cacturne"),
+    getNationalIDOfPokemon("Milotic"),
+    getNationalIDOfPokemon("Relicanth"),
+    getNationalIDOfPokemon("Starly"),
+    getNationalIDOfPokemon("Staravia"),
+    getNationalIDOfPokemon("Staraptor"),
+    getNationalIDOfPokemon("Bidoof"),
+    getNationalIDOfPokemon("Bibarel"),
+    getNationalIDOfPokemon("Kricketot"),
+    getNationalIDOfPokemon("Kricketune"),
+    getNationalIDOfPokemon("Shinx"),
+    getNationalIDOfPokemon("Luxio"),
+    getNationalIDOfPokemon("Luxray"),
+    getNationalIDOfPokemon("Roserade"),
+    getNationalIDOfPokemon("Combee"),
+    getNationalIDOfPokemon("Pachirisu"),
+    getNationalIDOfPokemon("Buizel"),
+    getNationalIDOfPokemon("Floatzel"),
+    getNationalIDOfPokemon("Ambipom"),
+    getNationalIDOfPokemon("Gible"),
+    getNationalIDOfPokemon("Gabite"),
+    getNationalIDOfPokemon("Garchomp"),
+    getNationalIDOfPokemon("Hippopotas"),
+    getNationalIDOfPokemon("Hippowdon"),
+    getNationalIDOfPokemon("Croagunk"),
+    getNationalIDOfPokemon("Toxicroak"),
+    getNationalIDOfPokemon("Finneon"),
+    getNationalIDOfPokemon("Lumineon"),
+    getNationalIDOfPokemon("Snover"),
+    getNationalIDOfPokemon("Abomasnow"),
+    getNationalIDOfPokemon("Weavile"),
+    getNationalIDOfPokemon("Rhyperior"),
+    getNationalIDOfPokemon("Tangrowth"),
+    getNationalIDOfPokemon("Mamoswine"),
+]
+
+//--------------------------------------------------
+// Completionist - Achievements
+
+achievement(
+    title = "Special Forest Dwellers", points = 5, type = "missable",
+    description = "Find and befriend the Spiky-eared Pichu in Ilex Forest and show it to Professor Elm.",
+    id = 123514, badge = "138595", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x3D &&
+              getSavefileDataRemember("16-bit", 0x104A) == 0x02 &&
+              getSavefileDataRemember("16-bit", 0x1052) == 0x01 &&
+              prev(getSavefileDataRemember("16-bit", 0x1052)) == 0x00
+)
+
+achievement(
+    title = "Hero of Time", points = 5, type = "missable",
+    description = "Travel through time with the help of Celebi and stop Team Rocket's comeback.",
+    id = 123533, badge = "138974", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x75 &&
+              getSavefileDataRemember("16-bit", 0xFF0) == 0x05 &&
+              prev(getSavefileDataRemember("16-bit", 0xFF0)) == 0x04
+)
+
+achievement(
+    title = "Mystery Inside the Enigma Stone", points = 5,
+    description = "Bring the Enigma Stone to the Pewter Museum of Science and capture the Eon Pokemon that gets summoned.",
+    id = 123534, badge = "138722", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x33 &&
+              getSavefileDataRemember("16-bit", 0xEFA) == 0x05 &&
+              prev(getSavefileDataRemember("16-bit", 0xEFA)) >= 0x03 &&
+              prev(getSavefileDataRemember("16-bit", 0xEFA)) <= 0x04
+)
+
+achievement(
+    title = "Holy Orbs of the Forgotten Tower", points = 5,
+    description = "Bring the Jade Orb to the Embedded Tower, capture Rayquaza, and tell Professor Oak about your success.",
+    id = 650852, badge = "743171", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x1F9 &&
+              getSavefileDataRemember("16-bit", 0xFE6) == 0x08 &&
+              prev(getSavefileDataRemember("16-bit", 0xFE6)) == 0x07
+)
+
+achievement(
+    title = "Unidentified Space Creature", points = 3,
+    description = "Bring Deoxys to the meteorites on Route 3 and discover all of its forms.",
+    id = 650585, badge = "742860", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x0B &&
+              measured(calculateDiscoveredFormsDeoxys() == 4) &&
+              ((calculateDiscoveredFormsDeoxys() == 4 &&
+                prev(calculateDiscoveredFormsDeoxys()) == 3) ||
+                prev(getCoordinateY()) >= 0x6F &&
+                getCoordinateX() >= 0x444 &&
+                getCoordinateX() <= 0x44E &&
+                getCoordinateY() >= 0x70 &&
+                getCoordinateY() <= 0x7A)
+)
+
+achievement(
+    title = "Multifunctional Device", points = 3,
+    description = "Reach the cellar of Silph Co. and let Rotom climb into every device at least once.",
+    id = 124349, badge = "138713", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x193 &&
+              measured(calculateDiscoveredFormsRotom() == 5) &&
+              prev(calculateDiscoveredFormsRotom()) == 4
+)
+
+achievement(
+    title = "Beauty of Blooming Flowers", points = 3,
+    description = "Show the Goldenrod Flower Shop employee a Shaymin, obtain a Gracidea and give it to the Shaymin.",
+    id = 650639, badge = "742863", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              ((getSavefileDataRemember("Bit5", 0x10FF) == 0x01 &&
+                getShayminFormsInPokedex() == 0x02 &&
+                prev(getShayminFormsInPokedex()) < 0x02) ||
+               (getShayminFormsInPokedex() == 0x02 &&
+                getSavefileDataRemember("Bit5", 0x10FF) > prev(getSavefileDataRemember("Bit5", 0x10FF))))
+)
+
+achievement(
+    title = "Creator of the Universe", points = 5,
+    description = "Witness the creation of a legendary Pokémon egg by an Arceus in the Sinjoh Ruins.",
+    id = 123473, badge = "138591", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x1EC &&
+              getSavefileDataRemember("16-bit", 0xFEA) == 0x0A &&
+              prev(getSavefileDataRemember("16-bit", 0xFEA)) == 0x09
+)
+
+achievement(
+    title = "A Second Chance of Life", points = 3,
+    description = "Witness the creation of another legendary Pokémon egg by an Arceus in the Sinjoh Ruins.",
+    id = 650846, badge = "743159", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x1EC &&
+              prev(getMapID() == 0x20A) &&
+              getSavefileDataRemember("16-bit", 0xFEA) == 0x0E
+)
+
+achievement(
+    title = "Joy of Joy", points = 5,
+    description = "Show Nurse Joy a black trainer card and get special treatment from her.",
+    id = 651491, badge = "743850", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              getSavefileDataRemember("Bit4", 0x10E0) > prev(getSavefileDataRemember("Bit4", 0x10E0))
+)
+
+achievement(
+    title = "Illness of Strength", points = 10,
+    description = "Show Nurse Joy a Pokémon that got infected with Pokérus.",
+    id = 651492, badge = "743853", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              getSavefileDataRemember("Bit5", 0x10E0) > prev(getSavefileDataRemember("Bit5", 0x10E0))
+)
+
+achievement(
+    title = "Masuda's Vanity", points = 25,
+    description = "Get a diploma from one of the Game Freak employees after completing the Johto Pokédex.",
+    id = 651158, badge = "743852", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x17A &&
+              getSavefileDataRemember("Bit3", 0x10FC) > prev(getSavefileDataRemember("Bit3", 0x10FC)) &&
+              measured(calculatePokedexCapturedDiplomaRegional() == 249)
+)
+
+achievement(
+    title = "Tajiri's Pride", points = 50,
+    description = "Get a diploma from one of the Game Freak employees after completing the National Pokédex.",
+    id = 651159, badge = "743529", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x17A &&
+              getSavefileDataRemember("Bit4", 0x10FC) > prev(getSavefileDataRemember("Bit4", 0x10FC)) &&
+              measured(calculatePokedexCapturedDiplomaNational() == 484)
+)
+
+achievement(
+    title = "Golden Heart and Silver Soul", points = 5,
+    description = "Complete the National Pokédex and capture all 493 Pokémon.",
+    id = 651160, badge = "743530", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(calculatePokedexCapturedNational() == 493) &&
+              prev(calculatePokedexCapturedNational() >= 482) &&
+              prev(calculatePokedexCapturedNational() <= 492)
+)
+
+achievement(
+    title = "Spot the Poké-Difference", points = 25,
+    description = "Register both genders of Pokémon with gender differences as seen in the Pokédex.",
+    id = 651933, badge = "744313", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(calculatePokedexSeenGenders() == length(pokemonWithGenderDifference)) &&
+              prev(calculatePokedexSeenGenders()) >= length(pokemonWithGenderDifference) - 11 &&
+              prev(calculatePokedexSeenGenders()) <= length(pokemonWithGenderDifference) - 1
+)
+
+achievement(
+    title = "Best Standards of All", points = 5,
+    description = "Max out the level of the \"Plains\" area in the Safari Zone by having it active for 250 days.",
+    id = 651917, badge = "744301", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x00) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x00) < 250)
+)
+
+achievement(
+    title = "Growing Flower Farm", points = 5,
+    description = "Max out the level of the \"Meadow\" area in the Safari Zone by having it active for 250 days.",
+    id = 651918, badge = "744302", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x01) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x01) < 250)
+)
+
+achievement(
+    title = "Evergreen Desert", points = 5,
+    description = "Max out the level of the \"Savannah\" area in the Safari Zone by having it active for 250 days.",
+    id = 651919, badge = "744303", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x02) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x02) < 250)
+)
+
+achievement(
+    title = "Hill of Magnetic Fields", points = 5,
+    description = "Max out the level of the \"Peak\" area in the Safari Zone by having it active for 250 days.",
+    id = 651920, badge = "744304", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x03) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x03) < 250)
+)
+
+achievement(
+    title = "Crystal Clear Spring", points = 5,
+    description = "Max out the level of the \"Rocky Beach\" area in the Safari Zone by having it active for 250 days.",
+    id = 651921, badge = "744305", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x04) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x04) < 250)
+)
+
+achievement(
+    title = "Watch Your Steps", points = 5,
+    description = "Max out the level of the \"Wetland\" area in the Safari Zone by having it active for 250 days.",
+    id = 651922, badge = "744306", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x05) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x05) < 250)
+)
+
+achievement(
+    title = "Trees of the Centuries", points = 5,
+    description = "Max out the level of the \"Forest\" area in the Safari Zone by having it active for 250 days.",
+    id = 651923, badge = "744307", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x06) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x06) < 250)
+)
+
+achievement(
+    title = "Muddy Footprints", points = 5,
+    description = "Max out the level of the \"Swamp\" area in the Safari Zone by having it active for 250 days.",
+    id = 651924, badge = "744308", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x07) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x07) < 250)
+)
+
+achievement(
+    title = "Stuck in the Mud", points = 5,
+    description = "Max out the level of the \"Marshland\" area in the Safari Zone by having it active for 250 days.",
+    id = 651925, badge = "744309", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x08) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x08) < 250)
+)
+
+achievement(
+    title = "Natural Training Area", points = 5,
+    description = "Max out the level of the \"Wasteland\" area in the Safari Zone by having it active for 250 days.",
+    id = 651926, badge = "744310", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x09) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x09) < 250)
+)
+
+achievement(
+    title = "High, High to the Sky", points = 5,
+    description = "Max out the level of the \"Mountain\" area in the Safari Zone by having it active for 250 days.",
+    id = 651927, badge = "744311", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x0A) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x0A) < 250)
+)
+
+achievement(
+    title = "Hidden Below the Sand", points = 5,
+    description = "Max out the level of the \"Desert\" area in the Safari Zone by having it active for 250 days.",
+    id = 651928, badge = "744312", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSafariZoneAreaLevel(0x0B) >= 250) &&
+              prev(getSafariZoneAreaLevel(0x0B) < 250)
+)
+
+achievement(
+    title = "Familiar Faces", points = 10,
+    description = "Get a total combined win streak of 500 or more in the Battle Hall and meet Ethan or Lyra inside the lobby.",
+    id = 651766, badge = "744052", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x114 &&
+              getCoordinateX() >= 0x03 &&
+              getCoordinateX() <= 0x05 &&
+              getCoordinateY() >= 0x05 &&
+              getCoordinateY() <= 0x07 &&
+              ((getBattleHallSpecialCharacter() == 0x00 &&
+                checkTalkingToNPCID(0x00) &&
+                checkTalkingToNPCIDChanged()) ||
+               (getBattleHallSpecialCharacter() == 0x61 &&
+                checkTalkingToNPCID(0x61) &&
+                checkTalkingToNPCIDChanged()))
+)
+
+achievement(
+    title = "Mommy's Little Star", points = 25,
+    description = "Get a total combined win streak of 1,000 or more in the Battle Hall and meet Mom inside the lobby.",
+    id = 651767, badge = "744053", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x114 &&
+              getCoordinateX() >= 0x03 &&
+              getCoordinateX() <= 0x05 &&
+              getCoordinateY() >= 0x05 &&
+              getCoordinateY() <= 0x07 &&
+              getBattleHallSpecialCharacter() == 0x16D &&
+              checkTalkingToNPCID(0x16D) &&
+              checkTalkingToNPCIDChanged()
+)
+
+achievement(
+    title = "Giving a Girl Tears Once Again", points = 100,
+    description = "Get a total combined win streak of 10,000 or more in the Battle Hall and meet Whitney inside the lobby.",
+    id = 651768, badge = "744054", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x114 &&
+              getCoordinateX() >= 0x03 &&
+              getCoordinateX() <= 0x05 &&
+              getCoordinateY() >= 0x05 &&
+              getCoordinateY() <= 0x07 &&
+              getBattleHallSpecialCharacter() == 0x162 &&
+              checkTalkingToNPCID(0x162) &&
+              checkTalkingToNPCIDChanged()
+)
+
+achievement(
+    title = "Investigating the Ins and Outs of Pokémon Battle", points = 100,
+    description = "Get a total combined win streak of 10,000 or more in the Battle Hall and meet Professor Oak inside the lobby.",
+    id = 651769, badge = "744055", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x114 &&
+              getCoordinateX() >= 0x03 &&
+              getCoordinateX() <= 0x05 &&
+              getCoordinateY() >= 0x05 &&
+              getCoordinateY() <= 0x07 &&
+              getBattleHallSpecialCharacter() == 0x16E &&
+              checkTalkingToNPCID(0x16E) &&
+              checkTalkingToNPCIDChanged()
+)
+
+achievement(
+    title = "Meet and Greet with the Ultimate Fan", points = 50,
+    description = "Set a win streak with all 475 Pokémon in the Battle Hall and talk to Serena or Winston.",
+    id = 651847, badge = "744160", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x114 &&
+              getCoordinateX() >= 0x07 &&
+              getCoordinateX() <= 0x09 &&
+              getCoordinateY() >= 0x0A &&
+              getCoordinateY() <= 0x0C &&
+              getBattleHallDifferentRecords() == 475 &&
+              __ornext(checkTalkingToNPCID(0x13D) ||
+                       checkTalkingToNPCID(0x140)) &&
+              checkTalkingToNPCIDChanged()
+)
+
+achievement(
+    title = "Sparkly Temptation", points = 5,
+    description = "Complete level 6 in the minigame \"Voltorb Flip\".",
+    id = 649572, badge = "742002", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x218 &&
+              checkHeapLoaded(0xA0) &&
+              getVoltorbFlipLevel() >= 50 &&
+              getVoltorbFlipLevel() <= 59 &&
+              checkVoltOrbFlipLevelComplete()
+)
+
+achievement(
+    title = "Voltsweeper", points = 10,
+    description = "Complete level 7 in the minigame \"Voltorb Flip\".",
+    id = 649573, badge = "742003", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x218 &&
+              checkHeapLoaded(0xA0) &&
+              getVoltorbFlipLevel() >= 60 &&
+              getVoltorbFlipLevel() <= 69 &&
+              checkVoltOrbFlipLevelComplete()
+)
+
+achievement(
+    title = "Atomic Brain", points = 25,
+    description = "Complete level 8 in the minigame \"Voltorb Flip\".",
+    id = 124428, badge = "742001", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x218 &&
+              checkHeapLoaded(0xA0) &&
+              getVoltorbFlipLevel() >= 70 &&
+              getVoltorbFlipLevel() <= 79 &&
+              checkVoltOrbFlipLevelComplete()
+)
+
+achievement(
+    title = "Berry Waste Disposal", points = 10,
+    description = "Score 20.000 points or more in the Wi-Fi Club minigame \"Swalot Plop\".",
+    id = 650178, badge = "742617", set = 45861,
+    trigger = checkSaveLoaded() &&
+              checkHeapLoaded(0x0B) &&
+              checkHeapLoaded(0x6A) &&
+              getField2DataStateID() == 0x5B &&
+              getMinigameSwalotPlopState() == 0x0B &&
+              prev(getMinigameSwalotPlopState()) == 0x0A &&
+              getMinigameSwalotPlopPlayerScore() >= 20000
+)
+
+achievement(
+    title = "Clownish Behavior", points = 10,
+    description = "Score 25.000 points or more in the Wi-Fi Club minigame \"Mime Jr. Top\".",
+    id = 650180, badge = "742619", set = 45861,
+    trigger = checkSaveLoaded() &&
+              checkHeapLoaded(0x0B) &&
+              checkHeapLoaded(0x75) &&
+              getField2DataStateID() == 0x5C &&
+              getMinigameMimeJrTopState() == 0x0E &&
+              prev(getMinigameMimeJrTopState()) >= 0x0C &&
+              prev(getMinigameMimeJrTopState()) <= 0x0D &&
+              getMinigameMimeJrTopPlayerScore() >= 25000
+)
+
+achievement(
+    title = "Defensive Explosions", points = 10,
+    description = "Contribute 50.000cc or more in the Wi-Fi Club minigame \"Wobbuffet Pop\".",
+    id = 650202, badge = "742641", set = 45861,
+    trigger = checkSaveLoaded() &&
+              checkHeapLoaded(0x0B) &&
+              checkHeapLoaded(0x75) &&
+              getField2DataStateID() == 0x5D &&
+              getMinigameWobbuffetPopState() == 0x0B &&
+              prev(getMinigameWobbuffetPopState()) == 0x0A &&
+              getMinigameWobbuffetPopPlayerScore() >= 50000
+)
+
+achievement(
+    title = "Shipped Right to the Door", points = 3,
+    description = "Unlock the PokéWalker route \"Beyond the Sea\" by trading a Pokémon from a foreign country.",
+    id = 649591, badge = "742011", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              getSavefileDataRemember("Bit4", 0xE71E) > prev(getSavefileDataRemember("Bit4", 0xE71E))
+)
+
+achievement(
+    title = "Shooting Star in the Sky", points = 3,
+    description = "Unlock the PokéWalker route \"Night Sky's Edge\" by registering Jirachi in the Pokédex.",
+    id = 649593, badge = "742013", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              getSavefileDataRemember("Bit5", 0xE71E) > prev(getSavefileDataRemember("Bit5", 0xE71E))
+)
+
+achievement(
+    title = "Miracle Paths", points = 2,
+    description = "Unlock the PokéWalker routes \"Yellow Forest\", \"Rally\", \"Sightseeing\", \"Winner's Path\" and \"Amity Meadow\" by downloading their wonder cards and obtaining them from the deliveryman.",
+    id = 649592, badge = "742012", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              measured(getSavefileDataRemember("Bit6", 0xE71E)
+                     + getSavefileDataRemember("Bit7", 0xE71E)
+                     + getSavefileDataRemember("Bit0", 0xE71F)
+                     + getSavefileDataRemember("Bit1", 0xE71F)
+                     + getSavefileDataRemember("Bit2", 0xE71F) == 5) &&
+                prev(getSavefileDataRemember("Bit6", 0xE71E)
+                     + getSavefileDataRemember("Bit7", 0xE71E)
+                     + getSavefileDataRemember("Bit0", 0xE71F)
+                     + getSavefileDataRemember("Bit1", 0xE71F)
+                     + getSavefileDataRemember("Bit2", 0xE71F)) == 4
+)
 
 //--------------------------------------------------
 // Pokéathlon - Achievements
@@ -542,16 +1829,16 @@ achievement(
               getMapID() == 0x119 &&
               ((measured(getSavefileData("32-bit", 0xE510) >= 5000) &&
                     prev(getSavefileData("32-bit", 0xE510)) < 5000) ||
-               (measured(getHeapData(92, "32-bit", 0xB78)
-                       + getHeapData(92, "32-bit", 0xB98)
-                       + getHeapData(92, "32-bit", 0xBB8)
+               (measured(getHeapData18(0x5C, "32-bit", 0xB78)
+                       + getHeapData18(0x5C, "32-bit", 0xB98)
+                       + getHeapData18(0x5C, "32-bit", 0xBB8)
                        + getSavefileData("32-bit", 0xE510) >= 5000,
-                       when = checkHeapLoaded(92) &&
-                              getHeapData(92, "32-bit", 0x210) * 0x100
+                       when = checkHeapLoaded(0x5C) &&
+                              getHeapData18(0x5C, "32-bit", 0x210) * 0x100
                               + getPokeathlonPhaseState() < 0x325) &&
-                    prev(getHeapData(92, "32-bit", 0xB78)
-                       + getHeapData(92, "32-bit", 0xB98)
-                       + getHeapData(92, "32-bit", 0xBB8)
+                    prev(getHeapData18(0x5C, "32-bit", 0xB78)
+                       + getHeapData18(0x5C, "32-bit", 0xB98)
+                       + getHeapData18(0x5C, "32-bit", 0xBB8)
                        + getSavefileData("32-bit", 0xE510)) < 5000))
 )
 
@@ -573,23 +1860,23 @@ achievement(
               getMapID() == 0x119 &&
               ((measured(getSavefileData("32-bit", 0xE514) == 200) &&
                     prev(getSavefileData("32-bit", 0xE514)) == 199) ||
-               (measured(getHeapData(92, "32-bit", 0x764)
-                       + getHeapData(92, "32-bit", 0x784)
-                       + getHeapData(92, "32-bit", 0x7A4)
+               (measured(getHeapData18(0x5C, "32-bit", 0x764)
+                       + getHeapData18(0x5C, "32-bit", 0x784)
+                       + getHeapData18(0x5C, "32-bit", 0x7A4)
                        + getSavefileData("32-bit", 0xE514) == 200,
-                       when = checkHeapLoaded(92) &&
-                              getHeapData(92, "32-bit", 0x210) * 0x100
+                       when = checkHeapLoaded(0x5C) &&
+                              getHeapData18(0x5C, "32-bit", 0x210) * 0x100
                               + getPokeathlonPhaseState() < 0x325) &&
-                    prev(getHeapData(92, "32-bit", 0x764)
-                       + getHeapData(92, "32-bit", 0x784)
-                       + getHeapData(92, "32-bit", 0x7A4)
+                    prev(getHeapData18(0x5C, "32-bit", 0x764)
+                       + getHeapData18(0x5C, "32-bit", 0x784)
+                       + getHeapData18(0x5C, "32-bit", 0x7A4)
                        + getSavefileData("32-bit", 0xE514)) == 199))
 )
 
 achievement(
     title = "Call Me a Champion!", points = 2,
     description = "Obtain the golden Pokégear trophy in the Pokéathlon Dome by winning a total of 100 courses.",
-    id = 847863, badge = "741525", set = 45860,
+    id = 647863, badge = "741525", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE4EC) == 100) &&
@@ -599,7 +1886,7 @@ achievement(
 achievement(
     title = "Get the Jump, Avoid the Bump", points = 10,
     description = "Win the single-player Pokéathlon event \"Hurdle Dash\" a total of 50 times and finish the course.",
-    id = 741513, badge = "80", set = 45860,
+    id = 648852, badge = "741513", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE528) == 50) &&
@@ -609,7 +1896,7 @@ achievement(
 achievement(
     title = "Quick Race Through Piles of Sand", points = 10,
     description = "Win the single-player Pokéathlon event \"Pennant Capture\" a total of 50 times and finish the course.",
-    id = 741514, badge = "80", set = 45860,
+    id = 648853, badge = "741514", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE52C) == 50) &&
@@ -619,7 +1906,7 @@ achievement(
 achievement(
     title = "Taking a Stance", points = 10,
     description = "Win the single-player Pokéathlon event \"Circle Push\" a total of 50 times and finish the course.",
-    id = 741515, badge = "80", set = 45860,
+    id = 648854, badge = "741515", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE530) == 50) &&
@@ -629,7 +1916,7 @@ achievement(
 achievement(
     title = "De-Constructor of the Month", points = 10,
     description = "Win the single-player Pokéathlon event \"Block Smash\" a total of 50 times and finish the course.",
-    id = 741516, badge = "80", set = 45860,
+    id = 648855, badge = "741516", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE534) == 50) &&
@@ -639,7 +1926,7 @@ achievement(
 achievement(
     title = "Catch It If You Can", points = 10,
     description = "Win the single-player Pokéathlon event \"Disc Catch\" a total of 50 times and finish the course.",
-    id = 741517, badge = "80", set = 45860,
+    id = 648856, badge = "741517", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE538) == 50) &&
@@ -649,7 +1936,7 @@ achievement(
 achievement(
     title = "Enlightment on the Bouncy Castle", points = 10,
     description = "Win the single-player Pokéathlon event \"Lamp Jump\" a total of 50 times and finish the course.",
-    id = 741518, badge = "80", set = 45860,
+    id = 648857, badge = "741518", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE53C) == 50) &&
@@ -659,7 +1946,7 @@ achievement(
 achievement(
     title = "Ready for a Marathon", points = 10,
     description = "Win the single-player Pokéathlon event \"Relay Run\" a total of 50 times and finish the course.",
-    id = 741519, badge = "80", set = 45860,
+    id = 648858, badge = "741519", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE540) == 50) &&
@@ -669,7 +1956,7 @@ achievement(
 achievement(
     title = "Pushing to the Limit", points = 10,
     description = "Win the single-player Pokéathlon event \"Ring Drop\" a total of 50 times and finish the course.",
-    id = 741520, badge = "80", set = 45860,
+    id = 648859, badge = "741520", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE544) == 50) &&
@@ -679,7 +1966,7 @@ achievement(
 achievement(
     title = "Snowmen and the Ice Princess", points = 10,
     description = "Win the single-player Pokéathlon event \"Snow Throw\" a total of 50 times and finish the course.",
-    id = 741521, badge = "80", set = 45860,
+    id = 648860, badge = "741521", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE548) == 50) &&
@@ -689,7 +1976,7 @@ achievement(
 achievement(
     title = "Pocket World Cup", points = 10,
     description = "Win the single-player Pokéathlon event \"Goal Roll\" a total of 50 times and finish the course.",
-    id = 741522, badge = "80", set = 45860,
+    id = 648861, badge = "741522", set = 45860,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x119 &&
               measured(getSavefileData("32-bit", 0xE54C) == 50) &&
@@ -734,13 +2021,83 @@ achievement(
 )
 
 //--------------------------------------------------
+// Completionist - Leaderboards
+
+leaderboard(
+    id = 177085, set = 45861, title = "Information",
+    description = "Total different Pokémon win streaks in the Battle Hall.",
+    start  = checkSaveLoaded() &&
+             getMapID() == 0x114 &&
+             getCoordinateX() >= 0x07 &&
+             getCoordinateX() <= 0x09 &&
+             getCoordinateY() >= 0x07 &&
+             getCoordinateY() <= 0x09 &&
+             checkTalkingToNPCID(0x11A) &&
+             checkTalkingToNPCIDChanged(),
+    cancel = !checkTalkingToNPCID(0x11A),
+    submit = always_false(),
+    value  = getBattleHallDifferentRecords(),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176681, set = 45861, title = "Minigame Record",
+    description = "Highest score in the Wi-Fi Plaza minigame \"Swalot Plop\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(0x0B) &&
+             checkHeapLoaded(0x6A) &&
+             getField2DataStateID() == 0x5B &&
+             getMinigameSwalotPlopState() == 0x0B &&
+             prev(getMinigameSwalotPlopState()) == 0x0A,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameSwalotPlopPlayerScore(),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+
+leaderboard(
+    id = 176705, set = 45861, title = "Minigame Record",
+    description = "Highest score in the Wi-Fi Plaza minigame \"Mime Jr. Top\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(0x0B) &&
+             checkHeapLoaded(0x71) &&
+             getField2DataStateID() == 0x5C &&
+             getMinigameMimeJrTopState() == 0x10 &&
+             prev(getMinigameMimeJrTopState()) == 0x0F,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameMimeJrTopPlayerScore(),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+leaderboard(
+    id = 176706, set = 45861, title = "Minigame Record",
+    description = "Most CC contributed in the Wi-Fi Plaza minigame \"Wobbuffet Pop\".",
+    start  = checkSaveLoaded() &&
+             checkHeapLoaded(0x0B) &&
+             checkHeapLoaded(0x75) &&
+             getField2DataStateID() == 0x5D &&
+             getMinigameWobbuffetPopState() == 0x08 &&
+             prev(getMinigameWobbuffetPopState()) == 0x07,
+    cancel = always_false(),
+    submit = always_true(),
+    value  = getMinigameWobbuffetPopPlayerScore(),
+    format = "VALUE",
+    lower_is_better = false
+)
+
+//--------------------------------------------------
 // Pokéathlon - Leaderboards
 
 leaderboard(
     id = 19141, set = 45860, title = "Event Record",
     description = "Least time needed in the Pokéathlon event \"Hurdle Dash\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -757,7 +2114,7 @@ leaderboard(
     id = 19143, set = 45860, title = "Event Record",
     description = "Most pennants captured in the Pokéathlon event \"Pennant Capture\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -774,7 +2131,7 @@ leaderboard(
     id = 19138, set = 45860, title = "Event Record",
     description = "Most points collected in the Pokéathlon event \"Circle Push\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -791,7 +2148,7 @@ leaderboard(
     id = 19137, set = 45860, title = "Event Record",
     description = "Most blocks destroyed in the Pokéathlon event \"Block Smash\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -808,7 +2165,7 @@ leaderboard(
     id = 19139, set = 45860, title = "Event Record",
     description = "Most points collected in the Pokéathlon event \"Disc Catch\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -825,7 +2182,7 @@ leaderboard(
     id = 19142, set = 45860, title = "Event Record",
     description = "Most points collected in the Pokéathlon event \"Lamp Jump\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -842,7 +2199,7 @@ leaderboard(
     id = 19144, set = 45860, title = "Event Record",
     description = "Most distance ran in the Pokéathlon event \"Relay Run\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -859,7 +2216,7 @@ leaderboard(
     id = 19145, set = 45860, title = "Event Record",
     description = "Most points collected in the Pokéathlon event \"Ring Drop\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -876,7 +2233,7 @@ leaderboard(
     id = 19146, set = 45860, title = "Event Record",
     description = "Most Pokémon hit in the Pokéathlon event \"Snow Throw\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -893,7 +2250,7 @@ leaderboard(
     id = 19140, set = 45860, title = "Event Record",
     description = "Most points collected in the Pokéathlon event \"Goal Roll\".",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonPhaseState() == 0x12 &&
              getPokeathlonResultState() == 0x02 &&
@@ -910,7 +2267,7 @@ leaderboard(
     id = 19147, set = 45860, title = "Course Record",
     description = "Highest end result in the Pokéathlon Speed course.",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonCourseID() == 0x00 &&
              getPokeathlonCurrentPhase() == 0x03 &&
@@ -919,7 +2276,7 @@ leaderboard(
              prev(getPokeathlonResultState()) == 0x01,
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    value  = dword(tbyte(getHeapData18(0x5C, "24-bit", 0x204) + 0x8C) + 0x10),
     format = "VALUE",
     lower_is_better = false
 )
@@ -928,7 +2285,7 @@ leaderboard(
     id = 19148, set = 45860, title = "Course Record",
     description = "Highest end result in the Pokéathlon Power course.",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonCourseID() == 0x01 &&
              getPokeathlonCurrentPhase() == 0x03 &&
@@ -937,7 +2294,7 @@ leaderboard(
              prev(getPokeathlonResultState()) == 0x01,
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    value  = dword(tbyte(getHeapData18(0x5C, "24-bit", 0x204) + 0x8C) + 0x10),
     format = "VALUE",
     lower_is_better = false
 )
@@ -946,7 +2303,7 @@ leaderboard(
     id = 19149, set = 45860, title = "Course Record",
     description = "Highest end result in the Pokéathlon Skill course.",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonCourseID() == 0x02 &&
              getPokeathlonCurrentPhase() == 0x03 &&
@@ -955,7 +2312,7 @@ leaderboard(
              prev(getPokeathlonResultState()) == 0x01,
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    value  = dword(tbyte(getHeapData18(0x5C, "24-bit", 0x204) + 0x8C) + 0x10),
     format = "VALUE",
     lower_is_better = false
 )
@@ -964,7 +2321,7 @@ leaderboard(
     id = 19150, set = 45860, title = "Course Record",
     description = "Highest end result in the Pokéathlon Stamina course.",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonCourseID() == 0x03 &&
              getPokeathlonCurrentPhase() == 0x03 &&
@@ -973,7 +2330,7 @@ leaderboard(
              prev(getPokeathlonResultState()) == 0x01,
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    value  = dword(tbyte(getHeapData18(0x5C, "24-bit", 0x204) + 0x8C) + 0x10),
     format = "VALUE",
     lower_is_better = false
 )
@@ -982,7 +2339,7 @@ leaderboard(
     id = 19151, set = 45860, title = "Course Record",
     description = "Highest end result in the Pokéathlon Jump course.",
     start  = checkSaveLoaded() &&
-             checkHeapLoaded(92) &&
+             checkHeapLoaded(0x5C) &&
              getMapID() == 0x119 &&
              getPokeathlonCourseID() == 0x04 &&
              getPokeathlonCurrentPhase() == 0x03 &&
@@ -991,7 +2348,7 @@ leaderboard(
              prev(getPokeathlonResultState()) == 0x01,
     cancel = always_false(),
     submit = always_true(),
-    value  = dword(tbyte(getHeapData(92, "24-bit", 0x204) + 0x8C) + 0x10),
+    value  = dword(tbyte(getHeapData18(0x5C, "24-bit", 0x204) + 0x8C) + 0x10),
     format = "VALUE",
     lower_is_better = false
 )
@@ -1093,7 +2450,7 @@ leaderboard(
 )
 
 leaderboard(
-    id = 0, set = 45860, title = "Data Card 06",
+    id = 177127, set = 45860, title = "Data Card 06",
     description = "Total wins in the Pokéathlon event \"Relay Run\".",
     start  = checkSaveLoaded() &&
              getMapID() == 0x119 &&
@@ -1121,7 +2478,7 @@ leaderboard(
 )
 
 leaderboard(
-    id = 0, set = 45860, title = "Data Card 08",
+    id = 177128, set = 45860, title = "Data Card 08",
     description = "Total wins in the Pokéathlon event \"Block Smash\".",
     start  = checkSaveLoaded() &&
              getMapID() == 0x119 &&
