@@ -11,7 +11,7 @@ achievementSetCompletionist = achievement_set("Completionist",
 //--------------------------------------------------
 // Addresses
 
-mem_ContextPointer              = 0x000BA8
+mem_ContextPointer  = 0x000BA8
 
 //--------------------------------------------------
 // Functions
@@ -93,6 +93,10 @@ function getCoordinateX() {
 
 function getCoordinateY() {
     return getSavefileData("32-bit", 0x1250)
+}
+
+function getRotation() {
+    return dword(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x40) + 0x30) + 0x28)
 }
 
 function getMapID() {
@@ -238,6 +242,117 @@ function calculatePokedexSeenGenders() {
     return sum
 }
 
+function calculatePhotoAlbumPicturesCity() {
+    return measured(tally(24, once(checkPhotoAlbumAnyPictureHashHash(0x003C, 0x02B7, 0x018F, 0x0000)), // New Bark Town
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0043, 0x0232, 0x018E, 0x0000)), // Cherrygrove City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00C7, 0x0011, 0x0006, 0x0000)), // Goldenrod Tunnel
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0118, 0x0029, 0x0019, 0x0000)), // Pokéathlon Dome
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0118, 0x0013, 0x001A, 0x0000)), // Pokéathlon Dome
+                              once(checkPhotoAlbumAnyPictureHashHash(0x004E, 0x0186, 0x009C, 0x0000)), // Ecruteak City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x004D, 0x0116, 0x00FD, 0x0000)), // Olivine City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00E0, 0x0002, 0x000A, 0x0000)), // Olivine Lighthouse
+                              once(checkPhotoAlbumAnyPictureHashHash(0x004B, 0x00B9, 0x015F, 0x0000)), // Cianwood City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00AE, 0x0057, 0x0128, 0x0000)), // Safari Zone Gate
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0059, 0x02AC, 0x00AB, 0x0000)), // Blackthorn City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x019B, 0x000D, 0x000C, 0x0000)), // Goldenrod Tunnel
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0031, 0x0407, 0x016F, 0x0000)), // Pallet Town
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0032, 0x040D, 0x0100, 0x0000)), // Viridian City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0033, 0x0417, 0x0051, 0x0000)), // Pewter City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x01D7, 0x0008, 0x0004, 0x0000)), // Pewter Museum of Science
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0034, 0x052D, 0x0068, 0x0000)), // Cerulean City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0036, 0x0526, 0x012E, 0x0000)), // Vermilion City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x003B, 0x051B, 0x00E8, 0x0000)), // Saffron City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x003B, 0x0507, 0x00D3, 0x0000)), // Saffron City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0037, 0x04B0, 0x00FC, 0x0000)), // Celadon City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0173, 0x0003, 0x0006, 0x0000)), // Celadon Dept. Store
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0038, 0x04B1, 0x01B9, 0x0000)), // Fuchsia City
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0066, 0x000A, 0x0005, 0x0000))  // National Park Lobby
+                         )
+                    )
+}
+
+function calculatePhotoAlbumPicturesNature() {
+    return measured(tally(21, once(checkPhotoAlbumAnyPictureHashHash(0x0071, 0x01B3, 0x0118, 0x0000)), // Ruins of Alph
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0143, 0x0004, 0x0004, 0x0000)), // Ruins of Alph
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0024, 0x01D4, 0x018B, 0x0000)), // Route 32
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0072, 0x0010, 0x0006, 0x0000)), // Slowpoke Well
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0075, 0x000B, 0x0014, 0x0000)), // Ilex Forest
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0027, 0x0174, 0x012F, 0x0000)), // Route 35
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0060, 0x0034, 0x004E, 0x0000)), // National Park
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0060, 0x0036, 0x0030, 0x0000)), // National Park
+                              once(checkPhotoAlbumAnyPictureHashHash(0x002B, 0x0106, 0x00A8, 0x0000)), // Route 39
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0098, 0x0065, 0x0153, 0x0000)), // Route 48
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0078, 0x0026, 0x0011, 0x0000)), // Ice Path
+                              once(checkPhotoAlbumAnyPictureHashHash(0x002F, 0x0288, 0x00FE, 0x0000)), // Route 45
+                              once(checkPhotoAlbumAnyPictureHashHash(0x005A, 0x0334, 0x010B, 0x0000)), // Mt. Silver
+                              once(checkPhotoAlbumAnyPictureHashHash(0x007A, 0x000C, 0x0024, 0x0000)), // Mt. Silver
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0009, 0x040C, 0x013C, 0x0000)), // Route 1
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0014, 0x0593, 0x0113, 0x0000)), // Route 12
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0016, 0x054D, 0x0183, 0x0000)), // Route 14
+                              once(checkPhotoAlbumAnyPictureHashHash(0x01C5, 0x0021, 0x0009, 0x0000)), // Seafoam Island
+                              once(checkPhotoAlbumAnyPictureHashHash(0x005D, 0x0413, 0x019C, 0x0000)), // Route 21
+                              once(checkPhotoAlbumAnyPictureHashHash(0x001B, 0x03B8, 0x010B, 0x0000)), // Route 22
+                              once(checkPhotoAlbumAnyPictureHashHash(0x001E, 0x0392, 0x0182, 0x0000))  // Route 26
+                         )
+                    )
+}
+
+function calculatePhotoAlbumPicturesCelebrity() {
+    return measured(tally(19, once(checkPhotoAlbumAnyPictureHashHash(0x0175, 0x000C, 0x0005, 0x0160)), // Celadon Dept. Store       Falkner
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0060, 0x003A, 0x0028, 0x0161)), // National Park             Bugsy
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00C4, 0x0003, 0x0004, 0x0162)), // Goldenrod Dept. Store     Whitney
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0006, 0x001F, 0x000C, 0x0163)), // Bellchime Trail           Morty
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0097, 0x004F, 0x0173, 0x0164)), // Route 47                  Chuck
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00E7, 0x0007, 0x0005, 0x0165)), // Olivine City              Jasmine
+                              once(checkPhotoAlbumAnyPictureHashHash(0x008C, 0x0006, 0x0005, 0x0166)), // Mahagony Gym              Pryce
+                              once(checkPhotoAlbumAnyPictureHashHash(0x00FD, 0x001B, 0x000D, 0x0167)), // Dragon's Den              Clair
+                              once(checkPhotoAlbumAnyPictureHashHash(0x006A, 0x0023, 0x0005, 0x0175)), // Diglett's Cave            Brock
+                              once(checkPhotoAlbumAnyPictureHashHash(0x001D, 0x058C, 0x002C, 0x0172)), // Route 25                  Misty
+                              once(checkPhotoAlbumAnyPictureHashHash(0x002B, 0x0105, 0x00BC, 0x0170)), // Route 39                  Lt. Surge
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0037, 0x04B0, 0x00FC, 0x0173)), // Celadon City              Erika
+                              once(checkPhotoAlbumAnyPictureHashHash(0x012B, 0x000A, 0x0008, 0x0174)), // Victory Road Gate         Janine
+                              once(checkPhotoAlbumAnyPictureHashHash(0x014A, 0x0010, 0x0016, 0x0171)), // Olivine Pier              Sabrina
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0039, 0x040B, 0x01F8, 0x0176)), // Cinnabar Island           Blaine
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0039, 0x040A, 0x01EF, 0x0177)), // Cinnabar Island           Blue
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0026, 0x016B, 0x019A, 0x014A)), // Pokémon Day-Care          Day-Care Man
+                              once(checkPhotoAlbumAnyPictureHashHash(0x0120, 0x0005, 0x000B, 0x0183)), // Dragon's Den              Master
+                              once(checkPhotoAlbumAnyPictureHashHash(0x01F9, 0x0006, 0x0006, 0x016E))  // Oak Pokémon Research Lab  Professor Oak
+                         )
+                    )
+}
+
+function checkPhotoAlbumAnyPictureHashHash(mapID, xAxis, yAxis, characterID) {
+    code = always_false()
+    for i in range (0, 35) {
+        code = __ornext(code || checkPhotoAlbumPictureHasHash(i, mapID, xAxis, yAxis, characterID))
+    }
+    return code
+}
+
+function checkPhotoAlbumPictureObtained() {
+    code = always_false()
+    for albumSlot in range (0, 35) {
+        baseOffset = 0xC754 + (albumSlot * 132)
+        code = __ornext(code || getSavefileData("32-bit", baseOffset + 0x2E) > prev(getSavefileData("32-bit", baseOffset + 0x2E)))
+    }
+    return code
+}
+
+function checkPhotoAlbumPictureHasHash(albumSlot, mapID, xAxis, yAxis, characterID) {
+    baseOffset = 0xC754 + (albumSlot * 132)
+    return getSavefileDataRemember("32-bit", baseOffset + 0x2E)
+         + getSavefileDataRemember("Bit0", baseOffset + 0x41) * 0x10000000  == hashPhotoAlbumPicture(mapID, xAxis, yAxis, characterID)
+}
+
+function hashPhotoAlbumPicture(mapID, xAxis, yAxis, characterID) {
+    if (characterID != 0x00) {
+        characterID = 1
+    }
+    return mapID
+         + xAxis * 0x10000
+         + characterID * 0x10000000
+}
+
 function getSafariZoneAreaLevel(areaID) {
     return getSavefileDataRemember("8-bit", 0xC428 + areaID)
 }
@@ -317,6 +432,66 @@ function checkTalkingToNPCID(npcID) {
 
 function checkTalkingToNPCIDChanged() {
     return tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) != prev(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10))
+}
+
+function checkItemObtained() {
+    return getContextPointer() != 0x00 &&
+           tbyte(getContextPointer() + 0xC28F8) != 0x00 &&
+           tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) != 0x00 &&
+           tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) != 0x00 &&
+           dword(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x94) != prev(dword(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x94))
+}
+
+function getItemIDObtained() {
+    return word(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x94)
+}
+
+function getItemAmountObtained() {
+    return word(tbyte(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x10) + 0x0C) + 0x96)
+}
+
+function getBugCatchingContestScorePlayer() {
+    return word(tbyte(tbyte(getContextPointer() + 0xC28F8) + 0x118) + 0xAE)
+}
+
+function checkBackdropsLoaded() {
+    code = always_true()
+    for i in range(0x00, 0x11) {
+        code = code && getSavefileDataRemember("8-bit", 0x3F9C + i) <= 0x12
+    }
+    return code
+}
+
+function calculateGBARewards() {
+    return 3
+         - getSavefileDataRemember("8-bit", 0x3FAA) / 0x12
+         - getSavefileDataRemember("8-bit", 0x3FAB) / 0x12
+         - getSavefileDataRemember("8-bit", 0x3FAC) / 0x12
+         + getSavefileDataRemember("Bit4", 0x3F98)
+         + getSavefileDataRemember("Bit5", 0x3F98)
+}
+
+function checkBattleHallNewRecord(mode) {
+    return __ornext(getBattleHallCurrentStreak(mode) != prev(getBattleHallCurrentStreak(mode)) ||
+                    getBattleHallNationalPokedexID(mode) != prev(getBattleHallNationalPokedexID(mode)))
+}
+
+function getBattleHallCurrentStreak(mode) {
+    if (mode == "Single") {
+        return word(getContextPointer() + 0xC12E0)
+    }
+    if (mode == "Double") {
+        return word(getContextPointer() + 0xC12F8)
+    }
+}
+
+function getBattleHallNationalPokedexID(mode) {
+    if (mode == "Single") {
+        return word(getContextPointer() + 0xC12E4)
+    }
+    if (mode == "Double") {
+        return word(getContextPointer() + 0xC12FC)
+    }
 }
 
 function calculatePokeathlonSolidaryCrowns() {
@@ -536,500 +711,501 @@ function getPokeathlonResultState() {
 //--------------------------------------------------
 // Arrays and Dictionaries
 
+// National Pokédex ID, Name, Battle Hall Single Leaderboard ID, Battle Hall Double Leaderboard ID
 nationalIDs = [
-    [001, "Bulbasaur"],
-    [002, "Ivysaur"],
-    [003, "Venusaur"],
-    [004, "Charmander"],
-    [005, "Charmeleon"],
-    [006, "Charizard"],
-    [007, "Squirtle"],
-    [008, "Wartortle"],
-    [009, "Blastoise"],
-    [010, "Caterpie"],
-    [011, "Metapod"],
-    [012, "Butterfree"],
-    [013, "Weedle"],
-    [014, "Kakuna"],
-    [015, "Beedrill"],
-    [016, "Pidgey"],
-    [017, "Pidgeotto"],
-    [018, "Pidgeot"],
-    [019, "Rattata"],
-    [020, "Raticate"],
-    [021, "Spearow"],
-    [022, "Fearow"],
-    [023, "Ekans"],
-    [024, "Arbok"],
-    [025, "Pikachu"],
-    [026, "Raichu"],
-    [027, "Sandshrew"],
-    [028, "Sandslash"],
-    [029, "Nidoran♀"],
-    [030, "Nidorina"],
-    [031, "Nidoqueen"],
-    [032, "Nidoran♂"],
-    [033, "Nidorino"],
-    [034, "Nidoking"],
-    [035, "Clefairy"],
-    [036, "Clefable"],
-    [037, "Vulpix"],
-    [038, "Ninetales"],
-    [039, "Jigglypuff"],
-    [040, "Wigglytuff"],
-    [041, "Zubat"],
-    [042, "Golbat"],
-    [043, "Oddish"],
-    [044, "Gloom"],
-    [045, "Vileplume"],
-    [046, "Paras"],
-    [047, "Parasect"],
-    [048, "Venonat"],
-    [049, "Venomoth"],
-    [050, "Diglett"],
-    [051, "Dugtrio"],
-    [052, "Meowth"],
-    [053, "Persian"],
-    [054, "Psyduck"],
-    [055, "Golduck"],
-    [056, "Mankey"],
-    [057, "Primeape"],
-    [058, "Growlithe"],
-    [059, "Arcanine"],
-    [060, "Poliwag"],
-    [061, "Poliwhirl"],
-    [062, "Poliwrath"],
-    [063, "Abra"],
-    [064, "Kadabra"],
-    [065, "Alakazam"],
-    [066, "Machop"],
-    [067, "Machoke"],
-    [068, "Machamp"],
-    [069, "Bellsprout"],
-    [070, "Weepinbell"],
-    [071, "Victreebel"],
-    [072, "Tentacool"],
-    [073, "Tentacruel"],
-    [074, "Geodude"],
-    [075, "Graveler"],
-    [076, "Golem"],
-    [077, "Ponyta"],
-    [078, "Rapidash"],
-    [079, "Slowpoke"],
-    [080, "Slowbro"],
-    [081, "Magnemite"],
-    [082, "Magneton"],
-    [083, "Farfetch'd"],
-    [084, "Doduo"],
-    [085, "Dodrio"],
-    [086, "Seel"],
-    [087, "Dewgong"],
-    [088, "Grimer"],
-    [089, "Muk"],
-    [090, "Shellder"],
-    [091, "Cloyster"],
-    [092, "Gastly"],
-    [093, "Haunter"],
-    [094, "Gengar"],
-    [095, "Onix"],
-    [096, "Drowzee"],
-    [097, "Hypno"],
-    [098, "Krabby"],
-    [099, "Kingler"],
-    [100, "Voltorb"],
-    [101, "Electrode"],
-    [102, "Exeggcute"],
-    [103, "Exeggutor"],
-    [104, "Cubone"],
-    [105, "Marowak"],
-    [106, "Hitmonlee"],
-    [107, "Hitmonchan"],
-    [108, "Lickitung"],
-    [109, "Koffing"],
-    [110, "Weezing"],
-    [111, "Rhyhorn"],
-    [112, "Rhydon"],
-    [113, "Chansey"],
-    [114, "Tangela"],
-    [115, "Kangaskhan"],
-    [116, "Horsea"],
-    [117, "Seadra"],
-    [118, "Goldeen"],
-    [119, "Seaking"],
-    [120, "Staryu"],
-    [121, "Starmie"],
-    [122, "Mr. Mime"],
-    [123, "Scyther"],
-    [124, "Jynx"],
-    [125, "Electabuzz"],
-    [126, "Magmar"],
-    [127, "Pinsir"],
-    [128, "Tauros"],
-    [129, "Magikarp"],
-    [130, "Gyarados"],
-    [131, "Lapras"],
-    [132, "Ditto"],
-    [133, "Eevee"],
-    [134, "Vaporeon"],
-    [135, "Jolteon"],
-    [136, "Flareon"],
-    [137, "Porygon"],
-    [138, "Omanyte"],
-    [139, "Omastar"],
-    [140, "Kabuto"],
-    [141, "Kabutops"],
-    [142, "Aerodactyl"],
-    [143, "Snorlax"],
-    [144, "Articuno"],
-    [145, "Zapdos"],
-    [146, "Moltres"],
-    [147, "Dratini"],
-    [148, "Dragonair"],
-    [149, "Dragonite"],
-    [150, "Mewtwo"],
-    [151, "Mew"],
-    [152, "Chikorita"],
-    [153, "Bayleef"],
-    [154, "Meganium"],
-    [155, "Cyndaquil"],
-    [156, "Quilava"],
-    [157, "Typhlosion"],
-    [158, "Totodile"],
-    [159, "Croconaw"],
-    [160, "Feraligatr"],
-    [161, "Sentret"],
-    [162, "Furret"],
-    [163, "Hoothoot"],
-    [164, "Noctowl"],
-    [165, "Ledyba"],
-    [166, "Ledian"],
-    [167, "Spinarak"],
-    [168, "Ariados"],
-    [169, "Crobat"],
-    [170, "Chinchou"],
-    [171, "Lanturn"],
-    [172, "Pichu"],
-    [173, "Cleffa"],
-    [174, "Igglybuff"],
-    [175, "Togepi"],
-    [176, "Togetic"],
-    [177, "Natu"],
-    [178, "Xatu"],
-    [179, "Mareep"],
-    [180, "Flaaffy"],
-    [181, "Ampharos"],
-    [182, "Bellossom"],
-    [183, "Marill"],
-    [184, "Azumarill"],
-    [185, "Sudowoodo"],
-    [186, "Politoed"],
-    [187, "Hoppip"],
-    [188, "Skiploom"],
-    [189, "Jumpluff"],
-    [190, "Aipom"],
-    [191, "Sunkern"],
-    [192, "Sunflora"],
-    [193, "Yanma"],
-    [194, "Wooper"],
-    [195, "Quagsire"],
-    [196, "Espeon"],
-    [197, "Umbreon"],
-    [198, "Murkrow"],
-    [199, "Slowking"],
-    [200, "Misdreavous"],
-    [201, "Unown"],
-    [202, "Wobbuffet"],
-    [203, "Girafarig"],
-    [204, "Pineco"],
-    [205, "Forretress"],
-    [206, "Dunsparce"],
-    [207, "Gligar"],
-    [208, "Steelix"],
-    [209, "Snubbull"],
-    [210, "Granbull"],
-    [211, "Qwilfish"],
-    [212, "Scizor"],
-    [213, "Shuckle"],
-    [214, "Heracross"],
-    [215, "Sneasel"],
-    [216, "Teddiursa"],
-    [217, "Ursaring"],
-    [218, "Slugma"],
-    [219, "Magcargo"],
-    [220, "Swinub"],
-    [221, "Piloswine"],
-    [222, "Corsola"],
-    [223, "Remoraid"],
-    [224, "Octillery"],
-    [225, "Delibird"],
-    [226, "Mantine"],
-    [227, "Skarmory"],
-    [228, "Houndour"],
-    [229, "Houndoom"],
-    [230, "Kingdra"],
-    [231, "Phanpy"],
-    [232, "Donphan"],
-    [233, "Porygon2"],
-    [234, "Stantler"],
-    [235, "Smeargle"],
-    [236, "Tyrogue"],
-    [237, "Hitmontop"],
-    [238, "Smoochum"],
-    [239, "Elekid"],
-    [240, "Magby"],
-    [241, "Miltank"],
-    [242, "Blissey"],
-    [243, "Raikou"],
-    [244, "Entei"],
-    [245, "Suicune"],
-    [246, "Larvitar"],
-    [247, "Pupitar"],
-    [248, "Tyranitar"],
-    [249, "Lugia"],
-    [250, "Ho-oh"],
-    [251, "Celebi"],
-    [252, "Treecko"],
-    [253, "Grovyle"],
-    [254, "Sceptile"],
-    [255, "Torchic"],
-    [256, "Combusken"],
-    [257, "Blaziken"],
-    [258, "Mudkip"],
-    [259, "Marshtomp"],
-    [260, "Swampert"],
-    [261, "Poochyena"],
-    [262, "Mightyena"],
-    [263, "Zigzagoon"],
-    [264, "Linoone"],
-    [265, "Wurmple"],
-    [266, "Silcoon"],
-    [267, "Beautifly"],
-    [268, "Cascoon"],
-    [269, "Dustox"],
-    [270, "Lotad"],
-    [271, "Lombre"],
-    [272, "Ludicolo"],
-    [273, "Seedot"],
-    [274, "Nuzleaf"],
-    [275, "Shiftry"],
-    [276, "Taillow"],
-    [277, "Swellow"],
-    [278, "Wingull"],
-    [279, "Pelipper"],
-    [280, "Ralts"],
-    [281, "Kirlia"],
-    [282, "Gardevoir"],
-    [283, "Surskit"],
-    [284, "Masquerain"],
-    [285, "Shroomish"],
-    [286, "Breloom"],
-    [287, "Slakoth"],
-    [288, "Vigoroth"],
-    [289, "Slaking"],
-    [290, "Nincada"],
-    [291, "Ninjask"],
-    [292, "Shedinja"],
-    [293, "Whismur"],
-    [294, "Loudred"],
-    [295, "Exploud"],
-    [296, "Makuhita"],
-    [297, "Hariyama"],
-    [298, "Azurill"],
-    [299, "Nosepass"],
-    [300, "Skitty"],
-    [301, "Delcatty"],
-    [302, "Sableye"],
-    [303, "Mawile"],
-    [304, "Aron"],
-    [305, "Lairon"],
-    [306, "Aggron"],
-    [307, "Meditite"],
-    [308, "Medicham"],
-    [309, "Electrike"],
-    [310, "Manectric"],
-    [311, "Plusle"],
-    [312, "Minun"],
-    [313, "Volbeat"],
-    [314, "Illumise"],
-    [315, "Roselia"],
-    [316, "Gulpin"],
-    [317, "Swalot"],
-    [318, "Carvanha"],
-    [319, "Sharpedo"],
-    [320, "Wailmer"],
-    [321, "Wailord"],
-    [322, "Numel"],
-    [323, "Camerupt"],
-    [324, "Torkoal"],
-    [325, "Spoink"],
-    [326, "Grumpig"],
-    [327, "Spinda"],
-    [328, "Trapinch"],
-    [329, "Vibrava"],
-    [330, "Flygon"],
-    [331, "Cacnea"],
-    [332, "Cacturne"],
-    [333, "Swablu"],
-    [334, "Altaria"],
-    [335, "Zangoose"],
-    [336, "Seviper"],
-    [337, "Lunatone"],
-    [338, "Solrock"],
-    [339, "Barboach"],
-    [340, "Whiscash"],
-    [341, "Corphish"],
-    [342, "Crawdaunt"],
-    [343, "Baltoy"],
-    [344, "Claydol"],
-    [345, "Lileep"],
-    [346, "Cradily"],
-    [347, "Anorith"],
-    [348, "Armaldo"],
-    [349, "Feebas"],
-    [350, "Milotic"],
-    [351, "Castform"],
-    [352, "Kecleon"],
-    [353, "Shuppet"],
-    [354, "Banette"],
-    [355, "Duskull"],
-    [356, "Dusclops"],
-    [357, "Tropius"],
-    [358, "Chimecho"],
-    [359, "Absol"],
-    [360, "Wynaut"],
-    [361, "Snorunt"],
-    [362, "Glalie"],
-    [363, "Spheal"],
-    [364, "Sealeo"],
-    [365, "Walrein"],
-    [366, "Clamperl"],
-    [367, "Huntail"],
-    [368, "Gorebyss"],
-    [369, "Relicanth"],
-    [370, "Luvdisc"],
-    [371, "Bagon"],
-    [372, "Shelgon"],
-    [373, "Salamence"],
-    [374, "Beldum"],
-    [375, "Metang"],
-    [376, "Metagross"],
-    [377, "Regirock"],
-    [378, "Regice"],
-    [379, "Registeel"],
-    [380, "Latias"],
-    [381, "Latios"],
-    [382, "Kyogre"],
-    [383, "Groudon"],
-    [384, "Rayquaza"],
-    [385, "Jirachi"],
-    [386, "Deoxys"],
-    [387, "Turtwig"],
-    [388, "Grotle"],
-    [389, "Torterra"],
-    [390, "Chimchar"],
-    [391, "Monferno"],
-    [392, "Infernape"],
-    [393, "Piplup"],
-    [394, "Prinplup"],
-    [395, "Empoleon"],
-    [396, "Starly"],
-    [397, "Staravia"],
-    [398, "Staraptor"],
-    [399, "Bidoof"],
-    [400, "Bibarel"],
-    [401, "Kricketot"],
-    [402, "Kricketune"],
-    [403, "Shinx"],
-    [404, "Luxio"],
-    [405, "Luxray"],
-    [406, "Budew"],
-    [407, "Roserade"],
-    [408, "Cranidos"],
-    [409, "Rampardos"],
-    [410, "Shieldon"],
-    [411, "Bastiodon"],
-    [412, "Burmy"],
-    [413, "Wormadam"],
-    [414, "Mothim"],
-    [415, "Combee"],
-    [416, "Vespiquen"],
-    [417, "Pachirisu"],
-    [418, "Buizel"],
-    [419, "Floatzel"],
-    [420, "Cherubi"],
-    [421, "Cherrim"],
-    [422, "Shellos"],
-    [423, "Gastrodon"],
-    [424, "Ambipom"],
-    [425, "Drifloon"],
-    [426, "Drifblim"],
-    [427, "Buneary"],
-    [428, "Lopunny"],
-    [429, "Mismagius"],
-    [430, "Honchkrow"],
-    [431, "Glameow"],
-    [432, "Purugly"],
-    [433, "Chingling"],
-    [434, "Stunky"],
-    [435, "Skuntank"],
-    [436, "Bronzor"],
-    [437, "Bronzong"],
-    [438, "Bonsly"],
-    [439, "Mime Jr."],
-    [440, "Happiny"],
-    [441, "Chatot"],
-    [442, "Spiritomb"],
-    [443, "Gible"],
-    [444, "Gabite"],
-    [445, "Garchomp"],
-    [446, "Munchlax"],
-    [447, "Riolu"],
-    [448, "Lucario"],
-    [449, "Hippopotas"],
-    [450, "Hippowdon"],
-    [451, "Skorupi"],
-    [452, "Drapion"],
-    [453, "Croagunk"],
-    [454, "Toxicroak"],
-    [455, "Carnivine"],
-    [456, "Finneon"],
-    [457, "Lumineon"],
-    [458, "Mantyke"],
-    [459, "Snover"],
-    [460, "Abomasnow"],
-    [461, "Weavile"],
-    [462, "Magnezone"],
-    [463, "Lickilicky"],
-    [464, "Rhyperior"],
-    [465, "Tangrowth"],
-    [466, "Electivire"],
-    [467, "Magmortar"],
-    [468, "Togekiss"],
-    [469, "Yanmega"],
-    [470, "Leafeon"],
-    [471, "Glaceon"],
-    [472, "Gliscor"],
-    [473, "Mamoswine"],
-    [474, "Porygon-Z"],
-    [475, "Gallade"],
-    [476, "Probopass"],
-    [477, "Dusknoir"],
-    [478, "Froslass"],
-    [479, "Rotom"],
-    [480, "Uxie"],
-    [481, "Mesprit"],
-    [482, "Azelf"],
-    [483, "Dialga"],
-    [484, "Palkia"],
-    [485, "Heatran"],
-    [486, "Regigigas"],
-    [487, "Giratina"],
-    [488, "Cresselia"],
-    [489, "Phione"],
-    [490, "Manaphy"],
-    [491, "Darkrai"],
-    [492, "Shaymin"],
-    [493, "Arceus"]
+    [001, "Bulbasaur",  178665, 179140],
+    [002, "Ivysaur",    178666, 179141],
+    [003, "Venusaur",   178667, 179142],
+    [004, "Charmander", 178668, 179143],
+    [005, "Charmeleon", 178669, 179144],
+    [006, "Charizard",  178670, 179145],
+    [007, "Squirtle",   178671, 179146],
+    [008, "Wartortle",  178672, 179147],
+    [009, "Blastoise",  178673, 179148],
+    [010, "Caterpie",   178674, 179149],
+    [011, "Metapod",    178675, 179155],
+    [012, "Butterfree", 178676, 179156],
+    [013, "Weedle",     178677, 179157],
+    [014, "Kakuna",     178678, 179158],
+    [015, "Beedrill",   178679, 179159],
+    [016, "Pidgey",     178680, 179160],
+    [017, "Pidgeotto",  178681, 179161],
+    [018, "Pidgeot",    178682, 179162],
+    [019, "Rattata",    178683, 179163],
+    [020, "Raticate",   178684, 179164],
+    [021, "Spearow",    178685, 179165],
+    [022, "Fearow",     178686, 179166],
+    [023, "Ekans",      178687, 179167],
+    [024, "Arbok",      178688, 179168],
+    [025, "Pikachu",    178689, 179169],
+    [026, "Raichu",     178690, 179170],
+    [027, "Sandshrew",  178691, 179171],
+    [028, "Sandslash",  178692, 179172],
+    [029, "Nidoran♀",   178693, 179173],
+    [030, "Nidorina",   178694, 179174],
+    [031, "Nidoqueen",  178695, 179175],
+    [032, "Nidoran♂",   178696, 179176],
+    [033, "Nidorino",   178697, 179177],
+    [034, "Nidoking",   178698, 179178],
+    [035, "Clefairy",   178699, 179179],
+    [036, "Clefable",   178700, 179180],
+    [037, "Vulpix",     178701, 179181],
+    [038, "Ninetales",  178702, 179182],
+    [039, "Jigglypuff", 178703, 179183],
+    [040, "Wigglytuff", 178704, 179184],
+    [041, "Zubat",      178705, 179185],
+    [042, "Golbat",     178706, 179186],
+    [043, "Oddish",     178707, 179187],
+    [044, "Gloom",      178708, 179188],
+    [045, "Vileplume",  178709, 179189],
+    [046, "Paras",      178710, 179190],
+    [047, "Parasect",   178711, 179191],
+    [048, "Venonat",    178712, 179192],
+    [049, "Venomoth",   178713, 179193],
+    [050, "Diglett",    178714, 179194],
+    [051, "Dugtrio",    178715, 179195],
+    [052, "Meowth",     178716, 179196],
+    [053, "Persian",    178717, 179197],
+    [054, "Psyduck",    178718, 179198],
+    [055, "Golduck",    178719, 179199],
+    [056, "Mankey",     178720, 179200],
+    [057, "Primeape",   178721, 179201],
+    [058, "Growlithe",  178722, 179202],
+    [059, "Arcanine",   178723, 179203],
+    [060, "Poliwag",    178724, 179204],
+    [061, "Poliwhirl",  178725, 179205],
+    [062, "Poliwrath",  178726, 179206],
+    [063, "Abra",       178727, 179207],
+    [064, "Kadabra",    178728, 179208],
+    [065, "Alakazam",   178729, 179209],
+    [066, "Machop",     178730, 179210],
+    [067, "Machoke",    178731, 179211],
+    [068, "Machamp",    178732, 179212],
+    [069, "Bellsprout", 178733, 179213],
+    [070, "Weepinbell", 178734, 179214],
+    [071, "Victreebel", 178735, 179215],
+    [072, "Tentacool",  178736, 179216],
+    [073, "Tentacruel", 178737, 179217],
+    [074, "Geodude",    178738, 179218],
+    [075, "Graveler",   178739, 179219],
+    [076, "Golem",      178740, 179220],
+    [077, "Ponyta",     178741, 179221],
+    [078, "Rapidash",   178742, 179222],
+    [079, "Slowpoke",   178743, 179223],
+    [080, "Slowbro",    178744, 179224],
+    [081, "Magnemite",  178745, 179225],
+    [082, "Magneton",   178746, 179226],
+    [083, "Farfetch'd", 178747, 179227],
+    [084, "Doduo",      178748, 179228],
+    [085, "Dodrio",     178749, 179229],
+    [086, "Seel",       178750, 179230],
+    [087, "Dewgong",    178751, 179231],
+    [088, "Grimer",     178752, 179232],
+    [089, "Muk",        178753, 179233],
+    [090, "Shellder",   178754, 179234],
+    [091, "Cloyster",   178755, 179235],
+    [092, "Gastly",     178756, 179236],
+    [093, "Haunter",    178757, 179237],
+    [094, "Gengar",     178758, 179238],
+    [095, "Onix",       178759, 179239],
+    [096, "Drowzee",    178760, 179240],
+    [097, "Hypno",      178761, 179241],
+    [098, "Krabby",     178762, 179242],
+    [099, "Kingler",    178763, 179243],
+    [100, "Voltorb",    178764, 179244],
+    [101, "Electrode",  178765, 179245],
+    [102, "Exeggcute",  178766, 179246],
+    [103, "Exeggutor",  178767, 179247],
+    [104, "Cubone",     178768, 179248],
+    [105, "Marowak",    178769, 179249],
+    [106, "Hitmonlee",  178770, 179250],
+    [107, "Hitmonchan", 178771, 179251],
+    [108, "Lickitung",  178772, 179252],
+    [109, "Koffing",    178773, 179253],
+    [110, "Weezing",    178774, 179254],
+    [111, "Rhyhorn",    178775, 179255],
+    [112, "Rhydon",     178776, 179256],
+    [113, "Chansey",    178777, 179257],
+    [114, "Tangela",    178778, 179258],
+    [115, "Kangaskhan", 178779, 179259],
+    [116, "Horsea",     178780, 179260],
+    [117, "Seadra",     178781, 179261],
+    [118, "Goldeen",    178782, 179262],
+    [119, "Seaking",    178783, 179263],
+    [120, "Staryu",     178784, 179264],
+    [121, "Starmie",    178785, 179265],
+    [122, "Mr. Mime",   178786, 179266],
+    [123, "Scyther",    178787, 179267],
+    [124, "Jynx",       178788, 179268],
+    [125, "Electabuzz", 178789, 179269],
+    [126, "Magmar",     178790, 179270],
+    [127, "Pinsir",     178791, 179271],
+    [128, "Tauros",     178792, 179272],
+    [129, "Magikarp",   178793, 179273],
+    [130, "Gyarados",   178794, 179274],
+    [131, "Lapras",     178795, 179275],
+    [132, "Ditto",      178796, 179276],
+    [133, "Eevee",      178797, 179277],
+    [134, "Vaporeon",   178798, 179278],
+    [135, "Jolteon",    178799, 179279],
+    [136, "Flareon",    178800, 179280],
+    [137, "Porygon",    178801, 179281],
+    [138, "Omanyte",    178802, 179282],
+    [139, "Omastar",    178803, 179283],
+    [140, "Kabuto",     178804, 179284],
+    [141, "Kabutops",   178805, 179285],
+    [142, "Aerodactyl", 178806, 179286],
+    [143, "Snorlax",    178807, 179287],
+    [144, "Articuno",   178808, 179288],
+    [145, "Zapdos",     178809, 179289],
+    [146, "Moltres",    178810, 179290],
+    [147, "Dratini",    178811, 179291],
+    [148, "Dragonair",  178812, 179292],
+    [149, "Dragonite",  178813, 179293],
+    [150, "Mewtwo"      ],
+    [151, "Mew"         ],
+    [152, "Chikorita",  178814, 179294],
+    [153, "Bayleef",    178815, 179295],
+    [154, "Meganium",   178816, 179296],
+    [155, "Cyndaquil",  178817, 179297],
+    [156, "Quilava",    178818, 179298],
+    [157, "Typhlosion", 178819, 179299],
+    [158, "Totodile",   178820, 179300],
+    [159, "Croconaw",   178821, 179301],
+    [160, "Feraligatr", 178822, 179302],
+    [161, "Sentret",    178823, 179303],
+    [162, "Furret",     178824, 179304],
+    [163, "Hoothoot",   178825, 179305],
+    [164, "Noctowl",    178826, 179306],
+    [165, "Ledyba",     178827, 179307],
+    [166, "Ledian",     178828, 179308],
+    [167, "Spinarak",   178829, 179309],
+    [168, "Ariados",    178830, 179310],
+    [169, "Crobat",     178831, 179311],
+    [170, "Chinchou",   178832, 179312],
+    [171, "Lanturn",    178833, 179313],
+    [172, "Pichu",      178834, 179314],
+    [173, "Cleffa",     178835, 179315],
+    [174, "Igglybuff",  178836, 179316],
+    [175, "Togepi",     178837, 179317],
+    [176, "Togetic",    178838, 179318],
+    [177, "Natu",       178839, 179319],
+    [178, "Xatu",       178840, 179320],
+    [179, "Mareep",     178841, 179321],
+    [180, "Flaaffy",    178842, 179322],
+    [181, "Ampharos",   178843, 179323],
+    [182, "Bellossom",  178844, 179324],
+    [183, "Marill",     178845, 179325],
+    [184, "Azumarill",  178846, 179326],
+    [185, "Sudowoodo",  178847, 179327],
+    [186, "Politoed",   178848, 179328],
+    [187, "Hoppip",     178849, 179329],
+    [188, "Skiploom",   178850, 179330],
+    [189, "Jumpluff",   178851, 179331],
+    [190, "Aipom",      178852, 179332],
+    [191, "Sunkern",    178853, 179333],
+    [192, "Sunflora",   178854, 179334],
+    [193, "Yanma",      178855, 179335],
+    [194, "Wooper",     178856, 179336],
+    [195, "Quagsire",   178857, 179337],
+    [196, "Espeon",     178858, 179338],
+    [197, "Umbreon",    178859, 179339],
+    [198, "Murkrow",    178860, 179340],
+    [199, "Slowking",   178861, 179341],
+    [200, "Misdreavous",178862, 179342],
+    [201, "Unown",      178863, 179343],
+    [202, "Wobbuffet",  178864, 179344],
+    [203, "Girafarig",  178865, 179345],
+    [204, "Pineco",     178866, 179346],
+    [205, "Forretress", 178867, 179347],
+    [206, "Dunsparce",  178868, 179348],
+    [207, "Gligar",     178869, 179349],
+    [208, "Steelix",    178870, 179350],
+    [209, "Snubbull",   178871, 179351],
+    [210, "Granbull",   178872, 179352],
+    [211, "Qwilfish",   178873, 179353],
+    [212, "Scizor",     178874, 179354],
+    [213, "Shuckle",    178875, 179355],
+    [214, "Heracross",  178876, 179356],
+    [215, "Sneasel",    178877, 179357],
+    [216, "Teddiursa",  178878, 179358],
+    [217, "Ursaring",   178879, 179359],
+    [218, "Slugma",     178880, 179360],
+    [219, "Magcargo",   178881, 179361],
+    [220, "Swinub",     178882, 179362],
+    [221, "Piloswine",  178883, 179363],
+    [222, "Corsola",    178884, 179364],
+    [223, "Remoraid",   178885, 179365],
+    [224, "Octillery",  178886, 179366],
+    [225, "Delibird",   178887, 179367],
+    [226, "Mantine",    178888, 179368],
+    [227, "Skarmory",   178889, 179369],
+    [228, "Houndour",   178890, 179370],
+    [229, "Houndoom",   178891, 179371],
+    [230, "Kingdra",    178892, 179372],
+    [231, "Phanpy",     178893, 179373],
+    [232, "Donphan",    178894, 179374],
+    [233, "Porygon2",   178895, 179375],
+    [234, "Stantler",   178896, 179376],
+    [235, "Smeargle",   178897, 179377],
+    [236, "Tyrogue",    178898, 179378],
+    [237, "Hitmontop",  178899, 179379],
+    [238, "Smoochum",   178900, 179380],
+    [239, "Elekid",     178901, 179381],
+    [240, "Magby",      178902, 179382],
+    [241, "Miltank",    178903, 179383],
+    [242, "Blissey",    178904, 179384],
+    [243, "Raikou",     178905, 179385],
+    [244, "Entei",      178906, 179386],
+    [245, "Suicune",    178907, 179387],
+    [246, "Larvitar",   178908, 179388],
+    [247, "Pupitar",    178909, 179389],
+    [248, "Tyranitar",  178910, 179390],
+    [249, "Lugia",      ],
+    [250, "Ho-oh",      ],
+    [251, "Celebi",     ],
+    [252, "Treecko",    178911, 179391],
+    [253, "Grovyle",    178912, 179392],
+    [254, "Sceptile",   178913, 179393],
+    [255, "Torchic",    178914, 179394],
+    [256, "Combusken",  178915, 179395],
+    [257, "Blaziken",   178916, 179396],
+    [258, "Mudkip",     178917, 179397],
+    [259, "Marshtomp",  178918, 179398],
+    [260, "Swampert",   178919, 179399],
+    [261, "Poochyena",  178920, 179400],
+    [262, "Mightyena",  178921, 179401],
+    [263, "Zigzagoon",  178922, 179402],
+    [264, "Linoone",    178923, 179403],
+    [265, "Wurmple",    178924, 179404],
+    [266, "Silcoon",    178925, 179405],
+    [267, "Beautifly",  178926, 179406],
+    [268, "Cascoon",    178927, 179407],
+    [269, "Dustox",     178928, 179408],
+    [270, "Lotad",      178929, 179409],
+    [271, "Lombre",     178930, 179410],
+    [272, "Ludicolo",   178931, 179411],
+    [273, "Seedot",     178932, 179412],
+    [274, "Nuzleaf",    178933, 179413],
+    [275, "Shiftry",    178934, 179414],
+    [276, "Taillow",    178935, 179415],
+    [277, "Swellow",    178936, 179416],
+    [278, "Wingull",    178937, 179417],
+    [279, "Pelipper",   178938, 179418],
+    [280, "Ralts",      178939, 179419],
+    [281, "Kirlia",     178940, 179420],
+    [282, "Gardevoir",  178941, 179421],
+    [283, "Surskit",    178942, 179422],
+    [284, "Masquerain", 178943, 179423],
+    [285, "Shroomish",  178944, 179424],
+    [286, "Breloom",    178945, 179425],
+    [287, "Slakoth",    178946, 179426],
+    [288, "Vigoroth",   178947, 179427],
+    [289, "Slaking",    178948, 179428],
+    [290, "Nincada",    178949, 179429],
+    [291, "Ninjask",    178950, 179430],
+    [292, "Shedinja",   178951, 179431],
+    [293, "Whismur",    178952, 179432],
+    [294, "Loudred",    178953, 179433],
+    [295, "Exploud",    178954, 179434],
+    [296, "Makuhita",   178955, 179435],
+    [297, "Hariyama",   178956, 179436],
+    [298, "Azurill",    178957, 179437],
+    [299, "Nosepass",   178958, 179438],
+    [300, "Skitty",     178959, 179439],
+    [301, "Delcatty",   178960, 179440],
+    [302, "Sableye",    178961, 179441],
+    [303, "Mawile",     178962, 179442],
+    [304, "Aron",       178963, 179443],
+    [305, "Lairon",     178964, 179444],
+    [306, "Aggron",     178965, 179445],
+    [307, "Meditite",   178966, 179446],
+    [308, "Medicham",   178967, 179447],
+    [309, "Electrike",  178968, 179448],
+    [310, "Manectric",  178969, 179449],
+    [311, "Plusle",     178970, 179450],
+    [312, "Minun",      178971, 179451],
+    [313, "Volbeat",    178972, 179452],
+    [314, "Illumise",   178973, 179453],
+    [315, "Roselia",    178974, 179454],
+    [316, "Gulpin",     178975, 179455],
+    [317, "Swalot",     178976, 179456],
+    [318, "Carvanha",   178977, 179457],
+    [319, "Sharpedo",   178978, 179458],
+    [320, "Wailmer",    178979, 179459],
+    [321, "Wailord",    178980, 179460],
+    [322, "Numel",      178981, 179461],
+    [323, "Camerupt",   178982, 179462],
+    [324, "Torkoal",    178983, 179463],
+    [325, "Spoink",     178984, 179464],
+    [326, "Grumpig",    178985, 179465],
+    [327, "Spinda",     178986, 179466],
+    [328, "Trapinch",   178987, 179467],
+    [329, "Vibrava",    178988, 179468],
+    [330, "Flygon",     178989, 179469],
+    [331, "Cacnea",     178990, 179470],
+    [332, "Cacturne",   178991, 179471],
+    [333, "Swablu",     178992, 179472],
+    [334, "Altaria",    178993, 179473],
+    [335, "Zangoose",   178994, 179474],
+    [336, "Seviper",    178995, 179475],
+    [337, "Lunatone",   178996, 179476],
+    [338, "Solrock",    178997, 179477],
+    [339, "Barboach",   178998, 179478],
+    [340, "Whiscash",   178999, 179479],
+    [341, "Corphish",   179000, 179480],
+    [342, "Crawdaunt",  179001, 179481],
+    [343, "Baltoy",     179002, 179482],
+    [344, "Claydol",    179003, 179483],
+    [345, "Lileep",     179004, 179484],
+    [346, "Cradily",    179005, 179485],
+    [347, "Anorith",    179006, 179486],
+    [348, "Armaldo",    179007, 179487],
+    [349, "Feebas",     179008, 179488],
+    [350, "Milotic",    179009, 179489],
+    [351, "Castform",   179010, 179490],
+    [352, "Kecleon",    179011, 179491],
+    [353, "Shuppet",    179012, 179492],
+    [354, "Banette",    179013, 179493],
+    [355, "Duskull",    179014, 179494],
+    [356, "Dusclops",   179015, 179495],
+    [357, "Tropius",    179016, 179496],
+    [358, "Chimecho",   179017, 179497],
+    [359, "Absol",      179018, 179498],
+    [360, "Wynaut",     179019, 179499],
+    [361, "Snorunt",    179020, 179500],
+    [362, "Glalie",     179021, 179501],
+    [363, "Spheal",     179022, 179502],
+    [364, "Sealeo",     179023, 179503],
+    [365, "Walrein",    179024, 179504],
+    [366, "Clamperl",   179025, 179505],
+    [367, "Huntail",    179026, 179506],
+    [368, "Gorebyss",   179027, 179507],
+    [369, "Relicanth",  179028, 179508],
+    [370, "Luvdisc",    179029, 179509],
+    [371, "Bagon",      179030, 179510],
+    [372, "Shelgon",    179031, 179511],
+    [373, "Salamence",  179032, 179512],
+    [374, "Beldum",     179033, 179513],
+    [375, "Metang",     179034, 179514],
+    [376, "Metagross",  179035, 179515],
+    [377, "Regirock",   179036, 179516],
+    [378, "Regice",     179037, 179517],
+    [379, "Registeel",  179038, 179518],
+    [380, "Latias",     179039, 179519],
+    [381, "Latios",     179040, 179520],
+    [382, "Kyogre",     ],
+    [383, "Groudon",    ],
+    [384, "Rayquaza",   ],
+    [385, "Jirachi",    ],
+    [386, "Deoxys",     ],
+    [387, "Turtwig",    179041, 179521],
+    [388, "Grotle",     179042, 179522],
+    [389, "Torterra",   179043, 179523],
+    [390, "Chimchar",   179044, 179524],
+    [391, "Monferno",   179045, 179525],
+    [392, "Infernape",  179046, 179526],
+    [393, "Piplup",     179047, 179527],
+    [394, "Prinplup",   179048, 179528],
+    [395, "Empoleon",   179049, 179529],
+    [396, "Starly",     179050, 179530],
+    [397, "Staravia",   179051, 179531],
+    [398, "Staraptor",  179052, 179532],
+    [399, "Bidoof",     179053, 179533],
+    [400, "Bibarel",    179054, 179534],
+    [401, "Kricketot",  179055, 179535],
+    [402, "Kricketune", 179056, 179536],
+    [403, "Shinx",      179057, 179537],
+    [404, "Luxio",      179058, 179538],
+    [405, "Luxray",     179059, 179539],
+    [406, "Budew",      179060, 179540],
+    [407, "Roserade",   179061, 179541],
+    [408, "Cranidos",   179062, 179542],
+    [409, "Rampardos",  179063, 179543],
+    [410, "Shieldon",   179064, 179544],
+    [411, "Bastiodon",  179065, 179545],
+    [412, "Burmy",      179066, 179546],
+    [413, "Wormadam",   179067, 179547],
+    [414, "Mothim",     179068, 179548],
+    [415, "Combee",     179069, 179549],
+    [416, "Vespiquen",  179070, 179550],
+    [417, "Pachirisu",  179071, 179551],
+    [418, "Buizel",     179072, 179552],
+    [419, "Floatzel",   179073, 179553],
+    [420, "Cherubi",    179074, 179554],
+    [421, "Cherrim",    179075, 179555],
+    [422, "Shellos",    179076, 179556],
+    [423, "Gastrodon",  179077, 179557],
+    [424, "Ambipom",    179078, 179558],
+    [425, "Drifloon",   179079, 179559],
+    [426, "Drifblim",   179080, 179560],
+    [427, "Buneary",    179081, 179561],
+    [428, "Lopunny",    179082, 179562],
+    [429, "Mismagius",  179083, 179563],
+    [430, "Honchkrow",  179084, 179564],
+    [431, "Glameow",    179085, 179565],
+    [432, "Purugly",    179086, 179566],
+    [433, "Chingling",  179087, 179567],
+    [434, "Stunky",     179088, 179568],
+    [435, "Skuntank",   179089, 179569],
+    [436, "Bronzor",    179090, 179570],
+    [437, "Bronzong",   179091, 179571],
+    [438, "Bonsly",     179092, 179572],
+    [439, "Mime Jr.",   179093, 179573],
+    [440, "Happiny",    179094, 179574],
+    [441, "Chatot",     179095, 179575],
+    [442, "Spiritomb",  179096, 179576],
+    [443, "Gible",      179097, 179577],
+    [444, "Gabite",     179098, 179578],
+    [445, "Garchomp",   179099, 179579],
+    [446, "Munchlax",   179100, 179580],
+    [447, "Riolu",      179101, 179581],
+    [448, "Lucario",    179102, 179582],
+    [449, "Hippopotas", 179103, 179583],
+    [450, "Hippowdon",  179104, 179584],
+    [451, "Skorupi",    179105, 179585],
+    [452, "Drapion",    179106, 179586],
+    [453, "Croagunk",   179107, 179587],
+    [454, "Toxicroak",  179108, 179588],
+    [455, "Carnivine",  179109, 179589],
+    [456, "Finneon",    179110, 179590],
+    [457, "Lumineon",   179111, 179591],
+    [458, "Mantyke",    179112, 179592],
+    [459, "Snover",     179113, 179593],
+    [460, "Abomasnow",  179114, 179594],
+    [461, "Weavile",    179115, 179595],
+    [462, "Magnezone",  179116, 179596],
+    [463, "Lickilicky", 179117, 179597],
+    [464, "Rhyperior",  179118, 179598],
+    [465, "Tangrowth",  179119, 179599],
+    [466, "Electivire", 179120, 179600],
+    [467, "Magmortar",  179121, 179601],
+    [468, "Togekiss",   179122, 179602],
+    [469, "Yanmega",    179123, 179603],
+    [470, "Leafeon",    179124, 179604],
+    [471, "Glaceon",    179125, 179605],
+    [472, "Gliscor",    179126, 179606],
+    [473, "Mamoswine",  179127, 179607],
+    [474, "Porygon-Z",  179128, 179608],
+    [475, "Gallade",    179129, 179609],
+    [476, "Probopass",  179130, 179610],
+    [477, "Dusknoir",   179131, 179611],
+    [478, "Froslass",   179132, 179612],
+    [479, "Rotom",      179133, 179613],
+    [480, "Uxie",       179134, 179614],
+    [481, "Mesprit",    179135, 179615],
+    [482, "Azelf",      179136, 179616],
+    [483, "Dialga",     ],
+    [484, "Palkia",     ],
+    [485, "Heatran",    179137, 179617],
+    [486, "Regigigas",  179138, 179618],
+    [487, "Giratina",   ],
+    [488, "Cresselia",  179139, 179619],
+    [489, "Phione"      ],
+    [490, "Manaphy"     ],
+    [491, "Darkrai"     ],
+    [492, "Shaymin"     ],
+    [493, "Arceus"      ]
 ]
 
 pokemonWithGenderDifference = [
@@ -1129,13 +1305,34 @@ pokemonWithGenderDifference = [
     getNationalIDOfPokemon("Mamoswine"),
 ]
 
+bannedPokemonInBattleHall = [
+    getNationalIDOfPokemon("Mewtwo"),
+    getNationalIDOfPokemon("Mew"),
+    getNationalIDOfPokemon("Lugia"),
+    getNationalIDOfPokemon("Ho-oh"),
+    getNationalIDOfPokemon("Celebi"),
+    getNationalIDOfPokemon("Kyogre"),
+    getNationalIDOfPokemon("Groudon"),
+    getNationalIDOfPokemon("Rayquaza"),
+    getNationalIDOfPokemon("Jirachi"),
+    getNationalIDOfPokemon("Deoxys"),
+    getNationalIDOfPokemon("Dialga"),
+    getNationalIDOfPokemon("Palkia"),
+    getNationalIDOfPokemon("Giratina"),
+    getNationalIDOfPokemon("Phione"),
+    getNationalIDOfPokemon("Manaphy"),
+    getNationalIDOfPokemon("Darkrai"),
+    getNationalIDOfPokemon("Shaymin"),
+    getNationalIDOfPokemon("Arceus"),
+]
+
 //--------------------------------------------------
 // Completionist - Achievements
 
 achievement(
     title = "Special Forest Dwellers", points = 5, type = "missable",
     description = "Find and befriend the Spiky-eared Pichu in Ilex Forest and show it to Professor Elm.",
-    id = 123514, badge = "138595", set = 45861,
+    id = 123514, badge = "745905", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x3D &&
               getSavefileDataRemember("16-bit", 0x104A) == 0x02 &&
@@ -1146,7 +1343,7 @@ achievement(
 achievement(
     title = "Hero of Time", points = 5, type = "missable",
     description = "Travel through time with the help of Celebi and stop Team Rocket's comeback.",
-    id = 123533, badge = "138974", set = 45861,
+    id = 123533, badge = "745906", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x75 &&
               getSavefileDataRemember("16-bit", 0xFF0) == 0x05 &&
@@ -1156,7 +1353,7 @@ achievement(
 achievement(
     title = "Mystery Inside the Enigma Stone", points = 5,
     description = "Bring the Enigma Stone to the Pewter Museum of Science and capture the Eon Pokemon that gets summoned.",
-    id = 123534, badge = "138722", set = 45861,
+    id = 123534, badge = "745907", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x33 &&
               getSavefileDataRemember("16-bit", 0xEFA) == 0x05 &&
@@ -1193,7 +1390,7 @@ achievement(
 achievement(
     title = "Multifunctional Device", points = 3,
     description = "Reach the cellar of Silph Co. and let Rotom climb into every device at least once.",
-    id = 124349, badge = "138713", set = 45861,
+    id = 124349, badge = "745909", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x193 &&
               measured(calculateDiscoveredFormsRotom() == 5) &&
@@ -1216,9 +1413,10 @@ achievement(
 achievement(
     title = "Creator of the Universe", points = 5,
     description = "Witness the creation of a legendary Pokémon egg by an Arceus in the Sinjoh Ruins.",
-    id = 123473, badge = "138591", set = 45861,
+    id = 123473, badge = "745912", set = 45861,
     trigger = checkSaveLoaded() &&
-              getMapID() == 0x1EC &&
+              __ornext(getMapID() == 0x13B ||
+                       getMapID() == 0x1EC) &&
               getSavefileDataRemember("16-bit", 0xFEA) == 0x0A &&
               prev(getSavefileDataRemember("16-bit", 0xFEA)) == 0x09
 )
@@ -1228,7 +1426,8 @@ achievement(
     description = "Witness the creation of another legendary Pokémon egg by an Arceus in the Sinjoh Ruins.",
     id = 650846, badge = "743159", set = 45861,
     trigger = checkSaveLoaded() &&
-              getMapID() == 0x1EC &&
+              __ornext(getMapID() == 0x13B ||
+                       getMapID() == 0x1EC) &&
               prev(getMapID() == 0x20A) &&
               getSavefileDataRemember("16-bit", 0xFEA) == 0x0E
 )
@@ -1236,7 +1435,7 @@ achievement(
 achievement(
     title = "Joy of Joy", points = 5,
     description = "Show Nurse Joy a black trainer card and get special treatment from her.",
-    id = 651491, badge = "743850", set = 45861,
+    id = 651491, badge = "743853", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == prev(getMapID()) &&
               getSavefileDataRemember("Bit4", 0x10E0) > prev(getSavefileDataRemember("Bit4", 0x10E0))
@@ -1245,7 +1444,7 @@ achievement(
 achievement(
     title = "Illness of Strength", points = 10,
     description = "Show Nurse Joy a Pokémon that got infected with Pokérus.",
-    id = 651492, badge = "743853", set = 45861,
+    id = 651492, badge = "743852", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == prev(getMapID()) &&
               getSavefileDataRemember("Bit5", 0x10E0) > prev(getSavefileDataRemember("Bit5", 0x10E0))
@@ -1254,7 +1453,7 @@ achievement(
 achievement(
     title = "Masuda's Vanity", points = 25,
     description = "Get a diploma from one of the Game Freak employees after completing the Johto Pokédex.",
-    id = 651158, badge = "743852", set = 45861,
+    id = 743528, badge = "743852", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x17A &&
               getSavefileDataRemember("Bit3", 0x10FC) > prev(getSavefileDataRemember("Bit3", 0x10FC)) &&
@@ -1414,6 +1613,31 @@ achievement(
 )
 
 achievement(
+    title = "Something Is Bugging Me", points = 25,
+    description = "Win the Bug-Catching Contest with a Pokémon that has a score of 380 points or higher.",
+    id = 653630, badge = "745588", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x60 &&
+              checkItemObtained() &&
+              __ornext(getItemIDObtained() == 0x50 ||
+                       getItemIDObtained() == 0x51 ||
+                       getItemIDObtained() == 0x52 ||
+                       getItemIDObtained() == 0x53 ||
+                       getItemIDObtained() == 0x54 ||
+                       getItemIDObtained() == 0x55 ||
+                       getItemIDObtained() == 0x6B ||
+                       getItemIDObtained() == 0x6C ||
+                       getItemIDObtained() == 0x6D ||
+                       getItemIDObtained() == 0x6E ||
+                       getItemIDObtained() == 0xE5 ||
+                       getItemIDObtained() == 0x9E ||
+                       getItemIDObtained() == 0x127) &&
+              getItemAmountObtained() == 0x01 &&
+              getBugCatchingContestScorePlayer() >= 380 &&
+              getBugCatchingContestScorePlayer() <= 400
+)
+
+achievement(
     title = "Familiar Faces", points = 10,
     description = "Get a total combined win streak of 500 or more in the Battle Hall and meet Ethan or Lyra inside the lobby.",
     id = 651766, badge = "744052", set = 45861,
@@ -1517,7 +1741,7 @@ achievement(
 )
 
 achievement(
-    title = "Atomic Brain", points = 25,
+    title = "Atomic Brain", points = 50,
     description = "Complete level 8 in the minigame \"Voltorb Flip\".",
     id = 124428, badge = "742001", set = 45861,
     trigger = checkSaveLoaded() &&
@@ -1602,6 +1826,53 @@ achievement(
                      + getSavefileDataRemember("Bit0", 0xE71F)
                      + getSavefileDataRemember("Bit1", 0xE71F)
                      + getSavefileDataRemember("Bit2", 0xE71F)) == 4
+)
+
+achievement(
+    title = "Presents From the Past", points = 2,
+    description = "Obtain the Crown, the Tiara, the Underground backdrop, the Seafloor backdrop and the Sky backdrop from the woman in the Pal Park.",
+    id = 653649, badge = "745591", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == 0x1DF &&
+              measured(calculateGBARewards() == 5,
+                       when = checkBackdropsLoaded()) &&
+              prev(calculateGBARewards()) == 4
+)
+
+achievement(
+    title = "Sightseeing in the City", points = 25,
+    description = "Fill the photo album with a picture of every possible photo location that is inside a city, a town or a building.",
+    id = 653626, badge = "745584", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              calculatePhotoAlbumPicturesCity() &&
+              checkPhotoAlbumPictureObtained() &&
+              never(checkHeapLoaded(0x0B) &&
+                    getField2DataStateID() == 0x6D)
+)
+
+achievement(
+    title = "Sightseeing in the Nature", points = 25,
+    description = "Fill the photo album with a picture of every possible photo location that is on a route, in a cave, in a forest, at the Ruins of Alph, at the National Park or at Mt. Silver.",
+    id = 653627, badge = "745585", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              calculatePhotoAlbumPicturesNature() &&
+              checkPhotoAlbumPictureObtained() &&
+              never(checkHeapLoaded(0x0B) &&
+                    getField2DataStateID() == 0x6D)
+)
+
+achievement(
+    title = "Sightseeing with Someone Special", points = 25,
+    description = "Fill the photo album with a picture of every possible photo location with a gym leader, Professor Oak, the Day-Care Man and the Dragon's Den master.",
+    id = 653628, badge = "745586", set = 45861,
+    trigger = checkSaveLoaded() &&
+              getMapID() == prev(getMapID()) &&
+              calculatePhotoAlbumPicturesCelebrity() &&
+              checkPhotoAlbumPictureObtained() &&
+              never(checkHeapLoaded(0x0B) &&
+                    getField2DataStateID() == 0x6D)
 )
 
 //--------------------------------------------------
@@ -2028,12 +2299,16 @@ leaderboard(
     description = "Total different Pokémon win streaks in the Battle Hall.",
     start  = checkSaveLoaded() &&
              getMapID() == 0x114 &&
-             getCoordinateX() >= 0x07 &&
-             getCoordinateX() <= 0x09 &&
-             getCoordinateY() >= 0x07 &&
-             getCoordinateY() <= 0x09 &&
              checkTalkingToNPCID(0x11A) &&
-             checkTalkingToNPCIDChanged(),
+             checkTalkingToNPCIDChanged() &&
+             ((getCoordinateX() >= 0x07 &&
+               getCoordinateX() <= 0x09 &&
+               getCoordinateY() >= 0x07 &&
+               getCoordinateY() <= 0x08) ||
+              (getCoordinateX() >= 0x08 &&
+               getCoordinateX() <= 0x09 &&
+               getCoordinateY() >= 0x07 &&
+               getCoordinateY() <= 0x09)),
     cancel = !checkTalkingToNPCID(0x11A),
     submit = always_false(),
     value  = getBattleHallDifferentRecords(),
@@ -2089,6 +2364,46 @@ leaderboard(
     format = "VALUE",
     lower_is_better = false
 )
+
+for pokemon in nationalIDs {
+    if (none_of(bannedPokemonInBattleHall, bannedNationalID => pokemon[0] == bannedNationalID)) {
+        leaderboard(
+            id = nationalIDs[pokemon[0] - 1][2], set = 45861, title = "Battle Hall",
+            description = format("Highest win streak with {0} in the Single Battle mode of the Battle Hall.", nationalIDs[pokemon[0] - 1][1]),
+            start  = checkSaveLoaded() &&
+                     getMapID() == 0x114 &&
+                     getCoordinateX() == 0x07 &&
+                     getCoordinateY() == 0x09 &&
+                     checkBattleHallNewRecord("Single") &&
+                     getBattleHallNationalPokedexID("Single") == nationalIDs[pokemon[0] - 1][0],
+            cancel = always_false(),
+            submit = always_true(),
+            value  = getBattleHallCurrentStreak("Single"),
+            format = "VALUE",
+            lower_is_better = false
+        )
+    }
+}
+
+for pokemon in nationalIDs {
+    if (none_of(bannedPokemonInBattleHall, bannedNationalID => pokemon[0] == bannedNationalID)) {
+        leaderboard(
+            id = nationalIDs[pokemon[0] - 1][3], set = 45861, title = "Battle Hall",
+            description = format("Highest win streak with {0} in the Double Battle mode of the Battle Hall.", nationalIDs[pokemon[0] - 1][1]),
+            start  = checkSaveLoaded() &&
+                     getMapID() == 0x114 &&
+                     getCoordinateX() == 0x07 &&
+                     getCoordinateY() == 0x09 &&
+                     checkBattleHallNewRecord("Double") &&
+                     getBattleHallNationalPokedexID("Double") == nationalIDs[pokemon[0] - 1][0],
+            cancel = always_false(),
+            submit = always_true(),
+            value  = getBattleHallCurrentStreak("Double"),
+            format = "VALUE",
+            lower_is_better = false
+        )
+    }
+}
 
 //--------------------------------------------------
 // Pokéathlon - Leaderboards
