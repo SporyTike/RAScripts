@@ -34,7 +34,9 @@ function checkHeapLoaded(heapIndex) {
 }
 
 function checkSaveLoaded() {
-    return getSavefileData("8-bit", 0x1000) == prev(getSavefileData("8-bit", 0x1000))
+    return dword(getContextPointer() + 0x20) >= 0x02000000 &&
+           dword(getContextPointer() + 0x20) <= 0x02FFFFFF &&
+           getSavefileData("8-bit", 0x1000) == prev(getSavefileData("8-bit", 0x1000))
 }
 
 function getContextPointer() {
@@ -1453,7 +1455,7 @@ achievement(
 achievement(
     title = "Masuda's Vanity", points = 25,
     description = "Get a diploma from one of the Game Freak employees after completing the Johto Pokédex.",
-    id = 743528, badge = "743852", set = 45861,
+    id = 651158, badge = "743852", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x17A &&
               getSavefileDataRemember("Bit3", 0x10FC) > prev(getSavefileDataRemember("Bit3", 0x10FC)) &&
@@ -3089,3 +3091,4 @@ leaderboard(
     format = "MINUTES",
     lower_is_better = false
 )
+
