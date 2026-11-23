@@ -1866,7 +1866,7 @@ achievement(
 )
 
 achievement(
-    title = "Sightseeing with Someone Special", points = 25,
+    title = "Sightseeing with Someone Special", points = 25, type = "missable",
     description = "Fill the photo album with a picture of every possible photo location with a gym leader, Professor Oak, the Day-Care Man and the Dragon's Den master.",
     id = 653628, badge = "745586", set = 45861,
     trigger = checkSaveLoaded() &&
