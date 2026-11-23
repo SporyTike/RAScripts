@@ -1455,7 +1455,7 @@ achievement(
 achievement(
     title = "Masuda's Vanity", points = 25,
     description = "Get a diploma from one of the Game Freak employees after completing the Johto Pokédex.",
-    id = 651158, badge = "743852", set = 45861,
+    id = 651158, badge = "743528", set = 45861,
     trigger = checkSaveLoaded() &&
               getMapID() == 0x17A &&
               getSavefileDataRemember("Bit3", 0x10FC) > prev(getSavefileDataRemember("Bit3", 0x10FC)) &&
@@ -1473,7 +1473,7 @@ achievement(
 )
 
 achievement(
-    title = "Golden Heart and Silver Soul", points = 5,
+    title = "Golden Heart and Silvered Soul", points = 5,
     description = "Complete the National Pokédex and capture all 493 Pokémon.",
     id = 651160, badge = "743530", set = 45861,
     trigger = checkSaveLoaded() &&
